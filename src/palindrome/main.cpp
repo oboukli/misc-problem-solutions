@@ -12,7 +12,7 @@
 #include <string>
 
 template <typename T = std::string, std::integral Tsize = typename T::size_type>
-[[nodiscard]] bool is_palindrome(const T& s) noexcept {
+[[nodiscard]] bool is_palindrome(T const& s) noexcept {
     Tsize const len = (s.length()) / Tsize{2};
     auto begin = s.cbegin();
     auto end = --(s.cend());

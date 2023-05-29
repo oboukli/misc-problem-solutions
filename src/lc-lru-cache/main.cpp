@@ -15,8 +15,9 @@ class LRUCacheBase {
 public:
     virtual ~LRUCacheBase() {
     }
-    virtual int get(const int key) noexcept = 0;
-    virtual void put(const int key, const int value) noexcept = 0;
+
+    virtual int get(int const key) noexcept = 0;
+    virtual void put(int const key, int const value) noexcept = 0;
 };
 
 namespace solution1 {
@@ -30,13 +31,13 @@ struct CacheItem {
 /// Least recently used (LRU) cache.
 class LRUCache final : public LRUCacheBase {
 public:
-    explicit LRUCache(const int capacity) noexcept :
+    explicit LRUCache(int const capacity) noexcept :
         capacity_{capacity}, cache_{std::make_unique<CacheItem[]>(capacity)} {
     }
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(const int key) noexcept override {
+    [[nodiscard]] int get(int const key) noexcept override {
         int result{-1};
         std::int64_t lowest_tick_count{ticks_};
 
@@ -65,7 +66,7 @@ public:
         return result;
     }
 
-    void put(const int key, const int value) noexcept override {
+    void put(int const key, int const value) noexcept override {
         assert(size_ <= capacity_);
 
         for (int i{0}; i < size_; ++i) {
@@ -106,14 +107,14 @@ namespace solution2 {
 /// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
 class LRUCache final : public LRUCacheBase {
 public:
-    explicit LRUCache(const int capacity) noexcept : capacity_{capacity} {
+    explicit LRUCache(int const capacity) noexcept : capacity_{capacity} {
         lookup_.reserve(capacity);
     }
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(const int key) noexcept override {
-        const auto existing_key_iter{lookup_.find(key)};
+    [[nodiscard]] int get(int const key) noexcept override {
+        auto const existing_key_iter{lookup_.find(key)};
         if (existing_key_iter == lookup_.end()) {
             return -1;
         }
@@ -123,13 +124,13 @@ public:
         return existing_key_iter->second->second;
     }
 
-    void put(const int key, const int value) noexcept override {
+    void put(int const key, int const value) noexcept override {
         assert(size_ <= capacity_);
         assert(size_ == lookup_.size());
         assert(size_ == cache_.size());
 
         // Update if key exists.
-        const auto iter_existing_key{lookup_.find(key)};
+        auto const iter_existing_key{lookup_.find(key)};
         if (iter_existing_key != lookup_.end()) {
             iter_existing_key->second->second = value;
 
@@ -137,11 +138,11 @@ public:
         }
 
         // Add new if cache is not full.
-        const auto cache_end{cache_.end()};
+        auto const cache_end{cache_.end()};
         if (size_ < capacity_) {
-            const auto emplaced_key_iter{cache_.emplace(cache_end, key, value)};
+            auto const emplaced_key_iter{cache_.emplace(cache_end, key, value)};
             assert(cache_.end() == cache_end);
-            [[maybe_unused]] const auto new_key_insert_result{
+            [[maybe_unused]] auto const new_key_insert_result{
                 lookup_.insert({key, emplaced_key_iter})};
             assert(new_key_insert_result.second);
             ++size_;
@@ -150,11 +151,11 @@ public:
         }
 
         // Replace oldest key if cache is full.
-        [[maybe_unused]] const auto num_elements_removed{
+        [[maybe_unused]] auto const num_elements_removed{
             lookup_.erase(cache_.begin()->first)};
         assert(num_elements_removed == 1);
         cache_.splice(cache_end, cache_, cache_.begin());
-        [[maybe_unused]] const auto replacement_key_insert_result{
+        [[maybe_unused]] auto const replacement_key_insert_result{
             lookup_.insert({key, std::prev(cache_end)})};
         assert(replacement_key_insert_result.second);
         assert(cache_.end() == cache_end);
@@ -177,7 +178,7 @@ private:
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
 test() {
-    volatile int val{};
+    int volatile val{};
 
     {
         T cache{2};

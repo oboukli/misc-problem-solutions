@@ -10,7 +10,7 @@
 #include <cassert>
 #include <cstdlib>
 
-[[nodiscard]] bool is_palindrome(const int n) noexcept {
+[[nodiscard]] bool is_palindrome(int const n) noexcept {
     if (n < 0) {
         return false;
     }
