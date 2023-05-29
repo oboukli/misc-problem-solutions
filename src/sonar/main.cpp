@@ -17,6 +17,7 @@ struct Sonar {
         int x;
         int y;
     };
+
     std::vector<Coord> coords;
     bool ping(Area area) const;
 };
@@ -31,22 +32,22 @@ struct Sonar {
 ///
 /// The area includes the borders.
 
-int count_ships(const Sonar& sonar, const Area area) {
+int count_ships(Sonar const& sonar, const Area area) {
     if (!sonar.ping(area)) {
         return 0;
     }
 
-    const int width{std::abs(area.right - area.left)};
-    const int height{std::abs(area.bottom - area.top)};
+    int const width{std::abs(area.right - area.left)};
+    int const height{std::abs(area.bottom - area.top)};
 
     if ((width + height) == 0) {
         return 1;
     }
 
-    const int mw0{area.left + (width / 2)};
-    const int mw1{mw0 + 1};
-    const int mh0{area.top + (height / 2)};
-    const int mh1{mh0 + 1};
+    int const mw0{area.left + (width / 2)};
+    int const mw1{mw0 + 1};
+    int const mh0{area.top + (height / 2)};
+    int const mh1{mh0 + 1};
 
     return count_ships(
                sonar,
@@ -165,7 +166,7 @@ int main() {
 }
 
 bool Sonar::ping(Area area) const {
-    return std::ranges::any_of(coords, [&area](const Coord& coord) {
+    return std::ranges::any_of(coords, [&area](Coord const& coord) {
         return coord.x >= area.top && coord.x <= area.bottom
             && coord.y >= area.left && coord.y <= area.right;
     });
