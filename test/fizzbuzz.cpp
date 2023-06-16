@@ -4,41 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
-///
-/// Original problem text:
-/// Write a program that prints the numbers from 1 to 100. But for multiples of
-/// three print "Fizz" instead of the number and for the multiples of five
-/// print "Buzz". For numbers which are multiples of both three and five print
-/// "FizzBuzz".
+#include "forfun/fizzbuzz.hpp"
 
 #include <cassert>
-#include <sstream>
-#include <string>
-
-std::string fizzbuzz(int const n) noexcept {
-    std::ostringstream buffer;
-    for (int i{1}; i <= n; ++i) {
-        bool f{true};
-
-        if (i % 3 == 0) {
-            buffer << "Fizz";
-            f = false;
-        }
-
-        if (i % 5 == 0) {
-            buffer << "Buzz";
-            continue;
-        }
-
-        if (f) {
-            buffer << i;
-        }
-    }
-
-    return buffer.str();
-}
 
 int main() {
     {
