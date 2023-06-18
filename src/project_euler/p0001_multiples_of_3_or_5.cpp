@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/project-euler/p0001-multiples-of-3-or-5.hpp"
+#include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"

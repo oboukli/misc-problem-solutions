@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/palindromic-number.hpp"
+#include "forfun/palindromic_number.hpp"
 
 #include <cassert>
 

@@ -13,16 +13,16 @@ add_library(
   forfun
   SHARED
   "include/forfun/fizzbuzz.hpp"
-  "include/forfun/lc-lru-cache.hpp"
+  "include/forfun/lc_lru_cache.hpp"
   "include/forfun/palindrome.hpp"
-  "include/forfun/palindromic-number.hpp"
-  "include/forfun/project-euler/p0001-multiples-of-3-or-5.hpp"
+  "include/forfun/palindromic_number.hpp"
+  "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
   "src/fizzbuzz.cpp"
-  "src/lc-lru-cache.cpp"
+  "src/lc_lru_cache.cpp"
   "src/palindrome.cpp"
-  "src/palindromic-number.cpp"
-  "src/project-euler/p0001-multiples-of-3-or-5.cpp"
+  "src/palindromic_number.cpp"
+  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
   "src/sonar.cpp"
 )
 
@@ -40,8 +40,8 @@ add_executable(
 )
 
 add_executable(
-  "lc-lru-cache"
-  "test/lc-lru-cache.cpp"
+  "lc_lru_cache"
+  "test/lc_lru_cache.cpp"
 )
 
 add_executable(
@@ -50,13 +50,13 @@ add_executable(
 )
 
 add_executable(
-  "palindromic-number"
-  "test/palindromic-number.cpp"
+  "palindromic_number"
+  "test/palindromic_number.cpp"
 )
 
 add_executable(
-  "project-euler-p0001-multiples-of-3-or-5"
-  "test/project-euler/p0001-multiples-of-3-or-5.cpp"
+  "project_euler_p0001_multiples_of_3_or_5"
+  "test/project_euler/p0001_multiples_of_3_or_5.cpp"
 )
 
 add_executable(
