@@ -8,7 +8,15 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.md]
+[*.{md,js,json,ts,yml}]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[CMakeLists.txt]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
