@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/lc-lru-cache.hpp"
+#include "forfun/lc_lru_cache.hpp"
 
 #include <cassert>
 
