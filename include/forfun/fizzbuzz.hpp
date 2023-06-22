@@ -6,6 +6,7 @@
 
 /// Problem source:
 /// https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
+/// https://en.wikipedia.org/wiki/Fizz_buzz
 ///
 /// Original problem text:
 /// Write a program that prints the numbers from 1 to 100. But for multiples of
