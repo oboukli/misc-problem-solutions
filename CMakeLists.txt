@@ -73,3 +73,10 @@ add_executable(
   test/fizzbuzz_test.cpp
 )
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+
+find_package(nanobench REQUIRED)
+add_executable(
+  palindrome_benchmark
+  "benchmark/palindrome_benchmark.cpp"
+)
+target_link_libraries(palindrome_benchmark PRIVATE nanobench::nanobench)
