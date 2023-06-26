@@ -23,7 +23,7 @@ public:
     virtual void put(int const key, int const value) noexcept = 0;
 };
 
-namespace solution1 {
+namespace naive {
 
 struct CacheItem {
     int key_{};
@@ -50,9 +50,9 @@ private:
     std::int64_t ticks_{0};
 };
 
-} // namespace solution1
+} // namespace naive
 
-namespace solution2 {
+namespace stl {
 
 /// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
 class LRUCache final : public LRUCacheBase {
@@ -73,7 +73,7 @@ private:
     int size_{0};
 };
 
-} // namespace solution2
+} // namespace stl
 
 } // namespace forfun::lrucache
 
