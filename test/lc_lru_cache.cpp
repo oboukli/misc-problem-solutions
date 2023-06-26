@@ -132,7 +132,7 @@ test() {
 
 int main() {
     test<forfun::lrucache::solution1::LRUCache>();
-    test<forfun::lrucache::solution1::LRUCache>();
+    test<forfun::lrucache::solution2::LRUCache>();
 
     return 0;
 }
