@@ -10,7 +10,7 @@
 
 namespace forfun::lrucache {
 
-namespace solution1 {
+namespace naive {
 
 LRUCache::LRUCache(int const capacity) noexcept :
     capacity_{capacity}, cache_{std::make_unique<CacheItem[]>(capacity)} {
@@ -71,9 +71,9 @@ void LRUCache::put(int const key, int const value) noexcept {
     cache_[least_recent_idx_].ticks_ = ticks_;
 }
 
-} // namespace solution1
+} // namespace naive
 
-namespace solution2 {
+namespace stl {
 
 LRUCache::LRUCache(int const capacity) noexcept : capacity_{capacity} {
     lookup_.reserve(capacity);
@@ -129,6 +129,6 @@ void LRUCache::put(int const key, int const value) noexcept {
     cache_.back().second = value;
 }
 
-} // namespace solution2
+} // namespace stl
 
 } // namespace forfun::lrucache
