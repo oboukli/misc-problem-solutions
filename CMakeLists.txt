@@ -6,6 +6,10 @@
 
 cmake_minimum_required(VERSION 3.26)
 
+set(CMAKE_C_STANDARD 90)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -17,7 +21,7 @@ set(
 
 project(
   ForFun
-  LANGUAGES CXX
+  LANGUAGES C CXX
 )
 
 add_library(
@@ -45,6 +49,21 @@ target_include_directories(
 
 link_libraries(forfun)
 
+add_library(
+  forfun_c
+  SHARED
+  "include/forfun/palindrome.h"
+  "src/palindrome.c"
+)
+
+target_include_directories(
+  forfun_c
+  PUBLIC
+  "${CMAKE_SOURCE_DIR}/include"
+)
+
+link_libraries(forfun_c)
+
 add_executable(
   fizzbuzz
   "test/fizzbuzz.cpp"
@@ -58,6 +77,11 @@ add_executable(
 add_executable(
   palindrome
   "test/palindrome.cpp"
+)
+
+add_executable(
+  palindrome_c
+  "test/palindrome.c"
 )
 
 add_executable(
