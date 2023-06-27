@@ -28,13 +28,13 @@ add_library(
   forfun
   SHARED
   "include/forfun/fizzbuzz.hpp"
-  "include/forfun/lc_lru_cache.hpp"
+  "include/forfun/lru_cache.hpp"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
   "src/fizzbuzz.cpp"
-  "src/lc_lru_cache.cpp"
+  "src/lru_cache.cpp"
   "src/palindrome.cpp"
   "src/palindromic_number.cpp"
   "src/project_euler/p0001_multiples_of_3_or_5.cpp"
@@ -70,8 +70,8 @@ add_executable(
 )
 
 add_executable(
-  lc_lru_cache
-  "test/lc_lru_cache.cpp"
+  lru_cache
+  "test/lru_cache.cpp"
 )
 
 add_executable(
@@ -112,7 +112,7 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
-  "benchmark/lc_lru_cache_benchmark.cpp"
+  "benchmark/lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
 )
 target_link_libraries(

@@ -2,8 +2,8 @@
 /// https://simontoth.substack.com/p/daily-bite-of-c-lru-cache
 /// https://leetcode.com/problems/lru-cache/
 
-#ifndef FORFUN_LC_LRU_CACHE_HPP_
-#define FORFUN_LC_LRU_CACHE_HPP_
+#ifndef FORFUN_LRU_CACHE_HPP_
+#define FORFUN_LRU_CACHE_HPP_
 
 #include <cassert>
 #include <cstdint>
@@ -77,4 +77,4 @@ private:
 
 } // namespace forfun::lrucache
 
-#endif // FORFUN_LC_LRU_CACHE_HPP_
+#endif // FORFUN_LRU_CACHE_HPP_
