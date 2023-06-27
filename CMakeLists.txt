@@ -74,14 +74,17 @@ add_executable(
 )
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
+find_package(fmt CONFIG REQUIRED)
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
+  "benchmark/lc_lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
 )
 target_link_libraries(
   benchmark
   PRIVATE Catch2::Catch2WithMain
+  PRIVATE fmt::fmt
 )
