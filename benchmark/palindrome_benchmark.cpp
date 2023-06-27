@@ -8,6 +8,8 @@
 
 #include <nanobench.h>
 
+#include <nameof.hpp>
+
 #include <string_view>
 
 #include "forfun/palindrome.hpp"
@@ -23,21 +25,21 @@ TEST_CASE("forfun::palindrome benchmarking") {
             .title("Palindrome (case-sensitive)")
 
             .run(
-                "forfun::palindrome::fast::is_palindrome",
+                NAMEOF_RAW(forfun::palindrome::fast::is_palindrome).c_str(),
                 [&palindrome]() {
                     auto r{forfun::palindrome::fast::is_palindrome(palindrome)};
                     ankerl::nanobench::doNotOptimizeAway(r);
                 })
 
             .run(
-                "forfun::palindrome::raw::is_palindrome",
+                NAMEOF_RAW(forfun::palindrome::raw::is_palindrome).c_str(),
                 [&palindrome]() {
                     auto r{forfun::palindrome::raw::is_palindrome(palindrome)};
                     ankerl::nanobench::doNotOptimizeAway(r);
                 })
 
             .run(
-                "forfun::palindrome::stl_fast::is_palindrome",
+                NAMEOF_RAW(forfun::palindrome::stl_fast::is_palindrome).c_str(),
                 [&palindrome]() {
                     auto r{forfun::palindrome::stl_fast::is_palindrome(
                         palindrome)};
@@ -45,7 +47,8 @@ TEST_CASE("forfun::palindrome benchmarking") {
                 })
 
             .run(
-                "forfun::palindrome::stl_bloated::is_palindrome",
+                NAMEOF_RAW(forfun::palindrome::stl_bloated::is_palindrome)
+                    .c_str(),
                 [&palindrome]() {
                     auto r{forfun::palindrome::stl_bloated::is_palindrome(
                         palindrome)};
@@ -61,7 +64,7 @@ TEST_CASE("forfun::palindrome benchmarking") {
             .title("Palindrome (case-insensitive)")
 
             .run(
-                "forfun::palindrome::fast::is_palindrome_ci",
+                NAMEOF_RAW(forfun::palindrome::fast::is_palindrome_ci).c_str(),
                 [&palindrome]() {
                     auto r{
                         forfun::palindrome::fast::is_palindrome_ci(palindrome)};
@@ -69,7 +72,7 @@ TEST_CASE("forfun::palindrome benchmarking") {
                 })
 
             .run(
-                "forfun::palindrome::raw::is_palindrome_ci",
+                NAMEOF_RAW(forfun::palindrome::raw::is_palindrome_ci).c_str(),
                 [&palindrome]() {
                     auto r{
                         forfun::palindrome::raw::is_palindrome_ci(palindrome)};
@@ -77,7 +80,8 @@ TEST_CASE("forfun::palindrome benchmarking") {
                 })
 
             .run(
-                "forfun::palindrome::stl_bloated::is_palindrome_ci",
+                NAMEOF_RAW(forfun::palindrome::stl_bloated::is_palindrome_ci)
+                    .c_str(),
                 [&palindrome]() {
                     auto r{forfun::palindrome::stl_bloated::is_palindrome_ci(
                         palindrome)};

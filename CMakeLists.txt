@@ -74,6 +74,7 @@ add_executable(
 )
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 
+find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
