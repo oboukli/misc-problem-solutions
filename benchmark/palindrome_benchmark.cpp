@@ -12,6 +12,7 @@
 
 #include <string_view>
 
+#include "forfun/palindrome.h"
 #include "forfun/palindrome.hpp"
 
 TEST_CASE("forfun::palindrome benchmarking") {
@@ -23,6 +24,14 @@ TEST_CASE("forfun::palindrome benchmarking") {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-sensitive)")
+
+            .run(
+                NAMEOF_RAW(::is_palindrome).c_str(),
+                [&palindrome]() {
+                    auto r{
+                        ::is_palindrome(palindrome.data(), palindrome.size())};
+                    ankerl::nanobench::doNotOptimizeAway(r);
+                })
 
             .run(
                 NAMEOF_RAW(forfun::palindrome::fast::is_palindrome).c_str(),
@@ -62,6 +71,14 @@ TEST_CASE("forfun::palindrome benchmarking") {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-insensitive)")
+
+            .run(
+                NAMEOF_RAW(::is_palindrome_ci).c_str(),
+                [&palindrome]() {
+                    auto r{::is_palindrome_ci(
+                        palindrome.data(), palindrome.size())};
+                    ankerl::nanobench::doNotOptimizeAway(r);
+                })
 
             .run(
                 NAMEOF_RAW(forfun::palindrome::fast::is_palindrome_ci).c_str(),
