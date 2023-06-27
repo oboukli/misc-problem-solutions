@@ -1,6 +1,7 @@
 {
   "dependencies": [
     "catch2",
+    "nameof",
     "nanobench"
   ]
 }
