@@ -12,7 +12,7 @@
 
 #include <fmt/format.h>
 
-#include "forfun/lc_lru_cache.hpp"
+#include "forfun/lru_cache.hpp"
 
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
