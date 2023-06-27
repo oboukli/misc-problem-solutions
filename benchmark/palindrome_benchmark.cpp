@@ -4,19 +4,20 @@
 
 // SPDX-License-Identifier: MIT
 
-#define ANKERL_NANOBENCH_IMPLEMENT
+#include <catch2/catch_test_macros.hpp>
+
 #include <nanobench.h>
 
 #include <string_view>
 
 #include "forfun/palindrome.hpp"
 
-int main() {
+TEST_CASE("forfun::palindrome benchmarking") {
     constexpr std::string_view const palindrome{
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"};
 
-    {
+    SECTION("case-sensitive") {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-sensitive)")
@@ -54,7 +55,7 @@ int main() {
             ;
     }
 
-    {
+    SECTION("case-insensitive") {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-insensitive)")
