@@ -1,0 +1,75 @@
+name: Microsoft C++ Code Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  build: ${{ github.workspace }}/build
+  config: Debug
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    name: Analyze
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+
+      - name: Check out vcpkg
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}\vcpkg
+
+      - name: Bootstrap vcpkg
+        run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+
+      - name: Apply vcpkg cache
+        id: vcpkg-cache
+        uses: actions/cache@v3
+        with:
+          path: |-
+            %VCPKG_DEFAULT_BINARY_CACHE%
+            ${{ github.workspace }}\vcpkg
+          key: >-
+            ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
+              'vcpkg/ports/catch2/vcpkg.json',
+              'vcpkg/ports/fmt/vcpkg.json',
+              'vcpkg/ports/nameof/vcpkg.json',
+              'vcpkg/ports/nanobench/vcpkg.json'
+            ) }}
+
+      - name: Configure CMake
+        run: cmake -B "${{ env.build }}" -DCMAKE_BUILD_TYPE="${{ env.config }}"
+
+      - name: Initialize MSVC Code Analysis
+        uses: microsoft/msvc-code-analysis-action@24c285ab36952c9e9182f4b78dfafbac38a7e5ee
+        id: run-analysis
+        with:
+          buildConfiguration: ${{ env.config }}
+          cmakeBuildDirectory: ${{ env.build }}
+          ruleset: NativeRecommendedRules.ruleset
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@46a6823b81f2d7c67ddf123851eea88365bc8a67
+        with:
+          sarif_file: ${{ steps.run-analysis.outputs.sarif }}
+
+      - name: Upload SARIF as an Artifact
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
+        with:
+          name: sarif-file
+          path: ${{ steps.run-analysis.outputs.sarif }}
