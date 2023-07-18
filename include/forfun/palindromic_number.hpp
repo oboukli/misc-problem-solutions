@@ -10,6 +10,6 @@
 #ifndef FORFUN_PALINDROMIC_NUMBER_HPP_
 #define FORFUN_PALINDROMIC_NUMBER_HPP_
 
-[[nodiscard]] bool is_palindrome(int const n) noexcept;
+[[nodiscard]] /* constexpr */ bool is_palindrome(int const n) noexcept;
 
 #endif // FORFUN_PALINDROMIC_NUMBER_HPP_

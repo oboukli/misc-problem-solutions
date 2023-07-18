@@ -8,7 +8,7 @@
 
 #include <cstdlib>
 
-[[nodiscard]] bool is_palindrome(int const n) noexcept {
+[[nodiscard]] /* constexpr */ bool is_palindrome(int const n) noexcept {
     if (n < 0) {
         return false;
     }

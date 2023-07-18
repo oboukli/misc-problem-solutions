@@ -19,14 +19,15 @@
 #include <algorithm>
 
 namespace {
-[[nodiscard]] inline constexpr int sum_2x(int const n, int const q) noexcept {
+[[nodiscard]] inline /* constexpr */ int
+sum_2x(int const n, int const q) noexcept {
     auto const d = std::div(n, q);
 
     return d.quot * (q + n - d.rem);
 }
 } // namespace
 
-[[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept {
+[[nodiscard]] /* constexpr */ int find_sum_mult_three_five(int n) noexcept {
     --n;
 
     return (sum_2x(n, 3) + sum_2x(n, 5) - sum_2x(n, 15)) / 2;

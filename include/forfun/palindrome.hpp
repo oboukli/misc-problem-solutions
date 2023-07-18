@@ -33,8 +33,7 @@ is_palindrome(std::string_view const& s) noexcept {
     return true;
 }
 
-[[nodiscard]] constexpr inline bool
-is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
@@ -68,8 +67,7 @@ is_palindrome(std::string_view const& s) noexcept {
     return true;
 }
 
-[[nodiscard]] constexpr inline bool
-is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
     auto upper{s.cend() - 1};
     auto const mid{s.cbegin() + (s.length() / 2)};
 
@@ -98,15 +96,14 @@ is_palindrome(std::string_view const& s) noexcept {
 }
 
 namespace {
-[[nodiscard]] constexpr inline bool
+[[nodiscard]] inline bool
 equal_case_insensitive(char const a, char const b) noexcept {
     return std::tolower(static_cast<unsigned char>(a))
         == std::tolower(static_cast<unsigned char>(b));
 }
 } // namespace
 
-[[nodiscard]] constexpr inline bool
-is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
     return std::equal(
         s.cbegin(), std::next(s.cbegin(), s.size() / 2), s.crbegin(),
         equal_case_insensitive);
