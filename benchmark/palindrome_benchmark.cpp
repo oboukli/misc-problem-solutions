@@ -4,13 +4,13 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <string_view>
+
 #include <catch2/catch_test_macros.hpp>
 
 #include <nanobench.h>
 
 #include <nameof.hpp>
-
-#include <string_view>
 
 #include "forfun/palindrome.h"
 #include "forfun/palindrome.hpp"
