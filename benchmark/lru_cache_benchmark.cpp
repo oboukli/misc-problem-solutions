@@ -51,7 +51,7 @@ test(int const capacity) {
 
 TEST_CASE("forfun::lrucache benchmarking") {
     SECTION("small") {
-        constexpr int const lrucache_capacity{32};
+        static constexpr int const lrucache_capacity{32};
 
         ankerl::nanobench::Bench()
 
@@ -74,7 +74,7 @@ TEST_CASE("forfun::lrucache benchmarking") {
     }
 
     SECTION("large") {
-        constexpr int const lrucache_capacity{128};
+        static constexpr int const lrucache_capacity{128};
 
         ankerl::nanobench::Bench()
 
