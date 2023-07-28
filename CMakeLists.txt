@@ -32,24 +32,31 @@ add_library(
   "include/forfun/lru_cache.hpp"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
-  "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
   "src/lru_cache.cpp"
   "src/palindrome.cpp"
   "src/palindromic_number.cpp"
-  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
   "src/sonar.cpp"
 )
-
 target_include_directories(
   forfun
   PUBLIC
   "${CMAKE_SOURCE_DIR}/include"
 )
 
-link_libraries(forfun)
+add_library(
+  forfun_project_euler
+  SHARED
+  "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
+  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
+)
+target_include_directories(
+  forfun_project_euler
+  PUBLIC
+  "${CMAKE_SOURCE_DIR}/include"
+)
 
 add_library(
   forfun_c
@@ -57,48 +64,73 @@ add_library(
   "include/forfun/palindrome.h"
   "src/palindrome.c"
 )
-
 target_include_directories(
   forfun_c
   PUBLIC
   "${CMAKE_SOURCE_DIR}/include"
 )
 
-link_libraries(forfun_c)
-
 add_executable(
   fizzbuzz
   "test/fizzbuzz.cpp"
+)
+target_link_libraries(
+  fizzbuzz
+  PRIVATE forfun
 )
 
 add_executable(
   lru_cache
   "test/lru_cache.cpp"
 )
+target_link_libraries(
+  lru_cache
+  PRIVATE forfun
+)
 
 add_executable(
   palindrome
   "test/palindrome.cpp"
+)
+target_link_libraries(
+  palindrome
+  PRIVATE forfun
 )
 
 add_executable(
   palindrome_c
   "test/palindrome.c"
 )
+target_link_libraries(
+  palindrome_c
+  PRIVATE forfun_c
+)
 
 add_executable(
   palindromic_number
   "test/palindromic_number.cpp"
+)
+target_link_libraries(
+  palindromic_number
+  PRIVATE forfun
 )
 
 add_executable(
   project_euler_p0001_multiples_of_3_or_5
   "test/project_euler/p0001_multiples_of_3_or_5.cpp"
 )
+target_link_libraries(
+  project_euler_p0001_multiples_of_3_or_5
+  PRIVATE forfun_project_euler
+)
 
 add_executable(
   sonar
   "test/sonar.cpp"
+)
+target_link_libraries(
+  sonar
+  PRIVATE forfun
 )
 
 find_package(Catch2 3 REQUIRED)
@@ -107,7 +139,14 @@ add_executable(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
 )
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(
+  tests
+  PRIVATE Catch2::Catch2WithMain
+)
+target_link_libraries(
+  tests
+  PRIVATE forfun
+)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(nameof CONFIG REQUIRED)
@@ -123,4 +162,9 @@ target_link_libraries(
   benchmark
   PRIVATE Catch2::Catch2WithMain
   PRIVATE fmt::fmt
+)
+target_link_libraries(
+  benchmark
+  PRIVATE forfun
+  PRIVATE forfun_c
 )
