@@ -59,6 +59,18 @@ target_include_directories(
 )
 
 add_library(
+  forfun_sorting
+  SHARED
+  "include/forfun/sorting/insertion.hpp"
+  "src/sorting/insertion.cpp"
+)
+target_include_directories(
+  forfun_sorting
+  PUBLIC
+  "${CMAKE_SOURCE_DIR}/include"
+)
+
+add_library(
   forfun_c
   SHARED
   "include/forfun/palindrome.h"
@@ -138,6 +150,7 @@ add_executable(
   tests
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
+  "test/sorting/insertion_test.cpp"
 )
 target_link_libraries(
   tests
@@ -146,6 +159,7 @@ target_link_libraries(
 target_link_libraries(
   tests
   PRIVATE forfun
+  PRIVATE forfun_sorting
 )
 
 find_package(fmt CONFIG REQUIRED)
