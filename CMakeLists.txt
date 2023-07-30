@@ -27,12 +27,14 @@ project(
 add_library(
   forfun
   SHARED
+  "include/forfun/first_missing_positive.hpp"
   "include/forfun/fizzbuzz.hpp"
   "include/forfun/lru_cache.hpp"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
+  "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
   "src/lru_cache.cpp"
   "src/palindrome.cpp"
@@ -102,6 +104,7 @@ add_executable(
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
+  "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
 )
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
@@ -112,6 +115,7 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
+  "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
 )
