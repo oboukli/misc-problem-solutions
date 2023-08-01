@@ -4,9 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://en.wikipedia.org/wiki/Insertion_sort
-
 #include <array>
 #include <vector>
 
@@ -77,7 +74,7 @@ TEST_CASE("Insertion sort") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary 01") {
+    SECTION("Arbitrary test with std::array") {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
         std::array expected_output{-10, 0, 2, 4, 7, 9, 200};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -87,9 +84,9 @@ TEST_CASE("Insertion sort") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary 02") {
-        std::array test_input{8, 4, 7, 0, 9, 5, 2};
-        std::array expected_output{0, 2, 4, 5, 7, 8, 9};
+    SECTION("Arbitrary test with std::vector 01") {
+        std::vector test_input{8, 4, 7, 0, 9, 5, 2};
+        std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7);
@@ -97,7 +94,7 @@ TEST_CASE("Insertion sort") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary 03") {
+    SECTION("Arbitrary test with std::vector 02") {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
         std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
