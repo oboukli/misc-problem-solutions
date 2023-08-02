@@ -20,7 +20,6 @@
 
 #include <algorithm>
 #include <cstddef>
-#include <vector>
 
 namespace forfun::first_missing_positive {
 
@@ -43,10 +42,11 @@ constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept {
 
 } // namespace
 
-[[nodiscard]] constexpr int lowest_missing(std::vector<int> numbers) noexcept {
-    auto max{numbers.size()};
+template <typename T>
+[[nodiscard]] constexpr inline int lowest_missing(T& numbers) noexcept {
     auto begin{numbers.begin()};
     auto end{numbers.end()};
+    auto max{numbers.size()};
 
     for (auto it{begin}; it != end; ++it) {
         int const current{*it};
