@@ -62,7 +62,9 @@ add_library(
   forfun_sorting
   SHARED
   "include/forfun/sorting/insertion.hpp"
+  "include/forfun/sorting/quicksort.hpp"
   "src/sorting/insertion.cpp"
+  "src/sorting/quicksort.cpp"
 )
 target_include_directories(
   forfun_sorting
@@ -151,6 +153,7 @@ add_executable(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/sorting/insertion_test.cpp"
+  "test/sorting/quicksort_test.cpp"
 )
 target_link_libraries(
   tests
