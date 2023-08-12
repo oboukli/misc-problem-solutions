@@ -49,7 +49,7 @@ test(int const capacity) {
     }
 }
 
-TEST_CASE("forfun::lrucache benchmarking") {
+TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]") {
     SECTION("small") {
         static constexpr int const lrucache_capacity{32};
 

@@ -14,7 +14,9 @@
 
 #include "forfun/first_missing_positive.hpp"
 
-TEST_CASE("forfun::first_missing_positive benchmarking") {
+TEST_CASE(
+    "forfun::first_missing_positive benchmarking",
+    "[benchmark][first_missing_positive]") {
     using ContainerType = std::array<int, 128>;
 
     ankerl::nanobench::Bench()

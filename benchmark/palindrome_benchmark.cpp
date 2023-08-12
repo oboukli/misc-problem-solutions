@@ -15,7 +15,7 @@
 #include "forfun/palindrome.h"
 #include "forfun/palindrome.hpp"
 
-TEST_CASE("forfun::palindrome benchmarking") {
+TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]") {
     constexpr std::string_view const palindrome{
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"};
