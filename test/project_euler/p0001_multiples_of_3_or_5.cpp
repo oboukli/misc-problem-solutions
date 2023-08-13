@@ -20,7 +20,7 @@ int main() {
     }
 
     {
-        int s{find_sum_mult_three_five(6)};
+        int const s{find_sum_mult_three_five(6)};
         assert(s == 8);
     }
 
@@ -35,7 +35,7 @@ int main() {
     }
 
     {
-        int s{find_sum_mult_three_five(1000)};
+        int const s{find_sum_mult_three_five(1000)};
         assert(s == 233168);
     }
 

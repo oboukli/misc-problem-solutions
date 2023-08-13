@@ -16,7 +16,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Empty container") {
         std::array<int, 0> test_input{};
-        std::array<int, 0> expected_output{};
+        static constexpr std::array<int, 0> const expected_output{};
         quicksort(test_input, test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 0);
@@ -26,7 +26,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("One element") {
         std::array test_input{7};
-        std::array expected_output{7};
+        static constexpr std::array const expected_output{7};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 1);
@@ -36,7 +36,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Two elements") {
         std::array test_input{1, 1};
-        std::array expected_output{1, 1};
+        static constexpr std::array const expected_output{1, 1};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 2);
@@ -46,7 +46,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Three elements") {
         std::array test_input{-6, 3, 11};
-        std::array expected_output{-6, 3, 11};
+        static constexpr std::array const expected_output{-6, 3, 11};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 3);
@@ -56,7 +56,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Best case") {
         std::array test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 10);
@@ -66,7 +66,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Worst case") {
         std::array test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 10);
@@ -76,7 +76,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Arbitrary test with std::array") {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
-        std::array expected_output{-10, 0, 2, 4, 7, 9, 200};
+        static constexpr std::array const expected_output{-10, 0, 2, 4, 7, 9, 200};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 7);
@@ -86,7 +86,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Arbitrary test with std::vector 01") {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
-        std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
         CHECK(test_input.size() == 7);
@@ -96,7 +96,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Arbitrary test with std::vector 02") {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
-        std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         quicksort(test_input, test_input.begin(), test_input.end() - 1);
 
         CHECK(test_input.size() == 7);
@@ -106,7 +106,7 @@ TEST_CASE("Quicksort sort") {
 
     SECTION("Negative numbers") {
         std::vector test_input{-8, -4, -7, -4, -9, -5, -2};
-        std::vector expected_output{-9, -8, -7, -5, -4, -4, -2};
+        std::vector const expected_output{-9, -8, -7, -5, -4, -4, -2};
         quicksort(test_input, test_input.begin(), test_input.end() - 1);
 
         CHECK(test_input.size() == 7);
