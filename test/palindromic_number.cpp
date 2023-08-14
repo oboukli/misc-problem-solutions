@@ -65,6 +65,11 @@ int main() {
     }
 
     {
+        bool const f_palindrome{is_palindrome(-32)};
+        assert(f_palindrome == false);
+    }
+
+    {
         bool const f_palindrome{is_palindrome(12)};
         assert(f_palindrome == false);
     }

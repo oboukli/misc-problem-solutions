@@ -9,10 +9,6 @@
 #include <cstdlib>
 
 [[nodiscard]] /* constexpr */ bool is_palindrome(int const n) noexcept {
-    if (n < 0) {
-        return false;
-    }
-
     int nn{0};
     std::div_t d{.quot = n, .rem = 0};
     while (d.quot > 0) {
