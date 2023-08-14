@@ -19,9 +19,10 @@ TEST_CASE("first_missing_positive") {
         std::array<int, 0> test_input{};
 
         CAPTURE(test_input);
-        CHECK(test_input.size() == 0);
 
-        REQUIRE(lowest_missing(test_input) == 1);
+        STATIC_CHECK(test_input.size() == 0);
+
+        STATIC_REQUIRE(lowest_missing(test_input) == 1);
     }
 
     SECTION("One number") {
@@ -36,6 +37,7 @@ TEST_CASE("first_missing_positive") {
             }));
 
         CAPTURE(test_input);
+
         CHECK(test_input.size() == 1);
 
         REQUIRE(lowest_missing(test_input) == expected_output);
@@ -57,6 +59,7 @@ TEST_CASE("first_missing_positive") {
             }));
 
         CAPTURE(test_input);
+
         CHECK(test_input.size() == 2);
 
         REQUIRE(lowest_missing(test_input) == expected_output);
@@ -79,6 +82,7 @@ TEST_CASE("first_missing_positive") {
             }));
 
         CAPTURE(test_input);
+
         CHECK(test_input.size() == 3);
 
         REQUIRE(lowest_missing(test_input) == expected_output);
@@ -100,6 +104,7 @@ TEST_CASE("first_missing_positive") {
             }));
 
         CAPTURE(test_input);
+
         CHECK(test_input.size() == 10);
 
         REQUIRE(lowest_missing(test_input) == expected_output);

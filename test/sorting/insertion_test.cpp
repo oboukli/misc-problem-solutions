@@ -14,14 +14,16 @@
 TEST_CASE("Insertion sort") {
     using forfun::sorting::insertion_sort;
 
+    // clang-format off
+
     SECTION("Empty container") {
         std::array<int, 0> test_input{};
         static constexpr std::array<int, 0> const expected_output{};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 0);
+        STATIC_CHECK(test_input.size() == 0);
 
-        REQUIRE(test_input == expected_output);
+        STATIC_REQUIRE(test_input == expected_output);
     }
 
     SECTION("One element") {
@@ -29,7 +31,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{7};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 1);
+        STATIC_CHECK(test_input.size() == 1);
 
         REQUIRE(test_input == expected_output);
     }
@@ -39,7 +41,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{1, 1};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 2);
+        STATIC_CHECK(test_input.size() == 2);
 
         REQUIRE(test_input == expected_output);
     }
@@ -49,7 +51,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{-6, 3, 11};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 3);
+        STATIC_CHECK(test_input.size() == 3);
 
         REQUIRE(test_input == expected_output);
     }
@@ -59,7 +61,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10);
+        STATIC_CHECK(test_input.size() == 10);
 
         REQUIRE(test_input == expected_output);
     }
@@ -69,7 +71,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10);
+        STATIC_CHECK(test_input.size() == 10);
 
         REQUIRE(test_input == expected_output);
     }
@@ -79,7 +81,7 @@ TEST_CASE("Insertion sort") {
         static constexpr std::array const expected_output{-10, 0, 2, 4, 7, 9, 200};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7);
+        STATIC_CHECK(test_input.size() == 7);
 
         REQUIRE(test_input == expected_output);
     }
@@ -113,4 +115,6 @@ TEST_CASE("Insertion sort") {
 
         REQUIRE(test_input == expected_output);
     }
+
+    // clang-format on
 }

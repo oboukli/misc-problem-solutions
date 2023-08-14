@@ -14,14 +14,16 @@
 TEST_CASE("Quicksort sort") {
     using forfun::sorting::quicksort;
 
+    // clang-format off
+
     SECTION("Empty container") {
         std::array<int, 0> test_input{};
         static constexpr std::array<int, 0> const expected_output{};
         quicksort(test_input, test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 0);
+        STATIC_CHECK(test_input.size() == 0);
 
-        REQUIRE(test_input == expected_output);
+        STATIC_REQUIRE(test_input == expected_output);
     }
 
     SECTION("One element") {
@@ -29,7 +31,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{7};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 1);
+        STATIC_CHECK(test_input.size() == 1);
 
         REQUIRE(test_input == expected_output);
     }
@@ -39,7 +41,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{1, 1};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 2);
+        STATIC_CHECK(test_input.size() == 2);
 
         REQUIRE(test_input == expected_output);
     }
@@ -49,7 +51,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{-6, 3, 11};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 3);
+        STATIC_CHECK(test_input.size() == 3);
 
         REQUIRE(test_input == expected_output);
     }
@@ -59,7 +61,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 10);
+        STATIC_CHECK(test_input.size() == 10);
 
         REQUIRE(test_input == expected_output);
     }
@@ -69,7 +71,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 10);
+        STATIC_CHECK(test_input.size() == 10);
 
         REQUIRE(test_input == expected_output);
     }
@@ -79,7 +81,7 @@ TEST_CASE("Quicksort sort") {
         static constexpr std::array const expected_output{-10, 0, 2, 4, 7, 9, 200};
         quicksort(test_input, test_input.begin(), std::prev(test_input.end()));
 
-        CHECK(test_input.size() == 7);
+        STATIC_CHECK(test_input.size() == 7);
 
         REQUIRE(test_input == expected_output);
     }
@@ -113,4 +115,6 @@ TEST_CASE("Quicksort sort") {
 
         REQUIRE(test_input == expected_output);
     }
+
+    // clang-format on
 }
