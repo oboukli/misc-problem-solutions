@@ -85,15 +85,6 @@ target_include_directories(
 )
 
 add_executable(
-  fizzbuzz
-  "test/fizzbuzz.cpp"
-)
-target_link_libraries(
-  fizzbuzz
-  PRIVATE forfun
-)
-
-add_executable(
   lru_cache
   "test/lru_cache.cpp"
 )
