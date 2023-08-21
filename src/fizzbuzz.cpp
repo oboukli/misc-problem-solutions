@@ -21,10 +21,7 @@ std::string fizzbuzz(int const n) noexcept {
 
         if (i % 5 == 0) {
             buffer << "Buzz";
-            continue;
-        }
-
-        if (f) {
+        } else if (f) {
             buffer << i;
         }
     }
