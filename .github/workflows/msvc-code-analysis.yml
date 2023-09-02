@@ -12,8 +12,7 @@ env:
   build: ${{ github.workspace }}/build
   config: Debug
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   analyze:
