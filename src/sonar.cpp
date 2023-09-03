@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <vector>
 
-int count_ships(Sonar const& sonar, const Area area) {
+int count_ships(Sonar const& sonar, Area const area) {
     if (!sonar.ping(area)) {
         return 0;
     }

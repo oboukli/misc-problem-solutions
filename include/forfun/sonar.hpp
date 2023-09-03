@@ -35,6 +35,6 @@ struct Sonar {
     bool ping(Area area) const;
 };
 
-int count_ships(Sonar const& sonar, const Area area);
+int count_ships(Sonar const& sonar, Area const area);
 
 #endif // FORFUN_SONAR_HPP_
