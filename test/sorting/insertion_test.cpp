@@ -11,7 +11,7 @@
 
 #include "forfun/sorting/insertion.hpp"
 
-TEST_CASE("Insertion sort") {
+TEST_CASE("Insertion sort", "[sorting]") {
     using forfun::sorting::insertion_sort;
 
     // clang-format off

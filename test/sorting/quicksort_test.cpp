@@ -11,7 +11,7 @@
 
 #include "forfun/sorting/quicksort.hpp"
 
-TEST_CASE("Quicksort sort") {
+TEST_CASE("Quicksort sort", "[sorting]") {
     using forfun::sorting::quicksort;
 
     // clang-format off
