@@ -26,15 +26,15 @@ TEST_CASE("first_missing_positive") {
     }
 
     SECTION("One number") {
-        auto [test_input, expected_output]
-            = GENERATE(table<std::array<int, 1>, int>({
+        auto [test_input, expected_output]{
+            GENERATE(table<std::array<int, 1>, int>({
                 {{-2}, 1},
                 {{-1}, 1},
                 {{0}, 1},
                 {{1}, 2},
                 {{2}, 1},
                 {{11}, 1},
-            }));
+            }))};
 
         CAPTURE(test_input);
 
@@ -44,8 +44,8 @@ TEST_CASE("first_missing_positive") {
     }
 
     SECTION("Two numbers") {
-        auto [test_input, expected_output]
-            = GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{
+            GENERATE(table<std::vector<int>, int>({
                 {{-2, -2}, 1},
                 {{-1, -2}, 1},
                 {{0, -2}, 1},
@@ -56,7 +56,7 @@ TEST_CASE("first_missing_positive") {
                 {{1, 2}, 3},
                 {{2, 1}, 3},
                 {{2, 2}, 1},
-            }));
+            }))};
 
         CAPTURE(test_input);
 
@@ -66,8 +66,8 @@ TEST_CASE("first_missing_positive") {
     }
 
     SECTION("Three numbers") {
-        auto [test_input, expected_output]
-            = GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{
+            GENERATE(table<std::vector<int>, int>({
                 {{-1, -1, -1}, 1},
                 {{-1, 0, 0}, 1},
                 {{0, 0, 0}, 1},
@@ -79,7 +79,7 @@ TEST_CASE("first_missing_positive") {
                 {{1, 1, 1}, 2},
                 {{3, 3, 3}, 1},
                 {{-8, -1, -3}, 1},
-            }));
+            }))};
 
         CAPTURE(test_input);
 
@@ -89,8 +89,8 @@ TEST_CASE("first_missing_positive") {
     }
 
     SECTION("Ten numbers") {
-        auto [test_input, expected_output]
-            = GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{
+            GENERATE(table<std::vector<int>, int>({
                 {{-1, -1, -1, -1, -1, -1, -1, -1, -1, 10}, 1},
                 {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 1},
                 {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 2},
@@ -101,7 +101,7 @@ TEST_CASE("first_missing_positive") {
                 {{9, 7, 5, 4, 3, 2, 1, 1, 1, 0}, 6},
                 {{8, 20, 10, 6, 4, 3, 2, 1, -1, 0}, 5},
                 {{7, 11, 6, 6, -1, 4, 1, 2, 7, 2}, 3},
-            }));
+            }))};
 
         CAPTURE(test_input);
 
