@@ -143,6 +143,7 @@ add_executable(
   tests
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
+  "test/palindromic_number_test.cpp"
   "test/sorting/insertion_test.cpp"
   "test/sorting/quicksort_test.cpp"
 )
