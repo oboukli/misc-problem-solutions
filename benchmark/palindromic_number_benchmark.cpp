@@ -25,7 +25,8 @@ TEST_CASE(
         .title("Palindromic number")
 
         .run(
-            NAMEOF_RAW(forfun::palindromic_number::fast::is_palindrome).c_str(),
+            NAMEOF_RAW(forfun::palindromic_number::fast::is_palindrome<int>)
+                .c_str(),
             []() {
                 auto r{forfun::palindromic_number::fast::is_palindrome(p)};
                 ankerl::nanobench::doNotOptimizeAway(r);

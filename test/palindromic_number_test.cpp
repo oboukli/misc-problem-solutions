@@ -12,7 +12,7 @@
 
 TEMPLATE_TEST_CASE_SIG(
     "palindromic_number", "", ((auto sut), sut),
-    (forfun::palindromic_number::fast::is_palindrome),
+    (forfun::palindromic_number::fast::is_palindrome<int>),
     (forfun::palindromic_number::stl::is_palindrome)) {
     SECTION("Palindromic numbers") {
         GIVEN("a palindromic number") {
