@@ -11,7 +11,7 @@
 #include "forfun/palindromic_number.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
-    "palindromic_number", "", ((auto sut), sut),
+    "palindromic_number", "[palindromic_number]", ((auto sut), sut),
     (forfun::palindromic_number::fast::is_palindrome<int>),
     (forfun::palindromic_number::stl::is_palindrome)) {
     SECTION("Palindromic numbers") {
@@ -62,5 +62,28 @@ TEMPLATE_TEST_CASE_SIG(
                 }
             }
         }
+    }
+}
+
+TEST_CASE("palindromic_number_static", "[palindromic_number][static]") {
+    SECTION("Palindromic integrals") {
+        STATIC_REQUIRE(
+            forfun::palindromic_number::fast::is_palindrome(char{33}));
+
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(7));
+
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(1881));
+
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(55l));
+
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(33ull));
+    }
+
+    SECTION("Non-palindromic integrals") {
+        STATIC_REQUIRE_FALSE(
+            forfun::palindromic_number::fast::is_palindrome(-1));
+
+        STATIC_REQUIRE_FALSE(
+            forfun::palindromic_number::fast::is_palindrome(char{65}));
     }
 }
