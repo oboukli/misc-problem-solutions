@@ -157,6 +157,7 @@ add_executable(
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
+  "benchmark/palindromic_number_benchmark.cpp"
 )
 target_link_libraries(
   benchmark

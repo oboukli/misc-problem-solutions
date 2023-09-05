@@ -8,6 +8,10 @@
 
 #include <cstdlib>
 
+namespace forfun::palindromic_number {
+
+namespace stl {
+
 [[nodiscard]] bool is_palindrome(int const n) noexcept {
     int nn{0};
     std::div_t d{.quot = n, .rem = 0};
@@ -18,3 +22,7 @@
 
     return n == nn;
 }
+
+} // namespace stl
+
+} // namespace forfun::palindromic_number
