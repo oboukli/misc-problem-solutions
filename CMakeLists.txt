@@ -112,15 +112,6 @@ target_link_libraries(
 )
 
 add_executable(
-  palindromic_number
-  "test/palindromic_number.cpp"
-)
-target_link_libraries(
-  palindromic_number
-  PRIVATE forfun
-)
-
-add_executable(
   project_euler_p0001_multiples_of_3_or_5
   "test/project_euler/p0001_multiples_of_3_or_5.cpp"
 )
