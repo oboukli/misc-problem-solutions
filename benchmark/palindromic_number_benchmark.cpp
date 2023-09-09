@@ -16,8 +16,8 @@
 
 inline constexpr int const p{1234554321};
 
-TEST_CASE(
-    "palindromic_number benchmarking", "[benchmark][palindromic_number]") {
+TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
+{
     static_assert(p >= 0 && p <= std::numeric_limits<decltype(p)>::max());
 
     ankerl::nanobench::Bench()

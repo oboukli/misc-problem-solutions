@@ -19,12 +19,15 @@ namespace {
 
 template <typename T, typename RandomIt>
 [[nodiscard]] constexpr inline RandomIt
-partition(T& container, RandomIt const lo, RandomIt const hi) noexcept {
+partition(T& container, RandomIt const lo, RandomIt const hi) noexcept
+{
     auto const pivot = *hi;
 
     auto i{std::prev(lo)};
-    for (auto j{lo}; j < hi; ++j) {
-        if (*j < pivot) {
+    for (auto j{lo}; j < hi; ++j)
+    {
+        if (*j < pivot)
+        {
             ++i;
             std::iter_swap(i, j);
         }
@@ -40,8 +43,10 @@ partition(T& container, RandomIt const lo, RandomIt const hi) noexcept {
 
 template <typename T, typename RandomIt>
 constexpr inline void
-quicksort(T& container, RandomIt const lo, RandomIt const hi) noexcept {
-    if (hi > lo) {
+quicksort(T& container, RandomIt const lo, RandomIt const hi) noexcept
+{
+    if (hi > lo)
+    {
         auto const p{partition(container, lo, hi)};
 
         quicksort(container, lo, std::prev(p));

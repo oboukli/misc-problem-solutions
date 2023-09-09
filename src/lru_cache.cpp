@@ -13,28 +13,35 @@ namespace forfun::lrucache {
 namespace naive {
 
 LRUCache::LRUCache(int const capacity) noexcept :
-    capacity_{capacity}, cache_{std::make_unique<CacheItem[]>(capacity)} {
+    capacity_{capacity}, cache_{std::make_unique<CacheItem[]>(capacity)}
+{
 }
 
-[[nodiscard]] int LRUCache::get(int const key) noexcept {
+[[nodiscard]] int LRUCache::get(int const key) noexcept
+{
     int result{-1};
     std::int64_t lowest_tick_count{ticks_};
 
     int i{0};
-    for (; i < size_; ++i) {
-        if (cache_[i].key_ == key) {
+    for (; i < size_; ++i)
+    {
+        if (cache_[i].key_ == key)
+        {
             result = cache_[i].value_;
             cache_[i].ticks_ = ticks_;
             break;
         }
-        if (lowest_tick_count >= cache_[i].ticks_) {
+        if (lowest_tick_count >= cache_[i].ticks_)
+        {
             lowest_tick_count = cache_[i].ticks_;
             least_recent_idx_ = i;
         }
     }
 
-    for (; i < size_; ++i) {
-        if (lowest_tick_count >= cache_[i].ticks_) {
+    for (; i < size_; ++i)
+    {
+        if (lowest_tick_count >= cache_[i].ticks_)
+        {
             lowest_tick_count = cache_[i].ticks_;
             least_recent_idx_ = i;
         }
@@ -45,18 +52,22 @@ LRUCache::LRUCache(int const capacity) noexcept :
     return result;
 }
 
-void LRUCache::put(int const key, int const value) noexcept {
+void LRUCache::put(int const key, int const value) noexcept
+{
     assert(size_ <= capacity_);
 
-    for (int i{0}; i < size_; ++i) {
-        if (cache_[i].key_ == key) {
+    for (int i{0}; i < size_; ++i)
+    {
+        if (cache_[i].key_ == key)
+        {
             cache_[i].value_ = value;
 
             return;
         }
     }
 
-    if (size_ < capacity_) {
+    if (size_ < capacity_)
+    {
         cache_[size_].key_ = key;
         cache_[size_].value_ = value;
         cache_[size_].ticks_ = ticks_;
@@ -75,13 +86,16 @@ void LRUCache::put(int const key, int const value) noexcept {
 
 namespace stl {
 
-LRUCache::LRUCache(int const capacity) noexcept : capacity_{capacity} {
+LRUCache::LRUCache(int const capacity) noexcept : capacity_{capacity}
+{
     lookup_.reserve(capacity);
 }
 
-[[nodiscard]] int LRUCache::get(int const key) noexcept {
+[[nodiscard]] int LRUCache::get(int const key) noexcept
+{
     auto const existing_key_iter{lookup_.find(key)};
-    if (existing_key_iter == lookup_.end()) {
+    if (existing_key_iter == lookup_.end())
+    {
         return -1;
     }
 
@@ -90,14 +104,16 @@ LRUCache::LRUCache(int const capacity) noexcept : capacity_{capacity} {
     return existing_key_iter->second->second;
 }
 
-void LRUCache::put(int const key, int const value) noexcept {
+void LRUCache::put(int const key, int const value) noexcept
+{
     assert(size_ <= capacity_);
     assert(size_ == lookup_.size());
     assert(size_ == cache_.size());
 
     // Update if key exists.
     auto const iter_existing_key{lookup_.find(key)};
-    if (iter_existing_key != lookup_.end()) {
+    if (iter_existing_key != lookup_.end())
+    {
         iter_existing_key->second->second = value;
 
         return;
@@ -105,7 +121,8 @@ void LRUCache::put(int const key, int const value) noexcept {
 
     // Add new if cache is not full.
     auto const cache_end{cache_.end()};
-    if (size_ < capacity_) {
+    if (size_ < capacity_)
+    {
         auto const emplaced_key_iter{cache_.emplace(cache_end, key, value)};
         assert(cache_.end() == cache_end);
         [[maybe_unused]] auto const new_key_insert_result{

@@ -18,10 +18,12 @@ namespace fast {
 
 template <typename T>
     requires std::integral<T>
-[[nodiscard]] constexpr bool is_palindrome(T const n) noexcept {
+[[nodiscard]] constexpr bool is_palindrome(T const n) noexcept
+{
     T nn{};
     auto d{n};
-    while (d > T{0}) {
+    while (d > T{0})
+    {
         nn = (nn * T{10}) + d % T{10};
         d /= T{10};
     }

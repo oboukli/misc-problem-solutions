@@ -11,7 +11,8 @@ found in the LICENSE file.
 #include <assert.h>
 #include <string.h>
 
-void test_palindrome() {
+void test_palindrome()
+{
     {
         char const* const s = "";
         size_t const len = strlen(s);
@@ -69,7 +70,8 @@ void test_palindrome() {
     }
 }
 
-void test_palindrome_ci() {
+void test_palindrome_ci()
+{
     {
         char const* const s = "Aa";
         size_t const len = strlen(s);
@@ -85,7 +87,8 @@ void test_palindrome_ci() {
     }
 }
 
-int main() {
+int main()
+{
     test_palindrome();
 
     test_palindrome_ci();

@@ -9,8 +9,10 @@
 
 #include "forfun/fizzbuzz.hpp"
 
-TEST_CASE("fizzbuzz") {
-    SECTION("Numbers other than three and five are concatenated as-is") {
+TEST_CASE("fizzbuzz")
+{
+    SECTION("Numbers other than three and five are concatenated as-is")
+    {
         REQUIRE_THAT(
             fizzbuzz(1),
             Catch::Matchers::Equals("1", Catch::CaseSensitive::Yes));
@@ -20,7 +22,8 @@ TEST_CASE("fizzbuzz") {
             Catch::Matchers::Equals("12", Catch::CaseSensitive::Yes));
     }
 
-    SECTION("Multiples of three are concatenated as Fizz") {
+    SECTION("Multiples of three are concatenated as Fizz")
+    {
         REQUIRE_THAT(
             fizzbuzz(3),
             Catch::Matchers::Equals("12Fizz", Catch::CaseSensitive::Yes));
@@ -36,7 +39,8 @@ TEST_CASE("fizzbuzz") {
                 "12Fizz4BuzzFizz78Fizz", Catch::CaseSensitive::Yes));
     }
 
-    SECTION("Multiples of five are concatenated as Buzz") {
+    SECTION("Multiples of five are concatenated as Buzz")
+    {
         REQUIRE_THAT(
             fizzbuzz(5),
             Catch::Matchers::Equals("12Fizz4Buzz", Catch::CaseSensitive::Yes));
@@ -53,7 +57,8 @@ TEST_CASE("fizzbuzz") {
                 Catch::CaseSensitive::Yes));
     }
 
-    SECTION("Multiples of both three and five are concatenated as FizzBuzz") {
+    SECTION("Multiples of both three and five are concatenated as FizzBuzz")
+    {
         REQUIRE_THAT(
             fizzbuzz(15),
             Catch::Matchers::Equals(
@@ -74,7 +79,8 @@ TEST_CASE("fizzbuzz") {
                 Catch::CaseSensitive::Yes));
     }
 
-    SECTION("Prime number input is computed correctly") {
+    SECTION("Prime number input is computed correctly")
+    {
         REQUIRE_THAT(
             fizzbuzz(11),
             Catch::Matchers::Equals(

@@ -10,7 +10,8 @@
 
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
-test() {
+test()
+{
     int volatile val{};
 
     {
@@ -130,7 +131,8 @@ test() {
     }
 }
 
-int main() {
+int main()
+{
     test<forfun::lrucache::naive::LRUCache>();
     test<forfun::lrucache::stl::LRUCache>();
 

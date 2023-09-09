@@ -11,12 +11,12 @@
 
 #include "forfun/sorting/insertion.hpp"
 
-TEST_CASE("Insertion sort", "[sorting]") {
+TEST_CASE("Insertion sort", "[sorting]")
+{
     using forfun::sorting::insertion_sort;
 
-    // clang-format off
-
-    SECTION("Empty container") {
+    SECTION("Empty container")
+    {
         std::array<int, 0> test_input{};
         static constexpr std::array<int, 0> const expected_output{};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -26,7 +26,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         STATIC_REQUIRE(test_input == expected_output);
     }
 
-    SECTION("One element") {
+    SECTION("One element")
+    {
         std::array test_input{7};
         static constexpr std::array const expected_output{7};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -36,7 +37,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Two elements") {
+    SECTION("Two elements")
+    {
         std::array test_input{1, 1};
         static constexpr std::array const expected_output{1, 1};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -46,7 +48,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Three elements") {
+    SECTION("Three elements")
+    {
         std::array test_input{-6, 3, 11};
         static constexpr std::array const expected_output{-6, 3, 11};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -56,9 +59,11 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Best case") {
+    SECTION("Best case")
+    {
         std::array test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        static constexpr std::array const expected_output{
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
         STATIC_CHECK(test_input.size() == 10);
@@ -66,9 +71,11 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Worst case") {
+    SECTION("Worst case")
+    {
         std::array test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        static constexpr std::array const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        static constexpr std::array const expected_output{
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
         STATIC_CHECK(test_input.size() == 10);
@@ -76,9 +83,11 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::array") {
+    SECTION("Arbitrary test with std::array")
+    {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
-        static constexpr std::array const expected_output{-10, 0, 2, 4, 7, 9, 200};
+        static constexpr std::array const expected_output{
+            -10, 0, 2, 4, 7, 9, 200};
         insertion_sort(test_input, test_input.begin(), test_input.end());
 
         STATIC_CHECK(test_input.size() == 7);
@@ -86,7 +95,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::vector 01") {
+    SECTION("Arbitrary test with std::vector 01")
+    {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
         std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -96,7 +106,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::vector 02") {
+    SECTION("Arbitrary test with std::vector 02")
+    {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
         std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -106,7 +117,8 @@ TEST_CASE("Insertion sort", "[sorting]") {
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Negative numbers") {
+    SECTION("Negative numbers")
+    {
         std::vector test_input{-8, -4, -7, -4, -9, -5, -2};
         std::vector const expected_output{-9, -8, -7, -5, -4, -4, -2};
         insertion_sort(test_input, test_input.begin(), test_input.end());
@@ -115,6 +127,4 @@ TEST_CASE("Insertion sort", "[sorting]") {
 
         REQUIRE(test_input == expected_output);
     }
-
-    // clang-format on
 }

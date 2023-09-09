@@ -26,12 +26,15 @@ namespace forfun::first_missing_positive {
 namespace {
 
 template <typename RandomIt>
-constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept {
+constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept
+{
     auto const n{*src};
 
-    if (n > 0) {
+    if (n > 0)
+    {
         RandomIt const dest{first + std::max(0, n - 1)};
-        if (auto const tmp{*dest}; tmp != n) {
+        if (auto const tmp{*dest}; tmp != n)
+        {
             *dest = n;
             *src = tmp;
 
@@ -43,27 +46,36 @@ constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept {
 } // namespace
 
 template <typename T>
-[[nodiscard]] constexpr inline int lowest_missing(T& numbers) noexcept {
+[[nodiscard]] constexpr inline int lowest_missing(T& numbers) noexcept
+{
     auto begin{numbers.begin()};
     auto end{numbers.end()};
     auto max{numbers.size()};
 
-    for (auto it{begin}; it != end; ++it) {
+    for (auto it{begin}; it != end; ++it)
+    {
         int const current{*it};
-        if (current < 1) {
+        if (current < 1)
+        {
             --max;
-        } else if (static_cast<std::size_t>(current) > max) {
+        }
+        else if (static_cast<std::size_t>(current) > max)
+        {
             --max;
             *it = 0;
-        } else {
+        }
+        else
+        {
             quasi_sort(begin, it);
         }
     }
 
     int min_num{1};
     auto const endIt = begin + max;
-    for (auto it{begin}; it != endIt; ++it) {
-        if (*it == min_num) {
+    for (auto it{begin}; it != endIt; ++it)
+    {
+        if (*it == min_num)
+        {
             ++min_num;
         }
     }

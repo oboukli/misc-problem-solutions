@@ -13,7 +13,8 @@
 
 using is_palindrome_func_t = std::function<bool(std::string_view const&)>;
 
-void test_palindrome(is_palindrome_func_t is_palindrome_func) {
+void test_palindrome(is_palindrome_func_t is_palindrome_func)
+{
     using namespace std::string_literals;
 
     {
@@ -57,7 +58,8 @@ void test_palindrome(is_palindrome_func_t is_palindrome_func) {
     }
 }
 
-void test_palindrome_ci(is_palindrome_func_t is_palindrome_func) {
+void test_palindrome_ci(is_palindrome_func_t is_palindrome_func)
+{
     using namespace std::string_literals;
 
     {
@@ -71,7 +73,8 @@ void test_palindrome_ci(is_palindrome_func_t is_palindrome_func) {
     }
 }
 
-int main() {
+int main()
+{
     test_palindrome(forfun::palindrome::raw::is_palindrome);
     test_palindrome(forfun::palindrome::fast::is_palindrome);
     test_palindrome(forfun::palindrome::stl_bloated::is_palindrome);

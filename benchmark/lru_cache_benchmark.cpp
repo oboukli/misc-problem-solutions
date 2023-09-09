@@ -18,11 +18,13 @@
 
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
-test(int const capacity) {
+test(int const capacity)
+{
     int volatile val{};
     T cache(capacity);
 
-    for (int i{0}; i < capacity; ++i) {
+    for (int i{0}; i < capacity; ++i)
+    {
         cache.put(i, i);
     }
 
@@ -44,13 +46,16 @@ test(int const capacity) {
 
     val = cache.get(3);
 
-    for (int i{0}; i < capacity; ++i) {
+    for (int i{0}; i < capacity; ++i)
+    {
         val = cache.get(i);
     }
 }
 
-TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]") {
-    SECTION("small") {
+TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
+{
+    SECTION("small")
+    {
         static constexpr int const lrucache_capacity{32};
 
         ankerl::nanobench::Bench()
@@ -73,7 +78,8 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]") {
             ;
     }
 
-    SECTION("large") {
+    SECTION("large")
+    {
         static constexpr int const lrucache_capacity{128};
 
         ankerl::nanobench::Bench()

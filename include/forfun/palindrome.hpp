@@ -20,12 +20,15 @@ namespace forfun::palindrome {
 namespace raw {
 
 [[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept {
+is_palindrome(std::string_view const& s) noexcept
+{
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
-    for (std::size_t i{0}; i < mid; ++i) {
-        if (s[i] != s[end - i]) {
+    for (std::size_t i{0}; i < mid; ++i)
+    {
+        if (s[i] != s[end - i])
+        {
             return false;
         }
     }
@@ -33,13 +36,16 @@ is_palindrome(std::string_view const& s) noexcept {
     return true;
 }
 
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+{
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
-    for (std::size_t i{0}; i < mid; ++i) {
+    for (std::size_t i{0}; i < mid; ++i)
+    {
         if (std::tolower(static_cast<unsigned char>(s[i]))
-            != std::tolower(static_cast<unsigned char>(s[end - i]))) {
+            != std::tolower(static_cast<unsigned char>(s[end - i])))
+        {
             return false;
         }
     }
@@ -52,12 +58,15 @@ is_palindrome(std::string_view const& s) noexcept {
 namespace fast {
 
 [[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept {
+is_palindrome(std::string_view const& s) noexcept
+{
     auto upper{s.cend() - 1};
     auto const mid{s.cbegin() + (s.length() / 2)};
 
-    for (auto lower{s.cbegin()}; lower < mid; ++lower) {
-        if ((*lower) != (*upper)) {
+    for (auto lower{s.cbegin()}; lower < mid; ++lower)
+    {
+        if ((*lower) != (*upper))
+        {
             return false;
         }
 
@@ -67,13 +76,16 @@ is_palindrome(std::string_view const& s) noexcept {
     return true;
 }
 
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+{
     auto upper{s.cend() - 1};
     auto const mid{s.cbegin() + (s.length() / 2)};
 
-    for (auto lower{s.cbegin()}; lower < mid; ++lower) {
+    for (auto lower{s.cbegin()}; lower < mid; ++lower)
+    {
         if (std::tolower(static_cast<unsigned char>((*lower)))
-            != std::tolower(static_cast<unsigned char>((*upper)))) {
+            != std::tolower(static_cast<unsigned char>((*upper))))
+        {
             return false;
         }
 
@@ -90,22 +102,27 @@ namespace stl_bloated {
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 [[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept {
+is_palindrome(std::string_view const& s) noexcept
+{
     return std::equal(
         s.cbegin(), std::next(s.cbegin(), s.size() / 2), s.crbegin());
 }
 
 namespace {
 [[nodiscard]] inline bool
-equal_case_insensitive(char const a, char const b) noexcept {
+equal_case_insensitive(char const a, char const b) noexcept
+{
     return std::tolower(static_cast<unsigned char>(a))
         == std::tolower(static_cast<unsigned char>(b));
 }
 } // namespace
 
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept {
+[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+{
     return std::equal(
-        s.cbegin(), std::next(s.cbegin(), s.size() / 2), s.crbegin(),
+        s.cbegin(),
+        std::next(s.cbegin(), s.size() / 2),
+        s.crbegin(),
         equal_case_insensitive);
 }
 
@@ -116,7 +133,8 @@ namespace stl_fast {
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 [[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept {
+is_palindrome(std::string_view const& s) noexcept
+{
     auto const begin{s.cbegin()};
     return std::equal(begin, begin + (s.size() / 2), s.crbegin());
 }

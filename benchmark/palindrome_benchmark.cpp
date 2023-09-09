@@ -19,8 +19,10 @@ inline constexpr std::string_view const palindrome{
     "oooooooooooooooooooooooooooooooooooooooooooooooooo"
     "oooooooooooooooooooooooooooooooooooooooooooooooooo"};
 
-TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]") {
-    SECTION("case-sensitive") {
+TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]")
+{
+    SECTION("case-sensitive")
+    {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-sensitive)")
@@ -67,7 +69,8 @@ TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]") {
             ;
     }
 
-    SECTION("case-insensitive") {
+    SECTION("case-insensitive")
+    {
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-insensitive)")

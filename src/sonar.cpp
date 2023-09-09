@@ -10,15 +10,18 @@
 #include <cstdlib>
 #include <vector>
 
-int count_ships(Sonar const& sonar, Area const area) {
-    if (!sonar.ping(area)) {
+int count_ships(Sonar const& sonar, Area const area)
+{
+    if (!sonar.ping(area))
+    {
         return 0;
     }
 
     int const width{std::abs(area.right - area.left)};
     int const height{std::abs(area.bottom - area.top)};
 
-    if ((width + height) == 0) {
+    if ((width + height) == 0)
+    {
         return 1;
     }
 
@@ -61,7 +64,8 @@ int count_ships(Sonar const& sonar, Area const area) {
                });
 }
 
-bool Sonar::ping(Area area) const {
+bool Sonar::ping(Area area) const
+{
     return std::ranges::any_of(coords, [&area](Coord const& coord) {
         return coord.x >= area.top && coord.x <= area.bottom
             && coord.y >= area.left && coord.y <= area.right;

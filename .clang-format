@@ -42,26 +42,26 @@ AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
-AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: Yes
 AttributeMacros:
   - __capability
-BinPackArguments: true
-BinPackParameters: true
+BinPackArguments: false
+BinPackParameters: false
 BitFieldColonSpacing: Both
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
-  AfterControlStatement: Never
+  AfterControlStatement: Always
   AfterEnum: false
   AfterExternBlock: false
-  AfterFunction: false
+  AfterFunction: true
   AfterNamespace: false
   AfterObjCDeclaration: false
   AfterStruct: false
   AfterUnion: false
   BeforeCatch: false
-  BeforeElse: false
+  BeforeElse: true
   BeforeLambdaBody: false
   BeforeWhile: false
   IndentBraces: false
@@ -73,7 +73,7 @@ BreakAfterJavaFieldAnnotations: false
 BreakArrays: true
 BreakBeforeBinaryOperators: All
 BreakBeforeConceptDeclarations: Always
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Custom
 BreakBeforeInlineASMColon: OnlyMultiline
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon
@@ -122,9 +122,9 @@ IndentPPDirectives: None
 IndentRequiresClause: true
 IndentWidth: 4
 IndentWrappedFunctionNames: false
-InsertBraces: false
+InsertBraces: true
 InsertNewlineAtEOF: true
-InsertTrailingCommas: None
+InsertTrailingCommas: Wrapped
 IntegerLiteralSeparator:
   Binary: 0
   Decimal: 0

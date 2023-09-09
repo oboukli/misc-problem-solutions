@@ -9,7 +9,8 @@
 #include <cassert>
 #include <iostream>
 
-int main() {
+int main()
+{
     {
         [[maybe_unused]] int num_ships;
         Sonar s{{{0, 0}}};

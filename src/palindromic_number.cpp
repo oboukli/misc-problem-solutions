@@ -12,10 +12,12 @@ namespace forfun::palindromic_number {
 
 namespace stl {
 
-[[nodiscard]] bool is_palindrome(int const n) noexcept {
+[[nodiscard]] bool is_palindrome(int const n) noexcept
+{
     int nn{0};
     std::div_t d{.quot = n, .rem = 0};
-    while (d.quot > 0) {
+    while (d.quot > 0)
+    {
         d = std::div(d.quot, 10);
         nn = (nn * 10) + d.rem;
     }

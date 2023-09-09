@@ -12,10 +12,12 @@
 
 #include "forfun/first_missing_positive.hpp"
 
-TEST_CASE("first_missing_positive") {
+TEST_CASE("first_missing_positive")
+{
     using forfun::first_missing_positive::lowest_missing;
 
-    SECTION("Empty container") {
+    SECTION("Empty container")
+    {
         std::array<int, 0> test_input{};
 
         CAPTURE(test_input);
@@ -25,7 +27,8 @@ TEST_CASE("first_missing_positive") {
         STATIC_REQUIRE(lowest_missing(test_input) == 1);
     }
 
-    SECTION("One number") {
+    SECTION("One number")
+    {
         auto [test_input, expected_output]{
             GENERATE(table<std::array<int, 1>, int>({
                 {{-2}, 1},
@@ -43,7 +46,8 @@ TEST_CASE("first_missing_positive") {
         REQUIRE(lowest_missing(test_input) == expected_output);
     }
 
-    SECTION("Two numbers") {
+    SECTION("Two numbers")
+    {
         auto [test_input, expected_output]{
             GENERATE(table<std::vector<int>, int>({
                 {{-2, -2}, 1},
@@ -65,7 +69,8 @@ TEST_CASE("first_missing_positive") {
         REQUIRE(lowest_missing(test_input) == expected_output);
     }
 
-    SECTION("Three numbers") {
+    SECTION("Three numbers")
+    {
         auto [test_input, expected_output]{
             GENERATE(table<std::vector<int>, int>({
                 {{-1, -1, -1}, 1},
@@ -88,7 +93,8 @@ TEST_CASE("first_missing_positive") {
         REQUIRE(lowest_missing(test_input) == expected_output);
     }
 
-    SECTION("Ten numbers") {
+    SECTION("Ten numbers")
+    {
         auto [test_input, expected_output]{
             GENERATE(table<std::vector<int>, int>({
                 {{-1, -1, -1, -1, -1, -1, -1, -1, -1, 10}, 1},

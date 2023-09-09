@@ -8,7 +8,8 @@
 
 #include <cassert>
 
-int main() {
+int main()
+{
     {
         int const s{find_sum_mult_three_five(1)};
         assert(s == 0);

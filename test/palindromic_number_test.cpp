@@ -11,11 +11,16 @@
 #include "forfun/palindromic_number.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
-    "palindromic_number", "[palindromic_number]", ((auto sut), sut),
+    "palindromic_number",
+    "[palindromic_number]",
+    ((auto sut), sut),
     (forfun::palindromic_number::fast::is_palindrome<int>),
-    (forfun::palindromic_number::stl::is_palindrome)) {
-    SECTION("Palindromic numbers") {
-        GIVEN("a palindromic number") {
+    (forfun::palindromic_number::stl::is_palindrome))
+{
+    SECTION("Palindromic numbers")
+    {
+        GIVEN("a palindromic number")
+        {
             auto const [palindromic_number]{GENERATE(table<int>({
                 {0},
                 {1},
@@ -32,16 +37,20 @@ TEMPLATE_TEST_CASE_SIG(
 
             CAPTURE(palindromic_number);
 
-            WHEN("is_palindrome checked") {
-                THEN("true") {
+            WHEN("is_palindrome checked")
+            {
+                THEN("true")
+                {
                     REQUIRE(sut(palindromic_number));
                 }
             }
         }
     }
 
-    SECTION("Non-palindromic numbers") {
-        GIVEN("a non-palindromic number") {
+    SECTION("Non-palindromic numbers")
+    {
+        GIVEN("a non-palindromic number")
+        {
             auto const [non_palindromic_number]{GENERATE(table<int>({
                 {std::numeric_limits<int>::min()},
                 {-1},
@@ -56,8 +65,10 @@ TEMPLATE_TEST_CASE_SIG(
 
             CAPTURE(non_palindromic_number);
 
-            WHEN("is_palindrome checked") {
-                THEN("false") {
+            WHEN("is_palindrome checked")
+            {
+                THEN("false")
+                {
                     REQUIRE_FALSE(sut(non_palindromic_number));
                 }
             }
@@ -65,8 +76,10 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("palindromic_number_static", "[palindromic_number][static]") {
-    SECTION("Palindromic integrals") {
+TEST_CASE("palindromic_number_static", "[palindromic_number][static]")
+{
+    SECTION("Palindromic integrals")
+    {
         STATIC_REQUIRE(
             forfun::palindromic_number::fast::is_palindrome(char{33}));
 
@@ -79,7 +92,8 @@ TEST_CASE("palindromic_number_static", "[palindromic_number][static]") {
         STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(33ull));
     }
 
-    SECTION("Non-palindromic integrals") {
+    SECTION("Non-palindromic integrals")
+    {
         STATIC_REQUIRE_FALSE(
             forfun::palindromic_number::fast::is_palindrome(-1));
 

@@ -16,7 +16,8 @@ namespace forfun::lrucache {
 
 class LRUCacheBase {
 public:
-    virtual ~LRUCacheBase() {
+    virtual ~LRUCacheBase()
+    {
     }
 
     virtual int get(int const key) noexcept = 0;

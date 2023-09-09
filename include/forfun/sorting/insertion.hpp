@@ -15,11 +15,15 @@
 namespace forfun::sorting {
 
 template <typename T, typename RandomIt>
-constexpr inline void insertion_sort(
-    T& container, RandomIt const begin, RandomIt const end) noexcept {
-    if (begin != end) {
-        for (RandomIt i{begin + 1}; i != end; ++i) {
-            for (RandomIt j{i}; *j < *(j - 1) && j != begin; --j) {
+constexpr inline void
+insertion_sort(T& container, RandomIt const begin, RandomIt const end) noexcept
+{
+    if (begin != end)
+    {
+        for (RandomIt i{begin + 1}; i != end; ++i)
+        {
+            for (RandomIt j{i}; *j < *(j - 1) && j != begin; --j)
+            {
                 std::iter_swap(j, j - 1);
             }
         }
