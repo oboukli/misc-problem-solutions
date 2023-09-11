@@ -27,12 +27,14 @@ project(
 add_library(
   forfun
   SHARED
+  "include/forfun/fibonacci_sequence.hpp"
   "include/forfun/first_missing_positive.hpp"
   "include/forfun/fizzbuzz.hpp"
   "include/forfun/lru_cache.hpp"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/sonar.hpp"
+  "src/fibonacci_sequence.cpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
   "src/lru_cache.cpp"
@@ -132,6 +134,7 @@ target_link_libraries(
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
+  "test/fibonacci_sequence_test.cpp"
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/palindromic_number_test.cpp"
@@ -154,6 +157,7 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
+  "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
