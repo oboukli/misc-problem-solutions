@@ -27,14 +27,14 @@ TEST_CASE(
             "Three variables",
             []() {
                 result_t r{};
-                // clang-format off
-                for (auto i{0}, j{1}, tmp{0};
-                    i <= f;
-                    tmp = j + i, i = j, j = tmp)
+                for (auto i{0}, j{1}, tmp{0}; i <= f;)
                 {
                     r += i;
+
+                    tmp = j + i;
+                    i = j;
+                    j = tmp;
                 }
-                // clang-format on
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
@@ -42,9 +42,12 @@ TEST_CASE(
             "Two variables",
             []() {
                 result_t r{};
-                for (auto i{0}, j{1}; i <= f; j += i, i = j - i)
+                for (auto i{0}, j{1}; i <= f;)
                 {
                     r += i;
+
+                    j += i;
+                    i = j - i;
                 }
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -53,9 +56,12 @@ TEST_CASE(
             "Two unsigned variables",
             []() {
                 result_t r{};
-                for (std::uint_fast32_t i{0}, j{1}; i <= uf; j += i, i = j - i)
+                for (std::uint_fast32_t i{0}, j{1}; i <= uf;)
                 {
                     r += i;
+
+                    j += i;
+                    i = j - i;
                 }
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -64,10 +70,12 @@ TEST_CASE(
             "Two variables by Creel",
             []() {
                 result_t r{};
-                // Source: https://youtu.be/IZc4Odd3K2Q?t=949
-                for (auto i{0}, j{1}; i <= f; j = (i += j) - j)
+                // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
+                for (auto i{0}, j{1}; i <= f;)
                 {
                     r += i;
+
+                    j = (i += j) - j;
                 }
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
