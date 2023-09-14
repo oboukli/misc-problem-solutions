@@ -4,79 +4,68 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <concepts>
 #include <cstdint>
 
 #include <catch2/catch_test_macros.hpp>
 
 #include <nanobench.h>
 
+#include <nameof.hpp>
+
+#include "forfun/fibonacci_sequence.hpp"
+
 inline constexpr int const f{514229};
-inline constexpr std::uint_fast32_t const uf{f};
 
-static_assert(uf == f);
-
-TEST_CASE(
-    "fibonacci sequence loops benchmarking", "[benchmark][fibonacci_sequence]")
+template <typename T, typename TState>
+    requires std::integral<T> && (sizeof(T) < sizeof(TState))
+void dummy_callback(T const n, TState* const state) noexcept
 {
+    *state += n;
+}
+
+TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
+{
+    using namespace forfun::fibonacci::sequence;
+
     using result_t = std::size_t;
 
     ankerl::nanobench::Bench()
-        .title("Fibonacci sequence loops")
+        .title("forfun::fibonacci::sequence")
 
         .run(
-            "Three variables",
+            NAMEOF_RAW(slow::fib_seq<int, result_t>).c_str(),
             []() {
                 result_t r{};
-                for (auto i{0}, j{1}, tmp{0}; i <= f;)
-                {
-                    r += i;
-
-                    tmp = j + i;
-                    i = j;
-                    j = tmp;
-                }
+                forfun::fibonacci::sequence::slow::fib_seq(
+                    f, dummy_callback, &r);
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
-            "Two variables",
+            NAMEOF_RAW(fast::fib_seq<int, result_t>).c_str(),
             []() {
                 result_t r{};
-                for (auto i{0}, j{1}; i <= f;)
-                {
-                    r += i;
-
-                    j += i;
-                    i = j - i;
-                }
+                forfun::fibonacci::sequence::fast::fib_seq(
+                    f, dummy_callback, &r);
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
-            "Two unsigned variables",
+            NAMEOF_RAW(fast::fib_seq<std::uint_fast32_t, result_t>).c_str(),
             []() {
                 result_t r{};
-                for (std::uint_fast32_t i{0}, j{1}; i <= uf;)
-                {
-                    r += i;
-
-                    j += i;
-                    i = j - i;
-                }
+                forfun::fibonacci::sequence::fast::fib_seq(
+                    std::uint_fast32_t{f}, dummy_callback, &r);
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
-            "Two variables by Creel",
+            NAMEOF_RAW(creel::fib_seq<int, result_t>).c_str(),
             []() {
                 result_t r{};
-                // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
-                for (auto i{0}, j{1}; i <= f;)
-                {
-                    r += i;
-
-                    j = (i += j) - j;
-                }
+                forfun::fibonacci::sequence::creel::fib_seq(
+                    f, dummy_callback, &r);
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

@@ -5,5 +5,3 @@
 // SPDX-License-Identifier: MIT
 
 #include "forfun/fibonacci_sequence.hpp"
-
-// See benchmark/fibonacci_sequence_benchmark.cpp
