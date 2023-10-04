@@ -17,9 +17,9 @@ namespace forfun::sorting {
 
 namespace {
 
-template <typename T, typename RandomIt>
+template <typename RandomIt>
 [[nodiscard]] constexpr inline RandomIt
-partition(T& container, RandomIt const lo, RandomIt const hi) noexcept
+partition(RandomIt const lo, RandomIt const hi) noexcept
 {
     auto const pivot = *hi;
 
@@ -41,18 +41,18 @@ partition(T& container, RandomIt const lo, RandomIt const hi) noexcept
 
 } // namespace
 
-template <typename T, typename RandomIt>
-constexpr inline void
-quicksort(T& container, RandomIt const lo, RandomIt const hi) noexcept
+template <typename RandomIt>
+constexpr inline void quicksort(RandomIt const lo, RandomIt const hi) noexcept
 {
     if (hi > lo)
     {
-        auto const p{partition(container, lo, hi)};
+        auto const p{partition(lo, hi)};
 
-        quicksort(container, lo, std::prev(p));
-        quicksort(container, std::next(p), hi);
+        quicksort(lo, std::prev(p));
+        quicksort(std::next(p), hi);
     }
 }
+
 } // namespace forfun::sorting
 
 #endif // FORFUN_SORTING_QUICKSORT_HPP_

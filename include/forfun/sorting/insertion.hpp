@@ -14,9 +14,9 @@
 
 namespace forfun::sorting {
 
-template <typename T, typename RandomIt>
+template <typename RandomIt>
 constexpr inline void
-insertion_sort(T& container, RandomIt const begin, RandomIt const end) noexcept
+insertion_sort(RandomIt const begin, RandomIt const end) noexcept
 {
     if (begin != end)
     {
