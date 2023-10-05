@@ -25,7 +25,7 @@ template <typename T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState* const state) noexcept
 {
-    for (auto i{0}, j{1}, tmp{0}; i <= max;)
+    for (T i{0}, j{1}, tmp{0}; i <= max;)
     {
         cb(i, state);
 
@@ -44,7 +44,7 @@ template <typename T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState* const state) noexcept
 {
-    for (auto i{0}, j{1}; i <= max;)
+    for (T i{0}, j{1}; i <= max;)
     {
         cb(i, state);
 
@@ -63,7 +63,7 @@ void fib_seq(
     T const max, callback_t<T, TState> const cb, TState* const state) noexcept
 {
     // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
-    for (auto i{0}, j{1}; i <= max;)
+    for (T i{0}, j{1}; i <= max;)
     {
         cb(i, state);
 

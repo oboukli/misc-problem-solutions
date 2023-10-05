@@ -12,10 +12,14 @@
 
 #include "forfun/fibonacci_sequence.hpp"
 
+namespace {
+
 void dummy_callback(int const n, std::vector<int>* const seq) noexcept
 {
     seq->push_back(n);
 }
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "fibonacci_sequence",
