@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <cstddef>
 #include <type_traits>
 
 #include <catch2/catch_test_macros.hpp>
@@ -18,14 +19,16 @@
 
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
-test(int const capacity)
+test(std::size_t const capacity)
 {
     int volatile val{};
     T cache(capacity);
 
-    for (int i{0}; i < capacity; ++i)
+    int x{0};
+    for (std::size_t i{0}; i < capacity; ++i)
     {
-        cache.put(i, i);
+        cache.put(i, x);
+        ++x;
     }
 
     val = cache.get(1);
@@ -34,7 +37,7 @@ test(int const capacity)
 
     val = cache.get(3);
 
-    cache.put(capacity + 1, capacity + 1);
+    cache.put(capacity + 1, 2946901);
 
     val = cache.get(1);
 
@@ -46,7 +49,7 @@ test(int const capacity)
 
     val = cache.get(3);
 
-    for (int i{0}; i < capacity; ++i)
+    for (std::size_t i{0}; i < capacity; ++i)
     {
         val = cache.get(i);
     }

@@ -6,6 +6,7 @@
 #define FORFUN_LRU_CACHE_HPP_
 
 #include <cassert>
+#include <cstddef>
 #include <cstdint>
 #include <iterator>
 #include <list>
@@ -20,14 +21,14 @@ public:
     {
     }
 
-    virtual int get(int const key) noexcept = 0;
-    virtual void put(int const key, int const value) noexcept = 0;
+    virtual int get(std::size_t const key) noexcept = 0;
+    virtual void put(std::size_t const key, int const value) noexcept = 0;
 };
 
 namespace naive {
 
 struct CacheItem {
-    int key_{};
+    std::size_t key_{};
     int value_{};
     std::int64_t ticks_{0};
 };
@@ -35,19 +36,19 @@ struct CacheItem {
 /// Least recently used (LRU) cache.
 class LRUCache final : public LRUCacheBase {
 public:
-    explicit LRUCache(int const capacity) noexcept;
+    explicit LRUCache(std::size_t const capacity) noexcept;
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(int const key) noexcept override;
+    [[nodiscard]] int get(std::size_t const key) noexcept override;
 
-    void put(int const key, int const value) noexcept override;
+    void put(std::size_t const key, int const value) noexcept override;
 
 private:
     std::unique_ptr<CacheItem[]> cache_{};
-    int capacity_{};
-    int size_{0};
-    int least_recent_idx_{0};
+    std::size_t capacity_{0};
+    std::size_t size_{0};
+    std::size_t least_recent_idx_{0};
     std::int64_t ticks_{0};
 };
 
@@ -58,20 +59,21 @@ namespace stl {
 /// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
 class LRUCache final : public LRUCacheBase {
 public:
-    explicit LRUCache(int const capacity) noexcept;
+    explicit LRUCache(std::size_t const capacity) noexcept;
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(int const key) noexcept override;
+    [[nodiscard]] int get(std::size_t const key) noexcept override;
 
-    void put(int const key, int const value) noexcept override;
+    void put(std::size_t const key, int const value) noexcept override;
 
 private:
-    using cache_item_t = std::pair<int, int>;
+    using cache_item_t = std::pair<std::size_t, int>;
     std::list<cache_item_t> cache_{};
-    std::unordered_map<int, std::list<cache_item_t>::iterator> lookup_{};
-    int capacity_{};
-    int size_{0};
+    std::unordered_map<std::size_t, std::list<cache_item_t>::iterator>
+        lookup_{};
+    std::size_t capacity_{0};
+    std::size_t size_{0};
 };
 
 } // namespace stl
