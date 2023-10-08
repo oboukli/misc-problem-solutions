@@ -11,6 +11,8 @@
 #include <string>
 #include <string_view>
 
+namespace {
+
 using is_palindrome_func_t = std::function<bool(std::string_view const&)>;
 
 void test_palindrome(is_palindrome_func_t is_palindrome_func)
@@ -72,6 +74,8 @@ void test_palindrome_ci(is_palindrome_func_t is_palindrome_func)
         assert(f_palindrome);
     }
 }
+
+} // namespace
 
 int main()
 {
