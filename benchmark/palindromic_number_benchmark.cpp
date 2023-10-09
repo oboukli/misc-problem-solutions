@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <type_traits>
+#include <limits>
 
 #include <catch2/catch_test_macros.hpp>
 
