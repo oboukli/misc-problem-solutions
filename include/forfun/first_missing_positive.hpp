@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <iterator>
 
 namespace forfun::first_missing_positive {
 
@@ -32,7 +33,7 @@ constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept
 
     if (n > 0)
     {
-        RandomIt const dest{first + std::max(0, n - 1)};
+        RandomIt const dest{std::next(first, std::max(0, n - 1))};
         if (auto const tmp{*dest}; tmp != n)
         {
             *dest = n;
@@ -71,7 +72,7 @@ template <typename T>
     }
 
     int min_num{1};
-    auto const endIt = begin + max;
+    auto const endIt{std::next(begin, static_cast<T::difference_type>(max))};
     for (auto it{begin}; it != endIt; ++it)
     {
         if (*it == min_num)
