@@ -21,63 +21,80 @@
 #include <algorithm>
 #include <cstddef>
 #include <iterator>
+#include <type_traits>
 
 namespace forfun::first_missing_positive {
 
 namespace {
 
-template <typename RandomIt>
-constexpr inline void quasi_sort(RandomIt first, RandomIt const src) noexcept
+template <typename Container>
+    requires std::integral<std::decay_t<typename Container::value_type>>
+constexpr inline void quasi_sort(
+    typename Container::iterator const first,
+    typename Container::iterator const src) noexcept
 {
-    auto const n{*src};
+    using ValTyp = std::decay_t<typename Container::value_type>;
 
-    if (n > 0)
+    if (auto const n{*src}; n > ValTyp{0})
     {
-        RandomIt const dest{std::next(first, std::max(0, n - 1))};
+        auto const dest{std::next(
+            first,
+            static_cast<Container::difference_type>(
+                std::max<ValTyp>(ValTyp{0}, n - ValTyp{1})))};
         if (auto const tmp{*dest}; tmp != n)
         {
             *dest = n;
             *src = tmp;
 
-            quasi_sort(first, src);
+            quasi_sort<Container>(first, src);
         }
     }
 }
 
 } // namespace
 
-template <typename T>
-[[nodiscard]] constexpr inline int lowest_missing(T& numbers) noexcept
+template <typename Container>
+    requires std::integral<std::decay_t<typename Container::value_type>>
+[[nodiscard]] constexpr inline Container::value_type
+lowest_missing(Container& numbers) noexcept
 {
-    auto begin{numbers.begin()};
-    auto end{numbers.end()};
+    using ValTyp = std::decay_t<typename Container::value_type>;
+
+    auto const begin{numbers.begin()};
+
     auto max{numbers.size()};
 
-    for (auto it{begin}; it != end; ++it)
     {
-        int const current{*it};
-        if (current < 1)
+        auto const end{numbers.end()};
+        for (auto it{begin}; it != end; ++it)
         {
-            --max;
-        }
-        else if (static_cast<std::size_t>(current) > max)
-        {
-            --max;
-            *it = 0;
-        }
-        else
-        {
-            quasi_sort(begin, it);
+            if (auto const current{*it}; current < ValTyp{1})
+            {
+                --max;
+            }
+            else if (static_cast<std::size_t>(current) > max)
+            {
+                --max;
+                *it = ValTyp{0};
+            }
+            else
+            {
+                quasi_sort<Container>(begin, it);
+            }
         }
     }
 
-    int min_num{1};
-    auto const endIt{std::next(begin, static_cast<T::difference_type>(max))};
-    for (auto it{begin}; it != endIt; ++it)
+    ValTyp min_num{1};
+
     {
-        if (*it == min_num)
+        auto const endIt{
+            std::next(begin, static_cast<Container::difference_type>(max))};
+        for (auto it{begin}; it != endIt; ++it)
         {
-            ++min_num;
+            if (*it == min_num)
+            {
+                ++min_num;
+            }
         }
     }
 

@@ -12,7 +12,7 @@
 
 #include "forfun/first_missing_positive.hpp"
 
-TEST_CASE("first_missing_positive")
+TEST_CASE("first_missing_positive", "[first_missing_positive]")
 {
     using forfun::first_missing_positive::lowest_missing;
 
@@ -114,5 +114,32 @@ TEST_CASE("first_missing_positive")
         CHECK(test_input.size() == 10);
 
         REQUIRE(lowest_missing(test_input) == expected_output);
+    }
+
+    SECTION("Integral types")
+    {
+        SECTION("char")
+        {
+            std::array<char, 2> test_input{char{1}, char{2}};
+            REQUIRE(lowest_missing(test_input) == char{3});
+        }
+
+        SECTION("unsigned int")
+        {
+            std::array<unsigned int, 3> test_input{1u, 2u, 4u};
+            REQUIRE(lowest_missing(test_input) == 3u);
+        }
+
+        SECTION("int")
+        {
+            std::array<int, 3> test_input{1, 2, 4};
+            REQUIRE(lowest_missing(test_input) == 3);
+        }
+
+        SECTION("unsigned long long")
+        {
+            std::array<unsigned long long, 2> test_input{2ull, 1ull};
+            REQUIRE(lowest_missing(test_input) == 3ull);
+        }
     }
 }
