@@ -16,23 +16,26 @@
 #ifndef FORFUN_PROJECT_EULER_P0001_MULTIPLES_OF_3_OR_5_HPP_
 #define FORFUN_PROJECT_EULER_P0001_MULTIPLES_OF_3_OR_5_HPP_
 
-#include <algorithm>
+namespace forfun::project_euler::multiples_of_3_or_5 {
+
+[[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept;
 
 namespace {
-[[nodiscard]] inline /* constexpr */ int
-sum_2x(int const n, int const q) noexcept
-{
-    auto const d = std::div(n, q);
 
-    return d.quot * (q + n - d.rem);
+[[nodiscard]] inline constexpr int sum_2x(int const n, int const q) noexcept
+{
+    return (n / q) * (q + n - (n % q));
 }
+
 } // namespace
 
-[[nodiscard]] /* constexpr */ int find_sum_mult_three_five(int n) noexcept
+[[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept
 {
     --n;
 
     return (sum_2x(n, 3) + sum_2x(n, 5) - sum_2x(n, 15)) / 2;
 }
+
+} // namespace forfun::project_euler::multiples_of_3_or_5
 
 #endif // FORFUN_PROJECT_EULER_P0001_MULTIPLES_OF_3_OR_5_HPP_

@@ -114,15 +114,6 @@ target_link_libraries(
 )
 
 add_executable(
-  project_euler_p0001_multiples_of_3_or_5
-  "test/project_euler/p0001_multiples_of_3_or_5.cpp"
-)
-target_link_libraries(
-  project_euler_p0001_multiples_of_3_or_5
-  PRIVATE forfun_project_euler
-)
-
-add_executable(
   sonar
   "test/sonar.cpp"
 )
@@ -138,6 +129,7 @@ add_executable(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/palindromic_number_test.cpp"
+  "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
   "test/sorting/insertion_test.cpp"
   "test/sorting/quicksort_test.cpp"
 )
