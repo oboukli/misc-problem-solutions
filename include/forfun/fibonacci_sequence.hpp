@@ -25,11 +25,11 @@ template <typename T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState* const state) noexcept
 {
-    for (T i{0}, j{1}, tmp{0}; i <= max;)
+    for (T i{0}, j{1}; i <= max;)
     {
         cb(i, state);
 
-        tmp = j + i;
+        T const tmp = j + i;
         i = j;
         j = tmp;
     }
