@@ -18,6 +18,7 @@ TEST_CASE(
     "forfun::first_missing_positive benchmarking",
     "[benchmark][first_missing_positive]")
 {
+    using namespace forfun::first_missing_positive;
     using ContainerType = std::array<int, 128>;
 
     ankerl::nanobench::Bench()
@@ -25,9 +26,7 @@ TEST_CASE(
         .title("Lowest missing positive integer")
 
         .run(
-            NAMEOF_RAW(
-                forfun::first_missing_positive::lowest_missing<ContainerType>)
-                .c_str(),
+            NAMEOF_RAW(cast::lowest_missing<ContainerType>).c_str(),
             []() {
                 ContainerType a{
                     // clang-format off
@@ -47,7 +46,32 @@ TEST_CASE(
                     // clang-format on
                 };
 
-                auto r{forfun::first_missing_positive::lowest_missing(a)};
+                auto r{forfun::first_missing_positive::cast::lowest_missing(a)};
+                ankerl::nanobench::doNotOptimizeAway(r);
+            })
+
+        .run(
+            NAMEOF_RAW(span::lowest_missing<ContainerType>).c_str(),
+            []() {
+                ContainerType a{
+                    // clang-format off
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+                    0, 0, 0, 0, 0, 0, 0, 0,
+                    // clang-format on
+                };
+
+                auto r{forfun::first_missing_positive::span::lowest_missing(a)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

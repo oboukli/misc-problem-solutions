@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <iterator>
+#include <span>
 #include <type_traits>
 
 namespace forfun::first_missing_positive {
@@ -52,6 +53,8 @@ constexpr inline void quasi_sort(
 }
 
 } // namespace
+
+namespace cast {
 
 template <typename Container>
     requires std::integral<std::decay_t<typename Container::value_type>>
@@ -100,6 +103,59 @@ lowest_missing(Container& numbers) noexcept
 
     return min_num;
 }
+
+} // namespace cast
+
+namespace span {
+
+template <typename Container>
+    requires std::integral<std::decay_t<typename Container::value_type>>
+[[nodiscard]] constexpr inline Container::value_type
+lowest_missing(Container& numbers) noexcept
+{
+    using ValTyp = std::decay_t<typename Container::value_type>;
+
+    auto const begin{numbers.begin()};
+
+    auto max{numbers.size()};
+
+    {
+        auto const end{numbers.end()};
+        for (auto it{begin}; it != end; ++it)
+        {
+            if (auto const current{*it}; current < ValTyp{1})
+            {
+                --max;
+            }
+            else if (static_cast<std::size_t>(current) > max)
+            {
+                --max;
+                *it = ValTyp{0};
+            }
+            else
+            {
+                quasi_sort<Container>(begin, it);
+            }
+        }
+    }
+
+    ValTyp min_num{1};
+
+    {
+        std::span s{numbers};
+        for (std::size_t i{0}; i < max; ++i)
+        {
+            if (s[i] == min_num)
+            {
+                ++min_num;
+            }
+        }
+    }
+
+    return min_num;
+}
+
+} // namespace span
 
 } // namespace forfun::first_missing_positive
 
