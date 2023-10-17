@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <vector>
 
+namespace forfun::sonar {
+
 int count_ships(Sonar const& sonar, Area const area)
 {
     if (!sonar.ping(area))
@@ -71,3 +73,5 @@ bool Sonar::ping(Area area) const
             && coord.y >= area.left && coord.y <= area.right;
     });
 }
+
+} // namespace forfun::sonar

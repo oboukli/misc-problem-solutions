@@ -11,6 +11,8 @@
 
 int main()
 {
+    using namespace forfun::sonar;
+
     {
         [[maybe_unused]] int num_ships;
         Sonar s{{{0, 0}}};

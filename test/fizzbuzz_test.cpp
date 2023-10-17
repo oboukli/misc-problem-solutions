@@ -11,6 +11,8 @@
 
 TEST_CASE("fizzbuzz")
 {
+    using forfun::fizzbuzz::fizzbuzz;
+
     SECTION("Numbers other than three and five are concatenated as-is")
     {
         REQUIRE_THAT(

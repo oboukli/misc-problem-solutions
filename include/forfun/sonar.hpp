@@ -18,6 +18,8 @@
 #include <cstdlib>
 #include <vector>
 
+namespace forfun::sonar {
+
 struct Area {
     int top;
     int bottom;
@@ -36,5 +38,7 @@ struct Sonar {
 };
 
 int count_ships(Sonar const& sonar, Area const area);
+
+} // namespace forfun::sonar
 
 #endif // FORFUN_SONAR_HPP_

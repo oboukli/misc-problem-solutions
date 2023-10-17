@@ -9,6 +9,8 @@
 #include <sstream>
 #include <string>
 
+namespace forfun::fizzbuzz {
+
 std::string fizzbuzz(int const n) noexcept
 {
     std::ostringstream buffer;
@@ -34,3 +36,5 @@ std::string fizzbuzz(int const n) noexcept
 
     return buffer.str();
 }
+
+} // namespace forfun::fizzbuzz

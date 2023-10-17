@@ -19,6 +19,10 @@
 
 #include <string>
 
+namespace forfun::fizzbuzz {
+
 std::string fizzbuzz(int const n) noexcept;
+
+} // namespace forfun::fizzbuzz
 
 #endif // FORFUN_FIZZBUZZ_HPP_
