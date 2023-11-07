@@ -29,6 +29,7 @@ project(
 add_library(
   forfun
   SHARED
+  "include/forfun/contains_duplicate.hpp"
   "include/forfun/fibonacci_sequence.hpp"
   "include/forfun/first_missing_positive.hpp"
   "include/forfun/fizzbuzz.hpp"
@@ -39,6 +40,7 @@ add_library(
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
+  "src/contains_duplicate.cpp"
   "src/fibonacci_sequence.cpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
@@ -135,6 +137,7 @@ target_link_libraries(
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
+  "test/contains_duplicate_test.cpp"
   "test/fibonacci_sequence_test.cpp"
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
