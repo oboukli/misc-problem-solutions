@@ -38,6 +38,7 @@ add_library(
   "include/forfun/sonar.hpp"
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/trie.hpp"
+  "include/forfun/two_sum.hpp"
   "src/fibonacci_sequence.cpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
@@ -47,6 +48,7 @@ add_library(
   "src/sonar.cpp"
   "src/sub_array_sums.cpp"
   "src/trie.cpp"
+  "src/two_sum.cpp"
 )
 target_include_directories(
   forfun
@@ -143,6 +145,7 @@ add_executable(
   "test/sorting/quicksort_test.cpp"
   "test/sub_array_sums_test.cpp"
   "test/trie_test.cpp"
+  "test/two_sum_test.cpp"
 )
 target_link_libraries(
   tests
