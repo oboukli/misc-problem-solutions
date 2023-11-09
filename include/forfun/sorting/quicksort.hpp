@@ -21,7 +21,7 @@ template <typename RandomIt>
 [[nodiscard]] constexpr inline RandomIt
 partition(RandomIt const lo, RandomIt const hi) noexcept
 {
-    auto const pivot = *hi;
+    auto const pivot{*hi};
 
     auto i{std::prev(lo)};
     for (auto j{lo}; j < hi; ++j)
