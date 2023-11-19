@@ -23,6 +23,7 @@ TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
     ankerl::nanobench::Bench()
 
         .title("Palindromic number")
+        .relative(true)
 
         .run(
             NAMEOF_RAW(forfun::palindromic_number::fast::is_palindrome<int>)

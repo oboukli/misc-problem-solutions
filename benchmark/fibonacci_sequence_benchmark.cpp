@@ -30,6 +30,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
 
     ankerl::nanobench::Bench()
         .title("forfun::fibonacci::sequence")
+        .relative(true)
 
         .run(
             NAMEOF_RAW(slow::fib_seq<int, int>).c_str(),

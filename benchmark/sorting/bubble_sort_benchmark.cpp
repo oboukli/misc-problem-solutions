@@ -21,6 +21,7 @@ TEST_CASE("bubble_sort benchmarking", "[benchmark][sorting][bubble_sort]")
     ankerl::nanobench::Bench()
 
         .title("Bubble sort")
+        .relative(true)
 
         .run(
             NAMEOF_RAW(

@@ -24,6 +24,7 @@ TEST_CASE(
     ankerl::nanobench::Bench()
 
         .title("Lowest missing positive integer")
+        .relative(true)
 
         .run(
             NAMEOF_RAW(cast::lowest_missing<ContainerType>).c_str(),

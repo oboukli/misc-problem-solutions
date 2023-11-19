@@ -26,6 +26,7 @@ TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]")
         ankerl::nanobench::Bench()
 
             .title("Palindrome (case-sensitive)")
+            .relative(true)
 
             .run(
                 NAMEOF_RAW(::is_palindrome).c_str(),
