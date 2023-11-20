@@ -176,6 +176,7 @@ add_executable(
   "benchmark/palindromic_number_benchmark.cpp"
   "benchmark/product_except_self_benchmark.cpp"
   "benchmark/sorting/bubble_sort_benchmark.cpp"
+  "benchmark/sorting/quicksort_benchmark.cpp"
   "benchmark/sub_array_sums_benchmark.cpp"
 )
 target_link_libraries(
