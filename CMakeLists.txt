@@ -34,6 +34,7 @@ add_library(
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/sonar.hpp"
+  "include/forfun/sub_array_sums.hpp"
   "src/fibonacci_sequence.cpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
@@ -41,6 +42,7 @@ add_library(
   "src/palindrome.cpp"
   "src/palindromic_number.cpp"
   "src/sonar.cpp"
+  "src/sub_array_sums.cpp"
 )
 target_include_directories(
   forfun
@@ -132,6 +134,7 @@ add_executable(
   "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
   "test/sorting/insertion_test.cpp"
   "test/sorting/quicksort_test.cpp"
+  "test/sub_array_sums_test.cpp"
 )
 target_link_libraries(
   tests
