@@ -230,10 +230,10 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
 
     SECTION("3 of 6, take all (std::array)")
     {
-        std::array const numbers{1, 1, 1, 2, 2, 2};
+        static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
         std::array<int, 4> sums{3, 4, 5, 6};
-        constexpr std::array<int, 6>::size_type const sub_size{3};
-        std::array const expected{3, 4, 5, 6};
+        static constexpr std::array<int, 6>::size_type const sub_size{3};
+        static constexpr std::array const expected{3, 4, 5, 6};
 
         CAPTURE(numbers);
         CAPTURE(sums.size());
@@ -245,10 +245,10 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
 
     SECTION("3 of 6, take all, do not mutate excess (std::array)")
     {
-        std::array const numbers{1, 1, 1, 2, 2, 2};
-        std::array<int, 6> sums{3, 4, 5, 6, 0, -1};
-        constexpr std::array<int, 6>::size_type const sub_size{3};
-        std::array const expected{3, 4, 5, 6, 0, -1};
+        static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
+        std::array<int, 6> sums{-1, -1, -1, -1, -1, -1};
+        static constexpr std::array<int, 6>::size_type const sub_size{3};
+        static constexpr std::array const expected{3, 4, 5, 6, -1, -1};
 
         CAPTURE(numbers);
         CAPTURE(sums.size());
