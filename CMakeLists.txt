@@ -159,6 +159,7 @@ add_executable(
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
   "benchmark/palindromic_number_benchmark.cpp"
+  "benchmark/sub_array_sums_benchmark.cpp"
 )
 target_link_libraries(
   benchmark
