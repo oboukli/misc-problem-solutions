@@ -17,7 +17,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_XCODE_XCCONFIG "vendor/XcodeWarnings/XcodeWarnings.xcconfig")
 
 set(
-  CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+  CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
   CACHE STRING "Vcpkg toolchain file"
 )
 
