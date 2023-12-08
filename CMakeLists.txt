@@ -67,8 +67,10 @@ target_include_directories(
 add_library(
   forfun_sorting
   SHARED
+  "include/forfun/sorting/bubble_sort.hpp"
   "include/forfun/sorting/insertion.hpp"
   "include/forfun/sorting/quicksort.hpp"
+  "src/sorting/bubble_sort.cpp"
   "src/sorting/insertion.cpp"
   "src/sorting/quicksort.cpp"
 )
@@ -134,6 +136,7 @@ add_executable(
   "test/fizzbuzz_test.cpp"
   "test/palindromic_number_test.cpp"
   "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
+  "test/sorting/bubble_sort_test.cpp"
   "test/sorting/insertion_test.cpp"
   "test/sorting/quicksort_test.cpp"
   "test/sub_array_sums_test.cpp"
