@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/sorting/insertion.hpp"
+#include "forfun/sorting/insertion_sort.hpp"
