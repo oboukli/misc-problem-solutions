@@ -11,7 +11,7 @@
 
 #include "forfun/sorting/quicksort.hpp"
 
-TEST_CASE("Quicksort sort", "[sorting]")
+TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 {
     using forfun::sorting::quicksort;
 

@@ -9,7 +9,7 @@
 
 #include "forfun/fizzbuzz.hpp"
 
-TEST_CASE("fizzbuzz")
+TEST_CASE("fizzbuzz", "[fizzbuzz]")
 {
     using forfun::fizzbuzz::fizzbuzz;
 

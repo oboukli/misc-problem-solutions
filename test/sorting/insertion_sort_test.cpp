@@ -11,7 +11,7 @@
 
 #include "forfun/sorting/insertion_sort.hpp"
 
-TEST_CASE("Insertion sort", "[sorting]")
+TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 {
     using forfun::sorting::insertion_sort;
 
