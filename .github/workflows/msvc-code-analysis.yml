@@ -60,6 +60,8 @@ jobs:
       - name: Initialize MSVC Code Analysis
         uses: microsoft/msvc-code-analysis-action@24c285ab36952c9e9182f4b78dfafbac38a7e5ee
         id: run-analysis
+        env:
+          CL: /DCATCH_CONFIG_EXPERIMENTAL_STATIC_ANALYSIS_SUPPORT %CL%
         with:
           buildConfiguration: ${{ env.config }}
           cmakeBuildDirectory: ${{ env.build }}
