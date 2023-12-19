@@ -37,6 +37,7 @@ add_library(
   "include/forfun/palindromic_number.hpp"
   "include/forfun/sonar.hpp"
   "include/forfun/sub_array_sums.hpp"
+  "include/forfun/trie.hpp"
   "src/fibonacci_sequence.cpp"
   "src/first_missing_positive.cpp"
   "src/fizzbuzz.cpp"
@@ -45,6 +46,7 @@ add_library(
   "src/palindromic_number.cpp"
   "src/sonar.cpp"
   "src/sub_array_sums.cpp"
+  "src/trie.cpp"
 )
 target_include_directories(
   forfun
@@ -140,6 +142,7 @@ add_executable(
   "test/sorting/insertion_sort_test.cpp"
   "test/sorting/quicksort_test.cpp"
   "test/sub_array_sums_test.cpp"
+  "test/trie_test.cpp"
 )
 target_link_libraries(
   tests
