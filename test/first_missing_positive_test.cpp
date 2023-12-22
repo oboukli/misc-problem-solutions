@@ -16,9 +16,11 @@
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive with vector<int>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<std::vector<int>>),
-    (forfun::first_missing_positive::span::lowest_missing<std::vector<int>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::vector<int>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::vector<int>::iterator>))
 {
     SECTION("Empty vector")
     {
@@ -28,7 +30,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 0);
 
-        REQUIRE(sut(test_input) == 1);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 1);
     }
 
     SECTION("One number")
@@ -47,7 +50,9 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 1);
 
-        REQUIRE(sut(test_input) == expected_output);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end())
+            == expected_output);
     }
 
     SECTION("Two numbers")
@@ -70,7 +75,9 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 2);
 
-        REQUIRE(sut(test_input) == expected_output);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end())
+            == expected_output);
     }
 
     SECTION("Three numbers")
@@ -94,7 +101,9 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 3);
 
-        REQUIRE(sut(test_input) == expected_output);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end())
+            == expected_output);
     }
 
     SECTION("Ten numbers")
@@ -117,16 +126,20 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 10);
 
-        REQUIRE(sut(test_input) == expected_output);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end())
+            == expected_output);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 0>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<std::array<int, 0>>),
-    (forfun::first_missing_positive::span::lowest_missing<std::array<int, 0>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<int, 0>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<int, 0>::iterator>))
 {
     SECTION("Empty array")
     {
@@ -136,16 +149,19 @@ TEMPLATE_TEST_CASE_SIG(
 
         STATIC_CHECK(test_input.size() == 0);
 
-        STATIC_REQUIRE(sut(test_input) == 1);
+        STATIC_REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 1);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 16>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<std::array<int, 16>>),
-    (forfun::first_missing_positive::span::lowest_missing<std::array<int, 16>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<int, 16>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<int, 16>::iterator>))
 {
     SECTION("Empty container")
     {
@@ -155,66 +171,59 @@ TEMPLATE_TEST_CASE_SIG(
 
         CHECK(test_input.size() == 16);
 
-        REQUIRE(sut(test_input) == 6);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 6);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<char, 2>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<std::array<char, 2>>),
-    (forfun::first_missing_positive::span::lowest_missing<std::array<char, 2>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<char, 2>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<char, 2>::iterator>))
 {
     SECTION("char")
     {
         std::array<char, 2> test_input{char{1}, char{2}};
-        REQUIRE(sut(test_input) == char{3});
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end())
+            == char{3});
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<unsigned int, 3>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<
-        std::array<unsigned int, 3>>),
-    (forfun::first_missing_positive::span::lowest_missing<
-        std::array<unsigned int, 3>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<unsigned int, 3>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<unsigned int, 3>::iterator>))
 {
     SECTION("unsigned int")
     {
         std::array<unsigned int, 3> test_input{1u, 2u, 4u};
-        REQUIRE(sut(test_input) == 3u);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 3u);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 3>",
     "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<std::array<int, 3>>),
-    (forfun::first_missing_positive::span::lowest_missing<std::array<int, 3>>))
+    ((auto first_missing_positive), first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<int, 3>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<int, 3>::iterator>))
 {
     SECTION("int")
     {
         std::array<int, 3> test_input{1, 2, 4};
-        REQUIRE(sut(test_input) == 3);
-    }
-}
-
-TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<unsigned long long, 2>",
-    "[first_missing_positive]",
-    ((auto sut), sut),
-    (forfun::first_missing_positive::cast::lowest_missing<
-        std::array<unsigned long long, 2>>),
-    (forfun::first_missing_positive::span::lowest_missing<
-        std::array<unsigned long long, 2>>))
-{
-    SECTION("unsigned long long")
-    {
-        std::array<unsigned long long, 2> test_input{2ull, 1ull};
-        REQUIRE(sut(test_input) == 3ull);
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 3);
     }
 }

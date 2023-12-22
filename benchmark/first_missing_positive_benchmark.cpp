@@ -27,7 +27,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(cast::lowest_missing<ContainerType>).c_str(),
+            NAMEOF_RAW(base::lowest_missing<ContainerType::iterator>).c_str(),
             []() {
                 ContainerType a{
                     // clang-format off
@@ -47,12 +47,12 @@ TEST_CASE(
                     // clang-format on
                 };
 
-                auto r{forfun::first_missing_positive::cast::lowest_missing(a)};
+                auto r{base::lowest_missing(a.begin(), a.end())};
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
-            NAMEOF_RAW(span::lowest_missing<ContainerType>).c_str(),
+            NAMEOF_RAW(fast::lowest_missing<ContainerType::iterator>).c_str(),
             []() {
                 ContainerType a{
                     // clang-format off
@@ -72,7 +72,7 @@ TEST_CASE(
                     // clang-format on
                 };
 
-                auto r{forfun::first_missing_positive::span::lowest_missing(a)};
+                auto r{fast::lowest_missing(a.begin(), a.end())};
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

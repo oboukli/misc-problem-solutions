@@ -19,143 +19,123 @@
 #define FORFUN_FIRST_MISSING_POSITIVE_HPP_
 
 #include <algorithm>
-#include <cstddef>
 #include <iterator>
-#include <span>
 #include <type_traits>
 
 namespace forfun::first_missing_positive {
 
 namespace {
 
-template <typename Container>
-    requires std::integral<std::decay_t<typename Container::value_type>>
-constexpr inline void quasi_sort(
-    typename Container::iterator const first,
-    typename Container::iterator const src) noexcept
+template <
+    typename RandomIt,
+    typename ValTyp = std::iterator_traits<RandomIt>::value_type,
+    typename Diff = std::iterator_traits<RandomIt>::difference_type>
+    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+constexpr inline void
+quasi_sort(RandomIt const first, RandomIt const src) noexcept
 {
-    using ValTyp = std::decay_t<typename Container::value_type>;
-
     if (auto const n{*src}; n > ValTyp{0})
     {
-        auto const dest{std::next(
-            first,
-            static_cast<Container::difference_type>(
-                std::max<ValTyp>(ValTyp{0}, n - ValTyp{1})))};
+        auto const dest{first + std::max<ValTyp>(ValTyp{0}, n - ValTyp{1})};
         if (auto const tmp{*dest}; tmp != n)
         {
             *dest = n;
             *src = tmp;
 
-            quasi_sort<Container>(first, src);
+            quasi_sort(first, src);
         }
     }
 }
 
 } // namespace
 
-namespace cast {
+namespace base {
 
-template <typename Container>
-    requires std::integral<std::decay_t<typename Container::value_type>>
-[[nodiscard]] constexpr inline Container::value_type
-lowest_missing(Container& numbers) noexcept
+template <
+    typename RandomIt,
+    typename ValTyp = std::iterator_traits<RandomIt>::value_type>
+    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+[[nodiscard]] constexpr inline ValTyp
+lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 {
-    using ValTyp = std::decay_t<typename Container::value_type>;
+    auto max{end - begin};
 
-    auto const begin{numbers.begin()};
-
-    auto max{numbers.size()};
-
+    for (auto it{begin}; it != end; ++it)
     {
-        auto const end{numbers.end()};
-        for (auto it{begin}; it != end; ++it)
+        if (auto const current{*it}; current < ValTyp{1})
         {
-            if (auto const current{*it}; current < ValTyp{1})
-            {
-                --max;
-            }
-            else if (static_cast<std::size_t>(current) > max)
-            {
-                --max;
-                *it = ValTyp{0};
-            }
-            else
-            {
-                quasi_sort<Container>(begin, it);
-            }
+            --max;
+        }
+        else if (current > max)
+        {
+            --max;
+            *it = ValTyp{0};
+        }
+        else
+        {
+            quasi_sort(begin, it);
         }
     }
 
     ValTyp min_num{1};
 
+    auto const endIt{begin + max};
+    for (auto it{begin}; it != endIt; ++it)
     {
-        auto const endIt{
-            std::next(begin, static_cast<Container::difference_type>(max))};
-        for (auto it{begin}; it != endIt; ++it)
+        if (*it == min_num)
         {
-            if (*it == min_num)
-            {
-                ++min_num;
-            }
+            ++min_num;
         }
     }
 
     return min_num;
 }
 
-} // namespace cast
+} // namespace base
 
-namespace span {
+namespace fast {
 
-template <typename Container>
-    requires std::integral<std::decay_t<typename Container::value_type>>
-[[nodiscard]] constexpr inline Container::value_type
-lowest_missing(Container& numbers) noexcept
+template <
+    typename RandomIt,
+    typename ValTyp = std::iterator_traits<RandomIt>::value_type,
+    typename Diff = std::iterator_traits<RandomIt>::difference_type>
+    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+[[nodiscard]] constexpr inline ValTyp
+lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 {
-    using ValTyp = std::decay_t<typename Container::value_type>;
+    auto max{end - begin};
 
-    auto const begin{numbers.begin()};
-
-    auto max{numbers.size()};
-
+    for (auto it{begin}; it != end; ++it)
     {
-        auto const end{numbers.end()};
-        for (auto it{begin}; it != end; ++it)
+        if (auto const current{*it}; current < ValTyp{1})
         {
-            if (auto const current{*it}; current < ValTyp{1})
-            {
-                --max;
-            }
-            else if (static_cast<std::size_t>(current) > max)
-            {
-                --max;
-                *it = ValTyp{0};
-            }
-            else
-            {
-                quasi_sort<Container>(begin, it);
-            }
+            --max;
+        }
+        else if (current > max)
+        {
+            --max;
+            *it = ValTyp{0};
+        }
+        else
+        {
+            quasi_sort(begin, it);
         }
     }
 
     ValTyp min_num{1};
 
+    for (Diff i{0}; i < max; ++i)
     {
-        std::span s{numbers};
-        for (std::size_t i{0}; i < max; ++i)
+        if (begin[i] == min_num)
         {
-            if (s[i] == min_num)
-            {
-                ++min_num;
-            }
+            ++min_num;
         }
     }
 
     return min_num;
 }
 
-} // namespace span
+} // namespace fast
 
 } // namespace forfun::first_missing_positive
 
