@@ -15,7 +15,7 @@
 TEMPLATE_TEST_CASE_SIG(
     "palindromic_number",
     "[palindromic_number]",
-    ((auto sut), sut),
+    ((auto is_palindrome), is_palindrome),
     (forfun::palindromic_number::fast::is_palindrome<int>),
     (forfun::palindromic_number::stl::is_palindrome))
 {
@@ -43,7 +43,7 @@ TEMPLATE_TEST_CASE_SIG(
             {
                 THEN("true")
                 {
-                    REQUIRE(sut(palindromic_number));
+                    REQUIRE(is_palindrome(palindromic_number));
                 }
             }
         }
@@ -71,7 +71,7 @@ TEMPLATE_TEST_CASE_SIG(
             {
                 THEN("false")
                 {
-                    REQUIRE_FALSE(sut(non_palindromic_number));
+                    REQUIRE_FALSE(is_palindrome(non_palindromic_number));
                 }
             }
         }

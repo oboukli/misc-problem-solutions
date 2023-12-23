@@ -24,7 +24,7 @@ void dummy_callback(int const n, std::vector<int>* const seq) noexcept
 TEMPLATE_TEST_CASE_SIG(
     "fibonacci_sequence",
     "[fibonacci_sequence]",
-    ((auto sut), sut),
+    ((auto fib_seq), fib_seq),
     (forfun::fibonacci::sequence::slow::fib_seq<int, std::vector<int>>),
     (forfun::fibonacci::sequence::fast::fib_seq<int, std::vector<int>>),
     (forfun::fibonacci::sequence::creel::fib_seq<int, std::vector<int>>))
@@ -48,7 +48,7 @@ TEMPLATE_TEST_CASE_SIG(
                 std::vector<int> seq;
                 seq.reserve(expected_seq.size());
 
-                sut(max, dummy_callback, &seq);
+                fib_seq(max, dummy_callback, &seq);
 
                 THEN("sequence is valid")
                 {
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
             {
                 std::vector<int> seq;
 
-                sut(max, dummy_callback, &seq);
+                fib_seq(max, dummy_callback, &seq);
 
                 THEN("sequence is empty")
                 {

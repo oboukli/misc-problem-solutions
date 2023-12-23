@@ -63,7 +63,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
         .run(
             NAMEOF_RAW(creel::fib_seq<int, int>).c_str(),
             []() {
-                int r{};
+                int r{0};
                 forfun::fibonacci::sequence::creel::fib_seq(
                     f, dummy_callback, &r);
                 ankerl::nanobench::doNotOptimizeAway(r);
