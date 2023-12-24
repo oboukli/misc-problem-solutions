@@ -10,7 +10,6 @@
 #ifndef FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 #define FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 
-#include <cassert>
 #include <concepts>
 #include <iterator>
 #include <type_traits>
