@@ -17,6 +17,9 @@ permissions: {}
 jobs:
   windows_vcpp:
     name: Build and test on Windows with VC++
+    env:
+      cmake_configure_preset_name: x64-debug
+      cmake_build_preset_name: windows-x64-debug
     runs-on: windows-latest
 
     steps:
@@ -51,15 +54,10 @@ jobs:
             ) }}
 
       - name: Configure CMake
-        run: >-
-          cmake -B "${{ env.build_dir }}"
-          -DBUILD_SHARED_LIBS=TRUE
-          -DCMAKE_BUILD_TYPE="${{ env.config }}"
-          -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE
+        run: cmake --preset "${{ env.cmake_configure_preset_name }}"
 
       - name: Build
-        run: cmake --build "${{ env.build_dir }}" --config "${{ env.config }}"
-        working-directory: ${{github.workspace}}
+        run: cmake --build --preset "${{ env.cmake_build_preset_name }}"
 
       - name: Run tests
         run: >-
@@ -67,7 +65,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
           --success
-        working-directory: ${{ env.build_dir }}\${{ env.config }}
+        working-directory: ${{github.workspace}}\out\build\${{ env.cmake_configure_preset_name }}\${{ env.config }}
 
       - name: Run benchmarks
         run: >-
@@ -75,7 +73,7 @@ jobs:
           --rng-seed 1654047489
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.build_dir }}\${{ env.config }}
+        working-directory: ${{github.workspace}}\out\build\${{ env.cmake_configure_preset_name }}\${{ env.config }}
 
   linux:
     name: Build and test on Ubuntu
@@ -120,9 +118,7 @@ jobs:
 
       - name: Build
         run: cmake --build "${{ env.build_dir }}" --config "${{ env.config }}"
-        working-directory: ${{github.workspace}}
 
-      # TODO: Sorting tests
       - name: Run tests
         run: >-
           ./tests
@@ -131,7 +127,6 @@ jobs:
           --success
         working-directory: ${{ env.build_dir }}
 
-      # TODO: Enable all benchmarks
       - name: Run benchmarks
         run: >-
           ./benchmark
