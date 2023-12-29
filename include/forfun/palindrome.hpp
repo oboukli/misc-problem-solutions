@@ -12,7 +12,6 @@
 
 #include <algorithm>
 #include <cctype>
-#include <cstddef>
 #include <string_view>
 
 namespace forfun::palindrome {
@@ -25,7 +24,7 @@ is_palindrome(std::string_view const& s) noexcept
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
-    for (std::size_t i{0}; i < mid; ++i)
+    for (std::string_view::size_type i{0}; i < mid; ++i)
     {
         if (s[i] != s[end - i])
         {
@@ -41,7 +40,7 @@ is_palindrome(std::string_view const& s) noexcept
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
-    for (std::size_t i{0}; i < mid; ++i)
+    for (std::string_view::size_type i{0}; i < mid; ++i)
     {
         if (std::tolower(static_cast<unsigned char>(s[i]))
             != std::tolower(static_cast<unsigned char>(s[end - i])))
