@@ -30,6 +30,7 @@ add_library(
   forfun
   SHARED
   "include/forfun/contains_duplicate.hpp"
+  "include/forfun/factorial.hpp"
   "include/forfun/fibonacci_sequence.hpp"
   "include/forfun/first_missing_positive.hpp"
   "include/forfun/fizzbuzz.hpp"
@@ -142,6 +143,7 @@ find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
   "test/contains_duplicate_test.cpp"
+  "test/factorial_test.cpp"
   "test/fibonacci_sequence_test.cpp"
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
@@ -172,6 +174,7 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
+  "benchmark/factorial_benchmark.cpp"
   "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
