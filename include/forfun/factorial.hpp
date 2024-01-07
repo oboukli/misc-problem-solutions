@@ -10,8 +10,10 @@
 #ifndef FORFUN_FACTORIAL_HPP_
 #define FORFUN_FACTORIAL_HPP_
 
+#include <algorithm>
 #include <cassert>
 #include <concepts>
+#include <ranges>
 #include <type_traits>
 
 namespace forfun::factorial {
@@ -37,6 +39,31 @@ factorial(std::integral auto const n) noexcept -> decltype(n)
 }
 
 } // namespace iterative
+
+#if __cpp_lib_ranges_fold >= 202207L
+
+#define FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE true
+
+namespace stl_functional {
+
+/// @note Providing a negative argument for @p n results in undefined behavior.
+/// @note For large values of @p n, the result may overflow the return type.
+[[nodiscard]] constexpr inline auto
+factorial(std::integral auto const n) noexcept
+{
+    using T = decltype(n);
+
+    assert(n >= T{0});
+
+    return std::ranges::fold_left(
+        std::views::iota(T{1}) | std::views::take(n),
+        T{1},
+        std::multiplies<>());
+}
+
+} // namespace stl_functional
+
+#endif // __cpp_lib_ranges_fold >= 202207L
 
 } // namespace forfun::factorial
 

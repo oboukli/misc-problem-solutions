@@ -1,6 +1,6 @@
 # Miscellaneous coding problem solutions
 
-Solutions for various coding problems, written in C90, C++17, and C++20.
+Solutions for various coding problems, written in C90, C++17, C++20, and C++23.
 
 The solutions are not necessarily optimal or meant as best practice.
 
