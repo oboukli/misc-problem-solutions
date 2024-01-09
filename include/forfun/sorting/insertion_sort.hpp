@@ -22,7 +22,7 @@ insertion_sort(RandomIt const begin, RandomIt const end) noexcept
     {
         for (RandomIt i{begin + 1}; i != end; ++i)
         {
-            for (RandomIt j{i}; *j < *(j - 1) && j != begin; --j)
+            for (RandomIt j{i}; j != begin && (*j < *(j - 1)); --j)
             {
                 std::iter_swap(j, j - 1);
             }
