@@ -11,20 +11,23 @@
 #define FORFUN_SORTING_INSERTION_HPP_
 
 #include <algorithm>
+#include <iterator>
 
 namespace forfun::sorting {
 
-template <typename RandomIt>
-constexpr inline void
-insertion_sort(RandomIt const begin, RandomIt const end) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+constexpr inline void insertion_sort(Iter const begin, Iter const end) noexcept
 {
+    using Diff = std::iterator_traits<Iter>::difference_type;
+
     if (begin != end)
     {
-        for (RandomIt i{begin + 1}; i != end; ++i)
+        for (Iter i{begin + Diff{1}}; i != end; ++i)
         {
-            for (RandomIt j{i}; j != begin && (*j < *(j - 1)); --j)
+            for (Iter j{i}; j != begin && (*j < *(j - Diff{1})); --j)
             {
-                std::iter_swap(j, j - 1);
+                std::iter_swap(j, j - Diff{1});
             }
         }
     }
