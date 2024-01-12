@@ -42,7 +42,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{7};
         std::array expected_output{7};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 1);
 
@@ -61,7 +61,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{1, 1};
         std::array expected_output{1, 1};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 2);
 
@@ -80,7 +80,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{-6, 3, 11};
         std::array expected_output{-6, 3, 11};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 3);
 
@@ -99,7 +99,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 10);
 
@@ -110,7 +110,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
         std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 10);
 
@@ -129,7 +129,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
         std::array expected_output{-10, 0, 2, 4, 7, 9, 200};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7);
 
@@ -148,7 +148,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
         std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
-        bubble_sort(test_input.begin(), std::prev(test_input.end()));
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7);
 
@@ -159,7 +159,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::vector test_input{8, 4, 7, 0, 9, 5, 2};
         std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
-        bubble_sort(test_input.begin(), test_input.end() - 1);
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7);
 
@@ -170,7 +170,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::vector test_input{-8, -4, -7, -4, -9, -5, -2};
         std::vector expected_output{-9, -8, -7, -5, -4, -4, -2};
-        bubble_sort(test_input.begin(), test_input.end() - 1);
+        bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7);
 

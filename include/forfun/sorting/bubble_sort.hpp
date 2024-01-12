@@ -19,9 +19,15 @@ namespace plain {
 template <typename RandomIt>
 constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
 {
+    if (begin == end)
+    {
+        return;
+    }
+
     bool f;
     do
     {
+        --end;
         f = false;
         for (RandomIt i{begin}; i != end; ++i)
         {
@@ -35,7 +41,6 @@ constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
                 f = true;
             }
         }
-        --end;
     } while (f);
 }
 
@@ -46,9 +51,15 @@ namespace stl {
 template <typename RandomIt>
 constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
 {
+    if (begin == end)
+    {
+        return;
+    }
+
     bool f;
     do
     {
+        --end;
         f = false;
         for (RandomIt i{begin}; i != end; ++i)
         {
@@ -58,7 +69,6 @@ constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
                 f = true;
             }
         }
-        --end;
     } while (f);
 }
 
