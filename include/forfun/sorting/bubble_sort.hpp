@@ -11,14 +11,18 @@
 #define FORFUN_SORTING_BUBBLE_SORT_HPP_
 
 #include <algorithm>
+#include <iterator>
 
 namespace forfun::sorting {
 
 namespace plain {
 
-template <typename RandomIt>
-constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 {
+    using Diff = std::iterator_traits<Iter>::difference_type;
+
     if (begin == end)
     {
         return;
@@ -29,9 +33,9 @@ constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
     {
         --end;
         f = false;
-        for (RandomIt i{begin}; i != end; ++i)
+        for (Iter i{begin}; i != end; ++i)
         {
-            auto const ii{i + 1};
+            auto const ii{i + Diff{1}};
             if (*i > *ii)
             {
                 auto const tmp{*ii};
@@ -48,9 +52,12 @@ constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
 
 namespace stl {
 
-template <typename RandomIt>
-constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 {
+    using Diff = std::iterator_traits<Iter>::difference_type;
+
     if (begin == end)
     {
         return;
@@ -61,11 +68,11 @@ constexpr inline void bubble_sort(RandomIt const begin, RandomIt end) noexcept
     {
         --end;
         f = false;
-        for (RandomIt i{begin}; i != end; ++i)
+        for (Iter i{begin}; i != end; ++i)
         {
-            if (*i > *(i + 1))
+            if (*i > *(i + Diff{1}))
             {
-                std::iter_swap(i, i + 1);
+                std::iter_swap(i, i + Diff{1});
                 f = true;
             }
         }
