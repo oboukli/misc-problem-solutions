@@ -17,13 +17,16 @@ namespace forfun::sorting {
 
 namespace {
 
-template <typename RandomIt>
-[[nodiscard]] constexpr inline RandomIt
-partition(RandomIt const lo, RandomIt const hi) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+[[nodiscard]] constexpr inline auto
+partition(Iter const lo, Iter const hi) noexcept
 {
+    using Diff = std::iterator_traits<Iter>::difference_type;
+
     auto const pivot{*hi};
 
-    auto i{std::prev(lo)};
+    auto i{lo - Diff{1}};
     for (auto j{lo}; j < hi; ++j)
     {
         if (*j < pivot)
@@ -33,7 +36,7 @@ partition(RandomIt const lo, RandomIt const hi) noexcept
         }
     }
 
-    std::advance(i, 1);
+    ++i;
     std::iter_swap(hi, i);
 
     return i;
@@ -41,15 +44,18 @@ partition(RandomIt const lo, RandomIt const hi) noexcept
 
 } // namespace
 
-template <typename RandomIt>
-constexpr inline void quicksort(RandomIt const lo, RandomIt const hi) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+constexpr inline void quicksort(Iter const lo, Iter const hi) noexcept
 {
+    using Diff = std::iterator_traits<Iter>::difference_type;
+
     if (hi > lo)
     {
         auto const p{partition(lo, hi)};
 
-        quicksort(lo, std::prev(p));
-        quicksort(std::next(p), hi);
+        quicksort(lo, p - Diff{1});
+        quicksort(p + Diff{1}, hi);
     }
 }
 
