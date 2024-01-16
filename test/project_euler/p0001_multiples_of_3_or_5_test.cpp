@@ -50,7 +50,7 @@ TEST_CASE("find_sum_mult_three_five", "[multiples_of_3_or_5]")
 
     SECTION("Runtime test")
     {
-        int volatile test_input{1000};
+        int const volatile test_input{1000};
         int const actual{find_sum_mult_three_five(test_input)};
         REQUIRE(actual == 233168);
     }
