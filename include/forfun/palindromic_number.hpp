@@ -11,20 +11,21 @@
 #define FORFUN_PALINDROMIC_NUMBER_HPP_
 
 #include <concepts>
+#include <type_traits>
 
 namespace forfun::palindromic_number {
 
 namespace fast {
 
-template <typename T>
-    requires std::integral<T>
-[[nodiscard]] constexpr bool is_palindrome(T const n) noexcept
+[[nodiscard]] constexpr bool is_palindrome(std::integral auto const n) noexcept
 {
+    using T = std::remove_const<decltype(n)>::type;
+
     T nn{};
     auto d{n};
     while (d > T{0})
     {
-        nn = (nn * T{10}) + d % T{10};
+        nn = (nn * T{10}) + (d % T{10});
         d /= T{10};
     }
 

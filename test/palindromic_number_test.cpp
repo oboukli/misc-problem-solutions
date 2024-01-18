@@ -64,7 +64,6 @@ TEMPLATE_TEST_CASE_SIG(
                 {4268604},
                 {999999998},
                 {2147483602}, // Max supported for std::int32_t
-
             }))};
 
             CAPTURE(non_palindromic_number);
