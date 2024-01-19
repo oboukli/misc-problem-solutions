@@ -5,7 +5,6 @@
 #ifndef FORFUN_LRU_CACHE_HPP_
 #define FORFUN_LRU_CACHE_HPP_
 
-#include <cassert>
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
