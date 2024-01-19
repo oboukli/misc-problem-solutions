@@ -14,8 +14,6 @@
 #ifndef FORFUN_SONAR_HPP_
 #define FORFUN_SONAR_HPP_
 
-#include <algorithm>
-#include <cstdlib>
 #include <vector>
 
 namespace forfun::sonar {
