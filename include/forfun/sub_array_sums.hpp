@@ -24,31 +24,38 @@ template <
 void sum_each(T const& numbers, TSum& sums, S const sub_size) noexcept
 {
     auto const nums_size{numbers.size()};
-    V sub_sum{0};
+    V sub_sum{};
 
+    // Result container element count.
     auto const sums_size{sums.size()};
-    if (sums_size > S{0})
+
+    if (sums_size == S{0})
     {
-        auto const sums_bound{
-            std::min(sums_size, numbers.size() - sub_size + 1)};
-        auto const nums_bound{std::min(sub_size, nums_size)};
-        for (S i{0}; i < nums_bound; ++i)
-        {
-            sub_sum += numbers[i];
-        }
-        sums[0] = sub_sum;
+        return;
+    }
 
-        if (sub_size > S{0} && sub_size < nums_size)
-        {
-            auto const ss{sub_size - S{1}};
-            for (S i{1}; i < sums_bound; ++i)
-            {
-                sub_sum -= numbers[i - S{1}];
-                sub_sum += numbers[i + ss];
+    // Calculate result for the first output element.
+    auto const nums_bound{std::min(sub_size, nums_size)};
+    for (S i{}; i < nums_bound; ++i)
+    {
+        sub_sum += numbers[i];
+    }
+    sums[S{0}] = sub_sum;
 
-                sums[i] = sub_sum;
-            }
-        }
+    if (sub_size == S{0} || sub_size > nums_size)
+    {
+        return;
+    }
+
+    // Calculate the remaining result(s).
+    auto const sums_bound{std::min(sums_size, numbers.size() - sub_size + S{1})};
+    auto const ss{sub_size - S{1}};
+    for (S i{1}; i < sums_bound; ++i)
+    {
+        sub_sum -= numbers[i - S{1}];
+        sub_sum += numbers[i + ss];
+
+        sums[i] = sub_sum;
     }
 }
 
