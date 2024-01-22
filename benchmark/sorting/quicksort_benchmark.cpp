@@ -16,7 +16,9 @@
 
 TEST_CASE("quicksort benchmarking", "[benchmark][sorting][quicksort]")
 {
-    using ContainerType = std::array<int, 512>;
+    using namespace forfun::sorting;
+    using ContainerType = std::array<int, 16>;
+    using Itr = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -24,11 +26,11 @@ TEST_CASE("quicksort benchmarking", "[benchmark][sorting][quicksort]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(forfun::sorting::quicksort<ContainerType::iterator>)
-                .c_str(),
+            NAMEOF_RAW(quicksort<Itr>).c_str(),
             []() {
-                ContainerType arr{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-                forfun::sorting::quicksort(arr.begin(), arr.end());
+                ContainerType arr{
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
+                quicksort(arr.begin(), arr.end());
 
                 ankerl::nanobench::doNotOptimizeAway(arr);
             })

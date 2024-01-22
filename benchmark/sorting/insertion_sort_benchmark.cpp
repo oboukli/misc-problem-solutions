@@ -16,7 +16,9 @@
 
 TEST_CASE("insertion_sort benchmarking", "[benchmark][sorting][insertion_sort]")
 {
-    using ContainerType = std::array<int, 512>;
+    using namespace forfun::sorting;
+    using ContainerType = std::array<int, 16>;
+    using Itr = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -24,11 +26,11 @@ TEST_CASE("insertion_sort benchmarking", "[benchmark][sorting][insertion_sort]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(forfun::sorting::insertion_sort<ContainerType::iterator>)
-                .c_str(),
+            NAMEOF_RAW(insertion_sort<Itr>).c_str(),
             []() {
-                ContainerType arr{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-                forfun::sorting::insertion_sort(arr.begin(), arr.end());
+                ContainerType arr{
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
+                insertion_sort(arr.begin(), arr.end());
 
                 ankerl::nanobench::doNotOptimizeAway(arr);
             })

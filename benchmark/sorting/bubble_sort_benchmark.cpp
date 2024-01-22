@@ -16,7 +16,9 @@
 
 TEST_CASE("bubble_sort benchmarking", "[benchmark][sorting][bubble_sort]")
 {
-    using ContainerType = std::array<int, 512>;
+    using namespace forfun::sorting;
+    using ContainerType = std::array<int, 16>;
+    using Itr = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -24,24 +26,19 @@ TEST_CASE("bubble_sort benchmarking", "[benchmark][sorting][bubble_sort]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(
-                forfun::sorting::plain::bubble_sort<ContainerType::iterator>)
-                .c_str(),
+            NAMEOF_RAW(plain::bubble_sort<Itr>).c_str(),
             []() {
-                ContainerType arr{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-                forfun::sorting::plain::bubble_sort(arr.begin(), arr.end());
+                ContainerType arr{
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
+                plain::bubble_sort(arr.begin(), arr.end());
 
                 ankerl::nanobench::doNotOptimizeAway(arr);
             })
 
-        .run(
-            NAMEOF_RAW(
-                forfun::sorting::stl::bubble_sort<ContainerType::iterator>)
-                .c_str(),
-            []() {
-                ContainerType arr{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-                forfun::sorting::stl::bubble_sort(arr.begin(), arr.end());
+        .run(NAMEOF_RAW(stl::bubble_sort<Itr>).c_str(), []() {
+            ContainerType arr{9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
+            stl::bubble_sort(arr.begin(), arr.end());
 
-                ankerl::nanobench::doNotOptimizeAway(arr);
-            });
+            ankerl::nanobench::doNotOptimizeAway(arr);
+        });
 }
