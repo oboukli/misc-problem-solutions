@@ -16,6 +16,8 @@
 
 TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
 {
+    using namespace forfun::sub_array_sums;
+
     ankerl::nanobench::Bench()
 
         .title("Sum of all subarrays of size K")
@@ -23,7 +25,7 @@ TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
         .run(
             NAMEOF_RAW(
                 // clang-format off
-                forfun::sub_array_sums::sum_each<std::array<int, 6>,
+                sum_each<std::array<int, 6>,
                     std::array<int, 4>,
                     std::array<int, 6>::size_type>)
                 // clang-format on
@@ -34,7 +36,7 @@ TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
                 static constexpr std::array<int, 6>::size_type const sub_size{
                     3};
 
-                forfun::sub_array_sums::sum_each(numbers, sums, sub_size);
+                sum_each(numbers, sums, sub_size);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);
             })

@@ -20,21 +20,22 @@ TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
 {
     static_assert(p >= 0 && p <= std::numeric_limits<decltype(p)>::max());
 
+    using namespace forfun::palindromic_number;
+
     ankerl::nanobench::Bench()
 
         .title("Palindromic number")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(forfun::palindromic_number::fast::is_palindrome<int>)
-                .c_str(),
+            NAMEOF_RAW(fast::is_palindrome<int>).c_str(),
             []() {
                 auto r{forfun::palindromic_number::fast::is_palindrome(p)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
-            NAMEOF_RAW(forfun::palindromic_number::stl::is_palindrome).c_str(),
+            NAMEOF_RAW(stl::is_palindrome).c_str(),
             []() {
                 auto r{forfun::palindromic_number::stl::is_palindrome(p)};
                 ankerl::nanobench::doNotOptimizeAway(r);

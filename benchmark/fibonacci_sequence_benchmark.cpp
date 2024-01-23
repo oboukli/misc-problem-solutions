@@ -36,8 +36,8 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(slow::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                forfun::fibonacci::sequence::slow::fib_seq(
-                    f, dummy_callback, &r);
+                slow::fib_seq(f, dummy_callback, &r);
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
@@ -45,8 +45,8 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(fast::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                forfun::fibonacci::sequence::fast::fib_seq(
-                    f, dummy_callback, &r);
+                fast::fib_seq(f, dummy_callback, &r);
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
@@ -55,8 +55,8 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
                 .c_str(),
             []() {
                 std::uint_fast32_t r{0};
-                forfun::fibonacci::sequence::fast::fib_seq(
-                    std::uint_fast32_t{f}, dummy_callback, &r);
+                fast::fib_seq(std::uint_fast32_t{f}, dummy_callback, &r);
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
@@ -64,8 +64,8 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(creel::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                forfun::fibonacci::sequence::creel::fib_seq(
-                    f, dummy_callback, &r);
+                creel::fib_seq(f, dummy_callback, &r);
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

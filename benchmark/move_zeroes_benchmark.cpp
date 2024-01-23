@@ -16,7 +16,10 @@
 
 TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
 {
-    using It = std::array<int, 128>::iterator;
+    using namespace forfun::move_zeroes;
+
+    static constexpr auto const array_size{std::size_t{128}};
+    using Itr = std::array<int, array_size>::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -24,7 +27,7 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(forfun::move_zeroes::sol1::move_zeroes<It>).c_str(),
+            NAMEOF_RAW(sol1::move_zeroes<Itr>).c_str(),
             []() {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
@@ -36,14 +39,13 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
 
-                forfun::move_zeroes::sol1::move_zeroes(
-                    nums.begin(), nums.end());
+                sol1::move_zeroes(nums.begin(), nums.end());
 
                 ankerl::nanobench::doNotOptimizeAway(nums);
             })
 
         .run(
-            NAMEOF_RAW(forfun::move_zeroes::sol2::move_zeroes<It>).c_str(),
+            NAMEOF_RAW(sol2::move_zeroes<Itr>).c_str(),
             []() {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
@@ -55,27 +57,24 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
 
-                forfun::move_zeroes::sol2::move_zeroes(
-                    nums.begin(), nums.end());
+                sol2::move_zeroes(nums.begin(), nums.end());
 
                 ankerl::nanobench::doNotOptimizeAway(nums);
             })
 
-        .run(
-            NAMEOF_RAW(forfun::move_zeroes::stl::move_zeroes<It>).c_str(),
-            []() {
-                std::array nums{
-                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
+        .run(NAMEOF_RAW(stl::move_zeroes<Itr>).c_str(), []() {
+            std::array nums{
+                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
 
-                forfun::move_zeroes::stl::move_zeroes(nums.begin(), nums.end());
+            stl::move_zeroes(nums.begin(), nums.end());
 
-                ankerl::nanobench::doNotOptimizeAway(nums);
-            });
+            ankerl::nanobench::doNotOptimizeAway(nums);
+        });
 }

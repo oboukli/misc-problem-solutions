@@ -57,6 +57,8 @@ test(std::size_t const capacity)
 
 TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
 {
+    using namespace forfun::lrucache;
+
     SECTION("small")
     {
         static constexpr int const lrucache_capacity{32};
@@ -68,16 +70,12 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
             .relative(true)
 
             .run(
-                NAMEOF_FULL_TYPE(forfun::lrucache::stl::LRUCache).data(),
-                []() {
-                    test<forfun::lrucache::stl::LRUCache>(lrucache_capacity);
-                })
+                NAMEOF_TYPE(stl::LRUCache).data(),
+                []() { test<stl::LRUCache>(lrucache_capacity); })
 
             .run(
-                NAMEOF_FULL_TYPE(forfun::lrucache::naive::LRUCache).data(),
-                []() {
-                    test<forfun::lrucache::naive::LRUCache>(lrucache_capacity);
-                })
+                NAMEOF_TYPE(naive::LRUCache).data(),
+                []() { test<naive::LRUCache>(lrucache_capacity); })
 
             ;
     }
@@ -92,16 +90,12 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
                 fmt::format("LRU Cache with {} cache items", lrucache_capacity))
 
             .run(
-                NAMEOF_FULL_TYPE(forfun::lrucache::stl::LRUCache).data(),
-                []() {
-                    test<forfun::lrucache::stl::LRUCache>(lrucache_capacity);
-                })
+                NAMEOF_TYPE(stl::LRUCache).data(),
+                []() { test<stl::LRUCache>(lrucache_capacity); })
 
             .run(
-                NAMEOF_FULL_TYPE(forfun::lrucache::naive::LRUCache).data(),
-                []() {
-                    test<forfun::lrucache::naive::LRUCache>(lrucache_capacity);
-                })
+                NAMEOF_TYPE(naive::LRUCache).data(),
+                []() { test<naive::LRUCache>(lrucache_capacity); })
 
             ;
     }
