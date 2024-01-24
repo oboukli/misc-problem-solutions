@@ -19,7 +19,7 @@ namespace fast {
 
 [[nodiscard]] constexpr bool is_palindrome(std::integral auto const n) noexcept
 {
-    using T = std::remove_const<decltype(n)>::type;
+    using T = std::remove_const_t<decltype(n)>;
 
     T nn{};
     auto d{n};
