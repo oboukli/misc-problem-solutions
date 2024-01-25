@@ -48,7 +48,8 @@ void sum_each(T const& numbers, TSum& sums, S const sub_size) noexcept
     }
 
     // Calculate the remaining result(s).
-    auto const sums_bound{std::min(sums_size, numbers.size() - sub_size + S{1})};
+    auto const sums_bound{
+        std::min(sums_size, numbers.size() - sub_size + S{1})};
     auto const ss{sub_size - S{1}};
     for (S i{1}; i < sums_bound; ++i)
     {
