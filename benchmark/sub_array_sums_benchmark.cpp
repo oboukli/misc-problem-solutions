@@ -23,20 +23,13 @@ TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
         .title("Sum of all subarrays of size K")
 
         .run(
-            NAMEOF_RAW(
-                // clang-format off
-                sum_each<std::array<int, 6>,
-                    std::array<int, 4>,
-                    std::array<int, 6>::size_type>)
-                // clang-format on
+            NAMEOF_RAW(sum_each<std::array<int, 6>, std::array<int, 4>>)
                 .c_str(),
             []() {
                 static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
                 static std::array<int, 4> sums{};
-                static constexpr std::array<int, 6>::size_type const sub_size{
-                    3};
 
-                sum_each(numbers, sums, sub_size);
+                sum_each(numbers, sums, 3);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);
             })

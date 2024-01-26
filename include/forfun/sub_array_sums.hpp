@@ -13,16 +13,20 @@
 #define FORFUN_SUB_ARRAY_SUMS_HPP_
 
 #include <algorithm>
+#include <iterator>
 
 namespace forfun::sub_array_sums {
 
-template <
-    typename T,
-    typename TSum,
-    typename S = T::size_type,
-    typename V = T::value_type>
-void sum_each(T const& numbers, TSum& sums, S const sub_size) noexcept
+template <typename T, typename TSum>
+    requires(
+        std::contiguous_iterator<typename T::iterator>
+        and std::contiguous_iterator<typename TSum::iterator>)
+void sum_each(
+    T const& numbers, TSum& sums, typename T::size_type const sub_size) noexcept
 {
+    using S = T::size_type;
+    using V = T::value_type;
+
     auto const nums_size{numbers.size()};
     V sub_sum{};
 
