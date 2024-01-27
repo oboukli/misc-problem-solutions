@@ -33,6 +33,7 @@ TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
             []() {
                 auto const volatile p{palindromic_num};
                 auto const r{fast::is_palindrome(p)};
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
@@ -41,6 +42,7 @@ TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
             []() {
                 auto const volatile p{palindromic_num};
                 auto const r{stl::is_palindrome(p)};
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

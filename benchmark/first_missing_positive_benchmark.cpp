@@ -30,7 +30,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(base::lowest_missing<Itr>).c_str(),
             []() {
-                ContainerType a{
+                std::array nums{
                     // clang-format off
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
@@ -47,15 +47,17 @@ TEST_CASE(
                     0, 0, 0, 0, 0, 0, 0, 0,
                     // clang-format on
                 };
+                static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
-                auto r{base::lowest_missing(a.begin(), a.end())};
+                auto const r{base::lowest_missing(nums.begin(), nums.end())};
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 
         .run(
             NAMEOF_RAW(fast::lowest_missing<Itr>).c_str(),
             []() {
-                ContainerType a{
+                std::array nums{
                     // clang-format off
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
@@ -72,8 +74,10 @@ TEST_CASE(
                     0, 0, 0, 0, 0, 0, 0, 0,
                     // clang-format on
                 };
+                static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
-                auto r{fast::lowest_missing(a.begin(), a.end())};
+                auto const r{fast::lowest_missing(nums.begin(), nums.end())};
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

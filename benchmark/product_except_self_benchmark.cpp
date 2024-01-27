@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <type_traits>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -14,8 +15,7 @@
 
 #include "forfun/product_except_self.hpp"
 
-using ContainerType = std::array<int, 128>;
-inline constexpr ContainerType const input{
+inline constexpr std::array const input{
     1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,
     4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,  4,  5,  6,
     7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,  4,  5,  6,  7,  8,  9,
@@ -24,15 +24,17 @@ inline constexpr ContainerType const input{
     16, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,
     3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16,
 };
+static_assert(input.size() == decltype(input)::size_type{128});
 
 TEST_CASE(
     "product_except_self benchmarking", "[benchmark][product_except_self]")
 {
     using namespace forfun::product_except_self;
 
-    using Itr = ContainerType::iterator;
+    std::remove_const_t<decltype(input)> result{};
 
-    ContainerType result;
+    using CnstItr = decltype(input)::const_iterator;
+    using Itr = decltype(result)::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -40,18 +42,20 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(base::product_except_self<Itr, Itr>).c_str(),
+            NAMEOF_RAW(base::product_except_self<CnstItr, Itr>).c_str(),
             [&result]() {
                 forfun::product_except_self::base::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
+
                 ankerl::nanobench::doNotOptimizeAway(result);
             })
 
         .run(
-            NAMEOF_RAW(fast::product_except_self<Itr, Itr>).c_str(),
+            NAMEOF_RAW(fast::product_except_self<CnstItr, Itr>).c_str(),
             [&result]() {
                 forfun::product_except_self::fast::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
+
                 ankerl::nanobench::doNotOptimizeAway(result);
             })
 

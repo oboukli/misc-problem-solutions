@@ -18,8 +18,8 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
 {
     using namespace forfun::move_zeroes;
 
-    static constexpr auto const array_size{std::size_t{128}};
-    using Itr = std::array<int, array_size>::iterator;
+    using ContainerType = std::array<int, 128>;
+    using Itr = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -38,6 +38,7 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
+                static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
                 sol1::move_zeroes(nums.begin(), nums.end());
 
@@ -56,6 +57,7 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
+                static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
                 sol2::move_zeroes(nums.begin(), nums.end());
 
@@ -72,6 +74,7 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
                 1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
                 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                 1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0};
+            static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
             stl::move_zeroes(nums.begin(), nums.end());
 

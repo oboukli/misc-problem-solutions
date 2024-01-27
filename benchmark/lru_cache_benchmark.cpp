@@ -17,6 +17,8 @@
 
 #include "forfun/lru_cache.hpp"
 
+namespace {
+
 template <typename T>
 std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
 test(std::size_t const capacity)
@@ -54,6 +56,8 @@ test(std::size_t const capacity)
         val = cache.get(i);
     }
 }
+
+} // namespace
 
 TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
 {
