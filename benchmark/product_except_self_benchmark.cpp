@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <cstdint>
 #include <type_traits>
 
 #include <catch2/catch_test_macros.hpp>
@@ -15,16 +16,11 @@
 
 #include "forfun/product_except_self.hpp"
 
-inline constexpr std::array const input{
-    1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,
-    4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,  4,  5,  6,
-    7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,  3,  4,  5,  6,  7,  8,  9,
-    10, 11, 12, 13, 14, 15, 16, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12,
-    13, 14, 15, 16, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15,
-    16, 1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 1,  2,
-    3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16,
+inline constexpr std::array<std::uint64_t, 16> const input{
+    // clang-format off
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0,
+    // clang-format on
 };
-static_assert(input.size() == decltype(input)::size_type{128});
 
 TEST_CASE(
     "product_except_self benchmarking", "[benchmark][product_except_self]")
