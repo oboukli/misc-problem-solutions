@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <cstdint>
 #include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
@@ -31,7 +32,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual;
+        std::vector<int> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end());
 
@@ -45,7 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual;
+        std::vector<int> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end());
 
@@ -59,7 +60,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual;
+        std::vector<int> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end());
 
@@ -134,12 +135,63 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Input is of three integers")
     {
-        constexpr std::array const nums{0, 1, 1};
-        constexpr std::array const expected{1, 0, 0};
+        static constexpr std::array const nums{0, 1, 1};
+        static constexpr std::array const expected{1, 0, 0};
 
         CAPTURE(nums);
 
-        std::array<int, 3> actual;
+        std::array<int, 3> actual{};
+        product_except_self(
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+
+        REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Product of array except self (benchmark case)",
+    "[product_except_self]",
+    ((auto product_except_self), product_except_self),
+    (forfun::product_except_self::base::product_except_self<
+        std::array<std::uint64_t, 16>::const_iterator,
+        std::array<std::uint64_t, 16>::iterator>),
+    (forfun::product_except_self::fast::product_except_self<
+        std::array<std::uint64_t, 16>::const_iterator,
+        std::array<std::uint64_t, 16>::iterator>))
+{
+    SECTION("Factorial product value")
+    {
+        static constexpr std::array const nums{
+            std::uint64_t{1},
+            std::uint64_t{2},
+            std::uint64_t{3},
+            std::uint64_t{4},
+            std::uint64_t{5},
+            std::uint64_t{6},
+            std::uint64_t{7},
+            std::uint64_t{8},
+            std::uint64_t{9},
+            std::uint64_t{10},
+            std::uint64_t{11},
+            std::uint64_t{12},
+            std::uint64_t{13},
+            std::uint64_t{14},
+            std::uint64_t{15},
+            std::uint64_t{0},
+        };
+
+#ifndef _MSC_VER
+        // The following line breaks MSVC 14.37.32822 (x64) when nums is defined
+        // without explicitly specifying the template's arguments.
+        static_assert(nums.size() == std::size_t{16});
+#endif
+
+        static constexpr std::array<std::uint64_t, 16> const expected{
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1'307'674'368'000};
+
+        CAPTURE(nums);
+
+        std::array<std::uint64_t, 16> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end());
 
