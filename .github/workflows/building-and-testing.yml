@@ -71,11 +71,11 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.build_dir }}\${{ env.config }}
 
-      # TODO: Sorting tests
+      # TODO: Enable all benchmarks
       - name: Run benchmarks
         run: >-
           .\benchmark.exe
-          ~[sorting]
+          ~[quicksort]
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.build_dir }}\${{ env.config }}
