@@ -65,7 +65,7 @@ jobs:
       - name: Run tests
         run: >-
           .\tests.exe
-          ~[sorting]
+          ~[quicksort]
           --rng-seed 1654047489
           --durations yes
           --reporter console::out=-::colour-mode=ansi
