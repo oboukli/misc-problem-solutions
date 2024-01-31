@@ -21,6 +21,7 @@ TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
     ankerl::nanobench::Bench()
 
         .title("Sum of all subarrays of size K")
+        .relative(true)
 
         .run(
             NAMEOF_RAW(sum_each<std::array<int, 6>, std::array<int, 4>>)

@@ -92,6 +92,7 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
 
             .title(
                 fmt::format("LRU Cache with {} cache items", lrucache_capacity))
+            .relative(true)
 
             .run(
                 NAMEOF_TYPE(stl::LRUCache).data(),
