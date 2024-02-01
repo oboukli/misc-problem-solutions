@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  build_dir: ${{ github.workspace }}\build
+  build_dir: ${{ github.workspace }}/build
   config: Debug
 
 permissions: {}
@@ -76,6 +76,70 @@ jobs:
         run: >-
           .\benchmark.exe
           ~[quicksort]
+          --rng-seed 1654047489
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.build_dir }}\${{ env.config }}
+
+  linux:
+    name: Build and test on Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Apply vcpkg cache
+        id: vcpkg-cache
+        uses: actions/cache@v4
+        with:
+          path: |-
+            %VCPKG_DEFAULT_BINARY_CACHE%
+            ${{ github.workspace }}/vcpkg
+          key: >-
+            ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
+              'vcpkg/ports/catch2/vcpkg.json',
+              'vcpkg/ports/fmt/vcpkg.json',
+              'vcpkg/ports/nameof/vcpkg.json',
+              'vcpkg/ports/nanobench/vcpkg.json'
+            ) }}
+
+      - name: Configure CMake
+        run: >-
+          cmake -B "${{ env.build_dir }}"
+          -DBUILD_SHARED_LIBS=TRUE
+          -DCMAKE_BUILD_TYPE="${{ env.config }}"
+
+      - name: Build
+        run: cmake --build "${{ env.build_dir }}" --config "${{ env.config }}"
+        working-directory: ${{github.workspace}}
+
+      # TODO: Sorting tests
+      - name: Run tests
+        run: >-
+          ./tests
+          --rng-seed 1654047489
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.build_dir }}
+
+      # TODO: Enable all benchmarks
+      - name: Run benchmarks
+        run: >-
+          ./benchmark
+          --rng-seed 1654047489
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.build_dir }}
