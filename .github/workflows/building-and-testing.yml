@@ -66,9 +66,9 @@ jobs:
         run: >-
           .\tests.exe
           ~[quicksort]
-          --rng-seed 1654047489
-          --durations yes
           --reporter console::out=-::colour-mode=ansi
+          --rng-seed 1654047489
+          --success
         working-directory: ${{ env.build_dir }}\${{ env.config }}
 
       # TODO: Enable all benchmarks
@@ -130,9 +130,9 @@ jobs:
       - name: Run tests
         run: >-
           ./tests
-          --rng-seed 1654047489
-          --durations yes
           --reporter console::out=-::colour-mode=ansi
+          --rng-seed 1654047489
+          --success
         working-directory: ${{ env.build_dir }}
 
       # TODO: Enable all benchmarks
