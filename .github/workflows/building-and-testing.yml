@@ -61,21 +61,17 @@ jobs:
         run: cmake --build "${{ env.build_dir }}" --config "${{ env.config }}"
         working-directory: ${{github.workspace}}
 
-      # TODO: Sorting tests
       - name: Run tests
         run: >-
           .\tests.exe
-          ~[quicksort]
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
           --success
         working-directory: ${{ env.build_dir }}\${{ env.config }}
 
-      # TODO: Enable all benchmarks
       - name: Run benchmarks
         run: >-
           .\benchmark.exe
-          ~[quicksort]
           --rng-seed 1654047489
           --durations yes
           --reporter console::out=-::colour-mode=ansi

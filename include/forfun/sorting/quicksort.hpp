@@ -20,57 +20,45 @@ namespace {
 template <typename Iter>
     requires std::contiguous_iterator<Iter>
 [[nodiscard]] constexpr inline auto
-partition(Iter const lo, Iter const hi) noexcept
+partition(Iter const first, Iter const last) noexcept
 {
-    using Diff = std::iterator_traits<Iter>::difference_type;
+    auto const pivot_itr{first};
+    auto const pivot{*pivot_itr};
 
-    auto const pivot{*hi};
-
-    auto i{lo - Diff{1}};
-    for (auto j{lo}; j < hi; ++j)
+    auto i{first};
+    for (auto j{last - 1}; j != i;)
     {
         if (*j < pivot)
         {
-            ++i;
-            std::iter_swap(i, j);
+            std::iter_swap(++i, j);
+        }
+        else
+        {
+            --j;
         }
     }
 
-    ++i;
-    std::iter_swap(hi, i);
+    std::iter_swap(pivot_itr, i);
 
     return i;
-}
-
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
-constexpr inline void sort(Iter const lo, Iter const hi) noexcept
-{
-    using Diff = std::iterator_traits<Iter>::difference_type;
-
-    if (lo < hi)
-    {
-        auto const p{partition(lo, hi)};
-
-        sort(lo, p - Diff{1});
-        sort(p + Diff{1}, hi);
-    }
 }
 
 } // namespace
 
 template <typename Iter>
     requires std::contiguous_iterator<Iter>
-constexpr inline void quicksort(Iter const begin, Iter const end) noexcept
+constexpr inline void quicksort(Iter const first, Iter const last) noexcept
 {
-    using Diff = std::iterator_traits<Iter>::difference_type;
+    using DiffType = std::iter_difference_t<Iter>;
 
-    if (begin == end)
+    if ((last - first) < DiffType{2})
     {
         return;
     }
-
-    sort(begin, end - Diff{1});
+    
+    auto const p{partition(first, last)};
+    quicksort(first, p);
+    quicksort(p + 1, last);
 }
 
 } // namespace forfun::sorting
