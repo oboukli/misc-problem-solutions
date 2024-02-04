@@ -38,18 +38,18 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(base::product_except_self<CnstItr, Itr>).c_str(),
+            NAMEOF_RAW(alg1::product_except_self<CnstItr, Itr>).c_str(),
             [&result]() {
-                forfun::product_except_self::base::product_except_self(
+                forfun::product_except_self::alg1::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
 
                 ankerl::nanobench::doNotOptimizeAway(result);
             })
 
         .run(
-            NAMEOF_RAW(fast::product_except_self<CnstItr, Itr>).c_str(),
+            NAMEOF_RAW(alg2::product_except_self<CnstItr, Itr>).c_str(),
             [&result]() {
-                forfun::product_except_self::fast::product_except_self(
+                forfun::product_except_self::alg2::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
 
                 ankerl::nanobench::doNotOptimizeAway(result);

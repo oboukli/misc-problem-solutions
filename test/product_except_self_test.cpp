@@ -18,10 +18,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
     "[product_except_self]",
     ((auto product_except_self), product_except_self),
-    (forfun::product_except_self::base::product_except_self<
+    (forfun::product_except_self::alg1::product_except_self<
         std::vector<int>::const_iterator,
         std::vector<int>::iterator>),
-    (forfun::product_except_self::fast::product_except_self<
+    (forfun::product_except_self::alg2::product_except_self<
         std::vector<int>::const_iterator,
         std::vector<int>::iterator>))
 {
@@ -100,10 +100,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
     "[product_except_self]",
     ((auto product_except_self), product_except_self),
-    (forfun::product_except_self::base::product_except_self<
+    (forfun::product_except_self::alg1::product_except_self<
         std::vector<float>::const_iterator,
         std::vector<double>::iterator>),
-    (forfun::product_except_self::fast::product_except_self<
+    (forfun::product_except_self::alg2::product_except_self<
         std::vector<float>::const_iterator,
         std::vector<double>::iterator>))
 {
@@ -126,10 +126,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::array<int, 3>)",
     "[product_except_self]",
     ((auto product_except_self), product_except_self),
-    (forfun::product_except_self::base::product_except_self<
+    (forfun::product_except_self::alg1::product_except_self<
         std::array<int, 3>::const_iterator,
         std::array<int, 3>::iterator>),
-    (forfun::product_except_self::fast::product_except_self<
+    (forfun::product_except_self::alg2::product_except_self<
         std::array<int, 3>::const_iterator,
         std::array<int, 3>::iterator>))
 {
@@ -152,10 +152,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (benchmark case)",
     "[product_except_self]",
     ((auto product_except_self), product_except_self),
-    (forfun::product_except_self::base::product_except_self<
+    (forfun::product_except_self::alg1::product_except_self<
         std::array<std::uint64_t, 16>::const_iterator,
         std::array<std::uint64_t, 16>::iterator>),
-    (forfun::product_except_self::fast::product_except_self<
+    (forfun::product_except_self::alg2::product_except_self<
         std::array<std::uint64_t, 16>::const_iterator,
         std::array<std::uint64_t, 16>::iterator>))
 {

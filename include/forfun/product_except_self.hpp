@@ -16,7 +16,7 @@
 
 namespace forfun::product_except_self {
 
-namespace base {
+namespace alg1 {
 
 template <
     typename RandomIt,
@@ -50,9 +50,9 @@ constexpr inline void product_except_self(
     }
 }
 
-} // namespace base
+} // namespace alg1
 
-namespace fast {
+namespace alg2 {
 
 template <
     typename RandomIt,
@@ -88,7 +88,7 @@ constexpr inline void product_except_self(
     }
 }
 
-} // namespace fast
+} // namespace alg2
 
 } // namespace forfun::product_except_self
 
