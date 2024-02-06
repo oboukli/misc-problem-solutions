@@ -19,29 +19,29 @@ namespace forfun::product_except_self {
 namespace alg1 {
 
 template <
-    typename RandomIt,
-    typename OutRandomIt,
+    typename InItr,
+    typename OutItr,
     typename T
-    = std::decay_t<typename std::iterator_traits<OutRandomIt>::value_type>>
-    requires std::forward_iterator<RandomIt>
-    && std::forward_iterator<OutRandomIt>
+    = std::decay_t<typename std::iterator_traits<OutItr>::value_type>>
+    requires std::forward_iterator<InItr> && std::forward_iterator<OutItr>
     && (std::integral<T> || std::floating_point<T>)
 constexpr inline void product_except_self(
-    RandomIt const first,
-    RandomIt const end,
-    OutRandomIt const products_first,
-    OutRandomIt const products_end) noexcept
+    InItr const first,
+    InItr const last,
+    OutItr const products_first,
+    OutItr const products_last) noexcept
 {
-    for (auto it_prd{products_first}; it_prd != products_end; ++it_prd)
+    for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
-        *it_prd = T{1};
+        *it_prd = std::iter_value_t<OutItr>{1};
 
         auto it_input{first + (it_prd - products_first)};
+
         auto cnt{first};
-        while (++cnt != end)
+        while (++cnt != last)
         {
             ++it_input;
-            if (it_input == end)
+            if (it_input == last)
             {
                 it_input = first;
             }
@@ -55,33 +55,31 @@ constexpr inline void product_except_self(
 namespace alg2 {
 
 template <
-    typename RandomIt,
-    typename OutRandomIt,
+    typename InItr,
+    typename OutItr,
     typename T
-    = std::decay_t<typename std::iterator_traits<OutRandomIt>::value_type>,
-    typename Diff = std::iterator_traits<RandomIt>::difference_type>
-    requires std::forward_iterator<RandomIt>
-    && std::forward_iterator<OutRandomIt>
+    = std::decay_t<typename std::iterator_traits<OutItr>::value_type>>
+    requires std::forward_iterator<InItr> && std::forward_iterator<OutItr>
     && (std::integral<T> || std::floating_point<T>)
 constexpr inline void product_except_self(
-    RandomIt const first,
-    RandomIt const end,
-    OutRandomIt const products_first,
-    OutRandomIt const products_end) noexcept
+    InItr const first,
+    InItr const last,
+    OutItr const products_first,
+    OutItr const products_last) noexcept
 {
-    if (first == end)
+    using Diff = std::iterator_traits<InItr>::difference_type;
+
+    if (first == last)
     {
         return;
     }
 
-    auto const length{products_end - products_first};
-    for (auto it_prd{products_first}; it_prd != products_end; ++it_prd)
+    auto const length{products_last - products_first};
+    for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
         *it_prd = T{1};
-
         auto const idx_prd{it_prd - products_first};
-
-        for (Diff j{1}; j < length; ++j)
+        for (auto j{Diff{1}}; j < length; ++j)
         {
             *it_prd *= first[(idx_prd + j) % length];
         }
