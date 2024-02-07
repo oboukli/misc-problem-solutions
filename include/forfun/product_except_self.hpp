@@ -10,21 +10,31 @@
 #ifndef FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 #define FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 
-#include <concepts>
 #include <iterator>
 #include <type_traits>
 
 namespace forfun::product_except_self {
 
+namespace concepts {
+
+template <typename Factor, typename Product>
+concept product_computable = requires(Factor f) {
+    requires std::is_arithmetic_v<Factor> and std::is_arithmetic_v<Product>;
+    requires sizeof(decltype(f * f)) <= sizeof(Product);
+};
+
+} // namespace concepts
+
 namespace alg1 {
 
-template <
-    typename InItr,
-    typename OutItr,
-    typename T
-    = std::decay_t<typename std::iterator_traits<OutItr>::value_type>>
-    requires std::forward_iterator<InItr> && std::forward_iterator<OutItr>
-    && (std::integral<T> || std::floating_point<T>)
+using namespace forfun::product_except_self::concepts;
+
+/// @note Input factors may result in too large a product that overflows the
+/// output type.
+template <typename InItr, typename OutItr>
+    requires product_computable<
+        std::iter_value_t<InItr>,
+        std::iter_value_t<OutItr>>
 constexpr inline void product_except_self(
     InItr const first,
     InItr const last,
@@ -54,20 +64,22 @@ constexpr inline void product_except_self(
 
 namespace alg2 {
 
-template <
-    typename InItr,
-    typename OutItr,
-    typename T
-    = std::decay_t<typename std::iterator_traits<OutItr>::value_type>>
-    requires std::forward_iterator<InItr> && std::forward_iterator<OutItr>
-    && (std::integral<T> || std::floating_point<T>)
+using namespace forfun::product_except_self::concepts;
+
+/// @note Input factors may result in too large a product that overflows the
+/// output type.
+template <typename InItr, typename OutItr>
+    requires product_computable<
+        std::iter_value_t<InItr>,
+        std::iter_value_t<OutItr>>
 constexpr inline void product_except_self(
     InItr const first,
     InItr const last,
     OutItr const products_first,
     OutItr const products_last) noexcept
 {
-    using Diff = std::iterator_traits<InItr>::difference_type;
+    using ValType = std::decay_t<std::iter_value_t<OutItr>>;
+    using DiffType = std::iter_difference_t<InItr>;
 
     if (first == last)
     {
@@ -77,9 +89,9 @@ constexpr inline void product_except_self(
     auto const length{products_last - products_first};
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
-        *it_prd = T{1};
+        *it_prd = ValType{1};
         auto const idx_prd{it_prd - products_first};
-        for (auto j{Diff{1}}; j < length; ++j)
+        for (auto j{DiffType{1}}; j < length; ++j)
         {
             *it_prd *= first[(idx_prd + j) % length];
         }

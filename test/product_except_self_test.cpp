@@ -198,3 +198,27 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
 }
+
+TEST_CASE("product_except_self concepts", "[product_except_self]")
+{
+    SECTION("product_computable")
+    {
+        using forfun::product_except_self::concepts::product_computable;
+
+        struct Dummy {};
+
+        STATIC_REQUIRE(product_computable<short, int>);
+        STATIC_REQUIRE(product_computable<int, int>);
+        STATIC_REQUIRE(product_computable<std::int32_t, std::int64_t>);
+        STATIC_REQUIRE(product_computable<std::int64_t, std::int64_t>);
+        STATIC_REQUIRE(product_computable<int, float>);
+        STATIC_REQUIRE(product_computable<float, float>);
+        STATIC_REQUIRE(product_computable<float, double>);
+
+        STATIC_REQUIRE(product_computable<bool, bool> == false);
+        STATIC_REQUIRE(product_computable<Dummy, int> == false);
+        STATIC_REQUIRE(product_computable<std::int32_t, std::int16_t> == false);
+        STATIC_REQUIRE(product_computable<std::int64_t, std::int32_t> == false);
+        STATIC_REQUIRE(product_computable<double, float> == false);
+    }
+}
