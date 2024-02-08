@@ -16,6 +16,7 @@
 
 TEST_CASE("gcd benchmarking", "[benchmark][gcd]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::gcd::euclid::recursive;
 
     ankerl::nanobench::Bench()

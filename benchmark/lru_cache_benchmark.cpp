@@ -59,6 +59,7 @@ void test(std::size_t const capacity)
 
 TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::lrucache;
 
     SECTION("small")
