@@ -19,26 +19,29 @@ namespace {
 
 template <typename Iter>
     requires std::contiguous_iterator<Iter>
-[[nodiscard]] constexpr inline auto
+[[nodiscard]] constexpr inline Iter
 partition(Iter const first, Iter const last) noexcept
 {
-    auto const pivot_itr{first};
-    auto const pivot{*pivot_itr};
-
     auto i{first};
-    for (auto j{last - 1}; j != i;)
+
     {
-        if (*j < pivot)
+        using DiffType = std::iter_difference_t<Iter>;
+
+        auto const pivot{*first};
+        for (auto j{last - DiffType{1}}; j != i;)
         {
-            std::iter_swap(++i, j);
-        }
-        else
-        {
-            --j;
+            if (*j < pivot)
+            {
+                std::iter_swap(++i, j);
+            }
+            else
+            {
+                --j;
+            }
         }
     }
 
-    std::iter_swap(pivot_itr, i);
+    std::iter_swap(first, i);
 
     return i;
 }
@@ -55,10 +58,10 @@ constexpr inline void quicksort(Iter const first, Iter const last) noexcept
     {
         return;
     }
-    
+
     auto const p{partition(first, last)};
     quicksort(first, p);
-    quicksort(p + 1, last);
+    quicksort(p + DiffType{1}, last);
 }
 
 } // namespace forfun::sorting
