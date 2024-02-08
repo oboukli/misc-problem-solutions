@@ -16,6 +16,7 @@
 
 TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::move_zeroes;
 
     using ContainerType = std::array<int, 128>;

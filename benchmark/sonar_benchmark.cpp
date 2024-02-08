@@ -16,6 +16,7 @@
 
 TEST_CASE("sonar benchmarking", "[benchmark][sonar]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::sonar;
 
     Sonar const sonar{{{0, 7}, {2, 5}, {3, 3}, {4, 6}, {5, 2}}};

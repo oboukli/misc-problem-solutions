@@ -16,6 +16,7 @@
 
 TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::palindromic_number;
 
     static constexpr int const palindromic_num{1234554321};

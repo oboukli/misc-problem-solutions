@@ -16,6 +16,7 @@
 
 TEST_CASE("fibonacci benchmarking", "[benchmark][fibonacci]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::fibonacci;
 
     static constexpr std::uint_fast32_t const n{7};

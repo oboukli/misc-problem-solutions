@@ -17,6 +17,7 @@
 
 TEST_CASE("contains_duplicate benchmarking", "[benchmark][contains_duplicate]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::contains_duplicate;
 
     using ContainerType = std::array<int, 32>;

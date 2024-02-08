@@ -19,6 +19,7 @@
 TEST_CASE(
     "product_except_self benchmarking", "[benchmark][product_except_self]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::product_except_self;
 
     static constexpr std::array<std::uint64_t, 16> const input{

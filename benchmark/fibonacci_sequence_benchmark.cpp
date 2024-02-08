@@ -26,6 +26,7 @@ void dummy_callback(T const n, T& state) noexcept
 
 TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
 {
+    // NOLINTNEXTLINE
     using namespace forfun::fibonacci::sequence;
 
     using fn_int_t = decltype(dummy_callback<int>);
