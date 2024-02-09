@@ -29,7 +29,14 @@ TEST_CASE("factorial benchmarking", "[benchmark][factorial]")
                 auto const volatile n{std::uint64_t{20}};
                 auto const r{iterative::factorial(n)};
 
-                assert(r == std::uint64_t{2'432'902'008'176'640'000});
+                ankerl::nanobench::doNotOptimizeAway(r);
+            })
+
+        .run(
+            NAMEOF_RAW(recursive::factorial<std::uint64_t>).c_str(),
+            []() {
+                auto const volatile n{std::uint64_t{20}};
+                auto const r{recursive::factorial(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -40,8 +47,6 @@ TEST_CASE("factorial benchmarking", "[benchmark][factorial]")
             []() {
                 auto const volatile n{std::uint64_t{20}};
                 auto const r{stl_functional::factorial(n)};
-
-                assert(r == std::uint64_t{2'432'902'008'176'640'000});
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })

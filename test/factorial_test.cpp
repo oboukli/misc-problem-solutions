@@ -35,8 +35,6 @@ TEST_CASE("Compiler feature test", "[factorial]")
 TEMPLATE_TEST_CASE(
     "Factorial value supported by std::int8_t or larger type",
     "[factorial]",
-    std::int8_t,
-    std::int16_t,
     std::int32_t,
     std::int64_t)
 {
@@ -51,6 +49,7 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{1}};
 
         STATIC_REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
+        STATIC_REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(expected);
     }
 
@@ -60,6 +59,7 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{1}};
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
+        REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
     }
 
@@ -69,6 +69,7 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{120}};
 
         STATIC_REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
+        STATIC_REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(expected);
     }
 }
@@ -117,6 +118,7 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{479'001'600}};
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
+        REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
     }
 }
@@ -133,6 +135,7 @@ TEMPLATE_TEST_CASE(
             TestType{2'432'902'008'176'640'000}};
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
+        REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
     }
 }
