@@ -19,9 +19,9 @@ inline constexpr int const f{514229};
 
 template <typename T, typename TState>
     requires std::integral<T> && (sizeof(T) <= sizeof(TState))
-void dummy_callback(T const n, TState* const state) noexcept
+void dummy_callback(T const n, TState& state) noexcept
 {
-    *state += n;
+    state += n;
 }
 
 TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
@@ -36,7 +36,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(slow::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                slow::fib_seq(f, dummy_callback, &r);
+                slow::fib_seq(f, dummy_callback, r);
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -45,7 +45,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(fast::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                fast::fib_seq(f, dummy_callback, &r);
+                fast::fib_seq(f, dummy_callback, r);
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -55,7 +55,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
                 .c_str(),
             []() {
                 std::uint_fast32_t r{0};
-                fast::fib_seq(std::uint_fast32_t{f}, dummy_callback, &r);
+                fast::fib_seq(std::uint_fast32_t{f}, dummy_callback, r);
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
@@ -64,7 +64,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(creel::fib_seq<int, int>).c_str(),
             []() {
                 int r{0};
-                creel::fib_seq(f, dummy_callback, &r);
+                creel::fib_seq(f, dummy_callback, r);
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
