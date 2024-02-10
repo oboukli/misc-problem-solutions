@@ -14,9 +14,9 @@
 
 namespace {
 
-void dummy_callback(int const n, std::vector<int>* const seq) noexcept
+void dummy_callback(int const n, std::vector<int>& seq) noexcept
 {
-    seq->push_back(n);
+    seq.push_back(n);
 }
 
 } // namespace
@@ -48,7 +48,7 @@ TEMPLATE_TEST_CASE_SIG(
                 std::vector<int> seq;
                 seq.reserve(expected_seq.size());
 
-                fib_seq(max, dummy_callback, &seq);
+                fib_seq(max, dummy_callback, seq);
 
                 THEN("sequence is valid")
                 {
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
             {
                 std::vector<int> seq;
 
-                fib_seq(max, dummy_callback, &seq);
+                fib_seq(max, dummy_callback, seq);
 
                 THEN("sequence is empty")
                 {

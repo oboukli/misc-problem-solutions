@@ -16,14 +16,14 @@ namespace forfun::fibonacci::sequence {
 
 template <typename T, typename TState>
     requires std::integral<T>
-using callback_t = void(*)(T const, TState* const state) noexcept;
+using callback_t = void(*)(T const, TState& state) noexcept;
 
 namespace slow {
 
 template <typename T, typename TState>
     requires std::integral<T>
 void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState* const state) noexcept
+    T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
@@ -42,7 +42,7 @@ namespace fast {
 template <typename T, typename TState>
     requires std::integral<T>
 void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState* const state) noexcept
+    T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
@@ -60,7 +60,7 @@ namespace creel {
 template <typename T, typename TState>
     requires std::integral<T>
 void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState* const state) noexcept
+    T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {
     // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
     for (T i{0}, j{1}; i <= max;)
