@@ -4,37 +4,35 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/fibonacci.hpp"
 
-TEST_CASE("Find Fibonacci number", "[fibonacci]")
+TEMPLATE_TEST_CASE_SIG(
+    "Find Fibonacci number",
+    "[fibonacci]",
+    ((auto fib), fib),
+    (forfun::fibonacci::iterative::fib<int>),
+    (forfun::fibonacci::recursive::fib<int>))
 {
-    using forfun::fibonacci::recursive::fib;
-
     SECTION("Negative value case (n = -1)")
     {
-        constexpr auto const n{-1};
-
-        CAPTURE(n);
+        static constexpr int const n{-1};
 
         STATIC_REQUIRE(fib(n) == 0);
     }
 
     SECTION("First (zeroth) Fibonacci number (n = 0) is zero")
     {
-        constexpr auto const n{0};
-
-        CAPTURE(n);
+        static constexpr int const n{0};
 
         STATIC_REQUIRE(fib(n) == 0);
     }
 
     SECTION("Second Fibonacci number (n = 1) is one")
     {
-        constexpr auto const n{1};
-
-        CAPTURE(n);
+        static constexpr int const n{1};
 
         STATIC_REQUIRE(fib(n) == 1);
     }
