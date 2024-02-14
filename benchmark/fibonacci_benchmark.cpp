@@ -26,9 +26,18 @@ TEST_CASE("fibonacci benchmarking", "[benchmark][fibonacci]")
         .relative(true)
 
         .run(
+            NAMEOF_RAW(iterative::fib<std::uint_fast32_t>).c_str(),
+            []() {
+                auto const r{iterative::fib(n)};
+
+                ankerl::nanobench::doNotOptimizeAway(r);
+            })
+
+        .run(
             NAMEOF_RAW(recursive::fib<std::uint_fast32_t>).c_str(),
             []() {
-                auto r{recursive::fib(n)};
+                auto const r{recursive::fib(n)};
+
                 ankerl::nanobench::doNotOptimizeAway(r);
             })
 

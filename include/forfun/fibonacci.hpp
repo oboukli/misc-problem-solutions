@@ -15,6 +15,27 @@
 
 namespace forfun::fibonacci {
 
+namespace iterative {
+
+template <typename T>
+    requires std::integral<T>
+    and std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+[[nodiscard]] constexpr inline T fib(T const n) noexcept
+{
+    T a{0};
+
+    for (T i{0}, b{1}; i < n; ++i)
+    {
+        T const c{a + b};
+        a = b;
+        b = c;
+    }
+
+    return a;
+}
+
+} // namespace iterative
+
 namespace recursive {
 
 template <typename T>
