@@ -48,7 +48,7 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert empty string")
     {
         TrieNode root{'X'};
-        constexpr std::string_view const word{};
+        static constexpr std::string_view const word{};
 
         insert(root, word);
 
@@ -60,7 +60,7 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert")
     {
         TrieNode root{'\0'};
-        constexpr std::string_view const word{"c"};
+        static constexpr std::string_view const word{"c"};
 
         insert(root, word);
 
@@ -76,7 +76,7 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert one word")
     {
         TrieNode root{'\0'};
-        constexpr std::string_view const word{"cat"};
+        static constexpr std::string_view const word{"cat"};
 
         insert(root, word);
 
@@ -100,8 +100,8 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert two words")
     {
         TrieNode root{'\0'};
-        constexpr std::string_view const word1{"cat"};
-        constexpr std::string_view const word2{"car"};
+        static constexpr std::string_view const word1{"cat"};
+        static constexpr std::string_view const word2{"car"};
 
         insert(root, word1);
         insert(root, word2);
@@ -128,7 +128,7 @@ TEST_CASE("Trie", "[trie]")
 
         SECTION("Insert prefixed")
         {
-            constexpr std::string_view const prefixed1{"catnip"};
+            static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
             REQUIRE(root.children[0]->value == 'c');
@@ -164,8 +164,8 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert two independent words")
     {
         TrieNode root{'\0'};
-        constexpr std::string_view const word1{"cat"};
-        constexpr std::string_view const word2{"dog"};
+        static constexpr std::string_view const word1{"cat"};
+        static constexpr std::string_view const word2{"dog"};
 
         insert(root, word1);
         insert(root, word2);
@@ -200,7 +200,7 @@ TEST_CASE("Trie", "[trie]")
 
         SECTION("Insert prefixed")
         {
-            constexpr std::string_view const prefixed1{"catnip"};
+            static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
             REQUIRE(root.children[0]->value == 'c');
