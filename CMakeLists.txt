@@ -177,9 +177,10 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
   "benchmark/benchmark.cpp"
+  "benchmark/contains_duplicate_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
-  "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/fibonacci_benchmark.cpp"
+  "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/move_zeroes_benchmark.cpp"
