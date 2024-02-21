@@ -14,18 +14,17 @@
 
 namespace forfun::contains_duplicate {
 
-template <typename RandomIt>
-    requires std::forward_iterator<RandomIt>
+template <std::contiguous_iterator Iter>
 [[nodiscard]] constexpr inline bool
-contains_duplicate(RandomIt it, RandomIt const end) noexcept
+contains_duplicate(Iter it, Iter const last) noexcept
 {
-    for (; it != end; ++it)
+    for (; it != last; ++it)
     {
-        auto const t{*it};
+        auto const val{*it};
 
-        for (auto it_j{it + 1}; it_j != end; ++it_j)
+        for (auto it_j{std::next(it)}; it_j != last; ++it_j)
         {
-            if ((*it_j) == t)
+            if ((*it_j) == val)
             {
                 return true;
             }
