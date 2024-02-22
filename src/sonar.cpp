@@ -31,41 +31,48 @@ int count_ships(Sonar const& sonar, Area const area)
     int const mh0{area.top + (height / 2)};
     int const mh1{mh0 + 1};
 
-    return count_ships(
-               sonar,
-               {
-                   area.top,
-                   mh0,
-                   area.left,
-                   mw0,
-               })
-        + count_ships(
-               sonar,
-               {
-                   area.top,
-                   mh0,
-                   mw1,
-                   area.right,
-               })
-        + count_ships(
-               sonar,
-               {
-                   mh1,
-                   area.bottom,
-                   area.left,
-                   mw0,
-               })
-        + count_ships(
-               sonar,
-               {
-                   mh1,
-                   area.bottom,
-                   mw1,
-                   area.right,
-               });
+    // clang-format off
+    return
+        count_ships(
+            sonar,
+            {
+                area.top,
+                mh0,
+                area.left,
+                mw0,
+            }
+        ) +
+        count_ships(
+            sonar,
+            {
+                area.top,
+                mh0,
+                mw1,
+                area.right,
+            }
+        ) +
+        count_ships(
+            sonar,
+            {
+                mh1,
+                area.bottom,
+                area.left,
+                mw0,
+            }
+        ) +
+        count_ships(
+            sonar,
+            {
+                mh1,
+                area.bottom,
+                mw1,
+                area.right,
+            }
+        );
+    // clang-format on
 }
 
-bool Sonar::ping(Area area) const
+bool Sonar::ping(Area const area) const
 {
     return std::ranges::any_of(coords, [&area](Coord const& coord) {
         return coord.x >= area.top && coord.x <= area.bottom

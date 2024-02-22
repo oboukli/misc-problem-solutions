@@ -19,20 +19,22 @@
 namespace forfun::sonar {
 
 struct Area {
-    int top;
-    int bottom;
-    int left;
-    int right;
+    int top{};
+    int bottom{};
+    int left{};
+    int right{};
 };
 
-struct Sonar {
+class Sonar final {
+public:
     struct Coord {
-        int x;
-        int y;
+        int x{};
+        int y{};
     };
 
     std::vector<Coord> coords;
-    bool ping(Area area) const;
+
+    bool ping(Area const area) const;
 };
 
 int count_ships(Sonar const& sonar, Area const area);
