@@ -132,15 +132,6 @@ target_link_libraries(
   PRIVATE forfun_c
 )
 
-add_executable(
-  sonar
-  "test/sonar.cpp"
-)
-target_link_libraries(
-  sonar
-  PRIVATE forfun
-)
-
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
@@ -154,6 +145,7 @@ add_executable(
   "test/palindromic_number_test.cpp"
   "test/product_except_self_test.cpp"
   "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
+  "test/sonar_test.cpp"
   "test/sorting/bubble_sort_test.cpp"
   "test/sorting/insertion_sort_test.cpp"
   "test/sorting/quicksort_test.cpp"
