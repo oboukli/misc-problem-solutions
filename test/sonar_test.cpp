@@ -35,7 +35,7 @@ TEST_CASE("sonar", "[sonar]")
         auto const [area, expected_num_ships]{GENERATE(table<Area, int>({
             {{0, 0, 7, 7}, 1},
             {{0, 5, 1, 5}, 3},
-            {{0, 5, 2, 7}, 5},
+            {{0, 5, 2, 7}, 5}, // Benchmark case
             {{1, 3, 0, 2}, 0},
         }))};
 

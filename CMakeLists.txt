@@ -179,6 +179,7 @@ add_executable(
   "benchmark/palindrome_benchmark.cpp"
   "benchmark/palindromic_number_benchmark.cpp"
   "benchmark/product_except_self_benchmark.cpp"
+  "benchmark/sonar_benchmark.cpp"
   "benchmark/sorting/bubble_sort_benchmark.cpp"
   "benchmark/sorting/insertion_sort_benchmark.cpp"
   "benchmark/sorting/quicksort_benchmark.cpp"
