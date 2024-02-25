@@ -17,12 +17,9 @@ namespace forfun::sorting {
 
 namespace plain {
 
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
+template <std::contiguous_iterator Iter>
 constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 {
-    using Diff = std::iterator_traits<Iter>::difference_type;
-
     if (begin == end)
     {
         return;
@@ -35,7 +32,7 @@ constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
         f = false;
         for (Iter i{begin}; i != end; ++i)
         {
-            auto const ii{i + Diff{1}};
+            auto const ii{i + std::iter_difference_t<Iter>{1}};
             if (*i > *ii)
             {
                 auto const tmp{*ii};
@@ -56,7 +53,7 @@ template <typename Iter>
     requires std::contiguous_iterator<Iter>
 constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 {
-    using Diff = std::iterator_traits<Iter>::difference_type;
+    using DiffType = std::iter_difference_t<Iter>;
 
     if (begin == end)
     {
@@ -70,9 +67,9 @@ constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
         f = false;
         for (Iter i{begin}; i != end; ++i)
         {
-            if (*i > *(i + Diff{1}))
+            if (*i > *(i + DiffType{1}))
             {
-                std::iter_swap(i, i + Diff{1});
+                std::iter_swap(i, i + DiffType{1});
                 f = true;
             }
         }

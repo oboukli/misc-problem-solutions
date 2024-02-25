@@ -15,19 +15,18 @@
 
 namespace forfun::sorting {
 
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
+template <std::contiguous_iterator Iter>
 constexpr inline void insertion_sort(Iter const begin, Iter const end) noexcept
 {
-    using Diff = std::iterator_traits<Iter>::difference_type;
+    using DiffType = std::iter_difference_t<Iter>;
 
     if (begin != end)
     {
-        for (Iter i{begin + Diff{1}}; i != end; ++i)
+        for (Iter i{begin + DiffType{1}}; i != end; ++i)
         {
-            for (Iter j{i}; j != begin && (*j < *(j - Diff{1})); --j)
+            for (Iter j{i}; j != begin && (*j < *(j - DiffType{1})); --j)
             {
-                std::iter_swap(j, j - Diff{1});
+                std::iter_swap(j, j - DiffType{1});
             }
         }
     }

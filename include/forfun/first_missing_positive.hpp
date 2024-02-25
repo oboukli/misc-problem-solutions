@@ -20,23 +20,21 @@
 
 #include <algorithm>
 #include <iterator>
-#include <type_traits>
 
 namespace forfun::first_missing_positive {
 
 namespace {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type,
-    typename Diff = std::iterator_traits<RandomIt>::difference_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
 constexpr inline void
 quasi_sort(RandomIt const first, RandomIt const src) noexcept
 {
-    if (auto const n{*src}; n > ValTyp{0})
+    using ValType = std::iter_value_t<RandomIt>;
+
+    if (auto const n{*src}; n > ValType{0})
     {
-        auto const dest{first + std::max<ValTyp>(ValTyp{0}, n - ValTyp{1})};
+        auto const dest{first + std::max<ValType>(ValType{0}, n - ValType{1})};
         if (auto const tmp{*dest}; tmp != n)
         {
             *dest = n;
@@ -51,25 +49,25 @@ quasi_sort(RandomIt const first, RandomIt const src) noexcept
 
 namespace base {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
-[[nodiscard]] constexpr inline ValTyp
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
+[[nodiscard]] constexpr inline std::iter_value_t<RandomIt>
 lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 {
+    using ValType = std::iter_value_t<RandomIt>;
+
     auto max{end - begin};
 
     for (auto it{begin}; it != end; ++it)
     {
-        if (auto const current{*it}; current < ValTyp{1})
+        if (auto const current{*it}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *it = ValTyp{0};
+            *it = ValType{0};
         }
         else
         {
@@ -77,7 +75,7 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
         }
     }
 
-    ValTyp min_num{1};
+    ValType min_num{1};
 
     auto const endIt{begin + max};
     for (auto it{begin}; it != endIt; ++it)
@@ -95,26 +93,25 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 
 namespace fast {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type,
-    typename Diff = std::iterator_traits<RandomIt>::difference_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
-[[nodiscard]] constexpr inline ValTyp
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
+[[nodiscard]] constexpr inline std::iter_value_t<RandomIt>
 lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 {
+    using ValType = std::iter_value_t<RandomIt>;
+
     auto max{end - begin};
 
     for (auto it{begin}; it != end; ++it)
     {
-        if (auto const current{*it}; current < ValTyp{1})
+        if (auto const current{*it}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *it = ValTyp{0};
+            *it = ValType{0};
         }
         else
         {
@@ -122,9 +119,9 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
         }
     }
 
-    ValTyp min_num{1};
+    ValType min_num{1};
 
-    for (Diff i{0}; i < max; ++i)
+    for (std::iter_difference_t<RandomIt> i{0}; i < max; ++i)
     {
         if (begin[i] == min_num)
         {

@@ -17,18 +17,16 @@
 #define FORFUN_TWO_SUM_HPP_
 
 #include <array>
-#include <concepts>
 #include <iterator>
 
 namespace forfun::two_sum {
 
-template <
-    typename RandomIt,
-    typename T,
-    typename Diff = std::iterator_traits<RandomIt>::difference_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<T>
-[[nodiscard]] constexpr inline std::array<Diff, 2>
-two_sum(RandomIt const first, RandomIt const end, T const target) noexcept
+template <std::random_access_iterator RandomIt>
+[[nodiscard]] constexpr inline std::array<std::iter_difference_t<RandomIt>, 2>
+two_sum(
+    RandomIt const first,
+    RandomIt const end,
+    std::iter_value_t<RandomIt> const target) noexcept
 {
     for (auto it_i{first}; it_i != end; ++it_i)
     {
@@ -43,7 +41,9 @@ two_sum(RandomIt const first, RandomIt const end, T const target) noexcept
         }
     }
 
-    return {Diff{-1}, Diff{-1}};
+    using DiffType = std::iter_difference_t<RandomIt>;
+
+    return {DiffType{-1}, DiffType{-1}};
 }
 
 } // namespace forfun::two_sum

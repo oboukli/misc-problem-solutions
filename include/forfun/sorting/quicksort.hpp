@@ -17,8 +17,7 @@ namespace forfun::sorting {
 
 namespace {
 
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
+template <std::contiguous_iterator Iter>
 [[nodiscard]] constexpr inline Iter
 partition(Iter const first, Iter const last) noexcept
 {
