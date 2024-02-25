@@ -14,14 +14,12 @@
 
 namespace forfun::fibonacci::sequence {
 
-template <typename T, typename TState>
-    requires std::integral<T>
-using callback_t = void(*)(T const, TState& state) noexcept;
+template <std::integral T, typename TState>
+using callback_t = void (*)(T const, TState& state) noexcept;
 
 namespace slow {
 
-template <typename T, typename TState>
-    requires std::integral<T>
+template <std::integral T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {
@@ -39,8 +37,7 @@ void fib_seq(
 
 namespace fast {
 
-template <typename T, typename TState>
-    requires std::integral<T>
+template <std::integral T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {
@@ -57,8 +54,7 @@ void fib_seq(
 
 namespace creel {
 
-template <typename T, typename TState>
-    requires std::integral<T>
+template <std::integral T, typename TState>
 void fib_seq(
     T const max, callback_t<T, TState> const cb, TState& state) noexcept
 {

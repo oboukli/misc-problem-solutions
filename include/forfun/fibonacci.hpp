@@ -17,9 +17,8 @@ namespace forfun::fibonacci {
 
 namespace iterative {
 
-template <typename T>
-    requires std::integral<T>
-    and std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+template <std::integral T>
+    requires std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
 [[nodiscard]] constexpr inline T fib(T const n) noexcept
 {
     T a{0};
@@ -38,9 +37,8 @@ template <typename T>
 
 namespace recursive {
 
-template <typename T>
-    requires std::integral<T>
-    and std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+template <std::integral T>
+    requires std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
 [[nodiscard]] constexpr inline T fib(T const n) noexcept
 {
     if (n <= T{2})

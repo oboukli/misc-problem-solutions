@@ -13,22 +13,21 @@
 #include <algorithm>
 #include <concepts>
 #include <iterator>
-#include <type_traits>
 
 namespace forfun::move_zeroes {
 
 namespace sol1 {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
 constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
+    using ValType = std::iter_value_t<RandomIt>;
+
     auto it_j{it};
     for (; it != end; ++it)
     {
-        if (*it != ValTyp{0})
+        if (*it != ValType{0})
         {
             std::iter_swap(it, it_j);
             ++it_j;
@@ -40,16 +39,16 @@ constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 
 namespace sol2 {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
 constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
+    using ValType = std::iter_value_t<RandomIt>;
+
     auto it_j{it};
     for (; it != end; ++it)
     {
-        if (*it != ValTyp{0})
+        if (*it != ValType{0})
         {
             *it_j = *it;
             ++it_j;
@@ -58,7 +57,7 @@ constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 
     for (; it_j != end; ++it_j)
     {
-        *it_j = ValTyp{0};
+        *it_j = ValType{0};
     }
 }
 
@@ -66,23 +65,23 @@ constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 
 namespace stl {
 
-template <
-    typename RandomIt,
-    typename ValTyp = std::iterator_traits<RandomIt>::value_type>
-    requires std::random_access_iterator<RandomIt> && std::integral<ValTyp>
+template <std::random_access_iterator RandomIt>
+    requires std::integral<std::iter_value_t<RandomIt>>
 constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
+    using ValType = std::iter_value_t<RandomIt>;
+
     auto it_j{it};
     for (; it != end; ++it)
     {
-        if (*it != ValTyp{0})
+        if (*it != ValType{0})
         {
             *it_j = *it;
             ++it_j;
         }
     }
 
-    std::fill(it_j, end, ValTyp{0});
+    std::fill(it_j, end, ValType{0});
 }
 
 } // namespace stl
