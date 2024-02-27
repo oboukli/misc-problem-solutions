@@ -18,6 +18,11 @@ namespace forfun::palindrome {
 
 namespace raw {
 
+#if __clang__
+#pragma clang attribute push( \
+    __attribute__((no_sanitize("unsigned-integer-overflow"))), \
+    apply_to = function)
+#endif /* __clang__ */
 [[nodiscard]] constexpr inline bool
 is_palindrome(std::string_view const& s) noexcept
 {
@@ -34,7 +39,15 @@ is_palindrome(std::string_view const& s) noexcept
 
     return true;
 }
+#if __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
 
+#if __clang__
+#pragma clang attribute push( \
+    __attribute__((no_sanitize("unsigned-integer-overflow"))), \
+    apply_to = function)
+#endif /* __clang__ */
 [[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
 {
     auto const end{s.length() - 1};
@@ -51,6 +64,9 @@ is_palindrome(std::string_view const& s) noexcept
 
     return true;
 }
+#if __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
 
 } // namespace raw
 
@@ -59,7 +75,7 @@ namespace fast {
 [[nodiscard]] constexpr inline bool
 is_palindrome(std::string_view const& s) noexcept
 {
-    auto upper{s.cend() - 1};
+    auto upper{s.crbegin()};
     auto const mid{s.cbegin() + (s.length() / 2)};
 
     for (auto lower{s.cbegin()}; lower < mid; ++lower)
@@ -69,7 +85,7 @@ is_palindrome(std::string_view const& s) noexcept
             return false;
         }
 
-        --upper;
+        ++upper;
     }
 
     return true;
@@ -77,7 +93,7 @@ is_palindrome(std::string_view const& s) noexcept
 
 [[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
 {
-    auto upper{s.cend() - 1};
+    auto upper{s.crbegin()};
     auto const mid{s.cbegin() + (s.length() / 2)};
 
     for (auto lower{s.cbegin()}; lower < mid; ++lower)
@@ -88,7 +104,7 @@ is_palindrome(std::string_view const& s) noexcept
             return false;
         }
 
-        --upper;
+        ++upper;
     }
 
     return true;
