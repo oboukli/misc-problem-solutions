@@ -37,6 +37,7 @@ add_library(
   "include/forfun/fizzbuzz.hpp"
   "include/forfun/lru_cache.hpp"
   "include/forfun/move_zeroes.hpp"
+  "include/forfun/palindrome.h"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/product_except_self.hpp"
@@ -51,6 +52,7 @@ add_library(
   "src/fizzbuzz.cpp"
   "src/lru_cache.cpp"
   "src/move_zeroes.cpp"
+  "src/palindrome.c"
   "src/palindrome.cpp"
   "src/palindromic_number.cpp"
   "src/product_except_self.cpp"
@@ -93,18 +95,6 @@ target_include_directories(
   "${CMAKE_SOURCE_DIR}/include"
 )
 
-add_library(
-  forfun_c
-  SHARED
-  "include/forfun/palindrome.h"
-  "src/palindrome.c"
-)
-target_include_directories(
-  forfun_c
-  PUBLIC
-  "${CMAKE_SOURCE_DIR}/include"
-)
-
 add_executable(
   lru_cache
   "test/lru_cache.cpp"
@@ -112,24 +102,6 @@ add_executable(
 target_link_libraries(
   lru_cache
   PRIVATE forfun
-)
-
-add_executable(
-  palindrome
-  "test/palindrome.cpp"
-)
-target_link_libraries(
-  palindrome
-  PRIVATE forfun
-)
-
-add_executable(
-  palindrome_c
-  "test/palindrome.c"
-)
-target_link_libraries(
-  palindrome_c
-  PRIVATE forfun_c
 )
 
 find_package(Catch2 3 REQUIRED)
@@ -142,6 +114,7 @@ add_executable(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/move_zeroes_test.cpp"
+  "test/palindrome_test.cpp"
   "test/palindromic_number_test.cpp"
   "test/product_except_self_test.cpp"
   "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
@@ -193,5 +166,4 @@ target_link_libraries(
 target_link_libraries(
   benchmark
   PRIVATE forfun
-  PRIVATE forfun_c
 )
