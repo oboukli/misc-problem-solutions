@@ -20,8 +20,8 @@
 namespace {
 
 template <typename T>
-std::enable_if_t<std::is_base_of_v<forfun::lrucache::LRUCacheBase, T>, void>
-test(std::size_t const capacity)
+    requires std::derived_from<T, forfun::lrucache::LRUCacheBase>
+void test(std::size_t const capacity)
 {
     int volatile val{};
     T cache(capacity);
