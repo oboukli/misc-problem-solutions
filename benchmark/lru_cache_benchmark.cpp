@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
-#include <type_traits>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -19,8 +18,7 @@
 
 namespace {
 
-template <typename T>
-    requires std::derived_from<T, forfun::lrucache::LRUCacheBase>
+template <forfun::lrucache::concepts::lru_cache T>
 void test(std::size_t const capacity)
 {
     int volatile val{};

@@ -5,6 +5,7 @@
 #ifndef FORFUN_LRU_CACHE_HPP_
 #define FORFUN_LRU_CACHE_HPP_
 
+#include <concepts>
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
@@ -14,15 +15,16 @@
 
 namespace forfun::lrucache {
 
-class LRUCacheBase {
-public:
-    virtual ~LRUCacheBase()
-    {
-    }
+namespace concepts {
 
-    virtual int get(std::size_t const key) noexcept = 0;
-    virtual void put(std::size_t const key, int const value) noexcept = 0;
+template <typename T>
+concept lru_cache = requires(T cache, std::size_t k, int v) {
+    { T(k) } -> std::same_as<T>;
+    { cache.put(k, v) } -> std::same_as<void>;
+    { cache.get(k) } -> std::same_as<int>;
 };
+
+} // namespace concepts
 
 namespace naive {
 
@@ -33,15 +35,13 @@ struct CacheItem {
 };
 
 /// Least recently used (LRU) cache.
-class LRUCache final : public LRUCacheBase {
+class LRUCache final {
 public:
     explicit LRUCache(std::size_t const capacity) noexcept;
 
-    ~LRUCache() = default;
+    [[nodiscard]] int get(std::size_t const key) noexcept;
 
-    [[nodiscard]] int get(std::size_t const key) noexcept override;
-
-    void put(std::size_t const key, int const value) noexcept override;
+    void put(std::size_t const key, int const value) noexcept;
 
 private:
     std::unique_ptr<CacheItem[]> cache_{};
@@ -56,15 +56,15 @@ private:
 namespace stl {
 
 /// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
-class LRUCache final : public LRUCacheBase {
+class LRUCache final {
 public:
     explicit LRUCache(std::size_t const capacity) noexcept;
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(std::size_t const key) noexcept override;
+    [[nodiscard]] int get(std::size_t const key) noexcept;
 
-    void put(std::size_t const key, int const value) noexcept override;
+    void put(std::size_t const key, int const value) noexcept;
 
 private:
     using cache_item_t = std::pair<std::size_t, int>;
