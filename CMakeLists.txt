@@ -131,6 +131,9 @@ target_link_libraries(
   PRIVATE forfun
   PRIVATE forfun_sorting
 )
+include(CTest)
+include(Catch)
+catch_discover_tests(tests)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(nameof CONFIG REQUIRED)
