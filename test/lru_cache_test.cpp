@@ -17,6 +17,8 @@ TEMPLATE_TEST_CASE(
 {
     using CacheType = TestType;
 
+    STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<CacheType>);
+
     int volatile val{};
 
     SECTION("Test case 1")
@@ -146,5 +148,61 @@ TEMPLATE_TEST_CASE(
 
         val = cache.get(3);
         REQUIRE(val == -1);
+    }
+}
+
+TEST_CASE("LRU Cache concepts", "[lru_cache]")
+{
+    struct Dummy0 {};
+
+    struct Dummy1 : public Dummy0 {
+        Dummy1(std::size_t)
+        {
+        }
+    };
+
+    struct Dummy2 : public Dummy1 {
+        Dummy2(std::size_t c) : Dummy1{c}
+        {
+        }
+
+        void put(std::size_t, int)
+        {
+        }
+    };
+
+    struct Dummy3 : public Dummy2 {
+        Dummy3(std::size_t c) : Dummy2{c}
+        {
+        }
+
+        int get(std::size_t)
+        {
+            return 0;
+        }
+    };
+
+    struct Dummy4 : public Dummy3 {
+        Dummy4(std::size_t c) : Dummy3{c}
+        {
+        }
+
+        void dummy()
+        {
+        }
+    };
+
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<Dummy3>);
+        STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<Dummy4>);
+    }
+
+    SECTION("Negative")
+    {
+        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<int>);
+        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy0>);
+        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy1>);
+        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy2>);
     }
 }
