@@ -95,15 +95,6 @@ target_include_directories(
   "${CMAKE_SOURCE_DIR}/include"
 )
 
-add_executable(
-  lru_cache
-  "test/lru_cache.cpp"
-)
-target_link_libraries(
-  lru_cache
-  PRIVATE forfun
-)
-
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
@@ -113,6 +104,7 @@ add_executable(
   "test/fibonacci_test.cpp"
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
+  "test/lru_cache_test.cpp"
   "test/move_zeroes_test.cpp"
   "test/palindrome_test.cpp"
   "test/palindromic_number_test.cpp"
