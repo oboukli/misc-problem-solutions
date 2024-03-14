@@ -46,6 +46,7 @@ add_library(
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
   "src/contains_duplicate.cpp"
+  "src/factorial.cpp"
   "src/fibonacci_sequence.cpp"
   "src/fibonacci.cpp"
   "src/first_missing_positive.cpp"
