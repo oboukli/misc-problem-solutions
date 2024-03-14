@@ -47,8 +47,7 @@ partition(Iter const first, Iter const last) noexcept
 
 } // namespace
 
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
+template <std::contiguous_iterator Iter>
 constexpr inline void quicksort(Iter const first, Iter const last) noexcept
 {
     using DiffType = std::iter_difference_t<Iter>;

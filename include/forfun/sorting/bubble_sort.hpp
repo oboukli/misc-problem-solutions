@@ -49,8 +49,7 @@ constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 
 namespace stl {
 
-template <typename Iter>
-    requires std::contiguous_iterator<Iter>
+template <std::contiguous_iterator Iter>
 constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 {
     using DiffType = std::iter_difference_t<Iter>;
