@@ -18,9 +18,11 @@ namespace forfun::product_except_self {
 namespace concepts {
 
 template <typename Factor, typename Product>
-concept product_computable = requires(Factor f) {
-    requires std::is_arithmetic_v<Factor> and std::is_arithmetic_v<Product>;
-    requires sizeof(decltype(f * f)) <= sizeof(Product);
+concept product_computable = requires {
+    requires std::is_arithmetic_v<Factor> and std::is_arithmetic_v<Product>
+        and requires(Factor f) {
+                requires sizeof(decltype(f * f)) <= sizeof(Product);
+            };
 };
 
 } // namespace concepts
