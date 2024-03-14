@@ -29,7 +29,7 @@ concept product_computable = requires {
 
 namespace alg1 {
 
-using namespace forfun::product_except_self::concepts;
+using forfun::product_except_self::concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
@@ -66,7 +66,7 @@ constexpr void product_except_self(
 
 namespace alg2 {
 
-using namespace forfun::product_except_self::concepts;
+using forfun::product_except_self::concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.

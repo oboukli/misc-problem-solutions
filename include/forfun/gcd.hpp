@@ -14,7 +14,7 @@
 
 namespace forfun::gcd::euclid::recursive {
 
-namespace {
+namespace detail {
 
 [[nodiscard]] constexpr auto gcd_(int const m, int const n) noexcept -> int
 {
@@ -26,12 +26,12 @@ namespace {
     return gcd_(n, m % n);
 }
 
-} // namespace
+} // namespace detail
 
 [[nodiscard]] /*constexpr*/ inline auto
 gcd(int const m, int const n) noexcept -> int
 {
-    return std::abs(gcd_(m, n));
+    return std::abs(detail::gcd_(m, n));
 }
 
 } // namespace forfun::gcd::euclid::recursive

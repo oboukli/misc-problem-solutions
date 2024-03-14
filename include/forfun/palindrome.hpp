@@ -134,14 +134,16 @@ is_palindrome(std::string_view const& s) noexcept -> bool
         s.crbegin());
 }
 
-namespace {
+namespace detail {
+
 [[nodiscard]] inline auto
 equal_case_insensitive(char const a, char const b) noexcept -> bool
 {
     return std::tolower(static_cast<unsigned char>(a))
         == std::tolower(static_cast<unsigned char>(b));
 }
-} // namespace
+
+} // namespace detail
 
 [[nodiscard]] inline auto
 is_palindrome_ci(std::string_view const& s) noexcept -> bool
@@ -152,7 +154,7 @@ is_palindrome_ci(std::string_view const& s) noexcept -> bool
             s.cbegin(),
             static_cast<std::string_view::difference_type>(s.size() / 2)),
         s.crbegin(),
-        equal_case_insensitive);
+        detail::equal_case_insensitive);
 }
 
 } // namespace stl_bloated

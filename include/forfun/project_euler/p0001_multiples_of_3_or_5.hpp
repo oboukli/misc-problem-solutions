@@ -20,17 +20,19 @@ namespace forfun::project_euler::multiples_of_3_or_5 {
 
 [[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept;
 
-namespace {
+namespace detail {
 
 [[nodiscard]] inline constexpr int sum_2x(int const n, int const q) noexcept
 {
     return (n / q) * (q + n - (n % q));
 }
 
-} // namespace
+} // namespace detail
 
 [[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept
 {
+    using detail::sum_2x;
+
     --n;
 
     return (sum_2x(n, 3) + sum_2x(n, 5) - sum_2x(n, 15)) / 2;
