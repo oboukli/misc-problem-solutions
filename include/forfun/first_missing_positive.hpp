@@ -24,7 +24,7 @@
 
 namespace forfun::first_missing_positive {
 
-namespace {
+namespace detail {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
@@ -45,7 +45,7 @@ constexpr void quasi_sort(RandomIt const first, RandomIt const src) noexcept
     }
 }
 
-} // namespace
+} // namespace detail
 
 namespace base {
 
@@ -72,7 +72,7 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
         }
         else
         {
-            quasi_sort(begin, it);
+            detail::quasi_sort(begin, it);
         }
     }
 
@@ -117,7 +117,7 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
         }
         else
         {
-            quasi_sort(begin, it);
+            detail::quasi_sort(begin, it);
         }
     }
 

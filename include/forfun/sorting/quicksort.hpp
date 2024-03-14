@@ -15,7 +15,7 @@
 
 namespace forfun::sorting {
 
-namespace {
+namespace detail {
 
 template <std::contiguous_iterator Iter>
 [[nodiscard]] constexpr inline Iter
@@ -45,7 +45,7 @@ partition(Iter const first, Iter const last) noexcept
     return i;
 }
 
-} // namespace
+} // namespace detail
 
 template <std::contiguous_iterator Iter>
 constexpr inline void quicksort(Iter const first, Iter const last) noexcept
@@ -57,7 +57,7 @@ constexpr inline void quicksort(Iter const first, Iter const last) noexcept
         return;
     }
 
-    auto const p{partition(first, last)};
+    auto const p{detail::partition(first, last)};
     quicksort(first, p);
     quicksort(p + DiffType{1}, last);
 }
