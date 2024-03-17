@@ -1,6 +1,7 @@
-# Miscellaneous coding problem solutions
+# Solutions to miscellaneous coding problems
 
-Solutions for various coding problems, written in C90, C++17, C++20, and C++23.
+This is a repository of modern coding showcases, and solutions for various
+coding problems, written in C90, and C++17, C++20, and C++23.
 
 The solutions are not necessarily optimal or meant as best practice.
 
@@ -12,8 +13,8 @@ and ideas leveraged by this project:
 - C (standard C99)
 - C++ (standard C++17, C++20, and C++23)
 - C++ STL
-- Strongly-typed approach, leveraging C++ `template`s and `concept`s
-- `const` and `constexpr` where applicable--except for fields
+- Strongly-typed approach, leveraging C++ templates and concepts
+- Const correctness where applicable--except for fields
 - Functional programming
 - Strict compilation
 - CMake
@@ -28,7 +29,6 @@ and ideas leveraged by this project:
 - Microsoft DevSkim
 - EditorConfig
 - Markdown
-- XcodeWarnings
 
 ## License
 
