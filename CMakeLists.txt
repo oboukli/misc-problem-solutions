@@ -29,6 +29,7 @@ project(
 add_library(
   forfun
   SHARED
+  "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
   "include/forfun/factorial.hpp"
   "include/forfun/fibonacci_sequence.hpp"
@@ -45,6 +46,7 @@ add_library(
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
+  "src/common.cpp"
   "src/contains_duplicate.cpp"
   "src/factorial.cpp"
   "src/fibonacci_sequence.cpp"
@@ -99,6 +101,7 @@ target_include_directories(
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
+  "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
   "test/factorial_test.cpp"
   "test/fibonacci_sequence_test.cpp"
