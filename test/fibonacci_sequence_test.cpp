@@ -14,20 +14,20 @@
 
 namespace {
 
-void dummy_callback(int const n, std::vector<int>& seq) noexcept
-{
-    seq.push_back(n);
-}
+constexpr auto const dummy_callback
+    = [](int const n, std::vector<int>& state) noexcept { state.push_back(n); };
 
 } // namespace
+
+using namespace forfun::fibonacci::sequence;
 
 TEMPLATE_TEST_CASE_SIG(
     "fibonacci_sequence",
     "[fibonacci_sequence]",
     ((auto fib_seq), fib_seq),
-    (forfun::fibonacci::sequence::slow::fib_seq<int, std::vector<int>>),
-    (forfun::fibonacci::sequence::fast::fib_seq<int, std::vector<int>>),
-    (forfun::fibonacci::sequence::creel::fib_seq<int, std::vector<int>>))
+    (slow::fib_seq<int, std::vector<int>, decltype((dummy_callback))>),
+    (fast::fib_seq<int, std::vector<int>, decltype((dummy_callback))>),
+    (creel::fib_seq<int, std::vector<int>, decltype((dummy_callback))>))
 {
     SECTION("Valid input")
     {
