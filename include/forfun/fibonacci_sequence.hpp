@@ -14,18 +14,20 @@
 
 namespace forfun::fibonacci::sequence {
 
-template <std::integral T, typename TState>
-using callback_t = void (*)(T const, TState& state) noexcept;
+template <typename Func, typename T, typename State>
+concept noexcept_callable = std::invocable<Func, T, State&>
+    and requires(Func&& func, T n, State& state) {
+            requires noexcept(func(n, state));
+        };
 
 namespace slow {
 
-template <std::integral T, typename TState>
-void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState& state) noexcept
+template <std::integral T, typename State, noexcept_callable<T, State&> Func>
+void fib_seq(T const max, Func&& func, State& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
-        cb(i, state);
+        func(i, state);
 
         T const tmp = j + i;
         i = j;
@@ -37,13 +39,12 @@ void fib_seq(
 
 namespace fast {
 
-template <std::integral T, typename TState>
-void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState& state) noexcept
+template <std::integral T, typename State, noexcept_callable<T, State&> Func>
+void fib_seq(T const max, Func&& func, State& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
-        cb(i, state);
+        func(i, state);
 
         j += i;
         i = j - i;
@@ -54,14 +55,13 @@ void fib_seq(
 
 namespace creel {
 
-template <std::integral T, typename TState>
-void fib_seq(
-    T const max, callback_t<T, TState> const cb, TState& state) noexcept
+template <std::integral T, typename State, noexcept_callable<T, State&> Func>
+void fib_seq(T const max, Func&& func, State& state) noexcept
 {
     // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
     for (T i{0}, j{1}; i <= max;)
     {
-        cb(i, state);
+        func(i, state);
 
         j = (i += j) - j;
     }
