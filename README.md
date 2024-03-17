@@ -1,9 +1,7 @@
-# Solutions to miscellaneous coding problems
+# Solutions to miscellaneous coding problems in C/C++
 
-This is a repository of modern coding showcases, and solutions for various
+This is a repository of modern coding showcases, and solutions to various
 coding problems, written in C90, and C++17, C++20, and C++23.
-
-The solutions are not necessarily optimal or meant as best practice.
 
 ## Technical showcases
 
