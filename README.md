@@ -30,6 +30,12 @@ and ideas leveraged by this project:
 - EditorConfig
 - Markdown
 
+## Disclaimer
+
+The provided attempted solutions are not guaranteed to be correct, safe,
+secure, optimal, or suitable for use in production. The code and coding style
+may, or may not, follow best practice guidelines.
+
 ## License
 
 ### Problem licenses
