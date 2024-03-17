@@ -17,6 +17,8 @@
 #include <type_traits>
 #include <utility>
 
+#include "common.hpp"
+
 namespace forfun::factorial {
 
 namespace iterative {
@@ -44,8 +46,7 @@ factorial(std::integral auto const n) noexcept -> decltype(n)
 namespace recursive {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
-template <std::integral T>
-    requires std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr inline T factorial(T const n) noexcept
 {
     assert(n >= T{0});
