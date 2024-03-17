@@ -28,6 +28,32 @@ and ideas leveraged by this project:
 - EditorConfig
 - Markdown
 
+## Index
+
+| Problem                         | Standard | Source                                            |
+| ---                             | ---      | ---                                               |
+| Bubble sort                     | C++20    | `src/sorting/bubble_sort.cpp`                     |
+| Contains duplicate              | C++20    | `src/contains_duplicate.cpp`                      |
+| Factorial                       | C++23    | `src/factorial.cpp`                               |
+| Fibonacci                       | C++20    | `src/fibonacci.cpp`                               |
+| Fibonacci sequence              | C++20    | `src/fibonacci_sequence.cpp`                      |
+| First missing positive          | C++20    | `src/first_missing_positive.cpp`                  |
+| Fizz buzz                       | C++17    | `src/fizzbuzz.cpp`                                |
+| Greatest common divisor         | C++17    | `src/gcd.cpp`                                     |
+| Insertion sort                  | C++20    | `src/sorting/insertion_sort.cpp`                  |
+| Least recently used (LRU) cache | C++20    | `src/lru_cache.cpp`                               |
+| Move zeroes                     | C++20    | `src/move_zeroes.cpp`                             |
+| Multiples of 3 or 5             | C++17    | `src/project_euler/p0001_multiples_of_3_or_5.cpp` |
+| Number of Ships in a Rectangle  | C++20    | `src/sonar.cpp`                                   |
+| Palindrome                      | C++17    | `src/palindrome.cpp`                              |
+| Palindrome (in C)               | C90      | `src/palindrome.c`                                |
+| Palindromic number              | C++20    | `src/palindromic_number.cpp`                      |
+| Product except self             | C++20    | `src/product_except_self.cpp`                     |
+| Quicksort                       | C++20    | `src/sorting/quicksort.cpp`                       |
+| Sub array sums                  | C++20    | `src/sub_array_sums.cpp`                          |
+| Trie                            | C++20    | `src/trie.cpp`                                    |
+| Two sum                         | C++20    | `src/two_sum.cpp`                                 |
+
 ## Disclaimer
 
 The provided attempted solutions are not guaranteed to be correct, safe,
