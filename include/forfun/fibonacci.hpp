@@ -13,12 +13,13 @@
 #include <type_traits>
 #include <utility>
 
+#include "common.hpp"
+
 namespace forfun::fibonacci {
 
 namespace iterative {
 
-template <std::integral T>
-    requires std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr inline T fib(T const n) noexcept
 {
     T a{0};
@@ -37,8 +38,7 @@ template <std::integral T>
 
 namespace recursive {
 
-template <std::integral T>
-    requires std::is_same_v<T, decltype(std::declval<T>() + std::declval<T>())>
+template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr inline T fib(T const n) noexcept
 {
     if (n <= T{2})
