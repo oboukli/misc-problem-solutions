@@ -33,7 +33,7 @@ using namespace forfun::product_except_self::concepts;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
-template <typename InItr, typename OutItr>
+template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
@@ -70,7 +70,7 @@ using namespace forfun::product_except_self::concepts;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
-template <typename InItr, typename OutItr>
+template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
