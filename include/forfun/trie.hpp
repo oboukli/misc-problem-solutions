@@ -20,42 +20,43 @@ namespace forfun::trie {
 
 namespace experimental {
 
-template <typename CharT = char, typename Traits = std::char_traits<CharT>>
-    requires std::integral<CharT>
+template <std::integral CharT = char>
 struct TrieNode final {
     using children_t = std::vector<std::unique_ptr<TrieNode>>;
     using value_type = CharT;
-    using traits_type = Traits;
+    using traits_type = std::char_traits<CharT>;
 
     children_t children{};
     CharT value{};
     bool is_terminal{false};
 
-    constexpr TrieNode(CharT value_) noexcept : value{value_}
+    explicit constexpr TrieNode(CharT const value_) noexcept : value{value_}
     {
     }
 
-    constexpr TrieNode(CharT value_, bool is_terminal_) noexcept :
+    explicit constexpr TrieNode(
+        CharT const value_, bool const is_terminal_) noexcept :
         value{value_}, is_terminal{is_terminal_}
     {
     }
 };
 
-template <
-    typename T,
-    typename StringViewT = std::basic_string_view<typename T::value_type>>
-    requires std::is_same_v<T, TrieNode<typename T::value_type>>
-void insert(T& root, StringViewT const& word) noexcept
+template <typename T>
+using StringViewT = std::basic_string_view<typename T::value_type>;
+
+template <typename T>
+    requires std::same_as<T, TrieNode<typename T::value_type>>
+void insert(T& root, StringViewT<T> const& word) noexcept
 {
-    using len_t = StringViewT::size_type;
+    using LenT = StringViewT<T>::size_type;
 
     auto const word_len{word.length()};
-    if (word_len == len_t{0})
+    if (word_len == LenT{0})
     {
         return;
     }
 
-    auto const prfx{word[len_t{0}]};
+    auto const prfx{word[LenT{0}]};
 
     T* parent{nullptr};
     for (auto const& node_ptr : root.children)
@@ -73,12 +74,12 @@ void insert(T& root, StringViewT const& word) noexcept
         parent = root.children.crbegin()->get();
     }
 
-    if (word_len == len_t{1})
+    if (word_len == LenT{1})
     {
         parent->is_terminal = true;
     }
 
-    insert(*parent, word.substr(len_t{1}));
+    insert(*parent, word.substr(LenT{1}));
 }
 
 } // namespace experimental
