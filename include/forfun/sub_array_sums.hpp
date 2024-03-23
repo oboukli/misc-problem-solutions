@@ -18,9 +18,8 @@
 namespace forfun::sub_array_sums {
 
 template <typename T, typename TSum>
-    requires(
-        std::contiguous_iterator<typename T::iterator>
-        and std::contiguous_iterator<typename TSum::iterator>)
+    requires std::contiguous_iterator<typename T::iterator>
+    and std::contiguous_iterator<typename TSum::iterator>
 void sum_each(
     T const& numbers, TSum& sums, typename T::size_type const sub_size) noexcept
 {
