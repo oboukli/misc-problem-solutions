@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <string>
 #include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
@@ -14,8 +15,22 @@
 
 namespace {
 
-constexpr auto const dummy_callback
+constexpr auto const dummy_noexcept_lambda
     = [](int const n, std::vector<int>& state) noexcept { state.push_back(n); };
+
+// clang-format off
+constexpr auto const dummy_throwing_lambda
+    = []([[maybe_unused]] int const n,
+        [[maybe_unused]] std::vector<int>& state) noexcept(false) {};
+// clang-format on
+
+void dummy_noexcept_func() noexcept
+{
+}
+
+void dummy_throwing_func() noexcept(false)
+{
+}
 
 } // namespace
 
@@ -25,9 +40,9 @@ TEMPLATE_TEST_CASE_SIG(
     "fibonacci_sequence",
     "[fibonacci_sequence]",
     ((auto fib_seq), fib_seq),
-    (slow::fib_seq<int, std::vector<int>, decltype((dummy_callback))>),
-    (fast::fib_seq<int, std::vector<int>, decltype((dummy_callback))>),
-    (creel::fib_seq<int, std::vector<int>, decltype((dummy_callback))>))
+    (slow::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>),
+    (fast::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>),
+    (creel::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>))
 {
     SECTION("Valid input")
     {
@@ -48,7 +63,7 @@ TEMPLATE_TEST_CASE_SIG(
                 std::vector<int> seq;
                 seq.reserve(expected_seq.size());
 
-                fib_seq(max, dummy_callback, seq);
+                fib_seq(max, dummy_noexcept_lambda, seq);
 
                 THEN("sequence is valid")
                 {
@@ -73,7 +88,7 @@ TEMPLATE_TEST_CASE_SIG(
             {
                 std::vector<int> seq;
 
-                fib_seq(max, dummy_callback, seq);
+                fib_seq(max, dummy_noexcept_lambda, seq);
 
                 THEN("sequence is empty")
                 {
@@ -81,5 +96,43 @@ TEMPLATE_TEST_CASE_SIG(
                 }
             }
         }
+    }
+}
+
+TEST_CASE("fibonacci_sequence noexcept_callable", "[fibonacci_sequence]")
+{
+    SECTION("Positive")
+    {
+        // clang-format off
+        STATIC_REQUIRE(noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<int>&>);
+
+        STATIC_REQUIRE(noexcept_callable<decltype([](int, int) noexcept{}), int, int>);
+        STATIC_REQUIRE(noexcept_callable<decltype([](char, int) noexcept{}), char, int>);
+        STATIC_REQUIRE(noexcept_callable<decltype([](int, char) noexcept{}), double, int>);
+
+        STATIC_REQUIRE(noexcept_callable<decltype([](int, std::string&) noexcept{}), int, std::string&>);
+        // clang-format on
+    }
+
+    SECTION("Negative")
+    {
+        // clang-format off
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<char>&>);
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_noexcept_lambda), int, int&>);
+
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_throwing_lambda), int, std::vector<int>&>);
+
+
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, int){}), int, int>);
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, int) noexcept(false) {}), int, int>);
+
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](char, char&) noexcept{}), int, int>);
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](char, char&) noexcept{}), int, int&>);
+
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, std::string&){}), int, std::string&>);
+
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([]() noexcept{}), int, int>);
+        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int) noexcept{}), int, int>);
+        // clang-format on
     }
 }
