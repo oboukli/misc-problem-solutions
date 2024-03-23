@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: Solutions to miscellaneous coding problems in C/C++
+title: Solutions to miscellaneous programming problems in C/C++
 message: If you use this software, kindly cite it using these metadata.
 type: software
 authors:
@@ -8,7 +8,7 @@ authors:
 repository-code: https://github.com/oboukli/misc-problem-solutions
 abstract: >-
   Coding showcases, and solutions written in C/C++ for
-  miscellaneous coding problems.
+  miscellaneous programming problems.
 keywords:
   - algorithms
   - c90
