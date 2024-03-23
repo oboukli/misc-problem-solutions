@@ -104,35 +104,77 @@ TEST_CASE("fibonacci_sequence noexcept_callable", "[fibonacci_sequence]")
     SECTION("Positive")
     {
         // clang-format off
-        STATIC_REQUIRE(noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<int>&>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<int>&>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype(dummy_noexcept_func)>);
 
-        STATIC_REQUIRE(noexcept_callable<decltype([](int, int) noexcept{}), int, int>);
-        STATIC_REQUIRE(noexcept_callable<decltype([](char, int) noexcept{}), char, int>);
-        STATIC_REQUIRE(noexcept_callable<decltype([](int, char) noexcept{}), double, int>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int, int) noexcept {}), int, int>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](char, int) noexcept {}), int, char>);
 
-        STATIC_REQUIRE(noexcept_callable<decltype([](int, std::string&) noexcept{}), int, std::string&>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int, char*) noexcept {}), double, char*>);
+
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int, std::string) noexcept {}), int, std::string>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int, std::string&) noexcept {}), int, std::string&>);
+
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([]() noexcept {})>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int) noexcept {}), int>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int, char, double, std::string) noexcept {}), int, int, int, std::string>);
         // clang-format on
     }
 
     SECTION("Negative")
     {
-        // clang-format off
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<char>&>);
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_noexcept_lambda), int, int&>);
+        SECTION("noexcept is false")
+        {
+            // clang-format off
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_throwing_lambda), int, std::vector<int>&>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_throwing_func)>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int, int) {}), int, int>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int, int) noexcept(false) {}), int, int>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int, std::string&) {}), int, std::string&>);
+            // clang-format on
+        }
 
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype(dummy_throwing_lambda), int, std::vector<int>&>);
+        SECTION("Parameter type mismatch")
+        {
+            // clang-format off
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<int>>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_noexcept_lambda), int, std::vector<char>&>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int, int&) noexcept {}), int, int>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](char, char&) noexcept {}), int, int&>);
+            // clang-format on
+        }
 
-
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, int){}), int, int>);
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, int) noexcept(false) {}), int, int>);
-
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](char, char&) noexcept{}), int, int>);
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](char, char&) noexcept{}), int, int&>);
-
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int, std::string&){}), int, std::string&>);
-
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([]() noexcept{}), int, int>);
-        STATIC_REQUIRE_FALSE(noexcept_callable<decltype([](int) noexcept{}), int, int>);
-        // clang-format on
+        SECTION("Parameter list mismatch")
+        {
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_noexcept_lambda), int, int&>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype(dummy_noexcept_lambda)>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([]() noexcept {}), int, int>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int) noexcept {}), int, int>);
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<decltype([](int, int) noexcept {})>);
+        }
     }
 }
