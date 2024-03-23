@@ -81,6 +81,18 @@ target_sources(
   "src/trie.cpp"
   "src/two_sum.cpp"
 )
+get_target_property(forfun_sources forfun SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/"
+  PREFIX "Source files"
+  FILES ${forfun_sources}
+)
+get_target_property(forfun_headers forfun HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun/"
+  PREFIX "Header files"
+  FILES ${forfun_headers}
+)
 
 add_library(
   forfun_project_euler
@@ -139,6 +151,12 @@ target_sources(
   "test/trie_test.cpp"
   "test/two_sum_test.cpp"
 )
+get_target_property(forfun_tests tests SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/test/"
+  PREFIX "Source files"
+  FILES ${forfun_tests}
+)
 target_link_libraries(
   tests
   PRIVATE Catch2::Catch2WithMain
@@ -178,6 +196,12 @@ target_sources(
   "benchmark/sorting/insertion_sort_benchmark.cpp"
   "benchmark/sorting/quicksort_benchmark.cpp"
   "benchmark/sub_array_sums_benchmark.cpp"
+)
+get_target_property(forfun_benchmark benchmark SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/benchmark/"
+  PREFIX "Source files"
+  FILES ${forfun_benchmark}
 )
 target_link_libraries(
   benchmark
