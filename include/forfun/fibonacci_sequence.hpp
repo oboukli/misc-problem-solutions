@@ -11,14 +11,18 @@
 #define FORFUN_FIBONACCI_SEQUENCE_HPP_
 
 #include <concepts>
+#include <utility>
 
 namespace forfun::fibonacci::sequence {
 
-template <typename Func, typename T, typename State>
-concept noexcept_callable = std::invocable<Func, T, State&>
-    and requires(Func&& func, T n, State& state) {
-            requires noexcept(func(n, state));
-        };
+// clang-format off
+template <typename Func, typename... Args>
+concept noexcept_callable
+    = std::invocable<Func, Args...>
+    and requires(Func&& func, Args&&... args) {
+        requires noexcept(func(std::forward<Args>(args)...));
+    };
+// clang-format on
 
 namespace slow {
 
