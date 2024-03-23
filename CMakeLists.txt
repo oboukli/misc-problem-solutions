@@ -29,6 +29,17 @@ project(
 add_library(
   forfun
   SHARED
+)
+target_include_directories(
+  forfun
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
   "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
   "include/forfun/factorial.hpp"
@@ -47,6 +58,10 @@ add_library(
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
+)
+target_sources(
+  forfun
+  PRIVATE
   "src/common.cpp"
   "src/contains_duplicate.cpp"
   "src/factorial.cpp"
@@ -65,11 +80,6 @@ add_library(
   "src/sub_array_sums.cpp"
   "src/trie.cpp"
   "src/two_sum.cpp"
-)
-target_include_directories(
-  forfun
-  PUBLIC
-  "${CMAKE_SOURCE_DIR}/include"
 )
 
 add_library(
@@ -103,6 +113,10 @@ target_include_directories(
 find_package(Catch2 3 REQUIRED)
 add_executable(
   tests
+)
+target_sources(
+  tests
+  PRIVATE
   "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
   "test/factorial_test.cpp"
@@ -143,6 +157,10 @@ find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark
+)
+target_sources(
+  benchmark
+  PRIVATE
   "benchmark/benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
