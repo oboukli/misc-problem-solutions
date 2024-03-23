@@ -1,7 +1,7 @@
 # Solutions to miscellaneous coding problems in C/C++
 
 This is a repository of modern coding showcases, and solutions to various
-coding problems, written in C90, and C++17, C++20, and C++23.
+programming problems, written in C90, and C++17, C++20, and C++23.
 
 ## Technical showcases
 
@@ -23,7 +23,6 @@ and ideas leveraged by this project:
 - Conventional Commits
 - GitHub Actions CI
 - Benchmarking using nanobench
-- GitHub CodeQL
 - Microsoft DevSkim
 - EditorConfig
 - Markdown
@@ -35,7 +34,6 @@ and ideas leveraged by this project:
 | Bubble sort                     | C++20    | `src/sorting/bubble_sort.cpp`                     |
 | Contains duplicate              | C++20    | `src/contains_duplicate.cpp`                      |
 | Factorial                       | C++23    | `src/factorial.cpp`                               |
-| Fibonacci                       | C++20    | `src/fibonacci.cpp`                               |
 | Fibonacci sequence              | C++20    | `src/fibonacci_sequence.cpp`                      |
 | First missing positive          | C++20    | `src/first_missing_positive.cpp`                  |
 | Fizz buzz                       | C++17    | `src/fizzbuzz.cpp`                                |
@@ -43,7 +41,8 @@ and ideas leveraged by this project:
 | Insertion sort                  | C++20    | `src/sorting/insertion_sort.cpp`                  |
 | Least recently used (LRU) cache | C++20    | `src/lru_cache.cpp`                               |
 | Move zeroes                     | C++20    | `src/move_zeroes.cpp`                             |
-| Multiples of 3 or 5             | C++17    | `src/project_euler/p0001_multiples_of_3_or_5.cpp` |
+| Multiples of three or five      | C++17    | `src/project_euler/p0001_multiples_of_3_or_5.cpp` |
+| Nth Fibonacci number            | C++20    | `src/fibonacci.cpp`                               |
 | Number of Ships in a Rectangle  | C++20    | `src/sonar.cpp`                                   |
 | Palindrome                      | C++17    | `src/palindrome.cpp`                              |
 | Palindrome (in C)               | C90      | `src/palindrome.c`                                |
@@ -64,7 +63,7 @@ may, or may not, follow best practice guidelines.
 
 ### Problem licenses
 
-Problem copyrights are reserved to their owners.
+Problem copyrights are reserved to their respective owners.
 
 ### Solution licenses
 
