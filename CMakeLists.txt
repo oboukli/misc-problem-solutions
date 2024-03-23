@@ -4,7 +4,7 @@
 
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.27)
 
 set(CMAKE_C_STANDARD 90)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -54,6 +54,7 @@ target_sources(
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/product_except_self.hpp"
+  "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/trie.hpp"
@@ -76,6 +77,7 @@ target_sources(
   "src/palindrome.cpp"
   "src/palindromic_number.cpp"
   "src/product_except_self.cpp"
+  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
   "src/sonar.cpp"
   "src/sub_array_sums.cpp"
   "src/trie.cpp"
@@ -95,18 +97,6 @@ source_group(
 )
 
 add_library(
-  forfun_project_euler
-  SHARED
-  "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
-  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
-)
-target_include_directories(
-  forfun_project_euler
-  PUBLIC
-  "${CMAKE_SOURCE_DIR}/include"
-)
-
-add_library(
   forfun_sorting
   SHARED
   "include/forfun/sorting/bubble_sort.hpp"
@@ -119,7 +109,7 @@ add_library(
 target_include_directories(
   forfun_sorting
   PUBLIC
-  "${CMAKE_SOURCE_DIR}/include"
+  "include/"
 )
 
 find_package(Catch2 3 REQUIRED)
@@ -211,4 +201,5 @@ target_link_libraries(
 target_link_libraries(
   benchmark
   PRIVATE forfun
+  PRIVATE forfun_sorting
 )
