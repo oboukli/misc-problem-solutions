@@ -8,18 +8,17 @@ on:
     branches:
       - main
 
-env:
-  BUILD_DIR: ${{ github.workspace }}/build
-  CONFIG: Debug
-
 permissions: {}
 
 jobs:
-  windows_vcpp:
-    name: Build and test on Windows with VC++
+  windows_msvc:
+    name: Build and test on Windows with MSVC
     env:
-      CMAKE_CONFIGURE_PRESET_NAME: x64-debug
-      CMAKE_BUILD_PRESET_NAME: windows-x64-debug
+      CONFIGURE_PRESET_NAME: windows-x64
+      DEBUG_BUILD_PRESET_NAME: windows-x64-debug
+      RELEASE_BUILD_PRESET_NAME: windows-x64-release
+      DEBUG_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
+      RELEASE_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
     runs-on: windows-2022
 
     steps:
@@ -56,13 +55,19 @@ jobs:
       - name: Configure CMake
         run: >-
           cmake
-          --preset "${{ env.CMAKE_CONFIGURE_PRESET_NAME }}"
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
-      - name: Build
+      - name: Build for testing
         run: >-
           cmake
           --build
-          --preset "${{ env.CMAKE_BUILD_PRESET_NAME }}"
+          --preset '${{ env.DEBUG_BUILD_PRESET_NAME }}'
+
+      - name: Build for benchmarking
+        run: >-
+          cmake
+          --build
+          --preset '${{ env.RELEASE_BUILD_PRESET_NAME }}'
 
       - name: Run tests
         run: >-
@@ -70,7 +75,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
           --success
-        working-directory: ${{ github.workspace }}\out\build\${{ env.CMAKE_CONFIGURE_PRESET_NAME }}\${{ env.CONFIG }}
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
@@ -78,13 +83,24 @@ jobs:
           --durations yes
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
-        working-directory: ${{ github.workspace }}\out\build\${{ env.CMAKE_CONFIGURE_PRESET_NAME }}\${{ env.CONFIG }}
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}
 
   linux:
     name: Build and test on Ubuntu
+    env:
+      CONFIGURE_PRESET_NAME: generic
+      DEBUG_BUILD_PRESET_NAME: generic-debug
+      RELEASE_BUILD_PRESET_NAME: generic-release
+      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Debug
+      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Release
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Install Ninja
+        run: |-
+          sudo apt-get update
+          sudo apt-get install ninja-build
+
       - name: Check out repository
         uses: actions/checkout@v4
         with:
@@ -115,18 +131,23 @@ jobs:
               'vcpkg/ports/nanobench/vcpkg.json'
             ) }}
 
-      - name: Configure CMake
+      - name: Configure CMake for testing
         run: >-
           cmake
-          -B "${{ env.BUILD_DIR }}"
-          -DBUILD_SHARED_LIBS=TRUE
-          -DCMAKE_BUILD_TYPE="${{ env.CONFIG }}"
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+          -DCMAKE_BUILD_TYPE='${{ env.CONFIG }}'
 
-      - name: Build
+      - name: Build for testing
         run: >-
           cmake
-          --build "${{ env.BUILD_DIR }}"
-          --config "${{ env.CONFIG }}"
+          --build
+          --preset '${{ env.DEBUG_BUILD_PRESET_NAME }}'
+
+      - name: Build for benchmarking
+        run: >-
+          cmake
+          --build
+          --preset '${{ env.RELEASE_BUILD_PRESET_NAME }}'
 
       - name: Run tests
         run: >-
@@ -134,7 +155,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
           --success
-        working-directory: ${{ env.BUILD_DIR }}
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
@@ -142,4 +163,4 @@ jobs:
           --durations yes
           --reporter console::out=-::colour-mode=ansi
           --rng-seed 1654047489
-        working-directory: ${{ env.BUILD_DIR }}
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}

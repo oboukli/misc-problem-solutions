@@ -8,14 +8,13 @@ on:
     branches:
       - main
 
-env:
-  build: ${{ github.workspace }}/build
-  config: Debug
-
 permissions: {}
 
 jobs:
   analyze:
+    env:
+      BUILD: ${{ github.workspace }}/build
+      CONFIG: Debug
     permissions:
       contents: read
       security-events: write
@@ -55,7 +54,13 @@ jobs:
             ) }}
 
       - name: Configure CMake
-        run: cmake -B "${{ env.build }}" -DCMAKE_BUILD_TYPE="${{ env.config }}"
+        env:
+          CMAKE_CONFIGURE_PRESET_NAME: windows-x64
+        run: >-
+          cmake
+          -B '${{ env.BUILD }}'
+          --preset '${{ env.CMAKE_CONFIGURE_PRESET_NAME }}'
+          -DCMAKE_BUILD_TYPE='${{ env.CONFIG }}'
 
       - name: Initialize MSVC Code Analysis
         uses: microsoft/msvc-code-analysis-action@24c285ab36952c9e9182f4b78dfafbac38a7e5ee
@@ -63,8 +68,8 @@ jobs:
         env:
           CL: /DCATCH_CONFIG_EXPERIMENTAL_STATIC_ANALYSIS_SUPPORT %CL%
         with:
-          buildConfiguration: ${{ env.config }}
-          cmakeBuildDirectory: ${{ env.build }}
+          buildConfiguration: ${{ env.CONFIG }}
+          cmakeBuildDirectory: ${{ env.BUILD }}
           ruleset: NativeRecommendedRules.ruleset
 
       - name: Upload SARIF to GitHub
