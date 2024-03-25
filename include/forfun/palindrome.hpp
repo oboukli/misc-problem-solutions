@@ -127,7 +127,11 @@ namespace stl_bloated {
 is_palindrome(std::string_view const& s) noexcept -> bool
 {
     return std::equal(
-        s.cbegin(), std::next(s.cbegin(), s.size() / 2), s.crbegin());
+        s.cbegin(),
+        std::next(
+            s.cbegin(),
+            static_cast<std::string_view::difference_type>(s.size() / 2)),
+        s.crbegin());
 }
 
 namespace {
@@ -144,7 +148,9 @@ is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(),
-        std::next(s.cbegin(), s.size() / 2),
+        std::next(
+            s.cbegin(),
+            static_cast<std::string_view::difference_type>(s.size() / 2)),
         s.crbegin(),
         equal_case_insensitive);
 }
