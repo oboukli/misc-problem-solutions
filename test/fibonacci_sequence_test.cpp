@@ -19,9 +19,10 @@ constexpr auto const dummy_noexcept_lambda
     = [](int const n, std::vector<int>& state) noexcept { state.push_back(n); };
 
 // clang-format off
-constexpr auto const dummy_throwing_lambda
-    = []([[maybe_unused]] int const n,
-        [[maybe_unused]] std::vector<int>& state) noexcept(false) {};
+constexpr auto const dummy_throwing_lambda = [](
+    [[maybe_unused]] int const n,
+    [[maybe_unused]] std::vector<int>& state
+) noexcept(false) {};
 // clang-format on
 
 void dummy_noexcept_func() noexcept

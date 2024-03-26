@@ -98,8 +98,8 @@ is_palindrome(std::string_view const& s) noexcept
 
     for (auto lower{s.cbegin()}; lower < mid; ++lower)
     {
-        if (std::tolower(static_cast<unsigned char>((*lower)))
-            != std::tolower(static_cast<unsigned char>((*upper))))
+        if (std::tolower(static_cast<unsigned char>(*lower))
+            != std::tolower(static_cast<unsigned char>(*upper)))
         {
             return false;
         }
