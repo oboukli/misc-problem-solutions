@@ -15,9 +15,17 @@
 #include "forfun/palindrome.h"
 #include "forfun/palindrome.hpp"
 
+#ifdef _MSC_VER
+// Compiler known issue
+// warning C4455: 'operator ""sv': literal suffix identifiers that do not start
+// with an underscore are reserved
+#pragma warning(suppress : C4455)
+#endif
+using std::string_view_literals::operator""sv;
+
 inline constexpr std::string_view const palindrome{
     "oooooooooooooooooooooooooooooooooooooooooooooooooo"
-    "oooooooooooooooooooooooooooooooooooooooooooooooooo"};
+    "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv};
 
 TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]")
 {

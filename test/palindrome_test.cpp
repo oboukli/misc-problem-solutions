@@ -29,6 +29,15 @@ is_palindrome_ci_wrapper(std::string_view const& s) noexcept
 
 } // namespace
 
+#ifdef _MSC_VER
+// Compiler known issue
+// warning C4455: 'operator ""sv': literal suffix identifiers that do not start
+// with an underscore are reserved
+#pragma warning(push)
+#pragma warning(suppress : C4455)
+#endif
+using std::string_view_literals::operator""sv;
+
 TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
@@ -42,17 +51,17 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Positive")
     {
         std::string_view s{GENERATE(
-            "",
-            "\xb8Y\xb8",
-            "aa",
-            "aba",
-            "a b a",
-            "101",
-            "tattarrattat",
-            "ABBA",
-            "Xyz 8 zyX",
-            "step on no pets",
-            "19/9/91")};
+            ""sv,
+            "\xb8Y\xb8"sv,
+            "aa"sv,
+            "aba"sv,
+            "a b a"sv,
+            "101"sv,
+            "tattarrattat"sv,
+            "ABBA"sv,
+            "Xyz 8 zyX"sv,
+            "step on no pets"sv,
+            "19/9/91"sv)};
 
         CAPTURE(s);
 
@@ -62,16 +71,16 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Negative")
     {
         std::string_view s{GENERATE(
-            "Dummy",
-            "dummy",
-            "Aa",
-            "Aab4'{x{'4BaA",
-            "Abba",
-            "Tattarrattat",
-            "Malayalam"
-            "Xyz 8 zYX",
-            "Step on no pets",
-            "12/20/2021")};
+            "Dummy"sv,
+            "dummy"sv,
+            "Aa"sv,
+            "Aab4'{x{'4BaA"sv,
+            "Abba"sv,
+            "Tattarrattat"sv,
+            "Malayalam"sv,
+            "Xyz 8 zYX"sv,
+            "Step on no pets"sv,
+            "12/20/2021"sv)};
 
         CAPTURE(s);
 
@@ -90,21 +99,21 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Positive")
     {
         std::string_view s{GENERATE(
-            "",
-            "\xb8Y\xb8",
-            "aa",
-            "aba",
-            "a b a",
-            "101",
-            "Malayalam",
-            "tattarrattat",
-            "Tattarrattat",
-            "Aa",
-            "a b A",
-            "tattarratTat",
-            "Aab4'{x{'4BaA",
-            "Step on no pets",
-            "19/9/91")};
+            ""sv,
+            "\xb8Y\xb8"sv,
+            "aa"sv,
+            "aba"sv,
+            "a b a"sv,
+            "101"sv,
+            "Malayalam"sv,
+            "tattarrattat"sv,
+            "Tattarrattat"sv,
+            "Aa"sv,
+            "a b A"sv,
+            "tattarratTat"sv,
+            "Aab4'{x{'4BaA"sv,
+            "Step on no pets"sv,
+            "19/9/91"sv)};
 
         CAPTURE(s);
 
@@ -114,13 +123,13 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Negative")
     {
         std::string_view s{GENERATE(
-            "Dummy",
-            "dummy",
-            "42",
-            "12/20/2021",
-            "Step on no pets!",
-            " 010",
-            "Cat")};
+            "Dummy"sv,
+            "dummy"sv,
+            "42"sv,
+            "12/20/2021"sv,
+            "Step on no pets!"sv,
+            " 010"sv,
+            "Cat"sv)};
 
         CAPTURE(s);
 
