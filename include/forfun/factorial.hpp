@@ -10,12 +10,14 @@
 #ifndef FORFUN_FACTORIAL_HPP_
 #define FORFUN_FACTORIAL_HPP_
 
-#include <algorithm>
+#include <algorithm> // IWYU pragma: keep
 #include <cassert>
 #include <concepts>
+#include <type_traits> // IWYU pragma: keep
+#if __cpp_lib_ranges_fold >= 202207L
+#include <functional>
 #include <ranges>
-#include <type_traits>
-#include <utility>
+#endif // __cpp_lib_ranges_fold >= 202207L
 
 #include "common.hpp"
 

@@ -19,6 +19,7 @@
 #define FORFUN_FIRST_MISSING_POSITIVE_HPP_
 
 #include <algorithm>
+#include <concepts>
 #include <iterator>
 
 namespace forfun::first_missing_positive {

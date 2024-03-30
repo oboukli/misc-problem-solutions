@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <iterator>
 #include <string_view>
 
 namespace forfun::palindrome {
