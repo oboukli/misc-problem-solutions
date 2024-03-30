@@ -37,7 +37,7 @@ template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
-constexpr inline void product_except_self(
+constexpr void product_except_self(
     InItr const first,
     InItr const last,
     OutItr const products_first,
@@ -74,7 +74,7 @@ template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
-constexpr inline void product_except_self(
+constexpr void product_except_self(
     InItr const first,
     InItr const last,
     OutItr const products_first,

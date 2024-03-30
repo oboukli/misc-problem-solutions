@@ -34,10 +34,10 @@ public:
 
     std::vector<Coord> coords;
 
-    bool ping(Area const area) const;
+    [[nodiscard]] auto ping(Area area) const -> bool;
 };
 
-int count_ships(Sonar const& sonar, Area const area);
+auto count_ships(Sonar const& sonar, Area area) -> int;
 
 } // namespace forfun::sonar
 

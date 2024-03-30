@@ -37,11 +37,11 @@ struct CacheItem {
 /// Least recently used (LRU) cache.
 class LRUCache final {
 public:
-    explicit LRUCache(std::size_t const capacity) noexcept;
+    explicit LRUCache(std::size_t capacity) noexcept;
 
-    [[nodiscard]] int get(std::size_t const key) noexcept;
+    [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
-    void put(std::size_t const key, int const value) noexcept;
+    void put(std::size_t key, int value) noexcept;
 
 private:
     std::unique_ptr<CacheItem[]> cache_{};
@@ -58,13 +58,13 @@ namespace stl {
 /// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
 class LRUCache final {
 public:
-    explicit LRUCache(std::size_t const capacity) noexcept;
+    explicit LRUCache(std::size_t capacity) noexcept;
 
     ~LRUCache() = default;
 
-    [[nodiscard]] int get(std::size_t const key) noexcept;
+    [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
-    void put(std::size_t const key, int const value) noexcept;
+    void put(std::size_t key, int value) noexcept;
 
 private:
     using cache_item_t = std::pair<std::size_t, int>;

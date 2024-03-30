@@ -15,8 +15,8 @@
 namespace forfun::contains_duplicate {
 
 template <std::contiguous_iterator Iter>
-[[nodiscard]] constexpr inline bool
-contains_duplicate(Iter it, Iter const last) noexcept
+[[nodiscard]] constexpr auto
+contains_duplicate(Iter it, Iter const last) noexcept -> bool
 {
     for (; it != last; ++it)
     {

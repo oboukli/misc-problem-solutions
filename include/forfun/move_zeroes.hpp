@@ -20,7 +20,7 @@ namespace sol1 {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
+constexpr void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
     using ValType = std::iter_value_t<RandomIt>;
 
@@ -41,7 +41,7 @@ namespace sol2 {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
+constexpr void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
     using ValType = std::iter_value_t<RandomIt>;
 
@@ -67,7 +67,7 @@ namespace stl {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-constexpr inline void move_zeroes(RandomIt it, RandomIt const end) noexcept
+constexpr void move_zeroes(RandomIt it, RandomIt const end) noexcept
 {
     using ValType = std::iter_value_t<RandomIt>;
 
