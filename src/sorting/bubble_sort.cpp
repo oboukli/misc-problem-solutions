@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/sorting/bubble_sort.hpp"
+#include "forfun/sorting/bubble_sort.hpp" // IWYU pragma: keep

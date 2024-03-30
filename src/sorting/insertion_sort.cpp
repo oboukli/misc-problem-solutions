@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/sorting/insertion_sort.hpp"
+#include "forfun/sorting/insertion_sort.hpp" // IWYU pragma: keep

@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/sorting/quicksort.hpp"
+#include "forfun/sorting/quicksort.hpp" // IWYU pragma: keep
