@@ -9,17 +9,13 @@
 
 #include <concepts>
 
-namespace forfun::common {
-
-namespace concepts {
+namespace forfun::common::concepts {
 
 template <typename T>
 concept addition_unpromoted = std::integral<T> and requires(T n) {
     { n + n } -> std::same_as<T>;
 };
 
-} // namespace concepts
-
-} // namespace forfun::common
+} // namespace forfun::common::concepts
 
 #endif // FORFUN_COMMON_HPP_

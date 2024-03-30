@@ -16,9 +16,7 @@
 #include <string_view>
 #include <vector>
 
-namespace forfun::trie {
-
-namespace experimental {
+namespace forfun::trie::experimental {
 
 template <std::integral CharT = char>
 struct TrieNode final {
@@ -82,8 +80,6 @@ void insert(T& root, StringViewT<T> const& word) noexcept
     insert(*parent, word.substr(LenT{1}));
 }
 
-} // namespace experimental
-
-} // namespace forfun::trie
+} // namespace forfun::trie::experimental
 
 #endif // FORFUN_TRIE_HPP_
