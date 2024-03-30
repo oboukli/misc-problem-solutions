@@ -28,8 +28,7 @@ namespace {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-constexpr inline void
-quasi_sort(RandomIt const first, RandomIt const src) noexcept
+constexpr void quasi_sort(RandomIt const first, RandomIt const src) noexcept
 {
     using ValType = std::iter_value_t<RandomIt>;
 
@@ -52,8 +51,9 @@ namespace base {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-[[nodiscard]] constexpr inline std::iter_value_t<RandomIt>
+[[nodiscard]] constexpr auto
 lowest_missing(RandomIt const begin, RandomIt const end) noexcept
+    -> std::iter_value_t<RandomIt>
 {
     using ValType = std::iter_value_t<RandomIt>;
 
@@ -96,8 +96,9 @@ namespace fast {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-[[nodiscard]] constexpr inline std::iter_value_t<RandomIt>
+[[nodiscard]] constexpr auto
 lowest_missing(RandomIt const begin, RandomIt const end) noexcept
+    -> std::iter_value_t<RandomIt>
 {
     using ValType = std::iter_value_t<RandomIt>;
 

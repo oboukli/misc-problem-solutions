@@ -27,7 +27,7 @@ namespace iterative {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
 /// @note For large values of @p n, the result may overflow the return type.
-[[nodiscard]] constexpr inline auto
+[[nodiscard]] constexpr auto
 factorial(std::integral auto const n) noexcept -> decltype(n)
 {
     using T = std::remove_const_t<decltype(n)>;
@@ -49,7 +49,7 @@ namespace recursive {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
 template <common::concepts::addition_unpromoted T>
-[[nodiscard]] constexpr inline T factorial(T const n) noexcept
+[[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
 {
     assert(n >= T{0});
 

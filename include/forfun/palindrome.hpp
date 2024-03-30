@@ -24,8 +24,8 @@ namespace raw {
     __attribute__((no_sanitize("unsigned-integer-overflow"))), \
     apply_to = function)
 #endif // __clang__
-[[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept
+[[nodiscard]] constexpr auto
+is_palindrome(std::string_view const& s) noexcept -> bool
 {
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
@@ -49,7 +49,8 @@ is_palindrome(std::string_view const& s) noexcept
     __attribute__((no_sanitize("unsigned-integer-overflow"))), \
     apply_to = function)
 #endif // __clang__
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+[[nodiscard]] inline auto
+is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
@@ -73,8 +74,8 @@ is_palindrome(std::string_view const& s) noexcept
 
 namespace fast {
 
-[[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept
+[[nodiscard]] constexpr auto
+is_palindrome(std::string_view const& s) noexcept -> bool
 {
     auto upper{s.crbegin()};
     auto const mid{s.cbegin() + (s.length() / 2)};
@@ -92,7 +93,8 @@ is_palindrome(std::string_view const& s) noexcept
     return true;
 }
 
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+[[nodiscard]] inline auto
+is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
     auto upper{s.crbegin()};
     auto const mid{s.cbegin() + (s.length() / 2)};
@@ -117,23 +119,24 @@ namespace stl_bloated {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
-[[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept
+[[nodiscard]] constexpr auto
+is_palindrome(std::string_view const& s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(), std::next(s.cbegin(), s.size() / 2), s.crbegin());
 }
 
 namespace {
-[[nodiscard]] inline bool
-equal_case_insensitive(char const a, char const b) noexcept
+[[nodiscard]] inline auto
+equal_case_insensitive(char const a, char const b) noexcept -> bool
 {
     return std::tolower(static_cast<unsigned char>(a))
         == std::tolower(static_cast<unsigned char>(b));
 }
 } // namespace
 
-[[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
+[[nodiscard]] inline auto
+is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(),
@@ -148,8 +151,8 @@ namespace stl_fast {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
-[[nodiscard]] constexpr inline bool
-is_palindrome(std::string_view const& s) noexcept
+[[nodiscard]] constexpr auto
+is_palindrome(std::string_view const& s) noexcept -> bool
 {
     auto const begin{s.cbegin()};
     return std::equal(begin, begin + (s.size() / 2), s.crbegin());

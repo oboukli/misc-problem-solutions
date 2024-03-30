@@ -17,7 +17,7 @@ namespace forfun::fibonacci {
 namespace iterative {
 
 template <common::concepts::addition_unpromoted T>
-[[nodiscard]] constexpr inline T fib(T const n) noexcept
+[[nodiscard]] constexpr auto fib(T const n) noexcept -> T
 {
     T a{0};
 
@@ -36,7 +36,7 @@ template <common::concepts::addition_unpromoted T>
 namespace recursive {
 
 template <common::concepts::addition_unpromoted T>
-[[nodiscard]] constexpr inline T fib(T const n) noexcept
+[[nodiscard]] constexpr auto fib(T const n) noexcept -> T
 {
     if (n <= T{2})
     {

@@ -22,11 +22,11 @@
 namespace forfun::two_sum {
 
 template <std::random_access_iterator RandomIt>
-[[nodiscard]] constexpr inline std::array<std::iter_difference_t<RandomIt>, 2>
-two_sum(
+[[nodiscard]] constexpr auto two_sum(
     RandomIt const first,
     RandomIt const end,
     std::iter_value_t<RandomIt> const target) noexcept
+    -> std::array<std::iter_difference_t<RandomIt>, 2>
 {
     for (auto it_i{first}; it_i != end; ++it_i)
     {
