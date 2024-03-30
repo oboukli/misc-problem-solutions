@@ -48,7 +48,7 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
         "CMAKE_XCODE_XCCONFIG": {
