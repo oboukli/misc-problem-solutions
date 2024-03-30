@@ -77,10 +77,12 @@ namespace fast {
 [[nodiscard]] constexpr auto
 is_palindrome(std::string_view const& s) noexcept -> bool
 {
-    auto upper{s.crbegin()};
-    auto const mid{s.cbegin() + (s.length() / 2)};
+    using const_itr = std::string_view::const_iterator;
 
-    for (auto lower{s.cbegin()}; lower < mid; ++lower)
+    auto upper{s.crbegin()};
+    const_itr const mid{s.cbegin() + (s.length() / 2)};
+
+    for (const_itr lower{s.cbegin()}; lower < mid; ++lower)
     {
         if ((*lower) != (*upper))
         {
@@ -96,10 +98,12 @@ is_palindrome(std::string_view const& s) noexcept -> bool
 [[nodiscard]] inline auto
 is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
-    auto upper{s.crbegin()};
-    auto const mid{s.cbegin() + (s.length() / 2)};
+    using const_itr = std::string_view::const_iterator;
 
-    for (auto lower{s.cbegin()}; lower < mid; ++lower)
+    auto upper{s.crbegin()};
+    const_itr const mid{s.cbegin() + (s.length() / 2)};
+
+    for (const_itr lower{s.cbegin()}; lower < mid; ++lower)
     {
         if (std::tolower(static_cast<unsigned char>(*lower))
             != std::tolower(static_cast<unsigned char>(*upper)))
@@ -154,7 +158,7 @@ namespace stl_fast {
 [[nodiscard]] constexpr auto
 is_palindrome(std::string_view const& s) noexcept -> bool
 {
-    auto const begin{s.cbegin()};
+    std::string_view::const_iterator const begin{s.cbegin()};
     return std::equal(begin, begin + (s.size() / 2), s.crbegin());
 }
 
