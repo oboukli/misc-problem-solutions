@@ -22,7 +22,7 @@ namespace raw {
 #pragma clang attribute push( \
     __attribute__((no_sanitize("unsigned-integer-overflow"))), \
     apply_to = function)
-#endif /* __clang__ */
+#endif // __clang__
 [[nodiscard]] constexpr inline bool
 is_palindrome(std::string_view const& s) noexcept
 {
@@ -41,13 +41,13 @@ is_palindrome(std::string_view const& s) noexcept
 }
 #if __clang__
 #pragma clang attribute pop
-#endif /* __clang__ */
+#endif // __clang__
 
 #if __clang__
 #pragma clang attribute push( \
     __attribute__((no_sanitize("unsigned-integer-overflow"))), \
     apply_to = function)
-#endif /* __clang__ */
+#endif // __clang__
 [[nodiscard]] inline bool is_palindrome_ci(std::string_view const& s) noexcept
 {
     auto const end{s.length() - 1};
@@ -66,7 +66,7 @@ is_palindrome(std::string_view const& s) noexcept
 }
 #if __clang__
 #pragma clang attribute pop
-#endif /* __clang__ */
+#endif // __clang__
 
 } // namespace raw
 
