@@ -21,7 +21,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array<int, 0> const expected_output{};
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 0);
+        STATIC_CHECK(test_input.empty());
 
         STATIC_REQUIRE(test_input == expected_output);
     }

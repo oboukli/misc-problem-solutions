@@ -22,7 +22,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 0);
+        STATIC_CHECK(test_input.empty());
 
         STATIC_REQUIRE(test_input == expected_output);
     }
