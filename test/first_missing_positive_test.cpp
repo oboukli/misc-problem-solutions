@@ -28,7 +28,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        CHECK(test_input.size() == 0);
+        CHECK(test_input.empty());
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end()) == 1);
@@ -147,7 +147,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        STATIC_CHECK(test_input.size() == 0);
+        STATIC_CHECK(test_input.empty());
 
         STATIC_REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end()) == 1);

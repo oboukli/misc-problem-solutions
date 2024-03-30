@@ -25,7 +25,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 0> expected_output{};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 0);
+        CHECK(test_input.empty());
 
         REQUIRE(test_input == expected_output);
     }
