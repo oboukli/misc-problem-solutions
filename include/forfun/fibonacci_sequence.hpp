@@ -27,7 +27,7 @@ concept noexcept_callable
 namespace slow {
 
 template <std::integral T, typename State, noexcept_callable<T, State&> Func>
-void fib_seq(T const max, Func&& func, State& state) noexcept
+void fib_seq(T const max, Func func, State& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
@@ -44,7 +44,7 @@ void fib_seq(T const max, Func&& func, State& state) noexcept
 namespace fast {
 
 template <std::integral T, typename State, noexcept_callable<T, State&> Func>
-void fib_seq(T const max, Func&& func, State& state) noexcept
+void fib_seq(T const max, Func func, State& state) noexcept
 {
     for (T i{0}, j{1}; i <= max;)
     {
@@ -60,7 +60,7 @@ void fib_seq(T const max, Func&& func, State& state) noexcept
 namespace creel {
 
 template <std::integral T, typename State, noexcept_callable<T, State&> Func>
-void fib_seq(T const max, Func&& func, State& state) noexcept
+void fib_seq(T const max, Func func, State& state) noexcept
 {
     // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
     for (T i{0}, j{1}; i <= max;)
