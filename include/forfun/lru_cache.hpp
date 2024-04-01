@@ -60,8 +60,6 @@ class LRUCache final {
 public:
     explicit LRUCache(std::size_t capacity) noexcept;
 
-    ~LRUCache() = default;
-
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
     void put(std::size_t key, int value) noexcept;
