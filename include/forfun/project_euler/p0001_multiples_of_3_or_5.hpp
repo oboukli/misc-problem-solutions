@@ -18,18 +18,18 @@
 
 namespace forfun::project_euler::multiples_of_3_or_5 {
 
-[[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept;
+[[nodiscard]] constexpr auto find_sum_mult_three_five(int n) noexcept -> int;
 
 namespace detail {
 
-[[nodiscard]] inline constexpr int sum_2x(int const n, int const q) noexcept
+[[nodiscard]] constexpr auto sum_2x(int const n, int const q) noexcept -> int
 {
     return (n / q) * (q + n - (n % q));
 }
 
 } // namespace detail
 
-[[nodiscard]] constexpr int find_sum_mult_three_five(int n) noexcept
+[[nodiscard]] constexpr auto find_sum_mult_three_five(int n) noexcept -> int
 {
     using detail::sum_2x;
 
