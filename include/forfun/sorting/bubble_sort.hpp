@@ -18,7 +18,7 @@ namespace forfun::sorting {
 namespace plain {
 
 template <std::contiguous_iterator Iter>
-constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
+constexpr void bubble_sort(Iter const begin, Iter end) noexcept
 {
     if (begin == end)
     {
@@ -50,7 +50,7 @@ constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
 namespace stl {
 
 template <std::contiguous_iterator Iter>
-constexpr inline void bubble_sort(Iter const begin, Iter end) noexcept
+constexpr void bubble_sort(Iter const begin, Iter end) noexcept
 {
     using DiffType = std::iter_difference_t<Iter>;
 

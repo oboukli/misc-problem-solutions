@@ -7,8 +7,8 @@
 /// Problem source:
 /// https://en.wikipedia.org/wiki/Insertion_sort
 
-#ifndef FORFUN_SORTING_INSERTION_HPP_
-#define FORFUN_SORTING_INSERTION_HPP_
+#ifndef FORFUN_SORTING_INSERTION_SORT_HPP
+#define FORFUN_SORTING_INSERTION_SORT_HPP
 
 #include <algorithm>
 #include <iterator>
@@ -16,7 +16,7 @@
 namespace forfun::sorting {
 
 template <std::contiguous_iterator Iter>
-constexpr inline void insertion_sort(Iter const begin, Iter const end) noexcept
+constexpr void insertion_sort(Iter const begin, Iter const end) noexcept
 {
     using DiffType = std::iter_difference_t<Iter>;
 
@@ -34,4 +34,4 @@ constexpr inline void insertion_sort(Iter const begin, Iter const end) noexcept
 
 } // namespace forfun::sorting
 
-#endif // FORFUN_SORTING_INSERTION_HPP_
+#endif // FORFUN_SORTING_INSERTION_SORT_HPP
