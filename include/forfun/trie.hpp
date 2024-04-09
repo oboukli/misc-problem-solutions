@@ -12,7 +12,6 @@
 
 #include <concepts>
 #include <memory>
-#include <string>
 #include <string_view>
 #include <vector>
 
@@ -22,11 +21,6 @@ template <std::integral CharT = char>
 struct TrieNode final {
     using children_t = std::vector<std::unique_ptr<TrieNode>>;
     using value_type = CharT;
-    using traits_type = std::char_traits<CharT>;
-
-    children_t children{};
-    CharT value{};
-    bool is_terminal{false};
 
     explicit constexpr TrieNode(CharT const value_) noexcept : value{value_}
     {
@@ -37,6 +31,12 @@ struct TrieNode final {
         value{value_}, is_terminal{is_terminal_}
     {
     }
+
+    // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
+    children_t children{};
+    CharT value{};
+    bool is_terminal{false};
+    // NOLINTEND(misc-non-private-member-variables-in-classes)
 };
 
 template <typename T>
@@ -44,7 +44,7 @@ using StringViewT = std::basic_string_view<typename T::value_type>;
 
 template <typename T>
     requires std::same_as<T, TrieNode<typename T::value_type>>
-void insert(T& root, StringViewT<T> const& word) noexcept
+auto insert(T& root, StringViewT<T> const& word) noexcept -> void
 {
     using LenT = StringViewT<T>::size_type;
 
