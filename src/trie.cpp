@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/trie.hpp"
+#include "forfun/trie.hpp" // IWYU pragma: keep
