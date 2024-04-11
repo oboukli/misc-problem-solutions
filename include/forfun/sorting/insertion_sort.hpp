@@ -16,17 +16,20 @@
 namespace forfun::sorting {
 
 template <std::contiguous_iterator Iter>
-constexpr void insertion_sort(Iter const begin, Iter const end) noexcept
+constexpr auto insertion_sort(Iter const begin, Iter const end) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 
     if (begin != end)
     {
-        for (Iter i{begin + DiffType{1}}; i != end; ++i)
+        for (Iter it_i{begin + DiffType{1}}; it_i != end; ++it_i)
         {
-            for (Iter j{i}; j != begin && (*j < *(j - DiffType{1})); --j)
+            // clang-format off
+            for (Iter it_j{it_i};
+                it_j != begin && (*it_j < *(it_j - DiffType{1})); --it_j)
+            // clang-format on
             {
-                std::iter_swap(j, j - DiffType{1});
+                std::iter_swap(it_j, it_j - DiffType{1});
             }
         }
     }

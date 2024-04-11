@@ -18,26 +18,28 @@ namespace forfun::sorting {
 namespace plain {
 
 template <std::contiguous_iterator Iter>
-constexpr void bubble_sort(Iter const begin, Iter end) noexcept
+constexpr auto bubble_sort(Iter const begin, Iter end) noexcept -> void
 {
     if (begin == end)
     {
         return;
     }
 
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     bool f;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
         --end;
         f = false;
-        for (Iter i{begin}; i != end; ++i)
+        for (Iter it_i{begin}; it_i != end; ++it_i)
         {
-            auto const ii{i + std::iter_difference_t<Iter>{1}};
-            if (*i > *ii)
+            auto const it_ii{it_i + std::iter_difference_t<Iter>{1}};
+            if (*it_i > *it_ii)
             {
-                auto const tmp{*ii};
-                *ii = *i;
-                *i = tmp;
+                auto const tmp{*it_ii};
+                *it_ii = *it_i;
+                *it_i = tmp;
 
                 f = true;
             }
@@ -50,7 +52,7 @@ constexpr void bubble_sort(Iter const begin, Iter end) noexcept
 namespace stl {
 
 template <std::contiguous_iterator Iter>
-constexpr void bubble_sort(Iter const begin, Iter end) noexcept
+constexpr auto bubble_sort(Iter const begin, Iter end) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 
@@ -59,16 +61,18 @@ constexpr void bubble_sort(Iter const begin, Iter end) noexcept
         return;
     }
 
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
     bool f;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
         --end;
         f = false;
-        for (Iter i{begin}; i != end; ++i)
+        for (Iter it_i{begin}; it_i != end; ++it_i)
         {
-            if (*i > *(i + DiffType{1}))
+            if (*it_i > *(it_i + DiffType{1}))
             {
-                std::iter_swap(i, i + DiffType{1});
+                std::iter_swap(it_i, it_i + DiffType{1});
                 f = true;
             }
         }
