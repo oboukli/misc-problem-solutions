@@ -21,34 +21,34 @@ template <std::contiguous_iterator Iter>
 [[nodiscard]] constexpr auto
 partition(Iter const first, Iter const last) noexcept -> Iter
 {
-    auto i{first};
+    auto it_i{first};
 
     {
         using DiffType = std::iter_difference_t<Iter>;
 
         auto const pivot{*first};
-        for (auto j{last - DiffType{1}}; j != i;)
+        for (auto it_j{last - DiffType{1}}; it_j != it_i;)
         {
-            if (*j < pivot)
+            if (*it_j < pivot)
             {
-                std::iter_swap(++i, j);
+                std::iter_swap(++it_i, it_j);
             }
             else
             {
-                --j;
+                --it_j;
             }
         }
     }
 
-    std::iter_swap(first, i);
+    std::iter_swap(first, it_i);
 
-    return i;
+    return it_i;
 }
 
 } // namespace detail
 
 template <std::contiguous_iterator Iter>
-constexpr void quicksort(Iter const first, Iter const last) noexcept
+constexpr auto quicksort(Iter const first, Iter const last) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 

@@ -17,8 +17,8 @@
 
 TEST_CASE("quicksort benchmarking", "[benchmark][sorting][quicksort]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::sorting;
+
     using ContainerType = std::array<int, 16>;
     using Itr = ContainerType::iterator;
 
