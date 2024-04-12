@@ -16,7 +16,6 @@
 
 TEST_CASE("gcd benchmarking", "[benchmark][gcd]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::gcd::euclid::recursive;
 
     ankerl::nanobench::Bench()
@@ -27,8 +26,8 @@ TEST_CASE("gcd benchmarking", "[benchmark][gcd]")
         .run(
             NAMEOF(gcd).c_str(),
             []() {
-                int const volatile m{1 << 25};
-                int const volatile n{(1 << 15) * 59'049};
+                int const volatile m{1U << 25U};
+                int const volatile n{(1U << 15U) * 59'049};
                 ankerl::nanobench::doNotOptimizeAway(gcd(m, n));
             })
 
