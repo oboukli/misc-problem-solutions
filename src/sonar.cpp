@@ -11,7 +11,7 @@
 
 namespace forfun::sonar {
 
-int count_ships(Sonar const& sonar, Area const area)
+auto count_ships(Sonar const& sonar, Area const area) noexcept -> int
 {
     if (!sonar.ping(area))
     {
@@ -36,45 +36,45 @@ int count_ships(Sonar const& sonar, Area const area)
         count_ships(
             sonar,
             {
-                area.top,
-                mh0,
-                area.left,
-                mw0,
+                .top = area.top,
+                .bottom = mh0,
+                .left = area.left,
+                .right = mw0,
             }
         ) +
         count_ships(
             sonar,
             {
-                area.top,
-                mh0,
-                mw1,
-                area.right,
+                .top = area.top,
+                .bottom = mh0,
+                .left = mw1,
+                .right = area.right,
             }
         ) +
         count_ships(
             sonar,
             {
-                mh1,
-                area.bottom,
-                area.left,
-                mw0,
+                .top = mh1,
+                .bottom = area.bottom,
+                .left = area.left,
+                .right = mw0,
             }
         ) +
         count_ships(
             sonar,
             {
-                mh1,
-                area.bottom,
-                mw1,
-                area.right,
+                .top = mh1,
+                .bottom = area.bottom,
+                .left = mw1,
+                .right = area.right,
             }
         );
     // clang-format on
 }
 
-bool Sonar::ping(Area const area) const
+auto Sonar::ping(Area const area) const noexcept -> bool
 {
-    return std::ranges::any_of(coords, [&area](Coord const& coord) {
+    return std::ranges::any_of(coords_, [&area](Coord const& coord) {
         return coord.x >= area.top && coord.x <= area.bottom
             && coord.y >= area.left && coord.y <= area.right;
     });
