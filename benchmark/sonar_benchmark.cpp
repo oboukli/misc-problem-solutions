@@ -4,8 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cstddef>
-
 #include <catch2/catch_test_macros.hpp>
 
 #include <nanobench.h>
@@ -16,10 +14,17 @@
 
 TEST_CASE("sonar benchmarking", "[benchmark][sonar]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::sonar;
 
-    Sonar const sonar{{{0, 7}, {2, 5}, {3, 3}, {4, 6}, {5, 2}}};
+    Sonar const sonar{{
+        // clang-format off
+        {.x = 0, .y = 7},
+        {.x = 2, .y = 5},
+        {.x = 3, .y = 3},
+        {.x = 4, .y = 6},
+        {.x = 5, .y = 2},
+        // clang-format on
+    }};
 
     ankerl::nanobench::Bench()
 
@@ -29,8 +34,8 @@ TEST_CASE("sonar benchmarking", "[benchmark][sonar]")
         .run(
             NAMEOF(count_ships).c_str(),
             [&sonar]() {
-                ankerl::nanobench::doNotOptimizeAway(
-                    count_ships(sonar, {0, 5, 2, 7}));
+                ankerl::nanobench::doNotOptimizeAway(count_ships(
+                    sonar, {.top = 0, .bottom = 5, .left = 2, .right = 7}));
             })
 
         ;

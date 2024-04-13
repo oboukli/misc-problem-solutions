@@ -14,6 +14,7 @@
 #ifndef FORFUN_SONAR_HPP_
 #define FORFUN_SONAR_HPP_
 
+#include <utility>
 #include <vector>
 
 namespace forfun::sonar {
@@ -32,12 +33,29 @@ public:
         int y{};
     };
 
-    std::vector<Coord> coords;
+private:
+    std::vector<Coord> coords_;
 
-    [[nodiscard]] auto ping(Area area) const -> bool;
+public:
+    Sonar(Sonar const&) = delete;
+
+    Sonar(Sonar&& rhs) = delete;
+
+    explicit Sonar(std::vector<Coord>&& coords) noexcept :
+        coords_(std::move(coords))
+    {
+    }
+
+    ~Sonar() = default;
+
+    auto operator=(Sonar const&) -> Sonar = delete;
+
+    auto operator=(Sonar&&) -> Sonar = delete;
+
+    [[nodiscard]] auto ping(Area area) const noexcept -> bool;
 };
 
-auto count_ships(Sonar const& sonar, Area area) -> int;
+auto count_ships(Sonar const& sonar, Area area) noexcept -> int;
 
 } // namespace forfun::sonar
 
