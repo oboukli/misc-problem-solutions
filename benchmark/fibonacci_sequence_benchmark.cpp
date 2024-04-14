@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <concepts>
 #include <cstdint>
 
 #include <catch2/catch_test_macros.hpp>

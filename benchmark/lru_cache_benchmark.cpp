@@ -8,11 +8,11 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <fmt/core.h>
+
 #include <nanobench.h>
 
 #include <nameof.hpp>
-
-#include <fmt/format.h>
 
 #include "forfun/lru_cache.hpp"
 

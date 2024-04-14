@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/first_missing_positive.hpp"
+#include "forfun/first_missing_positive.hpp" // IWYU pragma: keep
