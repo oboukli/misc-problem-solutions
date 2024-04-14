@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/fibonacci.hpp"
+#include "forfun/fibonacci.hpp" // IWYU pragma: keep

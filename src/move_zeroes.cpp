@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/move_zeroes.hpp"
+#include "forfun/move_zeroes.hpp" // IWYU pragma: keep

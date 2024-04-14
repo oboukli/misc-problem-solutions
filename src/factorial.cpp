@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/factorial.hpp"
+#include "forfun/factorial.hpp" // IWYU pragma: keep

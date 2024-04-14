@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/product_except_self.hpp"
+#include "forfun/product_except_self.hpp" // IWYU pragma: keep

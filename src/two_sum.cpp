@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/two_sum.hpp"
+#include "forfun/two_sum.hpp" // IWYU pragma: keep

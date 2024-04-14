@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/contains_duplicate.hpp"
+#include "forfun/contains_duplicate.hpp" // IWYU pragma: keep

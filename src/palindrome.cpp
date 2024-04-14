@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/palindrome.hpp"
+#include "forfun/palindrome.hpp" // IWYU pragma: keep

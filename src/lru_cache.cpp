@@ -7,6 +7,10 @@
 #include "forfun/lru_cache.hpp"
 
 #include <cassert>
+#include <cstddef>
+#include <cstdint>
+#include <iterator>
+#include <memory>
 
 namespace forfun::lrucache {
 
