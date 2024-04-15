@@ -90,7 +90,7 @@ TEMPLATE_TEST_CASE_SIG(
 
                 THEN("sequence is empty")
                 {
-                    REQUIRE(seq == std::vector<int>{});
+                    REQUIRE(seq.empty());
                 }
             }
         }
