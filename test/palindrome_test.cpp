@@ -53,7 +53,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        std::string_view s{GENERATE(
+        std::string_view const s{GENERATE(
             ""sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Negative")
     {
-        std::string_view s{GENERATE(
+        std::string_view const s{GENERATE(
             "Dummy"sv,
             "dummy"sv,
             "Aa"sv,
@@ -101,7 +101,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        std::string_view s{GENERATE(
+        std::string_view const s{GENERATE(
             ""sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
@@ -125,7 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Negative")
     {
-        std::string_view s{GENERATE(
+        std::string_view const s{GENERATE(
             "Dummy"sv,
             "dummy"sv,
             "42"sv,
