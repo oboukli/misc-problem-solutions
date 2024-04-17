@@ -8,9 +8,7 @@
 
 #include <cstdlib>
 
-namespace forfun::palindromic_number {
-
-namespace stl {
+namespace forfun::palindromic_number::stl {
 
 [[nodiscard]] bool is_palindrome(int const n) noexcept
 {
@@ -25,6 +23,4 @@ namespace stl {
     return n == nn;
 }
 
-} // namespace stl
-
-} // namespace forfun::palindromic_number
+} // namespace forfun::palindromic_number::stl
