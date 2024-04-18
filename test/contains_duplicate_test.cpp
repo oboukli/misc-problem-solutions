@@ -134,7 +134,7 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
 
     SECTION("Input is of four sorted unique elements")
     {
-        static constexpr std::array const nums{0.0f, 0.00000001f, 2.0f, 2.001f};
+        static constexpr std::array const nums{0.0F, 0.00000001F, 2.0F, 2.001F};
         static constexpr bool const expected{false};
 
         CAPTURE(nums);
@@ -147,7 +147,7 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
 
     SECTION("Input is of four unsorted unique elements")
     {
-        static constexpr std::array const nums{2.0f, 2.001f, 0.0f, 0.00000001f};
+        static constexpr std::array const nums{2.0F, 2.001F, 0.0F, 0.00000001F};
         static constexpr bool const expected{false};
 
         CAPTURE(nums);

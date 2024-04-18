@@ -90,9 +90,9 @@ TEST_CASE("palindromic_number_static", "[palindromic_number][static]")
 
         STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(1881));
 
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(55l));
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(55L));
 
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(33ull));
+        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(33ULL));
     }
 
     SECTION("Non-palindromic integrals")

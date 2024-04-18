@@ -112,7 +112,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Input is of four integers, output type is float")
     {
-        std::vector const nums{1.0f, 2.0f, 3.0f, 4.0f};
+        std::vector const nums{1.0F, 2.0F, 3.0F, 4.0F};
         std::vector const expected{24.0, 12.0, 8.0, 6.0};
 
         CAPTURE(nums);
