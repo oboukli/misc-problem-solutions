@@ -205,9 +205,9 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("unsigned int")
     {
-        std::array<unsigned int, 3> test_input{1u, 2u, 4u};
+        std::array<unsigned int, 3> test_input{1U, 2U, 4U};
         REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 3u);
+            first_missing_positive(test_input.begin(), test_input.end()) == 3U);
     }
 }
 
