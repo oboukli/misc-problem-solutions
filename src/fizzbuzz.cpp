@@ -11,7 +11,7 @@
 
 namespace forfun::fizzbuzz {
 
-std::string fizzbuzz(int const n) noexcept
+[[nodiscard]] auto fizzbuzz(int const n) noexcept -> std::string
 {
     std::ostringstream buffer;
     for (int i{1}; i <= n; ++i)

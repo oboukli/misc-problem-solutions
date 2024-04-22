@@ -10,7 +10,7 @@
 
 namespace forfun::palindromic_number::stl {
 
-[[nodiscard]] bool is_palindrome(int const n) noexcept
+[[nodiscard]] auto is_palindrome(int const n) noexcept -> bool
 {
     int nn{0};
     std::div_t d{.quot = n, .rem = 0};

@@ -28,7 +28,8 @@ namespace detail {
 
 template <std::random_access_iterator RandomIt>
     requires std::integral<std::iter_value_t<RandomIt>>
-constexpr void quasi_sort(RandomIt const first, RandomIt const src) noexcept
+constexpr auto
+quasi_sort(RandomIt const first, RandomIt const src) noexcept -> void
 {
     using ValType = std::iter_value_t<RandomIt>;
 

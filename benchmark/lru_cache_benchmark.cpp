@@ -19,7 +19,7 @@
 namespace {
 
 template <forfun::lrucache::concepts::lru_cache T>
-void test(std::size_t const capacity)
+auto test(std::size_t const capacity) noexcept -> void
 {
     int volatile val{};
     T cache(capacity);

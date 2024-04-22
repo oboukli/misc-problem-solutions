@@ -21,7 +21,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept :
 {
 }
 
-[[nodiscard]] int LRUCache::get(std::size_t const key) noexcept
+[[nodiscard]] auto LRUCache::get(std::size_t const key) noexcept -> int
 {
     int result{-1};
     std::int64_t lowest_tick_count{ticks_};
@@ -56,7 +56,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept :
     return result;
 }
 
-void LRUCache::put(std::size_t const key, int const value) noexcept
+auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 {
     assert(size_ <= capacity_);
 
@@ -95,7 +95,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept : capacity_{capacity}
     lookup_.reserve(capacity);
 }
 
-[[nodiscard]] int LRUCache::get(std::size_t const key) noexcept
+[[nodiscard]] auto LRUCache::get(std::size_t const key) noexcept -> int
 {
     auto const existing_key_iter{lookup_.find(key)};
     if (existing_key_iter == lookup_.end())
@@ -108,7 +108,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept : capacity_{capacity}
     return existing_key_iter->second->second;
 }
 
-void LRUCache::put(std::size_t const key, int const value) noexcept
+auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 {
     assert(size_ <= capacity_);
     assert(size_ == lookup_.size());
