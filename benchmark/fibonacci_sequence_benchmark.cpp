@@ -18,7 +18,7 @@
 inline constexpr int const f{514229};
 
 template <forfun::common::concepts::addition_unpromoted T>
-void dummy_callback(T const n, T& state) noexcept
+auto dummy_callback(T const n, T& state) noexcept -> void
 {
     state += n;
 }

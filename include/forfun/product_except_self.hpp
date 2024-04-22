@@ -34,14 +34,16 @@ using forfun::product_except_self::concepts::product_computable;
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
+// clang-format off
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
-constexpr void product_except_self(
+// clang-format on
+constexpr auto product_except_self(
     InItr const first,
     InItr const last,
     OutItr const products_first,
-    OutItr const products_last) noexcept
+    OutItr const products_last) noexcept -> void
 {
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
@@ -71,14 +73,16 @@ using forfun::product_except_self::concepts::product_computable;
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
+// clang-format off
     requires product_computable<
         std::iter_value_t<InItr>,
         std::iter_value_t<OutItr>>
-constexpr void product_except_self(
+// clang-format on
+constexpr auto product_except_self(
     InItr const first,
     InItr const last,
     OutItr const products_first,
-    OutItr const products_last) noexcept
+    OutItr const products_last) noexcept -> void
 {
     using ValType = std::decay_t<std::iter_value_t<OutItr>>;
     using DiffType = std::iter_difference_t<InItr>;

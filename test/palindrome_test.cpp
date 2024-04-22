@@ -16,16 +16,16 @@
 
 namespace {
 
-[[nodiscard]] inline bool
-is_palindrome_wrapper(std::string_view const& s) noexcept
+[[nodiscard]] inline auto
+is_palindrome_wrapper(std::string_view const& s) noexcept -> bool
 {
-    return ::is_palindrome(s.data(), s.size());
+    return ::is_palindrome(s.data(), s.size()) != 0;
 }
 
-[[nodiscard]] inline bool
-is_palindrome_ci_wrapper(std::string_view const& s) noexcept
+[[nodiscard]] inline auto
+is_palindrome_ci_wrapper(std::string_view const& s) noexcept -> bool
 {
-    return ::is_palindrome_ci(s.data(), s.size());
+    return ::is_palindrome_ci(s.data(), s.size()) != 0;
 }
 
 } // namespace

@@ -41,7 +41,7 @@ public:
 
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
-    void put(std::size_t key, int value) noexcept;
+    auto put(std::size_t key, int value) noexcept -> void;
 
 private:
     std::unique_ptr<CacheItem[]> cache_;
@@ -62,7 +62,7 @@ public:
 
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
-    void put(std::size_t key, int value) noexcept;
+    auto put(std::size_t key, int value) noexcept -> void;
 
 private:
     using cache_item_t = std::pair<std::size_t, int>;

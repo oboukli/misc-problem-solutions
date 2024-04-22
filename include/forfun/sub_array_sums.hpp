@@ -18,10 +18,14 @@
 namespace forfun::sub_array_sums {
 
 template <typename T, typename TSum>
+// clang-format off
     requires std::contiguous_iterator<typename T::iterator>
-    and std::contiguous_iterator<typename TSum::iterator>
-void sum_each(
-    T const& numbers, TSum& sums, typename T::size_type const sub_size) noexcept
+        and std::contiguous_iterator<typename TSum::iterator>
+// clang-format on
+auto sum_each(
+    T const& numbers,
+    TSum& sums,
+    typename T::size_type const sub_size) noexcept -> void
 {
     using S = T::size_type;
     using V = T::value_type;

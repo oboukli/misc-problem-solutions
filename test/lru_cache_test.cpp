@@ -158,38 +158,40 @@ TEST_CASE("LRU Cache concepts", "[lru_cache]")
     struct Dummy0 {};
 
     struct Dummy1 : public Dummy0 {
-        Dummy1(std::size_t)
+        explicit Dummy1(std::size_t /*unused*/) noexcept
         {
         }
     };
 
     struct Dummy2 : public Dummy1 {
-        Dummy2(std::size_t c) : Dummy1{c}
+        explicit Dummy2(std::size_t c) noexcept : Dummy1{c}
         {
         }
 
-        void put(std::size_t, int)
+        auto put(std::size_t /*unused*/, int /*unused*/) noexcept -> void
         {
         }
     };
 
     struct Dummy3 : public Dummy2 {
-        Dummy3(std::size_t c) : Dummy2{c}
+        explicit Dummy3(std::size_t c) noexcept : Dummy2{c}
         {
         }
 
-        int get(std::size_t)
+        [[nodiscard]] auto get(std::size_t /*unused*/) noexcept -> int
         {
-            return 0;
+            return value_;
         }
+
+        int value_{0};
     };
 
     struct Dummy4 : public Dummy3 {
-        Dummy4(std::size_t c) : Dummy3{c}
+        explicit Dummy4(std::size_t c) noexcept : Dummy3{c}
         {
         }
 
-        void dummy()
+        auto dummy() noexcept -> void
         {
         }
     };

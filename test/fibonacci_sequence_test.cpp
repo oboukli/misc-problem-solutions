@@ -26,9 +26,9 @@ constexpr auto const dummy_throwing_lambda = [](
 ) noexcept(false) {};
 // clang-format on
 
-[[maybe_unused]] void dummy_noexcept_func() noexcept;
+[[maybe_unused]] auto dummy_noexcept_func() noexcept -> void;
 
-[[maybe_unused]] void dummy_throwing_func() noexcept(false);
+[[maybe_unused]] auto dummy_throwing_func() noexcept(false) -> void;
 
 } // namespace
 
