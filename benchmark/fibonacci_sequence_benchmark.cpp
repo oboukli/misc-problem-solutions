@@ -15,7 +15,7 @@
 #include "forfun/common.hpp"
 #include "forfun/fibonacci_sequence.hpp"
 
-inline constexpr int const f{514229};
+inline constexpr int const f{514'229};
 
 template <forfun::common::concepts::addition_unpromoted T>
 auto dummy_callback(T const n, T& state) noexcept -> void

@@ -37,7 +37,7 @@ auto test(std::size_t const capacity) noexcept -> void
 
     val = cache.get(3);
 
-    cache.put(capacity + 1, 2946901);
+    cache.put(capacity + 1, 2'946'901);
 
     val = cache.get(1);
 

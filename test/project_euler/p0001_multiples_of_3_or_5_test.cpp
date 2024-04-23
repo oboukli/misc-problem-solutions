@@ -45,17 +45,17 @@ TEST_CASE("find_sum_mult_three_five", "[multiples_of_3_or_5]")
 
     SECTION("Static test 06")
     {
-        static constexpr int const actual{find_sum_mult_three_five(1000)};
-        STATIC_REQUIRE(actual == 233168);
+        static constexpr int const actual{find_sum_mult_three_five(1'000)};
+        STATIC_REQUIRE(actual == 233'168);
     }
 
     SECTION("Runtime test")
     {
-        int const volatile test_input{1000};
+        int const volatile test_input{1'000};
         int const actual{find_sum_mult_three_five(test_input)};
 
         CAPTURE(test_input);
 
-        REQUIRE(actual == 233168);
+        REQUIRE(actual == 233'168);
     }
 }
