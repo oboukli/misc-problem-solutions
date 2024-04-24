@@ -1,3 +1,4 @@
+---
 Language: Cpp
 AccessModifierOffset: -4
 AlignAfterOpenBracket: AlwaysBreak
@@ -109,6 +110,7 @@ BreakBeforeBraces: Custom
 BreakBeforeInlineASMColon: OnlyMultiline
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializers: AfterColon
+BreakFunctionDefinitionParameters: false
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
 BreakTemplateDeclarations: Yes
@@ -229,7 +231,7 @@ SpaceBeforeParensOptions:
   AfterOverloadedOperator: false
   AfterPlacementOperator: false
   AfterRequiresInClause: true
-  AfterRequiresInExpression: false
+  AfterRequiresInExpression: true
   BeforeNonEmptyParentheses: false
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false
@@ -263,3 +265,4 @@ WhitespaceSensitiveMacros:
   - NS_SWIFT_NAME
   - PP_STRINGIZE
   - STRINGIZE
+...
