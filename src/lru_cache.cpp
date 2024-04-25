@@ -17,6 +17,7 @@ namespace forfun::lrucache {
 namespace naive {
 
 LRUCache::LRUCache(std::size_t const capacity) noexcept :
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     capacity_{capacity}, cache_{std::make_unique<CacheItem[]>(capacity)}
 {
 }

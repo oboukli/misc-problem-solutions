@@ -16,8 +16,10 @@ namespace forfun::palindromic_number::stl {
     std::div_t d{.quot = n, .rem = 0};
     while (d.quot > 0)
     {
+        // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
         d = std::div(d.quot, 10);
         nn = (nn * 10) + d.rem;
+        // NOLINTEND(cppcoreguidelines-avoid-magic-numbers)
     }
 
     return n == nn;

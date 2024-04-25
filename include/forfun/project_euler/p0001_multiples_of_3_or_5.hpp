@@ -35,6 +35,7 @@ namespace detail {
 
     --n;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
     return (sum_2x(n, 3) + sum_2x(n, 5) - sum_2x(n, 15)) / 2;
 }
 
