@@ -16,7 +16,6 @@
 
 TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::sub_array_sums;
 
     ankerl::nanobench::Bench()
