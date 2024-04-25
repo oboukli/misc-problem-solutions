@@ -24,6 +24,7 @@ namespace forfun::fizzbuzz {
             f = false;
         }
 
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
         if (i % 5 == 0)
         {
             buffer << "Buzz";
