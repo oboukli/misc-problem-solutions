@@ -16,7 +16,6 @@
 
 TEST_CASE("factorial benchmarking", "[benchmark][factorial]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::factorial;
 
     ankerl::nanobench::Bench()

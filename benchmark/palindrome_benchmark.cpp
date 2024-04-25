@@ -33,7 +33,6 @@ inline constexpr std::string_view const palindrome{
 
 TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::palindrome;
 
     SECTION("case-sensitive")

@@ -59,7 +59,6 @@ auto test(std::size_t const capacity) noexcept -> void
 
 TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::lrucache;
 
     SECTION("small")

@@ -19,7 +19,6 @@
 TEST_CASE(
     "product_except_self benchmarking", "[benchmark][product_except_self]")
 {
-    // NOLINTNEXTLINE
     using namespace forfun::product_except_self;
 
     static constexpr std::array<std::uint64_t, 16> const input{
@@ -39,6 +38,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(alg1::product_except_self<CnstItr, Itr>).c_str(),
             []() {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
                 forfun::product_except_self::alg1::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
@@ -48,6 +48,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(alg2::product_except_self<CnstItr, Itr>).c_str(),
             []() {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
                 forfun::product_except_self::alg2::product_except_self(
                     input.cbegin(), input.cend(), result.begin(), result.end());
