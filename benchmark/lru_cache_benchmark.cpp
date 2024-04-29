@@ -12,8 +12,6 @@
 
 #include <nanobench.h>
 
-#include <nameof.hpp>
-
 #include "forfun/lru_cache.hpp"
 
 namespace {
@@ -72,11 +70,11 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
             .relative(true)
 
             .run(
-                NAMEOF_TYPE(stl::LRUCache).data(),
+                "stl::LRUCache",
                 []() { test<stl::LRUCache>(lrucache_capacity); })
 
             .run(
-                NAMEOF_TYPE(naive::LRUCache).data(),
+                "naive::LRUCache",
                 []() { test<naive::LRUCache>(lrucache_capacity); })
 
             ;
@@ -93,11 +91,11 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
             .relative(true)
 
             .run(
-                NAMEOF_TYPE(stl::LRUCache).data(),
+                "stl::LRUCache",
                 []() { test<stl::LRUCache>(lrucache_capacity); })
 
             .run(
-                NAMEOF_TYPE(naive::LRUCache).data(),
+                "naive::LRUCache",
                 []() { test<naive::LRUCache>(lrucache_capacity); })
 
             ;
