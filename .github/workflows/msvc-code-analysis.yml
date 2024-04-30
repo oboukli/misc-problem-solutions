@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   analyze:
     env:
-      BUILD: ${{ github.workspace }}/build
+      BUILD: ${{ github.workspace }}\out\build\windows-x64
       CONFIG: Debug
     permissions:
       contents: read
@@ -24,12 +24,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        uses: actions/checkout@v4
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -40,7 +40,7 @@ jobs:
 
       - name: Apply vcpkg cache
         id: vcpkg-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |-
             %VCPKG_DEFAULT_BINARY_CACHE%
@@ -58,9 +58,7 @@ jobs:
           CMAKE_CONFIGURE_PRESET_NAME: windows-x64
         run: >-
           cmake
-          -B '${{ env.BUILD }}'
           --preset '${{ env.CMAKE_CONFIGURE_PRESET_NAME }}'
-          -DCMAKE_BUILD_TYPE='${{ env.CONFIG }}'
 
       - name: Initialize MSVC Code Analysis
         uses: microsoft/msvc-code-analysis-action@24c285ab36952c9e9182f4b78dfafbac38a7e5ee
@@ -73,12 +71,12 @@ jobs:
           ruleset: NativeRecommendedRules.ruleset
 
       - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@46a6823b81f2d7c67ddf123851eea88365bc8a67
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.run-analysis.outputs.sarif }}
 
       - name: Upload SARIF as an Artifact
-        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce
+        uses: actions/upload-artifact@v4
         with:
           name: sarif-file
           path: ${{ steps.run-analysis.outputs.sarif }}
