@@ -6,7 +6,7 @@ found in the LICENSE file.
 
 /* SPDX-License-Identifier: MIT */
 
-#include "forfun/palindrome.h"
+#include "forfun_c/palindrome.h"
 
 #include <ctype.h>
 

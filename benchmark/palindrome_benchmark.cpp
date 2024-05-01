@@ -12,8 +12,8 @@
 
 #include <nameof.hpp>
 
-#include "forfun/palindrome.h"
 #include "forfun/palindrome.hpp"
+#include "forfun_c/palindrome.h"
 
 #ifdef _MSC_VER
 // Compiler known issue
