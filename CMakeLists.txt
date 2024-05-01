@@ -43,7 +43,6 @@ target_sources(
   "include/forfun/gcd.hpp"
   "include/forfun/lru_cache.hpp"
   "include/forfun/move_zeroes.hpp"
-  "include/forfun/palindrome.h"
   "include/forfun/palindrome.hpp"
   "include/forfun/palindromic_number.hpp"
   "include/forfun/product_except_self.hpp"
@@ -56,29 +55,28 @@ target_sources(
 target_sources(
   forfun
   PRIVATE
-  "src/common.cpp"
-  "src/contains_duplicate.cpp"
-  "src/factorial.cpp"
-  "src/fibonacci_sequence.cpp"
-  "src/fibonacci.cpp"
-  "src/first_missing_positive.cpp"
-  "src/fizzbuzz.cpp"
-  "src/gcd.cpp"
-  "src/lru_cache.cpp"
-  "src/move_zeroes.cpp"
-  "src/palindrome.c"
-  "src/palindrome.cpp"
-  "src/palindromic_number.cpp"
-  "src/product_except_self.cpp"
-  "src/project_euler/p0001_multiples_of_3_or_5.cpp"
-  "src/sonar.cpp"
-  "src/sub_array_sums.cpp"
-  "src/trie.cpp"
-  "src/two_sum.cpp"
+  "src/forfun/common.cpp"
+  "src/forfun/contains_duplicate.cpp"
+  "src/forfun/factorial.cpp"
+  "src/forfun/fibonacci_sequence.cpp"
+  "src/forfun/fibonacci.cpp"
+  "src/forfun/first_missing_positive.cpp"
+  "src/forfun/fizzbuzz.cpp"
+  "src/forfun/gcd.cpp"
+  "src/forfun/lru_cache.cpp"
+  "src/forfun/move_zeroes.cpp"
+  "src/forfun/palindrome.cpp"
+  "src/forfun/palindromic_number.cpp"
+  "src/forfun/product_except_self.cpp"
+  "src/forfun/project_euler/p0001_multiples_of_3_or_5.cpp"
+  "src/forfun/sonar.cpp"
+  "src/forfun/sub_array_sums.cpp"
+  "src/forfun/trie.cpp"
+  "src/forfun/two_sum.cpp"
 )
 get_target_property(forfun_sources forfun SOURCES)
 source_group(
-  TREE "${CMAKE_SOURCE_DIR}/src/"
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun/"
   PREFIX "Source files"
   FILES ${forfun_sources}
 )
@@ -95,14 +93,48 @@ add_library(
   "include/forfun/sorting/bubble_sort.hpp"
   "include/forfun/sorting/insertion_sort.hpp"
   "include/forfun/sorting/quicksort.hpp"
-  "src/sorting/bubble_sort.cpp"
-  "src/sorting/insertion_sort.cpp"
-  "src/sorting/quicksort.cpp"
+  "src/forfun/sorting/bubble_sort.cpp"
+  "src/forfun/sorting/insertion_sort.cpp"
+  "src/forfun/sorting/quicksort.cpp"
 )
 target_include_directories(
   forfun_sorting
   PUBLIC
   "include/"
+)
+
+add_library(
+  forfun_c
+  SHARED
+)
+target_include_directories(
+  forfun_c
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_c
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun_c/palindrome.h"
+)
+target_sources(
+  forfun_c
+  PRIVATE
+  "src/forfun_c/palindrome.c"
+)
+get_target_property(forfun_c_sources forfun_c SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun_c/"
+  PREFIX "Source files"
+  FILES ${forfun_c_sources}
+)
+get_target_property(forfun_c_headers forfun_c HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun_c/"
+  PREFIX "Header files"
+  FILES ${forfun_c_headers}
 )
 
 find_package(Catch2 3 REQUIRED)
@@ -147,6 +179,7 @@ target_link_libraries(
 target_link_libraries(
   tests
   PRIVATE forfun
+  PRIVATE forfun_c
   PRIVATE forfun_sorting
 )
 include(CTest)
@@ -194,5 +227,6 @@ target_link_libraries(
 target_link_libraries(
   benchmark
   PRIVATE forfun
+  PRIVATE forfun_c
   PRIVATE forfun_sorting
 )
