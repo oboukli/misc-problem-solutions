@@ -40,7 +40,7 @@
       }
     },
     {
-      "name": "xcode-base",
+      "name": "xcode",
       "displayName": "Xcode configuration",
       "description": "Target Darwin with Xcode.",
       "generator": "Xcode",
@@ -96,7 +96,7 @@
       "name": "xcode",
       "displayName": "Xcode build",
       "description": "Xcode build",
-      "configurePreset": "xcode-base"
+      "configurePreset": "xcode"
     }
   ]
 }
