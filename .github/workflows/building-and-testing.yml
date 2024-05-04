@@ -163,3 +163,80 @@ jobs:
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
+
+  macos_xcode:
+    name: Build and test on macOS with Xcode
+    env:
+      CONFIGURE_PRESET_NAME: xcode
+      BUILD_PRESET_NAME: xcode
+      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
+      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
+      BENCHMARK_BUILD_CONFIGURATION: Release
+      TEST_BUILD_CONFIGURATION: Debug
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Apply vcpkg cache
+        id: vcpkg-cache
+        uses: actions/cache@v4
+        with:
+          path: |-
+            %VCPKG_DEFAULT_BINARY_CACHE%
+            ${{ github.workspace }}/vcpkg
+          key: >-
+            ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
+              'vcpkg/ports/catch2/vcpkg.json',
+              'vcpkg/ports/fmt/vcpkg.json',
+              'vcpkg/ports/nameof/vcpkg.json',
+              'vcpkg/ports/nanobench/vcpkg.json'
+            ) }}
+
+      - name: Configure CMake for testing
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build for testing
+        run: >-
+          cmake
+          --build
+          --config '${{ env.TEST_BUILD_CONFIGURATION }}'
+          --parallel
+          --preset '${{ env.BUILD_PRESET_NAME }}'
+
+      - name: Build for benchmarking
+        run: >-
+          cmake
+          --build
+          --config '${{ env.BENCHMARK_BUILD_CONFIGURATION }}'
+          --parallel
+          --preset '${{ env.BUILD_PRESET_NAME }}'
+
+      - name: Run tests
+        run: >-
+          ./tests
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+
+      - name: Run benchmarks
+        run: >-
+          ./benchmark
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}
