@@ -8,7 +8,7 @@ programming problems, written in C90, and C++17, C++20, and C++23.
 The following is a partial list of standards, practices, software,
 and ideas leveraged by this project:
 
-- C (standard C99)
+- C (standard C90)
 - C++ (standard C++17, C++20, and C++23)
 - C++ STL
 - Strongly-typed approach, leveraging C++ templates and concepts
@@ -29,29 +29,29 @@ and ideas leveraged by this project:
 
 ## Index
 
-| Problem                         | Standard | Source                                            |
-| ---                             | ---      | ---                                               |
-| Bubble sort                     | C++20    | `src/sorting/bubble_sort.cpp`                     |
-| Contains duplicate              | C++20    | `src/contains_duplicate.cpp`                      |
-| Factorial                       | C++23    | `src/factorial.cpp`                               |
-| Fibonacci sequence              | C++20    | `src/fibonacci_sequence.cpp`                      |
-| First missing positive          | C++20    | `src/first_missing_positive.cpp`                  |
-| Fizz buzz                       | C++17    | `src/fizzbuzz.cpp`                                |
-| Greatest common divisor         | C++17    | `src/gcd.cpp`                                     |
-| Insertion sort                  | C++20    | `src/sorting/insertion_sort.cpp`                  |
-| Least recently used (LRU) cache | C++20    | `src/lru_cache.cpp`                               |
-| Move zeroes                     | C++20    | `src/move_zeroes.cpp`                             |
-| Multiples of three or five      | C++17    | `src/project_euler/p0001_multiples_of_3_or_5.cpp` |
-| Nth Fibonacci number            | C++20    | `src/fibonacci.cpp`                               |
-| Number of Ships in a Rectangle  | C++20    | `src/sonar.cpp`                                   |
-| Palindrome                      | C++17    | `src/palindrome.cpp`                              |
-| Palindrome (in C)               | C90      | `src/palindrome.c`                                |
-| Palindromic number              | C++20    | `src/palindromic_number.cpp`                      |
-| Product except self             | C++20    | `src/product_except_self.cpp`                     |
-| Quicksort                       | C++20    | `src/sorting/quicksort.cpp`                       |
-| Sub array sums                  | C++20    | `src/sub_array_sums.cpp`                          |
-| Trie                            | C++20    | `src/trie.cpp`                                    |
-| Two sum                         | C++20    | `src/two_sum.cpp`                                 |
+| Problem                         | Standard | Source                                                       |
+| ---                             | ---      | ---                                                          |
+| Bubble sort                     | C++20    | `include/forfun/sorting/bubble_sort.cpp`                     |
+| Contains duplicate              | C++20    | `include/forfun/contains_duplicate.cpp`                      |
+| Factorial                       | C++23    | `include/forfun/factorial.cpp`                               |
+| Fibonacci sequence              | C++20    | `include/forfun/fibonacci_sequence.cpp`                      |
+| First missing positive          | C++20    | `include/forfun/first_missing_positive.cpp`                  |
+| Fizz buzz                       | C++17    | `src/forfun/fizzbuzz.cpp`                                    |
+| Greatest common divisor         | C++17    | `include/forfun/gcd.cpp`                                     |
+| Insertion sort                  | C++20    | `include/forfun/sorting/insertion_sort.cpp`                  |
+| Least recently used (LRU) cache | C++20    | `src/forfun/lru_cache.cpp`                                   |
+| Move zeroes                     | C++20    | `include/forfun/move_zeroes.cpp`                             |
+| Multiples of three or five      | C++17    | `include/forfun/project_euler/p0001_multiples_of_3_or_5.cpp` |
+| Nth Fibonacci number            | C++20    | `include/forfun/fibonacci.cpp`                               |
+| Number of Ships in a Rectangle  | C++20    | `src/forfun/sonar.cpp`                                       |
+| Palindrome                      | C++17    | `include/forfun/palindrome.cpp`                              |
+| Palindrome (in C)               | C90      | `src/forfun_c/palindrome.c`                                  |
+| Palindromic number              | C++20    | `src/forfun/palindromic_number.cpp`                          |
+| Product except self             | C++20    | `include/forfun/product_except_self.cpp`                     |
+| Quicksort                       | C++20    | `include/forfun/sorting/quicksort.cpp`                       |
+| Sub array sums                  | C++20    | `include/forfun/sub_array_sums.cpp`                          |
+| Trie                            | C++20    | `include/forfun/trie.cpp`                                    |
+| Two sum                         | C++20    | `include/forfun/two_sum.cpp`                                 |
 
 ## Disclaimer
 
