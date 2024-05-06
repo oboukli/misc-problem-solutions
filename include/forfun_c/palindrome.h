@@ -11,8 +11,8 @@ Problem reference:
 https://en.wikipedia.org/wiki/Palindrome
 */
 
-#ifndef FORFUN_PALINDROME_H_
-#define FORFUN_PALINDROME_H_
+#ifndef FORFUN_C_PALINDROME_H_
+#define FORFUN_C_PALINDROME_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,4 +28,4 @@ int is_palindrome_ci(char const* str, size_t size);
 }
 #endif /* __cplusplus */
 
-#endif /* FORFUN_PALINDROME_H_ */
+#endif /* FORFUN_C_PALINDROME_H_ */
