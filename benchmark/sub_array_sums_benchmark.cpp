@@ -24,13 +24,24 @@ TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(sum_each<std::array<int, 6>, std::array<int, 4>>)
+            NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
             []() {
-                static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
-                static std::array<int, 4> sums{};
+                static constexpr std::array const numbers{
+                    // clang-format off
+                    1, 1, 1, 1, 1, 1, 1, 1,
+                    2, 2, 2, 2, 2, 2, 2, 2,
+                    3, 3, 3, 3, 3, 3, 3, 3,
+                    4, 4, 4, 4, 4, 4, 4, 4,
+                    5, 5, 5, 5, 5, 5, 5, 5,
+                    6, 6, 6, 6, 6, 6, 6, 6,
+                    7, 7, 7, 7, 7, 7, 7, 7,
+                    8, 8, 8, 8, 8, 8, 8, 8,
+                    // clang-format on
+                };
+                std::array<int, 8> sums{};
 
-                sum_each(numbers, sums, 3);
+                sum_each(numbers, sums, 8);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);
             })

@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <string>
 #include <vector>
 
 #include <catch2/catch_message.hpp>
@@ -16,7 +17,10 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
 {
     using forfun::sub_array_sums::sum_each;
 
-    SECTION("Zero window size of empty array, take all")
+    SECTION(
+        "Given an empty numbers collection"
+        " when sums collection has one element,"
+        " then sum is one element and is zero")
     {
         std::vector<int> const numbers{};
         std::vector<int> sums(1);
@@ -31,7 +35,10 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
         REQUIRE(sums == expected);
     }
 
-    SECTION("Zero window size of empty array none")
+    SECTION(
+        "Given an empty numbers collection"
+        " when sums collection is empty,"
+        " then no sum")
     {
         std::vector<int> const numbers{};
         std::vector<int> sums{};
@@ -257,5 +264,130 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
         sum_each(numbers, sums, sub_size);
 
         REQUIRE(sums == expected);
+    }
+
+    SECTION("8 of 64 (benchmark case)")
+    {
+        constexpr std::array const numbers{
+            // clang-format off
+            1, 1, 1, 1, 1, 1, 1, 1,
+            2, 2, 2, 2, 2, 2, 2, 2,
+            3, 3, 3, 3, 3, 3, 3, 3,
+            4, 4, 4, 4, 4, 4, 4, 4,
+            5, 5, 5, 5, 5, 5, 5, 5,
+            6, 6, 6, 6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7, 7, 7, 7,
+            8, 8, 8, 8, 8, 8, 8, 8,
+            // clang-format on
+        };
+        std::vector<int> sums(8);
+        std::vector const expected{{8, 9, 10, 11, 12, 13, 14, 15}};
+        static constexpr auto const sub_size{8};
+
+        CAPTURE(numbers);
+        CAPTURE(sums.size());
+        CAPTURE(sub_size);
+        sum_each(numbers, sums, sub_size);
+
+        REQUIRE(sums == expected);
+    }
+}
+
+namespace {
+
+template <typename Nums, typename Sums>
+// clang-format off
+concept template_specialization
+    = requires(Nums nums, Sums sums, typename Nums::size_type sub_size) {
+        forfun::sub_array_sums::sum_each(nums, sums, sub_size);
+    };
+// clang-format on
+
+struct Dummy final {};
+
+struct AddableDummy final {
+    explicit(false) AddableDummy(auto const /*unused*/)
+    {
+    }
+
+    auto operator+=(auto const /*unused*/) noexcept -> int
+    {
+        return 0;
+    }
+
+    auto operator-=(auto const /*unused*/) noexcept -> int
+    {
+        return 0;
+    }
+
+    // NOLINTNEXTLINE(hicpp-explicit-conversions)
+    explicit(false) operator int() const
+    {
+        return 0;
+    }
+};
+
+template <typename SizeType>
+struct DummyWithSizeType final : public std::array<unsigned char, 0> {
+    using size_type = SizeType;
+};
+
+} // namespace
+
+TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums][static]")
+{
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::array<int, 0>>);
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<int>>);
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::array<int, 0>>);
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::vector<int>>);
+
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<unsigned>>);
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<double>>);
+
+        STATIC_REQUIRE(
+            template_specialization<std::vector<unsigned>, std::vector<short>>);
+        // clang-format off
+        STATIC_REQUIRE(template_specialization<
+            std::vector<int>,
+            std::vector<AddableDummy>>);
+        STATIC_REQUIRE(template_specialization<
+            DummyWithSizeType<std::vector<int>::size_type>,
+            std::vector<int>>);
+        STATIC_REQUIRE(template_specialization<
+            std::vector<AddableDummy>,
+            std::vector<int>>);
+        // clang-format on
+    }
+
+    SECTION("Negative")
+    {
+        // clang-format off
+        STATIC_REQUIRE_FALSE(template_specialization<
+            std::vector<int>,
+            std::vector<std::string>>);
+        STATIC_REQUIRE_FALSE(template_specialization<
+            std::vector<std::string>,
+            std::vector<int>>);
+        // clang-format on
+
+        STATIC_REQUIRE_FALSE(
+            template_specialization<std::vector<int>, std::vector<Dummy>>);
+        STATIC_REQUIRE_FALSE(
+            template_specialization<std::vector<int>, std::vector<Dummy>>);
+
+        STATIC_REQUIRE_FALSE(template_specialization<int, int>);
+        STATIC_REQUIRE_FALSE(template_specialization<int, std::vector<int>>);
+        STATIC_REQUIRE_FALSE(template_specialization<std::vector<int>, int>);
+
+        STATIC_REQUIRE_FALSE(
+            template_specialization<DummyWithSizeType<char>, std::vector<int>>);
     }
 }

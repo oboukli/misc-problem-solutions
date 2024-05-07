@@ -13,57 +13,76 @@
 #define FORFUN_SUB_ARRAY_SUMS_HPP_
 
 #include <algorithm>
+#include <concepts>
 #include <iterator>
 
 namespace forfun::sub_array_sums {
 
-template <typename T, typename TSum>
+template <typename Nums, typename Sums>
 // clang-format off
-    requires std::contiguous_iterator<typename T::iterator>
-        and std::contiguous_iterator<typename TSum::iterator>
+    requires std::contiguous_iterator<typename Nums::iterator>
+        and std::contiguous_iterator<typename Sums::iterator>
+        and std::same_as<typename Nums::size_type, typename Sums::size_type>
+        and requires(Nums::value_type n, Sums::value_type s) {
+                s += n;
+                s -= n;
+            }
 // clang-format on
-auto sum_each(
-    T const& numbers,
-    TSum& sums,
-    typename T::size_type const sub_size) noexcept -> void
+constexpr auto sum_each(
+    Nums const& nums,
+    Sums& sums,
+    typename Nums::size_type const sub_size) noexcept -> void
 {
-    using S = T::size_type;
-    using V = T::value_type;
+    using SizeType = Sums::size_type;
+    using ValueType = Sums::value_type;
+    using DiffType = Nums::difference_type;
 
-    auto const nums_size{numbers.size()};
-    V sub_sum{};
-
-    // Result container element count.
     auto const sums_size{sums.size()};
 
-    if (sums_size == S{0})
+    if (sums_size == SizeType{0})
     {
         return;
     }
+
+    ValueType sub_sum{};
+
+    auto const nums_size{nums.size()};
+    auto nums_it{nums.cbegin()};
 
     // Calculate result for the first output element.
     auto const nums_bound{std::min(sub_size, nums_size)};
-    for (S i{}; i < nums_bound; ++i)
+    for (SizeType i{}; i < nums_bound; ++i)
     {
-        sub_sum += numbers[i];
+        sub_sum += *nums_it;
+        ++nums_it;
     }
-    sums[S{0}] = sub_sum;
+    auto sums_it{sums.begin()};
+    *sums_it = sub_sum;
 
-    if (sub_size == S{0} || sub_size > nums_size)
+    // Stop if no more than one sum element is possible.
+    if (sub_size > nums_size)
     {
         return;
     }
 
-    // Calculate the remaining result(s).
+    // Slide the window and update sum.
+    nums_it = nums.cbegin();
+    auto slider_last{nums_it + static_cast<DiffType>(sub_size)};
     auto const sums_bound{
-        std::min(sums_size, numbers.size() - sub_size + S{1})};
-    auto const ss{sub_size - S{1}};
-    for (S i{1}; i < sums_bound; ++i)
+        std::min(sums_size, (nums_size - sub_size) + SizeType{1})};
+    for (SizeType i{1}; i < sums_bound; ++i)
     {
-        sub_sum -= numbers[i - S{1}];
-        sub_sum += numbers[i + ss];
+        // Subtract the element before the sliding window.
+        sub_sum -= *nums_it;
 
-        sums[i] = sub_sum;
+        // Add the element at the end of the sliding window.
+        sub_sum += *slider_last;
+
+        ++nums_it;
+        ++slider_last;
+
+        ++sums_it;
+        *sums_it = sub_sum;
     }
 }
 
