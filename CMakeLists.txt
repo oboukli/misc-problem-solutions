@@ -49,6 +49,7 @@ target_sources(
   "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/sonar.hpp"
   "include/forfun/sub_array_sums.hpp"
+  "include/forfun/tower_of_hanoi.hpp"
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
 )
@@ -71,6 +72,7 @@ target_sources(
   "src/forfun/project_euler/p0001_multiples_of_3_or_5.cpp"
   "src/forfun/sonar.cpp"
   "src/forfun/sub_array_sums.cpp"
+  "src/forfun/tower_of_hanoi.cpp"
   "src/forfun/trie.cpp"
   "src/forfun/two_sum.cpp"
 )
@@ -163,6 +165,7 @@ target_sources(
   "test/sorting/insertion_sort_test.cpp"
   "test/sorting/quicksort_test.cpp"
   "test/sub_array_sums_test.cpp"
+  "test/tower_of_hanoi_test.cpp"
   "test/trie_test.cpp"
   "test/two_sum_test.cpp"
 )
@@ -212,6 +215,7 @@ target_sources(
   "benchmark/sorting/insertion_sort_benchmark.cpp"
   "benchmark/sorting/quicksort_benchmark.cpp"
   "benchmark/sub_array_sums_benchmark.cpp"
+  "benchmark/tower_of_hanoi_benchmark.cpp"
 )
 get_target_property(forfun_benchmark benchmark SOURCES)
 source_group(
