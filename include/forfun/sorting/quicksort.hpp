@@ -15,19 +15,20 @@
 
 namespace forfun::sorting {
 
+template <std::contiguous_iterator Iter>
+constexpr auto quicksort(Iter first, Iter last) noexcept -> void;
+
 namespace detail {
 
 template <std::contiguous_iterator Iter>
 [[nodiscard]] constexpr auto
-partition(Iter const first, Iter const last) noexcept -> Iter
+partition(Iter const first, Iter last) noexcept -> Iter
 {
     auto it_i{first};
 
     {
-        using DiffType = std::iter_difference_t<Iter>;
-
         auto const pivot{*first};
-        for (auto it_j{last - DiffType{1}}; it_j != it_i;)
+        for (auto it_j{--last}; it_j != it_i;)
         {
             if (*it_j < pivot)
             {
@@ -57,9 +58,9 @@ constexpr auto quicksort(Iter const first, Iter const last) noexcept -> void
         return;
     }
 
-    auto const p{detail::partition(first, last)};
+    auto p{detail::partition(first, last)};
     quicksort(first, p);
-    quicksort(p + DiffType{1}, last);
+    quicksort(++p, last);
 }
 
 } // namespace forfun::sorting
