@@ -53,6 +53,7 @@ and ideas leveraged by this project:
 | Tower of Hanoi                  | C++20    | `include/forfun/tower_of_hanoi.hpp`                          |
 | Trie                            | C++20    | `include/forfun/trie.cpp`                                    |
 | Two sum                         | C++20    | `include/forfun/two_sum.cpp`                                 |
+| Two-pass Boyer–Moore majority   | C++20    | `include/forfun/majority_element.hpp`                        |
 
 ## Disclaimer
 
