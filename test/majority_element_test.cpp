@@ -166,4 +166,27 @@ TEST_CASE("Majority element", "[majority_element]")
         CHECK(result == std::next(elements.cbegin(), 10));
         REQUIRE(*result == 5);
     }
+
+    SECTION("Sixty-four elements with majority (benchmark case)")
+    {
+        constexpr std::array const elements{
+            // clang-format off
+            5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
+            5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
+            5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
+            5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
+            // clang-format on
+        };
+        using ConstItr = decltype(elements)::const_iterator;
+
+        static_assert(elements.size() == 64);
+
+        CAPTURE(elements);
+
+        ConstItr const result{majority_element(elements)};
+
+        REQUIRE_FALSE(result == elements.cend());
+        CHECK(result == std::next(elements.cbegin(), 24));
+        REQUIRE(*result == 5);
+    }
 }

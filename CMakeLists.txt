@@ -209,6 +209,7 @@ target_sources(
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/gcd_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
+  "benchmark/majority_element_benchmark.cpp"
   "benchmark/move_zeroes_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
   "benchmark/palindromic_number_benchmark.cpp"
