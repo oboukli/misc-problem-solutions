@@ -47,6 +47,7 @@ and ideas leveraged by this project:
 | Palindrome                      | C++17    | `include/forfun/palindrome.cpp`                              |
 | Palindrome (in C)               | C90      | `src/forfun_c/palindrome.c`                                  |
 | Palindromic number              | C++20    | `src/forfun/palindromic_number.cpp`                          |
+| Primality test                  | C++20    | `include/forfun/primality.hpp`                               |
 | Product except self             | C++20    | `include/forfun/product_except_self.cpp`                     |
 | Quicksort                       | C++20    | `include/forfun/sorting/quicksort.cpp`                       |
 | Sub array sums                  | C++20    | `include/forfun/sub_array_sums.cpp`                          |
