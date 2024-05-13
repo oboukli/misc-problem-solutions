@@ -145,10 +145,10 @@ source_group(
 
 find_package(Catch2 3 REQUIRED)
 add_executable(
-  tests
+  test_driver
 )
 target_sources(
-  tests
+  test_driver
   PRIVATE
   "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
@@ -175,34 +175,34 @@ target_sources(
   "test/trie_test.cpp"
   "test/two_sum_test.cpp"
 )
-get_target_property(forfun_tests tests SOURCES)
+get_target_property(forfun_tests test_driver SOURCES)
 source_group(
   TREE "${CMAKE_SOURCE_DIR}/test/"
   PREFIX "Source files"
   FILES ${forfun_tests}
 )
 target_link_libraries(
-  tests
+  test_driver
   PRIVATE Catch2::Catch2WithMain
 )
 target_link_libraries(
-  tests
+  test_driver
   PRIVATE forfun
   PRIVATE forfun_c
   PRIVATE forfun_sorting
 )
 include(CTest)
 include(Catch)
-catch_discover_tests(tests)
+catch_discover_tests(test_driver)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 add_executable(
-  benchmark
+  benchmark_driver
 )
 target_sources(
-  benchmark
+  benchmark_driver
   PRIVATE
   "benchmark/benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
@@ -225,19 +225,19 @@ target_sources(
   "benchmark/sub_array_sums_benchmark.cpp"
   "benchmark/tower_of_hanoi_benchmark.cpp"
 )
-get_target_property(forfun_benchmark benchmark SOURCES)
+get_target_property(forfun_benchmark benchmark_driver SOURCES)
 source_group(
   TREE "${CMAKE_SOURCE_DIR}/benchmark/"
   PREFIX "Source files"
   FILES ${forfun_benchmark}
 )
 target_link_libraries(
-  benchmark
+  benchmark_driver
   PRIVATE Catch2::Catch2WithMain
   PRIVATE fmt::fmt
 )
 target_link_libraries(
-  benchmark
+  benchmark_driver
   PRIVATE forfun
   PRIVATE forfun_c
   PRIVATE forfun_sorting

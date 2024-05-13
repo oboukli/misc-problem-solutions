@@ -73,14 +73,14 @@ jobs:
 
       - name: Run tests
         run: >-
-          .\tests.exe
+          .\test_driver.exe
           --reporter console::out=-::colour-mode=ansi
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
-          .\benchmark.exe
+          .\benchmark_driver.exe
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
@@ -154,14 +154,14 @@ jobs:
 
       - name: Run tests
         run: >-
-          ./tests
+          ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
-          ./benchmark
+          ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
@@ -236,14 +236,14 @@ jobs:
 
       - name: Run tests
         run: >-
-          ./tests
+          ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
-          ./benchmark
+          ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
