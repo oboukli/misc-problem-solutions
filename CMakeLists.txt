@@ -94,6 +94,40 @@ source_group(
 )
 
 add_library(
+  forfun_search
+  SHARED
+)
+target_include_directories(
+  forfun_search
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_search
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun/search/binary_search.hpp"
+)
+target_sources(
+  forfun_search
+  PRIVATE
+  "src/forfun/search/binary_search.cpp"
+)
+get_target_property(forfun_search_headers forfun_search HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun/search/"
+  PREFIX "Header files"
+  FILES ${forfun_search_headers}
+)
+get_target_property(forfun_search_sources forfun_search SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun/search/"
+  PREFIX "Source files"
+  FILES ${forfun_search_sources}
+)
+
+add_library(
   forfun_sorting
   SHARED
   "include/forfun/sorting/bubble_sort.hpp"
@@ -166,6 +200,7 @@ target_sources(
   "test/primality_test.cpp"
   "test/product_except_self_test.cpp"
   "test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
+  "test/search/binary_search_test.cpp"
   "test/sonar_test.cpp"
   "test/sorting/bubble_sort_test.cpp"
   "test/sorting/insertion_sort_test.cpp"
@@ -189,6 +224,7 @@ target_link_libraries(
   test_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
 include(CTest)

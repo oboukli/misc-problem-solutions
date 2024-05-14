@@ -31,6 +31,7 @@ and ideas leveraged by this project:
 
 | Problem                         | Standard | Source                                                       |
 | ---                             | ---      | ---                                                          |
+| Binary search                   | C++20    | `include/forfun/search/binary_search.hpp`                    |
 | Bubble sort                     | C++20    | `include/forfun/sorting/bubble_sort.cpp`                     |
 | Contains duplicate              | C++20    | `include/forfun/contains_duplicate.cpp`                      |
 | Factorial                       | C++23    | `include/forfun/factorial.cpp`                               |
