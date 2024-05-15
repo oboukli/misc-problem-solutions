@@ -14,6 +14,38 @@
 
 namespace forfun::search::binary_search {
 
+namespace iterative {
+
+template <std::random_access_iterator Itr, typename Target>
+[[nodiscard]] constexpr auto
+find(Itr lhs, Itr const last, Target const target) noexcept -> Itr
+{
+    using DiffType = std::iter_difference_t<Itr>;
+
+    for (Itr rhs{last}; lhs != rhs;)
+    {
+        auto const distance{std::distance(lhs, rhs)};
+        Itr mid{std::next(lhs, distance / DiffType{2})};
+        if (target < *mid)
+        {
+            rhs = mid;
+        }
+        else if (target > *mid)
+        {
+            std::advance(mid, (distance % DiffType{2}));
+            lhs = mid;
+        }
+        else
+        {
+            return mid;
+        }
+    }
+
+    return last;
+}
+
+} // namespace iterative
+
 namespace recursive {
 
 namespace detail {

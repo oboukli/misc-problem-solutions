@@ -28,6 +28,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in empty collection",
     "[search][binary_search]",
     ((auto find), find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<0>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<0>, int>))
 {
     constexpr int const target{151};
@@ -41,6 +42,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in one-element collection",
     "[search][binary_search]",
     ((auto find), find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<1>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<1>, int>))
 {
     SECTION("One-element collection, containing the target")
@@ -77,6 +79,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in even collection",
     "[search][binary_search]",
     ((auto find), find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<12>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<12>, int>))
 {
     SECTION("Even collection containing the target once")
@@ -208,6 +211,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in odd collection",
     "[search][binary_search]",
     ((auto find), find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<11>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<11>, int>))
 {
     SECTION("Odd collection containing the target once")
