@@ -254,6 +254,7 @@ target_sources(
   "benchmark/palindromic_number_benchmark.cpp"
   "benchmark/primality_benchmark.cpp"
   "benchmark/product_except_self_benchmark.cpp"
+  "benchmark/search/binary_search_benchmark.cpp"
   "benchmark/sonar_benchmark.cpp"
   "benchmark/sorting/bubble_sort_benchmark.cpp"
   "benchmark/sorting/insertion_sort_benchmark.cpp"
@@ -276,5 +277,6 @@ target_link_libraries(
   benchmark_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
