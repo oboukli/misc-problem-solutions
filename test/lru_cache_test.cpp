@@ -12,7 +12,7 @@
 #include "forfun/lru_cache.hpp"
 
 TEMPLATE_TEST_CASE(
-    "LRU Cache",
+    "LRU cache",
     "[lru_cache]",
     (forfun::lrucache::naive::LRUCache),
     (forfun::lrucache::stl::LRUCache))
@@ -153,7 +153,7 @@ TEMPLATE_TEST_CASE(
     }
 }
 
-TEST_CASE("LRU Cache concepts", "[lru_cache]")
+TEST_CASE("LRU cache concepts", "[lru_cache]")
 {
     struct Dummy0 {};
 
@@ -173,25 +173,23 @@ TEST_CASE("LRU Cache concepts", "[lru_cache]")
         }
     };
 
-    struct Dummy3 : public Dummy2 {
+    class Dummy3 : public Dummy2 {
+    public:
         explicit Dummy3(std::size_t c) noexcept : Dummy2{c}
         {
         }
 
-        [[nodiscard]] auto get(std::size_t /*unused*/) noexcept -> int
+        [[nodiscard]] auto get(std::size_t /*unused*/) const noexcept -> int
         {
             return value_;
         }
 
+    private:
         int value_{0};
     };
 
     struct Dummy4 : public Dummy3 {
         explicit Dummy4(std::size_t c) noexcept : Dummy3{c}
-        {
-        }
-
-        auto dummy() noexcept -> void
         {
         }
     };

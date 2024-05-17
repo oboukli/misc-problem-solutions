@@ -55,7 +55,7 @@ auto test(std::size_t const capacity) noexcept -> void
 
 } // namespace
 
-TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
+TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 {
     using namespace forfun::lrucache;
 
@@ -66,7 +66,7 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
         ankerl::nanobench::Bench()
 
             .title(
-                fmt::format("LRU Cache with {} cache items", lrucache_capacity))
+                fmt::format("LRU cache with {} cache items", lrucache_capacity))
             .relative(true)
 
             .run(
@@ -87,7 +87,7 @@ TEST_CASE("forfun::lrucache benchmarking", "[benchmark][lrucache]")
         ankerl::nanobench::Bench()
 
             .title(
-                fmt::format("LRU Cache with {} cache items", lrucache_capacity))
+                fmt::format("LRU cache with {} cache items", lrucache_capacity))
             .relative(true)
 
             .run(

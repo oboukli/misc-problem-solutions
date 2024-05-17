@@ -57,6 +57,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept :
     return result;
 }
 
+// NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
 auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 {
     assert(size_ <= capacity_);
