@@ -116,6 +116,7 @@ TEST_CASE("fibonacci_sequence noexcept_callable", "[fibonacci_sequence]")
             noexcept_callable<decltype([](int, char*) noexcept {}), double, char*>);
 
         STATIC_REQUIRE(
+            // NOLINTNEXTLINE(performance-unnecessary-value-param)
             noexcept_callable<decltype([](int, std::string) noexcept {}), int, std::string>);
         STATIC_REQUIRE(
             noexcept_callable<decltype([](int, std::string&) noexcept {}), int, std::string&>);
@@ -125,6 +126,7 @@ TEST_CASE("fibonacci_sequence noexcept_callable", "[fibonacci_sequence]")
         STATIC_REQUIRE(
             noexcept_callable<decltype([](int) noexcept {}), int>);
         STATIC_REQUIRE(
+            // NOLINTNEXTLINE(performance-unnecessary-value-param)
             noexcept_callable<decltype([](int, char, double, std::string) noexcept {}), int, int, int, std::string>);
         // clang-format on
     }
