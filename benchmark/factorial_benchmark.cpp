@@ -14,13 +14,13 @@
 
 #include "forfun/factorial.hpp"
 
-TEST_CASE("factorial benchmarking", "[benchmark][factorial]")
+TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
 {
     using namespace forfun::factorial;
 
     ankerl::nanobench::Bench()
 
-        .title("forfun::factorial")
+        .title("Factorial")
         .relative(true)
 
         .run(

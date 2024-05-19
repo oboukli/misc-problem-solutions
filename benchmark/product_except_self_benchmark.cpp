@@ -17,7 +17,8 @@
 #include "forfun/product_except_self.hpp"
 
 TEST_CASE(
-    "product_except_self benchmarking", "[benchmark][product_except_self]")
+    "Product of array except self benchmarking",
+    "[benchmark][product_except_self]")
 {
     using namespace forfun::product_except_self;
 

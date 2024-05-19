@@ -15,7 +15,7 @@
 
 #include "forfun/contains_duplicate.hpp"
 
-TEST_CASE("contains_duplicate benchmarking", "[benchmark][contains_duplicate]")
+TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 {
     using namespace forfun::contains_duplicate;
 
@@ -32,7 +32,7 @@ TEST_CASE("contains_duplicate benchmarking", "[benchmark][contains_duplicate]")
 
     ankerl::nanobench::Bench()
 
-        .title("forfun::contains_duplicate")
+        .title("Contains duplicate")
         .relative(true)
 
         .run(

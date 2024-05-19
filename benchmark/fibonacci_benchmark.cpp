@@ -14,7 +14,7 @@
 
 #include "forfun/fibonacci.hpp"
 
-TEST_CASE("fibonacci benchmarking", "[benchmark][fibonacci]")
+TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
 {
     using namespace forfun::fibonacci;
 

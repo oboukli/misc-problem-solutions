@@ -14,7 +14,7 @@
 
 #include "forfun/gcd.hpp"
 
-TEST_CASE("gcd benchmarking", "[benchmark][gcd]")
+TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
 {
     using namespace forfun::gcd::euclid::recursive;
 

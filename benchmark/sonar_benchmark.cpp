@@ -12,7 +12,7 @@
 
 #include "forfun/sonar.hpp"
 
-TEST_CASE("sonar benchmarking", "[benchmark][sonar]")
+TEST_CASE("Sonar benchmarking", "[benchmark][sonar]")
 {
     using namespace forfun::sonar;
 
@@ -28,7 +28,7 @@ TEST_CASE("sonar benchmarking", "[benchmark][sonar]")
 
     ankerl::nanobench::Bench()
 
-        .title("forfun::sonar")
+        .title("Sonar")
         .relative(true)
 
         .run(
