@@ -15,7 +15,7 @@
 
 #include "forfun/sorting/insertion_sort.hpp"
 
-TEST_CASE("insertion_sort benchmarking", "[benchmark][sorting][insertion_sort]")
+TEST_CASE("Insertion sort benchmarking", "[benchmark][sorting][insertion_sort]")
 {
     using namespace forfun::sorting;
 

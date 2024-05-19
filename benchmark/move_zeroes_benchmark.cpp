@@ -15,7 +15,7 @@
 
 #include "forfun/move_zeroes.hpp"
 
-TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
+TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
 {
     using namespace forfun::move_zeroes;
 
@@ -24,7 +24,7 @@ TEST_CASE("move_zeroes benchmarking", "[benchmark][move_zeroes]")
 
     ankerl::nanobench::Bench()
 
-        .title("move_zeroes")
+        .title("Move zeroes")
         .relative(true)
 
         .run(

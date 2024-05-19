@@ -14,7 +14,9 @@
 
 #include "forfun/sub_array_sums.hpp"
 
-TEST_CASE("sub_array_sums benchmarking", "[benchmark][sub_array_sums]")
+TEST_CASE(
+    "Sum of all subarrays of size K benchmarking",
+    "[benchmark][sub_array_sums]")
 {
     using namespace forfun::sub_array_sums;
 

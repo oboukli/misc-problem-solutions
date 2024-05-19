@@ -15,7 +15,7 @@
 
 #include "forfun/sorting/bubble_sort.hpp"
 
-TEST_CASE("bubble_sort benchmarking", "[benchmark][sorting][bubble_sort]")
+TEST_CASE("Bubble sort benchmarking", "[benchmark][sorting][bubble_sort]")
 {
     using namespace forfun::sorting;
 

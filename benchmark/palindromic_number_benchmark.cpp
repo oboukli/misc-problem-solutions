@@ -14,7 +14,7 @@
 
 #include "forfun/palindromic_number.hpp"
 
-TEST_CASE("palindromic_number benchmarking", "[benchmark][palindromic_number]")
+TEST_CASE("Palindromic number benchmarking", "[benchmark][palindromic_number]")
 {
     using namespace forfun::palindromic_number;
 

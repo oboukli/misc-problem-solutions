@@ -14,7 +14,7 @@
 
 #include "forfun/tower_of_hanoi.hpp"
 
-TEST_CASE("tower_of_hanoi benchmarking", "[benchmark][tower_of_hanoi]")
+TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
 {
     using namespace forfun::tower_of_hanoi;
 

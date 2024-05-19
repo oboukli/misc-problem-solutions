@@ -16,7 +16,7 @@
 #include "forfun/first_missing_positive.hpp"
 
 TEST_CASE(
-    "forfun::first_missing_positive benchmarking",
+    "Lowest missing positive integer benchmarking",
     "[benchmark][first_missing_positive]")
 {
     using namespace forfun::first_missing_positive;

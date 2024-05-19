@@ -14,12 +14,12 @@
 
 #include "forfun/majority_element.hpp"
 
-TEST_CASE("majority_element benchmarking", "[benchmark][majority_element]")
+TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
 {
     using namespace forfun::majority_element;
     ankerl::nanobench::Bench()
 
-        .title("Boyer–Moore majority")
+        .title("Boyer-Moore majority")
         .relative(true)
 
         .run(

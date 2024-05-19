@@ -23,7 +23,7 @@ auto dummy_callback(T const n, T& state) noexcept -> void
     state += n;
 }
 
-TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
+TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
 {
     using namespace forfun::fibonacci::sequence;
 
@@ -31,7 +31,7 @@ TEST_CASE("fibonacci::sequence benchmarking", "[benchmark][fibonacci_sequence]")
     using fn_fast_t = decltype(dummy_callback<std::uint_fast32_t>);
 
     ankerl::nanobench::Bench()
-        .title("forfun::fibonacci::sequence")
+        .title("Fibonacci sequence")
         .relative(true)
 
         .run(

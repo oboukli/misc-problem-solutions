@@ -31,7 +31,7 @@ inline constexpr std::string_view const palindrome{
     "oooooooooooooooooooooooooooooooooooooooooooooooooo"
     "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv};
 
-TEST_CASE("forfun::palindrome benchmarking", "[benchmark][palindrome]")
+TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 {
     using namespace forfun::palindrome;
 

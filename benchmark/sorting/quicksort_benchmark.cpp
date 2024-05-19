@@ -15,7 +15,7 @@
 
 #include "forfun/sorting/quicksort.hpp"
 
-TEST_CASE("quicksort benchmarking", "[benchmark][sorting][quicksort]")
+TEST_CASE("Quicksort benchmarking", "[benchmark][sorting][quicksort]")
 {
     using namespace forfun::sorting;
 
