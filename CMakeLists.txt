@@ -94,6 +94,40 @@ source_group(
 )
 
 add_library(
+  forfun_graph
+  SHARED
+)
+target_include_directories(
+  forfun_graph
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_graph
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun/graph/vertex.hpp"
+)
+target_sources(
+  forfun_graph
+  PRIVATE
+  "src/forfun/graph/vertex.cpp"
+)
+get_target_property(forfun_graph_headers forfun_graph HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun/graph/"
+  PREFIX "Header files"
+  FILES ${forfun_graph_headers}
+)
+get_target_property(forfun_graph_sources forfun_graph SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun/graph/"
+  PREFIX "Source files"
+  FILES ${forfun_graph_sources}
+)
+
+add_library(
   forfun_search
   SHARED
 )
@@ -192,6 +226,7 @@ target_sources(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/gcd_test.cpp"
+  "test/graph/vertex_test.cpp"
   "test/lru_cache_test.cpp"
   "test/majority_element_test.cpp"
   "test/move_zeroes_test.cpp"
@@ -224,6 +259,7 @@ target_link_libraries(
   test_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_graph
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
