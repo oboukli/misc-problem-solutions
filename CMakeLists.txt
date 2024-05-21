@@ -107,11 +107,13 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/graph/depth_first_search.hpp"
   "include/forfun/graph/vertex.hpp"
 )
 target_sources(
   forfun_graph
   PRIVATE
+  "src/forfun/graph/depth_first_search.cpp"
   "src/forfun/graph/vertex.cpp"
 )
 get_target_property(forfun_graph_headers forfun_graph HEADER_SET)
@@ -226,6 +228,7 @@ target_sources(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/gcd_test.cpp"
+  "test/graph/depth_first_search_test.cpp"
   "test/graph/vertex_test.cpp"
   "test/lru_cache_test.cpp"
   "test/majority_element_test.cpp"
@@ -283,6 +286,7 @@ target_sources(
   "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/gcd_benchmark.cpp"
+  "benchmark/graph/depth_first_search_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/majority_element_benchmark.cpp"
   "benchmark/move_zeroes_benchmark.cpp"
@@ -313,6 +317,7 @@ target_link_libraries(
   benchmark_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_graph
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )

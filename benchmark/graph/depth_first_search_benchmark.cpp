@@ -1,0 +1,68 @@
+// Copyright (c) Omar Boukli-Hacene. All rights reserved.
+// Distributed under an MIT-style license that can be
+// found in the LICENSE file.
+
+// SPDX-License-Identifier: MIT
+
+#include <catch2/catch_test_macros.hpp>
+
+#include <nanobench.h>
+
+#include <nameof.hpp>
+
+#include "forfun/graph/depth_first_search.hpp"
+#include "forfun/graph/vertex.hpp"
+
+TEST_CASE(
+    "Depth-first search benchmarking", "[benchmark][graph][depth_first_search]")
+{
+    using namespace forfun::graph::depth_first_search;
+
+    using forfun::graph::vertex;
+    using forfun::graph::vertex_visit_state;
+    using forfun::graph::VertexAdjacencyList;
+    using forfun::graph::VertexStateList;
+
+    using Visitor = decltype([](vertex<int>) noexcept -> void {});
+
+    // See graph 1 in docs/graphs.md
+    VertexAdjacencyList<int> const adjacency_list{
+        // clang-format off
+        {{1}, {2}, {3}, {4},},
+        {{2},},
+        {{3},},
+        {{4}, {5},},
+        {{5}, {6},},
+        {{6},},
+        // clang-format on
+    };
+
+    VertexStateList<int> state_list{
+        // clang-format off
+        {{1}, vertex_visit_state::unvisited},
+        {{2}, vertex_visit_state::unvisited},
+        {{3}, vertex_visit_state::unvisited},
+        {{4}, vertex_visit_state::unvisited},
+        {{5}, vertex_visit_state::unvisited},
+        {{6}, vertex_visit_state::unvisited},
+        // clang-format on
+    };
+
+    ankerl::nanobench::Bench()
+
+        .title("Depth-first search")
+        .relative(true)
+
+        .run(
+            NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
+            [&adjacency_list, &state_list]() {
+                recursive::depth_first_search(
+                    adjacency_list,
+                    state_list,
+                    vertex<int>{1},
+                    [](vertex<int>) -> void {});
+                ankerl::nanobench::doNotOptimizeAway(state_list);
+            })
+
+        ;
+}

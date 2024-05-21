@@ -1,0 +1,93 @@
+// Copyright (c) Omar Boukli-Hacene. All rights reserved.
+// Distributed under an MIT-style license that can be
+// found in the LICENSE file.
+
+// SPDX-License-Identifier: MIT
+
+/// Problem source:
+/// https://en.wikipedia.org/wiki/Depth-first_search
+
+#ifndef FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_
+#define FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_
+
+#include <algorithm>
+#include <concepts>
+
+#include "forfun/graph/vertex.hpp"
+
+namespace forfun::graph::depth_first_search {
+
+namespace iterative {
+
+// Placeholder.
+
+} // namespace iterative
+
+namespace recursive {
+
+namespace detail {
+
+template <typename T>
+constexpr auto get_adjacencies(
+    VertexAdjacencyList<T> const& vertex_adjacency_list,
+    vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
+{
+    return std::find_if(
+        vertex_adjacency_list.cbegin(),
+        vertex_adjacency_list.cend(),
+        [v](VertexAdjacencyList<T>::value_type target) {
+            return target.front() == v;
+        });
+}
+
+template <typename T, std::invocable<vertex<T>> Visitor>
+constexpr auto depth_first_search_imp(
+    VertexAdjacencyList<T> const& vertex_adjacency_list,
+    VertexStateList<T>& vertex_state_list,
+    vertex<T> const& start,
+    Visitor const preorder_step) noexcept(noexcept(preorder_step(start)))
+    -> void
+{
+    vertex_state_list[start] = vertex_visit_state::visited;
+    preorder_step(start);
+
+    auto const adjacencies{
+        *detail::get_adjacencies(vertex_adjacency_list, start)};
+
+    for (auto const adjacency : adjacencies)
+    {
+        if (vertex_state_list[adjacency] == vertex_visit_state::unvisited)
+        {
+            depth_first_search_imp(
+                vertex_adjacency_list,
+                vertex_state_list,
+                adjacency,
+                preorder_step);
+        }
+    }
+}
+
+} // namespace detail
+
+template <typename T, std::invocable<vertex<T>> Visitor>
+constexpr auto depth_first_search(
+    VertexAdjacencyList<T> const& vertex_adjacency_list,
+    VertexStateList<T>& vertex_state_list,
+    vertex<T> const& start,
+    Visitor const preorder_step) noexcept(noexcept(preorder_step(start)))
+    -> void
+{
+    if (vertex_adjacency_list.empty())
+    {
+        return;
+    }
+
+    detail::depth_first_search_imp(
+        vertex_adjacency_list, vertex_state_list, start, preorder_step);
+}
+
+} // namespace recursive
+
+} // namespace forfun::graph::depth_first_search
+
+#endif // FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_
