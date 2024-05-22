@@ -4,6 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <cassert>
+#include <vector>
+#include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/graph/depth_first_search.hpp"
@@ -21,7 +24,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
     SECTION("Empty adjacency list (graph)")
     {
-        VertexAdjacencyList<int> adjacency_list{};
+        VertexAdjacencyList<int> const adjacency_list{};
         VertexStateList<int> state_list{};
         constexpr vertex<int> const starting_vertex{0};
 
@@ -33,6 +36,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(adjacency_list);
         CAPTURE(state_list);
+        CAPTURE(starting_vertex);
 
         depth_first_search(
             adjacency_list,
@@ -46,7 +50,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
     SECTION("All graph vertices visited")
     {
-        // See graph 1 in docs/graphs.md
         VertexAdjacencyList<int> const adjacency_list{
             // clang-format off
             {{1}, {2}, {3}, {4},},
@@ -69,6 +72,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(adjacency_list);
         CAPTURE(state_list);
+        CAPTURE(starting_vertex);
 
         depth_first_search(
             adjacency_list,
