@@ -25,7 +25,6 @@ TEST_CASE(
 
     using Visitor = decltype([](vertex<int>) noexcept -> void {});
 
-    // See graph 1 in docs/graphs.md
     VertexAdjacencyList<int> const adjacency_list{
         // clang-format off
         {{1}, {2}, {3}, {4},},
