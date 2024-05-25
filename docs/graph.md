@@ -2,18 +2,33 @@
 
 ## Test graphs
 
-See `test/graph/vertex_test.cpp`
-
 ### Graph 1
 
 ```mermaid
 flowchart TB
+    id1((1)) --- id2((2))
+    id1      --- id3((3))
+    id1      --- id4((4))
+
+    id4      --- id5((5))
+
+    id5      --- id6((6))
+```
+
+### Graph 2
+
+```mermaid
+flowchart TB
     id1((a)) --- id2((b))
-    id1 --- id3((c))
-    id1 --- id4((d))
-    id4 --- id5((e))
-    id5 --- id6((f))
-    id5 --- id7((g))
-    id6 --- id8((h))
-    id7 --- id8
+    id1      --- id3((c))
+    id1      --- id4((d))
+
+    id4      --- id5((e))
+
+    id5      --- id6((f))
+    id5      --- id7((g))
+
+    id6      --- id8((h))
+
+    id7      --- id8
 ```
