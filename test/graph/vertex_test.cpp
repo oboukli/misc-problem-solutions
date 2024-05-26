@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <string>
+#include <string_view>
 
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
@@ -39,12 +39,12 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
     {
         VertexAdjacencyList<int> const adjacency_list{
             // clang-format off
-            {{1}, {2}, {3}, {4},},
-            {{2},},
-            {{3},},
-            {{4}, {5},},
-            {{5}, {6},},
-            {{6},},
+            {{1}, {2}, {3}, {4}},
+            {{2}, {1}},
+            {{3}, {1}},
+            {{4}, {1}, {5}},
+            {{5}, {4}, {6}},
+            {{6}, {5}},
             // clang-format on
         };
         VertexStateList<int> state_list{};
@@ -73,19 +73,19 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 
     SECTION("Graph state list initialized (std::string)")
     {
-        using std::literals::string_literals::operator""s;
+        using std::literals::string_view_literals::operator""sv;
 
-        VertexAdjacencyList<std::string> const adjacency_list{
+        VertexAdjacencyList<std::string_view> const adjacency_list{
             // clang-format off
-            {{"one"s}, {"two"s}, {"three"s}, {"four"s},},
-            {{"two"s},},
-            {{"three"s},},
-            {{"four"s}, {"five"s},},
-            {{"five"s}, {"six"s},},
-            {{"six"s},},
+            {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
+            {{"two"sv}, {"one"sv}},
+            {{"three"sv}, {"one"sv}},
+            {{"four"sv}, {"one"sv}, {"five"sv}},
+            {{"five"sv}, {"four"sv}, {"six"sv}},
+            {{"six"sv}, {"five"sv}},
             // clang-format on
         };
-        VertexStateList<std::string> state_list{};
+        VertexStateList<std::string_view> state_list{};
 
         state_list.reserve(adjacency_list.size());
 
@@ -94,14 +94,14 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 
         init_state_list(adjacency_list, state_list);
 
-        VertexStateList<std::string> const expected_state_list{
+        VertexStateList<std::string_view> const expected_state_list{
             // clang-format off
-            {{"one"s}, vertex_visit_state::unvisited},
-            {{"two"s}, vertex_visit_state::unvisited},
-            {{"three"s}, vertex_visit_state::unvisited},
-            {{"four"s}, vertex_visit_state::unvisited},
-            {{"five"s}, vertex_visit_state::unvisited},
-            {{"six"s}, vertex_visit_state::unvisited},
+            {{"one"sv}, vertex_visit_state::unvisited},
+            {{"two"sv}, vertex_visit_state::unvisited},
+            {{"three"sv}, vertex_visit_state::unvisited},
+            {{"four"sv}, vertex_visit_state::unvisited},
+            {{"five"sv}, vertex_visit_state::unvisited},
+            {{"six"sv}, vertex_visit_state::unvisited},
             // clang-format on
         };
 
