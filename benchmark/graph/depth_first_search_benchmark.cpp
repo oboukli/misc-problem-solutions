@@ -27,12 +27,12 @@ TEST_CASE(
 
     VertexAdjacencyList<int> const adjacency_list{
         // clang-format off
-        {{1}, {2}, {3}, {4},},
-        {{2},},
-        {{3},},
-        {{4}, {5},},
-        {{5}, {6},},
-        {{6},},
+        {{1}, {2}, {3}, {4}},
+        {{2}, {1}},
+        {{3}, {1}},
+        {{4}, {1}, {5}},
+        {{5}, {4}, {6}},
+        {{6}, {5}},
         // clang-format on
     };
 
@@ -55,10 +55,12 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
             [&adjacency_list, &state_list]() {
+                constexpr vertex<int> const starting_vertex{1};
+
                 recursive::depth_first_search(
                     adjacency_list,
                     state_list,
-                    vertex<int>{1},
+                    starting_vertex,
                     [](vertex<int>) -> void {});
                 ankerl::nanobench::doNotOptimizeAway(state_list);
             })
