@@ -19,7 +19,7 @@ jobs:
       RELEASE_BUILD_PRESET_NAME: windows-x64-release
       DEBUG_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
       RELEASE_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
       - name: Check out repository
@@ -88,12 +88,14 @@ jobs:
   linux:
     name: Build and test on Ubuntu
     env:
+      CC: /usr/bin/gcc-14
+      CXX: /usr/bin/g++-14
       CONFIGURE_PRESET_NAME: generic
       DEBUG_BUILD_PRESET_NAME: generic-debug
       RELEASE_BUILD_PRESET_NAME: generic-release
       DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Debug
       RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Release
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Install Ninja
@@ -173,9 +175,14 @@ jobs:
       RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
       BENCHMARK_BUILD_CONFIGURATION: Release
       TEST_BUILD_CONFIGURATION: Debug
+      XCODE_RELEASE: "15.4"
+
     runs-on: macos-latest
 
     steps:
+      - name: Set default Xcode release
+        run: sudo xcode-select -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
+
       - name: Check out repository
         uses: actions/checkout@v4
         with:
