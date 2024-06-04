@@ -7,8 +7,10 @@
 #ifndef FORFUN_GRAPH_VERTEX_HPP_
 #define FORFUN_GRAPH_VERTEX_HPP_
 
+#include <concepts>
 #include <cstddef>
 #include <functional>
+#include <ostream>
 #include <unordered_map>
 #include <vector>
 
@@ -55,6 +57,17 @@ auto init_state_list(
     {
         state_list.insert({adjacencies.front(), vertex_visit_state::unvisited});
     }
+}
+
+template <typename T>
+    requires requires(std::ostream os, vertex<T> v) {
+        { os << v.value } -> std::convertible_to<std::ostream&>;
+    }
+auto operator<<(std::ostream& os, vertex<T> const& v) -> std::ostream&
+{
+    os << v.value;
+
+    return os;
 }
 
 } // namespace forfun::graph

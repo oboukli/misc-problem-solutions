@@ -4,12 +4,28 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <sstream>
 #include <string_view>
 
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/graph/vertex.hpp"
+
+TEST_CASE("Vertex conversion", "[graph][vertex]")
+{
+    SECTION("Covert vertex to ostream")
+    {
+        using std::literals::string_view_literals::operator""sv;
+
+        std::ostringstream buffer{};
+
+        forfun::graph::vertex<int> const v{17};
+        forfun::graph::operator<<(buffer, v);
+
+        REQUIRE(buffer.str() == "17"sv);
+    }
+}
 
 TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 {
