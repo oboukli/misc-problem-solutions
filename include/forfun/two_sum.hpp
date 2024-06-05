@@ -21,29 +21,28 @@
 
 namespace forfun::two_sum {
 
-template <std::random_access_iterator RandomIt>
+template <std::input_iterator InputItr, std::sentinel_for<InputItr> Sentinel>
 [[nodiscard]] constexpr auto two_sum(
-    RandomIt const first,
-    RandomIt const end,
-    std::iter_value_t<RandomIt> const target) noexcept
-    -> std::array<std::iter_difference_t<RandomIt>, 2>
+    InputItr itr,
+    Sentinel const end,
+    std::iter_value_t<InputItr> const target) noexcept
+    -> std::array<InputItr, 2>
 {
-    for (auto it_i{first}; it_i != end; ++it_i)
+    for (; itr != end; ++itr)
     {
-        auto const t{target - (*it_i)};
+        auto const t{target - (*itr)};
 
-        for (auto it_j{it_i + 1}; it_j != end; ++it_j)
+        auto itr_j{itr};
+        for (++itr_j; itr_j != end; ++itr_j)
         {
-            if ((*it_j) == t)
+            if ((*itr_j) == t)
             {
-                return {it_i - first, it_j - first};
+                return {itr, itr_j};
             }
         }
     }
 
-    using DiffType = std::iter_difference_t<RandomIt>;
-
-    return {DiffType{-1}, DiffType{-1}};
+    return {end, end};
 }
 
 } // namespace forfun::two_sum
