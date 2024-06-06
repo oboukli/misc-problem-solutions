@@ -20,6 +20,20 @@ TEST_CASE(
 {
     using namespace forfun::sub_array_sums;
 
+    constexpr std::array const numbers{
+        // clang-format off
+        1, 1, 1, 1, 1, 1, 1, 1,
+        2, 2, 2, 2, 2, 2, 2, 2,
+        3, 3, 3, 3, 3, 3, 3, 3,
+        4, 4, 4, 4, 4, 4, 4, 4,
+        5, 5, 5, 5, 5, 5, 5, 5,
+        6, 6, 6, 6, 6, 6, 6, 6,
+        7, 7, 7, 7, 7, 7, 7, 7,
+        8, 8, 8, 8, 8, 8, 8, 8,
+        // clang-format on
+    };
+    std::array<int, 8> sums{};
+
     ankerl::nanobench::Bench()
 
         .title("Sum of all subarrays of size K")
@@ -28,22 +42,9 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
-            []() {
-                static constexpr std::array const numbers{
-                    // clang-format off
-                    1, 1, 1, 1, 1, 1, 1, 1,
-                    2, 2, 2, 2, 2, 2, 2, 2,
-                    3, 3, 3, 3, 3, 3, 3, 3,
-                    4, 4, 4, 4, 4, 4, 4, 4,
-                    5, 5, 5, 5, 5, 5, 5, 5,
-                    6, 6, 6, 6, 6, 6, 6, 6,
-                    7, 7, 7, 7, 7, 7, 7, 7,
-                    8, 8, 8, 8, 8, 8, 8, 8,
-                    // clang-format on
-                };
-                std::array<int, 8> sums{};
-
-                sum_each(numbers, sums, 8);
+            [&numbers, &sums]() {
+                decltype(numbers)::size_type const volatile sub_size{8};
+                sum_each(numbers, sums, sub_size);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);
             })
