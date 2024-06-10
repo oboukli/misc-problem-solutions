@@ -21,12 +21,14 @@ namespace forfun::sub_array_sums {
 template <typename Nums, typename Sums>
 // clang-format off
     requires std::contiguous_iterator<typename Nums::iterator>
-        and std::contiguous_iterator<typename Sums::iterator>
+        and std::output_iterator<
+            typename Sums::iterator,
+            typename Nums::value_type>
         and std::same_as<typename Nums::size_type, typename Sums::size_type>
-        and requires(Nums::value_type n, Sums::value_type s) {
-                s += n;
-                s -= n;
-            }
+        and requires(Nums::value_type num, Sums::value_type sum) {
+            sum += num;
+            sum -= num;
+        }
 // clang-format on
 constexpr auto sum_each(
     Nums const& nums,
@@ -45,9 +47,8 @@ constexpr auto sum_each(
     }
 
     ValueType sub_sum{};
-
-    auto const nums_size{nums.size()};
     auto nums_it{nums.cbegin()};
+    auto const nums_size{nums.size()};
 
     // Calculate result for the first output element.
     auto const nums_bound{std::min(sub_size, nums_size)};

@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <list>
 #include <string>
 #include <vector>
 
@@ -266,6 +267,21 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
         REQUIRE(sums == expected);
     }
 
+    SECTION("Mixed iterators")
+    {
+        static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
+        std::list<int> sums{-1, -1, -1, -1, -1, -1};
+        std::list<int> const expected{3, 4, 5, 6, -1, -1};
+        static constexpr auto const sub_size{3};
+
+        CAPTURE(numbers);
+        CAPTURE(sums.size());
+        CAPTURE(sub_size);
+        sum_each(numbers, sums, sub_size);
+
+        REQUIRE(sums == expected);
+    }
+
     SECTION("8 of 64 (benchmark case)")
     {
         constexpr std::array const numbers{
@@ -346,6 +362,8 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums][static]")
             template_specialization<std::vector<int>, std::array<int, 0>>);
         STATIC_REQUIRE(
             template_specialization<std::array<int, 0>, std::vector<int>>);
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::list<int>>);
 
         STATIC_REQUIRE(
             template_specialization<std::vector<int>, std::vector<unsigned>>);
@@ -377,6 +395,8 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums][static]")
             std::vector<std::string>,
             std::vector<int>>);
         // clang-format on
+        STATIC_REQUIRE_FALSE(
+            template_specialization<std::list<int>, std::array<int, 0>>);
 
         STATIC_REQUIRE_FALSE(
             template_specialization<std::vector<int>, std::vector<Dummy>>);
