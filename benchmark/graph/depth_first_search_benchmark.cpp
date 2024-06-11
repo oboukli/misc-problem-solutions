@@ -36,17 +36,6 @@ TEST_CASE(
         // clang-format on
     };
 
-    VertexStateList<int> state_list{
-        // clang-format off
-        {{1}, vertex_visit_state::unvisited},
-        {{2}, vertex_visit_state::unvisited},
-        {{3}, vertex_visit_state::unvisited},
-        {{4}, vertex_visit_state::unvisited},
-        {{5}, vertex_visit_state::unvisited},
-        {{6}, vertex_visit_state::unvisited},
-        // clang-format on
-    };
-
     ankerl::nanobench::Bench()
 
         .title("Depth-first search")
@@ -54,8 +43,19 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
-            [&adjacency_list, &state_list]() {
+            [&adjacency_list]() {
                 constexpr vertex<int> const starting_vertex{1};
+
+                VertexStateList<int> state_list{
+                    // clang-format off
+                    {{1}, vertex_visit_state::unvisited},
+                    {{2}, vertex_visit_state::unvisited},
+                    {{3}, vertex_visit_state::unvisited},
+                    {{4}, vertex_visit_state::unvisited},
+                    {{5}, vertex_visit_state::unvisited},
+                    {{6}, vertex_visit_state::unvisited},
+                    // clang-format on
+                };
 
                 recursive::depth_first_search(
                     adjacency_list,
