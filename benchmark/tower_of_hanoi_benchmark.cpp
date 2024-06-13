@@ -30,9 +30,11 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
             NAMEOF_RAW(recursive::toh<Rod, Monk, std::size_t>).c_str(),
             []() {
                 static constexpr std::size_t const num_disks{4};
+                // NOLINTBEGIN(misc-const-correctness)
                 Rod src{};
                 Rod des{};
                 Rod aux{};
+                // NOLINTEND(misc-const-correctness)
 
                 forfun::tower_of_hanoi::recursive::toh(
                     src,
