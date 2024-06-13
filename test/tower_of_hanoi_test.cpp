@@ -45,14 +45,17 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Empty")
     {
+        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> src_rod{};
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
+        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.empty());
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
 
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
@@ -64,18 +67,22 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("One disk")
     {
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
         auto const disks = {1};
         push_range(src_rod, disks);
 
+        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
+        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 1);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -89,18 +96,22 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Two disks")
     {
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
         auto const disks = {2, 1};
         push_range(src_rod, disks);
 
+        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
+        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 2);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -114,18 +125,22 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Three disks")
     {
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
         auto const disks = {3, 2, 1};
         push_range(src_rod, disks);
 
+        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
+        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 3);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -139,18 +154,22 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Four disks")
     {
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
         auto const disks = {4, 3, 2, 1};
         push_range(src_rod, disks);
 
+        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
+        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 4);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
+        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -168,10 +187,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         {
             static constexpr unsigned int const num_disks{0};
 
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
             unsigned int count{0};
+            // NOLINTEND(misc-const-correctness)
 
             forfun::tower_of_hanoi::recursive::toh(
                 src_rod,
@@ -187,10 +208,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         {
             static constexpr unsigned int const num_disks{1};
 
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
             unsigned int count{0};
+            // NOLINTEND(misc-const-correctness)
 
             forfun::tower_of_hanoi::recursive::toh(
                 src_rod,
@@ -206,10 +229,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         {
             static constexpr unsigned int const num_disks{2};
 
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
             unsigned int count{0};
+            // NOLINTEND(misc-const-correctness)
 
             forfun::tower_of_hanoi::recursive::toh(
                 src_rod,
@@ -225,10 +250,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         {
             static constexpr unsigned int const num_disks{4};
 
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
             unsigned int count{0};
+            // NOLINTEND(misc-const-correctness)
 
             forfun::tower_of_hanoi::recursive::toh(
                 src_rod,
@@ -245,9 +272,11 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         SECTION("noexcept(false)")
         {
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
+            // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE_FALSE(
                 noexcept(forfun::tower_of_hanoi::recursive::toh(
@@ -260,9 +289,11 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
         SECTION("noexcept(true)")
         {
+            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
+            // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE(noexcept(forfun::tower_of_hanoi::recursive::toh(
                 src_rod,
