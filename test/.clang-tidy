@@ -1,0 +1,8 @@
+---
+Checks: '
+  -cppcoreguidelines-avoid-magic-numbers,
+  -google-build-using-namespace,
+  -google-explicit-constructor,
+  '
+InheritParentConfig: true
+...
