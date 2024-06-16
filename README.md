@@ -52,6 +52,7 @@ and ideas leveraged by this project:
 | Primality test                  | C++20    | `include/forfun/primality.hpp`                               |
 | Product except self             | C++20    | `include/forfun/product_except_self.cpp`                     |
 | Quicksort                       | C++20    | `include/forfun/sorting/quicksort.cpp`                       |
+| Set matrix zeroes               | C++17    | `src/forfun/set_matrix_zeroes.cpp`                           |
 | Sub array sums                  | C++20    | `include/forfun/sub_array_sums.cpp`                          |
 | Tower of Hanoi                  | C++20    | `include/forfun/tower_of_hanoi.hpp`                          |
 | Trie                            | C++20    | `include/forfun/trie.cpp`                                    |
