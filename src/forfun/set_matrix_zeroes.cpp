@@ -11,6 +11,99 @@
 
 namespace forfun::set_matrix_zeroes {
 
+namespace iterator_based_sol1 {
+
+auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
+{
+    using DiffC = std::vector<std::vector<int>>::value_type::difference_type;
+
+    auto const matrix_begin{matrix.begin()};
+    auto const matrix_end{matrix.end()};
+
+    if (matrix_begin == matrix_end)
+    {
+        return;
+    }
+
+    if (matrix_begin->size() == 0)
+    {
+        return;
+    }
+
+    auto const first_element_itr{matrix_begin->begin()};
+    bool is_first_col_zeroed{false};
+
+    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    {
+        assert(matrix_begin->size() == itr_r->size());
+
+        auto const itr_c_begin{itr_r->begin()};
+        auto const itr_c_end{itr_r->end()};
+        DiffC col_offset{0};
+        for (auto itr_c{itr_c_begin}; itr_c != itr_c_end; ++itr_c)
+        {
+            if (*itr_c == 0)
+            {
+                *itr_c_begin = 0;
+
+                if (col_offset == 0)
+                {
+                    is_first_col_zeroed = true;
+                }
+                else
+                {
+                    *(first_element_itr + col_offset) = 0;
+                }
+            }
+            ++col_offset;
+        }
+    }
+
+    // Zero all columns, except for the first one.
+    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    {
+        auto const itr_c_end{itr_r->end()};
+        DiffC col_offset{1};
+        // clang-format off
+        for (auto itr_c{itr_r->begin() + col_offset}; itr_c != itr_c_end;
+            ++itr_c)
+        // clang-format on
+        {
+            if (*(first_element_itr + col_offset) == 0)
+            {
+                *itr_c = 0;
+            }
+
+            ++col_offset;
+        }
+    }
+
+    // Zero all rows.
+    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    {
+        if (itr_r->front() == 0)
+        {
+            auto const itr_c_end{itr_r->end()};
+            for (auto itr_c{itr_r->begin()}; itr_c != itr_c_end; ++itr_c)
+            {
+                *itr_c = 0;
+            }
+        }
+    }
+
+    if (is_first_col_zeroed)
+    {
+        // Zero first column.
+        for (auto itr{matrix_begin}; itr != matrix_end; ++itr)
+        {
+            *itr->begin() = 0;
+        }
+    }
+}
+
+} // namespace iterator_based_sol1
+
+
 namespace offset_based {
 
 auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void

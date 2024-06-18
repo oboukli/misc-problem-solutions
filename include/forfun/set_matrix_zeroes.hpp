@@ -14,6 +14,13 @@
 
 namespace forfun::set_matrix_zeroes {
 
+namespace iterator_based_sol1 {
+
+
+auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void;
+
+}
+
 namespace offset_based {
 
 auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void;
