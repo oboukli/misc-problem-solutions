@@ -26,6 +26,7 @@ and ideas leveraged by this project:
 - Microsoft DevSkim
 - EditorConfig
 - Markdown
+- Diagraming with Mermaid
 
 ## Index
 
@@ -45,7 +46,7 @@ and ideas leveraged by this project:
 | Move zeroes                     | C++20    | `include/forfun/move_zeroes.cpp`                             |
 | Multiples of three or five      | C++17    | `include/forfun/project_euler/p0001_multiples_of_3_or_5.cpp` |
 | Nth Fibonacci number            | C++20    | `include/forfun/fibonacci.cpp`                               |
-| Number of Ships in a Rectangle  | C++20    | `src/forfun/sonar.cpp`                                       |
+| Number of ships in a rectangle  | C++20    | `src/forfun/sonar.cpp`                                       |
 | Palindrome                      | C++17    | `include/forfun/palindrome.cpp`                              |
 | Palindrome (in C)               | C90      | `src/forfun_c/palindrome.c`                                  |
 | Palindromic number              | C++20    | `src/forfun/palindromic_number.cpp`                          |
@@ -57,7 +58,7 @@ and ideas leveraged by this project:
 | Tower of Hanoi                  | C++20    | `include/forfun/tower_of_hanoi.hpp`                          |
 | Trie                            | C++20    | `include/forfun/trie.cpp`                                    |
 | Two sum                         | C++20    | `include/forfun/two_sum.cpp`                                 |
-| Two-pass Boyer–Moore majority   | C++20    | `include/forfun/majority_element.hpp`                        |
+| Two-pass Boyer-Moore majority   | C++20    | `include/forfun/majority_element.hpp`                        |
 
 ## Disclaimer
 
