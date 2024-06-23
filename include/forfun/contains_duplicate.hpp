@@ -14,15 +14,15 @@
 
 namespace forfun::contains_duplicate {
 
-template <std::contiguous_iterator Iter>
+template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
-contains_duplicate(Iter it, Iter const last) noexcept -> bool
+contains_duplicate(Iter itr, Sentinel const last) noexcept -> bool
 {
-    for (; it != last; ++it)
+    for (; itr != last; ++itr)
     {
-        auto const val{*it};
-
-        for (auto it_j{std::next(it)}; it_j != last; ++it_j)
+        auto const val{*itr};
+        auto it_j{itr};
+        for (++it_j; it_j != last; ++it_j)
         {
             if ((*it_j) == val)
             {
