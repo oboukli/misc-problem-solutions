@@ -16,7 +16,7 @@ TEST_CASE("Vertex conversion", "[graph][vertex]")
 {
     SECTION("Covert vertex to ostream")
     {
-        using std::literals::string_view_literals::operator""sv;
+        using std::string_view_literals::operator""sv;
 
         std::ostringstream buffer{};
 
@@ -89,7 +89,7 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 
     SECTION("Graph state list initialized (std::string)")
     {
-        using std::literals::string_view_literals::operator""sv;
+        using std::string_view_literals::operator""sv;
 
         VertexAdjacencyList<std::string_view> const adjacency_list{
             // clang-format off
