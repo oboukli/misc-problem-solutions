@@ -17,17 +17,7 @@ TEST_CASE("Trie", "[trie]")
 {
     using namespace forfun::trie::experimental;
 
-#ifdef _MSC_VER
-// Compiler known issue
-// warning C4455: 'operator ""sv': literal suffix identifiers that do not start
-// with an underscore are reserved
-#pragma warning(push)
-#pragma warning(disable : 4455)
-#endif
     using std::string_view_literals::operator""sv;
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
 
     // clang-format off
     SECTION("Types")
