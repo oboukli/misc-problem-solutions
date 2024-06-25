@@ -183,11 +183,7 @@ TEMPLATE_TEST_CASE_SIG(
             std::uint64_t{0},
         };
 
-#ifndef _MSC_VER
-        // The following line breaks MSVC 14.37.32822 (x64) when nums is defined
-        // without explicitly specifying the template's arguments.
         static_assert(nums.size() == std::size_t{16});
-#endif
 
         static constexpr std::array<std::uint64_t, 16> const expected{
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1'307'674'368'000};
