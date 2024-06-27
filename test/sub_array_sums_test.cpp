@@ -240,7 +240,7 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION("3 of 6, take all (std::array)")
     {
         static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
-        std::array<int, 4> sums{3, 4, 5, 6};
+        std::array sums{3, 4, 5, 6};
         static constexpr std::array const expected{3, 4, 5, 6};
         static constexpr auto const sub_size{3};
 
@@ -255,7 +255,7 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION("3 of 6, take all, do not mutate excess (std::array)")
     {
         static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
-        std::array<int, 6> sums{-1, -1, -1, -1, -1, -1};
+        std::array sums{-1, -1, -1, -1, -1, -1};
         static constexpr std::array const expected{3, 4, 5, 6, -1, -1};
         static constexpr auto const sub_size{3};
 
@@ -270,8 +270,8 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION("Mixed iterators")
     {
         static constexpr std::array const numbers{1, 1, 1, 2, 2, 2};
-        std::list<int> sums{-1, -1, -1, -1, -1, -1};
-        std::list<int> const expected{3, 4, 5, 6, -1, -1};
+        std::list sums{-1, -1, -1, -1, -1, -1};
+        std::list const expected{3, 4, 5, 6, -1, -1};
         static constexpr auto const sub_size{3};
 
         CAPTURE(numbers);
