@@ -188,7 +188,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("char")
     {
-        std::array<char, 2> test_input{char{1}, char{2}};
+        std::array test_input{char{1}, char{2}};
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
             == char{3});
@@ -206,7 +206,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("unsigned int")
     {
-        std::array<unsigned int, 3> test_input{1U, 2U, 4U};
+        std::array test_input{1U, 2U, 4U};
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end()) == 3U);
     }
@@ -223,7 +223,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("int")
     {
-        std::array<int, 3> test_input{1, 2, 4};
+        std::array test_input{1, 2, 4};
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end()) == 3);
     }

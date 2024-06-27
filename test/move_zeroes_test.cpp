@@ -53,7 +53,7 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::move_zeroes::stl::move_zeroes<std::array<int, 5>::iterator>))
 {
     static constexpr std::array const expected{1, 3, 12, 0, 0};
-    std::array<int, 5> test_input{0, 1, 0, 3, 12};
+    std::array test_input{0, 1, 0, 3, 12};
 
     CAPTURE(test_input);
 
