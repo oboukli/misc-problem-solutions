@@ -13,24 +13,25 @@
 #include <algorithm>
 #include <concepts>
 #include <iterator>
+#include <type_traits>
 
 namespace forfun::move_zeroes {
 
 namespace sol1 {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-constexpr auto move_zeroes(RandomIt it, RandomIt const end) noexcept -> void
+template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
+    requires std::integral<std::iter_value_t<Itr>>
+constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
 
-    auto it_j{it};
-    for (; it != end; ++it)
+    auto itr_j{itr};
+    for (; itr != end; ++itr)
     {
-        if (*it != ValType{0})
+        if (*itr != ValType{0})
         {
-            std::iter_swap(it, it_j);
-            ++it_j;
+            std::iter_swap(itr, itr_j);
+            ++itr_j;
         }
     }
 }
@@ -39,25 +40,25 @@ constexpr auto move_zeroes(RandomIt it, RandomIt const end) noexcept -> void
 
 namespace sol2 {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-constexpr auto move_zeroes(RandomIt it, RandomIt const end) noexcept -> void
+template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
+    requires std::integral<std::iter_value_t<Itr>>
+constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
 
-    auto it_j{it};
-    for (; it != end; ++it)
+    auto itr_j{itr};
+    for (; itr != end; ++itr)
     {
-        if (*it != ValType{0})
+        if (*itr != ValType{0})
         {
-            *it_j = *it;
-            ++it_j;
+            *itr_j = *itr;
+            ++itr_j;
         }
     }
 
-    for (; it_j != end; ++it_j)
+    for (; itr_j != end; ++itr_j)
     {
-        *it_j = ValType{0};
+        *itr_j = ValType{0};
     }
 }
 
@@ -65,23 +66,23 @@ constexpr auto move_zeroes(RandomIt it, RandomIt const end) noexcept -> void
 
 namespace stl {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-constexpr auto move_zeroes(RandomIt it, RandomIt const end) noexcept -> void
+template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
+    requires std::integral<std::iter_value_t<Itr>>
+constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
 
-    auto it_j{it};
-    for (; it != end; ++it)
+    auto itr_j{itr};
+    for (; itr != end; ++itr)
     {
-        if (*it != ValType{0})
+        if (*itr != ValType{0})
         {
-            *it_j = *it;
-            ++it_j;
+            *itr_j = *itr;
+            ++itr_j;
         }
     }
 
-    std::fill(it_j, end, ValType{0});
+    std::fill(itr_j, end, ValType{0});
 }
 
 } // namespace stl
