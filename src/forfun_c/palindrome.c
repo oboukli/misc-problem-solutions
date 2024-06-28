@@ -9,36 +9,65 @@ found in the LICENSE file.
 #include "forfun_c/palindrome.h"
 
 #include <ctype.h>
+#include <stddef.h>
 
-int is_palindrome(char const* const str, size_t const size)
+/* Adhere to C89/C90, for the fun of it. */
+
+#if __clang__
+#pragma clang attribute push( \
+    __attribute__(( \
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow"))), \
+    apply_to = function)
+#endif /* __clang__ */
+int is_palindrome(char const* str, size_t const length)
 {
-    size_t const mid = size / 2;
+    char const* const mid = str + (length / 2U);
 
-    size_t i;
-    for (i = 0; i < mid; ++i)
+    /* Two insulated and harmless overflows when length is zero. */
+    char const* str_rhs = str + (length - 1U);
+
+    for (; str != mid; ++str)
     {
-        if (str[i] != str[size - 1 - i])
+        if (*str != *str_rhs)
         {
             return 0;
         }
+
+        --str_rhs;
     }
 
     return 1;
 }
+#if __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
 
-int is_palindrome_ci(char const* const str, size_t const size)
+#if __clang__
+#pragma clang attribute push( \
+    __attribute__(( \
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow"))), \
+    apply_to = function)
+#endif /* __clang__ */
+int is_palindrome_ci(char const* str, size_t const length)
 {
-    size_t const mid = size / 2;
+    char const* const mid = str + (length / 2U);
 
-    size_t i;
-    for (i = 0; i < mid; ++i)
+    /* Two insulated and harmless overflows when length is zero. */
+    char const* str_rhs = str + (length - 1U);
+
+    for (; str != mid; ++str)
     {
-        if (tolower((unsigned char)str[i])
-            != tolower((unsigned char)str[size - 1 - i]))
+        if (tolower((unsigned char)(*str))
+            != tolower((unsigned char)(*str_rhs)))
         {
             return 0;
         }
+
+        --str_rhs;
     }
 
     return 1;
 }
+#if __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
