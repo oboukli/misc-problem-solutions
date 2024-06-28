@@ -30,7 +30,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(base::lowest_missing<Itr>).c_str(),
+            NAMEOF_RAW(base::lowest_missing<Itr, Itr>).c_str(),
             []() {
                 std::array nums{
                     // clang-format off
@@ -57,7 +57,7 @@ TEST_CASE(
             })
 
         .run(
-            NAMEOF_RAW(fast::lowest_missing<Itr>).c_str(),
+            NAMEOF_RAW(fast::lowest_missing<Itr, Itr>).c_str(),
             []() {
                 std::array nums{
                     // clang-format off
