@@ -26,12 +26,11 @@ namespace forfun::first_missing_positive {
 
 namespace detail {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-constexpr auto
-quasi_sort(RandomIt const first, RandomIt const src) noexcept -> void
+template <std::contiguous_iterator Itr>
+    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
+constexpr auto quasi_sort(Itr const first, Itr const src) noexcept -> void
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::iter_value_t<Itr>;
 
     if (auto const n{*src}; n > ValType{0})
     {
@@ -50,39 +49,38 @@ quasi_sort(RandomIt const first, RandomIt const src) noexcept -> void
 
 namespace base {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-[[nodiscard]] constexpr auto
-lowest_missing(RandomIt const begin, RandomIt const end) noexcept
-    -> std::iter_value_t<RandomIt>
+template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
+    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
+[[nodiscard]] constexpr auto lowest_missing(
+    Itr const begin, Sentinel const end) noexcept -> std::iter_value_t<Itr>
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::iter_value_t<Itr>;
 
     auto max{end - begin};
 
-    for (auto it{begin}; it != end; ++it)
+    for (auto itr{begin}; itr != end; ++itr)
     {
-        if (auto const current{*it}; current < ValType{1})
+        if (auto const current{*itr}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *it = ValType{0};
+            *itr = ValType{0};
         }
         else
         {
-            detail::quasi_sort(begin, it);
+            detail::quasi_sort(begin, itr);
         }
     }
 
     ValType min_num{1};
 
-    auto const endIt{begin + max};
-    for (auto it{begin}; it != endIt; ++it)
+    auto const endItr{begin + max};
+    for (auto itr{begin}; itr != endItr; ++itr)
     {
-        if (*it == min_num)
+        if (*itr == min_num)
         {
             ++min_num;
         }
@@ -95,36 +93,35 @@ lowest_missing(RandomIt const begin, RandomIt const end) noexcept
 
 namespace fast {
 
-template <std::random_access_iterator RandomIt>
-    requires std::integral<std::iter_value_t<RandomIt>>
-[[nodiscard]] constexpr auto
-lowest_missing(RandomIt const begin, RandomIt const end) noexcept
-    -> std::iter_value_t<RandomIt>
+template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
+    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
+[[nodiscard]] constexpr auto lowest_missing(
+    Itr const begin, Sentinel const end) noexcept -> std::iter_value_t<Itr>
 {
-    using ValType = std::iter_value_t<RandomIt>;
+    using ValType = std::iter_value_t<Itr>;
 
     auto max{end - begin};
 
-    for (auto it{begin}; it != end; ++it)
+    for (auto itr{begin}; itr != end; ++itr)
     {
-        if (auto const current{*it}; current < ValType{1})
+        if (auto const current{*itr}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *it = ValType{0};
+            *itr = ValType{0};
         }
         else
         {
-            detail::quasi_sort(begin, it);
+            detail::quasi_sort(begin, itr);
         }
     }
 
     ValType min_num{1};
 
-    for (std::iter_difference_t<RandomIt> i{0}; i < max; ++i)
+    for (std::iter_difference_t<Itr> i{0}; i < max; ++i)
     {
         if (begin[i] == min_num)
         {
