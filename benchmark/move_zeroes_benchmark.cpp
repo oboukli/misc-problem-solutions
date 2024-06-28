@@ -28,7 +28,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(sol1::move_zeroes<Itr>).c_str(),
+            NAMEOF_RAW(sol1::move_zeroes<Itr, Itr>).c_str(),
             []() {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
@@ -47,7 +47,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
             })
 
         .run(
-            NAMEOF_RAW(sol2::move_zeroes<Itr>).c_str(),
+            NAMEOF_RAW(sol2::move_zeroes<Itr, Itr>).c_str(),
             []() {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
@@ -65,7 +65,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
                 ankerl::nanobench::doNotOptimizeAway(nums);
             })
 
-        .run(NAMEOF_RAW(stl::move_zeroes<Itr>).c_str(), []() {
+        .run(NAMEOF_RAW(stl::move_zeroes<Itr, Itr>).c_str(), []() {
             std::array nums{
                 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                 1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
