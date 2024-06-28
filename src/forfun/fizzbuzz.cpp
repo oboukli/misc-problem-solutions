@@ -13,29 +13,29 @@ namespace forfun::fizzbuzz {
 
 [[nodiscard]] auto fizzbuzz(int const n) noexcept -> std::string
 {
-    std::ostringstream buffer;
+    std::ostringstream stream;
     for (int i{1}; i <= n; ++i)
     {
-        bool f{true};
+        bool is_numeric{true};
 
-        if (i % 3 == 0)
+        if ((i % 3) == 0)
         {
-            buffer << "Fizz";
-            f = false;
+            stream << "Fizz";
+            is_numeric = false;
         }
 
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
-        if (i % 5 == 0)
+        if ((i % 5) == 0)
         {
-            buffer << "Buzz";
+            stream << "Buzz";
         }
-        else if (f)
+        else if (is_numeric)
         {
-            buffer << i;
+            stream << i;
         }
     }
 
-    return buffer.str();
+    return stream.str();
 }
 
 } // namespace forfun::fizzbuzz
