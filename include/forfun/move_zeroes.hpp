@@ -13,7 +13,6 @@
 #include <algorithm>
 #include <concepts>
 #include <iterator>
-#include <type_traits>
 
 namespace forfun::move_zeroes {
 
@@ -23,7 +22,7 @@ template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
     requires std::integral<std::iter_value_t<Itr>>
 constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
+    using ValType = std::iter_value_t<Itr>;
 
     auto itr_j{itr};
     for (; itr != end; ++itr)
@@ -44,7 +43,7 @@ template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
     requires std::integral<std::iter_value_t<Itr>>
 constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
+    using ValType = std::iter_value_t<Itr>;
 
     auto itr_j{itr};
     for (; itr != end; ++itr)
@@ -70,7 +69,7 @@ template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
     requires std::integral<std::iter_value_t<Itr>>
 constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 {
-    using ValType = std::remove_cv_t<std::iter_value_t<Itr>>;
+    using ValType = std::iter_value_t<Itr>;
 
     auto itr_j{itr};
     for (; itr != end; ++itr)

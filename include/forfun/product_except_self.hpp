@@ -92,7 +92,7 @@ constexpr auto product_except_self(
     OutItr const products_itr,
     OutItrSentinel const products_last) noexcept -> void
 {
-    using ValType = std::decay_t<std::iter_value_t<OutItr>>;
+    using ValType = std::iter_value_t<OutItr>;
     using DiffType = std::iter_difference_t<InItr>;
 
     if (first == last)
