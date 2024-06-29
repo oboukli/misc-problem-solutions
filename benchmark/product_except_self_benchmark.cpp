@@ -28,7 +28,7 @@ TEST_CASE(
         // clang-format on
     };
 
-    using CnstItr = decltype(input)::const_iterator;
+    using ConstItr = decltype(input)::const_iterator;
     using Itr = std::remove_const_t<decltype(input)>::iterator;
 
     ankerl::nanobench::Bench()
@@ -37,7 +37,8 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(alg1::product_except_self<CnstItr, Itr>).c_str(),
+            NAMEOF_RAW(alg1::product_except_self<ConstItr, ConstItr, Itr, Itr>)
+                .c_str(),
             []() {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
@@ -47,7 +48,8 @@ TEST_CASE(
                 ankerl::nanobench::doNotOptimizeAway(result);
             })
         .run(
-            NAMEOF_RAW(alg2::product_except_self<CnstItr, Itr>).c_str(),
+            NAMEOF_RAW(alg2::product_except_self<ConstItr, ConstItr, Itr, Itr>)
+                .c_str(),
             []() {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
