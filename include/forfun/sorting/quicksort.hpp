@@ -16,6 +16,7 @@
 namespace forfun::sorting {
 
 template <std::contiguous_iterator Iter>
+    requires std::sortable<Iter>
 constexpr auto quicksort(Iter first, Iter last) noexcept -> void;
 
 namespace detail {
@@ -49,6 +50,7 @@ partition(Iter const first, Iter last) noexcept -> Iter
 } // namespace detail
 
 template <std::contiguous_iterator Iter>
+    requires std::sortable<Iter>
 constexpr auto quicksort(Iter const first, Iter const last) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;

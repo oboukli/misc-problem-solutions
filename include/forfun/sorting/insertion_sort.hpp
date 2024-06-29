@@ -15,8 +15,10 @@
 
 namespace forfun::sorting {
 
-template <std::contiguous_iterator Iter>
-constexpr auto insertion_sort(Iter const begin, Iter const end) noexcept -> void
+template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::sortable<Iter>
+constexpr auto
+insertion_sort(Iter const begin, Sentinel const end) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 

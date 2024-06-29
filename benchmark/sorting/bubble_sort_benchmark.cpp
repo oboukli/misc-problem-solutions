@@ -28,7 +28,7 @@ TEST_CASE("Bubble sort benchmarking", "[benchmark][sorting][bubble_sort]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(plain::bubble_sort<Itr>).c_str(),
+            NAMEOF_RAW(plain::bubble_sort<Itr, Itr>).c_str(),
             []() {
                 ContainerType nums{
                     9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
@@ -39,7 +39,7 @@ TEST_CASE("Bubble sort benchmarking", "[benchmark][sorting][bubble_sort]")
                 ankerl::nanobench::doNotOptimizeAway(nums);
             })
 
-        .run(NAMEOF_RAW(stl::bubble_sort<Itr>).c_str(), []() {
+        .run(NAMEOF_RAW(stl::bubble_sort<Itr, Itr>).c_str(), []() {
             ContainerType nums{9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
             static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
