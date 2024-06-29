@@ -33,17 +33,21 @@ using forfun::product_except_self::concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
-template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
+template <
+    std::contiguous_iterator InItr,
+    std::sentinel_for<InItr> InItrSentinel,
+    typename OutItr,
+    std::sentinel_for<OutItr> OutItrSentinel>
 // clang-format off
     requires product_computable<
-        std::iter_value_t<InItr>,
-        std::iter_value_t<OutItr>>
+        std::iter_value_t<InItr>, std::iter_value_t<OutItr>>
+        and std::output_iterator<OutItr, std::iter_value_t<OutItr>>
 // clang-format on
 constexpr auto product_except_self(
     InItr const first,
-    InItr const last,
+    InItrSentinel const last,
     OutItr const products_first,
-    OutItr const products_last) noexcept -> void
+    OutItrSentinel const products_last) noexcept -> void
 {
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
@@ -72,17 +76,21 @@ using forfun::product_except_self::concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
-template <std::contiguous_iterator InItr, std::contiguous_iterator OutItr>
+template <
+    std::contiguous_iterator InItr,
+    std::sentinel_for<InItr> InItrSentinel,
+    std::contiguous_iterator OutItr,
+    std::sized_sentinel_for<OutItr> OutItrSentinel>
 // clang-format off
     requires product_computable<
-        std::iter_value_t<InItr>,
-        std::iter_value_t<OutItr>>
+        std::iter_value_t<InItr>, std::iter_value_t<OutItr>>
+        and std::output_iterator<OutItr, std::iter_value_t<OutItr>>
 // clang-format on
 constexpr auto product_except_self(
     InItr const first,
-    InItr const last,
-    OutItr const products_first,
-    OutItr const products_last) noexcept -> void
+    InItrSentinel const last,
+    OutItr const products_itr,
+    OutItrSentinel const products_last) noexcept -> void
 {
     using ValType = std::decay_t<std::iter_value_t<OutItr>>;
     using DiffType = std::iter_difference_t<InItr>;
@@ -92,11 +100,11 @@ constexpr auto product_except_self(
         return;
     }
 
-    auto const length{products_last - products_first};
-    for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
+    auto const length{products_last - products_itr};
+    for (auto it_prd{products_itr}; it_prd != products_last; ++it_prd)
     {
         *it_prd = ValType{1};
-        auto const idx_prd{it_prd - products_first};
+        auto const idx_prd{it_prd - products_itr};
         for (auto j{DiffType{1}}; j < length; ++j)
         {
             *it_prd *= first[(idx_prd + j) % length];
