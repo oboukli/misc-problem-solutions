@@ -12,12 +12,20 @@
 
 #include "forfun/sorting/bubble_sort.hpp"
 
+using Arr0Itr = std::array<int, 0>::iterator;
+using Arr1Itr = std::array<int, 1>::iterator;
+using Arr2Itr = std::array<int, 2>::iterator;
+using Arr3Itr = std::array<int, 3>::iterator;
+using Arr7Itr = std::array<int, 7>::iterator;
+using Arr10Itr = std::array<int, 10>::iterator;
+using VecItr = std::vector<int>::iterator;
+
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 0>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 0>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 0>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr0Itr, Arr0Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr0Itr, Arr0Itr>))
 {
     SECTION("Empty container")
     {
@@ -35,8 +43,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 1>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 1>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 1>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr1Itr, Arr1Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr1Itr, Arr1Itr>))
 {
     SECTION("One element")
     {
@@ -54,8 +62,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 2>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 2>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 2>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr2Itr, Arr2Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr2Itr, Arr2Itr>))
 {
     SECTION("Two elements")
     {
@@ -73,8 +81,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 3>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 3>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 3>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr3Itr, Arr3Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr3Itr, Arr3Itr>))
 {
     SECTION("Three elements")
     {
@@ -92,8 +100,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 10>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 10>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 10>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr10Itr, Arr10Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr10Itr, Arr10Itr>))
 {
     SECTION("Best case")
     {
@@ -122,8 +130,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 7>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::array<int, 7>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::array<int, 7>::iterator>))
+    (forfun::sorting::plain::bubble_sort<Arr7Itr, Arr7Itr>),
+    (forfun::sorting::stl::bubble_sort<Arr7Itr, Arr7Itr>))
 {
     SECTION("Arbitrary test with std::array")
     {
@@ -141,8 +149,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::vector<int>)",
     "[sorting][bubble_sort]",
     ((auto bubble_sort), bubble_sort),
-    (forfun::sorting::plain::bubble_sort<std::vector<int>::iterator>),
-    (forfun::sorting::stl::bubble_sort<std::vector<int>::iterator>))
+    (forfun::sorting::plain::bubble_sort<VecItr, VecItr>),
+    (forfun::sorting::stl::bubble_sort<VecItr, VecItr>))
 {
     SECTION("Arbitrary test with std::vector 01")
     {
