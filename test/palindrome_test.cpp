@@ -17,13 +17,13 @@
 namespace {
 
 [[nodiscard]] inline auto
-is_palindrome_wrapper(std::string_view const& s) noexcept -> bool
+is_palindrome_wrapper(std::string_view const s) noexcept -> bool
 {
     return ::is_palindrome(s.data(), s.size()) != 0;
 }
 
 [[nodiscard]] inline auto
-is_palindrome_ci_wrapper(std::string_view const& s) noexcept -> bool
+is_palindrome_ci_wrapper(std::string_view const s) noexcept -> bool
 {
     return ::is_palindrome_ci(s.data(), s.size()) != 0;
 }
