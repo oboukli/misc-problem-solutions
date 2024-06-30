@@ -20,7 +20,7 @@ namespace forfun::palindrome {
 namespace raw {
 
 [[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
+constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
 {
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
@@ -37,7 +37,7 @@ constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
 }
 
 [[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
-inline auto is_palindrome_ci(std::string_view const& s) noexcept -> bool
+inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
@@ -59,7 +59,7 @@ inline auto is_palindrome_ci(std::string_view const& s) noexcept -> bool
 namespace fast {
 
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
+constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
 {
     using const_itr = std::string_view::const_iterator;
 
@@ -80,7 +80,7 @@ constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
 }
 
 [[nodiscard]]
-inline auto is_palindrome_ci(std::string_view const& s) noexcept -> bool
+inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     using const_itr = std::string_view::const_iterator;
 
@@ -108,7 +108,7 @@ namespace stl_bloated {
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
+constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(),
@@ -130,7 +130,7 @@ inline auto equal_case_insensitive(char const a, char const b) noexcept -> bool
 } // namespace detail
 
 [[nodiscard]]
-inline auto is_palindrome_ci(std::string_view const& s) noexcept -> bool
+inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(),
@@ -148,7 +148,7 @@ namespace stl_fast {
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const& s) noexcept -> bool
+constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
 {
     std::string_view::const_iterator const begin{s.cbegin()};
     return std::equal(begin, begin + (s.size() / 2), s.crbegin());
