@@ -19,12 +19,7 @@ namespace forfun::palindrome {
 
 namespace raw {
 
-#if __clang__
-#pragma clang attribute push( \
-    __attribute__((no_sanitize("unsigned-integer-overflow"))), \
-    apply_to = function)
-#endif // __clang__
-[[nodiscard]] constexpr auto
+[[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]] constexpr auto
 is_palindrome(std::string_view const& s) noexcept -> bool
 {
     auto const end{s.length() - 1};
@@ -40,16 +35,8 @@ is_palindrome(std::string_view const& s) noexcept -> bool
 
     return true;
 }
-#if __clang__
-#pragma clang attribute pop
-#endif // __clang__
 
-#if __clang__
-#pragma clang attribute push( \
-    __attribute__((no_sanitize("unsigned-integer-overflow"))), \
-    apply_to = function)
-#endif // __clang__
-[[nodiscard]] inline auto
+[[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]] inline auto
 is_palindrome_ci(std::string_view const& s) noexcept -> bool
 {
     auto const end{s.length() - 1};
@@ -66,9 +53,6 @@ is_palindrome_ci(std::string_view const& s) noexcept -> bool
 
     return true;
 }
-#if __clang__
-#pragma clang attribute pop
-#endif // __clang__
 
 } // namespace raw
 
