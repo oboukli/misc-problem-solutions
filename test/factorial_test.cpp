@@ -14,9 +14,9 @@
 
 #if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
 #define FORFUN_REQUIRE_STL_FUNCTIONAL(X) \
-    REQUIRE(forfun::factorial::stl_functional::factorial(n) == X)
+    REQUIRE(forfun::factorial::stl_functional::factorial(n) == (X))
 #define FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(X) \
-    STATIC_REQUIRE(forfun::factorial::stl_functional::factorial(n) == X)
+    STATIC_REQUIRE(forfun::factorial::stl_functional::factorial(n) == (X))
 #else
 #define FORFUN_REQUIRE_STL_FUNCTIONAL(X)
 #define FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(X)

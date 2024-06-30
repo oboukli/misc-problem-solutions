@@ -10,11 +10,12 @@
 #ifndef FORFUN_FACTORIAL_HPP_
 #define FORFUN_FACTORIAL_HPP_
 
-#include <algorithm> // IWYU pragma: keep
 #include <cassert>
 #include <concepts>
-#include <type_traits> // IWYU pragma: keep
+#include <type_traits>
+
 #if __cpp_lib_ranges_fold >= 202207L
+#include <algorithm>
 #include <functional>
 #include <ranges>
 #endif // __cpp_lib_ranges_fold >= 202207L
@@ -34,7 +35,7 @@ factorial(std::integral auto const n) noexcept -> decltype(n)
 
     assert(n >= T{0});
 
-    auto result{T{1}};
+    T result{1};
     for (auto i{n}; i > T{1}; --i)
     {
         result *= i;
@@ -71,8 +72,7 @@ namespace stl_functional {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
 /// @note For large values of @p n, the result may overflow the return type.
-[[nodiscard]] constexpr inline auto
-factorial(std::integral auto const n) noexcept
+[[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
 {
     using T = decltype(n);
 
