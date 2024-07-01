@@ -37,10 +37,10 @@ TEMPLATE_TEST_CASE_SIG(
     "[palindrome]",
     ((auto is_palindrome), is_palindrome),
     (is_palindrome_wrapper),
-    (forfun::palindrome::functional::is_palindrome),
-    (forfun::palindrome::functional::bloated::is_palindrome),
-    (forfun::palindrome::iterator_based::is_palindrome),
-    (forfun::palindrome::raw::is_palindrome))
+    (forfun::palindrome::functional::is_palindrome<char>),
+    (forfun::palindrome::functional::bloated::is_palindrome<char>),
+    (forfun::palindrome::iterator_based::is_palindrome<char>),
+    (forfun::palindrome::raw::is_palindrome<char>))
 {
     SECTION("Positive")
     {
@@ -75,6 +75,58 @@ TEMPLATE_TEST_CASE_SIG(
             "Xyz 8 zYX"sv,
             "Step on no pets"sv,
             "12/20/2021"sv)};
+
+        CAPTURE(s);
+
+        REQUIRE_FALSE(is_palindrome(s));
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Case-sensitive palindrome check (char32_t)",
+    "[palindrome]",
+    ((auto is_palindrome), is_palindrome),
+    (forfun::palindrome::functional::is_palindrome<char32_t>),
+    (forfun::palindrome::functional::bloated::is_palindrome<char32_t>),
+    (forfun::palindrome::iterator_based::is_palindrome<char32_t>),
+    (forfun::palindrome::raw::is_palindrome<char32_t>))
+{
+    SECTION("Positive")
+    {
+        std::basic_string_view<char32_t> const s{GENERATE(
+            U""sv,
+            U"\xb8Y\xb8"sv,
+            U"aa"sv,
+            U"aba"sv,
+            U"a b a"sv,
+            U"101"sv,
+            U"tattarrattat"sv,
+            U"ABBA"sv,
+            U"Xyz 8 zyX"sv,
+            U"step on no pets"sv,
+            U"باب"sv,
+            U"亞細亞"sv,
+            U"19/9/91"sv)};
+
+        CAPTURE(s);
+
+        REQUIRE(is_palindrome(s));
+    }
+
+    SECTION("Negative")
+    {
+        std::basic_string_view<char32_t> const s{GENERATE(
+            U"Dummy"sv,
+            U"dummy"sv,
+            U"Aa"sv,
+            U"Aab4'{x{'4BaA"sv,
+            U"Abba"sv,
+            U"Tattarrattat"sv,
+            U"Malayalam"sv,
+            U"Xyz 8 zYX"sv,
+            U"Step on no pets"sv,
+            U"باَب"sv,
+            U"12/20/2021"sv)};
 
         CAPTURE(s);
 
