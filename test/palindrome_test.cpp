@@ -36,11 +36,11 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
     ((auto is_palindrome), is_palindrome),
-    (forfun::palindrome::fast::is_palindrome),
-    (forfun::palindrome::stl_bloated::is_palindrome),
-    (forfun::palindrome::stl_fast::is_palindrome),
-    (forfun::palindrome::raw::is_palindrome),
-    (is_palindrome_wrapper))
+    (is_palindrome_wrapper),
+    (forfun::palindrome::functional::is_palindrome),
+    (forfun::palindrome::functional::bloated::is_palindrome),
+    (forfun::palindrome::iterator_based::is_palindrome),
+    (forfun::palindrome::raw::is_palindrome))
 {
     SECTION("Positive")
     {
@@ -86,9 +86,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-insensitive palindrome check",
     "[palindrome]",
     ((auto is_palindrome_ci), is_palindrome_ci),
-    (forfun::palindrome::fast::is_palindrome_ci),
-    (forfun::palindrome::raw::is_palindrome_ci),
-    (is_palindrome_ci_wrapper))
+    (is_palindrome_ci_wrapper),
+    (forfun::palindrome::functional::bloated::is_palindrome_ci),
+    (forfun::palindrome::iterator_based::is_palindrome_ci),
+    (forfun::palindrome::raw::is_palindrome_ci))
 {
     SECTION("Positive")
     {
