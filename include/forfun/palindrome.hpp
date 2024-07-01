@@ -56,7 +56,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
 } // namespace raw
 
-namespace fast {
+namespace iterator_based {
 
 [[nodiscard]]
 constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
@@ -101,9 +101,20 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
     return true;
 }
 
-} // namespace fast
+} // namespace iterator_based
 
-namespace stl_bloated {
+namespace functional {
+
+/// Adapted from original source:
+/// https://en.cppreference.com/w/cpp/algorithm/equal
+[[nodiscard]]
+constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
+{
+    std::string_view::const_iterator const begin{s.cbegin()};
+    return std::equal(begin, begin + (s.size() / 2), s.crbegin());
+}
+
+namespace bloated {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
@@ -141,20 +152,9 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
         detail::equal_case_insensitive);
 }
 
-} // namespace stl_bloated
+} // namespace bloated
 
-namespace stl_fast {
-
-/// Adapted from original source:
-/// https://en.cppreference.com/w/cpp/algorithm/equal
-[[nodiscard]]
-constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
-{
-    std::string_view::const_iterator const begin{s.cbegin()};
-    return std::equal(begin, begin + (s.size() / 2), s.crbegin());
-}
-
-} // namespace stl_fast
+} // namespace functional
 
 } // namespace forfun::palindrome
 
