@@ -15,15 +15,15 @@
 #include "forfun/palindrome.hpp"
 #include "forfun_c/palindrome.h"
 
-using std::string_view_literals::operator""sv;
-
-inline constexpr std::string_view const palindrome{
-    "oooooooooooooooooooooooooooooooooooooooooooooooooo"
-    "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv};
-
 TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 {
+    using std::string_view_literals::operator""sv;
+
     using namespace forfun::palindrome;
+
+    std::string_view palindrome{
+        "oooooooooooooooooooooooooooooooooooooooooooooooooo"
+        "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv};
 
     SECTION("case-sensitive")
     {
@@ -34,7 +34,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(::is_palindrome).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{::is_palindrome(
                         palindrome.data(), palindrome.length())};
 
@@ -43,7 +43,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::is_palindrome<char>).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{functional::is_palindrome(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
@@ -51,7 +51,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome<char>).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{
                         functional::bloated::is_palindrome(palindrome)};
 
@@ -60,7 +60,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome<char>).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{iterator_based::is_palindrome(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
@@ -68,7 +68,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(raw::is_palindrome<char>).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{raw::is_palindrome(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
@@ -86,7 +86,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(::is_palindrome_ci).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{::is_palindrome_ci(
                         palindrome.data(), palindrome.length())};
 
@@ -95,7 +95,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome_ci).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{
                         functional::bloated::is_palindrome_ci(palindrome)};
 
@@ -104,7 +104,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome_ci).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{iterator_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
@@ -112,7 +112,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(raw::is_palindrome_ci).c_str(),
-                []() {
+                [&palindrome]() {
                     auto const r{raw::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
