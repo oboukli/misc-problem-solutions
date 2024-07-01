@@ -18,22 +18,20 @@
 
 namespace {
 
-template <typename BasicStringView>
-[[nodiscard]] auto
-adapt_func_is_palindrome(auto&& func, BasicStringView&& s) noexcept -> bool
+template <typename Func, Func func, typename BasicStringView>
+[[nodiscard]] constexpr auto
+adapt_func_is_palindrome(BasicStringView&& s) noexcept -> bool
 {
     if constexpr (std::is_invocable_r_v<bool, decltype(func), decltype(s)>)
     {
-        return std::invoke(
-            std::forward<decltype(func)>(func), std::forward<decltype(s)>(s));
+        return func(std::forward<decltype(s)>(s));
     }
     // clang-format off
     else if constexpr (std::is_invocable_r_v<
         bool, decltype(func), decltype(s.data()), decltype(s.length())>)
     // clang-format on
     {
-        return std::invoke(
-            std::forward<decltype(func)>(func),
+        return func(
             std::forward<decltype(s.data())>(s.data()),
             std::forward<decltype(s.length())>(s.length()));
     }
@@ -70,7 +68,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 
     SECTION("Negative")
@@ -89,7 +91,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE_FALSE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 }
 
@@ -121,7 +127,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 
     SECTION("Negative")
@@ -141,7 +151,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE_FALSE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 }
 
@@ -173,7 +187,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 
     SECTION("Negative")
@@ -193,7 +211,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(adapt_func_is_palindrome(func_is_palindrome, s));
+        // clang-format off
+        REQUIRE_FALSE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome),
+            func_is_palindrome>(s));
+        // clang-format on
     }
 }
 
@@ -227,7 +249,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(adapt_func_is_palindrome(func_is_palindrome_ci, s));
+        // clang-format off
+        REQUIRE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome_ci),
+            func_is_palindrome_ci>(s));
+        // clang-format on
     }
 
     SECTION("Negative")
@@ -243,6 +269,10 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(adapt_func_is_palindrome(func_is_palindrome_ci, s));
+        // clang-format off
+        REQUIRE_FALSE(adapt_func_is_palindrome<
+            decltype(func_is_palindrome_ci),
+            func_is_palindrome_ci>(s));
+        // clang-format on
     }
 }
