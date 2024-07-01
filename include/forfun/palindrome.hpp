@@ -19,13 +19,17 @@ namespace forfun::palindrome {
 
 namespace raw {
 
+template <typename CharT>
 [[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
+constexpr auto
+is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
+    using SizeType = decltype(s)::size_type;
+
     auto const end{s.length() - 1};
     auto const mid{s.length() / 2};
 
-    for (std::string_view::size_type i{0}; i < mid; ++i)
+    for (SizeType i{0}; i < mid; ++i)
     {
         if (s[i] != s[end - i])
         {
@@ -58,15 +62,17 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
 namespace iterator_based {
 
+template <typename CharT>
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
+constexpr auto
+is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
-    using const_itr = std::string_view::const_iterator;
+    using ConstItr = decltype(s)::const_iterator;
 
     auto upper{s.crbegin()};
-    const_itr const mid{s.cbegin() + (s.length() / 2)};
+    ConstItr const mid{s.cbegin() + (s.length() / 2)};
 
-    for (const_itr lower{s.cbegin()}; lower < mid; ++lower)
+    for (ConstItr lower{s.cbegin()}; lower < mid; ++lower)
     {
         if ((*lower) != (*upper))
         {
@@ -82,12 +88,12 @@ constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
 [[nodiscard]]
 inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
-    using const_itr = std::string_view::const_iterator;
+    using ConstItr = decltype(s)::const_iterator;
 
     auto upper{s.crbegin()};
-    const_itr const mid{s.cbegin() + (s.length() / 2)};
+    ConstItr const mid{s.cbegin() + (s.length() / 2)};
 
-    for (const_itr lower{s.cbegin()}; lower < mid; ++lower)
+    for (ConstItr lower{s.cbegin()}; lower < mid; ++lower)
     {
         if (std::tolower(static_cast<unsigned char>(*lower))
             != std::tolower(static_cast<unsigned char>(*upper)))
@@ -107,10 +113,14 @@ namespace functional {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
+template <typename CharT>
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
+constexpr auto
+is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
-    std::string_view::const_iterator const begin{s.cbegin()};
+    using ConstItr = decltype(s)::const_iterator;
+
+    ConstItr const begin{s.cbegin()};
     return std::equal(begin, begin + (s.size() / 2), s.crbegin());
 }
 
@@ -118,14 +128,16 @@ namespace bloated {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
+template <typename CharT>
 [[nodiscard]]
-constexpr auto is_palindrome(std::string_view const s) noexcept -> bool
+constexpr auto
+is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
     return std::equal(
         s.cbegin(),
         std::next(
             s.cbegin(),
-            static_cast<std::string_view::difference_type>(s.size() / 2)),
+            static_cast<decltype(s)::difference_type>(s.size() / 2)),
         s.crbegin());
 }
 
@@ -147,7 +159,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
         s.cbegin(),
         std::next(
             s.cbegin(),
-            static_cast<std::string_view::difference_type>(s.size() / 2)),
+            static_cast<decltype(s)::difference_type>(s.size() / 2)),
         s.crbegin(),
         detail::equal_case_insensitive);
 }
