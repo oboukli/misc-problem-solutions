@@ -12,21 +12,23 @@
 
 #include <algorithm>
 #include <cctype>
+#include <concepts>
 #include <iterator>
 #include <string_view>
+#include <type_traits>
 
 namespace forfun::palindrome {
 
 namespace raw {
 
-template <typename CharT>
+template <std::integral CharT>
 [[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
-constexpr auto
-is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
+constexpr auto is_palindrome(
+    typename std::basic_string_view<CharT>::const_pointer const s,
+    typename std::basic_string_view<CharT>::size_type const length) noexcept
+    -> bool
 {
-    using SizeType = decltype(s)::size_type;
-
-    auto const length{s.length()};
+    using SizeType = std::remove_const_t<decltype(length)>;
 
     auto end{length - 1};
     auto const mid{length / 2};
@@ -64,7 +66,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
 namespace iterator_based {
 
-template <typename CharT>
+template <std::integral CharT>
 [[nodiscard]]
 constexpr auto
 is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
@@ -119,7 +121,7 @@ namespace functional {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
-template <typename CharT>
+template <std::integral CharT>
 [[nodiscard]]
 constexpr auto
 is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
@@ -135,7 +137,7 @@ namespace bloated {
 
 /// Adapted from original source:
 /// https://en.cppreference.com/w/cpp/algorithm/equal
-template <typename CharT>
+template <std::integral CharT>
 [[nodiscard]]
 constexpr auto
 is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
