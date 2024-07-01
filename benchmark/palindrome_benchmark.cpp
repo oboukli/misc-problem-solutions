@@ -69,7 +69,8 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             .run(
                 NAMEOF_RAW(raw::is_palindrome<char>).c_str(),
                 [&palindrome]() {
-                    auto const r{raw::is_palindrome(palindrome)};
+                    auto const r{raw::is_palindrome<char>(
+                        palindrome.data(), palindrome.length())};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
                 })
