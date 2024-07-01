@@ -26,12 +26,14 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
     using SizeType = decltype(s)::size_type;
 
-    auto const end{s.length() - 1};
-    auto const mid{s.length() / 2};
+    auto const length{s.length()};
 
-    for (SizeType i{0}; i < mid; ++i)
+    auto end{length - 1};
+    auto const mid{length / 2};
+
+    for (SizeType i{0}; i != mid; ++i)
     {
-        if (s[i] != s[end - i])
+        if (s[i] != s[end--])
         {
             return false;
         }
@@ -69,10 +71,14 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
     using ConstItr = decltype(s)::const_iterator;
 
+    auto const cbegin{s.cbegin()};
     auto upper{s.crbegin()};
-    ConstItr const mid{s.cbegin() + (s.length() / 2)};
 
-    for (ConstItr lower{s.cbegin()}; lower < mid; ++lower)
+    static_assert(std::contiguous_iterator<ConstItr>);
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    ConstItr const mid{cbegin + (s.length() / 2)};
+
+    for (ConstItr lower{cbegin}; lower < mid; ++lower)
     {
         if ((*lower) != (*upper))
         {
@@ -120,8 +126,9 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
 {
     using ConstItr = decltype(s)::const_iterator;
 
-    ConstItr const begin{s.cbegin()};
-    return std::equal(begin, begin + (s.size() / 2), s.crbegin());
+    ConstItr const cbegin{s.cbegin()};
+
+    return std::equal(cbegin, cbegin + (s.length() / 2), s.crbegin());
 }
 
 namespace bloated {
@@ -137,7 +144,7 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
         s.cbegin(),
         std::next(
             s.cbegin(),
-            static_cast<decltype(s)::difference_type>(s.size() / 2)),
+            static_cast<decltype(s)::difference_type>(s.length() / 2)),
         s.crbegin());
 }
 
@@ -159,7 +166,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
         s.cbegin(),
         std::next(
             s.cbegin(),
-            static_cast<decltype(s)::difference_type>(s.size() / 2)),
+            static_cast<decltype(s)::difference_type>(s.length() / 2)),
         s.crbegin(),
         detail::equal_case_insensitive);
 }
