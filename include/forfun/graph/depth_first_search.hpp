@@ -27,19 +27,6 @@ namespace recursive {
 
 namespace detail {
 
-template <std::regular T>
-constexpr auto get_adjacencies_iter(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
-{
-    return std::find_if(
-        vertex_adjacency_list.cbegin(),
-        vertex_adjacency_list.cend(),
-        [v](VertexAdjacencyList<T>::value_type const& target) {
-            return target.front() == v;
-        });
-}
-
 template <std::regular T, std::invocable<vertex<T>> Visitor>
 constexpr auto depth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
@@ -52,7 +39,7 @@ constexpr auto depth_first_search_imp(
     preorder_step(start);
 
     auto const adjacencies_iter{
-        detail::get_adjacencies_iter(vertex_adjacency_list, start)};
+        get_adjacencies_iter(vertex_adjacency_list, start)};
 
     auto itr{adjacencies_iter->cbegin()};
     auto const end{adjacencies_iter->cend()};

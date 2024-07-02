@@ -49,6 +49,19 @@ using VertexStateList
     = std::unordered_map<vertex<T>, vertex_visit_state, vertex_hash<T>>;
 
 template <std::regular T>
+constexpr auto get_adjacencies_iter(
+    VertexAdjacencyList<T> const& vertex_adjacency_list,
+    vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
+{
+    return std::find_if(
+        vertex_adjacency_list.cbegin(),
+        vertex_adjacency_list.cend(),
+        [v](VertexAdjacencyList<T>::value_type const& target) {
+            return target.front() == v;
+        });
+}
+
+template <std::regular T>
 auto init_state_list(
     VertexAdjacencyList<T> const& adjacency_list,
     VertexStateList<T>& state_list) noexcept -> void
