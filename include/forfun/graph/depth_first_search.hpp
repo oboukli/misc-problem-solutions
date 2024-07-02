@@ -28,14 +28,14 @@ namespace recursive {
 namespace detail {
 
 template <typename T>
-constexpr auto get_adjacencies(
+constexpr auto get_adjacencies_iter(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
 {
     return std::find_if(
         vertex_adjacency_list.cbegin(),
         vertex_adjacency_list.cend(),
-        [v](VertexAdjacencyList<T>::value_type target) {
+        [v](VertexAdjacencyList<T>::value_type const& target) {
             return target.front() == v;
         });
 }
@@ -51,12 +51,16 @@ constexpr auto depth_first_search_imp(
     vertex_state_list[start] = vertex_visit_state::visited;
     preorder_step(start);
 
-    auto const adjacencies{
-        *detail::get_adjacencies(vertex_adjacency_list, start)};
+    auto const adjacencies_iter{
+        detail::get_adjacencies_iter(vertex_adjacency_list, start)};
 
-    for (auto const adjacency : adjacencies)
+    auto itr{adjacencies_iter->cbegin()};
+    auto const end{adjacencies_iter->cend()};
+
+    for (; itr != end; ++itr)
     {
-        if (vertex_state_list[adjacency] == vertex_visit_state::unvisited)
+        if (auto const adjacency = *itr;
+            vertex_state_list[adjacency] == vertex_visit_state::unvisited)
         {
             depth_first_search_imp(
                 vertex_adjacency_list,
