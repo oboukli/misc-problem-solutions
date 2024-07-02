@@ -27,6 +27,71 @@ TEST_CASE("Vertex conversion", "[graph][vertex]")
     }
 }
 
+TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
+{
+    using forfun::graph::vertex;
+    using forfun::graph::VertexAdjacencyList;
+
+    SECTION("Empty adjacency list (graph)")
+    {
+        constexpr vertex<int> const vertex{17};
+        VertexAdjacencyList<int> const adjacency_list{};
+
+        CAPTURE(vertex);
+        CAPTURE(adjacency_list);
+
+        REQUIRE(
+            get_adjacencies_iter(adjacency_list, vertex)
+            == adjacency_list.cend());
+    }
+
+    SECTION("Adjacency list can be found for vertex<int>")
+    {
+        constexpr vertex<int> const vertex{4};
+        VertexAdjacencyList<int> const adjacency_list{
+            // clang-format off
+            {{1}, {2}, {3}, {4}},
+            {{2}, {1}},
+            {{3}, {1}},
+            {{4}, {1}, {5}},
+            {{5}, {4}, {6}},
+            {{6}, {5}},
+            // clang-format on
+        };
+
+        CAPTURE(vertex);
+        CAPTURE(adjacency_list);
+
+        REQUIRE(
+            get_adjacencies_iter(adjacency_list, vertex)
+            == std::next(adjacency_list.cbegin(), 3));
+    }
+
+    SECTION("Adjacency list can be found for vertex<std::string>")
+    {
+        using std::string_view_literals::operator""sv;
+
+        constexpr vertex<std::string_view> const vertex{"five"sv};
+        VertexAdjacencyList<std::string_view> const adjacency_list{
+            // clang-format off
+            {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
+            {{"two"sv}, {"one"sv}},
+            {{"three"sv}, {"one"sv}},
+            {{"four"sv}, {"one"sv}, {"five"sv}},
+            {{"five"sv}, {"four"sv}, {"six"sv}},
+            {{"six"sv}, {"five"sv}},
+            // clang-format on
+        };
+
+        CAPTURE(vertex);
+        CAPTURE(adjacency_list);
+
+        REQUIRE(
+            get_adjacencies_iter(adjacency_list, vertex)
+            == std::next(adjacency_list.cbegin(), 4));
+    }
+}
+
 TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 {
     using forfun::graph::init_state_list;
