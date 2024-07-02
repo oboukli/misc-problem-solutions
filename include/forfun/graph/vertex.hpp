@@ -21,13 +21,13 @@ enum class vertex_visit_state : bool {
     visited = true,
 };
 
-template <typename V>
+template <std::regular V>
 struct vertex {
     V value{};
     constexpr auto operator==(vertex<V> const&) const -> bool = default;
 };
 
-template <typename T>
+template <std::regular T>
 struct vertex_hash {
     constexpr auto
     operator()(vertex<T> const& vertex) const noexcept -> std::size_t
@@ -41,14 +41,14 @@ struct vertex_hash {
     }
 };
 
-template <typename T>
+template <std::regular T>
 using VertexAdjacencyList = std::vector<std::vector<vertex<T>>>;
 
-template <typename T>
+template <std::regular T>
 using VertexStateList
     = std::unordered_map<vertex<T>, vertex_visit_state, vertex_hash<T>>;
 
-template <typename T>
+template <std::regular T>
 auto init_state_list(
     VertexAdjacencyList<T> const& adjacency_list,
     VertexStateList<T>& state_list) noexcept -> void
@@ -59,7 +59,7 @@ auto init_state_list(
     }
 }
 
-template <typename T>
+template <std::regular T>
     requires requires(std::ostream os, vertex<T> v) {
         { os << v.value } -> std::convertible_to<std::ostream&>;
     }

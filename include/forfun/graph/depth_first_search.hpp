@@ -27,7 +27,7 @@ namespace recursive {
 
 namespace detail {
 
-template <typename T>
+template <std::regular T>
 constexpr auto get_adjacencies_iter(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
@@ -40,7 +40,7 @@ constexpr auto get_adjacencies_iter(
         });
 }
 
-template <typename T, std::invocable<vertex<T>> Visitor>
+template <std::regular T, std::invocable<vertex<T>> Visitor>
 constexpr auto depth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
@@ -73,7 +73,7 @@ constexpr auto depth_first_search_imp(
 
 } // namespace detail
 
-template <typename T, std::invocable<vertex<T>> Visitor>
+template <std::regular T, std::invocable<vertex<T>> Visitor>
 constexpr auto depth_first_search(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
