@@ -218,13 +218,16 @@ jobs:
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
-      - name: Build for testing
+      - name: Build with sanitizers for testing
         run: >-
           cmake
           --build
           --config '${{ env.TEST_BUILD_CONFIGURATION }}'
           --parallel
           --preset '${{ env.BUILD_PRESET_NAME }}'
+          --
+          -enableAddressSanitizer YES
+          -enableUndefinedBehaviorSanitizer YES
 
       - name: Build for benchmarking
         run: >-
