@@ -60,6 +60,9 @@
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Darwin"
+      },
+      "environment": {
+        "CXXFLAGS": "-D_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
       }
     }
   ],
