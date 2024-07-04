@@ -29,15 +29,25 @@ concept lru_cache = requires(T cache, std::size_t k, int v) {
 namespace naive {
 
 struct CacheItem {
+    std::int64_t ticks_{0};
     std::size_t key_{};
     int value_{};
-    std::int64_t ticks_{0};
 };
 
 /// Least recently used (LRU) cache.
 class LRUCache final {
 public:
     explicit LRUCache(std::size_t capacity) noexcept;
+
+    LRUCache(LRUCache const&) = delete;
+
+    LRUCache(LRUCache&&) = delete;
+
+    ~LRUCache() = default;
+
+    auto operator=(LRUCache const&) -> LRUCache = delete;
+
+    auto operator=(LRUCache&&) -> LRUCache& = delete;
 
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
