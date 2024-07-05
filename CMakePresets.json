@@ -37,6 +37,10 @@
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
+      },
+      "environment": {
+        "CFLAGS": "/source-charset:utf-8",
+        "CXXFLAGS": "/source-charset:utf-8"
       }
     },
     {
