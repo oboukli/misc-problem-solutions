@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <functional>
 #include <string_view>
 #include <utility>
 
