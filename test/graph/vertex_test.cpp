@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <iterator>
 #include <sstream>
 #include <string_view>
 
