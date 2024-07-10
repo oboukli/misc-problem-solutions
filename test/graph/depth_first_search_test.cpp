@@ -47,7 +47,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.empty());
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         depth_first_search(
@@ -55,6 +54,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             state_list,
             starting_vertex,
             [](vertex<int>) noexcept -> void {});
+
+        CAPTURE(state_list);
 
         REQUIRE(state_list.empty());
         REQUIRE(adjacency_list.empty());
@@ -83,7 +84,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         depth_first_search(
@@ -91,6 +91,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             state_list,
             starting_vertex,
             [](vertex<int>) noexcept {});
+
+        CAPTURE(state_list);
 
         VertexStateList<int> const expected_state_list{
             // clang-format off
@@ -130,7 +132,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         depth_first_search(
@@ -138,6 +139,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             state_list,
             starting_vertex,
             [](vertex<int>) noexcept {});
+
+        CAPTURE(state_list);
 
         VertexStateList<int> const expected_state_list{
             // clang-format off
@@ -179,7 +182,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         depth_first_search(
@@ -187,6 +189,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             state_list,
             starting_vertex,
             [](vertex<char>) noexcept {});
+
+        CAPTURE(state_list);
 
         VertexStateList<char> const expected_state_list{
             // clang-format off
@@ -230,7 +234,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         std::size_t call_count{};
@@ -239,6 +242,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             state_list,
             starting_vertex,
             [&call_count](vertex<char>) noexcept { ++call_count; });
+
+        CAPTURE(state_list);
 
         REQUIRE(call_count == 8);
     }
@@ -268,7 +273,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
-        CAPTURE(state_list);
         CAPTURE(starting_vertex);
 
         std::vector<vertex<char>> recorded_path{};
@@ -281,6 +285,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             [&recorded_path](vertex<char> v) noexcept {
                 recorded_path.emplace_back(v);
             });
+
+        CAPTURE(state_list);
 
         REQUIRE(recorded_path.size() == 8);
 
