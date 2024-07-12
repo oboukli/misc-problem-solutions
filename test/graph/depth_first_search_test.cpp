@@ -61,6 +61,39 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         REQUIRE(adjacency_list.empty());
     }
 
+    SECTION("Two-vertex graph")
+    {
+        VertexAdjacencyList<char> const adjacency_list{
+            // clang-format off
+            {{'a'}, {'b'}},
+            {{'b'}, {'a'}},
+            // clang-format on
+        };
+        VertexStateList<char> state_list{};
+        constexpr vertex<char> const starting_vertex{'a'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        assert(adjacency_list.size() == 2);
+        assert(state_list.size() == 2);
+        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::size_t call_count{};
+        depth_first_search(
+            adjacency_list,
+            state_list,
+            starting_vertex,
+            [&call_count](vertex<char>) noexcept { ++call_count; });
+
+        CAPTURE(state_list);
+
+        REQUIRE(call_count == 2);
+    }
+
     SECTION("All graph vertices visited, starting from leaf vertex")
     {
         VertexAdjacencyList<int> const adjacency_list{
