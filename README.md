@@ -1,7 +1,7 @@
 # Solutions to miscellaneous coding problems in C/C++
 
-This is a repository of modern coding showcases, and solutions to various
-programming problems, written in C90, and C++17, C++20, and C++23.
+This is a repository of modern coding showcases and solutions to various
+programming problems, written in C90, C++17, C++20, and C++23.
 
 ## Technical showcases
 
@@ -15,6 +15,8 @@ and ideas leveraged by this project:
 - Const correctness where applicable--except for fields
 - Functional programming
 - Strict compilation
+- Static analysis with Clang Tidy and Microsoft C++ Code Analysis
+- Dynamic analysis
 - CMake
 - Clean Git history and configuration
 - Extensive testing using Catch2 and CTest
@@ -33,6 +35,7 @@ and ideas leveraged by this project:
 | Problem                         | Standard | Source                                                       |
 | ---                             | ---      | ---                                                          |
 | Binary search                   | C++20    | `include/forfun/search/binary_search.hpp`                    |
+| Breadth-first search            | C++20    | `include/forfun/graph/breadth_first_search.hpp`              |
 | Bubble sort                     | C++20    | `include/forfun/sorting/bubble_sort.cpp`                     |
 | Contains duplicate              | C++20    | `include/forfun/contains_duplicate.cpp`                      |
 | Depth-first search              | C++20    | `include/forfun/graph/depth_first_search.hpp`                |
