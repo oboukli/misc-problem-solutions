@@ -109,12 +109,14 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/graph/breadth_first_search.hpp"
   "include/forfun/graph/depth_first_search.hpp"
   "include/forfun/graph/vertex.hpp"
 )
 target_sources(
   forfun_graph
   PRIVATE
+  "src/forfun/graph/breadth_first_search.cpp"
   "src/forfun/graph/depth_first_search.cpp"
   "src/forfun/graph/vertex.cpp"
 )
@@ -230,6 +232,7 @@ target_sources(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/gcd_test.cpp"
+  "test/graph/breadth_first_search_test.cpp"
   "test/graph/depth_first_search_test.cpp"
   "test/graph/vertex_test.cpp"
   "test/lru_cache_test.cpp"
