@@ -22,7 +22,10 @@ namespace forfun::palindrome {
 namespace raw {
 
 template <std::integral CharT>
-[[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
+#if __clang__
+[[clang::no_sanitize("unsigned-integer-overflow")]]
+#endif // __clang__
+[[nodiscard]]
 constexpr auto is_palindrome(
     typename std::basic_string_view<CharT>::const_pointer const s,
     typename std::basic_string_view<CharT>::size_type const length) noexcept
@@ -44,7 +47,10 @@ constexpr auto is_palindrome(
     return true;
 }
 
-[[clang::no_sanitize("unsigned-integer-overflow")]] [[nodiscard]]
+#if __clang__
+[[clang::no_sanitize("unsigned-integer-overflow")]]
+#endif // __clang__
+[[nodiscard]]
 inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     auto const end{s.length() - 1};
