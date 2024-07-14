@@ -90,11 +90,11 @@ jobs:
     env:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
-      CONFIGURE_PRESET_NAME: generic
-      DEBUG_BUILD_PRESET_NAME: generic-debug
-      RELEASE_BUILD_PRESET_NAME: generic-release
-      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Debug
-      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/generic/Release
+      CONFIGURE_PRESET_NAME: strict-gcc
+      DEBUG_BUILD_PRESET_NAME: strict-gcc-debug
+      RELEASE_BUILD_PRESET_NAME: strict-gcc-release
+      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
+      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
     runs-on: ubuntu-24.04
 
     steps:
