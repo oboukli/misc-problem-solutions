@@ -32,7 +32,7 @@ struct vertex_hash {
     constexpr auto
     operator()(vertex<T> const& vertex) const noexcept -> std::size_t
     {
-        if constexpr (sizeof(T) <= sizeof(std::size_t))
+        if constexpr (std::integral<T> and (sizeof(T) <= sizeof(std::size_t)))
         {
             return static_cast<std::size_t>(vertex.value);
         }
