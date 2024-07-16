@@ -22,13 +22,13 @@ enum class vertex_visit_state : bool {
 };
 
 template <std::regular V>
-struct vertex {
+struct vertex final {
     V value{};
     constexpr auto operator==(vertex<V> const&) const -> bool = default;
 };
 
 template <std::regular T>
-struct vertex_hash {
+struct vertex_hash final {
     constexpr auto
     operator()(vertex<T> const& vertex) const noexcept -> std::size_t
     {
@@ -36,8 +36,10 @@ struct vertex_hash {
         {
             return static_cast<std::size_t>(vertex.value);
         }
-
-        return std::hash<T>{}(vertex.value);
+        else
+        {
+            return std::hash<T>{}(vertex.value);
+        }
     }
 };
 
