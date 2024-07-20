@@ -229,7 +229,7 @@ TEST_CASE("product_except_self concepts", "[product_except_self]")
     {
         using forfun::product_except_self::concepts::product_computable;
 
-        struct Dummy {};
+        struct Dummy final {};
 
         STATIC_REQUIRE(product_computable<short, int>);
         STATIC_REQUIRE(product_computable<int, int>);
