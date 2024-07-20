@@ -17,9 +17,8 @@
 namespace {
 
 template <forfun::lrucache::concepts::lru_cache T>
-auto test(std::size_t const capacity) noexcept -> void
+auto wrapper(std::size_t const capacity) noexcept -> int
 {
-    int volatile val{};
     T cache(capacity);
 
     int x{0};
@@ -29,7 +28,7 @@ auto test(std::size_t const capacity) noexcept -> void
         ++x;
     }
 
-    val = cache.get(1);
+    int val{cache.get(1)};
 
     val = cache.get(2);
 
@@ -51,6 +50,8 @@ auto test(std::size_t const capacity) noexcept -> void
     {
         val = cache.get(i);
     }
+
+    return val;
 }
 
 } // namespace
@@ -71,11 +72,19 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "stl::LRUCache",
-                []() { test<stl::LRUCache>(lrucache_capacity); })
+                []() {
+                    int val{wrapper<stl::LRUCache>(lrucache_capacity)};
+
+                    ankerl::nanobench::doNotOptimizeAway(val);
+                })
 
             .run(
                 "naive::LRUCache",
-                []() { test<naive::LRUCache>(lrucache_capacity); })
+                []() {
+                    int val{wrapper<naive::LRUCache>(lrucache_capacity)};
+
+                    ankerl::nanobench::doNotOptimizeAway(val);
+                })
 
             ;
     }
@@ -92,11 +101,19 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "stl::LRUCache",
-                []() { test<stl::LRUCache>(lrucache_capacity); })
+                []() {
+                    int val{wrapper<stl::LRUCache>(lrucache_capacity)};
+
+                    ankerl::nanobench::doNotOptimizeAway(val);
+                })
 
             .run(
                 "naive::LRUCache",
-                []() { test<naive::LRUCache>(lrucache_capacity); })
+                []() {
+                    int val{wrapper<naive::LRUCache>(lrucache_capacity)};
+
+                    ankerl::nanobench::doNotOptimizeAway(val);
+                })
 
             ;
     }
