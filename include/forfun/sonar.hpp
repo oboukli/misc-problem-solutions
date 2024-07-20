@@ -19,7 +19,7 @@
 
 namespace forfun::sonar {
 
-struct Area {
+struct Area final {
     int top{};
     int bottom{};
     int left{};
@@ -28,7 +28,7 @@ struct Area {
 
 class Sonar final {
 public:
-    struct Coord {
+    struct Coord final {
         int x{};
         int y{};
     };
