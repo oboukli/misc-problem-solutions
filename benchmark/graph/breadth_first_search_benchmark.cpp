@@ -62,7 +62,7 @@ TEST_CASE(
                     adjacency_list,
                     state_list,
                     starting_vertex,
-                    [](vertex<int>) -> void {});
+                    [](vertex<int>) noexcept -> void {});
                 ankerl::nanobench::doNotOptimizeAway(state_list);
             })
 
