@@ -188,7 +188,7 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         int value_{0};
     };
 
-    struct Dummy4 : public Dummy3 {
+    struct Dummy4 final : public Dummy3 {
         explicit Dummy4(std::size_t c) noexcept : Dummy3{c}
         {
         }
