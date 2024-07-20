@@ -28,7 +28,7 @@ concept lru_cache = requires(T cache, std::size_t k, int v) {
 
 namespace naive {
 
-struct CacheItem {
+struct CacheItem final {
     std::int64_t ticks_{0};
     std::size_t key_{};
     int value_{};
@@ -45,7 +45,7 @@ public:
 
     ~LRUCache() = default;
 
-    auto operator=(LRUCache const&) -> LRUCache = delete;
+    auto operator=(LRUCache const&) -> LRUCache& = delete;
 
     auto operator=(LRUCache&&) -> LRUCache& = delete;
 
