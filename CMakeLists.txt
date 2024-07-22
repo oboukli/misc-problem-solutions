@@ -55,6 +55,7 @@ target_sources(
   "include/forfun/tower_of_hanoi.hpp"
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
+  "include/forfun/valid_anagram.hpp"
 )
 target_sources(
   forfun
@@ -81,6 +82,7 @@ target_sources(
   "src/forfun/tower_of_hanoi.cpp"
   "src/forfun/trie.cpp"
   "src/forfun/two_sum.cpp"
+  "src/forfun/valid_anagram.cpp"
 )
 get_target_property(forfun_sources forfun SOURCES)
 source_group(
@@ -253,6 +255,7 @@ target_sources(
   "test/tower_of_hanoi_test.cpp"
   "test/trie_test.cpp"
   "test/two_sum_test.cpp"
+  "test/valid_anagram_test.cpp"
 )
 get_target_property(forfun_tests test_driver SOURCES)
 source_group(
@@ -309,6 +312,7 @@ target_sources(
   "benchmark/sorting/quicksort_benchmark.cpp"
   "benchmark/sub_array_sums_benchmark.cpp"
   "benchmark/tower_of_hanoi_benchmark.cpp"
+  "benchmark/valid_anagram_benchmark.cpp"
 )
 get_target_property(forfun_benchmark benchmark_driver SOURCES)
 source_group(
