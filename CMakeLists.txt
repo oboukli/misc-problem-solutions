@@ -56,6 +56,7 @@ target_sources(
   "include/forfun/trie.hpp"
   "include/forfun/two_sum.hpp"
   "include/forfun/valid_anagram.hpp"
+  "include/forfun/valid_parentheses.hpp"
 )
 target_sources(
   forfun
@@ -83,6 +84,7 @@ target_sources(
   "src/forfun/trie.cpp"
   "src/forfun/two_sum.cpp"
   "src/forfun/valid_anagram.cpp"
+  "src/forfun/valid_parentheses.cpp"
 )
 get_target_property(forfun_sources forfun SOURCES)
 source_group(
@@ -256,6 +258,7 @@ target_sources(
   "test/trie_test.cpp"
   "test/two_sum_test.cpp"
   "test/valid_anagram_test.cpp"
+  "test/valid_parentheses_test.cpp"
 )
 get_target_property(forfun_tests test_driver SOURCES)
 source_group(
@@ -313,6 +316,7 @@ target_sources(
   "benchmark/sub_array_sums_benchmark.cpp"
   "benchmark/tower_of_hanoi_benchmark.cpp"
   "benchmark/valid_anagram_benchmark.cpp"
+  "benchmark/valid_parentheses_benchmark.cpp"
 )
 get_target_property(forfun_benchmark benchmark_driver SOURCES)
 source_group(
