@@ -63,6 +63,7 @@ and ideas leveraged by this project:
 | Two sum                         | C++20    | `include/forfun/two_sum.cpp`                                 |
 | Two-pass Boyer-Moore majority   | C++20    | `include/forfun/majority_element.hpp`                        |
 | Valid anagram                   | C++20    | `include/forfun/valid_anagram.hpp`                           |
+| Valid parentheses               | C++20    | `src/forfun/valid_parentheses.cpp`                           |
 
 ## Disclaimer
 
