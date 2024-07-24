@@ -1,27 +1,34 @@
-# Solutions to miscellaneous coding problems in C/C++
+# Solutions in C/C++ to Miscellaneous Programming Problems
 
 This is a repository of modern coding showcases and solutions to various
-programming problems, written in C90, C++17, C++20, and C++23.
+popular programming problems, written in C90, C++17, C++20, and C++23.
+
+For some of the said problems, multiple solutions of varying efficiency
+and trade-offs are provided, along with benchmarks.
+
+All solutions are driven by extensive automated testing, in addition to being
+statically and dynamically analyzed, and compiled under strict rules with
+the latest Clang, GCC, and MSVC compilers.
 
 ## Technical showcases
 
-The following is a partial list of standards, practices, software,
-and ideas leveraged by this project:
+The following is a partial list of standards, practices, paradigms, and tools
+leveraged by this project:
 
-- C (standard C90)
-- C++ (standard C++17, C++20, and C++23)
-- C++ STL
-- Strongly-typed approach, leveraging C++ templates and concepts
+- C (standard C90) and C++ (standard C++17, C++20, and C++23)
+- The C and C++ standard libraries
+- Strongly-typed approach, leveraging C++ templates and C++20 concepts
 - Const correctness where applicable--except for fields
 - Functional programming
-- Strict compilation
+- Strict standard conformance and strict compilation rules
 - Static analysis with Clang Tidy and Microsoft C++ Code Analysis
 - Dynamic analysis
+- LLVM-based sanitizer tools
 - CMake
 - Clean Git history and configuration
 - Extensive testing using Catch2 and CTest
 - Development dependency management using vcpkg
-- Opinionated Clang Format configuration
+- Own opinionated Clang Format configuration
 - Conventional Commits
 - GitHub Actions CI
 - Benchmarking using nanobench
@@ -54,10 +61,10 @@ and ideas leveraged by this project:
 | Palindrome (in C)               | C90      | `src/forfun_c/palindrome.c`                                  |
 | Palindromic number              | C++20    | `src/forfun/palindromic_number.cpp`                          |
 | Primality test                  | C++20    | `include/forfun/primality.hpp`                               |
-| Product except self             | C++20    | `include/forfun/product_except_self.cpp`                     |
+| Product of array except self    | C++20    | `include/forfun/product_except_self.cpp`                     |
 | Quicksort                       | C++20    | `include/forfun/sorting/quicksort.cpp`                       |
 | Set matrix zeroes               | C++17    | `src/forfun/set_matrix_zeroes.cpp`                           |
-| Sub array sums                  | C++20    | `include/forfun/sub_array_sums.cpp`                          |
+| Sums of subarrays of length k   | C++20    | `include/forfun/sub_array_sums.cpp`                          |
 | Tower of Hanoi                  | C++20    | `include/forfun/tower_of_hanoi.hpp`                          |
 | Trie                            | C++20    | `include/forfun/trie.cpp`                                    |
 | Two sum                         | C++20    | `include/forfun/two_sum.cpp`                                 |
@@ -78,7 +85,11 @@ Problem copyrights are reserved to their respective owners.
 
 ### Solution licenses
 
-Solutions are released under an [MIT-style license](LICENSE).
+Solution code is released under an [MIT-style license](LICENSE).
 Copyright © Omar Boukli-Hacene. All rights reserved.
 
 SPDX license identifier: MIT.
+
+---
+
+Written for the joy of it 🪐
