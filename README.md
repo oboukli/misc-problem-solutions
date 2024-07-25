@@ -57,7 +57,7 @@ leveraged by this project:
 | Multiples of three or five      | C++17    | `include/forfun/project_euler/p0001_multiples_of_3_or_5.cpp` |
 | Nth Fibonacci number            | C++20    | `include/forfun/fibonacci.cpp`                               |
 | Number of ships in a rectangle  | C++20    | `src/forfun/sonar.cpp`                                       |
-| Palindrome                      | C++17    | `include/forfun/palindrome.cpp`                              |
+| Palindrome                      | C++20    | `include/forfun/palindrome.cpp`                              |
 | Palindrome (in C)               | C90      | `src/forfun_c/palindrome.c`                                  |
 | Palindromic number              | C++20    | `src/forfun/palindromic_number.cpp`                          |
 | Primality test                  | C++20    | `include/forfun/primality.hpp`                               |

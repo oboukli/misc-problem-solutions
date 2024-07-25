@@ -67,9 +67,9 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 })
 
             .run(
-                NAMEOF_RAW(raw::is_palindrome<char>).c_str(),
+                NAMEOF_RAW(offset_based::is_palindrome<char>).c_str(),
                 [&palindrome]() {
-                    auto const r{raw::is_palindrome<char>(
+                    auto const r{offset_based::is_palindrome<char>(
                         palindrome.data(), palindrome.length())};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
@@ -112,9 +112,9 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 })
 
             .run(
-                NAMEOF_RAW(raw::is_palindrome_ci).c_str(),
+                NAMEOF_RAW(offset_based::is_palindrome_ci).c_str(),
                 [&palindrome]() {
-                    auto const r{raw::is_palindrome_ci(palindrome)};
+                    auto const r{offset_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
                 })
