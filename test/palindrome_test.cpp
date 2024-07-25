@@ -48,7 +48,7 @@ TEMPLATE_TEST_CASE_SIG(
     (&forfun::palindrome::functional::is_palindrome<char>),
     (&forfun::palindrome::functional::bloated::is_palindrome<char>),
     (&forfun::palindrome::iterator_based::is_palindrome<char>),
-    (&forfun::palindrome::raw::is_palindrome<char>))
+    (&forfun::palindrome::offset_based::is_palindrome<char>))
 {
     SECTION("Positive")
     {
@@ -105,7 +105,7 @@ TEMPLATE_TEST_CASE_SIG(
     (&forfun::palindrome::functional::is_palindrome<wchar_t>),
     (&forfun::palindrome::functional::bloated::is_palindrome<wchar_t>),
     (&forfun::palindrome::iterator_based::is_palindrome<wchar_t>),
-    (&forfun::palindrome::raw::is_palindrome<wchar_t>))
+    (&forfun::palindrome::offset_based::is_palindrome<wchar_t>))
 {
     SECTION("Positive")
     {
@@ -165,7 +165,7 @@ TEMPLATE_TEST_CASE_SIG(
     (&forfun::palindrome::functional::is_palindrome<char32_t>),
     (&forfun::palindrome::functional::bloated::is_palindrome<char32_t>),
     (&forfun::palindrome::iterator_based::is_palindrome<char32_t>),
-    (&forfun::palindrome::raw::is_palindrome<char32_t>))
+    (&forfun::palindrome::offset_based::is_palindrome<char32_t>))
 {
     SECTION("Positive")
     {
@@ -225,7 +225,7 @@ TEMPLATE_TEST_CASE_SIG(
     (&::is_palindrome_ci),
     (&forfun::palindrome::functional::bloated::is_palindrome_ci),
     (&forfun::palindrome::iterator_based::is_palindrome_ci),
-    (&forfun::palindrome::raw::is_palindrome_ci))
+    (&forfun::palindrome::offset_based::is_palindrome_ci))
 {
     SECTION("Positive")
     {
