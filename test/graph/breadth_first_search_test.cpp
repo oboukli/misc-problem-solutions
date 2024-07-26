@@ -310,7 +310,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         std::vector<vertex<char>> recorded_path{};
         recorded_path.reserve(8);
-        assert(recorded_path.empty());
 
         breadth_first_search(
             adjacency_list,
