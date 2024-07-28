@@ -44,6 +44,7 @@ leveraged by this project:
 | Binary search                   | C++20    | `include/forfun/search/binary_search.hpp`                    |
 | Breadth-first search            | C++20    | `include/forfun/graph/breadth_first_search.hpp`              |
 | Bubble sort                     | C++20    | `include/forfun/sorting/bubble_sort.cpp`                     |
+| Concatenation of array          | C++17    | `include/forfun/array_concatenation.hpp`                     |
 | Contains duplicate              | C++20    | `include/forfun/contains_duplicate.cpp`                      |
 | Depth-first search              | C++20    | `include/forfun/graph/depth_first_search.hpp`                |
 | Factorial                       | C++23    | `include/forfun/factorial.cpp`                               |

@@ -33,6 +33,7 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/array_concatenation.hpp"
   "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
   "include/forfun/factorial.hpp"
@@ -61,6 +62,7 @@ target_sources(
 target_sources(
   forfun
   PRIVATE
+  "src/forfun/array_concatenation.cpp"
   "src/forfun/common.cpp"
   "src/forfun/contains_duplicate.cpp"
   "src/forfun/factorial.cpp"
@@ -228,6 +230,7 @@ add_executable(
 target_sources(
   test_driver
   PRIVATE
+  "test/array_concatenation_test.cpp"
   "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
   "test/factorial_test.cpp"
@@ -291,6 +294,7 @@ add_executable(
 target_sources(
   benchmark_driver
   PRIVATE
+  "benchmark/array_concatenation_benchmark.cpp"
   "benchmark/benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
