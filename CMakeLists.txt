@@ -285,7 +285,6 @@ include(CTest)
 include(Catch)
 catch_discover_tests(test_driver)
 
-find_package(fmt CONFIG REQUIRED)
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 add_executable(
@@ -331,7 +330,6 @@ source_group(
 target_link_libraries(
   benchmark_driver
   PRIVATE Catch2::Catch2WithMain
-  PRIVATE fmt::fmt
 )
 target_link_libraries(
   benchmark_driver

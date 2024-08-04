@@ -47,7 +47,6 @@ jobs:
           key: >-
             ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
               'vcpkg\ports\catch2\vcpkg.json',
-              'vcpkg\ports\fmt\vcpkg.json',
               'vcpkg\ports\nameof\vcpkg.json',
               'vcpkg\ports\nanobench\vcpkg.json'
             ) }}
@@ -128,7 +127,6 @@ jobs:
           key: >-
             ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
               'vcpkg/ports/catch2/vcpkg.json',
-              'vcpkg/ports/fmt/vcpkg.json',
               'vcpkg/ports/nameof/vcpkg.json',
               'vcpkg/ports/nanobench/vcpkg.json'
             ) }}
@@ -208,7 +206,6 @@ jobs:
           key: >-
             ${{ runner.os }}-vcpkg-archives-cache-${{ hashFiles(
               'vcpkg/ports/catch2/vcpkg.json',
-              'vcpkg/ports/fmt/vcpkg.json',
               'vcpkg/ports/nameof/vcpkg.json',
               'vcpkg/ports/nanobench/vcpkg.json'
             ) }}
