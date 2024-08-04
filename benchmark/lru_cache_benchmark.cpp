@@ -5,10 +5,9 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
+#include <format>
 
 #include <catch2/catch_test_macros.hpp>
-
-#include <fmt/core.h>
 
 #include <nanobench.h>
 
@@ -67,7 +66,7 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
         ankerl::nanobench::Bench()
 
             .title(
-                fmt::format("LRU cache with {} cache items", lrucache_capacity))
+                std::format("LRU cache with {} cache items", lrucache_capacity))
             .relative(true)
 
             .run(
@@ -96,7 +95,7 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
         ankerl::nanobench::Bench()
 
             .title(
-                fmt::format("LRU cache with {} cache items", lrucache_capacity))
+                std::format("LRU cache with {} cache items", lrucache_capacity))
             .relative(true)
 
             .run(
