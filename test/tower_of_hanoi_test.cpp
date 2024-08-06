@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <cassert>
+#include <initializer_list>
 #include <stack>
 
 #include <catch2/catch_test_macros.hpp>
@@ -69,7 +70,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        auto const disks = {1};
+        std::initializer_list<int> const disks{1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -98,7 +99,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        auto const disks = {2, 1};
+        std::initializer_list<int> const disks{2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -127,7 +128,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        auto const disks = {3, 2, 1};
+        std::initializer_list<int> const disks{3, 2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -156,7 +157,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        auto const disks = {4, 3, 2, 1};
+        std::initializer_list<int> const disks{4, 3, 2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
