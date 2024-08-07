@@ -22,7 +22,7 @@ using VecConstIter = std::vector<std::string_view>::const_iterator;
 TEMPLATE_TEST_CASE_SIG(
     "Evaluate reverse polish notation (Well-formed input)",
     "[evaluate_reverse_polish_notation]",
-    ((auto eval_expression), eval_expression),
+    (auto eval_expression, eval_expression),
     // clang-format off
     (forfun::evaluate_reverse_polish_notation::hardened::
         eval_expression<VecConstIter, VecConstIter>),
@@ -47,8 +47,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Return as is")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"0"}, 0},
                 {{"1"}, 1},
                 {{"2"}, 2},
@@ -68,8 +68,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Addition")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"0", "0", "+"}, 0},
                 {{"0", "1", "+"}, 1},
                 {{"1", "0", "+"}, 1},
@@ -92,8 +92,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Subtraction")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"0", "0", "-"}, 0},
                 {{"1", "1", "-"}, 0},
                 {{"1", "0", "-"}, 1},
@@ -112,8 +112,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Multiplication")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"0", "0", "*"}, 0},
                 {{"0", "1", "*"}, 0},
                 {{"1", "0", "*"}, 0},
@@ -134,8 +134,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Division (valid cases)")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"1", "1", "/"}, 1},
                 {{"3", "17", "/"}, 0},
                 {{"17", "3", "/"}, 5},
@@ -153,8 +153,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Values only")
     {
-        auto [tokens, expected]{
-            GENERATE(table<std::vector<std::string_view>, int>({
+        auto [tokens, expected]{GENERATE(
+            table<std::vector<std::string_view>, int>({
                 {{"17", "0"}, 0},
                 {{"157", "163"}, 163},
                 {{"19", "-7"}, -7},
@@ -256,16 +256,17 @@ TEST_CASE(
 
     SECTION("Invalid operator")
     {
-        auto [tokens]{GENERATE(table<std::vector<std::string_view>>({
-            {{"3", "17", "@"}},
-            {{"17", "3", "="}},
-            {{"0", "41", "A"}},
-            {{"0", "-41", "b"}},
-            {{"0", "-41", ""}},
-            {{"0", "-41", "  "}},
-            {{"0", "-41", " + "}},
-            {{"0", "-41", "++"}},
-        }))};
+        auto [tokens]{GENERATE(
+            table<std::vector<std::string_view>>({
+                {{"3", "17", "@"}},
+                {{"17", "3", "="}},
+                {{"0", "41", "A"}},
+                {{"0", "-41", "b"}},
+                {{"0", "-41", ""}},
+                {{"0", "-41", "  "}},
+                {{"0", "-41", " + "}},
+                {{"0", "-41", "++"}},
+            }))};
 
         CAPTURE(tokens);
 
@@ -276,16 +277,17 @@ TEST_CASE(
 
     SECTION("Invalid operands")
     {
-        auto [tokens]{GENERATE(table<std::vector<std::string_view>>({
-            {{" 0", "0", "+"}},
-            {{"0 ", "1", "+"}},
-            {{"1", "1 1", "+"}},
-            {{"1", " 0 ", "+"}},
-            {{"3", "n", "+"}},
-            {{"", "", "+"}},
-            {{"n", "", "-"}},
-            {{"a", "b", "/"}},
-        }))};
+        auto [tokens]{GENERATE(
+            table<std::vector<std::string_view>>({
+                {{" 0", "0", "+"}},
+                {{"0 ", "1", "+"}},
+                {{"1", "1 1", "+"}},
+                {{"1", " 0 ", "+"}},
+                {{"3", "n", "+"}},
+                {{"", "", "+"}},
+                {{"n", "", "-"}},
+                {{"a", "b", "/"}},
+            }))};
 
         CAPTURE(tokens);
 
@@ -297,14 +299,15 @@ TEST_CASE(
 
     SECTION("Malformed input")
     {
-        auto [tokens]{GENERATE(table<std::vector<std::string_view>>({
-            {{""}},
-            {{"0", "0", "++"}},
-            {{"invalid input"}},
-            {{"17", "invalid input", "+"}},
-            {{"0", "41", "invalid input"}},
-            {{"invalid input", "invalid input", "invalid input"}},
-        }))};
+        auto [tokens]{GENERATE(
+            table<std::vector<std::string_view>>({
+                {{""}},
+                {{"0", "0", "++"}},
+                {{"invalid input"}},
+                {{"17", "invalid input", "+"}},
+                {{"0", "41", "invalid input"}},
+                {{"invalid input", "invalid input", "invalid input"}},
+            }))};
 
         CAPTURE(tokens);
 

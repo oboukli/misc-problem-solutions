@@ -37,7 +37,7 @@ using namespace forfun::fibonacci::sequence;
 TEMPLATE_TEST_CASE_SIG(
     "fibonacci_sequence",
     "[fibonacci_sequence]",
-    ((auto fib_seq), fib_seq),
+    (auto fib_seq, fib_seq),
     (slow::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>),
     (fast::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>),
     (creel::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>))
@@ -46,8 +46,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         GIVEN("a positive integer (incl. zero) as an upper bound")
         {
-            auto const [max, expected_seq]{
-                GENERATE(table<int, std::vector<int>>({
+            auto const [max, expected_seq]{GENERATE(
+                table<int, std::vector<int>>({
                     {0, {0}},
                     {1, {0, 1, 1}},
                     {13, {0, 1, 1, 2, 3, 5, 8, 13}},
@@ -75,10 +75,11 @@ TEMPLATE_TEST_CASE_SIG(
     {
         GIVEN("a negative integer as an upper bound")
         {
-            auto const [max]{GENERATE(table<int>({
-                {-13},
-                {-1},
-            }))};
+            auto const [max]{GENERATE(
+                table<int>({
+                    {-13},
+                    {-1},
+                }))};
 
             CAPTURE(max);
 

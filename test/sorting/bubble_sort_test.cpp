@@ -23,7 +23,7 @@ using VecItr = std::vector<int>::iterator;
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 0>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr0Itr, Arr0Itr>),
     (forfun::sorting::stl::bubble_sort<Arr0Itr, Arr0Itr>))
 {
@@ -42,7 +42,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 1>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr1Itr, Arr1Itr>),
     (forfun::sorting::stl::bubble_sort<Arr1Itr, Arr1Itr>))
 {
@@ -61,7 +61,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 2>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr2Itr, Arr2Itr>),
     (forfun::sorting::stl::bubble_sort<Arr2Itr, Arr2Itr>))
 {
@@ -80,7 +80,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 3>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr3Itr, Arr3Itr>),
     (forfun::sorting::stl::bubble_sort<Arr3Itr, Arr3Itr>))
 {
@@ -99,7 +99,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 10>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr10Itr, Arr10Itr>),
     (forfun::sorting::stl::bubble_sort<Arr10Itr, Arr10Itr>))
 {
@@ -129,7 +129,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 7>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr7Itr, Arr7Itr>),
     (forfun::sorting::stl::bubble_sort<Arr7Itr, Arr7Itr>))
 {
@@ -148,7 +148,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::vector<int>)",
     "[sorting][bubble_sort]",
-    ((auto bubble_sort), bubble_sort),
+    (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<VecItr, VecItr>),
     (forfun::sorting::stl::bubble_sort<VecItr, VecItr>))
 {

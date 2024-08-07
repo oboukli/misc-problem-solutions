@@ -15,13 +15,13 @@
 TEMPLATE_TEST_CASE_SIG(
     "Valid parentheses",
     "[valid_parentheses]",
-    ((auto is_valid), is_valid),
-    (forfun::valid_parentheses::ascii_optimized::is_valid),
-    (forfun::valid_parentheses::circuit_breaker::is_valid),
-    (forfun::valid_parentheses::deque_based::is_valid),
-    (forfun::valid_parentheses::dyn_array_based::is_valid),
-    (forfun::valid_parentheses::vector_based::is_valid),
-    (forfun::valid_parentheses::vector_based_demi_allocated::is_valid))
+    (auto is_valid, is_valid),
+    forfun::valid_parentheses::ascii_optimized::is_valid,
+    forfun::valid_parentheses::circuit_breaker::is_valid,
+    forfun::valid_parentheses::deque_based::is_valid,
+    forfun::valid_parentheses::dyn_array_based::is_valid,
+    forfun::valid_parentheses::vector_based::is_valid,
+    forfun::valid_parentheses::vector_based_demi_allocated::is_valid)
 {
     SECTION("Valid")
     {

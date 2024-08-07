@@ -296,12 +296,13 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             int aux_rod{};
             // NOLINTEND(misc-const-correctness)
 
-            STATIC_REQUIRE(noexcept(forfun::tower_of_hanoi::recursive::toh(
-                src_rod,
-                des_rod,
-                aux_rod,
-                [](int&, int&) noexcept -> void {},
-                0)));
+            STATIC_REQUIRE(
+                noexcept(forfun::tower_of_hanoi::recursive::toh(
+                    src_rod,
+                    des_rod,
+                    aux_rod,
+                    [](int&, int&) noexcept -> void {},
+                    0)));
         }
     }
 }

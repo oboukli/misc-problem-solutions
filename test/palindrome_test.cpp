@@ -43,12 +43,12 @@ using std::string_view_literals::operator""sv;
 TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
-    ((auto func_is_palindrome), func_is_palindrome),
-    (&::is_palindrome),
-    (&forfun::palindrome::functional::is_palindrome<char>),
-    (&forfun::palindrome::functional::bloated::is_palindrome<char>),
-    (&forfun::palindrome::iterator_based::is_palindrome<char>),
-    (&forfun::palindrome::offset_based::is_palindrome<char>))
+    (auto func_is_palindrome, func_is_palindrome),
+    &::is_palindrome,
+    &forfun::palindrome::functional::is_palindrome<char>,
+    &forfun::palindrome::functional::bloated::is_palindrome<char>,
+    &forfun::palindrome::iterator_based::is_palindrome<char>,
+    &forfun::palindrome::offset_based::is_palindrome<char>)
 {
     SECTION("Positive")
     {
@@ -101,11 +101,11 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check (wchar_t)",
     "[palindrome]",
-    ((auto func_is_palindrome), func_is_palindrome),
-    (&forfun::palindrome::functional::is_palindrome<wchar_t>),
-    (&forfun::palindrome::functional::bloated::is_palindrome<wchar_t>),
-    (&forfun::palindrome::iterator_based::is_palindrome<wchar_t>),
-    (&forfun::palindrome::offset_based::is_palindrome<wchar_t>))
+    (auto func_is_palindrome, func_is_palindrome),
+    &forfun::palindrome::functional::is_palindrome<wchar_t>,
+    &forfun::palindrome::functional::bloated::is_palindrome<wchar_t>,
+    &forfun::palindrome::iterator_based::is_palindrome<wchar_t>,
+    &forfun::palindrome::offset_based::is_palindrome<wchar_t>)
 {
     SECTION("Positive")
     {
@@ -161,11 +161,11 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check (char32_t)",
     "[palindrome]",
-    ((auto func_is_palindrome), func_is_palindrome),
-    (&forfun::palindrome::functional::is_palindrome<char32_t>),
-    (&forfun::palindrome::functional::bloated::is_palindrome<char32_t>),
-    (&forfun::palindrome::iterator_based::is_palindrome<char32_t>),
-    (&forfun::palindrome::offset_based::is_palindrome<char32_t>))
+    (auto func_is_palindrome, func_is_palindrome),
+    &forfun::palindrome::functional::is_palindrome<char32_t>,
+    &forfun::palindrome::functional::bloated::is_palindrome<char32_t>,
+    &forfun::palindrome::iterator_based::is_palindrome<char32_t>,
+    &forfun::palindrome::offset_based::is_palindrome<char32_t>)
 {
     SECTION("Positive")
     {
@@ -221,11 +221,11 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Case-insensitive palindrome check",
     "[palindrome]",
-    ((auto func_is_palindrome_ci), func_is_palindrome_ci),
-    (&::is_palindrome_ci),
-    (&forfun::palindrome::functional::bloated::is_palindrome_ci),
-    (&forfun::palindrome::iterator_based::is_palindrome_ci),
-    (&forfun::palindrome::offset_based::is_palindrome_ci))
+    (auto func_is_palindrome_ci, func_is_palindrome_ci),
+    &::is_palindrome_ci,
+    &forfun::palindrome::functional::bloated::is_palindrome_ci,
+    &forfun::palindrome::iterator_based::is_palindrome_ci,
+    &forfun::palindrome::offset_based::is_palindrome_ci)
 {
     SECTION("Positive")
     {

@@ -15,7 +15,7 @@
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate empty array",
     "[array_concatenation]",
-    ((auto concatenate), concatenate),
+    (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 0U>),
     (forfun::array_concatenation::functional_minimal::concatenate<int, 0U>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 0U>),
@@ -39,7 +39,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate one-element array",
     "[array_concatenation]",
-    ((auto concatenate), concatenate),
+    (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 1U>),
     (forfun::array_concatenation::functional_minimal::concatenate<int, 1U>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 1U>),
@@ -63,7 +63,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate three-element array",
     "[array_concatenation]",
-    ((auto concatenate), concatenate),
+    (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 3U>),
     (forfun::array_concatenation::functional_minimal::concatenate<int, 3U>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 3U>),
@@ -87,7 +87,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate four-element array",
     "[array_concatenation]",
-    ((auto concatenate), concatenate),
+    (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 4U>),
     (forfun::array_concatenation::functional_minimal::concatenate<int, 4U>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 4U>),
@@ -112,7 +112,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate 256-element array (benchmark case)",
     "[array_concatenation]",
-    ((auto concatenate), concatenate),
+    (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 256U>),
     (forfun::array_concatenation::functional_minimal::concatenate<int, 256U>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 256U>),
