@@ -57,7 +57,8 @@ TEMPLATE_TEST_CASE_SIG(
                 {"abcd"sv, "bcad"sv},
                 {"abcd"sv, "dbca"sv},
                 {"abcd"sv, "adbc"sv},
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);
@@ -85,7 +86,8 @@ TEMPLATE_TEST_CASE_SIG(
 
                 {"anagram"sv, "anagramlion"sv},
                 {"anagramlion"sv, "anagram"sv},
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);
@@ -136,7 +138,8 @@ TEST_CASE("Valid Anagram (8-bit ordinal comparison)", "[valid_anagram]")
 
                 {u8"عربي"sv, u8"عبري"sv}, //  Arabic <=> Hebrew
                 {u8"我爱你"sv, u8"你爱我"sv}, // I love you <=> You love me
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);
@@ -164,7 +167,8 @@ TEST_CASE("Valid Anagram (8-bit ordinal comparison)", "[valid_anagram]")
 
                 {u8"anagram"sv, u8"anagramlion"sv},
                 {u8"anagramlion"sv, u8"anagram"sv},
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);
@@ -215,7 +219,8 @@ TEST_CASE("Valid Anagram (32-bit ordinal comparison)", "[valid_anagram]")
 
                 {U"عربي"sv, U"عبري"sv}, //  Arabic <=> Hebrew
                 {U"我爱你"sv, U"你爱我"sv}, // I love you <=> You love me
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);
@@ -243,7 +248,8 @@ TEST_CASE("Valid Anagram (32-bit ordinal comparison)", "[valid_anagram]")
 
                 {U"anagram"sv, U"anagramlion"sv},
                 {U"anagramlion"sv, U"anagram"sv},
-            }))};
+            })
+        )};
 
         CAPTURE(s);
         CAPTURE(t);

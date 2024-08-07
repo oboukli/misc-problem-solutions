@@ -33,7 +33,8 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     }
 
     auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)};
+        static_cast<std::vector<int>::size_type>(end - iter)
+    };
     std::vector<int> evaluation_stack;
     evaluation_stack.reserve(evaluation_stack_size);
 
@@ -44,15 +45,15 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
         if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)};
+                std::from_chars(sv_begin, sv_end, operand)
+            };
             parse_result.ec == std::errc{}
             && parse_result.ptr == iter->data() + iter->size())
         {
             evaluation_stack.push_back(operand);
         }
-        else if (
-            iter->length() == std::string_view::size_type{1}
-            && evaluation_stack.size() >= std::vector<int>::size_type{2})
+        else if (iter->length() == std::string_view::size_type{1}
+                 && evaluation_stack.size() >= std::vector<int>::size_type{2})
         {
             int const operand_2{evaluation_stack.back()};
             evaluation_stack.pop_back();
@@ -109,7 +110,8 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     }
 
     auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)};
+        static_cast<std::vector<int>::size_type>(end - iter)
+    };
     std::vector<int> evaluation_stack;
     evaluation_stack.reserve(evaluation_stack_size);
 
@@ -120,7 +122,8 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
         if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)};
+                std::from_chars(sv_begin, sv_end, operand)
+            };
             parse_result.ec == std::errc{})
         {
             evaluation_stack.push_back(operand);
@@ -164,11 +167,13 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     -> std::pair<int, std::errc>
 {
     auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)};
+        static_cast<std::vector<int>::size_type>(end - iter)
+    };
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     std::unique_ptr<int[]> const evaluation_stack{
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
-        std::make_unique_for_overwrite<int[]>(evaluation_stack_size + 1U)};
+        std::make_unique_for_overwrite<int[]>(evaluation_stack_size + 1U)
+    };
 
     int* evaluation_stack_top{evaluation_stack.get()};
     *evaluation_stack_top = 0;
@@ -180,7 +185,8 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
         if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)};
+                std::from_chars(sv_begin, sv_end, operand)
+            };
             parse_result.ec == std::errc{})
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)

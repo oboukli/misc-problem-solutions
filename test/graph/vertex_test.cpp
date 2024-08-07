@@ -43,21 +43,20 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
         REQUIRE(
             get_adjacencies_iter(adjacency_list, vertex)
-            == adjacency_list.cend());
+            == adjacency_list.cend()
+        );
     }
 
     SECTION("Adjacency list can be found for vertex<int>")
     {
         constexpr vertex<int> const vertex{4};
         VertexAdjacencyList<int> const adjacency_list{
-            // clang-format off
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
             {{3}, {1}},
             {{4}, {1}, {5}},
             {{5}, {4}, {6}},
             {{6}, {5}},
-            // clang-format on
         };
 
         CAPTURE(vertex);
@@ -65,7 +64,8 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
         REQUIRE(
             get_adjacencies_iter(adjacency_list, vertex)
-            == std::next(adjacency_list.cbegin(), 3));
+            == std::next(adjacency_list.cbegin(), 3)
+        );
     }
 
     SECTION("Adjacency list can be found for vertex<std::string>")
@@ -74,14 +74,12 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
         constexpr vertex<std::string_view> const vertex{"five"sv};
         VertexAdjacencyList<std::string_view> const adjacency_list{
-            // clang-format off
             {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
             {{"two"sv}, {"one"sv}},
             {{"three"sv}, {"one"sv}},
             {{"four"sv}, {"one"sv}, {"five"sv}},
             {{"five"sv}, {"four"sv}, {"six"sv}},
             {{"six"sv}, {"five"sv}},
-            // clang-format on
         };
 
         CAPTURE(vertex);
@@ -89,7 +87,8 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
         REQUIRE(
             get_adjacencies_iter(adjacency_list, vertex)
-            == std::next(adjacency_list.cbegin(), 4));
+            == std::next(adjacency_list.cbegin(), 4)
+        );
     }
 }
 
@@ -120,14 +119,12 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
     SECTION("Graph state list initialized (int)")
     {
         VertexAdjacencyList<int> const adjacency_list{
-            // clang-format off
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
             {{3}, {1}},
             {{4}, {1}, {5}},
             {{5}, {4}, {6}},
             {{6}, {5}},
-            // clang-format on
         };
         VertexStateList<int> state_list{};
 
@@ -139,14 +136,12 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
         init_state_list(adjacency_list, state_list);
 
         VertexStateList<int> const expected_state_list{
-            // clang-format off
             {{1}, vertex_visit_state::unvisited},
             {{2}, vertex_visit_state::unvisited},
             {{3}, vertex_visit_state::unvisited},
             {{4}, vertex_visit_state::unvisited},
             {{5}, vertex_visit_state::unvisited},
             {{6}, vertex_visit_state::unvisited},
-            // clang-format on
         };
 
         REQUIRE(state_list == expected_state_list);
@@ -158,14 +153,12 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
         using std::string_view_literals::operator""sv;
 
         VertexAdjacencyList<std::string_view> const adjacency_list{
-            // clang-format off
             {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
             {{"two"sv}, {"one"sv}},
             {{"three"sv}, {"one"sv}},
             {{"four"sv}, {"one"sv}, {"five"sv}},
             {{"five"sv}, {"four"sv}, {"six"sv}},
             {{"six"sv}, {"five"sv}},
-            // clang-format on
         };
         VertexStateList<std::string_view> state_list{};
 
@@ -177,14 +170,12 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
         init_state_list(adjacency_list, state_list);
 
         VertexStateList<std::string_view> const expected_state_list{
-            // clang-format off
             {{"one"sv}, vertex_visit_state::unvisited},
             {{"two"sv}, vertex_visit_state::unvisited},
             {{"three"sv}, vertex_visit_state::unvisited},
             {{"four"sv}, vertex_visit_state::unvisited},
             {{"five"sv}, vertex_visit_state::unvisited},
             {{"six"sv}, vertex_visit_state::unvisited},
-            // clang-format on
         };
 
         REQUIRE(state_list == expected_state_list);

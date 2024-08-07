@@ -29,7 +29,8 @@ TEST_CASE("Compiler feature test", "[factorial]")
 #else
     WARN(
         "forfun::factorial::stl_functional::factorial<>(n) is not available "
-        "because it was not supported by the C++ compiler.");
+        "because it was not supported by the C++ compiler."
+    );
 #endif // FORFUN_UNSUPPORTED_FEATURE
 }
 
@@ -37,7 +38,8 @@ TEMPLATE_TEST_CASE(
     "Factorial value supported by std::int8_t or larger type",
     "[factorial]",
     std::int32_t,
-    std::int64_t)
+    std::int64_t
+)
 {
     SECTION("Factorial of negative")
     {
@@ -80,7 +82,8 @@ TEMPLATE_TEST_CASE(
     "[factorial]",
     std::int16_t,
     std::int32_t,
-    std::int64_t)
+    std::int64_t
+)
 {
     SECTION("7! is 5,040")
     {
@@ -96,7 +99,8 @@ TEMPLATE_TEST_CASE(
     "Factorial value supported by std::uint16_t or larger type",
     "[factorial]",
     std::uint16_t,
-    std::uint32_t)
+    std::uint32_t
+)
 {
     SECTION("8! is 40,320")
     {
@@ -111,7 +115,8 @@ TEMPLATE_TEST_CASE(
 TEMPLATE_TEST_CASE(
     "Factorial value supported by std::uint32_t or larger type",
     "[factorial]",
-    std::uint32_t)
+    std::uint32_t
+)
 {
     SECTION("12! is 479,001,600")
     {
@@ -127,13 +132,14 @@ TEMPLATE_TEST_CASE(
 TEMPLATE_TEST_CASE(
     "Factorial value supported by std::uint64_t or larger type",
     "[factorial]",
-    std::uint64_t)
+    std::uint64_t
+)
 {
     SECTION("20! is 2,432,902,008,176,640,000")
     {
         auto const volatile n{TestType{20}};
-        static constexpr auto const expected{
-            TestType{2'432'902'008'176'640'000}};
+        static constexpr auto const expected{TestType{2'432'902'008'176'640'000}
+        };
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         REQUIRE(forfun::factorial::recursive::factorial(n) == expected);

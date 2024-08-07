@@ -21,7 +21,8 @@ TEMPLATE_TEST_CASE_SIG(
     forfun::valid_parentheses::deque_based::is_valid,
     forfun::valid_parentheses::dyn_array_based::is_valid,
     forfun::valid_parentheses::vector_based::is_valid,
-    forfun::valid_parentheses::vector_based_demi_allocated::is_valid)
+    forfun::valid_parentheses::vector_based_demi_allocated::is_valid
+)
 {
     SECTION("Valid")
     {
@@ -90,8 +91,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("[]{{{{{()}}}}}(([[[[]]]]))")
         {
-            constexpr std::u8string_view const s{
-                u8"[]{{{{{()}}}}}(([[[[]]]]))"};
+            constexpr std::u8string_view const s{u8"[]{{{{{()}}}}}(([[[[]]]]))"
+            };
 
             CAPTURE(s);
 
@@ -104,7 +105,8 @@ TEMPLATE_TEST_CASE_SIG(
                 u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                 "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
                 "]]]]))))}}}}}}}}}}}}}}}}}}}}}}}}"
-                "))))))))))))))))]]]]]]]]]]]]]]]]"};
+                "))))))))))))))))]]]]]]]]]]]]]]]]"
+            };
 
             CAPTURE(s);
 
@@ -267,7 +269,8 @@ TEMPLATE_TEST_CASE_SIG(
                 u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                 "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
                 "]]]]))))}}}}}}}}}}}}}}}}}}}}}}}}"
-                "))))))))))))))))]]]]]]]]]]]]]]]"};
+                "))))))))))))))))]]]]]]]]]]]]]]]"
+            };
 
             CAPTURE(s);
 

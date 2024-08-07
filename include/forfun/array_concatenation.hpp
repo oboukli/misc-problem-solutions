@@ -21,8 +21,8 @@ namespace functional {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     std::copy(src.cbegin(), src.cend(), dest.begin());
     std::copy(src.cbegin(), src.cend(), std::next(dest.begin(), Size));
@@ -34,8 +34,8 @@ namespace functional_minimal {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     std::copy(src.cbegin(), src.cend(), dest.begin());
     std::copy(src.cbegin(), src.cend(), dest.begin() + Size);
@@ -47,8 +47,8 @@ namespace iterator_based {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     auto const src_cbegin{src.cbegin()};
     auto const src_cend{src.cend()};
@@ -70,8 +70,8 @@ namespace iterator_based_double {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     auto const src_cbegin{src.cbegin()};
     auto const src_cend{src.cend()};
@@ -100,8 +100,8 @@ namespace iterator_unfolded {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     auto const src_cend{src.cend()};
     auto dest1_itr{dest.begin()};
@@ -120,8 +120,8 @@ namespace nested_loops {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
     for (std::size_t i{0U}; i < 2U; ++i)
     {
@@ -146,8 +146,8 @@ namespace semi_unfolded {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src,
-    std::array<T, std::size_t{2U * Size}>& dest) noexcept -> void
+    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+) noexcept -> void
 {
 #if _MSC_VER
 #pragma warning(push)

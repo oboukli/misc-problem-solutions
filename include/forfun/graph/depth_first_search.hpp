@@ -32,28 +32,30 @@ constexpr auto depth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const preorder_step) noexcept(noexcept(preorder_step(start)))
-    -> void
+    Visitor const preorder_step
+) noexcept(noexcept(preorder_step(start))) -> void
 {
     vertex_state_list[start] = vertex_visit_state::visited;
     preorder_step(start);
 
     auto const adjacencies_iter{
-        get_adjacencies_iter(vertex_adjacency_list, start)};
+        get_adjacencies_iter(vertex_adjacency_list, start)
+    };
 
     auto itr{adjacencies_iter->cbegin()};
     auto const end{adjacencies_iter->cend()};
 
     for (; itr != end; ++itr)
     {
-        if (auto const adjacency = *itr;
+        if (auto const adjacency{*itr};
             vertex_state_list[adjacency] == vertex_visit_state::unvisited)
         {
             depth_first_search_imp(
                 vertex_adjacency_list,
                 vertex_state_list,
                 adjacency,
-                preorder_step);
+                preorder_step
+            );
         }
     }
 }
@@ -65,8 +67,8 @@ constexpr auto depth_first_search(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const preorder_step) noexcept(noexcept(preorder_step(start)))
-    -> void
+    Visitor const preorder_step
+) noexcept(noexcept(preorder_step(start))) -> void
 {
     if (vertex_adjacency_list.empty())
     {
@@ -74,7 +76,8 @@ constexpr auto depth_first_search(
     }
 
     detail::depth_first_search_imp(
-        vertex_adjacency_list, vertex_state_list, start, preorder_step);
+        vertex_adjacency_list, vertex_state_list, start, preorder_step
+    );
 }
 
 } // namespace recursive

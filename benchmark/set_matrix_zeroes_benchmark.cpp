@@ -15,7 +15,8 @@
 #include "forfun/set_matrix_zeroes.hpp"
 
 TEST_CASE(
-    "Set matrix zeros benchmarking", "[benchmark][matrix][set_matrix_zeroes]")
+    "Set matrix zeros benchmarking", "[benchmark][matrix][set_matrix_zeroes]"
+)
 {
     using namespace forfun::set_matrix_zeroes;
 
@@ -27,7 +28,6 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(iterator_based_sol1::set_zeroes).c_str(),
             []() {
-                // clang-format off
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
@@ -48,17 +48,16 @@ TEST_CASE(
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0},
                 };
-                // clang-format on
 
                 iterator_based_sol1::set_zeroes(matrix);
 
                 ankerl::nanobench::doNotOptimizeAway(matrix);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(iterator_based_sol2::set_zeroes).c_str(),
             []() {
-                // clang-format off
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
@@ -79,17 +78,16 @@ TEST_CASE(
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0},
                 };
-                // clang-format on
 
                 iterator_based_sol2::set_zeroes(matrix);
 
                 ankerl::nanobench::doNotOptimizeAway(matrix);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(offset_based::set_zeroes).c_str(),
             []() {
-                // clang-format off
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
@@ -110,12 +108,12 @@ TEST_CASE(
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0},
                 };
-                // clang-format on
 
                 offset_based::set_zeroes(matrix);
 
                 ankerl::nanobench::doNotOptimizeAway(matrix);
-            })
+            }
+        )
 
         ;
 }

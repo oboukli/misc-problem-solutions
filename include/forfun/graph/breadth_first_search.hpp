@@ -29,20 +29,23 @@ constexpr auto breadth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const step) noexcept(noexcept(step(start))) -> void
+    Visitor const step
+) noexcept(noexcept(step(start))) -> void
 {
     vertex_state_list[start] = vertex_visit_state::visited;
     step(start);
 
     auto const adjacencies_iter{
-        get_adjacencies_iter(vertex_adjacency_list, start)};
+        get_adjacencies_iter(vertex_adjacency_list, start)
+    };
 
     for (auto const adjacency : *adjacencies_iter)
     {
         if (vertex_state_list[adjacency] == vertex_visit_state::unvisited)
         {
             breadth_first_search_imp(
-                vertex_adjacency_list, vertex_state_list, adjacency, step);
+                vertex_adjacency_list, vertex_state_list, adjacency, step
+            );
         }
     }
 }
@@ -54,7 +57,8 @@ constexpr auto breadth_first_search(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const step) noexcept(noexcept(step(start))) -> void
+    Visitor const step
+) noexcept(noexcept(step(start))) -> void
 {
     if (vertex_adjacency_list.empty())
     {
@@ -62,7 +66,8 @@ constexpr auto breadth_first_search(
     }
 
     detail::breadth_first_search_imp(
-        vertex_adjacency_list, vertex_state_list, start, step);
+        vertex_adjacency_list, vertex_state_list, start, step
+    );
 }
 
 } // namespace recursive

@@ -27,14 +27,16 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
     std::array<
         std::size_t,
         2U << static_cast<std::size_t>(
-            std::numeric_limits<std::string_view::value_type>::digits)>
+            std::numeric_limits<std::string_view::value_type>::digits
+        )>
         haystack{};
     static_assert(haystack.size() == std::size_t{256U});
 
     for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
         auto const index{
-            static_cast<std::size_t>(static_cast<unsigned char>(*iter))};
+            static_cast<std::size_t>(static_cast<unsigned char>(*iter))
+        };
         assert((std::size_t{0U} <= index) and (index < haystack.size()));
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
@@ -44,7 +46,8 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
         auto const index{
-            static_cast<std::size_t>(static_cast<unsigned char>(*iter))};
+            static_cast<std::size_t>(static_cast<unsigned char>(*iter))
+        };
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
         if (haystack[index] == std::size_t{0U})
         {

@@ -35,7 +35,8 @@ TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
 
                 ConstItr r{majority_element(elements)};
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         ;
 }

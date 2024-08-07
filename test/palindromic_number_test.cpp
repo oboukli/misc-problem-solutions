@@ -18,7 +18,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[palindromic_number]",
     (auto is_palindrome, is_palindrome),
     forfun::palindromic_number::fast::is_palindrome<int>,
-    forfun::palindromic_number::stl::is_palindrome)
+    forfun::palindromic_number::stl::is_palindrome
+)
 {
     SECTION("Palindromic numbers")
     {
@@ -37,7 +38,8 @@ TEMPLATE_TEST_CASE_SIG(
                     {143341},
                     {4268624},
                     {1234554321},
-                }))};
+                })
+            )};
 
             CAPTURE(palindromic_number);
 
@@ -67,7 +69,8 @@ TEMPLATE_TEST_CASE_SIG(
                     {4268604},
                     {999999998},
                     {2147483602}, // Max supported for std::int32_t
-                }))};
+                })
+            )};
 
             CAPTURE(non_palindromic_number);
 
@@ -87,7 +90,8 @@ TEST_CASE("palindromic_number_static", "[palindromic_number][static]")
     SECTION("Palindromic integrals")
     {
         STATIC_REQUIRE(
-            forfun::palindromic_number::fast::is_palindrome(char{33}));
+            forfun::palindromic_number::fast::is_palindrome(char{33})
+        );
 
         STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(7));
 
@@ -101,9 +105,11 @@ TEST_CASE("palindromic_number_static", "[palindromic_number][static]")
     SECTION("Non-palindromic integrals")
     {
         STATIC_REQUIRE_FALSE(
-            forfun::palindromic_number::fast::is_palindrome(-1));
+            forfun::palindromic_number::fast::is_palindrome(-1)
+        );
 
         STATIC_REQUIRE_FALSE(
-            forfun::palindromic_number::fast::is_palindrome(char{65}));
+            forfun::palindromic_number::fast::is_palindrome(char{65})
+        );
     }
 }

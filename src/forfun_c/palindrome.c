@@ -16,8 +16,10 @@ found in the LICENSE file.
 #if __clang__
 #pragma clang attribute push( \
     __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow"))), \
-    apply_to = function)
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
+    )), \
+    apply_to = function \
+)
 #endif /* __clang__ */
 int is_palindrome(char const* str, size_t const length)
 {
@@ -45,8 +47,10 @@ int is_palindrome(char const* str, size_t const length)
 #if __clang__
 #pragma clang attribute push( \
     __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow"))), \
-    apply_to = function)
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
+    )), \
+    apply_to = function \
+)
 #endif /* __clang__ */
 int is_palindrome_ci(char const* str, size_t const length)
 {

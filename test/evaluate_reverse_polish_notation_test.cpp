@@ -40,7 +40,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == 0);
         REQUIRE(actual_error == std::errc{});
     }
@@ -56,12 +57,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"-1"}, -1},
                 {{"-17"}, -17},
                 {{"7919"}, 7919},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -80,12 +83,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"17", "3", "+"}, 20},
                 {{"1000", "1", "+"}, 1001},
                 {{"1", "1000", "+"}, 1001},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -100,12 +105,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"0", "1", "-"}, -1},
                 {{"3", "17", "-"}, -14},
                 {{"17", "3", "-"}, 14},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -122,12 +129,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"311", "1", "*"}, 311},
                 {{"3", "17", "*"}, 51},
                 {{"17", "3", "*"}, 51},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -141,12 +150,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"17", "3", "/"}, 5},
                 {{"0", "41", "/"}, 0},
                 {{"0", "-41", "/"}, 0},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -163,12 +174,14 @@ TEMPLATE_TEST_CASE_SIG(
                 {{"1", "1"}, 1},
                 {{"1", "1", "1"}, 1},
                 {{"3", "17", "0"}, 0},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -196,16 +209,19 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(
             actual_result
-            == (((((((211 - 283) - 137) * 47) / 241) + 113) - 67) * 89));
+            == (((((((211 - 283) - 137) * 47) / 241) + 113) - 67) * 89)
+        );
         REQUIRE(actual_error == std::errc{});
     }
 
     SECTION(
         "((((((((149 * 2) + 61) + 223) - 2) / 11) + 71) * 293) - 101) "
-        "(benchmark case)")
+        "(benchmark case)"
+    )
     {
         std::vector<std::string_view> const tokens{
             {"149"sv},
@@ -224,22 +240,26 @@ TEMPLATE_TEST_CASE_SIG(
             {"293"sv},
             {"*"sv},
             {"101"sv},
-            {"-"sv}};
+            {"-"sv},
+        };
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(
             actual_result
-            == ((((((((149 * 2) + 61) + 223) - 2) / 11) + 71) * 293) - 101));
+            == ((((((((149 * 2) + 61) + 223) - 2) / 11) + 71) * 293) - 101)
+        );
         REQUIRE(actual_error == std::errc{});
     }
 }
 
 TEST_CASE(
     "Evaluate reverse polish notation (Invalid input)",
-    "[evaluate_reverse_polish_notation]")
+    "[evaluate_reverse_polish_notation]"
+)
 {
     using forfun::evaluate_reverse_polish_notation::hardened::eval_expression;
 
@@ -250,7 +270,8 @@ TEST_CASE(
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -266,12 +287,14 @@ TEST_CASE(
                 {{"0", "-41", "  "}},
                 {{"0", "-41", " + "}},
                 {{"0", "-41", "++"}},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -287,12 +310,14 @@ TEST_CASE(
                 {{"", "", "+"}},
                 {{"n", "", "-"}},
                 {{"a", "b", "/"}},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         // REQUIRE(actual_result == 0);
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
@@ -307,12 +332,14 @@ TEST_CASE(
                 {{"17", "invalid input", "+"}},
                 {{"0", "41", "invalid input"}},
                 {{"invalid input", "invalid input", "invalid input"}},
-            }))};
+            })
+        )};
 
         CAPTURE(tokens);
 
         auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())};
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 }

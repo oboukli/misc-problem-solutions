@@ -15,8 +15,8 @@
 #include "forfun/sub_array_sums.hpp"
 
 TEST_CASE(
-    "Sum of all subarrays of size K benchmarking",
-    "[benchmark][sub_array_sums]")
+    "Sum of all subarrays of size K benchmarking", "[benchmark][sub_array_sums]"
+)
 {
     using namespace forfun::sub_array_sums;
 
@@ -47,7 +47,8 @@ TEST_CASE(
                 sum_each(numbers, sums, sub_size);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);
-            })
+            }
+        )
 
         ;
 }

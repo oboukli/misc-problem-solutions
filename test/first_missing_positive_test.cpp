@@ -21,9 +21,12 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::first_missing_positive::base::lowest_missing<
         std::vector<int>::iterator,
         std::vector<int>::iterator>),
+    // clang-format off
     (forfun::first_missing_positive::fast::lowest_missing<
         std::vector<int>::iterator,
-        std::vector<int>::iterator>))
+        std::vector<int>::iterator>)
+    // clang-format onß
+)
 {
     SECTION("Empty vector")
     {
@@ -34,7 +37,8 @@ TEMPLATE_TEST_CASE_SIG(
         CHECK(test_input.empty());
 
         REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 1);
+            first_missing_positive(test_input.begin(), test_input.end()) == 1
+        );
     }
 
     SECTION("One number")
@@ -47,7 +51,8 @@ TEMPLATE_TEST_CASE_SIG(
                 {{1}, 2},
                 {{2}, 1},
                 {{11}, 1},
-            }))};
+            })
+        )};
 
         CAPTURE(test_input);
 
@@ -55,7 +60,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
-            == expected_output);
+            == expected_output
+        );
     }
 
     SECTION("Two numbers")
@@ -72,7 +78,8 @@ TEMPLATE_TEST_CASE_SIG(
                 {{1, 2}, 3},
                 {{2, 1}, 3},
                 {{2, 2}, 1},
-            }))};
+            })
+        )};
 
         CAPTURE(test_input);
 
@@ -80,7 +87,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
-            == expected_output);
+            == expected_output
+        );
     }
 
     SECTION("Three numbers")
@@ -98,7 +106,8 @@ TEMPLATE_TEST_CASE_SIG(
                 {{1, 1, 1}, 2},
                 {{3, 3, 3}, 1},
                 {{-8, -1, -3}, 1},
-            }))};
+            })
+        )};
 
         CAPTURE(test_input);
 
@@ -106,7 +115,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
-            == expected_output);
+            == expected_output
+        );
     }
 
     SECTION("Ten numbers")
@@ -123,7 +133,8 @@ TEMPLATE_TEST_CASE_SIG(
                 {{9, 7, 5, 4, 3, 2, 1, 1, 1, 0}, 6},
                 {{8, 20, 10, 6, 4, 3, 2, 1, -1, 0}, 5},
                 {{7, 11, 6, 6, -1, 4, 1, 2, 7, 2}, 3},
-            }))};
+            })
+        )};
 
         CAPTURE(test_input);
 
@@ -131,7 +142,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
-            == expected_output);
+            == expected_output
+        );
     }
 }
 
@@ -144,7 +156,8 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 0>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
         std::array<int, 0>::iterator,
-        std::array<int, 0>::iterator>))
+        std::array<int, 0>::iterator>)
+)
 {
     SECTION("Empty array")
     {
@@ -155,7 +168,8 @@ TEMPLATE_TEST_CASE_SIG(
         STATIC_CHECK(test_input.empty());
 
         STATIC_REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 1);
+            first_missing_positive(test_input.begin(), test_input.end()) == 1
+        );
     }
 }
 
@@ -168,7 +182,8 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 16>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
         std::array<int, 16>::iterator,
-        std::array<int, 16>::iterator>))
+        std::array<int, 16>::iterator>)
+)
 {
     SECTION("Empty container")
     {
@@ -179,7 +194,8 @@ TEMPLATE_TEST_CASE_SIG(
         CHECK(test_input.size() == 16);
 
         REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 6);
+            first_missing_positive(test_input.begin(), test_input.end()) == 6
+        );
     }
 }
 
@@ -192,14 +208,16 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<char, 2>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
         std::array<char, 2>::iterator,
-        std::array<char, 2>::iterator>))
+        std::array<char, 2>::iterator>)
+)
 {
     SECTION("char")
     {
         std::array test_input{char{1}, char{2}};
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
-            == char{3});
+            == char{3}
+        );
     }
 }
 
@@ -212,13 +230,15 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<unsigned int, 3>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
         std::array<unsigned int, 3>::iterator,
-        std::array<unsigned int, 3>::iterator>))
+        std::array<unsigned int, 3>::iterator>)
+)
 {
     SECTION("unsigned int")
     {
         std::array test_input{1U, 2U, 4U};
         REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 3U);
+            first_missing_positive(test_input.begin(), test_input.end()) == 3U
+        );
     }
 }
 
@@ -231,12 +251,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 3>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
         std::array<int, 3>::iterator,
-        std::array<int, 3>::iterator>))
+        std::array<int, 3>::iterator>)
+)
 {
     SECTION("int")
     {
         std::array test_input{1, 2, 4};
         REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 3);
+            first_missing_positive(test_input.begin(), test_input.end()) == 3
+        );
     }
 }

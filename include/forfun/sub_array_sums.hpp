@@ -22,8 +22,7 @@ template <typename Nums, typename Sums>
 // clang-format off
     requires std::contiguous_iterator<typename Nums::iterator>
         and std::output_iterator<
-            typename Sums::iterator,
-            typename Nums::value_type>
+            typename Sums::iterator, typename Nums::value_type>
         and std::same_as<typename Nums::size_type, typename Sums::size_type>
         and requires(Nums::value_type num, Sums::value_type sum) {
             sum += num;
@@ -31,9 +30,8 @@ template <typename Nums, typename Sums>
         }
 // clang-format on
 constexpr auto sum_each(
-    Nums const& nums,
-    Sums& sums,
-    typename Nums::size_type const sub_size) noexcept -> void
+    Nums const& nums, Sums& sums, typename Nums::size_type const sub_size
+) noexcept -> void
 {
     using SizeType = Sums::size_type;
     using ValueType = Sums::value_type;
@@ -70,7 +68,8 @@ constexpr auto sum_each(
     nums_it = nums.cbegin();
     auto slider_last{nums_it + static_cast<DiffType>(sub_size)};
     auto const sums_bound{
-        std::min(sums_size, (nums_size - sub_size) + SizeType{1})};
+        std::min(sums_size, (nums_size - sub_size) + SizeType{1})
+    };
     for (SizeType i{1}; i < sums_bound; ++i)
     {
         // Subtract the element before the sliding window.

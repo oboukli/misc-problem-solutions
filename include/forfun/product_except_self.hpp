@@ -19,7 +19,8 @@ namespace concepts {
 
 template <typename Factor, typename Product>
 concept product_computable = requires {
-    requires std::is_arithmetic_v<Factor> and std::is_arithmetic_v<Product>
+    requires std::is_arithmetic_v<Factor>
+        and std::is_arithmetic_v<Product>
         and requires(Factor f) {
                 requires sizeof(decltype(f * f)) <= sizeof(Product);
             };
@@ -47,7 +48,8 @@ constexpr auto product_except_self(
     InItr const first,
     InItrSentinel const last,
     OutItr const products_first,
-    OutItrSentinel const products_last) noexcept -> void
+    OutItrSentinel const products_last
+) noexcept -> void
 {
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
@@ -90,7 +92,8 @@ constexpr auto product_except_self(
     InItr const first,
     InItrSentinel const last,
     OutItr const products_itr,
-    OutItrSentinel const products_last) noexcept -> void
+    OutItrSentinel const products_last
+) noexcept -> void
 {
     using ValType = std::iter_value_t<OutItr>;
     using DiffType = std::iter_difference_t<InItr>;

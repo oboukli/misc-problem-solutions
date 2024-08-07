@@ -48,7 +48,8 @@ TEST_CASE("Greatest common divisor", "[gcd]")
     }
 
     SECTION(
-        "The GCD of 1,934,917,632 and 33,554,432 is 32,768 (benchmark case)")
+        "The GCD of 1,934,917,632 and 33,554,432 is 32,768 (benchmark case)"
+    )
     {
         REQUIRE(gcd(1'934'917'632, 33'554'432) == 32'768);
     }

@@ -31,13 +31,15 @@ TEST_CASE("Quicksort benchmarking", "[benchmark][sorting][quicksort]")
             NAMEOF_RAW(quicksort<Itr>).c_str(),
             []() {
                 ContainerType nums{
-                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6};
+                    9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6
+                };
                 static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
                 quicksort(nums.begin(), nums.end());
 
                 ankerl::nanobench::doNotOptimizeAway(nums);
-            })
+            }
+        )
 
         ;
 }

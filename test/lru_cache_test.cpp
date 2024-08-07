@@ -15,7 +15,8 @@ TEMPLATE_TEST_CASE(
     "LRU cache",
     "[lru_cache]",
     forfun::lrucache::naive::LRUCache,
-    forfun::lrucache::stl::LRUCache)
+    forfun::lrucache::stl::LRUCache
+)
 {
     using CacheType = TestType;
 

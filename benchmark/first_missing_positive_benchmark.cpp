@@ -17,7 +17,8 @@
 
 TEST_CASE(
     "Lowest missing positive integer benchmarking",
-    "[benchmark][first_missing_positive]")
+    "[benchmark][first_missing_positive]"
+)
 {
     using namespace forfun::first_missing_positive;
 
@@ -54,7 +55,8 @@ TEST_CASE(
                 auto const r{base::lowest_missing(nums.begin(), nums.end())};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(fast::lowest_missing<Itr, Itr>).c_str(),
@@ -81,7 +83,8 @@ TEST_CASE(
                 auto const r{fast::lowest_missing(nums.begin(), nums.end())};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         ;
 }

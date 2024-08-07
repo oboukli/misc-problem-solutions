@@ -67,7 +67,8 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
     {
         std::array test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         static constexpr std::array const expected_output{
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        };
 
         quicksort(test_input.begin(), test_input.end());
 
@@ -80,7 +81,8 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
     {
         std::array test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
         static constexpr std::array const expected_output{
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        };
 
         quicksort(test_input.begin(), test_input.end());
 
@@ -93,7 +95,8 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
     {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
         static constexpr std::array const expected_output{
-            -10, 0, 2, 4, 7, 9, 200};
+            -10, 0, 2, 4, 7, 9, 200
+        };
 
         quicksort(test_input.begin(), test_input.end());
 

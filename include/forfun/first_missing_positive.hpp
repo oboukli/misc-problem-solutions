@@ -52,7 +52,8 @@ namespace base {
 template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
     requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
 [[nodiscard]] constexpr auto lowest_missing(
-    Itr const begin, Sentinel const end) noexcept -> std::iter_value_t<Itr>
+    Itr const begin, Sentinel const end
+) noexcept -> std::iter_value_t<Itr>
 {
     using ValType = std::iter_value_t<Itr>;
 
@@ -96,7 +97,8 @@ namespace fast {
 template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
     requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
 [[nodiscard]] constexpr auto lowest_missing(
-    Itr const begin, Sentinel const end) noexcept -> std::iter_value_t<Itr>
+    Itr const begin, Sentinel const end
+) noexcept -> std::iter_value_t<Itr>
 {
     using ValType = std::iter_value_t<Itr>;
 

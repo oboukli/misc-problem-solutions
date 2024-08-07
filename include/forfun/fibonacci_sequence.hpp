@@ -33,7 +33,7 @@ auto fib_seq(T const max, Func func, State& state) noexcept -> void
     {
         func(i, state);
 
-        T const tmp = j + i;
+        T const tmp{j + i};
         i = j;
         j = tmp;
     }

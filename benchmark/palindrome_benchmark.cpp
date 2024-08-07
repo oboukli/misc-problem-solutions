@@ -23,7 +23,8 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
     std::string_view palindrome{
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"
-        "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv};
+        "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv
+    };
 
     SECTION("case-sensitive")
     {
@@ -35,11 +36,13 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             .run(
                 NAMEOF_RAW(::is_palindrome).c_str(),
                 [&palindrome]() {
-                    auto const r{::is_palindrome(
-                        palindrome.data(), palindrome.length())};
+                    auto const r{
+                        ::is_palindrome(palindrome.data(), palindrome.length())
+                    };
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(functional::is_palindrome<char>).c_str(),
@@ -47,16 +50,18 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                     auto const r{functional::is_palindrome(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome<char>).c_str(),
                 [&palindrome]() {
-                    auto const r{
-                        functional::bloated::is_palindrome(palindrome)};
+                    auto const r{functional::bloated::is_palindrome(palindrome)
+                    };
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome<char>).c_str(),
@@ -64,16 +69,19 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                     auto const r{iterator_based::is_palindrome(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(offset_based::is_palindrome<char>).c_str(),
                 [&palindrome]() {
                     auto const r{offset_based::is_palindrome<char>(
-                        palindrome.data(), palindrome.length())};
+                        palindrome.data(), palindrome.length()
+                    )};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             ;
     }
@@ -89,19 +97,23 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(::is_palindrome_ci).c_str(),
                 [&palindrome]() {
                     auto const r{::is_palindrome_ci(
-                        palindrome.data(), palindrome.length())};
+                        palindrome.data(), palindrome.length()
+                    )};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome_ci).c_str(),
                 [&palindrome]() {
                     auto const r{
-                        functional::bloated::is_palindrome_ci(palindrome)};
+                        functional::bloated::is_palindrome_ci(palindrome)
+                    };
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome_ci).c_str(),
@@ -109,7 +121,8 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                     auto const r{iterator_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             .run(
                 NAMEOF_RAW(offset_based::is_palindrome_ci).c_str(),
@@ -117,7 +130,8 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                     auto const r{offset_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
-                })
+                }
+            )
 
             ;
     }

@@ -18,14 +18,28 @@
 
 TEST_CASE(
     "Product of array except self benchmarking",
-    "[benchmark][product_except_self]")
+    "[benchmark][product_except_self]"
+)
 {
     using namespace forfun::product_except_self;
 
     static constexpr std::array<std::uint64_t, 16> const input{
-        // clang-format off
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0,
-        // clang-format on
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        0,
     };
 
     using ConstItr = decltype(input)::const_iterator;
@@ -43,10 +57,12 @@ TEST_CASE(
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
                 forfun::product_except_self::alg1::product_except_self(
-                    input.cbegin(), input.cend(), result.begin(), result.end());
+                    input.cbegin(), input.cend(), result.begin(), result.end()
+                );
 
                 ankerl::nanobench::doNotOptimizeAway(result);
-            })
+            }
+        )
         .run(
             NAMEOF_RAW(alg2::product_except_self<ConstItr, ConstItr, Itr, Itr>)
                 .c_str(),
@@ -54,10 +70,12 @@ TEST_CASE(
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result;
                 forfun::product_except_self::alg2::product_except_self(
-                    input.cbegin(), input.cend(), result.begin(), result.end());
+                    input.cbegin(), input.cend(), result.begin(), result.end()
+                );
 
                 ankerl::nanobench::doNotOptimizeAway(result);
-            })
+            }
+        )
 
         ;
 }

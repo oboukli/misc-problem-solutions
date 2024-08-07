@@ -29,7 +29,8 @@ TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
                 int const volatile m{1U << 25U};
                 int const volatile n{(1U << 15U) * 59'049};
                 ankerl::nanobench::doNotOptimizeAway(gcd(m, n));
-            })
+            }
+        )
 
         ;
 }
