@@ -27,7 +27,7 @@ using StdVectorConstItr = std::vector<int>::const_iterator;
 TEMPLATE_TEST_CASE_SIG(
     "Binary search in empty collection",
     "[search][binary_search]",
-    ((auto find), find),
+    (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<0>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<0>, int>))
 {
@@ -41,7 +41,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Binary search in one-element collection",
     "[search][binary_search]",
-    ((auto find), find),
+    (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<1>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<1>, int>))
 {
@@ -78,7 +78,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Binary search in even collection",
     "[search][binary_search]",
-    ((auto find), find),
+    (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<12>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<12>, int>))
 {
@@ -210,7 +210,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Binary search in odd collection",
     "[search][binary_search]",
-    ((auto find), find),
+    (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<11>, int>),
     (forfun::search::binary_search::recursive::find<StdArrayConstItr<11>, int>))
 {
@@ -341,7 +341,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Binary search with std::vector",
     "[search][binary_search]",
-    ((auto find), find),
+    (auto find, find),
     (forfun::search::binary_search::recursive::find<StdVectorConstItr, int>))
 {
     SECTION("Even collection (vector) containing the target odd times")

@@ -16,27 +16,28 @@
 TEMPLATE_TEST_CASE_SIG(
     "palindromic_number",
     "[palindromic_number]",
-    ((auto is_palindrome), is_palindrome),
-    (forfun::palindromic_number::fast::is_palindrome<int>),
-    (forfun::palindromic_number::stl::is_palindrome))
+    (auto is_palindrome, is_palindrome),
+    forfun::palindromic_number::fast::is_palindrome<int>,
+    forfun::palindromic_number::stl::is_palindrome)
 {
     SECTION("Palindromic numbers")
     {
         GIVEN("a palindromic number")
         {
-            auto const [palindromic_number]{GENERATE(table<int>({
-                {0},
-                {1},
-                {11},
-                {121},
-                {212},
-                {333},
-                {4444},
-                {14341},
-                {143341},
-                {4268624},
-                {1234554321},
-            }))};
+            auto const [palindromic_number]{GENERATE(
+                table<int>({
+                    {0},
+                    {1},
+                    {11},
+                    {121},
+                    {212},
+                    {333},
+                    {4444},
+                    {14341},
+                    {143341},
+                    {4268624},
+                    {1234554321},
+                }))};
 
             CAPTURE(palindromic_number);
 
@@ -54,18 +55,19 @@ TEMPLATE_TEST_CASE_SIG(
     {
         GIVEN("a non-palindromic number")
         {
-            auto const [non_palindromic_number]{GENERATE(table<int>({
-                {std::numeric_limits<int>::min()},
-                {-1},
-                {-32},
-                {12},
-                {112},
-                {1121},
-                {12325},
-                {4268604},
-                {999999998},
-                {2147483602}, // Max supported for std::int32_t
-            }))};
+            auto const [non_palindromic_number]{GENERATE(
+                table<int>({
+                    {std::numeric_limits<int>::min()},
+                    {-1},
+                    {-32},
+                    {12},
+                    {112},
+                    {1121},
+                    {12325},
+                    {4268604},
+                    {999999998},
+                    {2147483602}, // Max supported for std::int32_t
+                }))};
 
             CAPTURE(non_palindromic_number);
 

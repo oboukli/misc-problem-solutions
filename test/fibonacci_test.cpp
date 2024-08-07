@@ -13,9 +13,9 @@
 TEMPLATE_TEST_CASE_SIG(
     "Find Fibonacci number",
     "[fibonacci]",
-    ((auto fib), fib),
-    (forfun::fibonacci::iterative::fib<int>),
-    (forfun::fibonacci::recursive::fib<int>))
+    (auto fib, fib),
+    forfun::fibonacci::iterative::fib<int>,
+    forfun::fibonacci::recursive::fib<int>)
 {
     SECTION("Negative value case (n = -1)")
     {

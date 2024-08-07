@@ -17,7 +17,7 @@
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive with vector<int>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::vector<int>::iterator,
         std::vector<int>::iterator>),
@@ -39,8 +39,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("One number")
     {
-        auto [test_input, expected_output]{
-            GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{GENERATE(
+            table<std::vector<int>, int>({
                 {{-2}, 1},
                 {{-1}, 1},
                 {{0}, 1},
@@ -60,8 +60,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Two numbers")
     {
-        auto [test_input, expected_output]{
-            GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{GENERATE(
+            table<std::vector<int>, int>({
                 {{-2, -2}, 1},
                 {{-1, -2}, 1},
                 {{0, -2}, 1},
@@ -85,8 +85,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Three numbers")
     {
-        auto [test_input, expected_output]{
-            GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{GENERATE(
+            table<std::vector<int>, int>({
                 {{-1, -1, -1}, 1},
                 {{-1, 0, 0}, 1},
                 {{0, 0, 0}, 1},
@@ -111,8 +111,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Ten numbers")
     {
-        auto [test_input, expected_output]{
-            GENERATE(table<std::vector<int>, int>({
+        auto [test_input, expected_output]{GENERATE(
+            table<std::vector<int>, int>({
                 {{-1, -1, -1, -1, -1, -1, -1, -1, -1, 10}, 1},
                 {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 1},
                 {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 2},
@@ -138,7 +138,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 0>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::array<int, 0>::iterator,
         std::array<int, 0>::iterator>),
@@ -162,7 +162,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 16>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::array<int, 16>::iterator,
         std::array<int, 16>::iterator>),
@@ -186,7 +186,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<char, 2>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::array<char, 2>::iterator,
         std::array<char, 2>::iterator>),
@@ -206,7 +206,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<unsigned int, 3>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::array<unsigned int, 3>::iterator,
         std::array<unsigned int, 3>::iterator>),
@@ -225,7 +225,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "first_missing_positive array<int, 3>",
     "[first_missing_positive]",
-    ((auto first_missing_positive), first_missing_positive),
+    (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
         std::array<int, 3>::iterator,
         std::array<int, 3>::iterator>),

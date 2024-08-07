@@ -18,10 +18,10 @@
 TEMPLATE_TEST_CASE_SIG(
     "Set matrix zeros",
     "[matrix][set_matrix_zeroes]",
-    ((auto set_zeroes), set_zeroes),
-    (forfun::set_matrix_zeroes::iterator_based_sol1::set_zeroes),
-    (forfun::set_matrix_zeroes::iterator_based_sol2::set_zeroes),
-    (forfun::set_matrix_zeroes::offset_based::set_zeroes))
+    (auto set_zeroes, set_zeroes),
+    forfun::set_matrix_zeroes::iterator_based_sol1::set_zeroes,
+    forfun::set_matrix_zeroes::iterator_based_sol2::set_zeroes,
+    forfun::set_matrix_zeroes::offset_based::set_zeroes)
 {
     SECTION("Invalid matrices")
     {

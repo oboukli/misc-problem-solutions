@@ -32,7 +32,7 @@ find(Itr lhs, Itr const last, Target const target) noexcept -> Itr
         }
         else if (target > *mid)
         {
-            std::advance(mid, (distance % DiffType{2}));
+            std::advance(mid, distance % DiffType{2});
             lhs = mid;
         }
         else
@@ -70,7 +70,7 @@ do_find(Itr const first, Itr const last, Target const target) noexcept -> Itr
 
     if (target > *mid)
     {
-        std::advance(mid, (distance % DiffType{2}));
+        std::advance(mid, distance % DiffType{2});
 
         return do_find(mid, last, target);
     }

@@ -29,7 +29,7 @@ using U64ArrItr = std::array<std::uint64_t, 16>::iterator;
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
     "[product_except_self]",
-    ((auto product_except_self), product_except_self),
+    (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
         IntVecConstItr,
         IntVecConstItr,
@@ -115,7 +115,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
     "[product_except_self]",
-    ((auto product_except_self), product_except_self),
+    (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
         FloatVecConstItr,
         FloatVecConstItr,
@@ -145,7 +145,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::array<int, 3>)",
     "[product_except_self]",
-    ((auto product_except_self), product_except_self),
+    (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
         IntArr3ConstItr,
         IntArr3ConstItr,
@@ -175,7 +175,7 @@ TEMPLATE_TEST_CASE_SIG(
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (benchmark case)",
     "[product_except_self]",
-    ((auto product_except_self), product_except_self),
+    (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
         U64ArrConstItr,
         U64ArrConstItr,
