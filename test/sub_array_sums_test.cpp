@@ -21,7 +21,8 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION(
         "Given an empty numbers collection"
         " when sums collection has one element,"
-        " then sum is one element and is zero")
+        " then sum is one element and is zero"
+    )
     {
         std::vector<int> const numbers{};
         std::vector<int> sums(1);
@@ -39,7 +40,8 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION(
         "Given an empty numbers collection"
         " when sums collection is empty,"
-        " then no sum")
+        " then no sum"
+    )
     {
         std::vector<int> const numbers{};
         std::vector<int> sums{};
@@ -162,7 +164,8 @@ TEST_CASE("sub_array_sums", "[sub_array_sums]")
     SECTION(
         "Given non-empty array, "
         "when sub size is larger than size, "
-        "then sum all")
+        "then sum all"
+    )
     {
         std::vector const numbers{{1, 2, 3}};
         std::vector<int> sums(1);
@@ -354,60 +357,74 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums][static]")
 {
     SECTION("Positive")
     {
-        STATIC_REQUIRE(
-            template_specialization<std::array<int, 0>, std::array<int, 0>>);
-        STATIC_REQUIRE(
-            template_specialization<std::vector<int>, std::vector<int>>);
-        STATIC_REQUIRE(
-            template_specialization<std::vector<int>, std::array<int, 0>>);
-        STATIC_REQUIRE(
-            template_specialization<std::array<int, 0>, std::vector<int>>);
-        STATIC_REQUIRE(
-            template_specialization<std::array<int, 0>, std::list<int>>);
-
-        STATIC_REQUIRE(
-            template_specialization<std::vector<int>, std::vector<unsigned>>);
-        STATIC_REQUIRE(
-            template_specialization<std::vector<int>, std::vector<double>>);
-
-        STATIC_REQUIRE(
-            template_specialization<std::vector<unsigned>, std::vector<short>>);
         // clang-format off
-        STATIC_REQUIRE(template_specialization<
-            std::vector<int>,
-            std::vector<AddableDummy>>);
-        STATIC_REQUIRE(template_specialization<
-            DummyWithSizeType<std::vector<int>::size_type>,
-            std::vector<int>>);
-        STATIC_REQUIRE(template_specialization<
-            std::vector<AddableDummy>,
-            std::vector<int>>);
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::array<int, 0>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<int>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::array<int, 0>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::vector<int>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::array<int, 0>, std::list<int>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<unsigned>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<double>>
+        );
+
+        STATIC_REQUIRE(
+            template_specialization<std::vector<unsigned>, std::vector<short>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<int>, std::vector<AddableDummy>>
+        );
+        STATIC_REQUIRE(
+            template_specialization<
+                DummyWithSizeType<std::vector<int>::size_type>,
+                std::vector<int>
+            >
+        );
+        STATIC_REQUIRE(
+            template_specialization<std::vector<AddableDummy>, std::vector<int>>
+        );
         // clang-format on
     }
 
     SECTION("Negative")
     {
         // clang-format off
-        STATIC_REQUIRE_FALSE(template_specialization<
-            std::vector<int>,
-            std::vector<std::string>>);
-        STATIC_REQUIRE_FALSE(template_specialization<
-            std::vector<std::string>,
-            std::vector<int>>);
-        // clang-format on
         STATIC_REQUIRE_FALSE(
-            template_specialization<std::list<int>, std::array<int, 0>>);
+            template_specialization<std::vector<int>, std::vector<std::string>>
+        );
+        STATIC_REQUIRE_FALSE(
+            template_specialization<std::vector<std::string>, std::vector<int>>
+        );
+        STATIC_REQUIRE_FALSE(
+            template_specialization<std::list<int>, std::array<int, 0>>
+        );
 
         STATIC_REQUIRE_FALSE(
-            template_specialization<std::vector<int>, std::vector<Dummy>>);
+            template_specialization<std::vector<int>, std::vector<Dummy>>
+        );
         STATIC_REQUIRE_FALSE(
-            template_specialization<std::vector<int>, std::vector<Dummy>>);
+            template_specialization<std::vector<int>, std::vector<Dummy>>
+        );
 
         STATIC_REQUIRE_FALSE(template_specialization<int, int>);
         STATIC_REQUIRE_FALSE(template_specialization<int, std::vector<int>>);
         STATIC_REQUIRE_FALSE(template_specialization<std::vector<int>, int>);
 
         STATIC_REQUIRE_FALSE(
-            template_specialization<DummyWithSizeType<char>, std::vector<int>>);
+            template_specialization<DummyWithSizeType<char>, std::vector<int>>
+        );
+        // clang-format on
     }
 }

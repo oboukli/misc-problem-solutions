@@ -26,7 +26,8 @@ TEST_CASE("Primality benchmarking", "[benchmark][primality]")
             []() {
                 bool r{is_prime(2'147'483'647U)};
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         ;
 }

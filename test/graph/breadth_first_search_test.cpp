@@ -53,7 +53,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept -> void {});
+            [](vertex<int>) noexcept -> void {}
+        );
 
         CAPTURE(state_list);
 
@@ -64,10 +65,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("Two-vertex graph")
     {
         VertexAdjacencyList<char> const adjacency_list{
-            // clang-format off
             {{'a'}, {'b'}},
             {{'b'}, {'a'}},
-            // clang-format on
         };
         VertexStateList<char> state_list{};
         constexpr vertex<char> const starting_vertex{'a'};
@@ -87,7 +86,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [&call_count](vertex<char>) noexcept { ++call_count; });
+            [&call_count](vertex<char>) noexcept { ++call_count; }
+        );
 
         CAPTURE(state_list);
 
@@ -97,14 +97,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices visited, starting from leaf vertex")
     {
         VertexAdjacencyList<int> const adjacency_list{
-            // clang-format off
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
             {{3}, {1}},
             {{4}, {1}, {5}},
             {{5}, {4}, {6}},
             {{6}, {5}},
-            // clang-format on
         };
         VertexStateList<int> state_list{};
         constexpr vertex<int> const starting_vertex{1};
@@ -123,19 +121,18 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept {});
+            [](vertex<int>) noexcept {}
+        );
 
         CAPTURE(state_list);
 
         VertexStateList<int> const expected_state_list{
-            // clang-format off
             {{1}, vertex_visit_state::visited},
             {{2}, vertex_visit_state::visited},
             {{3}, vertex_visit_state::visited},
             {{4}, vertex_visit_state::visited},
             {{5}, vertex_visit_state::visited},
             {{6}, vertex_visit_state::visited},
-            // clang-format on
         };
 
         REQUIRE(state_list == expected_state_list);
@@ -145,14 +142,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices visited, starting from non-leaf vertex")
     {
         VertexAdjacencyList<int> const adjacency_list{
-            // clang-format off
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
             {{3}, {1}},
             {{4}, {1}, {5}},
             {{5}, {4}, {6}},
             {{6}, {5}},
-            // clang-format on
         };
         VertexStateList<int> state_list{};
         constexpr vertex<int> const starting_vertex{5};
@@ -171,19 +166,18 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept {});
+            [](vertex<int>) noexcept {}
+        );
 
         CAPTURE(state_list);
 
         VertexStateList<int> const expected_state_list{
-            // clang-format off
             {{1}, vertex_visit_state::visited},
             {{2}, vertex_visit_state::visited},
             {{3}, vertex_visit_state::visited},
             {{4}, vertex_visit_state::visited},
             {{5}, vertex_visit_state::visited},
             {{6}, vertex_visit_state::visited},
-            // clang-format on
         };
 
         REQUIRE(state_list == expected_state_list);
@@ -193,7 +187,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices (vertex<char>) visited")
     {
         VertexAdjacencyList<char> const adjacency_list{
-            // clang-format off
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -202,7 +195,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'f'}, {'e'}, {'h'}},
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
-            // clang-format on
         };
         VertexStateList<char> state_list{};
         constexpr vertex<char> const starting_vertex{'c'};
@@ -221,12 +213,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<char>) noexcept {});
+            [](vertex<char>) noexcept {}
+        );
 
         CAPTURE(state_list);
 
         VertexStateList<char> const expected_state_list{
-            // clang-format off
             {{'a'}, vertex_visit_state::visited},
             {{'b'}, vertex_visit_state::visited},
             {{'c'}, vertex_visit_state::visited},
@@ -235,7 +227,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'f'}, vertex_visit_state::visited},
             {{'g'}, vertex_visit_state::visited},
             {{'h'}, vertex_visit_state::visited},
-            // clang-format on
         };
 
         REQUIRE(state_list == expected_state_list);
@@ -245,7 +236,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("Visitor call count is the same as the vertex count")
     {
         VertexAdjacencyList<char> const adjacency_list{
-            // clang-format off
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -254,7 +244,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'f'}, {'e'}, {'h'}},
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
-            // clang-format on
         };
         VertexStateList<char> state_list{};
         constexpr vertex<char> const starting_vertex{'h'};
@@ -274,7 +263,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [&call_count](vertex<char>) noexcept { ++call_count; });
+            [&call_count](vertex<char>) noexcept { ++call_count; }
+        );
 
         CAPTURE(state_list);
 
@@ -284,7 +274,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("Visitor is called and is passed valid arguments to")
     {
         VertexAdjacencyList<char> const adjacency_list{
-            // clang-format off
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -293,7 +282,6 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'f'}, {'e'}, {'h'}},
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
-            // clang-format on
         };
         VertexStateList<char> state_list{};
         constexpr vertex<char> const starting_vertex{'e'};
@@ -317,14 +305,16 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             starting_vertex,
             [&recorded_path](vertex<char> v) noexcept {
                 recorded_path.emplace_back(v);
-            });
+            }
+        );
 
         CAPTURE(state_list);
 
         REQUIRE(recorded_path.size() == 8);
 
         std::vector<vertex<char>> const expected_recorded_path{
-            {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}};
+            {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
+        };
         REQUIRE(recorded_path == expected_recorded_path);
     }
 }

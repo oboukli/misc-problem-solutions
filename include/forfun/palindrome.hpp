@@ -27,8 +27,8 @@ template <std::integral CharT>
 [[nodiscard]]
 constexpr auto is_palindrome(
     typename std::basic_string_view<CharT>::const_pointer const s,
-    typename std::basic_string_view<CharT>::size_type const length) noexcept
-    -> bool
+    typename std::basic_string_view<CharT>::size_type const length
+) noexcept -> bool
 {
     using SizeType = std::basic_string_view<CharT>::size_type;
 
@@ -151,7 +151,8 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
     ConstIter const cbegin{s.cbegin()};
 
     return std::equal(
-        cbegin, cbegin + static_cast<DiffType>(s.length() / 2U), s.crbegin());
+        cbegin, cbegin + static_cast<DiffType>(s.length() / 2U), s.crbegin()
+    );
 }
 
 namespace bloated {
@@ -168,7 +169,8 @@ is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
     return std::equal(
         s.cbegin(),
         std::next(s.cbegin(), static_cast<DiffType>(s.length() / 2U)),
-        s.crbegin());
+        s.crbegin()
+    );
 }
 
 namespace detail {
@@ -194,7 +196,8 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
         cbegin,
         std::next(cbegin, static_cast<DiffType>(s.length() / 2U)),
         s.crbegin(),
-        detail::equal_case_insensitive);
+        detail::equal_case_insensitive
+    );
 }
 
 } // namespace bloated

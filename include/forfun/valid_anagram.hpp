@@ -28,8 +28,8 @@ namespace generic {
 
 template <std::integral CharT>
 [[nodiscard]] auto is_anagram(
-    std::basic_string_view<CharT> s,
-    std::basic_string_view<CharT> t) noexcept -> bool
+    std::basic_string_view<CharT> s, std::basic_string_view<CharT> t
+) noexcept -> bool
 {
     using Iter = std::basic_string_view<CharT>::const_iterator;
 
@@ -38,8 +38,8 @@ template <std::integral CharT>
         return false;
     }
 
-    std::multiset<typename std::basic_string_view<CharT>::value_type>
-        haystack{};
+    std::multiset<typename std::basic_string_view<CharT>::value_type> haystack{
+    };
 
     if constexpr (requires { haystack.insert_range(s); })
     {

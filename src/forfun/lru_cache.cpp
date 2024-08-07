@@ -132,7 +132,8 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
         auto const emplaced_key_iter{cache_.emplace(cache_end, key, value)};
         assert(cache_.end() == cache_end);
         [[maybe_unused]] auto const new_key_insert_result{
-            lookup_.insert({key, emplaced_key_iter})};
+            lookup_.insert({key, emplaced_key_iter})
+        };
         assert(new_key_insert_result.second);
         ++size_;
 
@@ -141,11 +142,13 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 
     // Replace oldest key if cache is full.
     [[maybe_unused]] auto const num_elements_removed{
-        lookup_.erase(cache_.begin()->first)};
+        lookup_.erase(cache_.begin()->first)
+    };
     assert(num_elements_removed == 1);
     cache_.splice(cache_end, cache_, cache_.begin());
     [[maybe_unused]] auto const replacement_key_insert_result{
-        lookup_.insert({key, std::prev(cache_end)})};
+        lookup_.insert({key, std::prev(cache_end)})
+    };
     assert(replacement_key_insert_result.second);
     assert(cache_.end() == cache_end);
     cache_.back().first = key;

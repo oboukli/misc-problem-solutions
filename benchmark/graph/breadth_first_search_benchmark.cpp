@@ -15,7 +15,8 @@
 
 TEST_CASE(
     "breadth-first search benchmarking",
-    "[benchmark][graph][breadth_first_search]")
+    "[benchmark][graph][breadth_first_search]"
+)
 {
     using namespace forfun::graph::breadth_first_search;
 
@@ -27,14 +28,12 @@ TEST_CASE(
     using Visitor = decltype([](vertex<int>) noexcept -> void {});
 
     VertexAdjacencyList<int> const adjacency_list{
-        // clang-format off
         {{1}, {2}, {3}, {4}},
         {{2}, {1}},
         {{3}, {1}},
         {{4}, {1}, {5}},
         {{5}, {4}, {6}},
         {{6}, {5}},
-        // clang-format on
     };
 
     ankerl::nanobench::Bench()
@@ -48,23 +47,23 @@ TEST_CASE(
                 constexpr vertex<int> const starting_vertex{1};
 
                 VertexStateList<int> state_list{
-                    // clang-format off
                     {{1}, vertex_visit_state::unvisited},
                     {{2}, vertex_visit_state::unvisited},
                     {{3}, vertex_visit_state::unvisited},
                     {{4}, vertex_visit_state::unvisited},
                     {{5}, vertex_visit_state::unvisited},
                     {{6}, vertex_visit_state::unvisited},
-                    // clang-format on
                 };
 
                 recursive::breadth_first_search(
                     adjacency_list,
                     state_list,
                     starting_vertex,
-                    [](vertex<int>) noexcept -> void {});
+                    [](vertex<int>) noexcept -> void {}
+                );
                 ankerl::nanobench::doNotOptimizeAway(state_list);
-            })
+            }
+        )
 
         ;
 }

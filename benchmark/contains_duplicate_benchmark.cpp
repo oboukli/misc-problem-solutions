@@ -38,9 +38,11 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
         .run(
             NAMEOF_RAW(contains_duplicate<Itr, Itr>).c_str(),
             [&superprimes]() {
-                ankerl::nanobench::doNotOptimizeAway(contains_duplicate(
-                    superprimes.cbegin(), superprimes.cend()));
-            })
+                ankerl::nanobench::doNotOptimizeAway(
+                    contains_duplicate(superprimes.cbegin(), superprimes.cend())
+                );
+            }
+        )
 
         ;
 }

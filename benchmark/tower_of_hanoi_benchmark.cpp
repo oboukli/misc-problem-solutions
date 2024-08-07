@@ -37,14 +37,12 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
                 // NOLINTEND(misc-const-correctness)
 
                 forfun::tower_of_hanoi::recursive::toh(
-                    src,
-                    des,
-                    aux,
-                    [](Rod&, Rod&) noexcept -> void {},
-                    num_disks);
+                    src, des, aux, [](Rod&, Rod&) noexcept -> void {}, num_disks
+                );
 
                 ankerl::nanobench::doNotOptimizeAway(des);
-            })
+            }
+        )
 
         ;
 }

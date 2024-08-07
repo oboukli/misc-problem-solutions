@@ -33,7 +33,7 @@ count_ships(Sonar const& sonar, Area const area) noexcept -> int
     int const mh1{mh0 + 1};
 
     // clang-format off
-    return
+    return (
         count_ships(
             sonar,
             {
@@ -69,15 +69,18 @@ count_ships(Sonar const& sonar, Area const area) noexcept -> int
                 .left = mw1,
                 .right = area.right,
             }
-        );
+        )
+    );
     // clang-format on
 }
 
 [[nodiscard]] auto Sonar::ping(Area const area) const noexcept -> bool
 {
     return std::ranges::any_of(coords_, [&area](Coord const& coord) {
-        return coord.x >= area.top && coord.x <= area.bottom
-            && coord.y >= area.left && coord.y <= area.right;
+        return coord.x >= area.top
+            && coord.x <= area.bottom
+            && coord.y >= area.left
+            && coord.y <= area.right;
     });
 }
 

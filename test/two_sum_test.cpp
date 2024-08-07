@@ -28,7 +28,8 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -43,7 +44,8 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -53,13 +55,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{3, 3};
         static constexpr int const target{6};
         static constexpr std::array const expected{
-            nums.cbegin(), std::next(nums.cbegin(), 1)};
+            nums.cbegin(), std::next(nums.cbegin(), 1)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -69,13 +73,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{0, -1, 2, -3, 1};
         static constexpr int const target{-2};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 3), std::next(nums.cbegin(), 4)};
+            std::next(nums.cbegin(), 3), std::next(nums.cbegin(), 4)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -85,13 +91,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{2, 7, 11, 15};
         static constexpr int const target{9};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)};
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -101,13 +109,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{2, 7, 11, 15};
         static constexpr int const target{22};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 3)};
+            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 3)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -117,13 +127,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{19, 19, 19, 19};
         static constexpr int const target{38};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)};
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -133,13 +145,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{3, 2, 4};
         static constexpr int const target{6};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 2)};
+            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 2)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -149,13 +163,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{3, 2, 4};
         static constexpr int const target{7};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 2)};
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 2)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -165,13 +181,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{1, 4, 10, -3};
         static constexpr int const target{14};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 2)};
+            std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 2)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
@@ -181,13 +199,15 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
         static constexpr std::array const nums{9, 5, 1, 23};
         static constexpr int const target{10};
         static constexpr std::array const expected{
-            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 2)};
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 2)
+        };
 
         CAPTURE(nums);
         CAPTURE(target);
 
         static constexpr auto const actual{
-            two_sum(nums.cbegin(), nums.cend(), target)};
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }

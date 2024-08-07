@@ -15,7 +15,8 @@
 #include "forfun/array_concatenation.hpp"
 
 TEST_CASE(
-    "array_concatenation benchmarking", "[benchmark][array_concatenation]")
+    "array_concatenation benchmarking", "[benchmark][array_concatenation]"
+)
 {
     using namespace forfun::array_concatenation;
 
@@ -68,7 +69,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 functional::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(functional_minimal::concatenate<int, 256U>).c_str(),
@@ -77,7 +79,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 functional_minimal::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(iterator_based::concatenate<int, 256U>).c_str(),
@@ -86,7 +89,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 iterator_based::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(iterator_based_double::concatenate<int, 256U>).c_str(),
@@ -95,7 +99,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 iterator_based_double::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(iterator_unfolded::concatenate<int, 256U>).c_str(),
@@ -104,7 +109,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 iterator_unfolded::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(nested_loops::concatenate<int, 256U>).c_str(),
@@ -113,7 +119,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 nested_loops::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(semi_unfolded::concatenate<int, 256U>).c_str(),
@@ -122,7 +129,8 @@ TEST_CASE(
                 std::array<int, 512U> dest;
                 semi_unfolded::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
-            })
+            }
+        )
 
         ;
 }

@@ -42,7 +42,8 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
             des.push(src.top());
             src.pop();
-        }};
+        }
+    };
 
     SECTION("Empty")
     {
@@ -200,7 +201,8 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                 des_rod,
                 aux_rod,
                 [&count](int&, int&) noexcept -> void { ++count; },
-                num_disks);
+                num_disks
+            );
 
             REQUIRE(count == 0);
         }
@@ -221,7 +223,8 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                 des_rod,
                 aux_rod,
                 [&count](int&, int&) noexcept -> void { ++count; },
-                num_disks);
+                num_disks
+            );
 
             REQUIRE(count == 1);
         }
@@ -242,7 +245,8 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                 des_rod,
                 aux_rod,
                 [&count](int&, int&) noexcept -> void { ++count; },
-                num_disks);
+                num_disks
+            );
 
             REQUIRE(count == 3);
         }
@@ -263,7 +267,8 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                 des_rod,
                 aux_rod,
                 [&count](int&, int&) noexcept -> void { ++count; },
-                num_disks);
+                num_disks
+            );
 
             REQUIRE(count == 15);
         }
@@ -285,7 +290,9 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                     des_rod,
                     aux_rod,
                     [](int&, int&) noexcept(false) -> void {},
-                    0)));
+                    0
+                ))
+            );
         }
 
         SECTION("noexcept(true)")
@@ -302,7 +309,9 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                     des_rod,
                     aux_rod,
                     [](int&, int&) noexcept -> void {},
-                    0)));
+                    0
+                ))
+            );
         }
     }
 }

@@ -25,7 +25,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr0Itr, Arr0Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr0Itr, Arr0Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr0Itr, Arr0Itr>)
+)
 {
     SECTION("Empty container")
     {
@@ -44,7 +45,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr1Itr, Arr1Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr1Itr, Arr1Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr1Itr, Arr1Itr>)
+)
 {
     SECTION("One element")
     {
@@ -63,7 +65,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr2Itr, Arr2Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr2Itr, Arr2Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr2Itr, Arr2Itr>)
+)
 {
     SECTION("Two elements")
     {
@@ -82,7 +85,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr3Itr, Arr3Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr3Itr, Arr3Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr3Itr, Arr3Itr>)
+)
 {
     SECTION("Three elements")
     {
@@ -101,7 +105,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr10Itr, Arr10Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr10Itr, Arr10Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr10Itr, Arr10Itr>)
+)
 {
     SECTION("Best case")
     {
@@ -131,7 +136,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr7Itr, Arr7Itr>),
-    (forfun::sorting::stl::bubble_sort<Arr7Itr, Arr7Itr>))
+    (forfun::sorting::stl::bubble_sort<Arr7Itr, Arr7Itr>)
+)
 {
     SECTION("Arbitrary test with std::array")
     {
@@ -150,7 +156,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<VecItr, VecItr>),
-    (forfun::sorting::stl::bubble_sort<VecItr, VecItr>))
+    (forfun::sorting::stl::bubble_sort<VecItr, VecItr>)
+)
 {
     SECTION("Arbitrary test with std::vector 01")
     {

@@ -32,7 +32,8 @@ adapt_func_is_palindrome(BasicStringView&& s) noexcept -> bool
     {
         return func(
             std::forward<decltype(s.data())>(s.data()),
-            std::forward<decltype(s.length())>(s.length()));
+            std::forward<decltype(s.length())>(s.length())
+        );
     }
 }
 
@@ -41,6 +42,7 @@ adapt_func_is_palindrome(BasicStringView&& s) noexcept -> bool
 using std::string_view_literals::operator""sv;
 
 TEMPLATE_TEST_CASE_SIG(
+    // clang-format off
     "Case-sensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
@@ -48,7 +50,9 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::is_palindrome<char>,
     &forfun::palindrome::functional::bloated::is_palindrome<char>,
     &forfun::palindrome::iterator_based::is_palindrome<char>,
-    &forfun::palindrome::offset_based::is_palindrome<char>)
+    &forfun::palindrome::offset_based::is_palindrome<char>
+    // clang-format on
+)
 {
     SECTION("Positive")
     {
@@ -63,15 +67,16 @@ TEMPLATE_TEST_CASE_SIG(
             "ABBA"sv,
             "Xyz 8 zyX"sv,
             "step on no pets"sv,
-            "19/9/91"sv)};
+            "19/9/91"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 
     SECTION("Negative")
@@ -86,15 +91,16 @@ TEMPLATE_TEST_CASE_SIG(
             "Malayalam"sv,
             "Xyz 8 zYX"sv,
             "Step on no pets"sv,
-            "12/20/2021"sv)};
+            "12/20/2021"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE_FALSE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE_FALSE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 }
 
@@ -122,15 +128,16 @@ TEMPLATE_TEST_CASE_SIG(
             L"step on no pets"sv,
             L"باب"sv, // Door, in Arabic
             L"亞細亞"sv, // Asia, in Chinese
-            L"19/9/91"sv)};
+            L"19/9/91"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 
     SECTION("Negative")
@@ -146,15 +153,16 @@ TEMPLATE_TEST_CASE_SIG(
             L"Xyz 8 zYX"sv,
             L"Step on no pets"sv,
             L"قطة"sv, // Cat, in Arabic
-            L"12/20/2021"sv)};
+            L"12/20/2021"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE_FALSE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE_FALSE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 }
 
@@ -182,15 +190,16 @@ TEMPLATE_TEST_CASE_SIG(
             U"step on no pets"sv,
             U"باب"sv, // Door, in Arabic
             U"亞細亞"sv, // Asia, in Chinese
-            U"19/9/91"sv)};
+            U"19/9/91"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 
     SECTION("Negative")
@@ -206,15 +215,16 @@ TEMPLATE_TEST_CASE_SIG(
             U"Xyz 8 zYX"sv,
             U"Step on no pets"sv,
             U"قطة"sv, // Cat, in Arabic
-            U"12/20/2021"sv)};
+            U"12/20/2021"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE_FALSE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome),
-            func_is_palindrome>(s));
-        // clang-format on
+        REQUIRE_FALSE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome),
+                func_is_palindrome>(s)
+        );
     }
 }
 
@@ -225,7 +235,8 @@ TEMPLATE_TEST_CASE_SIG(
     &::is_palindrome_ci,
     &forfun::palindrome::functional::bloated::is_palindrome_ci,
     &forfun::palindrome::iterator_based::is_palindrome_ci,
-    &forfun::palindrome::offset_based::is_palindrome_ci)
+    &forfun::palindrome::offset_based::is_palindrome_ci
+)
 {
     SECTION("Positive")
     {
@@ -244,15 +255,16 @@ TEMPLATE_TEST_CASE_SIG(
             "tattarratTat"sv,
             "Aab4'{x{'4BaA"sv,
             "Step on no pets"sv,
-            "19/9/91"sv)};
+            "19/9/91"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome_ci),
-            func_is_palindrome_ci>(s));
-        // clang-format on
+        REQUIRE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome_ci),
+                func_is_palindrome_ci>(s)
+        );
     }
 
     SECTION("Negative")
@@ -264,14 +276,15 @@ TEMPLATE_TEST_CASE_SIG(
             "12/20/2021"sv,
             "Step on no pets!"sv,
             " 010"sv,
-            "Cat"sv)};
+            "Cat"sv
+        )};
 
         CAPTURE(s);
 
-        // clang-format off
-        REQUIRE_FALSE(adapt_func_is_palindrome<
-            decltype(func_is_palindrome_ci),
-            func_is_palindrome_ci>(s));
-        // clang-format on
+        REQUIRE_FALSE(
+            adapt_func_is_palindrome<
+                decltype(func_is_palindrome_ci),
+                func_is_palindrome_ci>(s)
+        );
     }
 }

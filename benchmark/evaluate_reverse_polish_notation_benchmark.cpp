@@ -17,7 +17,8 @@
 
 TEST_CASE(
     "Evaluate reverse polish notation benchmarking",
-    "[benchmark][evaluate_reverse_polish_notation]")
+    "[benchmark][evaluate_reverse_polish_notation]"
+)
 {
     using std::string_view_literals::operator""sv;
 
@@ -42,7 +43,8 @@ TEST_CASE(
         "293"sv,
         "*"sv,
         "101"sv,
-        "-"sv};
+        "-"sv,
+    };
 
     ankerl::nanobench::Bench()
 
@@ -54,28 +56,33 @@ TEST_CASE(
                 .c_str(),
             [&tokens]() {
                 auto const r{
-                    hardened::eval_expression(tokens.cbegin(), tokens.cend())};
+                    hardened::eval_expression(tokens.cbegin(), tokens.cend())
+                };
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(unhardened::eval_expression<VecConstIter, VecConstIter>)
                 .c_str(),
             [&tokens]() {
-                auto const r{unhardened::eval_expression(
-                    tokens.cbegin(), tokens.cend())};
+                auto const r{
+                    unhardened::eval_expression(tokens.cbegin(), tokens.cend())
+                };
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
-            NAMEOF_RAW(
-                speed_optimized::eval_expression<VecConstIter, VecConstIter>)
+            NAMEOF_RAW(speed_optimized::eval_expression<VecConstIter, VecConstIter>)
                 .c_str(),
             [&tokens]() {
                 auto const r{speed_optimized::eval_expression(
-                    tokens.cbegin(), tokens.cend())};
+                    tokens.cbegin(), tokens.cend()
+                )};
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         ;
 }

@@ -39,7 +39,8 @@ TEMPLATE_TEST_CASE_SIG(
         IntVecConstItr,
         IntVecConstItr,
         IntVecItr,
-        IntVecItr>))
+        IntVecItr>)
+)
 {
     SECTION("Empty input")
     {
@@ -50,7 +51,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<int> actual{};
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -64,7 +66,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<int> actual{};
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -78,7 +81,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<int> actual{};
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -92,7 +96,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<int> actual(3);
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -106,7 +111,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<int> actual(4);
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -125,7 +131,8 @@ TEMPLATE_TEST_CASE_SIG(
         FloatVecConstItr,
         FloatVecConstItr,
         DoubleVecItr,
-        DoubleVecItr>))
+        DoubleVecItr>)
+)
 {
     SECTION("Input is of four integers, output type is float")
     {
@@ -136,7 +143,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::vector<double> actual(4);
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -155,7 +163,8 @@ TEMPLATE_TEST_CASE_SIG(
         IntArr3ConstItr,
         IntArr3ConstItr,
         IntArr3Itr,
-        IntArr3Itr>))
+        IntArr3Itr>)
+)
 {
     SECTION("Input is of three integers")
     {
@@ -166,7 +175,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         std::array<int, 3> actual{};
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }
@@ -185,7 +195,8 @@ TEMPLATE_TEST_CASE_SIG(
         U64ArrConstItr,
         U64ArrConstItr,
         U64ArrItr,
-        U64ArrItr>))
+        U64ArrItr>)
+)
 {
     SECTION("Factorial product value")
     {
@@ -211,13 +222,15 @@ TEMPLATE_TEST_CASE_SIG(
         static_assert(nums.size() == std::size_t{16});
 
         static constexpr std::array<std::uint64_t, 16> const expected{
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1'307'674'368'000};
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1'307'674'368'000
+        };
 
         CAPTURE(nums);
 
         std::array<std::uint64_t, 16> actual{};
         product_except_self(
-            nums.cbegin(), nums.cend(), actual.begin(), actual.end());
+            nums.cbegin(), nums.cend(), actual.begin(), actual.end()
+        );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
     }

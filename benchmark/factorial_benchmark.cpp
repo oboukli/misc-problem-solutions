@@ -30,7 +30,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
                 auto const r{iterative::factorial(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(recursive::factorial<std::uint64_t>).c_str(),
@@ -39,7 +40,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
                 auto const r{recursive::factorial(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
 #if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
         .run(
@@ -49,7 +51,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
                 auto const r{stl_functional::factorial(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 #endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
 
         ;

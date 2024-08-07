@@ -16,8 +16,9 @@
 namespace forfun::primality {
 
 template <std::unsigned_integral UInteger>
-/*constexpr*/ inline auto is_prime(UInteger const n) noexcept(
-    noexcept(std::sqrt(std::declval<UInteger>()))) -> bool
+/*constexpr*/ inline auto
+is_prime(UInteger const n) noexcept(noexcept(std::sqrt(std::declval<UInteger>())
+)) -> bool
 {
     if (n < UInteger{2})
     {

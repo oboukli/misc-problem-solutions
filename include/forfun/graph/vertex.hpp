@@ -29,8 +29,8 @@ struct vertex final {
 
 template <std::regular T>
 struct vertex_hash final {
-    constexpr auto
-    operator()(vertex<T> const& vertex) const noexcept -> std::size_t
+    constexpr auto operator()(vertex<T> const& vertex
+    ) const noexcept -> std::size_t
     {
         if constexpr (std::integral<T> and (sizeof(T) <= sizeof(std::size_t)))
         {
@@ -52,21 +52,22 @@ using VertexStateList
 
 template <std::regular T>
 constexpr auto get_adjacencies_iter(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    vertex<T> const& v) noexcept -> VertexAdjacencyList<T>::const_iterator
+    VertexAdjacencyList<T> const& vertex_adjacency_list, vertex<T> const& v
+) noexcept -> VertexAdjacencyList<T>::const_iterator
 {
     return std::find_if(
         vertex_adjacency_list.cbegin(),
         vertex_adjacency_list.cend(),
         [v](VertexAdjacencyList<T>::value_type const& target) {
             return target.front() == v;
-        });
+        }
+    );
 }
 
 template <std::regular T>
 auto init_state_list(
-    VertexAdjacencyList<T> const& adjacency_list,
-    VertexStateList<T>& state_list) noexcept -> void
+    VertexAdjacencyList<T> const& adjacency_list, VertexStateList<T>& state_list
+) noexcept -> void
 {
     for (auto const& adjacencies : adjacency_list)
     {

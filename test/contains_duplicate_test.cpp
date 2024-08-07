@@ -23,7 +23,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         STATIC_REQUIRE(actual == expected);
     }
@@ -36,7 +37,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -49,7 +51,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -62,7 +65,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -75,7 +79,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -88,7 +93,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -101,7 +107,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -114,7 +121,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -127,7 +135,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -140,7 +149,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -153,7 +163,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }
@@ -166,7 +177,8 @@ TEST_CASE("Contains Duplicate", "[contains_duplicate]")
         CAPTURE(nums);
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())};
+            contains_duplicate(nums.cbegin(), nums.cend())
+        };
 
         REQUIRE(actual == expected);
     }

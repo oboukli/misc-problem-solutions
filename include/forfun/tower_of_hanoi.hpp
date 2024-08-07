@@ -16,11 +16,8 @@ namespace forfun::tower_of_hanoi::recursive {
 
 template <typename Rod, std::invocable<Rod&, Rod&> Monk>
 constexpr auto
-toh(Rod& src,
-    Rod& des,
-    Rod& aux,
-    Monk monk,
-    std::integral auto num_moves) noexcept(noexcept(monk(src, des))) -> void
+toh(Rod& src, Rod& des, Rod& aux, Monk monk, std::integral auto num_moves
+) noexcept(noexcept(monk(src, des))) -> void
 {
     if (num_moves == decltype(num_moves){0})
     {

@@ -23,10 +23,8 @@ namespace forfun::two_sum {
 
 template <std::input_iterator InputItr, std::sentinel_for<InputItr> Sentinel>
 [[nodiscard]] constexpr auto two_sum(
-    InputItr itr,
-    Sentinel const end,
-    std::iter_value_t<InputItr> const target) noexcept
-    -> std::array<InputItr, 2>
+    InputItr itr, Sentinel const end, std::iter_value_t<InputItr> const target
+) noexcept -> std::array<InputItr, 2>
 {
     for (; itr != end; ++itr)
     {

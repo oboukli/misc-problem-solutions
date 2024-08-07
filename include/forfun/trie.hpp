@@ -27,7 +27,8 @@ struct TrieNode final {
     }
 
     explicit constexpr TrieNode(
-        CharT const value_, bool const is_terminal_) noexcept :
+        CharT const value_, bool const is_terminal_
+    ) noexcept :
         value{value_}, is_terminal{is_terminal_}
     {
     }

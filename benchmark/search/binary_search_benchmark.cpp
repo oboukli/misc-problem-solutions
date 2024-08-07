@@ -33,23 +33,28 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
             [&records]() {
                 Itr const r{std::find(records.cbegin(), records.cend(), 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(iterative::find<Itr, int>).c_str(),
             [&records]() {
                 Itr const r{
-                    iterative::find(records.cbegin(), records.cend(), 41)};
+                    iterative::find(records.cbegin(), records.cend(), 41)
+                };
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         .run(
             NAMEOF_RAW(recursive::find<Itr, int>).c_str(),
             [&records]() {
                 Itr const r{
-                    recursive::find(records.cbegin(), records.cend(), 41)};
+                    recursive::find(records.cbegin(), records.cend(), 41)
+                };
                 ankerl::nanobench::doNotOptimizeAway(r);
-            })
+            }
+        )
 
         ;
 }

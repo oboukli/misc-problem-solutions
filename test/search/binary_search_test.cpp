@@ -29,7 +29,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[search][binary_search]",
     (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<0>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<0>, int>))
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<0>, int>)
+)
 {
     constexpr int const target{151};
     std::array<int, 0> const records{};
@@ -43,7 +44,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[search][binary_search]",
     (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<1>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<1>, int>))
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<1>, int>)
+)
 {
     SECTION("One-element collection, containing the target")
     {
@@ -80,7 +82,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[search][binary_search]",
     (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<12>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<12>, int>))
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<12>, int>)
+)
 {
     SECTION("Even collection containing the target once")
     {
@@ -102,7 +105,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{163};
         std::array const records{
-            149, 151, 157, 163, 163, 163, 163, 181, 191, 193, 197, 199};
+            149, 151, 157, 163, 163, 163, 163, 181, 191, 193, 197, 199
+        };
         static_assert(records.size() == 12);
 
         CAPTURE(records);
@@ -119,7 +123,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{257};
         std::array const records{
-            227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281};
+            227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281
+        };
         static_assert(records.size() == 12);
 
         CAPTURE(records);
@@ -168,7 +173,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{35};
         constexpr std::array const records{
-            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73};
+            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73
+        };
         static_assert(records.size() == 12);
         static_assert(target > records.front());
         static_assert(target < records.back());
@@ -177,7 +183,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 
     SECTION("Even collection where target is smaller than smallest element")
@@ -190,7 +197,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 
     SECTION("Even collection where target is larger than largest element")
@@ -203,7 +211,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 }
 
@@ -212,7 +221,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[search][binary_search]",
     (auto find, find),
     (forfun::search::binary_search::iterative::find<StdArrayConstItr<11>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<11>, int>))
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<11>, int>)
+)
 {
     SECTION("Odd collection containing the target once")
     {
@@ -250,7 +260,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{239};
         std::array const records{
-            227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277};
+            227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277
+        };
         static_assert(records.size() == 11);
 
         CAPTURE(records);
@@ -299,7 +310,8 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{35};
         constexpr std::array const records{
-            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71};
+            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
+        };
         static_assert(records.size() == 11);
         static_assert(target > records.front());
         static_assert(target < records.back());
@@ -308,7 +320,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 
     SECTION("Odd collection where target is smaller than smallest element")
@@ -321,7 +334,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 
     SECTION("Odd collection where target is larger than largest element")
@@ -334,7 +348,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(target);
 
         REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend());
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 }
 
@@ -342,13 +357,15 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search with std::vector",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::recursive::find<StdVectorConstItr, int>))
+    (forfun::search::binary_search::recursive::find<StdVectorConstItr, int>)
+)
 {
     SECTION("Even collection (vector) containing the target odd times")
     {
         constexpr int const target{257};
         std::vector const records{
-            227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281};
+            227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281
+        };
 
         CAPTURE(records);
         CAPTURE(target);
