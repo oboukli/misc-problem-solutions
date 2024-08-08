@@ -25,7 +25,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         return;
     }
 
-    if (matrix_begin->size() == 0)
+    if (matrix_begin->empty())
     {
         return;
     }
@@ -46,7 +46,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
             {
                 *itr_c_begin = 0;
 
-                if (col_offset == 0)
+                if (col_offset == DiffC{0})
                 {
                     is_first_col_zeroed = true;
                 }
@@ -117,7 +117,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         return;
     }
 
-    if (matrix_begin->size() == 0)
+    if (matrix_begin->empty())
     {
         return;
     }
@@ -138,7 +138,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
             {
                 *itr_c_begin = 0;
 
-                if (col_offset == 0)
+                if (col_offset == DiffC{0})
                 {
                     is_first_col_zeroed = true;
                 }
@@ -200,25 +200,25 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     auto const matrix_r_size{matrix.size()};
 
-    if (matrix_r_size == 0)
+    if (matrix_r_size == SizeTypeR{0U})
     {
         return;
     }
 
     auto const matrix_c_size{matrix.begin()->size()};
 
-    if (matrix_c_size == 0)
+    if (matrix_c_size == SizeTypeC{0U})
     {
         return;
     }
 
     bool is_col_zeroed{false};
 
-    for (SizeTypeR r{0}; r < matrix_r_size; ++r)
+    for (SizeTypeR r{0U}; r < matrix_r_size; ++r)
     {
         assert(matrix[r].size() == matrix_c_size);
 
-        for (SizeTypeC c{0}; c < matrix_c_size; ++c)
+        for (SizeTypeC c{0U}; c < matrix_c_size; ++c)
         {
             if (matrix[r][c] == 0)
             {
@@ -233,9 +233,9 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         }
     }
 
-    for (SizeTypeR r{1}; r < matrix_r_size; ++r)
+    for (SizeTypeR r{1U}; r < matrix_r_size; ++r)
     {
-        for (SizeTypeC c{1}; c < matrix_c_size; ++c)
+        for (SizeTypeC c{1U}; c < matrix_c_size; ++c)
         {
             if ((matrix[r][0] == 0) || (matrix[0][c] == 0))
             {
@@ -246,7 +246,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     if (matrix[0][0] == 0)
     {
-        for (SizeTypeC c{1}; c < matrix_c_size; ++c)
+        for (SizeTypeC c{1U}; c < matrix_c_size; ++c)
         {
             matrix[0][c] = 0;
         }
@@ -254,7 +254,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     if (is_col_zeroed)
     {
-        for (SizeTypeR r{0}; r < matrix_r_size; ++r)
+        for (SizeTypeR r{0U}; r < matrix_r_size; ++r)
         {
             matrix[r][0] = 0;
         }
