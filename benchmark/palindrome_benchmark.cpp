@@ -26,7 +26,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv
     };
 
-    SECTION("case-sensitive")
+    SECTION("Case-sensitive")
     {
         ankerl::nanobench::Bench()
 
@@ -86,7 +86,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             ;
     }
 
-    SECTION("case-insensitive")
+    SECTION("Case-insensitive")
     {
         ankerl::nanobench::Bench()
 

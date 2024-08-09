@@ -14,7 +14,7 @@
 
 #include "forfun/valid_parentheses.hpp"
 
-TEST_CASE("valid_parentheses benchmarking", "[benchmark][valid_parentheses]")
+TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 {
     using namespace forfun::valid_parentheses;
 
