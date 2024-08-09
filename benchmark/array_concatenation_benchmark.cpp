@@ -59,7 +59,7 @@ TEST_CASE(
 
     ankerl::nanobench::Bench()
 
-        .title("Concatenation of Array")
+        .title("Concatenation of array")
         .relative(true)
 
         .run(

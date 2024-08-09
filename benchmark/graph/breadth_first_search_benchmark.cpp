@@ -14,7 +14,7 @@
 #include "forfun/graph/vertex.hpp"
 
 TEST_CASE(
-    "breadth-first search benchmarking",
+    "Breadth-first search benchmarking",
     "[benchmark][graph][breadth_first_search]"
 )
 {
@@ -38,7 +38,7 @@ TEST_CASE(
 
     ankerl::nanobench::Bench()
 
-        .title("breadth-first search")
+        .title("Breadth-first search")
         .relative(true)
 
         .run(
