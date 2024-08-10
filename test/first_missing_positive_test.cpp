@@ -15,7 +15,7 @@
 #include "forfun/first_missing_positive.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive with vector<int>",
+    "First missing positive (vector<int>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -148,7 +148,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<int, 0>",
+    "First missing positive (array<int, 0>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -159,22 +159,19 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 0>::iterator>)
 )
 {
-    SECTION("Empty array")
-    {
-        std::array<int, 0> test_input{};
+    std::array<int, 0> test_input{};
 
-        CAPTURE(test_input);
+    CAPTURE(test_input);
 
-        STATIC_CHECK(test_input.empty());
+    STATIC_CHECK(test_input.empty());
 
-        STATIC_REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 1
-        );
-    }
+    STATIC_REQUIRE(
+        first_missing_positive(test_input.begin(), test_input.end()) == 1
+    );
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<int, 16>",
+    "First missing positive (array<int, 16>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -185,22 +182,17 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 16>::iterator>)
 )
 {
-    SECTION("Empty container")
-    {
-        std::array test_input{9, 9, 7, 5, 4, 3, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0};
+    std::array test_input{9, 9, 7, 5, 4, 3, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0};
 
-        CAPTURE(test_input);
+    CAPTURE(test_input);
 
-        CHECK(test_input.size() == 16);
+    CHECK(test_input.size() == 16);
 
-        REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 6
-        );
-    }
+    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 6);
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<char, 2>",
+    "First missing positive (array<char, 2>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -211,18 +203,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<char, 2>::iterator>)
 )
 {
-    SECTION("char")
-    {
-        std::array test_input{char{1}, char{2}};
-        REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end())
-            == char{3}
-        );
-    }
+    std::array test_input{char{1}, char{2}};
+    REQUIRE(
+        first_missing_positive(test_input.begin(), test_input.end()) == char{3}
+    );
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<unsigned int, 3>",
+    "First missing positive (array<unsigned int, 3>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -233,17 +221,12 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<unsigned int, 3>::iterator>)
 )
 {
-    SECTION("unsigned int")
-    {
-        std::array test_input{1U, 2U, 4U};
-        REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 3U
-        );
-    }
+    std::array test_input{1U, 2U, 4U};
+    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 3U);
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "first_missing_positive array<int, 3>",
+    "First missing positive (array<int, 3>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
@@ -254,11 +237,6 @@ TEMPLATE_TEST_CASE_SIG(
         std::array<int, 3>::iterator>)
 )
 {
-    SECTION("int")
-    {
-        std::array test_input{1, 2, 4};
-        REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 3
-        );
-    }
+    std::array test_input{1, 2, 4};
+    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 3);
 }

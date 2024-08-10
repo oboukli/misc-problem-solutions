@@ -38,7 +38,7 @@ TEST_CASE("Trie", "[trie]")
         // clang-format on
     }
 
-    SECTION("Ctor 1")
+    SECTION("Constructor 1")
     {
         /*constexpr*/ TrieNode const node{'B'};
 
@@ -49,7 +49,7 @@ TEST_CASE("Trie", "[trie]")
         );
     }
 
-    SECTION("Ctor 2")
+    SECTION("Constructor 2")
     {
         /*constexpr*/ TrieNode const node{'C', true};
 

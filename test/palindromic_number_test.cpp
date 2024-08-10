@@ -14,7 +14,7 @@
 #include "forfun/palindromic_number.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
-    "palindromic_number",
+    "Palindromic number",
     "[palindromic_number]",
     (auto is_palindrome, is_palindrome),
     forfun::palindromic_number::fast::is_palindrome<int>,
@@ -85,7 +85,7 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("palindromic_number_static", "[palindromic_number][static]")
+TEST_CASE("Palindromic number (static)", "[palindromic_number][static]")
 {
     SECTION("Palindromic integrals")
     {

@@ -9,7 +9,7 @@
 
 #include "forfun/sonar.hpp"
 
-TEST_CASE("sonar", "[sonar]")
+TEST_CASE("Sonar", "[sonar]")
 {
     using namespace forfun::sonar;
 

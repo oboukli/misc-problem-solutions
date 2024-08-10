@@ -35,7 +35,7 @@ constexpr auto const dummy_throwing_lambda{
 using namespace forfun::fibonacci::sequence;
 
 TEMPLATE_TEST_CASE_SIG(
-    "fibonacci_sequence",
+    "Fibonacci sequence",
     "[fibonacci_sequence]",
     (auto fib_seq, fib_seq),
     (slow::fib_seq<int, std::vector<int>, decltype((dummy_noexcept_lambda))>),
@@ -101,7 +101,7 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("fibonacci_sequence noexcept_callable", "[fibonacci_sequence]")
+TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
 {
     SECTION("Positive")
     {

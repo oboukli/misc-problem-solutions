@@ -11,7 +11,7 @@
 
 #include "forfun/contains_duplicate.hpp"
 
-TEST_CASE("Contains Duplicate", "[contains_duplicate]")
+TEST_CASE("Contains duplicate", "[contains_duplicate]")
 {
     using forfun::contains_duplicate::contains_duplicate;
 
