@@ -236,9 +236,9 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("product_except_self concepts", "[product_except_self]")
+TEST_CASE("Product except self (concepts)", "[product_except_self]")
 {
-    SECTION("product_computable")
+    SECTION("Concept product_computable")
     {
         using forfun::product_except_self::concepts::product_computable;
 

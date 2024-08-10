@@ -16,7 +16,7 @@
 using std::string_view_literals::operator""sv;
 
 TEMPLATE_TEST_CASE_SIG(
-    "Valid Anagram (char ordinal comparison)",
+    "Valid anagram (char ordinal comparison)",
     "[valid_anagram]",
     (auto is_anagram, is_anagram),
     forfun::valid_anagram::char_only::is_anagram,
@@ -96,7 +96,7 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("Valid Anagram (8-bit ordinal comparison)", "[valid_anagram]")
+TEST_CASE("Valid anagram (8-bit ordinal comparison)", "[valid_anagram]")
 {
     using forfun::valid_anagram::generic::is_anagram;
 
@@ -177,7 +177,7 @@ TEST_CASE("Valid Anagram (8-bit ordinal comparison)", "[valid_anagram]")
     }
 }
 
-TEST_CASE("Valid Anagram (32-bit ordinal comparison)", "[valid_anagram]")
+TEST_CASE("Valid anagram (32-bit ordinal comparison)", "[valid_anagram]")
 {
     using forfun::valid_anagram::generic::is_anagram;
 

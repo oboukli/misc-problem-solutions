@@ -10,7 +10,7 @@
 
 #include "forfun/fizzbuzz.hpp"
 
-TEST_CASE("fizzbuzz", "[fizzbuzz]")
+TEST_CASE("Fizz buzz", "[fizzbuzz]")
 {
     using forfun::fizzbuzz::fizzbuzz;
 

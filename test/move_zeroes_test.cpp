@@ -19,7 +19,7 @@ using VecItr = std::vector<int>::iterator;
 using Arr5Itr = std::array<int, 5>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
-    "move_zeroes in std::vector",
+    "Move zeroes (std::vector)",
     "[move_zeroes]",
     (auto move_zeroes, move_zeroes),
     (forfun::move_zeroes::sol1::move_zeroes<VecItr, VecItr>),
@@ -50,7 +50,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "move_zeroes in std::array",
+    "Move zeroes (std::array)",
     "[move_zeroes]",
     (auto move_zeroes, move_zeroes),
     (forfun::move_zeroes::sol1::move_zeroes<Arr5Itr, Arr5Itr>),
