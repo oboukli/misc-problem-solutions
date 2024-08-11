@@ -18,10 +18,10 @@
 TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 {
     using namespace forfun::search::binary_search;
-    using Itr = std::array<int, 12>::const_iterator;
+    using Itr = std::array<int, 12U>::const_iterator;
 
     std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-    static_assert(records.size() == 12);
+    static_assert(records.size() == 12U);
 
     ankerl::nanobench::Bench()
 
@@ -31,7 +31,16 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         .run(
             NAMEOF_RAW(std::find<Itr, int>).c_str(),
             [&records]() {
+                // NOLINTNEXTLINE(modernize-use-ranges)
                 Itr const r{std::find(records.cbegin(), records.cend(), 41)};
+                ankerl::nanobench::doNotOptimizeAway(r);
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(std::ranges::find).c_str(),
+            [&records]() {
+                Itr const r{std::ranges::find(records, 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
         )
