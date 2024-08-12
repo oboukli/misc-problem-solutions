@@ -1,14 +1,14 @@
-# Solutions in C/C++ to Miscellaneous Programming Problems
+# Solutions in C and C++ to Miscellaneous Programming Problems
 
-This is a repository of modern coding showcases and solutions to various
-popular programming problems, written in C90, C++17, C++20, and C++23.
+This is a repository of modern coding showcases and solutions to various popular
+programming problems, written in C90, C++17, C++20, and C++23.
 
-For some of the said problems, multiple solutions of varying efficiency
-and trade-offs are provided, along with benchmarks.
+For some of the said problems, multiple solutions of varying efficiencies and
+trade-offs are provided, along with benchmarks.
 
 All solutions are driven by extensive automated testing, in addition to being
-statically and dynamically analyzed, and compiled under strict rules with
-the latest Clang, GCC, and MSVC compilers.
+statically and dynamically analyzed, and compiled under strict rules with the
+latest Clang, GCC, and MSVC compilers.
 
 ## Technical showcases
 
