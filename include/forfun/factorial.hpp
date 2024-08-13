@@ -10,15 +10,12 @@
 #ifndef FORFUN_FACTORIAL_HPP_
 #define FORFUN_FACTORIAL_HPP_
 
+#include <algorithm>
 #include <cassert>
 #include <concepts>
-#include <type_traits>
-
-#if __cpp_lib_ranges_fold >= 202207L
-#include <algorithm>
 #include <functional>
 #include <ranges>
-#endif // __cpp_lib_ranges_fold >= 202207L
+#include <type_traits>
 
 #include "common.hpp"
 
