@@ -289,7 +289,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
                     src_rod,
                     des_rod,
                     aux_rod,
-                    [](int&, int&) noexcept(false) -> void {},
+                    [](int&, int&) noexcept(false) -> void { throw; },
                     0
                 ))
             );
