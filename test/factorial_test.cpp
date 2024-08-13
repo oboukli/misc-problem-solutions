@@ -12,16 +12,6 @@
 
 #include "forfun/factorial.hpp"
 
-#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
-#define FORFUN_REQUIRE_STL_FUNCTIONAL(X) \
-    REQUIRE(forfun::factorial::stl_functional::factorial(n) == (X))
-#define FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(X) \
-    STATIC_REQUIRE(forfun::factorial::stl_functional::factorial(n) == (X))
-#else
-#define FORFUN_REQUIRE_STL_FUNCTIONAL(X)
-#define FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(X)
-#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
-
 TEST_CASE("Compiler feature test", "[factorial]")
 {
 #if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
@@ -54,7 +44,11 @@ TEMPLATE_TEST_CASE(
 
         STATIC_REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         STATIC_REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
-        FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        STATIC_REQUIRE(
+            forfun::factorial::stl_functional::factorial(n) == expected
+        );
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 
     SECTION("1! is one")
@@ -64,7 +58,9 @@ TEMPLATE_TEST_CASE(
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
-        FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 
     SECTION("5! is 120")
@@ -74,7 +70,11 @@ TEMPLATE_TEST_CASE(
 
         STATIC_REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         STATIC_REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
-        FORFUN_STATIC_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        STATIC_REQUIRE(
+            forfun::factorial::stl_functional::factorial(n) == expected
+        );
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 }
 
@@ -92,7 +92,9 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{5'040}};
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
-        FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 }
 
@@ -109,7 +111,9 @@ TEMPLATE_TEST_CASE(
         static constexpr auto const expected{TestType{40'320}};
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
-        FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 }
 
@@ -126,7 +130,9 @@ TEMPLATE_TEST_CASE(
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
-        FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 }
 
@@ -144,6 +150,8 @@ TEMPLATE_TEST_CASE(
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
-        FORFUN_REQUIRE_STL_FUNCTIONAL(expected);
+#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
+        REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
     }
 }
