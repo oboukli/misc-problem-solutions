@@ -45,6 +45,7 @@ TEST_CASE(
             [&adjacency_list]() {
                 constexpr vertex<int> const starting_vertex{1};
 
+                // NOLINTNEXTLINE(misc-const-correctness)
                 VertexStateList<int> state_list{
                     {{1}, vertex_visit_state::unvisited},
                     {{2}, vertex_visit_state::unvisited},
