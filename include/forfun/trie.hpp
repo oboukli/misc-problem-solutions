@@ -50,12 +50,12 @@ auto insert(T& root, StringViewT<T> const& word) noexcept -> void
     using LenT = StringViewT<T>::size_type;
 
     auto const word_len{word.length()};
-    if (word_len == LenT{0})
+    if (word_len == LenT{0U})
     {
         return;
     }
 
-    auto const prfx{word[LenT{0}]};
+    auto const prfx{word[LenT{0U}]};
 
     T* parent{nullptr};
     for (auto const& node_ptr : root.children)
