@@ -41,6 +41,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     for (; iter != end; ++iter)
     {
         auto const sv_begin{iter->data()};
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         auto const sv_end{sv_begin + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
@@ -118,6 +119,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     for (; iter != end; ++iter)
     {
         auto const sv_begin{iter->data()};
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         auto const sv_end{sv_begin + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
@@ -181,6 +183,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     for (; iter != end; ++iter)
     {
         auto const sv_begin{iter->data()};
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         auto const sv_end{sv_begin + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand;
