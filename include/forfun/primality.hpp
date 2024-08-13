@@ -20,25 +20,25 @@ template <std::unsigned_integral UInteger>
 is_prime(UInteger const n) noexcept(noexcept(std::sqrt(std::declval<UInteger>())
 )) -> bool
 {
-    if (n < UInteger{2})
+    if (n < UInteger{2U})
     {
         return false;
     }
 
-    if (n == UInteger{2})
+    if (n == UInteger{2U})
     {
         return true;
     }
 
-    if ((n & UInteger{1}) == UInteger{0})
+    if ((n & UInteger{1U}) == UInteger{0U})
     {
         return false;
     }
 
     UInteger const r{static_cast<UInteger>(std::sqrt(n))};
-    for (UInteger i{3}; i <= r; ++i)
+    for (UInteger i{3U}; i <= r; ++i)
     {
-        if (((i & UInteger{1}) != UInteger{0}) && ((n % i) == UInteger{0}))
+        if (((i & UInteger{1U}) != UInteger{0U}) && ((n % i) == UInteger{0}))
         {
             return false;
         }

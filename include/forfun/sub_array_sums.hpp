@@ -39,7 +39,7 @@ constexpr auto sum_each(
 
     auto const sums_size{sums.size()};
 
-    if (sums_size == SizeType{0})
+    if (sums_size == SizeType{0U})
     {
         return;
     }
@@ -50,7 +50,7 @@ constexpr auto sum_each(
 
     // Calculate result for the first output element.
     auto const nums_bound{std::min(sub_size, nums_size)};
-    for (SizeType i{}; i < nums_bound; ++i)
+    for (SizeType i{0U}; i < nums_bound; ++i)
     {
         sub_sum += *nums_it;
         ++nums_it;
@@ -70,9 +70,9 @@ constexpr auto sum_each(
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
     auto slider_last{nums_it + static_cast<DiffType>(sub_size)};
     auto const sums_bound{
-        std::min(sums_size, (nums_size - sub_size) + SizeType{1})
+        std::min(sums_size, (nums_size - sub_size) + SizeType{1U})
     };
-    for (SizeType i{1}; i < sums_bound; ++i)
+    for (SizeType i{1U}; i < sums_bound; ++i)
     {
         // Subtract the element before the sliding window.
         sub_sum -= *nums_it;

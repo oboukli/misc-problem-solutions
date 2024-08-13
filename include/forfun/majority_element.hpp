@@ -26,19 +26,19 @@ majority_element(Elements const& elements) noexcept -> Elements::const_iterator
     SizeType const size{elements.size()};
     Itr const cend{elements.cend()};
 
-    if (size < SizeType{3})
+    if (size < SizeType{3U})
     {
         return cend;
     }
 
-    SizeType threshold{(size / SizeType{2}) + SizeType{1}};
-    SizeType count{0};
+    SizeType threshold{(size / SizeType{2U}) + SizeType{1U}};
+    SizeType count{0U};
     ElementType majority_elm{}; // Unecessary default initialization.
     Itr majority_itr{}; // Unecessary default initialization.
 
     for (Itr itr{elements.cbegin()}; itr != cend; ++itr)
     {
-        if (count == SizeType{0})
+        if (count == SizeType{0U})
         {
             majority_elm = *itr;
             majority_itr = itr;
@@ -65,7 +65,7 @@ majority_element(Elements const& elements) noexcept -> Elements::const_iterator
             --threshold;
         }
 
-        if (threshold == 0)
+        if (threshold == SizeType{0U})
         {
             return majority_itr;
         }
