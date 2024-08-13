@@ -10,7 +10,6 @@
 #ifndef FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_
 #define FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_
 
-#include <algorithm>
 #include <concepts>
 
 #include "forfun/graph/vertex.hpp"
