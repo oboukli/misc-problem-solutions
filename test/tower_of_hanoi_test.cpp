@@ -79,7 +79,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         std::stack<int> aux_rod{};
         // NOLINTEND(misc-const-correctness)
 
-        assert(src_rod.size() == 1);
+        assert(src_rod.size() == 1U);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
@@ -91,7 +91,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
 
         REQUIRE(src_rod.empty());
-        REQUIRE(des_rod.size() == 1);
+        REQUIRE(des_rod.size() == 1U);
         REQUIRE(des_rod.top() == expected.top());
         REQUIRE(aux_rod.empty());
     }
@@ -108,7 +108,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         std::stack<int> aux_rod{};
         // NOLINTEND(misc-const-correctness)
 
-        assert(src_rod.size() == 2);
+        assert(src_rod.size() == 2U);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
@@ -120,7 +120,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
 
         REQUIRE(src_rod.empty());
-        REQUIRE(des_rod.size() == 2);
+        REQUIRE(des_rod.size() == 2U);
         REQUIRE(des_rod.top() == expected.top());
         REQUIRE(aux_rod.empty());
     }
@@ -137,7 +137,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         std::stack<int> aux_rod{};
         // NOLINTEND(misc-const-correctness)
 
-        assert(src_rod.size() == 3);
+        assert(src_rod.size() == 3U);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
@@ -149,7 +149,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
 
         REQUIRE(src_rod.empty());
-        REQUIRE(des_rod.size() == 3);
+        REQUIRE(des_rod.size() == 3U);
         REQUIRE(des_rod.top() == expected.top());
         REQUIRE(aux_rod.empty());
     }
@@ -166,7 +166,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         std::stack<int> aux_rod{};
         // NOLINTEND(misc-const-correctness)
 
-        assert(src_rod.size() == 4);
+        assert(src_rod.size() == 4U);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
@@ -178,7 +178,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
 
         REQUIRE(src_rod.empty());
-        REQUIRE(des_rod.size() == 4);
+        REQUIRE(des_rod.size() == 4U);
         REQUIRE(des_rod.top() == expected.top());
         REQUIRE(aux_rod.empty());
     }

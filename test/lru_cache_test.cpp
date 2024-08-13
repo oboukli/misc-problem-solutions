@@ -29,32 +29,32 @@ TEMPLATE_TEST_CASE(
         CacheType cache{2};
 
         // Cache is {{1, 1}}.
-        cache.put(1, 1);
+        cache.put(1U, 1);
 
         // Cache is {{1, 1}, {2, 2}}.
-        cache.put(2, 2);
+        cache.put(2U, 2);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == 1);
 
         // LRU key was 2. Evicts key 2. Cache is {{1, 1}, {3, 3}}.
-        cache.put(3, 3);
+        cache.put(3U, 3);
 
         // Returns -1 (key not found).
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == -1);
 
         // LRU key was 1; evicts key 1, cache is {{4, 4}, {3, 3}}.
-        cache.put(4, 4);
+        cache.put(4U, 4);
 
         // Returns -1 (key not found).
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == -1);
 
-        val = cache.get(3);
+        val = cache.get(3U);
         REQUIRE(val == 3);
 
-        val = cache.get(4);
+        val = cache.get(4U);
         REQUIRE(val == 4);
     }
 
@@ -62,34 +62,34 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(2);
 
-        cache.put(1, 1);
+        cache.put(1U, 1);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == 1);
 
-        cache.put(2, 2);
+        cache.put(2U, 2);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 2);
 
         // Evicts key 1.
-        cache.put(3, 3);
+        cache.put(3U, 3);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == -1);
 
-        cache.put(2, 4);
+        cache.put(2U, 4);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 4);
 
         // Evicts key 3.
-        cache.put(4, 4);
+        cache.put(4U, 4);
 
-        val = cache.get(3);
+        val = cache.get(3U);
         REQUIRE(val == -1);
 
-        val = cache.get(5);
+        val = cache.get(5U);
         REQUIRE(val == -1);
     }
 
@@ -97,23 +97,23 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(1);
 
-        cache.put(1, 1);
+        cache.put(1U, 1);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == 1);
 
         // Evicts key 1.
-        cache.put(2, 2);
+        cache.put(2U, 2);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == -1);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 2);
 
-        cache.put(2, 3);
+        cache.put(2U, 3);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 3);
     }
 
@@ -121,35 +121,35 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(3);
 
-        cache.put(1, 1);
-        cache.put(2, 2);
-        cache.put(3, 3);
+        cache.put(1U, 1);
+        cache.put(2U, 2);
+        cache.put(3U, 3);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == 1);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 2);
 
-        val = cache.get(3);
+        val = cache.get(3U);
         REQUIRE(val == 3);
 
         // Evicts key 1.
-        cache.put(4, 4);
+        cache.put(4U, 4);
 
-        val = cache.get(1);
+        val = cache.get(1U);
         REQUIRE(val == -1);
 
-        val = cache.get(4);
+        val = cache.get(4U);
         REQUIRE(val == 4);
 
-        val = cache.get(2);
+        val = cache.get(2U);
         REQUIRE(val == 2);
 
         // Evicts key 3, as key 2 was accessed recently.
-        cache.put(5, 5);
+        cache.put(5U, 5);
 
-        val = cache.get(3);
+        val = cache.get(3U);
         REQUIRE(val == -1);
     }
 }

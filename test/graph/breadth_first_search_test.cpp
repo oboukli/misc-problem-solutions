@@ -74,8 +74,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 2);
-        assert(state_list.size() == 2);
+        assert(adjacency_list.size() == 2U);
+        assert(state_list.size() == 2U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -91,7 +91,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        REQUIRE(call_count == 2);
+        REQUIRE(call_count == 2U);
     }
 
     SECTION("All graph vertices visited, starting from leaf vertex")
@@ -110,8 +110,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 6);
-        assert(state_list.size() == 6);
+        assert(adjacency_list.size() == 6U);
+        assert(state_list.size() == 6U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -136,7 +136,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(adjacency_list.size() == 6);
+        REQUIRE(adjacency_list.size() == 6U);
     }
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
@@ -155,8 +155,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 6);
-        assert(state_list.size() == 6);
+        assert(adjacency_list.size() == 6U);
+        assert(state_list.size() == 6U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -181,7 +181,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(adjacency_list.size() == 6);
+        REQUIRE(adjacency_list.size() == 6U);
     }
 
     SECTION("All graph vertices (vertex<char>) visited")
@@ -202,8 +202,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8);
-        assert(state_list.size() == 8);
+        assert(adjacency_list.size() == 8U);
+        assert(state_list.size() == 8U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -230,7 +230,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(adjacency_list.size() == 8);
+        REQUIRE(adjacency_list.size() == 8U);
     }
 
     SECTION("Visitor call count is the same as the vertex count")
@@ -251,8 +251,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8);
-        assert(state_list.size() == 8);
+        assert(adjacency_list.size() == 8U);
+        assert(state_list.size() == 8U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -268,7 +268,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        REQUIRE(call_count == 8);
+        REQUIRE(call_count == 8U);
     }
 
     SECTION("Visitor is called and is passed valid arguments to")
@@ -289,8 +289,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8);
-        assert(state_list.size() == 8);
+        assert(adjacency_list.size() == 8U);
+        assert(state_list.size() == 8U);
         assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
@@ -310,7 +310,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        REQUIRE(recorded_path.size() == 8);
+        REQUIRE(recorded_path.size() == 8U);
 
         std::vector<vertex<char>> const expected_recorded_path{
             {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}

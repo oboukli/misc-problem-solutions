@@ -12,16 +12,16 @@
 
 #include "forfun/sorting/bubble_sort.hpp"
 
-using Arr0Itr = std::array<int, 0>::iterator;
-using Arr1Itr = std::array<int, 1>::iterator;
-using Arr2Itr = std::array<int, 2>::iterator;
-using Arr3Itr = std::array<int, 3>::iterator;
-using Arr7Itr = std::array<int, 7>::iterator;
-using Arr10Itr = std::array<int, 10>::iterator;
+using Arr0Itr = std::array<int, 0U>::iterator;
+using Arr1Itr = std::array<int, 1U>::iterator;
+using Arr2Itr = std::array<int, 2U>::iterator;
+using Arr3Itr = std::array<int, 3U>::iterator;
+using Arr7Itr = std::array<int, 7U>::iterator;
+using Arr10Itr = std::array<int, 10U>::iterator;
 using VecItr = std::vector<int>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 0>)",
+    "Bubble sort (std::array<int, 0U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr0Itr, Arr0Itr>),
@@ -30,8 +30,8 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Empty container")
     {
-        std::array<int, 0> test_input{};
-        std::array<int, 0> expected_output{};
+        std::array<int, 0U> test_input{};
+        std::array<int, 0U> expected_output{};
         bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.empty());
@@ -41,7 +41,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 1>)",
+    "Bubble sort (std::array<int, 1U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr1Itr, Arr1Itr>),
@@ -54,14 +54,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{7};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 1);
+        CHECK(test_input.size() == 1U);
 
         REQUIRE(test_input == expected_output);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 2>)",
+    "Bubble sort (std::array<int, 2U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr2Itr, Arr2Itr>),
@@ -74,14 +74,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{1, 1};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 2);
+        CHECK(test_input.size() == 2U);
 
         REQUIRE(test_input == expected_output);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 3>)",
+    "Bubble sort (std::array<int, 3U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr3Itr, Arr3Itr>),
@@ -94,14 +94,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{-6, 3, 11};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 3);
+        CHECK(test_input.size() == 3U);
 
         REQUIRE(test_input == expected_output);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 10>)",
+    "Bubble sort (std::array<int, 10U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr10Itr, Arr10Itr>),
@@ -114,7 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10);
+        CHECK(test_input.size() == 10U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -125,14 +125,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10);
+        CHECK(test_input.size() == 10U);
 
         REQUIRE(test_input == expected_output);
     }
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 7>)",
+    "Bubble sort (std::array<int, 7U>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr7Itr, Arr7Itr>),
@@ -145,7 +145,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array expected_output{-10, 0, 2, 4, 7, 9, 200};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7);
+        CHECK(test_input.size() == 7U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -165,7 +165,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7);
+        CHECK(test_input.size() == 7U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -176,7 +176,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector expected_output{0, 2, 4, 5, 7, 8, 9};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7);
+        CHECK(test_input.size() == 7U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -187,7 +187,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector expected_output{-9, -8, -7, -5, -4, -4, -2};
         bubble_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7);
+        CHECK(test_input.size() == 7U);
 
         REQUIRE(test_input == expected_output);
     }

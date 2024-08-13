@@ -20,7 +20,7 @@ TEST_CASE("Two-Sum problem", "[two_sum]")
 
     SECTION("Empty input")
     {
-        static constexpr std::array<int, 0> const nums{};
+        static constexpr std::array<int, 0U> const nums{};
         static constexpr int const target{0};
         static constexpr std::array const expected{nums.cend(), nums.cend()};
 
