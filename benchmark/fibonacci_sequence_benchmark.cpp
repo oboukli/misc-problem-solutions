@@ -17,11 +17,15 @@
 
 inline constexpr int const f{514'229};
 
+namespace {
+
 template <forfun::common::concepts::addition_unpromoted T>
 auto dummy_callback(T const n, T& state) noexcept -> void
 {
     state += n;
 }
+
+} // namespace
 
 TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
 {
