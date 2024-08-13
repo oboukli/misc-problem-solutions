@@ -18,7 +18,7 @@ TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
 {
     using namespace forfun::fibonacci;
 
-    static constexpr std::uint_fast32_t const n{7};
+    static constexpr std::uint_fast32_t const n{7U};
 
     ankerl::nanobench::Bench()
 

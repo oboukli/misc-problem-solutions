@@ -58,7 +58,7 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
             NAMEOF_RAW(fast::fib_seq<std::uint_fast32_t, std::uint_fast32_t, fn_fast_t>)
                 .c_str(),
             []() {
-                std::uint_fast32_t r{0};
+                std::uint_fast32_t r{0U};
                 fast::
                     fib_seq<std::uint_fast32_t, std::uint_fast32_t, fn_fast_t>(
                         std::uint_fast32_t{f}, dummy_callback, r
