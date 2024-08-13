@@ -66,6 +66,8 @@ constexpr auto sum_each(
 
     // Slide the window and update sum.
     nums_it = nums.cbegin();
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
     auto slider_last{nums_it + static_cast<DiffType>(sub_size)};
     auto const sums_bound{
         std::min(sums_size, (nums_size - sub_size) + SizeType{1})

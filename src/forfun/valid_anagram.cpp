@@ -30,6 +30,7 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
             std::numeric_limits<std::string_view::value_type>::digits
         )>
         haystack{};
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
     static_assert(haystack.size() == std::size_t{256U});
 
     for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
