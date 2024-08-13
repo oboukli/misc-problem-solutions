@@ -21,31 +21,31 @@ auto wrapper(std::size_t const capacity) noexcept -> int
     T cache(capacity);
 
     int x{0};
-    for (std::size_t i{0}; i < capacity; ++i)
+    for (std::size_t i{0U}; i < capacity; ++i)
     {
         cache.put(i, x);
         ++x;
     }
 
-    int val{cache.get(1)};
+    int val{cache.get(1U)};
 
-    val = cache.get(2);
+    val = cache.get(2U);
 
-    val = cache.get(3);
+    val = cache.get(3U);
 
     cache.put(capacity + 1, 2'946'901);
 
-    val = cache.get(1);
+    val = cache.get(1U);
 
-    val = cache.get(4);
+    val = cache.get(4U);
 
-    val = cache.get(2);
+    val = cache.get(2U);
 
-    cache.put(5, 5);
+    cache.put(5U, 5);
 
-    val = cache.get(3);
+    val = cache.get(3U);
 
-    for (std::size_t i{0}; i < capacity; ++i)
+    for (std::size_t i{0U}; i < capacity; ++i)
     {
         val = cache.get(i);
     }

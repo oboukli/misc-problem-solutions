@@ -19,7 +19,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 {
     using namespace forfun::contains_duplicate;
 
-    using ContainerType = std::array<int, 32>;
+    using ContainerType = std::array<int, 32U>;
     using Itr = ContainerType::iterator;
 
     constexpr std::array const superprimes{

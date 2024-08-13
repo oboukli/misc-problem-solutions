@@ -22,7 +22,7 @@ TEST_CASE(
 {
     using namespace forfun::first_missing_positive;
 
-    using ContainerType = std::array<int, 128>;
+    using ContainerType = std::array<int, 128U>;
     using Itr = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
