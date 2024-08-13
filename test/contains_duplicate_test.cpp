@@ -17,7 +17,7 @@ TEST_CASE("Contains duplicate", "[contains_duplicate]")
 
     SECTION("Empty input")
     {
-        static constexpr std::array<int, 0> const nums{};
+        static constexpr std::array<int, 0U> const nums{};
         static constexpr bool const expected{false};
 
         CAPTURE(nums);

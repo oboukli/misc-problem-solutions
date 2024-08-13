@@ -21,10 +21,10 @@ using IntVecItr = std::vector<int>::iterator;
 using IntVecConstItr = std::vector<int>::const_iterator;
 using FloatVecConstItr = std::vector<float>::const_iterator;
 using DoubleVecItr = std::vector<double>::iterator;
-using IntArr3ConstItr = std::array<int, 3>::const_iterator;
-using IntArr3Itr = std::array<int, 3>::iterator;
-using U64ArrConstItr = std::array<std::uint64_t, 16>::const_iterator;
-using U64ArrItr = std::array<std::uint64_t, 16>::iterator;
+using IntArr3ConstItr = std::array<int, 3U>::const_iterator;
+using IntArr3Itr = std::array<int, 3U>::iterator;
+using U64ArrConstItr = std::array<std::uint64_t, 16U>::const_iterator;
+using U64ArrItr = std::array<std::uint64_t, 16U>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
@@ -94,7 +94,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual(3);
+        std::vector<int> actual(3U);
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -109,7 +109,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual(4);
+        std::vector<int> actual(4U);
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -141,7 +141,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<double> actual(4);
+        std::vector<double> actual(4U);
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -151,7 +151,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Product of array except self (std::array<int, 3>)",
+    "Product of array except self (std::array<int, 3U>)",
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
@@ -173,7 +173,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::array<int, 3> actual{};
+        std::array<int, 3U> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -201,33 +201,48 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Factorial product value")
     {
         static constexpr std::array const nums{
-            std::uint64_t{1},
-            std::uint64_t{2},
-            std::uint64_t{3},
-            std::uint64_t{4},
-            std::uint64_t{5},
-            std::uint64_t{6},
-            std::uint64_t{7},
-            std::uint64_t{8},
-            std::uint64_t{9},
-            std::uint64_t{10},
-            std::uint64_t{11},
-            std::uint64_t{12},
-            std::uint64_t{13},
-            std::uint64_t{14},
-            std::uint64_t{15},
-            std::uint64_t{0},
+            std::uint64_t{1U},
+            std::uint64_t{2U},
+            std::uint64_t{3U},
+            std::uint64_t{4U},
+            std::uint64_t{5U},
+            std::uint64_t{6U},
+            std::uint64_t{7U},
+            std::uint64_t{8U},
+            std::uint64_t{9U},
+            std::uint64_t{10U},
+            std::uint64_t{11U},
+            std::uint64_t{12U},
+            std::uint64_t{13U},
+            std::uint64_t{14U},
+            std::uint64_t{15U},
+            std::uint64_t{0U},
         };
 
-        static_assert(nums.size() == std::size_t{16});
+        static_assert(nums.size() == std::size_t{16U});
 
-        static constexpr std::array<std::uint64_t, 16> const expected{
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1'307'674'368'000
+        static constexpr std::array<std::uint64_t, 16U> const expected{
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            0U,
+            1'307'674'368'000U
         };
 
         CAPTURE(nums);
 
-        std::array<std::uint64_t, 16> actual{};
+        std::array<std::uint64_t, 16U> actual{};
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );

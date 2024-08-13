@@ -19,7 +19,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Empty collection should have no majority")
     {
-        constexpr std::array<int, 0> const elements{};
+        constexpr std::array<int, 0U> const elements{};
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }
@@ -28,7 +28,7 @@ TEST_CASE("Majority element", "[majority_element]")
     {
         constexpr std::array const elements{7};
 
-        static_assert(elements.size() == 1);
+        static_assert(elements.size() == 1U);
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }
@@ -37,7 +37,7 @@ TEST_CASE("Majority element", "[majority_element]")
     {
         constexpr std::array const elements{5, 7};
 
-        static_assert(elements.size() == 2);
+        static_assert(elements.size() == 2U);
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }
@@ -179,7 +179,7 @@ TEST_CASE("Majority element", "[majority_element]")
         };
         using ConstItr = decltype(elements)::const_iterator;
 
-        static_assert(elements.size() == 64);
+        static_assert(elements.size() == 64U);
 
         CAPTURE(elements);
 

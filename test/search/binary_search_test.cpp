@@ -33,7 +33,7 @@ TEMPLATE_TEST_CASE_SIG(
 )
 {
     constexpr int const target{151};
-    std::array<int, 0> const records{};
+    std::array<int, 0U> const records{};
     static_assert(records.empty());
 
     REQUIRE(find(records.cbegin(), records.cend(), target) == records.cend());
@@ -51,7 +51,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{277};
         std::array const records{277};
-        static_assert(records.size() == 1);
+        static_assert(records.size() == 1U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -66,7 +66,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{19};
         std::array const records{7};
-        static_assert(records.size() == 1);
+        static_assert(records.size() == 1U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -89,7 +89,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{5};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -107,7 +107,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array const records{
             149, 151, 157, 163, 163, 163, 163, 181, 191, 193, 197, 199
         };
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -125,7 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array const records{
             227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281
         };
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -141,7 +141,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{2};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -157,7 +157,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{37};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -175,7 +175,7 @@ TEMPLATE_TEST_CASE_SIG(
         constexpr std::array const records{
             29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73
         };
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
         static_assert(target > records.front());
         static_assert(target < records.back());
 
@@ -191,7 +191,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{1};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -205,7 +205,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{41};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
-        static_assert(records.size() == 12);
+        static_assert(records.size() == 12U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -228,7 +228,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{23};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -244,7 +244,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{17};
         std::array const records{2, 3, 5, 7, 11, 17, 17, 17, 17, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -262,7 +262,7 @@ TEMPLATE_TEST_CASE_SIG(
         std::array const records{
             227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277
         };
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -278,7 +278,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{2};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -294,7 +294,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{31};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -312,7 +312,7 @@ TEMPLATE_TEST_CASE_SIG(
         constexpr std::array const records{
             29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
         };
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
         static_assert(target > records.front());
         static_assert(target < records.back());
 
@@ -328,7 +328,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{1};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -342,7 +342,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         constexpr int const target{41};
         std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-        static_assert(records.size() == 11);
+        static_assert(records.size() == 11U);
 
         CAPTURE(records);
         CAPTURE(target);
