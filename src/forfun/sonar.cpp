@@ -76,7 +76,7 @@ count_ships(Sonar const& sonar, Area const area) noexcept -> int
 
 [[nodiscard]] auto Sonar::ping(Area const area) const noexcept -> bool
 {
-    return std::ranges::any_of(coords_, [&area](Coord const& coord) {
+    return std::ranges::any_of(coords_, [&area](Coord const& coord) noexcept {
         return coord.x >= area.top
             && coord.x <= area.bottom
             && coord.y >= area.left
