@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include <catch2/catch_message.hpp>
@@ -131,9 +132,8 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
         );
 
         STATIC_REQUIRE(
-            // NOLINTNEXTLINE(performance-unnecessary-value-param)
             noexcept_callable<
-                decltype([](int, std::string) noexcept {}),
+                decltype([](int, std::string_view) noexcept {}),
                 int,
                 std::string
             >
@@ -149,9 +149,8 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
         STATIC_REQUIRE(noexcept_callable<decltype([]() noexcept {})>);
         STATIC_REQUIRE(noexcept_callable<decltype([](int) noexcept {}), int>);
         STATIC_REQUIRE(
-            // NOLINTNEXTLINE(performance-unnecessary-value-param)
             noexcept_callable<
-                decltype([](int, char, double, std::string) noexcept {}),
+                decltype([](int, char, double, std::string_view) noexcept {}),
                 int,
                 int,
                 int,
