@@ -27,9 +27,18 @@ constexpr auto const dummy_throwing_lambda{
     noexcept(false) {}};
 // clang-format on
 
+#if __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-function"
+#endif // __GNUC__
+
 [[maybe_unused]] auto dummy_noexcept_func() noexcept -> void;
 
 [[maybe_unused]] auto dummy_throwing_func() noexcept(false) -> void;
+
+#if __GNUC__
+#pragma GCC diagnostic pop
+#endif // __GNUC__
 
 } // namespace
 
