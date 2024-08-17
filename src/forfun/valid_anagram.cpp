@@ -38,7 +38,7 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
         auto const index{
             static_cast<std::size_t>(static_cast<unsigned char>(*iter))
         };
-        assert((std::size_t{0U} <= index) and (index < haystack.size()));
+        assert(index < haystack.size());
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
         ++haystack[index];
