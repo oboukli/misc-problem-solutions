@@ -114,7 +114,6 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
     using ConstIter = std::string_view::const_iterator;
     using ConstRevIter = std::string_view::const_reverse_iterator;
     using DiffType = std::string_view::difference_type;
-    using SizeType = std::string_view::size_type;
 
     ConstIter const cbegin{s.cbegin()};
     ConstRevIter upper{s.crbegin()};
