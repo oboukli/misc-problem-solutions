@@ -101,10 +101,10 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Install Ninja
+      - name: Install tools
         run: |-
           sudo apt-get update
-          sudo apt-get install ninja-build
+          sudo apt-get install ninja-build valgrind
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -154,8 +154,12 @@ jobs:
           --parallel
           --preset '${{ env.RELEASE_BUILD_PRESET_NAME }}'
 
-      - name: Run tests
+      - name: Run and instrument test driver
         run: >-
+          /usr/bin/valgrind
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
