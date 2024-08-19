@@ -77,10 +77,13 @@ TEST_CASE(
             NAMEOF_RAW(speed_optimized::eval_expression<VecConstIter, VecConstIter>)
                 .c_str(),
             [&tokens]() {
+// Ignore Division by zero [core.DivideZero] warning.
+#ifndef __clang_analyzer__
                 auto const r{speed_optimized::eval_expression(
                     tokens.cbegin(), tokens.cend()
                 )};
                 ankerl::nanobench::doNotOptimizeAway(r);
+#endif // __clang_analyzer__
             }
         )
 
