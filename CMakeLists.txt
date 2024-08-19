@@ -225,6 +225,42 @@ source_group(
   FILES ${forfun_c_headers}
 )
 
+add_library(
+  forfun_experimental
+  SHARED
+)
+target_include_directories(
+  forfun_experimental
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_experimental
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun/container/internal/list_node.hpp"
+  "include/forfun/container/list.hpp"
+)
+target_sources(
+  forfun_experimental
+  PRIVATE
+  "src/forfun/container/internal/list_node.cpp"
+  "src/forfun/container/list.cpp"
+)
+get_target_property(forfun_experimental_sources forfun_experimental SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun/"
+  PREFIX "Source files"
+  FILES ${forfun_experimental_sources}
+)
+get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun/"
+  PREFIX "Header files"
+  FILES ${forfun_experimental_headers}
+)
+
 find_package(Catch2 3 REQUIRED)
 add_executable(
   test_driver
@@ -284,9 +320,34 @@ target_link_libraries(
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
+
+add_executable(
+  test_driver_experimental
+)
+target_sources(
+  test_driver_experimental
+  PRIVATE
+  "test/container/linked_list_test.cpp"
+)
+get_target_property(forfun_experimental_tests test_driver_experimental SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/test/"
+  PREFIX "Source files"
+  FILES ${forfun_experimental_tests}
+)
+target_link_libraries(
+  test_driver_experimental
+  PRIVATE Catch2::Catch2WithMain
+)
+target_link_libraries(
+  test_driver_experimental
+  PRIVATE forfun_experimental
+)
+
 include(CTest)
 include(Catch)
 catch_discover_tests(test_driver)
+catch_discover_tests(test_driver_experimental)
 
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
