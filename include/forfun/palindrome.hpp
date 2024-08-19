@@ -21,9 +21,9 @@ namespace forfun::palindrome {
 namespace offset_based {
 
 template <std::integral CharT>
-#if __clang__
+#if __has_cpp_attribute(clang::no_sanitize)
 [[clang::no_sanitize("unsigned-integer-overflow")]]
-#endif // __clang__
+#endif // __has_cpp_attribute(clang::no_sanitize)
 [[nodiscard]]
 constexpr auto is_palindrome(
     typename std::basic_string_view<CharT>::const_pointer const s,
@@ -46,9 +46,9 @@ constexpr auto is_palindrome(
     return true;
 }
 
-#if __clang__
+#if __has_cpp_attribute(clang::no_sanitize)
 [[clang::no_sanitize("unsigned-integer-overflow")]]
-#endif // __clang__
+#endif // __has_cpp_attribute(clang::no_sanitize)
 [[nodiscard]]
 inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
