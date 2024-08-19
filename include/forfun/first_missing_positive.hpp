@@ -35,10 +35,10 @@ constexpr auto quasi_sort(Itr const first, Itr const src) noexcept -> void
     if (auto const n{*src}; n > ValType{0})
     {
         auto const dest{first + std::max<ValType>(ValType{0}, n - ValType{1})};
-        if (auto const tmp{*dest}; tmp != n)
+        if (auto const aux{*dest}; aux != n)
         {
             *dest = n;
-            *src = tmp;
+            *src = aux;
 
             quasi_sort(first, src);
         }
