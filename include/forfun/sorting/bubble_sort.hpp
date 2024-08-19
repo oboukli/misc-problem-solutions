@@ -38,9 +38,9 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
             auto const it_ii{it_i + std::iter_difference_t<Iter>{1}};
             if (*it_i > *it_ii)
             {
-                auto const tmp{*it_ii};
+                auto const aux{*it_ii};
                 *it_ii = *it_i;
-                *it_i = tmp;
+                *it_i = aux;
 
                 f = true;
             }
