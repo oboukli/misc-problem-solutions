@@ -13,48 +13,84 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 {
     using forfun::project_euler::multiples_of_3_or_5::find_sum_mult_three_five;
 
-    SECTION("Static test 01")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 0")
+    {
+        int const volatile test_input{0};
+        CAPTURE(test_input);
+
+        int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 0);
+    }
+
+    SECTION("Find the sum of all the multiples of 3 or 5 below 1 (static)")
     {
         static constexpr int const actual{find_sum_mult_three_five(1)};
+
         STATIC_REQUIRE(actual == 0);
     }
 
-    SECTION("Static test 02")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 4 (static)")
+    {
+        static constexpr int const actual{find_sum_mult_three_five(3)};
+
+        STATIC_REQUIRE(actual == 0);
+    }
+
+    SECTION("Find the sum of all the multiples of 3 or 5 below 4 (static)")
     {
         static constexpr int const actual{find_sum_mult_three_five(4)};
+
         STATIC_REQUIRE(actual == 3);
     }
 
-    SECTION("Static test 03")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 6 (static)")
     {
         static constexpr int const actual{find_sum_mult_three_five(6)};
+
         STATIC_REQUIRE(actual == 8);
     }
 
-    SECTION("Static test 04")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 10 (static)")
     {
         static constexpr int const actual{find_sum_mult_three_five(10)};
+
         STATIC_REQUIRE(actual == 23);
     }
 
-    SECTION("Static test 05")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 11")
     {
-        static constexpr int const actual{find_sum_mult_three_five(11)};
-        STATIC_REQUIRE(actual == 33);
+        int const volatile test_input{11};
+        CAPTURE(test_input);
+
+        int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 33);
     }
 
-    SECTION("Static test 06")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 100")
+    {
+        int const volatile test_input{100};
+        CAPTURE(test_input);
+
+        int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 2'318);
+    }
+
+    SECTION("Find the sum of all the multiples of 3 or 5 below 1000 (static)")
     {
         static constexpr int const actual{find_sum_mult_three_five(1'000)};
+
         STATIC_REQUIRE(actual == 233'168);
     }
 
-    SECTION("Runtime test")
+    SECTION("Find the sum of all the multiples of 3 or 5 below 1000")
     {
         int const volatile test_input{1'000};
-        int const actual{find_sum_mult_three_five(test_input)};
-
         CAPTURE(test_input);
+
+        int const actual{find_sum_mult_three_five(test_input)};
 
         REQUIRE(actual == 233'168);
     }
