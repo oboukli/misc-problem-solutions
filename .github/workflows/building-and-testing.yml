@@ -74,9 +74,16 @@ jobs:
           --
           /verbosity:detailed
 
-      - name: Run tests
+      - name: Run test driver
         run: >-
           .\test_driver.exe
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+
+      - name: Run test driver of experimental library
+        run: >-
+          .\test_driver_experimental.exe
           --reporter console::out=-::colour-mode=ansi
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
@@ -165,6 +172,17 @@ jobs:
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
 
+      - name: Run and instrument test driver of experimental library
+        run: >-
+          /usr/bin/valgrind
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_experimental
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
@@ -242,9 +260,16 @@ jobs:
           --parallel
           --preset '${{ env.BUILD_PRESET_NAME }}'
 
-      - name: Run tests
+      - name: Run test driver
         run: >-
           ./test_driver
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+
+      - name: Run test driver of experimental library
+        run: >-
+          ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
           --success
         working-directory: ${{ env.DEBUG_BINARY_DIR }}
