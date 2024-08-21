@@ -327,7 +327,7 @@ add_executable(
 target_sources(
   test_driver_experimental
   PRIVATE
-  "test/container/linked_list_test.cpp"
+  "test/container/list_test.cpp"
 )
 get_target_property(forfun_experimental_tests test_driver_experimental SOURCES)
 source_group(
