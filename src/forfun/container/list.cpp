@@ -8,6 +8,8 @@
 
 #include <cassert>
 
+#include "forfun/container/internal/list_node.hpp"
+
 namespace forfun::experimental::container {
 
 auto list::push_back(list::value_type value) noexcept -> void
