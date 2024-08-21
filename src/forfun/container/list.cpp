@@ -63,9 +63,12 @@ auto list::pop_back() noexcept -> void
 
 auto list::clear() noexcept -> void
 {
+    assert(
+        ((head_ == nullptr) and (size_ == size_type{}))
+        or ((head_ != nullptr) and (size_ > size_type{}))
+    );
     for (list_node const* node{head_}; node != nullptr;)
     {
-        assert(size_ > size_type{});
         list_node const* const next{node->next_};
         delete node;
 
