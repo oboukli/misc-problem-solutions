@@ -13,6 +13,7 @@
 #include <cstddef>
 
 #include "forfun/container/internal/list_node.hpp"
+#include "forfun/container/list_iterator.hpp"
 
 namespace forfun::experimental::container {
 
@@ -20,6 +21,7 @@ class list final {
 public:
     using size_type = std::size_t;
     using value_type = int;
+    using iterator = list_iterator;
 
     constexpr list() noexcept = default;
 
@@ -61,6 +63,10 @@ public:
     auto pop_back() noexcept -> void;
 
     auto clear() noexcept -> void;
+
+    [[nodiscard]] auto begin() const noexcept -> iterator;
+
+    [[nodiscard]] auto end() const noexcept -> iterator;
 
 private:
     list_node* head_{nullptr};

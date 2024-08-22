@@ -240,12 +240,14 @@ target_sources(
   FILE_SET HEADERS
   FILES
   "include/forfun/container/internal/list_node.hpp"
+  "include/forfun/container/list_iterator.hpp"
   "include/forfun/container/list.hpp"
 )
 target_sources(
   forfun_experimental
   PRIVATE
   "src/forfun/container/internal/list_node.cpp"
+  "src/forfun/container/list_iterator.cpp"
   "src/forfun/container/list.cpp"
 )
 get_target_property(forfun_experimental_sources forfun_experimental SOURCES)
@@ -327,6 +329,7 @@ add_executable(
 target_sources(
   test_driver_experimental
   PRIVATE
+  "test/container/list_iterator_test.cpp"
   "test/container/list_test.cpp"
 )
 get_target_property(forfun_experimental_tests test_driver_experimental SOURCES)
