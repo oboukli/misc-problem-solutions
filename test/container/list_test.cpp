@@ -26,7 +26,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         REQUIRE(list.size() == std::size_t{0U});
     }
 
-    SECTION("Push back one element")
+    SECTION("Push back one element (benchmark case)")
     {
         forfun::experimental::container::list list{};
 

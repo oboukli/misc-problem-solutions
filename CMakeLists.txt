@@ -407,3 +407,30 @@ target_link_libraries(
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
+
+add_executable(
+  benchmark_driver_experimental
+)
+target_sources(
+  benchmark_driver_experimental
+  PRIVATE
+  "benchmark/benchmark.cpp"
+  "benchmark/container/list_benchmark.cpp"
+)
+get_target_property(
+  forfun_experimental_benchmark
+  benchmark_driver_experimental SOURCES
+)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/benchmark/"
+  PREFIX "Source files"
+  FILES ${forfun_experimental_benchmark}
+)
+target_link_libraries(
+  benchmark_driver_experimental
+  PRIVATE Catch2::Catch2WithMain
+)
+target_link_libraries(
+  benchmark_driver_experimental
+  PRIVATE forfun_experimental
+)
