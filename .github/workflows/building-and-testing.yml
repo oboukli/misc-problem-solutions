@@ -95,6 +95,13 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
 
+      - name: Run benchmarks of experimental library
+        run: >-
+          .\benchmark_driver_experimental.exe
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+
   linux:
     name: Build and test on Ubuntu
     env:
@@ -190,6 +197,13 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
 
+      - name: Run benchmarks of experimental library
+        run: >-
+          ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+
   macos_xcode:
     name: Build and test on macOS with Xcode
     env:
@@ -277,6 +291,13 @@ jobs:
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+
+      - name: Run benchmarks of experimental library
+        run: >-
+          ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
