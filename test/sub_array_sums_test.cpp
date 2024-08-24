@@ -14,7 +14,7 @@
 
 #include "forfun/sub_array_sums.hpp"
 
-TEST_CASE("sub_array_sums", "[sub_array_sums]")
+TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
 {
     using forfun::sub_array_sums::sum_each;
 
