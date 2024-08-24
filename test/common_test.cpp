@@ -12,7 +12,7 @@
 
 #include "forfun/common.hpp"
 
-TEST_CASE("Concept addition_unpromoted", "[common][static]")
+TEST_CASE("Concept addition_unpromoted", "[common]")
 {
     using forfun::common::concepts::addition_unpromoted;
 

@@ -353,7 +353,7 @@ struct DummyWithSizeType final : public std::array<unsigned char, 0U> {
 
 } // namespace
 
-TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums][static]")
+TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
 {
     SECTION("Positive")
     {

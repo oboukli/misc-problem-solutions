@@ -85,7 +85,7 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("Palindromic number (static)", "[palindromic_number][static]")
+TEST_CASE("Palindromic number (static)", "[palindromic_number]")
 {
     SECTION("Palindromic integrals")
     {

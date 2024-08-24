@@ -14,7 +14,7 @@
 #include "forfun/container/list.hpp"
 #include "forfun/container/list_iterator.hpp"
 
-TEST_CASE("Linked list iterator traits", "[linked_list][list_iterator][static]")
+TEST_CASE("Linked list iterator traits", "[linked_list][list_iterator]")
 {
     SECTION("Iterator traits")
     {
