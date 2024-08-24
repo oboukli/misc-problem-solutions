@@ -9,7 +9,7 @@
 
 #include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
 
-TEST_CASE("find_sum_mult_three_five", "[multiples_of_3_or_5]")
+TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 {
     using forfun::project_euler::multiples_of_3_or_5::find_sum_mult_three_five;
 
