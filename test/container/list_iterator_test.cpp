@@ -14,7 +14,7 @@
 #include "forfun/container/list.hpp"
 #include "forfun/container/list_iterator.hpp"
 
-TEST_CASE("Linked list iterator traits", "[linked_list][list_iterator]")
+TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
 {
     SECTION("Iterator traits")
     {
@@ -49,7 +49,7 @@ TEST_CASE("Linked list iterator traits", "[linked_list][list_iterator]")
     }
 }
 
-TEST_CASE("Linked list iterator", "[linked_list][list_iterator]")
+TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
 {
     using forfun::experimental::container::list;
     using forfun::experimental::container::list_iterator;

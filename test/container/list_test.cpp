@@ -10,7 +10,7 @@
 
 #include "forfun/container/list.hpp"
 
-TEST_CASE("Linked list", "[linked_list][dynamic_allocation]")
+TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 {
     SECTION("List is initially empty")
     {
