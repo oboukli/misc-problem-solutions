@@ -30,6 +30,7 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
                 std::forward_iterator_tag
             >
         );
+
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<iterator>::pointer,
@@ -38,12 +39,15 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
         );
 
         STATIC_REQUIRE(std::same_as<std::iter_reference_t<iterator>, int&>);
+
         STATIC_REQUIRE(
             std::same_as<std::iter_rvalue_reference_t<iterator>, int&&>
         );
+
         STATIC_REQUIRE(
             std::same_as<std::iter_common_reference_t<iterator>, int&>
         );
+
         STATIC_REQUIRE(std::same_as<std::iter_value_t<iterator>, int>);
         // clang-format on
     }
@@ -159,132 +163,6 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         REQUIRE_FALSE(iter == list.begin());
     }
 
-    SECTION("Incrementing iterator once")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1091);
-        list.push_back(1093);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        ++iter;
-
-        REQUIRE(*iter == 1093);
-    }
-
-    SECTION("Incrementing iterator an even number of times within range")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1109);
-        list.push_back(1117);
-        list.push_back(1123);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        ++iter;
-        ++iter;
-
-        REQUIRE(*iter == 1123);
-    }
-
-    SECTION("Incrementing iterator an odd number of times within range")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1163);
-        list.push_back(1171);
-        list.push_back(1181);
-        list.push_back(1187);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        ++iter;
-        ++iter;
-        ++iter;
-
-        REQUIRE(*iter == 1187);
-    }
-
-    SECTION("Incrementing iterator one time off size")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1223);
-        list.push_back(1229);
-        list.push_back(1231);
-        list.push_back(1237);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        ++iter;
-        ++iter;
-        ++iter;
-        ++iter;
-
-        REQUIRE(iter == list.end());
-    }
-
-    SECTION("Post incrementing iterator once")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1453);
-        list.push_back(1459);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        iter++;
-
-        REQUIRE(*iter == 1459);
-    }
-
-    SECTION("Post incrementing iterator an even number of times within range")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1471);
-        list.push_back(1481);
-        list.push_back(1483);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        iter++;
-        iter++;
-
-        REQUIRE(*iter == 1483);
-    }
-
-    SECTION("Post incrementing iterator an odd number of times within range")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1487);
-        list.push_back(1489);
-        list.push_back(1493);
-        list.push_back(1499);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        iter++;
-        iter++;
-        iter++;
-
-        REQUIRE(*iter == 1499);
-    }
-
-    SECTION("Post incrementing iterator one time off size")
-    {
-        forfun::experimental::container::list list{};
-
-        list.push_back(1511);
-        list.push_back(1523);
-        list.push_back(1531);
-        list.push_back(1543);
-
-        forfun::experimental::container::list::iterator iter = list.begin();
-        iter++;
-        iter++;
-        iter++;
-        iter++;
-
-        REQUIRE(iter == list.end());
-    }
-
     SECTION("Dereferencing iterator of begin")
     {
         forfun::experimental::container::list list{};
@@ -304,5 +182,134 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         *list.begin() = 1297;
 
         REQUIRE(*list.begin() == 1297);
+    }
+}
+
+TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
+{
+    SECTION("Increment iterator once")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1091);
+        list.push_back(1093);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+
+        REQUIRE(*iter == 1093);
+    }
+
+    SECTION("Increment iterator an even number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1109);
+        list.push_back(1117);
+        list.push_back(1123);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+        ++iter;
+
+        REQUIRE(*iter == 1123);
+    }
+
+    SECTION("Increment iterator an odd number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1163);
+        list.push_back(1171);
+        list.push_back(1181);
+        list.push_back(1187);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+        ++iter;
+        ++iter;
+
+        REQUIRE(*iter == 1187);
+    }
+
+    SECTION("Increment iterator one time off size")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1223);
+        list.push_back(1229);
+        list.push_back(1231);
+        list.push_back(1237);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+        ++iter;
+        ++iter;
+        ++iter;
+
+        REQUIRE(iter == list.end());
+    }
+
+    SECTION("Post-increment iterator once")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1453);
+        list.push_back(1459);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        iter++;
+
+        REQUIRE(*iter == 1459);
+    }
+
+    SECTION("Post-increment iterator an even number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1471);
+        list.push_back(1481);
+        list.push_back(1483);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        iter++;
+        iter++;
+
+        REQUIRE(*iter == 1483);
+    }
+
+    SECTION("Post-increment iterator an odd number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1487);
+        list.push_back(1489);
+        list.push_back(1493);
+        list.push_back(1499);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        iter++;
+        iter++;
+        iter++;
+
+        REQUIRE(*iter == 1499);
+    }
+
+    SECTION("Post-increment iterator one time off size")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1511);
+        list.push_back(1523);
+        list.push_back(1531);
+        list.push_back(1543);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        iter++;
+        iter++;
+        iter++;
+        iter++;
+
+        REQUIRE(iter == list.end());
     }
 }
