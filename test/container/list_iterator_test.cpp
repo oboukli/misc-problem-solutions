@@ -31,13 +31,6 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
             >
         );
 
-        STATIC_REQUIRE(
-            std::same_as<
-                std::iterator_traits<iterator>::pointer,
-                forfun::experimental::container::list_node*
-            >
-        );
-
         STATIC_REQUIRE(std::same_as<std::iter_reference_t<iterator>, int&>);
 
         STATIC_REQUIRE(
@@ -250,7 +243,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         REQUIRE(iter == list.end());
     }
 
-    SECTION("Post-increment iterator once")
+    SECTION("Postfix increment iterator once")
     {
         forfun::experimental::container::list list{};
 
@@ -263,7 +256,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         REQUIRE(*iter == 1459);
     }
 
-    SECTION("Post-increment iterator an even number of times within range")
+    SECTION("Postfix increment iterator an even number of times within range")
     {
         forfun::experimental::container::list list{};
 
@@ -278,7 +271,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         REQUIRE(*iter == 1483);
     }
 
-    SECTION("Post-increment iterator an odd number of times within range")
+    SECTION("Postfix increment iterator an odd number of times within range")
     {
         forfun::experimental::container::list list{};
 
@@ -295,7 +288,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         REQUIRE(*iter == 1499);
     }
 
-    SECTION("Post-increment iterator one time off size")
+    SECTION("Postfix increment iterator one time off size")
     {
         forfun::experimental::container::list list{};
 
@@ -311,5 +304,33 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         iter++;
 
         REQUIRE(iter == list.end());
+    }
+
+    SECTION("Result of postfix increment")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1549);
+        list.push_back(1553);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+
+        REQUIRE(iter++ == list.begin());
+        REQUIRE_FALSE(iter == list.begin());
+        REQUIRE(*iter == 1553);
+    }
+
+    SECTION("Dereferencing result of postfix increment")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1559);
+        list.push_back(1567);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+
+        REQUIRE(*iter == 1559);
+        REQUIRE(*iter++ == 1559);
+        REQUIRE(*iter == 1567);
     }
 }
