@@ -23,7 +23,11 @@ public:
     using value_type = int;
     using iterator = list_iterator;
 
-    constexpr list() noexcept = default;
+    constexpr list() : end_{new list_node(int{}, nullptr, nullptr)}
+    {
+        head_ = end_;
+        tail_ = end_;
+    }
 
     constexpr list(list const&) noexcept = delete;
 
@@ -36,6 +40,7 @@ public:
     ~list() noexcept
     {
         clear();
+        delete end_;
     }
 
     [[nodiscard]] constexpr auto size() const noexcept -> size_type
@@ -69,8 +74,9 @@ public:
     [[nodiscard]] auto end() const noexcept -> iterator;
 
 private:
-    list_node* head_{nullptr};
-    list_node* tail_{nullptr};
+    list_node* head_;
+    list_node* tail_;
+    list_node* end_;
     size_type size_{};
 };
 

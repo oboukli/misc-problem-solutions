@@ -15,7 +15,7 @@ namespace forfun::experimental::container {
 
 class list_iterator final {
 public:
-    using iterator_category = std::forward_iterator_tag;
+    using iterator_category = std::bidirectional_iterator_tag;
     using reference = int&;
     using value_type = int;
 
@@ -58,6 +58,19 @@ public:
     {
         auto const aux{*this};
         ++*this;
+        return aux;
+    }
+
+    auto operator--() noexcept -> list_iterator
+    {
+        node_ = node_->previous_;
+        return *this;
+    }
+
+    auto operator--(int) noexcept -> list_iterator
+    {
+        auto const aux{*this};
+        node_ = node_->previous_;
         return aux;
     }
 

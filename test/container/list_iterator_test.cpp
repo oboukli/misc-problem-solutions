@@ -27,7 +27,7 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<iterator>::iterator_category,
-                std::forward_iterator_tag
+                std::bidirectional_iterator_tag
             >
         );
 
@@ -332,5 +332,158 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         REQUIRE(*iter == 1559);
         REQUIRE(*iter++ == 1559);
         REQUIRE(*iter == 1567);
+    }
+}
+
+TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
+{
+    SECTION("Decrement iterator once from end")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1579);
+
+        forfun::experimental::container::list_iterator iter = list.end();
+        --iter;
+
+        REQUIRE(*iter == 1579);
+    }
+
+    SECTION("Decrement iterator an even number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1597);
+        list.push_back(1601);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        --iter;
+        --iter;
+
+        REQUIRE(*iter == 1597);
+    }
+
+    SECTION("Decrement iterator an odd number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1607);
+        list.push_back(1609);
+        list.push_back(1613);
+        list.push_back(1619);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        --iter;
+        --iter;
+        --iter;
+
+        REQUIRE(*iter == 1609);
+    }
+
+    SECTION("Decrement iterator to beginning iterator")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1621);
+        list.push_back(1627);
+        list.push_back(1637);
+        list.push_back(1657);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        --iter;
+        --iter;
+        --iter;
+        --iter;
+
+        REQUIRE(iter == list.begin());
+    }
+
+    SECTION("Postfix decrement iterator once")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1663);
+        list.push_back(1667);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        iter--;
+
+        REQUIRE(*iter == 1667);
+    }
+
+    SECTION("Postfix decrement iterator an even number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1669);
+        list.push_back(1693);
+        list.push_back(1697);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        iter--;
+        iter--;
+
+        REQUIRE(*iter == 1693);
+    }
+
+    SECTION("Postfix decrement iterator an odd number of times within range")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1699);
+        list.push_back(1709);
+        list.push_back(1721);
+        list.push_back(1723);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        iter--;
+        iter--;
+        iter--;
+
+        REQUIRE(*iter == 1709);
+    }
+
+    SECTION("Postfix decrement iterator one time off size")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1733);
+        list.push_back(1741);
+        list.push_back(1747);
+        list.push_back(1753);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        iter--;
+        iter--;
+        iter--;
+        iter--;
+
+        REQUIRE(iter == list.begin());
+    }
+
+    SECTION("Result of postfix decrement")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1759);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+
+        REQUIRE(iter-- == list.end());
+        REQUIRE_FALSE(iter == list.end());
+        REQUIRE(iter == list.begin());
+    }
+
+    SECTION("Dereferencing result of postfix decrement")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1783);
+        list.push_back(1787);
+
+        forfun::experimental::container::list::iterator iter = list.end();
+        --iter;
+
+        REQUIRE(*iter-- == 1787);
     }
 }
