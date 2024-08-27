@@ -9,6 +9,7 @@
 #include <cassert>
 
 #include "forfun/container/internal/list_node.hpp"
+#include "forfun/container/list_iterator.hpp"
 
 namespace forfun::experimental::container {
 
@@ -19,15 +20,15 @@ namespace forfun::experimental::container {
 
 [[nodiscard]] auto list::end() const noexcept -> iterator
 {
-    return list_iterator{nullptr};
+    return list_iterator(end_);
 }
 
 auto list::push_back(list::value_type value) noexcept -> void
 {
     ++size_;
-    list_node* const n{new list_node(value, tail_, nullptr)};
+    list_node* const n{new list_node(value, tail_, end_)};
 
-    if (head_ == nullptr)
+    if (head_ == end_)
     {
         head_ = n;
     }
@@ -37,32 +38,33 @@ auto list::push_back(list::value_type value) noexcept -> void
     }
 
     tail_ = n;
+    end_->previous_ = n;
 }
 
 auto list::pop_back() noexcept -> void
 {
-    if (tail_ == nullptr)
+    if (tail_ == end_)
     {
-        assert(head_ == nullptr);
+        assert(head_ == end_);
         assert(size_ == size_type{});
 
         return;
     }
 
     assert(size_ > size_type{});
-    assert(head_ != nullptr);
+    assert(head_ != end_);
 
-    if (tail_->previous_ == nullptr)
+    if (tail_->previous_ == end_)
     {
         assert(size_ == size_type{1});
         assert(head_ == tail_);
-        assert(head_->next_ == nullptr);
-        head_ = nullptr;
+        assert(head_->next_ == end_);
+        head_ = end_;
     }
     else
     {
         assert(size_ > size_type{1});
-        tail_->previous_->next_ = nullptr;
+        tail_->previous_->next_ = end_;
     }
 
     --size_;
@@ -76,10 +78,10 @@ auto list::pop_back() noexcept -> void
 auto list::clear() noexcept -> void
 {
     assert(
-        ((head_ == nullptr) and (size_ == size_type{}))
-        or ((head_ != nullptr) and (size_ > size_type{}))
+        ((head_ == end_) and (size_ == size_type{}))
+        or ((head_ != end_) and (size_ > size_type{}))
     );
-    for (list_node const* node{head_}; node != nullptr;)
+    for (list_node const* node{head_}; node != end_;)
     {
         list_node const* const next{node->next_};
         delete node;
@@ -89,8 +91,8 @@ auto list::clear() noexcept -> void
     }
 
     assert(size_ == size_type{});
-    head_ = nullptr;
-    tail_ = nullptr;
+    head_ = end_;
+    tail_ = end_;
 }
 
 } // namespace forfun::experimental::container
