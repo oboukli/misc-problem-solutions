@@ -56,6 +56,7 @@ leveraged by this project:
 | Insertion sort                   | C++20    | `include/forfun/sorting/insertion_sort.cpp`                  |
 | Least recently used (LRU) cache  | C++20    | `src/forfun/lru_cache.cpp`                                   |
 | Linked list                      | C++20    | `include/forfun/container/list.hpp`                          |
+| List bidirectional iterator      | C++20    | `include/forfun/container/list_iterator.hpp`                 |
 | Move zeroes                      | C++20    | `include/forfun/move_zeroes.cpp`                             |
 | Multiples of three or five       | C++17    | `include/forfun/project_euler/p0001_multiples_of_3_or_5.cpp` |
 | Nth Fibonacci number             | C++20    | `include/forfun/fibonacci.cpp`                               |
