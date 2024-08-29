@@ -487,3 +487,36 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         REQUIRE(*iter-- == 1787);
     }
 }
+
+TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
+{
+    SECTION("Beginning iterator")
+    {
+        forfun::experimental::container::list const list{};
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+
+        REQUIRE(iter == std::default_sentinel);
+    }
+
+    SECTION("End iterator")
+    {
+        forfun::experimental::container::list const list{};
+
+        forfun::experimental::container::list::iterator iter = list.end();
+
+        REQUIRE(iter == std::default_sentinel);
+    }
+
+    SECTION("Incremented iterator")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1571);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+
+        REQUIRE(iter == std::default_sentinel);
+    }
+}
