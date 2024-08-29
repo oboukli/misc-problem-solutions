@@ -79,6 +79,11 @@ public:
         return node_ == other.node_;
     }
 
+    auto operator==(std::default_sentinel_t const&) const -> bool
+    {
+        return node_->next_ == nullptr;
+    }
+
     auto operator!=(list_iterator const& other) const noexcept -> bool
     {
         return node_ != other.node_;
