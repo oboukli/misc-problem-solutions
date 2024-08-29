@@ -490,33 +490,62 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
 TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 {
-    SECTION("Beginning iterator")
+    SECTION("Iterator at beginning of empty list")
     {
         forfun::experimental::container::list const list{};
 
         forfun::experimental::container::list::iterator iter = list.begin();
 
         REQUIRE(iter == std::default_sentinel);
+        REQUIRE_FALSE(iter != std::default_sentinel);
     }
 
-    SECTION("End iterator")
-    {
-        forfun::experimental::container::list const list{};
-
-        forfun::experimental::container::list::iterator iter = list.end();
-
-        REQUIRE(iter == std::default_sentinel);
-    }
-
-    SECTION("Incremented iterator")
+    SECTION("Iterator at beginning of non-empty list")
     {
         forfun::experimental::container::list list{};
 
         list.push_back(1571);
 
         forfun::experimental::container::list::iterator iter = list.begin();
+
+        REQUIRE_FALSE(iter == std::default_sentinel);
+        REQUIRE(iter != std::default_sentinel);
+    }
+
+    SECTION("Iterator at end of list")
+    {
+        forfun::experimental::container::list const list{};
+
+        forfun::experimental::container::list::iterator iter = list.end();
+
+        REQUIRE(iter == std::default_sentinel);
+        REQUIRE_FALSE(iter != std::default_sentinel);
+    }
+
+    SECTION("Incremented iterator to end of non-empty list")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1583);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
         ++iter;
 
         REQUIRE(iter == std::default_sentinel);
+        REQUIRE_FALSE(iter != std::default_sentinel);
+    }
+
+    SECTION("Incremented iterator to non-end of non-empty list")
+    {
+        forfun::experimental::container::list list{};
+
+        list.push_back(1789);
+        list.push_back(1801);
+
+        forfun::experimental::container::list::iterator iter = list.begin();
+        ++iter;
+
+        REQUIRE_FALSE(iter == std::default_sentinel);
+        REQUIRE(iter != std::default_sentinel);
     }
 }
