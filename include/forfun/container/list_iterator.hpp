@@ -89,6 +89,11 @@ public:
         return node_ != other.node_;
     }
 
+    auto operator!=(std::default_sentinel_t const&) const -> bool
+    {
+        return node_->next_ != nullptr;
+    }
+
 private:
     list_node* node_;
 };
