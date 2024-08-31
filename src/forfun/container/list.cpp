@@ -9,18 +9,17 @@
 #include <cassert>
 
 #include "forfun/container/internal/list_node.hpp"
-#include "forfun/container/list_iterator.hpp"
 
 namespace forfun::experimental::container {
 
 [[nodiscard]] auto list::begin() const noexcept -> iterator
 {
-    return list_iterator(head_);
+    return iterator(head_);
 }
 
 [[nodiscard]] auto list::end() const noexcept -> iterator
 {
-    return list_iterator(end_);
+    return iterator(end_);
 }
 
 auto list::push_back(list::value_type value) noexcept -> void
