@@ -225,6 +225,7 @@ source_group(
   FILES ${forfun_c_headers}
 )
 
+find_package(Microsoft.GSL CONFIG REQUIRED)
 add_library(
   forfun_experimental
   SHARED
@@ -261,6 +262,10 @@ source_group(
   TREE "${CMAKE_SOURCE_DIR}/include/forfun/"
   PREFIX "Header files"
   FILES ${forfun_experimental_headers}
+)
+target_link_libraries(
+  forfun_experimental
+  PRIVATE Microsoft.GSL::GSL
 )
 
 find_package(Catch2 3 REQUIRED)

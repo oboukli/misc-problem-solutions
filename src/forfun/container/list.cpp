@@ -8,6 +8,8 @@
 
 #include <cassert>
 
+#include <gsl/pointers>
+
 #include "forfun/container/internal/list_node.hpp"
 
 namespace forfun::experimental::container {
@@ -25,7 +27,7 @@ namespace forfun::experimental::container {
 auto list::push_back(list::value_type value) noexcept -> void
 {
     ++size_;
-    list_node* const n{new list_node(value, tail_, end_)};
+    gsl::owner<list_node*> const n{new list_node(value, tail_, end_)};
 
     if (head_ == end_)
     {
@@ -80,9 +82,9 @@ auto list::clear() noexcept -> void
         ((head_ == end_) and (size_ == size_type{}))
         or ((head_ != end_) and (size_ > size_type{}))
     );
-    for (list_node const* node{head_}; node != end_;)
+    for (gsl::owner<list_node const*> node{head_}; node != end_;)
     {
-        list_node const* const next{node->next_};
+        gsl::owner<list_node const*> const next{node->next_};
         delete node;
 
         node = next;
