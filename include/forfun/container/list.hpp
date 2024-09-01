@@ -12,6 +12,8 @@
 
 #include <cstddef>
 
+#include <gsl/pointers>
+
 #include "forfun/container/internal/list_node.hpp"
 #include "forfun/container/list_iterator.hpp"
 
@@ -76,7 +78,7 @@ public:
 private:
     list_node* head_;
     list_node* tail_;
-    list_node* end_;
+    gsl::owner<list_node*> end_;
     size_type size_{};
 };
 
