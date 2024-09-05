@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <concepts>
+#include <cstddef>
 #include <iterator>
 #include <utility>
 
@@ -16,33 +17,70 @@
 
 TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
 {
+    // clang-format off
+    static_assert(
+        std::same_as<
+            forfun::experimental::container::list_iterator,
+            forfun::experimental::container::list::iterator
+        >
+    );
+    // clang-format on
+
+    SECTION("Iterator")
+    {
+        using forfun::experimental::container::list_iterator;
+
+        STATIC_REQUIRE(std::bidirectional_iterator<list_iterator>);
+
+        STATIC_REQUIRE(std::indirectly_writable<list_iterator, int>);
+    }
+
     SECTION("Iterator traits")
     {
-        using iterator = forfun::experimental::container::list::iterator;
-        using list_iterator = forfun::experimental::container::list_iterator;
+        using forfun::experimental::container::list_iterator;
 
         // clang-format off
-        STATIC_REQUIRE(std::same_as<list_iterator, iterator>);
-
         STATIC_REQUIRE(
             std::same_as<
-                std::iterator_traits<iterator>::iterator_category,
+                std::iterator_traits<list_iterator>::iterator_category,
                 std::bidirectional_iterator_tag
             >
         );
 
-        STATIC_REQUIRE(std::same_as<std::iter_reference_t<iterator>, int&>);
-
         STATIC_REQUIRE(
-            std::same_as<std::iter_rvalue_reference_t<iterator>, int&&>
+            std::same_as<
+                std::iterator_traits<list_iterator>::iterator_concept,
+                std::bidirectional_iterator_tag
+            >
         );
 
         STATIC_REQUIRE(
-            std::same_as<std::iter_common_reference_t<iterator>, int&>
+            std::same_as<
+                std::iterator_traits<list_iterator>::pointer,
+                list_iterator
+            >
         );
 
-        STATIC_REQUIRE(std::same_as<std::iter_value_t<iterator>, int>);
+        STATIC_REQUIRE(
+            std::same_as<std::iter_reference_t<list_iterator>, int&>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<std::iter_rvalue_reference_t<list_iterator>, int&&>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<std::iter_common_reference_t<list_iterator>, int&>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<std::iter_difference_t<list_iterator>, std::ptrdiff_t>
+        );
         // clang-format on
+
+        STATIC_REQUIRE(std::same_as<std::iter_value_t<list_iterator>, int>);
+
+        STATIC_REQUIRE(std::assignable_from<list_iterator::reference, int>);
     }
 }
 
@@ -51,6 +89,14 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
     using forfun::experimental::container::list;
     using forfun::experimental::container::list_iterator;
     using forfun::experimental::container::list_node;
+
+    SECTION("Default constructor")
+    {
+        list_iterator iterator1{};
+        list_iterator iterator2{};
+
+        REQUIRE(iterator2 == iterator1);
+    }
 
     SECTION("Copy constructor")
     {
