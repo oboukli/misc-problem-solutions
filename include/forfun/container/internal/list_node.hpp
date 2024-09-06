@@ -14,7 +14,9 @@ public:
     using value_type = int;
 
     list_node* previous_{nullptr};
+
     list_node* next_{nullptr};
+
     value_type value_{};
 
     explicit constexpr list_node(

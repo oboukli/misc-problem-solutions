@@ -18,19 +18,19 @@ namespace iterator_based_sol1 {
 
 auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void;
 
-}
+} // namespace iterator_based_sol1
 
 namespace iterator_based_sol2 {
 
 auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void;
 
-}
+} // namespace iterator_based_sol2
 
 namespace offset_based {
 
 auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void;
 
-}
+} // namespace offset_based
 
 } // namespace forfun::set_matrix_zeroes
 

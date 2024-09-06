@@ -21,9 +21,11 @@ namespace forfun::experimental::container {
 
 class list final {
 public:
-    using size_type = std::size_t;
-    using value_type = int;
     using iterator = list_iterator;
+
+    using size_type = std::size_t;
+
+    using value_type = int;
 
     constexpr list() : end_{new list_node(int{}, nullptr, nullptr)}
     {
