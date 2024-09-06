@@ -29,7 +29,8 @@ TEST_CASE("Compiler feature test", "[factorial]")
 #else
     WARN(
         "forfun::factorial::stl_functional::factorial<>(n) is not available "
-        "because it was not supported by the C++ compiler."
+        "because it was not supported by the C++ compiler and/or "
+        "the C++ standard library."
     );
 #endif // FORFUN_UNSUPPORTED_FEATURE
 }
