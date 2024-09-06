@@ -21,6 +21,8 @@ namespace forfun::experimental::container {
 
 class list final {
 public:
+    using const_iterator = list_const_iterator;
+
     using iterator = list_iterator;
 
     using size_type = std::size_t;
@@ -76,6 +78,10 @@ public:
     [[nodiscard]] auto begin() const noexcept -> iterator;
 
     [[nodiscard]] auto end() const noexcept -> iterator;
+
+    [[nodiscard]] auto cbegin() const noexcept -> list_const_iterator;
+
+    [[nodiscard]] auto cend() const noexcept -> list_const_iterator;
 
 private:
     list_node* head_;

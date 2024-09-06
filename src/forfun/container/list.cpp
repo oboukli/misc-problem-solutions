@@ -24,6 +24,16 @@ namespace forfun::experimental::container {
     return iterator(end_);
 }
 
+[[nodiscard]] auto list::cbegin() const noexcept -> const_iterator
+{
+    return const_iterator(head_);
+}
+
+[[nodiscard]] auto list::cend() const noexcept -> const_iterator
+{
+    return const_iterator(end_);
+}
+
 auto list::push_back(list::value_type value) noexcept -> void
 {
     ++size_;
