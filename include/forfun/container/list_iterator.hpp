@@ -16,7 +16,9 @@ namespace forfun::experimental::container {
 class list_iterator final {
 public:
     using iterator_category = std::bidirectional_iterator_tag;
+
     using reference = int&;
+
     using value_type = int;
 
     constexpr explicit list_iterator(list_node* const node) noexcept :
@@ -104,7 +106,9 @@ template <>
 struct std::iterator_traits<forfun::experimental::container::list_iterator> {
     using iterator_category
         = forfun::experimental::container::list_iterator::iterator_category;
+
     using reference = forfun::experimental::container::list_iterator::reference;
+
     using value_type
         = forfun::experimental::container::list_iterator::value_type;
 };

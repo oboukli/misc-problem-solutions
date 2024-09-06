@@ -53,8 +53,12 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         {
             evaluation_stack.push_back(operand);
         }
-        else if (iter->length() == std::string_view::size_type{1}
-                 && evaluation_stack.size() >= std::vector<int>::size_type{2})
+        // clang-format off
+        else if (
+            (iter->length() == std::string_view::size_type{1})
+            && (evaluation_stack.size() >= std::vector<int>::size_type{2})
+        )
+        // clang-format on
         {
             int const operand_2{evaluation_stack.back()};
             evaluation_stack.pop_back();

@@ -17,7 +17,9 @@
 namespace forfun::graph::breadth_first_search {
 
 namespace iterative {
+
 // Placeholder.
+
 } // namespace iterative
 
 namespace recursive {

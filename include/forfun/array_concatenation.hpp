@@ -126,6 +126,7 @@ constexpr auto concatenate(
     for (std::size_t i{0U}; i < 2U; ++i)
     {
 #if _MSC_VER
+// Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER
@@ -150,6 +151,7 @@ constexpr auto concatenate(
 ) noexcept -> void
 {
 #if _MSC_VER
+// Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER

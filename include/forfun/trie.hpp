@@ -20,6 +20,7 @@ namespace forfun::trie::experimental {
 template <std::integral CharT = char>
 struct TrieNode final {
     using children_t = std::vector<std::unique_ptr<TrieNode>>;
+
     using value_type = CharT;
 
     explicit constexpr TrieNode(CharT const value_) noexcept : value{value_}
@@ -35,7 +36,9 @@ struct TrieNode final {
 
     // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
     children_t children{};
+
     CharT value{};
+
     bool is_terminal{false};
     // NOLINTEND(misc-non-private-member-variables-in-classes)
 };

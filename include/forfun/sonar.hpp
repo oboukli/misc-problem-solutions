@@ -30,6 +30,7 @@ class Sonar final {
 public:
     struct Coord final {
         int x{};
+
         int y{};
     };
 
