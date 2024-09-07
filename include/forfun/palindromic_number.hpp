@@ -27,7 +27,7 @@ is_palindrome(std::integral auto const n) noexcept -> bool
     while (d > T{0})
     {
         // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
-        nn = (nn * T{10}) + (d % T{10});
+        nn = static_cast<T>((nn * T{10}) + (d % T{10}));
         d /= T{10};
         // NOLINTEND(cppcoreguidelines-avoid-magic-numbers)
     }
