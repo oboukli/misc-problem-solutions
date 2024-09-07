@@ -134,7 +134,7 @@ TEMPLATE_TEST_CASE_SIG(
         DoubleVecItr>)
 )
 {
-    SECTION("Input is of four integers, output type is float")
+    SECTION("Input is of four floats, output type is of four doubles")
     {
         std::vector const nums{1.0F, 2.0F, 3.0F, 4.0F};
         std::vector const expected{24.0, 12.0, 8.0, 6.0};
