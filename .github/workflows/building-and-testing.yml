@@ -62,8 +62,6 @@ jobs:
           --build
           --parallel
           --preset '${{ env.DEBUG_BUILD_PRESET_NAME }}'
-          --
-          /verbosity:detailed
 
       - name: Build for benchmarking
         run: >-
@@ -71,8 +69,6 @@ jobs:
           --build
           --parallel
           --preset '${{ env.RELEASE_BUILD_PRESET_NAME }}'
-          --
-          /verbosity:detailed
 
       - name: Run test driver
         run: >-
