@@ -51,9 +51,11 @@ constexpr auto product_except_self(
     OutItrSentinel const products_last
 ) noexcept -> void
 {
+    using ValType = std::iter_value_t<OutItr>;
+
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
-        *it_prd = std::iter_value_t<OutItr>{1};
+        *it_prd = ValType{1};
 
         auto it_input{first + (it_prd - products_first)};
 
@@ -65,7 +67,7 @@ constexpr auto product_except_self(
             {
                 it_input = first;
             }
-            *it_prd *= *it_input;
+            *it_prd *= static_cast<ValType>(*it_input);
         }
     }
 }
@@ -110,7 +112,7 @@ constexpr auto product_except_self(
         auto const idx_prd{it_prd - products_itr};
         for (auto j{DiffType{1}}; j < length; ++j)
         {
-            *it_prd *= first[(idx_prd + j) % length];
+            *it_prd *= static_cast<ValType>(first[(idx_prd + j) % length]);
         }
     }
 }
