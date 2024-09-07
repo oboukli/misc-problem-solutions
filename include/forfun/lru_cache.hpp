@@ -43,7 +43,7 @@ public:
 
     LRUCache(LRUCache&&) = delete;
 
-    ~LRUCache() = default;
+    ~LRUCache() noexcept = default;
 
     auto operator=(LRUCache const&) -> LRUCache& = delete;
 
@@ -70,6 +70,16 @@ namespace stl {
 class LRUCache final {
 public:
     explicit LRUCache(std::size_t capacity) noexcept;
+
+    LRUCache(LRUCache const&) = delete;
+
+    LRUCache(LRUCache&&) = delete;
+
+    ~LRUCache() noexcept = default;
+
+    auto operator=(LRUCache const&) -> LRUCache& = delete;
+
+    auto operator=(LRUCache&&) -> LRUCache& = delete;
 
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
