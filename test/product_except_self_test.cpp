@@ -50,6 +50,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<int> actual{};
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -65,6 +66,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<int> actual{};
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -80,6 +82,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<int> actual{};
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -95,6 +98,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<int> actual(3U);
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -110,6 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<int> actual(4U);
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -142,6 +147,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::vector<double> actual(4U);
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -174,6 +180,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::array<int, 3U> actual{};
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
@@ -243,6 +250,7 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
 
         std::array<std::uint64_t, 16U> actual{};
+
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
         );
