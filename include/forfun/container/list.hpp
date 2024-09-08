@@ -46,6 +46,7 @@ public:
     ~list() noexcept
     {
         clear();
+
         delete end_;
     }
 

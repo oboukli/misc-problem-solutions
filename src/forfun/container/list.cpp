@@ -95,6 +95,7 @@ auto list::clear() noexcept -> void
     for (gsl::owner<list_node const*> node{head_}; node != end_;)
     {
         gsl::owner<list_node const*> const next{node->next_};
+
         delete node;
 
         node = next;
