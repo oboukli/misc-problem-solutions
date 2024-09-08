@@ -34,7 +34,7 @@ namespace forfun::experimental::container {
     return const_iterator(end_);
 }
 
-auto list::push_back(list::value_type value) noexcept -> void
+auto list::push_back(list::value_type value) noexcept(false) -> void
 {
     ++size_;
     gsl::owner<list_node*> const n{new list_node(value, tail_, end_)};

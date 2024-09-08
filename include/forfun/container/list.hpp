@@ -29,7 +29,8 @@ public:
 
     using value_type = int;
 
-    constexpr list() : end_{new list_node(int{}, nullptr, nullptr)}
+    constexpr list() noexcept(false) :
+        end_{new list_node(int{}, nullptr, nullptr)}
     {
         head_ = end_;
         tail_ = end_;
@@ -70,7 +71,7 @@ public:
         return tail_->value_;
     }
 
-    auto push_back(value_type value) noexcept -> void;
+    auto push_back(value_type value) noexcept(false) -> void;
 
     auto pop_back() noexcept -> void;
 
