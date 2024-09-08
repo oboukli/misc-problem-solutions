@@ -80,9 +80,9 @@ auto list::pop_back() noexcept -> void
 
     --size_;
 
-    auto const* const aux{tail_};
+    gsl::owner<list_node const*> const aux{tail_};
     tail_ = tail_->previous_;
-    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+
     delete aux;
 }
 
