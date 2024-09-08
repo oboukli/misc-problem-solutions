@@ -7,6 +7,7 @@
 #include <concepts>
 #include <cstddef>
 #include <iterator>
+#include <ranges>
 #include <utility>
 
 #include <catch2/catch_test_macros.hpp>
