@@ -777,7 +777,7 @@ TEST_CASE(
         REQUIRE_FALSE(iterator2 == iterator1);
     }
 
-    SECTION("Iterator and sentinel of empty list are equal")
+    SECTION("Const iterator and const sentinel of empty list are equal")
     {
         forfun::experimental::container::list const list{};
 
@@ -785,7 +785,7 @@ TEST_CASE(
         REQUIRE_FALSE(list.cbegin() != list.cend());
     }
 
-    SECTION("Iterator of non-empty list is not sentinel")
+    SECTION("Const iterator of non-empty list is not const sentinel")
     {
         forfun::experimental::container::list list{};
         list.push_back(1871);
@@ -793,7 +793,7 @@ TEST_CASE(
         REQUIRE_FALSE(list.cbegin() == list.cend());
     }
 
-    SECTION("Iterator and sentinel of non-empty list are unequal")
+    SECTION("Const iterator and const sentinel of non-empty list are unequal")
     {
         forfun::experimental::container::list list{};
         list.push_back(1873);
@@ -818,7 +818,7 @@ TEST_CASE(
         REQUIRE_FALSE(list.cbegin() != list.cbegin());
     }
 
-    SECTION("Iterator inequality")
+    SECTION("Const iterator inequality")
     {
         forfun::experimental::container::list list{};
         list.push_back(1879);
