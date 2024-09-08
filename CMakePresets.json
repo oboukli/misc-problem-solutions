@@ -40,7 +40,7 @@
       },
       "environment": {
         "CFLAGS": "/permissive- /source-charset:utf-8 /W4 /WX /Zc:__cplusplus",
-        "CXXFLAGS": "/permissive- /source-charset:utf-8 /W4 /WX /Zc:__cplusplus"
+        "CXXFLAGS": "/permissive- /source-charset:utf-8 /W4 /WX /Zc:__cplusplus /Zc:enumTypes /Zc:preprocessor"
       }
     },
     {
