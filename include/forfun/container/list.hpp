@@ -81,9 +81,9 @@ public:
 
     [[nodiscard]] auto end() const noexcept -> iterator;
 
-    [[nodiscard]] auto cbegin() const noexcept -> list_const_iterator;
+    [[nodiscard]] auto cbegin() const noexcept -> const_iterator;
 
-    [[nodiscard]] auto cend() const noexcept -> list_const_iterator;
+    [[nodiscard]] auto cend() const noexcept -> const_iterator;
 
 private:
     list_node* head_;
