@@ -14,15 +14,15 @@
 
 namespace {
 
-constexpr auto
-push_range(auto& dest_container, auto const& src_list) noexcept -> void
+constexpr auto push_range(auto& dest_container, auto const& src_list) noexcept
+    -> void
     requires requires { dest_container.push_range(src_list); }
 {
     dest_container.push_range(src_list);
 }
 
-constexpr auto
-push_range(auto& dest_container, auto const& src_list) noexcept -> void
+constexpr auto push_range(auto& dest_container, auto const& src_list) noexcept
+    -> void
 {
     for (auto const e : src_list)
     {

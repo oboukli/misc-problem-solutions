@@ -54,11 +54,11 @@ private:
 public:
     constexpr ~list_iterator_helper() noexcept = default;
 
-    auto operator=(list_iterator_helper const& other
-    ) noexcept -> list_iterator_helper& = default;
+    auto operator=(list_iterator_helper const& other) noexcept
+        -> list_iterator_helper& = default;
 
-    auto operator=(list_iterator_helper&& other
-    ) noexcept -> list_iterator_helper&
+    auto operator=(list_iterator_helper&& other) noexcept
+        -> list_iterator_helper&
     {
         node_ = other.node_;
         other.node_ = nullptr;
@@ -140,8 +140,8 @@ public:
 
     constexpr ~list_iterator() noexcept = default;
 
-    auto operator=(list_iterator const& other
-    ) noexcept -> list_iterator& = default;
+    auto operator=(list_iterator const& other) noexcept
+        -> list_iterator& = default;
 
     auto operator=(list_iterator&& other) noexcept -> list_iterator&
     {
@@ -180,8 +180,8 @@ public:
 
     ~list_const_iterator() noexcept = default;
 
-    auto operator=(list_const_iterator const& other
-    ) noexcept -> list_const_iterator& = default;
+    auto operator=(list_const_iterator const& other) noexcept
+        -> list_const_iterator& = default;
 
     auto operator=(list_const_iterator&& other) noexcept -> list_const_iterator&
     {

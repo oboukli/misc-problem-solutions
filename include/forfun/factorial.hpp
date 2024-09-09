@@ -25,8 +25,8 @@ namespace iterative {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
 /// @note For large values of @p n, the result may overflow the return type.
-[[nodiscard]] constexpr auto
-factorial(std::integral auto const n) noexcept -> decltype(n)
+[[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
+    -> decltype(n)
 {
     using T = std::remove_const_t<decltype(n)>;
 

@@ -29,8 +29,8 @@ struct vertex final {
 
 template <std::regular T>
 struct vertex_hash final {
-    constexpr auto operator()(vertex<T> const& vertex
-    ) const noexcept -> std::size_t
+    constexpr auto operator()(vertex<T> const& vertex) const noexcept
+        -> std::size_t
     {
         if constexpr (std::integral<T> and (sizeof(T) <= sizeof(std::size_t)))
         {

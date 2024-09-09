@@ -22,8 +22,8 @@ constexpr auto quicksort(Iter first, Iter last) noexcept -> void;
 namespace detail {
 
 template <std::contiguous_iterator Iter>
-[[nodiscard]] constexpr auto
-partition(Iter const first, Iter last) noexcept -> Iter
+[[nodiscard]] constexpr auto partition(Iter const first, Iter last) noexcept
+    -> Iter
 {
     auto it_i{first};
 

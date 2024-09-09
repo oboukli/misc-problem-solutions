@@ -14,8 +14,8 @@
 
 namespace forfun::valid_anagram::char_only {
 
-[[nodiscard]] auto
-is_anagram(std::string_view s, std::string_view t) noexcept -> bool
+[[nodiscard]] auto is_anagram(std::string_view s, std::string_view t) noexcept
+    -> bool
 {
     using Iter = std::string_view::const_iterator;
 

@@ -11,8 +11,8 @@
 
 namespace forfun::sonar {
 
-[[nodiscard]] auto
-count_ships(Sonar const& sonar, Area const area) noexcept -> int
+[[nodiscard]] auto count_ships(Sonar const& sonar, Area const area) noexcept
+    -> int
 {
     if (!sonar.ping(area))
     {

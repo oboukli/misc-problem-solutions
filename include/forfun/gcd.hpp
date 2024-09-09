@@ -28,8 +28,8 @@ namespace detail {
 
 } // namespace detail
 
-[[nodiscard]] /*constexpr*/ inline auto
-gcd(int const m, int const n) noexcept -> int
+[[nodiscard]] /*constexpr*/ inline auto gcd(int const m, int const n) noexcept
+    -> int
 {
     return std::abs(detail::gcd_imp(m, n));
 }

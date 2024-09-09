@@ -19,8 +19,8 @@ namespace forfun::valid_anagram {
 
 namespace char_only {
 
-[[nodiscard]] auto
-is_anagram(std::string_view s, std::string_view t) noexcept -> bool;
+[[nodiscard]] auto is_anagram(std::string_view s, std::string_view t) noexcept
+    -> bool;
 
 } // namespace char_only
 
