@@ -14,23 +14,24 @@
 
 #include <gsl/pointers>
 
+#include "forfun/container/internal/list_const_iterator.hpp"
+#include "forfun/container/internal/list_iterator.hpp"
 #include "forfun/container/internal/list_node.hpp"
-#include "forfun/container/list_iterator.hpp"
 
 namespace forfun::experimental::container {
 
 class list final {
 public:
-    using const_iterator = list_const_iterator;
+    using const_iterator = internal::list_const_iterator;
 
-    using iterator = list_iterator;
+    using iterator = internal::list_iterator;
 
     using size_type = std::size_t;
 
     using value_type = int;
 
     constexpr list() noexcept(false) :
-        end_{new list_node(int{}, nullptr, nullptr)}
+        end_{new internal::list_node(int{}, nullptr, nullptr)}
     {
         head_ = end_;
         tail_ = end_;
@@ -86,9 +87,9 @@ public:
     [[nodiscard]] auto cend() const noexcept -> const_iterator;
 
 private:
-    list_node* head_;
-    list_node* tail_;
-    gsl::owner<list_node*> end_;
+    internal::list_node* head_;
+    internal::list_node* tail_;
+    gsl::owner<internal::list_node*> end_;
     size_type size_{};
 };
 
