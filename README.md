@@ -39,42 +39,42 @@ leveraged by this project:
 
 ## Index
 
-| Problem                          | Standard | Source                                                       |
-| ---                              | ---      | ---                                                          |
-| Binary search                    | C++20    | `include/forfun/search/binary_search.hpp`                    |
-| Breadth-first search             | C++20    | `include/forfun/graph/breadth_first_search.hpp`              |
-| Bubble sort                      | C++20    | `include/forfun/sorting/bubble_sort.hpp`                     |
-| Concatenation of array           | C++17    | `include/forfun/array_concatenation.hpp`                     |
-| Contains duplicate               | C++20    | `include/forfun/contains_duplicate.hpp`                      |
-| Depth-first search               | C++20    | `include/forfun/graph/depth_first_search.hpp`                |
-| Evaluate reverse polish notation | C++20    | `include/forfun/evaluate_reverse_polish_notation.hpp`        |
-| Factorial                        | C++23    | `include/forfun/factorial.hpp`                               |
-| Fibonacci sequence               | C++20    | `include/forfun/fibonacci_sequence.hpp`                      |
-| First missing positive           | C++20    | `include/forfun/first_missing_positive.hpp`                  |
-| Fizz buzz                        | C++17    | `src/forfun/fizzbuzz.cpp`                                    |
-| Greatest common divisor          | C++17    | `include/forfun/gcd.hpp`                                     |
-| Insertion sort                   | C++20    | `include/forfun/sorting/insertion_sort.hpp`                  |
-| Least recently used (LRU) cache  | C++20    | `src/forfun/lru_cache.cpp`                                   |
-| Linked list                      | C++20    | `include/forfun/container/list.hpp`                          |
-| List bidirectional iterator      | C++20    | `include/forfun/container/internal/list_iterator.hpp`        |
-| Move zeroes                      | C++20    | `include/forfun/move_zeroes.hpp`                             |
-| Multiples of three or five       | C++17    | `include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp` |
-| Nth Fibonacci number             | C++20    | `include/forfun/fibonacci.hpp`                               |
-| Number of ships in a rectangle   | C++20    | `src/forfun/sonar.cpp`                                       |
-| Palindrome                       | C++20    | `include/forfun/palindrome.hpp`                              |
-| Palindrome (in C)                | C90      | `src/forfun_c/palindrome.c`                                  |
-| Palindromic number               | C++20    | `src/forfun/palindromic_number.cpp`                          |
-| Primality test                   | C++20    | `include/forfun/primality.hpp`                               |
-| Product of array except self     | C++20    | `include/forfun/product_except_self.hpp`                     |
-| Quicksort                        | C++20    | `include/forfun/sorting/quicksort.hpp`                       |
-| Set matrix zeroes                | C++17    | `src/forfun/set_matrix_zeroes.cpp`                           |
-| Sums of subarrays of length k    | C++20    | `include/forfun/sub_array_sums.hpp`                          |
-| Tower of Hanoi                   | C++20    | `include/forfun/tower_of_hanoi.hpp`                          |
-| Trie                             | C++20    | `include/forfun/trie.hpp`                                    |
-| Two sum                          | C++20    | `include/forfun/two_sum.hpp`                                 |
-| Two-pass Boyer-Moore majority    | C++20    | `include/forfun/majority_element.hpp`                        |
-| Valid anagram                    | C++20    | `include/forfun/valid_anagram.hpp`                           |
-| Valid parentheses                | C++20    | `src/forfun/valid_parentheses.cpp`                           |
+| Problem                          | Standard | Source                                                                                                                     |
+| ---                              | ---      | ---                                                                                                                        |
+| Binary search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
+| Breadth-first search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                           |
+| Bubble sort                      | C++20    | [`include/forfun/sorting/bubble_sort.hpp`](include/forfun/sorting/bubble_sort.hpp)                                         |
+| Concatenation of array           | C++17    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
+| Contains duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
+| Depth-first search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                               |
+| Evaluate reverse polish notation | C++20    | [`include/forfun/evaluate_reverse_polish_notation.hpp`](include/forfun/evaluate_reverse_polish_notation.hpp)               |
+| Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
+| Fibonacci sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
+| First missing positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                   |
+| Fizz buzz                        | C++17    | [`src/forfun/fizzbuzz.cpp`](src/forfun/fizzbuzz.cpp)                                                                       |
+| Greatest common divisor          | C++17    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
+| Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
+| Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
+| Linked list                      | C++20    | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                   |
+| List bidirectional iterator      | C++20    | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)               |
+| Move zeroes                      | C++20    | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                         |
+| Multiples of three or five       | C++17    | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp) |
+| Nth Fibonacci number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                             |
+| Number of ships in a rectangle   | C++20    | [`src/forfun/sonar.cpp`](src/forfun/sonar.cpp)                                                                             |
+| Palindrome                       | C++20    | [`include/forfun/palindrome.hpp`](include/forfun/palindrome.hpp)                                                           |
+| Palindrome (in C)                | C90      | [`src/forfun_c/palindrome.c`](src/forfun_c/palindrome.c)                                                                   |
+| Palindromic number               | C++20    | [`src/forfun/palindromic_number.cpp`](src/forfun/palindromic_number.cpp)                                                   |
+| Primality test                   | C++20    | [`include/forfun/primality.hpp`](include/forfun/primality.hpp)                                                             |
+| Product of array except self     | C++20    | [`include/forfun/product_except_self.hpp`](include/forfun/product_except_self.hpp)                                         |
+| Quicksort                        | C++20    | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                             |
+| Set matrix zeroes                | C++17    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
+| Sums of subarrays of length k    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
+| Tower of Hanoi                   | C++20    | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                   |
+| Trie                             | C++20    | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                       |
+| Two sum                          | C++20    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                 |
+| Two-pass Boyer-Moore majority    | C++20    | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                               |
+| Valid anagram                    | C++20    | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                     |
+| Valid parentheses                | C++20    | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                     |
 
 ## Disclaimer
 
