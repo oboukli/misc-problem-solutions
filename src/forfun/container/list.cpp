@@ -37,7 +37,9 @@ namespace forfun::experimental::container {
 auto list::push_back(list::value_type value) noexcept(false) -> void
 {
     ++size_;
-    gsl::owner<list_node*> const n{new list_node(value, tail_, end_)};
+    gsl::owner<internal::list_node*> const n{
+        new internal::list_node(value, tail_, end_)
+    };
 
     if (head_ == end_)
     {
@@ -80,7 +82,7 @@ auto list::pop_back() noexcept -> void
 
     --size_;
 
-    gsl::owner<list_node const*> const aux{tail_};
+    gsl::owner<internal::list_node const*> const aux{tail_};
     tail_ = tail_->previous_;
 
     delete aux;
@@ -92,9 +94,9 @@ auto list::clear() noexcept -> void
         ((head_ == end_) and (size_ == size_type{}))
         or ((head_ != end_) and (size_ > size_type{}))
     );
-    for (gsl::owner<list_node const*> node{head_}; node != end_;)
+    for (gsl::owner<internal::list_node const*> node{head_}; node != end_;)
     {
-        gsl::owner<list_node const*> const next{node->next_};
+        gsl::owner<internal::list_node const*> const next{node->next_};
 
         delete node;
 

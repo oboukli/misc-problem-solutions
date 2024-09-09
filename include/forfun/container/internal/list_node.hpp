@@ -7,7 +7,7 @@
 #ifndef FORFUN_CONTAINER_INTERNAL_LIST_NODE_HPP_
 #define FORFUN_CONTAINER_INTERNAL_LIST_NODE_HPP_
 
-namespace forfun::experimental::container {
+namespace forfun::experimental::container::internal {
 
 class list_node final {
 public:
@@ -40,6 +40,6 @@ public:
     constexpr ~list_node() noexcept = default;
 };
 
-} // namespace forfun::experimental::container
+} // namespace forfun::experimental::container::internal
 
 #endif // FORFUN_CONTAINER_INTERNAL_LIST_NODE_HPP_
