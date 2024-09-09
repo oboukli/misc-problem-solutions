@@ -80,8 +80,8 @@ template <std::integral CharT>
         typename std::basic_string_view<CharT>::const_iterator>
 // clang-format on
 [[nodiscard]]
-constexpr auto
-is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
+constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
+    -> bool
 {
     using ConstIter = std::basic_string_view<CharT>::const_iterator;
     using ConstRevIter = std::basic_string_view<CharT>::const_reverse_iterator;
@@ -141,8 +141,8 @@ namespace functional {
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 template <std::integral CharT>
 [[nodiscard]]
-constexpr auto
-is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
+constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
+    -> bool
 {
     using ConstIter = std::basic_string_view<CharT>::const_iterator;
     using DiffType = std::basic_string_view<CharT>::difference_type;
@@ -160,8 +160,8 @@ namespace bloated {
 /// https://en.cppreference.com/w/cpp/algorithm/equal
 template <std::integral CharT>
 [[nodiscard]]
-constexpr auto
-is_palindrome(std::basic_string_view<CharT> const s) noexcept -> bool
+constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
+    -> bool
 {
     using DiffType = std::basic_string_view<CharT>::difference_type;
 

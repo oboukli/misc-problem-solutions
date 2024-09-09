@@ -17,8 +17,8 @@ namespace forfun::palindromic_number {
 
 namespace fast {
 
-[[nodiscard]] constexpr auto
-is_palindrome(std::integral auto const n) noexcept -> bool
+[[nodiscard]] constexpr auto is_palindrome(std::integral auto const n) noexcept
+    -> bool
 {
     using T = std::remove_const_t<decltype(n)>;
 

@@ -16,8 +16,8 @@ namespace forfun::majority_element {
 
 template <typename Elements>
     requires std::forward_iterator<typename Elements::iterator>
-[[nodiscard]] constexpr auto
-majority_element(Elements const& elements) noexcept -> Elements::const_iterator
+[[nodiscard]] constexpr auto majority_element(Elements const& elements) noexcept
+    -> Elements::const_iterator
 {
     using ElementType = Elements::value_type;
     using SizeType = Elements::size_type;
