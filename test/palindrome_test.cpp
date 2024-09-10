@@ -46,7 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
-    &::is_palindrome,
+    &::forfun_is_palindrome,
     &forfun::palindrome::functional::is_palindrome<char>,
     &forfun::palindrome::functional::bloated::is_palindrome<char>,
     &forfun::palindrome::iterator_based::is_palindrome<char>,
@@ -234,7 +234,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-insensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome_ci, func_is_palindrome_ci),
-    &::is_palindrome_ci,
+    &::forfun_is_palindrome_ci,
     &forfun::palindrome::functional::bloated::is_palindrome_ci,
     &forfun::palindrome::iterator_based::is_palindrome_ci,
     &forfun::palindrome::offset_based::is_palindrome_ci
