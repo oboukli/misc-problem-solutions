@@ -20,9 +20,9 @@ extern "C" {
 
 #include <stddef.h>
 
-int is_palindrome(char const* str, size_t length);
+int forfun_is_palindrome(char const* str, size_t length);
 
-int is_palindrome_ci(char const* str, size_t length);
+int forfun_is_palindrome_ci(char const* str, size_t length);
 
 #ifdef __cplusplus
 }

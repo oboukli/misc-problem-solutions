@@ -21,7 +21,7 @@ found in the LICENSE file.
     apply_to = function \
 )
 #endif /* __clang__ */
-int is_palindrome(char const* str, size_t const length)
+int forfun_is_palindrome(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
@@ -52,7 +52,7 @@ int is_palindrome(char const* str, size_t const length)
     apply_to = function \
 )
 #endif /* __clang__ */
-int is_palindrome_ci(char const* str, size_t const length)
+int forfun_is_palindrome_ci(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
