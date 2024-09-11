@@ -33,6 +33,7 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/add_two_numbers.hpp"
   "include/forfun/array_concatenation.hpp"
   "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
@@ -63,6 +64,7 @@ target_sources(
 target_sources(
   forfun
   PRIVATE
+  "src/forfun/add_two_numbers.cpp"
   "src/forfun/array_concatenation.cpp"
   "src/forfun/common.cpp"
   "src/forfun/contains_duplicate.cpp"
@@ -279,6 +281,7 @@ add_executable(
 target_sources(
   test_driver
   PRIVATE
+  "test/add_two_numbers_test.cpp"
   "test/array_concatenation_test.cpp"
   "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
