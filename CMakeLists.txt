@@ -375,6 +375,7 @@ target_sources(
   PRIVATE
   "benchmark/array_concatenation_benchmark.cpp"
   "benchmark/benchmark.cpp"
+  "benchmark/add_two_numbers_benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
   "benchmark/evaluate_reverse_polish_notation_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
