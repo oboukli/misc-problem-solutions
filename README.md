@@ -53,6 +53,7 @@ leveraged by this project:
 | Fibonacci sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
 | First missing positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                   |
 | Fizz buzz                        | C++17    | [`src/forfun/fizzbuzz.cpp`](src/forfun/fizzbuzz.cpp)                                                                       |
+| Forward list                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest common divisor          | C++17    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
