@@ -242,6 +242,7 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/container/forward_list.hpp"
   "include/forfun/container/internal/list_const_iterator.hpp"
   "include/forfun/container/internal/list_iterator_helper.hpp"
   "include/forfun/container/internal/list_iterator.hpp"
@@ -251,6 +252,7 @@ target_sources(
 target_sources(
   forfun_experimental
   PRIVATE
+  "src/forfun/container/forward_list.cpp"
   "src/forfun/container/internal/list_const_iterator.cpp"
   "src/forfun/container/internal/list_iterator_helper.cpp"
   "src/forfun/container/internal/list_iterator.cpp"
@@ -341,6 +343,7 @@ add_executable(
 target_sources(
   test_driver_experimental
   PRIVATE
+  "test/container/forward_list_test.cpp"
   "test/container/internal/list_const_iterator_test.cpp"
   "test/container/internal/list_iterator_test.cpp"
   "test/container/list_test.cpp"
