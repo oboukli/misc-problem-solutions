@@ -432,6 +432,7 @@ target_sources(
   benchmark_driver_experimental
   PRIVATE
   "benchmark/benchmark.cpp"
+  "benchmark/container/forward_list_benchmark.cpp"
   "benchmark/container/list_benchmark.cpp"
 )
 get_target_property(
