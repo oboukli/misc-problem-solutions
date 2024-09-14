@@ -36,9 +36,9 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             .run(
                 NAMEOF_RAW(::forfun_is_palindrome).c_str(),
                 [&palindrome]() {
-                    auto const r{
-                        ::forfun_is_palindrome(palindrome.data(), palindrome.length())
-                    };
+                    auto const r{::forfun_is_palindrome(
+                        palindrome.data(), palindrome.length()
+                    )};
 
                     ankerl::nanobench::doNotOptimizeAway(r);
                 }

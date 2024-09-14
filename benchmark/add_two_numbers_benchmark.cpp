@@ -40,5 +40,5 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
         ;
 
-        ankerl::nanobench::doNotOptimizeAway(results_stl);
+    ankerl::nanobench::doNotOptimizeAway(results_stl);
 }
