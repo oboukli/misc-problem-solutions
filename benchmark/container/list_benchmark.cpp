@@ -22,7 +22,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            "::std::list",
+            "::std::list<int>",
             []() noexcept {
                 std::list<int> list{};
                 list.push_back(1301);
