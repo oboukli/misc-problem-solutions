@@ -129,10 +129,10 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         REQUIRE(list.size() == std::size_t{1U});
         REQUIRE_FALSE(list.empty());
 
-        list.push_back(1361);
+        list.push_back(1021);
 
         REQUIRE(list.front() == 1361);
-        REQUIRE(list.back() == 1361);
+        REQUIRE(list.back() == 1021);
         REQUIRE(list.size() == std::size_t{2U});
         REQUIRE_FALSE(list.empty());
 
