@@ -41,7 +41,8 @@ leveraged by this project:
 
 | Problem                          | Standard | Source                                                                                                                     |
 | ---                              | ---      | ---                                                                                                                        |
-| Add Two Numbers                  | C++20    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
+| Add two numbers                  | C++20    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
+| Add two numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
 | Binary search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-first search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                           |
 | Bubble sort                      | C++20    | [`include/forfun/sorting/bubble_sort.hpp`](include/forfun/sorting/bubble_sort.hpp)                                         |
