@@ -227,6 +227,42 @@ source_group(
   FILES ${forfun_c_headers}
 )
 
+add_library(
+  forfun_c_experimental
+  SHARED
+)
+target_include_directories(
+  forfun_c_experimental
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_c_experimental
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun_c/add_two_numbers.h"
+  "include/forfun_c/container/forward_list.h"
+)
+target_sources(
+  forfun_c_experimental
+  PRIVATE
+  "src/forfun_c/add_two_numbers.c"
+  "src/forfun_c/container/forward_list.c"
+)
+get_target_property(forfun_c_experimental_sources forfun_c_experimental SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun_c/"
+  PREFIX "Source files"
+  FILES ${forfun_c_experimental_sources}
+)
+get_target_property(forfun_c_experimental_headers forfun_c_experimental HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun_c/"
+  PREFIX "Header files"
+  FILES ${forfun_c_experimental_headers}
+)
+
 find_package(Microsoft.GSL CONFIG REQUIRED)
 add_library(
   forfun_experimental
@@ -343,6 +379,7 @@ add_executable(
 target_sources(
   test_driver_experimental
   PRIVATE
+  "test/add_two_numbers_c_test.cpp"
   "test/container/forward_list_test.cpp"
   "test/container/internal/list_const_iterator_test.cpp"
   "test/container/internal/list_iterator_test.cpp"
@@ -360,6 +397,7 @@ target_link_libraries(
 )
 target_link_libraries(
   test_driver_experimental
+  PRIVATE forfun_c_experimental
   PRIVATE forfun_experimental
 )
 
