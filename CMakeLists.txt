@@ -416,7 +416,6 @@ target_sources(
   PRIVATE
   "benchmark/array_concatenation_benchmark.cpp"
   "benchmark/benchmark.cpp"
-  "benchmark/add_two_numbers_benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
   "benchmark/evaluate_reverse_polish_notation_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
@@ -470,6 +469,7 @@ target_sources(
   benchmark_driver_experimental
   PRIVATE
   "benchmark/benchmark.cpp"
+  "benchmark/add_two_numbers_benchmark.cpp"
   "benchmark/container/forward_list_benchmark.cpp"
   "benchmark/container/list_benchmark.cpp"
 )
@@ -488,5 +488,7 @@ target_link_libraries(
 )
 target_link_libraries(
   benchmark_driver_experimental
+  PRIVATE forfun
   PRIVATE forfun_experimental
+  PRIVATE forfun_c_experimental
 )
