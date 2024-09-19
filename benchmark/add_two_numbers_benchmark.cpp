@@ -25,6 +25,7 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
     std::forward_list<unsigned> const addend_a{1U, 4U, 5U, 6U, 5U, 2U};
     std::forward_list<unsigned> const addend_b{1U, 9U, 9U, 7U, 9U, 9U};
+    std::forward_list<std::forward_list<unsigned>> results_stl{};
 
     ::forfun_forward_list_node node_a_5 = {.next = nullptr, .value = 2U};
     ::forfun_forward_list_node node_a_4 = {.next = &node_a_5, .value = 5U};
@@ -45,11 +46,15 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
     ::forfun_forward_list_node const* const node_a{&node_a_0};
     ::forfun_forward_list_node const* const node_b{&node_b_0};
 
-    std::forward_list<std::forward_list<unsigned>> results_stl{};
     std::forward_list<std::unique_ptr<
         ::forfun_forward_list_node,
         decltype(&::forfun_free_node_list)>>
         results_c_iterative{};
+
+    std::forward_list<std::unique_ptr<
+        ::forfun_forward_list_node,
+        decltype(&::forfun_free_node_list)>>
+        results_c_recursive{};
 
     ankerl::nanobench::Bench()
 
@@ -62,6 +67,15 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
                 auto* r{::forfun_iterative_add_two_numbers(node_a, node_b)};
 
                 results_c_iterative.emplace_front(r, &::forfun_free_node_list);
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(::forfun_recursive_add_two_numbers).c_str(),
+            [node_a, node_b, &results_c_recursive]() noexcept {
+                auto* r{::forfun_recursive_add_two_numbers(node_a, node_b)};
+
+                results_c_recursive.emplace_front(r, &::forfun_free_node_list);
             }
         )
 
