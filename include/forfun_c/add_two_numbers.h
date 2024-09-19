@@ -25,6 +25,11 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
     struct forfun_forward_list_node const* addend_b
 );
 
+struct forfun_forward_list_node* forfun_recursive_add_two_numbers(
+    struct forfun_forward_list_node const* addend_a,
+    struct forfun_forward_list_node const* addend_b
+);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

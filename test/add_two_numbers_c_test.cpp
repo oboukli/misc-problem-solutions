@@ -16,7 +16,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Add two numbers",
     "[add_two_numbers][dynamic_allocation]",
     (auto add_two_numbers, add_two_numbers),
-    &::forfun_iterative_add_two_numbers
+    &::forfun_iterative_add_two_numbers,
+    &::forfun_recursive_add_two_numbers
 )
 {
     using ::forfun_forward_list_node;
