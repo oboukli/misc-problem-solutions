@@ -18,25 +18,29 @@
 
 namespace forfun::project_euler::multiples_of_3_or_5 {
 
-[[nodiscard]] constexpr auto find_sum_mult_three_five(int n) noexcept -> int;
-
 namespace detail {
 
-[[nodiscard]] constexpr auto sum_2x(int const n, int const q) noexcept -> int
+[[nodiscard]] constexpr auto
+sum_2x(unsigned int const n, unsigned int const q) noexcept -> unsigned int
 {
     return (n / q) * (q + n - (n % q));
 }
 
 } // namespace detail
 
-[[nodiscard]] constexpr auto find_sum_mult_three_five(int n) noexcept -> int
+[[nodiscard]] constexpr auto find_sum_mult_three_five(unsigned int n) noexcept
+    -> unsigned int
 {
-    using detail::sum_2x;
+    if (n == 0U)
+    {
+        return 0U;
+    }
 
     --n;
 
+    using detail::sum_2x;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
-    return (sum_2x(n, 3) + sum_2x(n, 5) - sum_2x(n, 15)) / 2;
+    return (sum_2x(n, 3U) + sum_2x(n, 5U) - sum_2x(n, 15U)) / 2U;
 }
 
 } // namespace forfun::project_euler::multiples_of_3_or_5
