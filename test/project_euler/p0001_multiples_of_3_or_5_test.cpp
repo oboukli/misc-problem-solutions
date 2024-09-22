@@ -85,6 +85,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 below 1000 (static)")
     {
+        static_assert(sizeof(unsigned int) >= 4U);
+
         static constexpr unsigned int const actual{
             find_sum_mult_three_five(1'000U)
         };
@@ -94,11 +96,28 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 below 1000")
     {
+        static_assert(sizeof(unsigned int) >= 4U);
+
         unsigned int const volatile test_input{1'000U};
         CAPTURE(test_input);
 
         unsigned int const actual{find_sum_mult_three_five(test_input)};
 
         REQUIRE(actual == 233'168U);
+    }
+
+    SECTION(
+        "Find the sum of all the multiples of 3 or 5 below max unsigned 32-bit "
+        "safe limit"
+    )
+    {
+        static_assert(sizeof(unsigned int) >= 4U);
+
+        unsigned int const volatile test_input{89'739U};
+        CAPTURE(test_input);
+
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 1'878'991'079U);
     }
 }
