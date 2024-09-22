@@ -7,8 +7,8 @@
 #include <concepts>
 #include <cstddef>
 #include <iterator>
-#include <ranges>
 #include <utility>
+#include <version>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -92,7 +92,7 @@ TEST_CASE(
             >
         );
 
-#if defined(__cpp_lib_ranges_as_const) or defined(__glibcxx_ranges_as_const)
+#if __cpp_lib_ranges_as_const >= 202207L
         STATIC_REQUIRE(
             std::same_as<
                 std::iter_const_reference_t<list_const_iterator>, int const&
