@@ -21,26 +21,20 @@ namespace forfun::project_euler::multiples_of_3_or_5 {
 namespace detail {
 
 [[nodiscard]] constexpr auto
-sum_2x(unsigned int const n, unsigned int const q) noexcept -> unsigned int
+sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 {
     return (n / q) * (q + n - (n % q));
 }
 
 } // namespace detail
 
-[[nodiscard]] constexpr auto find_sum_mult_three_five(unsigned int n) noexcept
-    -> unsigned int
+[[nodiscard]] constexpr auto
+find_sum_mult_three_five(unsigned int const n) noexcept -> unsigned int
 {
-    if (n == 0U)
-    {
-        return 0U;
-    }
+    using detail::sum_mult_2x;
 
-    --n;
-
-    using detail::sum_2x;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
-    return (sum_2x(n, 3U) + sum_2x(n, 5U) - sum_2x(n, 15U)) / 2U;
+    return (sum_mult_2x(3U, n) + sum_mult_2x(5U, n) - sum_mult_2x(15U, n)) / 2U;
 }
 
 } // namespace forfun::project_euler::multiples_of_3_or_5
