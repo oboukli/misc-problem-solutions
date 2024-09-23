@@ -43,7 +43,6 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
             }
         )
 
-#if FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
         .run(
             NAMEOF_RAW(stl_functional::factorial<std::uint64_t>).c_str(),
             []() {
@@ -53,7 +52,6 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
         )
-#endif // FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE
 
         ;
 }

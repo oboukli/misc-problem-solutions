@@ -61,10 +61,6 @@ template <common::concepts::addition_unpromoted T>
 
 } // namespace recursive
 
-#if __cpp_lib_ranges_fold >= 202207L
-
-#define FORFUN_FACTORIAL_STL_FUNCTIONAL_AVAILABLE true
-
 namespace stl_functional {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
@@ -81,8 +77,6 @@ namespace stl_functional {
 }
 
 } // namespace stl_functional
-
-#endif // __cpp_lib_ranges_fold >= 202207L
 
 } // namespace forfun::factorial
 
