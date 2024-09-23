@@ -20,6 +20,15 @@ namespace forfun::project_euler::multiples_of_3_or_5 {
 
 namespace detail {
 
+///
+/// Calculate the doubled sum of all multiples of q up to n.
+///
+/// Calculate, using a closed-form expression, the 2x value, avoiding premature
+/// division by two operation.
+///
+/// @param q Base whose multiples to be calculated
+/// @param n Upper inclusive limit
+/// @return Result
 [[nodiscard]] constexpr auto
 sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 {
@@ -28,6 +37,11 @@ sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 
 } // namespace detail
 
+///
+/// Find the sum of all the multiples of 3 or 5 up to n.
+///
+/// @param n Upper inclusive limit
+/// @return Result
 [[nodiscard]] constexpr auto
 find_sum_mult_three_five(unsigned int const n) noexcept -> unsigned int
 {
