@@ -29,6 +29,11 @@ namespace detail {
 /// @param q Base whose multiples to be calculated
 /// @param n Upper inclusive limit
 /// @return Result
+#if defined(__GNUC__) or defined(__clang__) // The following guard breaks MSVC.
+#if __has_cpp_attribute(gnu::const)
+[[gnu::const]]
+#endif // __has_cpp_attribute(gnu::const)
+#endif // defined(__GNUC__) or defined(__clang__)
 [[nodiscard]] constexpr auto
 sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 {
@@ -42,6 +47,12 @@ sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 ///
 /// @param n Upper inclusive limit
 /// @return Result
+#if __has_cpp_attribute(gnu::flatten)
+[[gnu::flatten]]
+#endif // __has_cpp_attribute(gnu::flatten)
+#if __has_cpp_attribute(msvc::forceinline_calls)
+[[msvc::forceinline_calls]]
+#endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
 find_sum_mult_three_five(unsigned int const n) noexcept -> unsigned int
 {
