@@ -24,7 +24,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Dependency Review
+      - name: Review dependencies
         uses: actions/dependency-review-action@v4
         with:
           base-ref: ${{ github.event.pull_request.base.sha || 'main' }}
