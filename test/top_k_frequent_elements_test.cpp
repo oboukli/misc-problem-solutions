@@ -23,6 +23,9 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format off
     (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
         std::vector<int>::const_iterator,
+        std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::unordered_map_based::top_frequent<
+        std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>)
     // clang-format on
 )
