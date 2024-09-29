@@ -21,6 +21,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[top_k_frequent_elements]",
     (auto top_frequent, top_frequent),
     // clang-format off
+    (forfun::top_k_frequent_elements::bucket_sort_based::
+        top_frequent<std::vector<int>::iterator, std::vector<int>::iterator>),
     (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),

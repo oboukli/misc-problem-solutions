@@ -22,6 +22,77 @@
 
 namespace forfun::top_k_frequent_elements {
 
+namespace bucket_sort_based {
+
+/// Assume input is valid and guarantees having a unique solution.
+/// Invalid input may result in undefined behavior.
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] auto
+top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
+    -> std::vector<std::iter_value_t<Iter>>
+{
+    using ValType = std::iter_value_t<Iter>;
+
+    if (first == end)
+    {
+        return {};
+    }
+
+    std::sort(first, end);
+
+    std::size_t const size{static_cast<std::size_t>(end - first)};
+
+    std::vector<std::vector<ValType>> counts(size);
+
+    k = std::min(k, size);
+
+    ValType current{*first};
+    std::size_t current_count{0U};
+    std::size_t counts_size{1U};
+    for (auto aux_iter{first}; aux_iter != end; ++aux_iter)
+    {
+        if (current == *aux_iter)
+        {
+            ++current_count;
+        }
+        else
+        {
+            if (counts[current_count - 1U].empty())
+            {
+                ++counts_size;
+            }
+            counts[current_count - 1U].push_back(current);
+            current = *aux_iter;
+            current_count = 1U;
+        }
+    }
+    counts[current_count - 1U].push_back(current);
+    ++counts_size;
+
+    std::vector<ValType> result;
+    result.reserve(k);
+
+    for (auto iter{counts.crbegin()}; k != std::size_t{0U}; ++iter)
+    {
+        assert(iter != counts.crend());
+        auto const iter_cend{iter->cend()};
+        // clang-format off
+        for (auto j{iter->cbegin()}; j != iter_cend && k != std::size_t{0U};
+            ++j)
+        // clang-format on
+        {
+            result.push_back(*j);
+            --k;
+        }
+    }
+
+    return result;
+}
+
+} // namespace bucket_sort_based
+
+
 namespace priority_queue_based {
 
 /// Assume input is valid and guarantees having a unique solution.
