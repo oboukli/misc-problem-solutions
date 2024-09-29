@@ -442,6 +442,7 @@ target_sources(
   "benchmark/sorting/insertion_sort_benchmark.cpp"
   "benchmark/sorting/quicksort_benchmark.cpp"
   "benchmark/sub_array_sums_benchmark.cpp"
+  "benchmark/top_k_frequent_elements_benchmark.cpp"
   "benchmark/tower_of_hanoi_benchmark.cpp"
   "benchmark/valid_anagram_benchmark.cpp"
   "benchmark/valid_parentheses_benchmark.cpp"
