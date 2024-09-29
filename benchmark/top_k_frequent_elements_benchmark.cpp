@@ -26,7 +26,7 @@ TEST_CASE(
 
     ankerl::nanobench::Bench()
 
-        .title("top_k_frequent_elements")
+        .title("Top K frequent elements")
         .relative(true)
 
         .run(
