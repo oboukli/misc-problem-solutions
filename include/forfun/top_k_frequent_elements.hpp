@@ -71,6 +71,56 @@ top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
 
 } // namespace priority_queue_based
 
+namespace unordered_map_based {
+
+/// Assume input is valid and guarantees having a unique solution.
+/// Invalid input may result in undefined behavior.
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+[[nodiscard]] auto
+top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
+    -> std::vector<std::iter_value_t<Iter>>
+{
+    using ValType = std::iter_value_t<Iter>;
+
+    std::unordered_map<ValType, std::size_t> counts;
+
+    std::size_t const size{static_cast<std::size_t>(end - iter)};
+
+    counts.reserve(size);
+
+    k = std::min(k, size);
+
+    for (; iter != end; ++iter)
+    {
+        ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
+    }
+
+    std::vector<std::pair<ValType, std::size_t>> intermediate;
+    intermediate.reserve(size);
+
+    std::copy(counts.cbegin(), counts.cend(), std::back_inserter(intermediate));
+
+    std::sort(
+        intermediate.begin(),
+        intermediate.end(),
+        [](auto const& a, auto const& b) { return a.second > b.second; }
+    );
+
+    std::vector<ValType> result;
+    result.reserve(k);
+    std::transform(
+        intermediate.cbegin(),
+        intermediate.cbegin()
+            + static_cast<decltype(intermediate)::difference_type>(k),
+        std::back_inserter(result),
+        [](auto const& bucket) { return bucket.first; }
+    );
+
+    return result;
+}
+
+} // namespace unordered_map_based
+
 } // namespace forfun::top_k_frequent_elements
 
 #endif // FORFUN_TOP_K_FREQUENT_ELEMENTS_HPP_
