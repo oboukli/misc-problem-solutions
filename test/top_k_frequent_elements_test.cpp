@@ -23,12 +23,22 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format off
     (forfun::top_k_frequent_elements::bucket_sort_based::
         top_frequent<std::vector<int>::iterator, std::vector<int>::iterator>),
+    (forfun::top_k_frequent_elements::bucket_sort_based_functional::
+        top_frequent<std::vector<int>::iterator, std::vector<int>::iterator>),
     (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::priority_queue_based_functional::
+        top_frequent<
+            std::vector<int>::const_iterator,
+            std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::unordered_map_based::top_frequent<
         std::vector<int>::const_iterator,
-        std::vector<int>::const_iterator>)
+        std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::unordered_map_based_functional::
+        top_frequent<
+            std::vector<int>::const_iterator,
+            std::vector<int>::const_iterator>)
     // clang-format on
 )
 {
@@ -432,5 +442,49 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
+}
+
+TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
+{
+    using forfun::top_k_frequent_elements::unordered_map_based_functional::
+        top_frequent;
+
+    SECTION("Top three of three identical elements")
+    {
+        std::vector nums{19, 19, 19};
+        static constexpr int const k{3U};
+
+        static constexpr std::array const expected{19};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+
+        REQUIRE_THAT(
+            actual,
+            Catch::Matchers::SizeIs(1U)
+                and Catch::Matchers::UnorderedRangeEquals(expected)
+        );
+    }
+
+    SECTION("Top four of four identical elements")
+    {
+        std::vector nums{23, 23, 23, 23};
+        static constexpr int const k{4U};
+
+        static constexpr std::array const expected{23};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+
+        REQUIRE_THAT(
+            actual,
+            Catch::Matchers::SizeIs(1U)
+                and Catch::Matchers::UnorderedRangeEquals(expected)
+        );
     }
 }
