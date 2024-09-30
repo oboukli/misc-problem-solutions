@@ -44,6 +44,23 @@ TEST_CASE(
         )
 
         .run(
+            NAMEOF_RAW(bucket_sort_based_functional::top_frequent<Iter, Iter>)
+                .c_str(),
+            []() {
+                std::array nums{
+                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
+                };
+
+                auto const volatile r{
+                    bucket_sort_based_functional::top_frequent(
+                        nums.begin(), nums.end(), 3U
+                    )
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(priority_queue_based::top_frequent<Iter, Iter>).c_str(),
             []() {
                 static constexpr std::array const nums{
@@ -58,6 +75,23 @@ TEST_CASE(
         )
 
         .run(
+            NAMEOF_RAW(priority_queue_based_functional::top_frequent<Iter, Iter>)
+                .c_str(),
+            []() {
+                static constexpr std::array const nums{
+                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
+                };
+
+                auto const volatile r{
+                    priority_queue_based_functional::top_frequent(
+                        nums.cbegin(), nums.cend(), 3U
+                    )
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(unordered_map_based::top_frequent<Iter, Iter>).c_str(),
             []() {
                 static constexpr std::array const nums{
@@ -67,6 +101,23 @@ TEST_CASE(
                 auto const volatile r{unordered_map_based::top_frequent(
                     nums.cbegin(), nums.cend(), 3U
                 )};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(unordered_map_based_functional::top_frequent<Iter, Iter>)
+                .c_str(),
+            []() {
+                static constexpr std::array const nums{
+                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
+                };
+
+                auto const volatile r{
+                    unordered_map_based_functional::top_frequent(
+                        nums.cbegin(), nums.cend(), 3U
+                    )
+                };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
