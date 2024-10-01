@@ -31,7 +31,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(bucket_sort_based::top_frequent<Iter, Iter>).c_str(),
-            []() {
+            []() noexcept(false) {
                 std::array nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };
@@ -46,7 +46,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(bucket_sort_based_functional::top_frequent<Iter, Iter>)
                 .c_str(),
-            []() {
+            []() noexcept(false) {
                 std::array nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };
@@ -62,7 +62,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(priority_queue_based::top_frequent<Iter, Iter>).c_str(),
-            []() {
+            []() noexcept(false) {
                 static constexpr std::array const nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };
@@ -77,7 +77,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(priority_queue_based_functional::top_frequent<Iter, Iter>)
                 .c_str(),
-            []() {
+            []() noexcept(false) {
                 static constexpr std::array const nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };
@@ -93,7 +93,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(unordered_map_based::top_frequent<Iter, Iter>).c_str(),
-            []() {
+            []() noexcept(false) {
                 static constexpr std::array const nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };
@@ -108,7 +108,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(unordered_map_based_functional::top_frequent<Iter, Iter>)
                 .c_str(),
-            []() {
+            []() noexcept(false) {
                 static constexpr std::array const nums{
                     5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
                 };

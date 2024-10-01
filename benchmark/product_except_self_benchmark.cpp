@@ -53,7 +53,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(alg1::product_except_self<ConstItr, ConstItr, Itr, Itr>)
                 .c_str(),
-            []() {
+            []() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16U> result;
                 forfun::product_except_self::alg1::product_except_self(
@@ -66,7 +66,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(alg2::product_except_self<ConstItr, ConstItr, Itr, Itr>)
                 .c_str(),
-            []() {
+            []() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16U> result;
                 forfun::product_except_self::alg2::product_except_self(

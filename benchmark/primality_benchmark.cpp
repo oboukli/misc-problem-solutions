@@ -23,7 +23,7 @@ TEST_CASE("Primality benchmarking", "[benchmark][primality]")
 
         .run(
             NAMEOF_RAW(is_prime<unsigned>).c_str(),
-            []() {
+            []() noexcept {
                 bool r{is_prime(2'147'483'647U)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }

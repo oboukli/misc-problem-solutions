@@ -64,7 +64,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(functional::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 functional::concatenate(src, dest);
@@ -74,7 +74,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(functional_minimal::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 functional_minimal::concatenate(src, dest);
@@ -84,7 +84,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterator_based::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 iterator_based::concatenate(src, dest);
@@ -94,7 +94,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterator_based_double::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 iterator_based_double::concatenate(src, dest);
@@ -104,7 +104,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterator_unfolded::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 iterator_unfolded::concatenate(src, dest);
@@ -114,7 +114,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(nested_loops::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 nested_loops::concatenate(src, dest);
@@ -124,7 +124,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(semi_unfolded::concatenate<int, 256U>).c_str(),
-            [&src]() {
+            [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<int, 512U> dest;
                 semi_unfolded::concatenate(src, dest);

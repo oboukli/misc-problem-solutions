@@ -27,7 +27,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterator_based_sol1::set_zeroes).c_str(),
-            []() {
+            []() noexcept {
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
@@ -57,7 +57,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterator_based_sol2::set_zeroes).c_str(),
-            []() {
+            []() noexcept {
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
@@ -87,7 +87,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(offset_based::set_zeroes).c_str(),
-            []() {
+            []() noexcept {
                 std::vector<std::vector<int>> matrix{
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
                     {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},

@@ -28,7 +28,7 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
 
         .run(
             NAMEOF_RAW(recursive::toh<Rod, Monk, std::size_t>).c_str(),
-            []() {
+            []() noexcept {
                 static constexpr std::size_t const num_disks{4U};
                 // NOLINTBEGIN(misc-const-correctness)
                 Rod src{};

@@ -40,7 +40,7 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
 
         .run(
             NAMEOF_RAW(slow::fib_seq<int, int, fn_int_t>).c_str(),
-            []() {
+            []() noexcept {
                 int r{0};
                 slow::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
@@ -50,7 +50,7 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
 
         .run(
             NAMEOF_RAW(fast::fib_seq<int, int, fn_int_t>).c_str(),
-            []() {
+            []() noexcept {
                 int r{0};
                 fast::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
@@ -61,7 +61,7 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
         .run(
             NAMEOF_RAW(fast::fib_seq<std::uint_fast32_t, std::uint_fast32_t, fn_fast_t>)
                 .c_str(),
-            []() {
+            []() noexcept {
                 std::uint_fast32_t r{0U};
                 fast::
                     fib_seq<std::uint_fast32_t, std::uint_fast32_t, fn_fast_t>(
@@ -74,7 +74,7 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
 
         .run(
             NAMEOF_RAW(creel::fib_seq<int, int, fn_int_t>).c_str(),
-            []() {
+            []() noexcept {
                 int r{0};
                 creel::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
