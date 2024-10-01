@@ -24,7 +24,7 @@ TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
 
         .run(
             NAMEOF_RAW(majority_element<std::array<int, 64U>>).c_str(),
-            []() {
+            []() noexcept {
                 static constexpr std::array const elements{
                     5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
                     5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,

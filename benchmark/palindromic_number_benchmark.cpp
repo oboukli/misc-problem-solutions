@@ -31,7 +31,7 @@ TEST_CASE("Palindromic number benchmarking", "[benchmark][palindromic_number]")
 
         .run(
             NAMEOF_RAW(fast::is_palindrome<int>).c_str(),
-            []() {
+            []() noexcept {
                 auto const volatile p{palindromic_num};
                 auto const r{fast::is_palindrome(p)};
 
@@ -41,7 +41,7 @@ TEST_CASE("Palindromic number benchmarking", "[benchmark][palindromic_number]")
 
         .run(
             NAMEOF_RAW(stl::is_palindrome).c_str(),
-            []() {
+            []() noexcept {
                 auto const volatile p{palindromic_num};
                 auto const r{stl::is_palindrome(p)};
 

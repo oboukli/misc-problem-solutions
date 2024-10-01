@@ -27,7 +27,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(deque_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -43,7 +43,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(vector_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -59,7 +59,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(circuit_breaker::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -75,7 +75,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(ascii_optimized::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -91,7 +91,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(vector_based_demi_allocated::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -107,7 +107,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(dyn_array_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -133,7 +133,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(deque_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -149,7 +149,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(vector_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -165,7 +165,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(circuit_breaker::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -181,7 +181,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(ascii_optimized::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -197,7 +197,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(vector_based_demi_allocated::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
@@ -213,7 +213,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
             .run(
                 NAMEOF_RAW(dyn_array_based::is_valid).c_str(),
-                []() {
+                []() noexcept {
                     constexpr static std::u8string_view const s{
                         u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                         "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["

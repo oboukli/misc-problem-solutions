@@ -32,7 +32,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(base::lowest_missing<Itr, Itr>).c_str(),
-            []() {
+            []() noexcept {
                 std::array nums{
                     // clang-format off
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
@@ -60,7 +60,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(fast::lowest_missing<Itr, Itr>).c_str(),
-            []() {
+            []() noexcept {
                 std::array nums{
                     // clang-format off
                     9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
