@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <concepts>
 #include <iterator>
+#include <limits>
 #include <utility>
 
 namespace forfun::maximum_subarray {
@@ -21,6 +22,36 @@ template <std::integral T>
 using PromotedValueType = decltype(std::declval<T>() + std::declval<T>());
 
 namespace brute_force {
+
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+max_sum(Iter const first, Sentinel const end) noexcept
+    -> PromotedValueType<std::iter_value_t<Iter>>
+{
+    using T = PromotedValueType<std::iter_value_t<Iter>>;
+
+    if (first == end)
+    {
+        return T{0};
+    }
+
+    T max_sum{std::numeric_limits<T>::min()};
+    for (auto iter_i{first}; iter_i != end; ++iter_i)
+    {
+        T sum{0};
+        for (auto iter_j{iter_i}; iter_j != end; ++iter_j)
+        {
+            sum += *iter_j;
+            if (sum > max_sum)
+            {
+                max_sum = sum;
+            }
+        }
+    }
+
+    return max_sum;
+}
 
 } // namespace brute_force
 

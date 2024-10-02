@@ -16,6 +16,9 @@ TEMPLATE_TEST_CASE_SIG(
     "Maximum subarray",
     "[maximum_subarray]",
     (auto max_sum, max_sum),
+    (forfun::maximum_subarray::brute_force::max_sum<
+        std::vector<int>::const_iterator,
+        std::vector<int>::const_iterator>),
     (forfun::maximum_subarray::recursive::max_sum<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
