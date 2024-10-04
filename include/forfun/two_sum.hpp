@@ -19,8 +19,11 @@
 #include <array>
 #include <concepts>
 #include <iterator>
+#include <map>
 
 namespace forfun::two_sum {
+
+namespace brute_force {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
@@ -44,6 +47,39 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     return {end, end};
 }
+
+} // namespace brute_force
+
+namespace map_based {
+
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto two_sum(
+    Iter const first, Sentinel const end, std::iter_value_t<Iter> const target
+) noexcept -> std::array<Iter, 2U>
+{
+    std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
+    for (auto iter{first}; iter != end; ++iter)
+    {
+        lookup_map.insert({*iter, iter});
+    }
+
+    auto const lookup_map_cend{lookup_map.cend()};
+    for (auto iter{first}; iter != end; ++iter)
+    {
+        auto const addend{target - *iter};
+
+        if (auto const found_iter{lookup_map.find(addend)};
+            (found_iter != lookup_map_cend) && (found_iter->second != iter))
+        {
+            return {iter, found_iter->second};
+        }
+    }
+
+    return {end, end};
+}
+
+} // namespace map_based
 
 } // namespace forfun::two_sum
 
