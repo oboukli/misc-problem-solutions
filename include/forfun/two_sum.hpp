@@ -17,14 +17,16 @@
 #define FORFUN_TWO_SUM_HPP_
 
 #include <array>
+#include <concepts>
 #include <iterator>
 
 namespace forfun::two_sum {
 
-template <std::input_iterator InputItr, std::sentinel_for<InputItr> Sentinel>
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
-    InputItr itr, Sentinel const end, std::iter_value_t<InputItr> const target
-) noexcept -> std::array<InputItr, 2U>
+    Iter itr, Sentinel const end, std::iter_value_t<Iter> const target
+) noexcept -> std::array<Iter, 2U>
 {
     for (; itr != end; ++itr)
     {
