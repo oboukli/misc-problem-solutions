@@ -428,6 +428,7 @@ target_sources(
   "benchmark/fibonacci_benchmark.cpp"
   "benchmark/fibonacci_sequence_benchmark.cpp"
   "benchmark/first_missing_positive_benchmark.cpp"
+  "benchmark/fizzbuzz_benchmark.cpp"
   "benchmark/gcd_benchmark.cpp"
   "benchmark/graph/breadth_first_search_benchmark.cpp"
   "benchmark/graph/depth_first_search_benchmark.cpp"
