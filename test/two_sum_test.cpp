@@ -211,4 +211,28 @@ TEST_CASE("Two sum", "[two_sum]")
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
+
+    SECTION("Unsorted input 5 (benchmark case)")
+    {
+        static constexpr std::array const nums{
+            2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,  37,  41,
+            43,  47,  53,  59,  61,  67,  71,  73,  79,  83,  89,  97,  101,
+            103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
+            173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239,
+            241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311,
+        };
+        static constexpr int const target{307 + 311};
+        static constexpr std::array const expected{
+            std::next(nums.cbegin(), 62), std::next(nums.cbegin(), 63)
+        };
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        static constexpr auto const actual{
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
 }
