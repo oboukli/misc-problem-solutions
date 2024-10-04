@@ -14,7 +14,7 @@
 
 #include "forfun/two_sum.hpp"
 
-TEST_CASE("Two-Sum problem", "[two_sum]")
+TEST_CASE("Two sum", "[two_sum]")
 {
     using forfun::two_sum::two_sum;
 
