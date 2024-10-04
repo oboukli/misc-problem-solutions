@@ -440,6 +440,7 @@ target_sources(
   "benchmark/palindromic_number_benchmark.cpp"
   "benchmark/primality_benchmark.cpp"
   "benchmark/product_except_self_benchmark.cpp"
+  "benchmark/project_euler/p0001_multiples_of_3_or_5_benchmark.cpp"
   "benchmark/search/binary_search_benchmark.cpp"
   "benchmark/set_matrix_zeroes_benchmark.cpp"
   "benchmark/sonar_benchmark.cpp"
