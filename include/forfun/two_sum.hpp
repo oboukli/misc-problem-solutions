@@ -25,19 +25,19 @@ namespace forfun::two_sum {
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
-    Iter itr, Sentinel const end, std::iter_value_t<Iter> const target
+    Iter iter, Sentinel const end, std::iter_value_t<Iter> const target
 ) noexcept -> std::array<Iter, 2U>
 {
-    for (; itr != end; ++itr)
+    for (; iter != end; ++iter)
     {
-        auto const t{target - (*itr)};
+        auto const addend{target - *iter};
 
-        auto itr_j{itr};
+        auto itr_j{iter};
         for (++itr_j; itr_j != end; ++itr_j)
         {
-            if ((*itr_j) == t)
+            if (*itr_j == addend)
             {
-                return {itr, itr_j};
+                return {iter, itr_j};
             }
         }
     }
