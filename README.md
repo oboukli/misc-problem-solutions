@@ -57,6 +57,7 @@ leveraged by this project:
 | Forward list                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest common divisor          | C++17    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
+| Last stone weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
 | Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
 | Linked list                      | C++20    | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                   |
 | List bidirectional iterator      | C++20    | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)               |
