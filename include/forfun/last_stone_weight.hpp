@@ -10,8 +10,10 @@
 #ifndef FORFUN_LAST_STONE_WEIGHT_HPP_
 #define FORFUN_LAST_STONE_WEIGHT_HPP_
 
+#include <algorithm>
 #include <cassert>
 #include <concepts>
+#include <functional>
 #include <iterator>
 
 namespace forfun::last_stone_weight {
@@ -81,6 +83,39 @@ namespace heapified {
 // Placeholder.
 
 } // namespace heapified
+
+namespace partially_sorted {
+
+/// Assume stones is not empty, and each element (stone) of stones is
+/// non-negative, otherwise the function's behavior is undefined.
+template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+last_stone_weight(Iter const first, Sentinel end) noexcept
+    -> std::iter_value_t<Iter>
+{
+    using ValueType = std::iter_value_t<Iter>;
+    using DiffType = std::iter_difference_t<Iter>;
+
+    assert(std::distance(first, end) > DiffType{0});
+
+    if ((end - first) > ValueType{1})
+    {
+        auto iter{first};
+        auto const sort_end{first + DiffType{2}};
+        for (++iter; iter != end;)
+        {
+            std::partial_sort(first, sort_end, end, std::greater<>());
+
+            *first -= *iter;
+            *iter = *--end;
+        }
+    }
+
+    return *first;
+}
+
+} // namespace partially_sorted
 
 } // namespace forfun::last_stone_weight
 
