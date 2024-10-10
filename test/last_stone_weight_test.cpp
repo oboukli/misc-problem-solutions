@@ -18,6 +18,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Last stone weight (iterator-based strategies)",
     "[last_stone_weight]",
     (auto last_stone_weight, last_stone_weight),
+    (forfun::last_stone_weight::heapified::last_stone_weight<Iter, Iter>),
     (forfun::last_stone_weight::naive::last_stone_weight<Iter, Iter>),
     (forfun::last_stone_weight::partially_sorted::last_stone_weight<Iter, Iter>)
 )
