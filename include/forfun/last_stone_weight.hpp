@@ -80,7 +80,41 @@ last_stone_weight(Iter const first, Sentinel end) noexcept
 
 namespace heapified {
 
-// Placeholder.
+/// Assume each element (stone) of stones is non-negative, otherwise the
+/// function's behavior is undefined.
+template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+last_stone_weight(Iter const first, Sentinel end) noexcept
+    -> std::iter_value_t<Iter>
+{
+    using ValueType = std::iter_value_t<Iter>;
+    using DiffType = decltype(end - first);
+
+    std::make_heap(first, end);
+
+    auto size{end - first};
+
+    while (size > DiffType{1})
+    {
+        auto s{*first};
+        std::pop_heap(first, end--);
+
+        s -= *first;
+        std::pop_heap(first, end--);
+
+        if (s != ValueType{0})
+        {
+            *end = s;
+            ++end;
+            std::push_heap(first, end);
+        }
+
+        size = end - first;
+    }
+
+    return size == DiffType{0} ? ValueType{0} : *first;
+}
 
 } // namespace heapified
 
