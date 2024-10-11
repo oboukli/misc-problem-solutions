@@ -78,6 +78,7 @@ target_sources(
   "src/forfun/first_missing_positive.cpp"
   "src/forfun/fizzbuzz.cpp"
   "src/forfun/gcd.cpp"
+  "src/forfun/last_stone_weight.cpp"
   "src/forfun/lru_cache.cpp"
   "src/forfun/majority_element.cpp"
   "src/forfun/maximum_subarray.cpp"
