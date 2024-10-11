@@ -15,6 +15,7 @@
 #include <concepts>
 #include <functional>
 #include <iterator>
+#include <vector>
 
 namespace forfun::last_stone_weight {
 
@@ -150,6 +151,14 @@ last_stone_weight(Iter const first, Sentinel end) noexcept
 }
 
 } // namespace partially_sorted
+
+namespace priority_queue_based {
+
+/// Assume each element (stone) of stones is non-negative, otherwise the
+/// function's behavior is undefined.
+[[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) noexcept -> int;
+
+} // namespace priority_queue_based
 
 } // namespace forfun::last_stone_weight
 
