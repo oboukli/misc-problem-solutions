@@ -435,6 +435,7 @@ target_sources(
   "benchmark/gcd_benchmark.cpp"
   "benchmark/graph/breadth_first_search_benchmark.cpp"
   "benchmark/graph/depth_first_search_benchmark.cpp"
+  "benchmark/last_stone_weight_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/majority_element_benchmark.cpp"
   "benchmark/maximum_subarray_benchmark.cpp"
