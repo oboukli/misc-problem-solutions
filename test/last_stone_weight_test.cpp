@@ -15,6 +15,43 @@
 
 using Iter = std::vector<int>::iterator;
 
+TEST_CASE("Last stone weight applied on empty container", "[last_stone_weight]")
+{
+    SECTION(
+        "Empty container with "
+        "forfun::last_stone_weight::heapified::last_stone_weight"
+    )
+    {
+        std::vector<int> stones{};
+
+        CAPTURE(stones);
+
+        REQUIRE(
+            forfun::last_stone_weight::heapified::last_stone_weight(
+                stones.begin(), stones.end()
+            )
+            == 0
+        );
+    }
+
+    SECTION(
+        "Empty container with "
+        "forfun::last_stone_weight::priority_queue_based::last_stone_weight"
+    )
+    {
+        std::vector<int> stones{};
+
+        CAPTURE(stones);
+
+        int const actual{
+            forfun::last_stone_weight::priority_queue_based::last_stone_weight(
+                std::move(stones)
+            )
+        };
+        REQUIRE(actual == 0);
+    }
+}
+
 TEMPLATE_TEST_CASE_SIG(
     "Last stone weight (iterator-based strategies)",
     "[last_stone_weight]",
