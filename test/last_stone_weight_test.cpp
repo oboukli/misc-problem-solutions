@@ -177,6 +177,102 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 3);
     }
+
+    SECTION("Sixty-four positive non-zero elements (benchmark case)")
+    {
+        std::vector stones{
+            2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,  37,  41,
+            43,  47,  53,  59,  61,  67,  71,  73,  79,  83,  89,  97,  101,
+            103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
+            173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239,
+            241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311,
+        };
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 1);
+    }
+
+    SECTION("One element; Element is zero")
+    {
+        std::vector stones{0};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 0);
+    }
+
+    SECTION("Two elements, all of which are zero")
+    {
+        std::vector stones{0, 0};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 0);
+    }
+
+    SECTION("Three elements, all of which are zero")
+    {
+        std::vector stones{0, 0, 0};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 0);
+    }
+
+    SECTION("Two elements, one of which is zero")
+    {
+        std::vector stones{0, 3};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 3);
+    }
+
+    SECTION("Trailing zero")
+    {
+        std::vector stones{3, 0};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 3);
+    }
+
+    SECTION("LeetCode test case 1")
+    {
+        std::vector stones{2, 7, 4, 1, 8, 1};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 1);
+    }
+
+    SECTION("LeetCode test case 2")
+    {
+        std::vector stones{1};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 1);
+    }
+
+    SECTION("NeetCode test case 1")
+    {
+        std::vector stones{2, 3, 6, 2, 4};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 1);
+    }
+
+    SECTION("NeetCode test case 2")
+    {
+        std::vector stones{1, 2};
+
+        CAPTURE(stones);
+
+        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 1);
+    }
 }
 
 TEST_CASE(
@@ -314,5 +410,111 @@ TEST_CASE(
 
         int const actual{last_stone_weight(std::move(stones))};
         REQUIRE(actual == 3);
+    }
+
+    SECTION("Sixty-four positive non-zero elements (benchmark case)")
+    {
+        std::vector stones{
+            2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,  37,  41,
+            43,  47,  53,  59,  61,  67,  71,  73,  79,  83,  89,  97,  101,
+            103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167,
+            173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239,
+            241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311,
+        };
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 1);
+    }
+
+    SECTION("One element; Element is zero")
+    {
+        std::vector stones{0};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 0);
+    }
+
+    SECTION("Two elements, all of which are zero")
+    {
+        std::vector stones{0, 0};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 0);
+    }
+
+    SECTION("Three elements, all of which are zero")
+    {
+        std::vector stones{0, 0, 0};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 0);
+    }
+
+    SECTION("Two elements, one of which is zero")
+    {
+        std::vector stones{0, 3};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 3);
+    }
+
+    SECTION("Trailing zero")
+    {
+        std::vector stones{3, 0};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 3);
+    }
+
+    SECTION("LeetCode test case 1")
+    {
+        std::vector stones{2, 7, 4, 1, 8, 1};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 1);
+    }
+
+    SECTION("LeetCode test case 2")
+    {
+        std::vector stones{1};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 1);
+    }
+
+    SECTION("NeetCode test case 1")
+    {
+        std::vector stones{2, 3, 6, 2, 4};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 1);
+    }
+
+    SECTION("NeetCode test case 2")
+    {
+        std::vector stones{1, 2};
+
+        CAPTURE(stones);
+
+        int const actual{last_stone_weight(std::move(stones))};
+        REQUIRE(actual == 1);
     }
 }
