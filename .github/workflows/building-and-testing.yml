@@ -196,15 +196,13 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.RELEASE_BINARY_DIR }}
 
-  macos_xcode:
-    name: Build and test on macOS with Xcode
+  apple_clang_debug_aarch64_macos:
+    name: Build (Apple Clang Debug AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
       BUILD_PRESET_NAME: xcode
-      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
-      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
-      BENCHMARK_BUILD_CONFIGURATION: Release
-      TEST_BUILD_CONFIGURATION: Debug
+      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
+      BUILD_CONFIGURATION: Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
       XCODE_RELEASE: "16.0"
 
@@ -242,27 +240,104 @@ jobs:
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 
-      - name: Configure CMake for testing
+      - name: Configure CMake
         run: >-
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
-      - name: Build with sanitizers for testing
+      - name: Build with sanitizers
         run: >-
           cmake
           --build
-          --config '${{ env.TEST_BUILD_CONFIGURATION }}'
+          --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
           --preset '${{ env.BUILD_PRESET_NAME }}'
           --
           -enableAddressSanitizer YES
           -enableUndefinedBehaviorSanitizer YES
 
-      - name: Build for benchmarking
+      - name: Run test driver
+        run: >-
+          ./test_driver
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of experimental library
+        run: >-
+          ./test_driver_experimental
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks
+        run: >-
+          ./benchmark_driver
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of experimental library
+        run: >-
+          ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+  apple_clang_release_aarch64_macos:
+    name: Build (Apple Clang Release AArch64 macOS)
+    env:
+      CONFIGURE_PRESET_NAME: xcode
+      BUILD_PRESET_NAME: xcode
+      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
+      BUILD_CONFIGURATION: Release
+      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      XCODE_RELEASE: "16.0"
+
+    runs-on: macos-latest
+
+    steps:
+      - name: Set default Xcode release
+        run: >-
+          sudo xcode-select
+          -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Export GitHub Actions cache environment variables
+        uses: actions/github-script@v7
+        with:
+          script: |-
+            core.exportVariable(
+              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
+            );
+            core.exportVariable(
+              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
+            );
+
+      - name: Bootstrap vcpkg
+        run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build
         run: >-
           cmake
           --build
-          --config '${{ env.BENCHMARK_BUILD_CONFIGURATION }}'
+          --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
           --preset '${{ env.BUILD_PRESET_NAME }}'
 
@@ -271,25 +346,25 @@ jobs:
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run test driver of experimental library
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
