@@ -163,24 +163,25 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-  linux:
-    name: Build and test on Ubuntu
+  gcc_debug_x86_64_linux:
+    name: Build (GCC Debug x86-64 Linux)
     env:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
       CONFIGURE_PRESET_NAME: strict-gcc
-      DEBUG_BUILD_PRESET_NAME: strict-gcc-debug
-      RELEASE_BUILD_PRESET_NAME: strict-gcc-release
-      DEBUG_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
-      RELEASE_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
+      BUILD_PRESET_NAME: strict-gcc-debug
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
     runs-on: ubuntu-24.04
 
     steps:
       - name: Install tools
-        run: |-
+        run: >-
           sudo apt-get update
-          sudo apt-get install ninja-build valgrind
+
+          sudo apt-get install
+          ninja-build
+          valgrind
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -208,24 +209,17 @@ jobs:
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 
-      - name: Configure CMake for testing
+      - name: Configure CMake
         run: >-
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
-      - name: Build for testing
+      - name: Build
         run: >-
           cmake
           --build
           --parallel
-          --preset '${{ env.DEBUG_BUILD_PRESET_NAME }}'
-
-      - name: Build for benchmarking
-        run: >-
-          cmake
-          --build
-          --parallel
-          --preset '${{ env.RELEASE_BUILD_PRESET_NAME }}'
+          --preset '${{ env.BUILD_PRESET_NAME }}'
 
       - name: Run and instrument test driver
         run: >-
@@ -236,7 +230,7 @@ jobs:
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
         run: >-
@@ -247,21 +241,115 @@ jobs:
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.DEBUG_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.RELEASE_BINARY_DIR }}
+        working-directory: ${{ env.BINARY_DIR }}
+
+  gcc_release_x86_64_linux:
+    name: Build (GCC Release x86-64 Linux)
+    env:
+      CC: /usr/bin/gcc-14
+      CXX: /usr/bin/g++-14
+      CONFIGURE_PRESET_NAME: strict-gcc
+      BUILD_PRESET_NAME: strict-gcc-release
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
+      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Install tools
+        run: >-
+          sudo apt-get update
+
+          sudo apt-get install
+          ninja-build
+          valgrind
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Export GitHub Actions cache environment variables
+        uses: actions/github-script@v7
+        with:
+          script: |-
+            core.exportVariable(
+              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
+            );
+            core.exportVariable(
+              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
+            );
+
+      - name: Bootstrap vcpkg
+        run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build
+        run: >-
+          cmake
+          --build
+          --parallel
+          --preset '${{ env.BUILD_PRESET_NAME }}'
+
+      - name: Run and instrument test driver
+        run: >-
+          /usr/bin/valgrind
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run and instrument test driver of experimental library
+        run: >-
+          /usr/bin/valgrind
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_experimental
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks
+        run: >-
+          ./benchmark_driver
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of experimental library
+        run: >-
+          ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
 
   apple_clang_debug_aarch64_macos:
     name: Build (Apple Clang Debug AArch64 macOS)
