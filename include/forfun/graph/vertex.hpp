@@ -67,7 +67,7 @@ constexpr auto get_adjacencies_iter(
 template <std::regular T>
 auto init_state_list(
     VertexAdjacencyList<T> const& adjacency_list, VertexStateList<T>& state_list
-) noexcept -> void
+) -> void
 {
     for (auto const& adjacencies : adjacency_list)
     {
