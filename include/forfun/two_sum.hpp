@@ -56,7 +56,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter const first, Sentinel const end, std::iter_value_t<Iter> const target
-) noexcept -> std::array<Iter, 2U>
+) -> std::array<Iter, 2U>
 {
     std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
     for (auto iter{first}; iter != end; ++iter)

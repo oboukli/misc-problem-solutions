@@ -24,7 +24,7 @@ namespace forfun::evaluate_reverse_polish_notation {
 namespace hardened {
 
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end) noexcept
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
     if (iter == end)
@@ -106,7 +106,7 @@ invalid_argument:
 namespace unhardened {
 
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end) noexcept
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
     if (iter == end)
@@ -169,7 +169,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 namespace speed_optimized {
 
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end) noexcept
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
     auto const evaluation_stack_size{

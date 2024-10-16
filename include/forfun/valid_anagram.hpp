@@ -27,9 +27,9 @@ namespace char_only {
 namespace generic {
 
 template <std::integral CharT>
-[[nodiscard]] auto is_anagram(
-    std::basic_string_view<CharT> s, std::basic_string_view<CharT> t
-) noexcept -> bool
+[[nodiscard]] auto
+is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
+    -> bool
 {
     using Iter = std::basic_string_view<CharT>::const_iterator;
 

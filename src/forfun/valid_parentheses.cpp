@@ -33,7 +33,7 @@ namespace {
 
 namespace ascii_optimized {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
@@ -66,7 +66,7 @@ namespace ascii_optimized {
 
 namespace circuit_breaker {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
     using SizeType = std::u8string_view::size_type;
@@ -105,7 +105,7 @@ namespace circuit_breaker {
 
 namespace deque_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
@@ -137,7 +137,7 @@ namespace deque_based {
 namespace dyn_array_based {
 
 /// @note Utilizes odd string circuit breaker and a dynamic array.
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
     using SizeType = std::u8string_view::size_type;
@@ -206,7 +206,7 @@ namespace dyn_array_based {
 
 namespace vector_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
@@ -238,7 +238,7 @@ namespace vector_based {
 
 namespace vector_based_demi_allocated {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) noexcept -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 

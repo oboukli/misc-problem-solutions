@@ -21,7 +21,7 @@
 
 namespace forfun::fizzbuzz {
 
-[[nodiscard]] auto fizzbuzz(int n) noexcept -> std::string;
+[[nodiscard]] auto fizzbuzz(int n) -> std::string;
 
 } // namespace forfun::fizzbuzz
 

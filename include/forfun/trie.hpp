@@ -48,7 +48,7 @@ using StringViewT = std::basic_string_view<typename T::value_type>;
 
 template <typename T>
     requires std::same_as<T, TrieNode<typename T::value_type>>
-auto insert(T& root, StringViewT<T> const& word) noexcept -> void
+auto insert(T& root, StringViewT<T> const& word) -> void
 {
     using LenT = StringViewT<T>::size_type;
 
