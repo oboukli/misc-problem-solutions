@@ -17,8 +17,7 @@ struct forward_list_node final {
 
     T value{};
 
-    explicit constexpr forward_list_node(T val) noexcept :
-        next{nullptr}, value{val}
+    explicit constexpr forward_list_node(T val) noexcept : value{val}
     {
     }
 
