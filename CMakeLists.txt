@@ -125,6 +125,7 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/graph/binary_tree_node.hpp"
   "include/forfun/graph/breadth_first_search.hpp"
   "include/forfun/graph/depth_first_search.hpp"
   "include/forfun/graph/vertex.hpp"
@@ -132,6 +133,7 @@ target_sources(
 target_sources(
   forfun_graph
   PRIVATE
+  "src/forfun/graph/binary_tree_node.cpp"
   "src/forfun/graph/breadth_first_search.cpp"
   "src/forfun/graph/depth_first_search.cpp"
   "src/forfun/graph/vertex.cpp"
