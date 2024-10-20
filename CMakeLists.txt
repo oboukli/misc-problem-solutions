@@ -125,6 +125,7 @@ target_sources(
   PUBLIC
   FILE_SET HEADERS
   FILES
+  "include/forfun/graph/balanced_binary_tree.hpp"
   "include/forfun/graph/binary_tree_node.hpp"
   "include/forfun/graph/breadth_first_search.hpp"
   "include/forfun/graph/depth_first_search.hpp"
@@ -133,6 +134,7 @@ target_sources(
 target_sources(
   forfun_graph
   PRIVATE
+  "src/forfun/graph/balanced_binary_tree.cpp"
   "src/forfun/graph/binary_tree_node.cpp"
   "src/forfun/graph/breadth_first_search.cpp"
   "src/forfun/graph/depth_first_search.cpp"
@@ -338,6 +340,7 @@ target_sources(
   "test/first_missing_positive_test.cpp"
   "test/fizzbuzz_test.cpp"
   "test/gcd_test.cpp"
+  "test/graph/balanced_binary_tree_test.cpp"
   "test/graph/breadth_first_search_test.cpp"
   "test/graph/depth_first_search_test.cpp"
   "test/graph/vertex_test.cpp"
