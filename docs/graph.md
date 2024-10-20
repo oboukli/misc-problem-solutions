@@ -4,6 +4,8 @@
 
 ### Graph 1
 
+Six-node tree.
+
 ```mermaid
 flowchart TB
     id1((1)) --- id2((2))
@@ -16,6 +18,8 @@ flowchart TB
 ```
 
 ### Graph 2
+
+Eight-node graph with a cycle.
 
 ```mermaid
 flowchart TB
