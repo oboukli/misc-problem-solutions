@@ -125,25 +125,22 @@ namespace partially_sorted {
 /// non-negative, otherwise the function's behavior is undefined.
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel end) noexcept
+[[nodiscard]] constexpr auto last_stone_weight(Iter iter, Sentinel end) noexcept
     -> std::iter_value_t<Iter>
 {
-    using ValueType = std::iter_value_t<Iter>;
-    using DiffType = std::iter_difference_t<Iter>;
+    assert(std::distance(iter, end) > std::iter_difference_t<Iter>{0});
 
-    assert(std::distance(first, end) > DiffType{0});
+    auto const first{iter};
+    auto const second{++iter};
 
-    if ((end - first) > ValueType{1})
+    if (iter != end)
     {
-        auto iter{first};
-        auto const sort_end{first + DiffType{2}};
-        for (++iter; iter != end;)
+        for (++iter; second != end;)
         {
-            std::partial_sort(first, sort_end, end, std::greater<>());
+            std::partial_sort(first, iter, end, std::greater<>());
 
-            *first -= *iter;
-            *iter = *--end;
+            *first -= *second;
+            *second = *--end;
         }
     }
 
