@@ -36,3 +36,48 @@ flowchart TB
 
     id7      --- id8
 ```
+
+### Graph 3
+
+Balanced twelve-node binary tree.
+
+```mermaid
+flowchart TB
+    id1((a)) --- id2((b))
+    id1      --- id3((c))
+
+    id2      --- id4((d))
+    id2      --- id5((e))
+
+    id3      --- id6((f))
+    id3      --- id7((g))
+
+    id6      --- id8((h))
+    id6      --- id9((i))
+
+    id7      --- id10((j))
+    id7      --- id11((k))
+```
+
+### Graph 4
+
+Unbalanced twelve-node binary tree.
+
+```mermaid
+flowchart TB
+    id1((a)) --- id2((b))
+    id1      --- id3((c))
+
+    id2      --- id4((d))
+    id2      --- id5((e))
+
+    id3      --- id6((f))
+    id3      --- id7((g))
+
+    id6      --- id8((h))
+    id6      --- id9((i))
+
+    id7      --- id10((j))
+    id7      --- id11((k))
+    id10     --- id12((l))
+```
