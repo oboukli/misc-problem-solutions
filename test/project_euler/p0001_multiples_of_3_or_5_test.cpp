@@ -25,7 +25,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 1 (static)")
     {
-        static constexpr unsigned int const actual{find_sum_mult_three_five(1U)
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(1U)
         };
 
         STATIC_REQUIRE(actual == 0U);
@@ -33,7 +34,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 3 (static)")
     {
-        static constexpr unsigned int const actual{find_sum_mult_three_five(3U)
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(3U)
         };
 
         STATIC_REQUIRE(actual == 3U);
@@ -41,7 +43,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 4 (static)")
     {
-        static constexpr unsigned int const actual{find_sum_mult_three_five(4U)
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(4U)
         };
 
         STATIC_REQUIRE(actual == 3U);
@@ -49,7 +52,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 6 (static)")
     {
-        static constexpr unsigned int const actual{find_sum_mult_three_five(6U)
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(6U)
         };
 
         STATIC_REQUIRE(actual == 14U);
@@ -57,7 +61,8 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 10 (static)")
     {
-        static constexpr unsigned int const actual{find_sum_mult_three_five(10U)
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(10U)
         };
 
         STATIC_REQUIRE(actual == 33U);

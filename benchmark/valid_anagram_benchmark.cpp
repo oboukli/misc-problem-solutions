@@ -36,7 +36,8 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
         .run(
             NAMEOF_RAW(generic::is_anagram<char>).c_str(),
             []() noexcept(false) {
-                bool const r{generic::is_anagram<char>("anagram"sv, "nagaram"sv)
+                bool const r{
+                    generic::is_anagram<char>("anagram"sv, "nagaram"sv)
                 };
 
                 ankerl::nanobench::doNotOptimizeAway(r);
