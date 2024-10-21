@@ -56,7 +56,8 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome<char>).c_str(),
                 [&palindrome]() noexcept {
-                    auto const r{functional::bloated::is_palindrome(palindrome)
+                    auto const r{
+                        functional::bloated::is_palindrome(palindrome)
                     };
 
                     ankerl::nanobench::doNotOptimizeAway(r);

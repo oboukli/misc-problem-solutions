@@ -91,7 +91,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("[]{{{{{()}}}}}(([[[[]]]]))")
         {
-            constexpr std::u8string_view const s{u8"[]{{{{{()}}}}}(([[[[]]]]))"
+            constexpr std::u8string_view const s{
+                u8"[]{{{{{()}}}}}(([[[[]]]]))"
             };
 
             CAPTURE(s);

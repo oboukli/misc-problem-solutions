@@ -120,7 +120,8 @@ TEMPLATE_TEST_CASE(
     SECTION("20! is 2,432,902,008,176,640,000")
     {
         auto const volatile n{TestType{20}};
-        static constexpr auto const expected{TestType{2'432'902'008'176'640'000}
+        static constexpr auto const expected{
+            TestType{2'432'902'008'176'640'000}
         };
 
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
