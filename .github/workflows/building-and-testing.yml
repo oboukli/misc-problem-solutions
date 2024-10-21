@@ -57,7 +57,11 @@ jobs:
           cmake
           --build
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
+          --preset ${{ env.BUILD_PRESET_NAME }}
+          --
+          -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
+        shell: cmd
+
 
       - name: Run test driver
         run: >-
@@ -133,7 +137,10 @@ jobs:
           cmake
           --build
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
+          --preset ${{ env.BUILD_PRESET_NAME }}
+          --
+          -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
+        shell: cmd
 
       - name: Run test driver
         run: >-
