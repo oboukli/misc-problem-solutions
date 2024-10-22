@@ -58,7 +58,6 @@ find_sum_mult_three_five(unsigned int const n) noexcept -> unsigned int
 {
     using detail::sum_mult_2x;
 
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
     return (sum_mult_2x(3U, n) + sum_mult_2x(5U, n) - sum_mult_2x(15U, n)) / 2U;
 }
 
