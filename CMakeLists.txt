@@ -438,6 +438,7 @@ target_sources(
   "benchmark/first_missing_positive_benchmark.cpp"
   "benchmark/fizzbuzz_benchmark.cpp"
   "benchmark/gcd_benchmark.cpp"
+  "benchmark/graph/balanced_binary_tree_benchmark.cpp"
   "benchmark/graph/breadth_first_search_benchmark.cpp"
   "benchmark/graph/depth_first_search_benchmark.cpp"
   "benchmark/last_stone_weight_benchmark.cpp"
