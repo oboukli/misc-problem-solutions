@@ -19,6 +19,12 @@ namespace complicated {
 
 } // namespace complicated
 
+namespace hacky {
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+
+} // namespace hacky
+
 namespace simple {
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
