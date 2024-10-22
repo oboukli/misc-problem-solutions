@@ -8,8 +8,59 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <utility>
 
 namespace forfun::graph::balanced_binary_tree {
+
+namespace complicated {
+
+namespace {
+
+auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+    -> std::pair<std::size_t, bool>
+{
+    if (head == nullptr)
+    {
+        return {std::size_t{0U}, false};
+    }
+
+    auto const left{is_unbalanced_internal(head->left_node_)};
+    if (left.second)
+    {
+        return left;
+    }
+
+    auto const right{is_unbalanced_internal(head->right_node_)};
+    if (right.second)
+    {
+        return right;
+    }
+
+    // clang-format off
+    auto diff{
+        left.first > right.first
+        ? left.first - right.first
+        : right.first - left.first
+    };
+    // clang-format on
+
+    if (diff > std::size_t{1U})
+    {
+        return {diff, true}; // Or {0, true}
+    }
+
+    return {std::size_t{1} + std::max(left.first, right.first), false};
+}
+
+} // namespace
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+    -> bool
+{
+    return not is_unbalanced_internal(head).second;
+}
+
+} // namespace complicated
 
 namespace simple {
 

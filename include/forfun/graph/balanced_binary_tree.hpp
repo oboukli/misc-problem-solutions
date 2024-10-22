@@ -13,6 +13,12 @@ namespace forfun::graph::balanced_binary_tree {
 
 using forfun::graph::binary_tree_node;
 
+namespace complicated {
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+
+} // namespace complicated
+
 namespace simple {
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
