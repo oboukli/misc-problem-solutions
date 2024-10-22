@@ -24,7 +24,6 @@ namespace forfun::fizzbuzz {
             is_numeric = false;
         }
 
-        // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
         if ((i % 5) == 0)
         {
             stream << "Buzz";

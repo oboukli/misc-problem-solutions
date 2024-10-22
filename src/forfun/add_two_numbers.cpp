@@ -41,9 +41,7 @@ namespace forfun::add_two_numbers::stl {
             column_sum += *addend_b_iter++;
         }
 
-        // NOLINTNEXTLINE (cppcoreguidelines-avoid-magic-numbers)
         back_iter = result.insert_after(back_iter, column_sum % 10U);
-        // NOLINTNEXTLINE (cppcoreguidelines-avoid-magic-numbers)
         carry = column_sum / 10U;
         column_sum = carry;
     }

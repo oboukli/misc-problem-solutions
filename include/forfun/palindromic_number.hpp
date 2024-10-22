@@ -26,10 +26,8 @@ namespace fast {
     auto d{n};
     while (d > T{0})
     {
-        // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers)
         nn = static_cast<T>((nn * T{10}) + (d % T{10}));
         d /= T{10};
-        // NOLINTEND(cppcoreguidelines-avoid-magic-numbers)
     }
 
     return n == nn;
