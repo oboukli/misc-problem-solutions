@@ -35,6 +35,7 @@ target_sources(
   FILES
   "include/forfun/add_two_numbers.hpp"
   "include/forfun/array_concatenation.hpp"
+  "include/forfun/best_time_to_buy_and_sell_stock.hpp"
   "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
   "include/forfun/evaluate_reverse_polish_notation.hpp"
@@ -69,6 +70,7 @@ target_sources(
   PRIVATE
   "src/forfun/add_two_numbers.cpp"
   "src/forfun/array_concatenation.cpp"
+  "src/forfun/best_time_to_buy_and_sell_stock.cpp"
   "src/forfun/common.cpp"
   "src/forfun/contains_duplicate.cpp"
   "src/forfun/evaluate_reverse_polish_notation.cpp"
@@ -331,6 +333,7 @@ target_sources(
   PRIVATE
   "test/add_two_numbers_test.cpp"
   "test/array_concatenation_test.cpp"
+  "test/best_time_to_buy_and_sell_stock_test.cpp"
   "test/common_test.cpp"
   "test/contains_duplicate_test.cpp"
   "test/evaluate_reverse_polish_notation_test.cpp"
