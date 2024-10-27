@@ -7,16 +7,20 @@
 #include <array>
 
 #include <catch2/catch_message.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/best_time_to_buy_and_sell_stock.hpp"
 
-TEST_CASE(
-    "Best time to buy and sell stock", "[best_time_to_buy_and_sell_stock]"
+TEMPLATE_TEST_CASE_SIG(
+    "Best time to buy and sell stock",
+    "[best_time_to_buy_and_sell_stock]",
+    (auto calc_max_profit, calc_max_profit),
+    forfun::best_time_to_buy_and_sell_stock::calc_max_profit,
+    forfun::best_time_to_buy_and_sell_stock::optimized_l1::calc_max_profit,
+    forfun::best_time_to_buy_and_sell_stock::optimized_l2::calc_max_profit
 )
 {
-    using forfun::best_time_to_buy_and_sell_stock::calc_max_profit;
-
     SECTION("Empty price container")
     {
         std::array<int, 0U> const prices{};
