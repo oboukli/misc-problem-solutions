@@ -30,7 +30,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 
         .run(
             NAMEOF_RAW(std::find<Itr, int>).c_str(),
-            [&records]() {
+            [&records]() noexcept {
                 // NOLINTNEXTLINE(modernize-use-ranges)
                 Itr const r{std::find(records.cbegin(), records.cend(), 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
@@ -39,7 +39,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 
         .run(
             NAMEOF_RAW(std::ranges::find).c_str(),
-            [&records]() {
+            [&records]() noexcept {
                 Itr const r{std::ranges::find(records, 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
@@ -47,7 +47,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 
         .run(
             NAMEOF_RAW(iterative::find<Itr, int>).c_str(),
-            [&records]() {
+            [&records]() noexcept {
                 Itr const r{
                     iterative::find(records.cbegin(), records.cend(), 41)
                 };
@@ -57,7 +57,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 
         .run(
             NAMEOF_RAW(recursive::find<Itr, int>).c_str(),
-            [&records]() {
+            [&records]() noexcept {
                 Itr const r{
                     recursive::find(records.cbegin(), records.cend(), 41)
                 };

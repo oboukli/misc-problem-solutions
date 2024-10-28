@@ -42,7 +42,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
-            [&adjacency_list]() {
+            [&adjacency_list]() noexcept {
                 constexpr vertex<int> const starting_vertex{1};
 
                 // NOLINTNEXTLINE(misc-const-correctness)

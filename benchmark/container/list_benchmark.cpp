@@ -34,7 +34,7 @@ TEST_CASE(
 
         .run(
             "experimental::container::list",
-            []() {
+            []() noexcept {
                 forfun::experimental::container::list list{};
                 list.push_back(1301);
 
