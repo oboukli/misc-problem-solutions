@@ -119,36 +119,6 @@ last_stone_weight(Iter const first, Sentinel end) noexcept
 
 } // namespace heapified
 
-namespace partially_sorted {
-
-/// Assume stones is not empty, and each element (stone) of stones is
-/// non-negative, otherwise the function's behavior is undefined.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] constexpr auto last_stone_weight(Iter iter, Sentinel end) noexcept
-    -> std::iter_value_t<Iter>
-{
-    assert(std::distance(iter, end) > std::iter_difference_t<Iter>{0});
-
-    auto const first{iter};
-    auto const second{++iter};
-
-    if (iter != end)
-    {
-        for (++iter; second != end;)
-        {
-            std::partial_sort(first, iter, end, std::greater<>());
-
-            *first -= *second;
-            *second = *--end;
-        }
-    }
-
-    return *first;
-}
-
-} // namespace partially_sorted
-
 namespace priority_queue_based {
 
 /// Assume each element (stone) of stones is non-negative, otherwise the
