@@ -11,14 +11,16 @@
 
 TEST_CASE("Sonar", "[sonar]")
 {
-    using namespace forfun::sonar;
+    using forfun::sonar::area;
+    using forfun::sonar::coord;
+    using forfun::sonar::sonar;
 
     SECTION("Sonar test case 1")
     {
-        Sonar const sonar{{{.x = 0, .y = 0}}};
+        sonar const sonar{{{.x = 0, .y = 0}}};
 
-        auto const [area, expected_num_ships]{GENERATE(
-            table<Area, int>({
+        auto const [a, expected_num_ships]{GENERATE(
+            table<area, int>({
                 {{0, 0, 0, 0}, 1},
                 {{0, 0, 1, 3}, 0},
                 {{0, 5, 0, 7}, 1},
@@ -26,13 +28,13 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(sonar, area)};
+        int const num_ships{count_ships(sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 2")
     {
-        Sonar const sonar{{
+        sonar const sonar{{
             {.x = 0, .y = 7},
             {.x = 2, .y = 5},
             {.x = 3, .y = 3},
@@ -40,8 +42,8 @@ TEST_CASE("Sonar", "[sonar]")
             {.x = 5, .y = 2},
         }};
 
-        auto const [area, expected_num_ships]{GENERATE(
-            table<Area, int>({
+        auto const [a, expected_num_ships]{GENERATE(
+            table<area, int>({
                 {{0, 0, 7, 7}, 1},
                 {{0, 5, 1, 5}, 3},
                 {{0, 5, 2, 7}, 5}, // Benchmark case
@@ -49,13 +51,13 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(sonar, area)};
+        int const num_ships{count_ships(sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 3")
     {
-        Sonar const sonar{{
+        sonar const sonar{{
             {.x = 1, .y = 1},
             {.x = 2, .y = 2},
             {.x = 3, .y = 3},
@@ -63,21 +65,21 @@ TEST_CASE("Sonar", "[sonar]")
             {.x = 5, .y = 5},
         }};
 
-        auto const [area, expected_num_ships]{GENERATE(
-            table<Area, int>({
+        auto const [a, expected_num_ships]{GENERATE(
+            table<area, int>({
                 {{1, 1, 1, 1}, 1},
                 {{1, 2, 1, 2}, 2},
                 {{1, 5, 1, 5}, 5},
             })
         )};
 
-        int const num_ships{count_ships(sonar, area)};
+        int const num_ships{count_ships(sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 4")
     {
-        Sonar const sonar{{{.x = 345, .y = 456}}};
+        sonar const sonar{{{.x = 345, .y = 456}}};
 
         int const num_ships{count_ships(
             sonar, {.top = 1, .bottom = 1000, .left = 1, .right = 1000}
@@ -87,7 +89,7 @@ TEST_CASE("Sonar", "[sonar]")
 
     SECTION("Sonar test case 5")
     {
-        Sonar const sonar{{{
+        sonar const sonar{{{
             {.x = 102, .y = 430}, {.x = 488, .y = 821}, {.x = 863, .y = 875},
             {.x = 820, .y = 684}, {.x = 453, .y = 603}, {.x = 99, .y = 476},
             {.x = 516, .y = 730}, {.x = 582, .y = 54},  {.x = 349, .y = 987},

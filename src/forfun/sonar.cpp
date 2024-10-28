@@ -11,7 +11,7 @@
 
 namespace forfun::sonar {
 
-[[nodiscard]] auto count_ships(Sonar const& sonar, Area const area) noexcept
+[[nodiscard]] auto count_ships(sonar const& sonar, area const area) noexcept
     -> int
 {
     if (!sonar.ping(area))
@@ -74,9 +74,9 @@ namespace forfun::sonar {
     // clang-format on
 }
 
-[[nodiscard]] auto Sonar::ping(Area const area) const noexcept -> bool
+[[nodiscard]] auto sonar::ping(area const area) const noexcept -> bool
 {
-    return std::ranges::any_of(coords_, [&area](Coord const& coord) noexcept {
+    return std::ranges::any_of(coords_, [&area](coord const& coord) noexcept {
         return coord.x >= area.top
             && coord.x <= area.bottom
             && coord.y >= area.left
