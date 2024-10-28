@@ -19,7 +19,7 @@
 
 namespace forfun::sonar {
 
-struct Area final {
+struct area final {
     int top{};
 
     int bottom{};
@@ -29,38 +29,38 @@ struct Area final {
     int right{};
 };
 
-struct Coord final {
+struct coord final {
     int x{};
 
     int y{};
 };
 
-class Sonar final {
+class sonar final {
 public:
-    Sonar() = delete;
+    sonar() = delete;
 
-    Sonar(Sonar const&) = delete;
+    sonar(sonar const&) = delete;
 
-    Sonar(Sonar&& rhs) = delete;
+    sonar(sonar&& rhs) = delete;
 
-    explicit Sonar(std::vector<Coord>&& coords) noexcept :
+    explicit sonar(std::vector<coord>&& coords) noexcept :
         coords_{std::move(coords)}
     {
     }
 
-    ~Sonar() = default;
+    ~sonar() = default;
 
-    auto operator=(Sonar const&) -> Sonar = delete;
+    auto operator=(sonar const&) -> sonar = delete;
 
-    auto operator=(Sonar&&) -> Sonar = delete;
+    auto operator=(sonar&&) -> sonar = delete;
 
-    [[nodiscard]] auto ping(Area area) const noexcept -> bool;
+    [[nodiscard]] auto ping(area area) const noexcept -> bool;
 
 private:
-    std::vector<Coord> coords_;
+    std::vector<coord> coords_;
 };
 
-[[nodiscard]] auto count_ships(Sonar const& sonar, Area area) noexcept -> int;
+[[nodiscard]] auto count_ships(sonar const& sonar, area area) noexcept -> int;
 
 } // namespace forfun::sonar
 

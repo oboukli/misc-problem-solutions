@@ -16,7 +16,7 @@ TEST_CASE("Sonar benchmarking", "[benchmark][sonar]")
 {
     using namespace forfun::sonar;
 
-    Sonar const sonar{{
+    sonar const sonar{{
         {.x = 0, .y = 7},
         {.x = 2, .y = 5},
         {.x = 3, .y = 3},
