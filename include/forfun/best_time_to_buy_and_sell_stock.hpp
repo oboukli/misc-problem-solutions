@@ -11,31 +11,34 @@
 #define FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 
 #include <algorithm>
-#include <span>
+#include <concepts>
+#include <iterator>
 
 namespace forfun::best_time_to_buy_and_sell_stock {
 
+template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-calc_max_profit(std::span<int const> const prices) noexcept -> int
+calc_max_profit(Iter iter, Sentinel const last) noexcept
+    -> std::iter_value_t<Iter>
 {
-    if (prices.size() < decltype(prices)::size_type{2U})
+    using TypeValue = std::iter_value_t<Iter>;
+
+    if (iter == last)
     {
-        return 0;
+        return TypeValue{0};
     }
 
-    int max_profit{0};
-    auto buyer_iter{prices.begin()}; // Could be refactored to use C++23 cbegin
-    auto seller_iter{buyer_iter};
-    ++seller_iter;
-    auto const end{prices.end()};
+    TypeValue max_profit{0};
+    auto buyer_iter{iter};
 
-    for (; seller_iter != end; ++seller_iter)
+    for (++iter; iter != last; ++iter)
     {
-        auto const profit{*seller_iter - *buyer_iter};
+        auto const profit{*iter - *buyer_iter};
 
-        if (profit < 0)
+        if (profit < TypeValue{0})
         {
-            buyer_iter = seller_iter;
+            buyer_iter = iter;
 
             continue;
         }
@@ -47,27 +50,30 @@ calc_max_profit(std::span<int const> const prices) noexcept -> int
 }
 
 namespace optimized_l1 {
-[[nodiscard]] constexpr auto
-calc_max_profit(std::span<int const> const prices) noexcept -> int
-{
-    auto seller_iter{prices.begin()};
-    auto const end{prices.end()};
 
-    if (seller_iter == end)
+template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::same_as<int, std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+calc_max_profit(Iter iter, Sentinel const last) noexcept
+    -> std::iter_value_t<Iter>
+{
+    using TypeValue = std::iter_value_t<Iter>;
+
+    if (iter == last)
     {
-        return 0;
+        return TypeValue{0};
     }
 
-    auto buyer_price{prices.front()}; // Could be refactored to use C++23 cbegin
-    int max_profit{0};
+    auto buyer_price{*iter};
+    TypeValue max_profit{0};
 
-    for (++seller_iter; seller_iter != end; ++seller_iter)
+    for (++iter; iter != last; ++iter)
     {
-        auto const profit{*seller_iter - buyer_price};
+        auto const profit{*iter - buyer_price};
 
-        if (profit < 0)
+        if (profit < TypeValue{0})
         {
-            buyer_price = *seller_iter;
+            buyer_price = *iter;
 
             continue;
         }
@@ -81,30 +87,33 @@ calc_max_profit(std::span<int const> const prices) noexcept -> int
 } // namespace optimized_l1
 
 namespace optimized_l2 {
-[[nodiscard]] constexpr auto
-calc_max_profit(std::span<int const> const prices) noexcept -> int
-{
-    auto seller_iter{prices.begin()}; // Could be refactored to use C++23 cbegin
-    auto const end{prices.end()};
 
-    if (seller_iter == end)
+template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::same_as<int, std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+calc_max_profit(Iter iter, Sentinel const last) noexcept
+    -> std::iter_value_t<Iter>
+{
+    using TypeValue = std::iter_value_t<Iter>;
+
+    if (iter == last)
     {
-        return 0;
+        return TypeValue{0};
     }
 
-    auto buyer_price{prices.front()};
-    int max_profit{0};
+    auto buyer_price{*iter};
+    TypeValue max_profit{0};
 
-    for (++seller_iter; seller_iter != end; ++seller_iter)
+    for (++iter; iter != last; ++iter)
     {
-        if (*seller_iter < buyer_price)
+        if (*iter < buyer_price)
         {
-            buyer_price = *seller_iter;
+            buyer_price = *iter;
 
             continue;
         }
 
-        max_profit = std::max(*seller_iter - buyer_price, max_profit);
+        max_profit = std::max(*iter - buyer_price, max_profit);
     }
 
     return max_profit;
