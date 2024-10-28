@@ -21,29 +21,30 @@ namespace forfun::sonar {
 
 struct Area final {
     int top{};
+
     int bottom{};
+
     int left{};
+
     int right{};
+};
+
+struct Coord final {
+    int x{};
+
+    int y{};
 };
 
 class Sonar final {
 public:
-    struct Coord final {
-        int x{};
+    Sonar() = delete;
 
-        int y{};
-    };
-
-private:
-    std::vector<Coord> coords_;
-
-public:
     Sonar(Sonar const&) = delete;
 
     Sonar(Sonar&& rhs) = delete;
 
     explicit Sonar(std::vector<Coord>&& coords) noexcept :
-        coords_(std::move(coords))
+        coords_{std::move(coords)}
     {
     }
 
@@ -54,9 +55,12 @@ public:
     auto operator=(Sonar&&) -> Sonar = delete;
 
     [[nodiscard]] auto ping(Area area) const noexcept -> bool;
+
+private:
+    std::vector<Coord> coords_;
 };
 
-auto count_ships(Sonar const& sonar, Area area) noexcept -> int;
+[[nodiscard]] auto count_ships(Sonar const& sonar, Area area) noexcept -> int;
 
 } // namespace forfun::sonar
 
