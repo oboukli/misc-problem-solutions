@@ -13,7 +13,7 @@ TEST_CASE("Sonar", "[sonar]")
 {
     using namespace forfun::sonar;
 
-    SECTION("Test sonar 1")
+    SECTION("Sonar test case 1")
     {
         Sonar const sonar{{{.x = 0, .y = 0}}};
 
@@ -30,7 +30,7 @@ TEST_CASE("Sonar", "[sonar]")
         REQUIRE(num_ships == expected_num_ships);
     }
 
-    SECTION("Test sonar 2")
+    SECTION("Sonar test case 2")
     {
         Sonar const sonar{{
             {.x = 0, .y = 7},
@@ -53,7 +53,7 @@ TEST_CASE("Sonar", "[sonar]")
         REQUIRE(num_ships == expected_num_ships);
     }
 
-    SECTION("Test sonar 3")
+    SECTION("Sonar test case 3")
     {
         Sonar const sonar{{
             {.x = 1, .y = 1},
@@ -75,7 +75,7 @@ TEST_CASE("Sonar", "[sonar]")
         REQUIRE(num_ships == expected_num_ships);
     }
 
-    SECTION("Test sonar 4")
+    SECTION("Sonar test case 4")
     {
         Sonar const sonar{{{.x = 345, .y = 456}}};
 
@@ -85,7 +85,7 @@ TEST_CASE("Sonar", "[sonar]")
         REQUIRE(num_ships == 1);
     }
 
-    SECTION("Test sonar 5")
+    SECTION("Sonar test case 5")
     {
         Sonar const sonar{{{
             {.x = 102, .y = 430}, {.x = 488, .y = 821}, {.x = 863, .y = 875},
