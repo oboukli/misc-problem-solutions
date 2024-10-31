@@ -17,6 +17,7 @@ Checks: '
   portability-*,
   readability-*,
   -cppcoreguidelines-avoid-magic-numbers,
+  -google-readability-todo,
   -misc-no-recursion,
   -misc-non-private-member-variables-in-classes,
   -readability-function-cognitive-complexity,
