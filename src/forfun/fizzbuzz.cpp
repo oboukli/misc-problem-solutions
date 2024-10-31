@@ -7,14 +7,12 @@
 #include "forfun/fizzbuzz.hpp"
 
 #include <ios>
-#include <sstream>
-#include <string>
+#include <ostream>
 
 namespace forfun::fizzbuzz {
 
-[[nodiscard]] auto fizzbuzz(int const n) -> std::string
+auto fizzbuzz(int const n, std::ostream& stream) -> void
 {
-    std::ostringstream stream;
     for (int i{1}; i <= n; ++i)
     {
         bool is_numeric{true};
@@ -35,8 +33,6 @@ namespace forfun::fizzbuzz {
             stream << i;
         }
     }
-
-    return stream.str();
 }
 
 } // namespace forfun::fizzbuzz

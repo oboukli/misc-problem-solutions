@@ -17,11 +17,11 @@
 #ifndef FORFUN_FIZZBUZZ_HPP_
 #define FORFUN_FIZZBUZZ_HPP_
 
-#include <string>
+#include <ostream>
 
 namespace forfun::fizzbuzz {
 
-[[nodiscard]] auto fizzbuzz(int n) -> std::string;
+auto fizzbuzz(int n, std::ostream& stream) -> void;
 
 } // namespace forfun::fizzbuzz
 
