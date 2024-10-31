@@ -1,5 +1,7 @@
 ---
 Checks: '
+  -bugprone-unused-return-value,
+  -cert-err33-c,
   -google-build-using-namespace,
   '
 InheritParentConfig: true
