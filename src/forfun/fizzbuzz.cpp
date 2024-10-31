@@ -6,6 +6,7 @@
 
 #include "forfun/fizzbuzz.hpp"
 
+#include <ios>
 #include <sstream>
 #include <string>
 
@@ -20,13 +21,14 @@ namespace forfun::fizzbuzz {
 
         if ((i % 3) == 0)
         {
-            stream << "Fizz";
+            stream.write("Fizz", std::streamsize{4});
+
             is_numeric = false;
         }
 
         if ((i % 5) == 0)
         {
-            stream << "Buzz";
+            stream.write("Buzz", std::streamsize{4});
         }
         else if (is_numeric)
         {
