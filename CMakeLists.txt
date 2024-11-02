@@ -131,6 +131,7 @@ target_sources(
   "include/forfun/graph/binary_tree_node.hpp"
   "include/forfun/graph/breadth_first_search.hpp"
   "include/forfun/graph/depth_first_search.hpp"
+  "include/forfun/graph/subsets.hpp"
   "include/forfun/graph/vertex.hpp"
 )
 target_sources(
@@ -140,6 +141,7 @@ target_sources(
   "src/forfun/graph/binary_tree_node.cpp"
   "src/forfun/graph/breadth_first_search.cpp"
   "src/forfun/graph/depth_first_search.cpp"
+  "src/forfun/graph/subsets.cpp"
   "src/forfun/graph/vertex.cpp"
 )
 get_target_property(forfun_graph_headers forfun_graph HEADER_SET)
@@ -346,6 +348,7 @@ target_sources(
   "test/graph/balanced_binary_tree_test.cpp"
   "test/graph/breadth_first_search_test.cpp"
   "test/graph/depth_first_search_test.cpp"
+  "test/graph/subsets_test.cpp"
   "test/graph/vertex_test.cpp"
   "test/last_stone_weight_test.cpp"
   "test/lru_cache_test.cpp"
