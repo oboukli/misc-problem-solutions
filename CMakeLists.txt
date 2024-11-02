@@ -448,6 +448,7 @@ target_sources(
   "benchmark/graph/balanced_binary_tree_benchmark.cpp"
   "benchmark/graph/breadth_first_search_benchmark.cpp"
   "benchmark/graph/depth_first_search_benchmark.cpp"
+  "benchmark/graph/subsets_benchmark.cpp"
   "benchmark/last_stone_weight_benchmark.cpp"
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/majority_element_benchmark.cpp"
