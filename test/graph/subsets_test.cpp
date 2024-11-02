@@ -20,7 +20,7 @@ TEST_CASE("Subsets", "[subsets]")
 
     SECTION("Empty container")
     {
-        std::vector<int> elements{};
+        std::vector<int> const elements{};
 
         std::vector<std::vector<int>> const expected{{}};
 
@@ -37,7 +37,7 @@ TEST_CASE("Subsets", "[subsets]")
 
     SECTION("One element container")
     {
-        std::vector<int> elements{17};
+        std::vector<int> const elements{17};
 
         std::vector<std::vector<int>> const expected{{}, {17}};
 
@@ -54,7 +54,7 @@ TEST_CASE("Subsets", "[subsets]")
 
     SECTION("Two element container")
     {
-        std::vector<int> elements{5, 7};
+        std::vector<int> const elements{5, 7};
 
         std::vector<std::vector<int>> const expected{{{}, {5}, {7}, {5, 7}}};
 
@@ -71,7 +71,7 @@ TEST_CASE("Subsets", "[subsets]")
 
     SECTION("Three element container")
     {
-        std::vector<int> elements{1, 2, 3};
+        std::vector<int> const elements{1, 2, 3};
 
         std::vector<std::vector<int>> const expected{
             {{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}}
@@ -90,7 +90,7 @@ TEST_CASE("Subsets", "[subsets]")
 
     SECTION("Four element container")
     {
-        std::vector<int> elements{23, 29, 31, 37};
+        std::vector<int> const elements{23, 29, 31, 37};
 
         std::vector<std::vector<int>> const expected{
             {},
