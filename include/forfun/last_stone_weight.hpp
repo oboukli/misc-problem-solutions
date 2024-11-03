@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <concepts>
+#include <functional>
 #include <iterator>
 #include <vector>
 
@@ -124,6 +125,37 @@ namespace priority_queue_based {
 [[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) noexcept -> int;
 
 } // namespace priority_queue_based
+
+namespace sort_based {
+
+/// Assume stones is not empty, and each element (stone) of stones is
+/// non-negative, otherwise the function's behavior is undefined.
+template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+last_stone_weight(Iter const first, Sentinel last) noexcept
+    -> std::iter_value_t<Iter>
+{
+    if (first == last)
+    {
+        return 0;
+    }
+
+    auto second{first};
+    ++second;
+
+    for (; second != last;)
+    {
+        std::sort(first, last, std::greater<>());
+
+        *first -= *second;
+        *second = *--last;
+    }
+
+    return *first;
+}
+
+} // namespace sort_based
 
 } // namespace forfun::last_stone_weight
 
