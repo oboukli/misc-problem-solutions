@@ -11,9 +11,7 @@
 #define FORFUN_LAST_STONE_WEIGHT_HPP_
 
 #include <algorithm>
-#include <cassert>
 #include <concepts>
-#include <functional>
 #include <iterator>
 #include <vector>
 
@@ -26,25 +24,28 @@ namespace naive {
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel end) noexcept
+last_stone_weight(Iter const first, Sentinel last) noexcept
     -> std::iter_value_t<Iter>
 {
     using ValueType = std::iter_value_t<Iter>;
 
-    assert((end - first) != decltype(end - first){0});
+    if (first == last)
+    {
+        return ValueType{0};
+    }
 
     ValueType s1{*first};
     auto stop{first};
-    for (++stop; stop != end;)
+    for (++stop; stop != last;)
     {
         ValueType s2{0};
-        auto it_s1{end};
-        auto it_s2{end};
+        auto it_s1{last};
+        auto it_s2{last};
 
         s1 = ValueType{0};
 
         // Find the heaviest two stones, where s1 is larger than or equal to s2.
-        for (auto it{first}; it != end; ++it)
+        for (auto it{first}; it != last; ++it)
         {
             if (*it >= s1)
             {
@@ -60,15 +61,12 @@ last_stone_weight(Iter const first, Sentinel end) noexcept
             }
         }
 
-        assert(it_s1 != end);
-        assert(it_s2 != end);
-
         // Smash the two stones together.
         *it_s1 -= *it_s2;
-        --end;
-        if (stop != end)
+        --last;
+        if (stop != last)
         {
-            *it_s2 = *end;
+            *it_s2 = *last;
         }
 
         s1 = *it_s1;
@@ -86,32 +84,32 @@ namespace heapified {
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel end) noexcept
+last_stone_weight(Iter const first, Sentinel last) noexcept
     -> std::iter_value_t<Iter>
 {
     using ValueType = std::iter_value_t<Iter>;
-    using DiffType = decltype(end - first);
+    using DiffType = decltype(last - first);
 
-    std::make_heap(first, end);
+    std::make_heap(first, last);
 
-    auto size{end - first};
+    auto size{last - first};
 
     while (size > DiffType{1})
     {
         auto s{*first};
-        std::pop_heap(first, end--);
+        std::pop_heap(first, last--);
 
         s -= *first;
-        std::pop_heap(first, end--);
+        std::pop_heap(first, last--);
 
         if (s != ValueType{0})
         {
-            *end = s;
-            ++end;
-            std::push_heap(first, end);
+            *last = s;
+            ++last;
+            std::push_heap(first, last);
         }
 
-        size = end - first;
+        size = last - first;
     }
 
     return size == DiffType{0} ? ValueType{0} : *first;
