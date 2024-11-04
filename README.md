@@ -41,7 +41,7 @@ leveraged by this project:
 
 | Problem                          | Standard | Source                                                                                                                     |
 | ---                              | ---      | ---                                                                                                                        |
-| Add two numbers                  | C++20    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
+| Add two numbers                  | C++17    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
 | Add two numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
 | Balanced binary tree             | C++17    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
 | Best time to buy and sell stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
