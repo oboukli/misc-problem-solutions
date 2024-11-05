@@ -17,7 +17,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
 {
     using forfun::fizzbuzz::fizzbuzz;
 
-    SECTION("One")
+    SECTION("From one to one inclusive")
     {
         std::ostringstream stream;
 
@@ -29,7 +29,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Two")
+    SECTION("From one to two inclusive")
     {
         std::ostringstream stream;
 
@@ -41,7 +41,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Three")
+    SECTION("From one to three inclusive")
     {
         std::ostringstream stream;
 
@@ -53,7 +53,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Five")
+    SECTION("From one to five inclusive")
     {
         std::ostringstream stream;
 
@@ -65,7 +65,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Six")
+    SECTION("From one to six inclusive")
     {
         std::ostringstream stream;
 
@@ -79,7 +79,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Nine")
+    SECTION("From one to nine inclusive")
     {
         std::ostringstream stream;
 
@@ -93,7 +93,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Ten")
+    SECTION("From one to ten inclusive")
     {
         std::ostringstream stream;
 
@@ -107,7 +107,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Eleven")
+    SECTION("From one to eleven inclusive")
     {
         std::ostringstream stream;
 
@@ -121,7 +121,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Fifteen")
+    SECTION("From one to fifteen inclusive")
     {
         std::ostringstream stream;
 
@@ -136,7 +136,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Sixteen")
+    SECTION("From one to sixteen inclusive")
     {
         std::ostringstream stream;
 
@@ -151,7 +151,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Seventeen")
+    SECTION("From one to seventeen inclusive")
     {
         std::ostringstream stream;
 
@@ -166,7 +166,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Twenty")
+    SECTION("From one to twenty inclusive")
     {
         std::ostringstream stream;
 
@@ -181,7 +181,7 @@ TEST_CASE("Fizz buzz", "[fizzbuzz]")
         );
     }
 
-    SECTION("Thirty")
+    SECTION("From one to thirty inclusive")
     {
         std::ostringstream stream;
 
