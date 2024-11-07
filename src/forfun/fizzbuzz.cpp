@@ -9,7 +9,7 @@
 #include <ostream>
 #include <string_view>
 
-namespace forfun::fizzbuzz {
+namespace forfun::fizzbuzz::basic {
 
 auto fizzbuzz(int const n, std::ostream& stream) -> void
 {
@@ -40,4 +40,4 @@ auto fizzbuzz(int const n, std::ostream& stream) -> void
     }
 }
 
-} // namespace forfun::fizzbuzz
+} // namespace forfun::fizzbuzz::basic
