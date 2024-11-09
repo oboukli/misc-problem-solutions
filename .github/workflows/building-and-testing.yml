@@ -368,7 +368,7 @@ jobs:
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
       XCODE_RELEASE: "16.0"
 
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
       - name: Set default Xcode release
@@ -456,7 +456,7 @@ jobs:
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
       XCODE_RELEASE: "16.0"
 
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
       - name: Set default Xcode release
