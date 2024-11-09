@@ -6,3 +6,5 @@
 *.hpp diff=cpp
 
 *.h linguist-language=c
+
+contrib/ linguist-vendored
