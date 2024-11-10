@@ -11,8 +11,7 @@
 #define FORFUN_CONTAINER_FORWARD_LIST_HPP_
 
 #include <concepts>
-
-#include <gsl/pointers>
+#include <utility>
 
 #include "forfun/container/internal/forward_list_node.hpp"
 
@@ -48,11 +47,12 @@ public:
         return head_ == nullptr;
     }
 
-    auto push_front(T&& value) noexcept -> void
+    auto push_front(T&& value) -> void
     {
         internal::forward_list_node<T>* const aux{head_};
 
-        head_ = new internal::forward_list_node<T>(value);
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+        head_ = new internal::forward_list_node<T>(std::move(value));
 
         head_->next = aux;
     }
@@ -64,21 +64,20 @@ public:
             return;
         }
 
-        gsl::owner<internal::forward_list_node<T>*> const aux{head_};
+        internal::forward_list_node<T>* const aux{head_};
         head_ = head_->next;
 
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete aux;
     }
 
     auto clear() noexcept -> void
     {
-        // clang-format off
-        for (gsl::owner<internal::forward_list_node<T>*> node = head_;
-            node != nullptr;)
-        // clang-format on
+        for (internal::forward_list_node<T>* node{head_}; node != nullptr;)
         {
             internal::forward_list_node<T>* const next = node->next;
 
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;
 
             node = next;
