@@ -156,7 +156,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator /= operand_2;
                 break;
             default:
-                assert(false);
+                std::unreachable();
             }
         }
     }
@@ -224,7 +224,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator /= operand_2;
                 break;
             default:
-                assert(false);
+                std::unreachable();
             }
         }
     }
