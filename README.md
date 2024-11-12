@@ -55,7 +55,7 @@ leveraged by this project:
 | Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
 | Fibonacci sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
 | First missing positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                   |
-| Fizz buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                                       |
+| Fizz buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                               |
 | Forward list                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest common divisor          | C++17    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
