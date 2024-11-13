@@ -33,8 +33,8 @@ template <typename Elements>
 
     SizeType threshold{(size / SizeType{2U}) + SizeType{1U}};
     SizeType count{0U};
-    ElementType majority_elm{}; // Unecessary default initialization.
-    Itr majority_itr{}; // Unecessary default initialization.
+    ElementType majority_elm{} /*[[indeterminate]]*/;
+    Itr majority_itr{} /*[[indeterminate]]*/;
 
     for (Itr itr{elements.cbegin()}; itr != cend; ++itr)
     {
