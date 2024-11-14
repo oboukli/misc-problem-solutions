@@ -7,4 +7,4 @@
 
 *.h linguist-language=c
 
-contrib/ linguist-vendored
+contrib/** linguist-vendored
