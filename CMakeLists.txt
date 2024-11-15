@@ -456,6 +456,7 @@ target_sources(
   "benchmark/lru_cache_benchmark.cpp"
   "benchmark/majority_element_benchmark.cpp"
   "benchmark/maximum_subarray_benchmark.cpp"
+  "benchmark/meeting_rooms_benchmark.cpp"
   "benchmark/move_zeroes_benchmark.cpp"
   "benchmark/palindrome_benchmark.cpp"
   "benchmark/palindromic_number_benchmark.cpp"
