@@ -7,4 +7,5 @@
 
 *.h linguist-language=c
 
+CMakeLists.txt linguist-vendored
 contrib/** linguist-vendored
