@@ -28,7 +28,7 @@ TEMPLATE_TEST_CASE_SIG(
     static constexpr std::array<int, 0U> const src{};
     static constexpr std::array<int, 0U> const expected{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 0U> dest;
+    std::array<int, 0U> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -53,7 +53,7 @@ TEMPLATE_TEST_CASE_SIG(
     static constexpr std::array<int, 1U> const src{17};
     static constexpr std::array<int, 2U> const expected{17, 17};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 2U> dest;
+    std::array<int, 2U> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -78,7 +78,7 @@ TEMPLATE_TEST_CASE_SIG(
     static constexpr std::array<int, 3U> const src{19, 23, 29};
     static constexpr std::array<int, 6U> const expected{19, 23, 29, 19, 23, 29};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 6U> dest;
+    std::array<int, 6U> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -105,7 +105,7 @@ TEMPLATE_TEST_CASE_SIG(
         31, 37, 41, 43, 31, 37, 41, 43
     };
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 8U> dest;
+    std::array<int, 8U> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -236,7 +236,7 @@ TEMPLATE_TEST_CASE_SIG(
         // clang-format on
     };
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 512U> dest;
+    std::array<int, 512U> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
