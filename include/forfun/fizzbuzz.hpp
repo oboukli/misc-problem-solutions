@@ -76,7 +76,7 @@ fizzbuzz(int start, int const last, BinaryFunc write) noexcept(noexcept(write))
                 std::numeric_limits<decltype(start)>::digits10 + 2
             };
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-            std::array<char, buffer_size> buffer;
+            std::array<char, buffer_size> buffer /*[[indeterminate]]*/;
 
             std::to_chars_result const result{
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
