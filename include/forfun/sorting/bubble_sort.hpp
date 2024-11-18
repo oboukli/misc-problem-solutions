@@ -27,7 +27,7 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
     }
 
     // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-    bool f;
+    bool f /*[[indeterminate]]*/;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
@@ -64,7 +64,7 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
     }
 
     // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-    bool f;
+    bool f /*[[indeterminate]]*/;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
