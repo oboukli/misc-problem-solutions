@@ -22,7 +22,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("One interval")
@@ -31,7 +31,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("Two conflicting intervals")
@@ -55,7 +55,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("Three, all conflicting, intervals")
@@ -94,7 +94,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("Three successive intervals")
@@ -107,7 +107,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("Four intervals, two of which are conflicting")
@@ -135,7 +135,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("Sixteen non-conflicting sorted intervals (benchmark case)")
@@ -161,7 +161,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.begin(), intervals.end()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 
     SECTION("NeetCode test case 1")
@@ -185,6 +185,6 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
         CAPTURE(intervals);
 
-        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()) == true);
+        REQUIRE(can_attend(intervals.cbegin(), intervals.cend()));
     }
 }
