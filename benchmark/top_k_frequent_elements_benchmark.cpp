@@ -75,7 +75,9 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(priority_queue_based_functional::top_frequent<Iter, Iter>)
+            NAMEOF_RAW(
+                priority_queue_based_functional::top_frequent<Iter, Iter>
+            )
                 .c_str(),
             []() noexcept(false) {
                 static constexpr std::array const nums{

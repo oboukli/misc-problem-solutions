@@ -34,7 +34,9 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(best_time_to_buy_and_sell_stock::calc_max_profit<Iter, Iter>)
+            NAMEOF_RAW(
+                best_time_to_buy_and_sell_stock::calc_max_profit<Iter, Iter>
+            )
                 .c_str(),
             [&prices]() noexcept {
                 auto const volatile r{
@@ -47,7 +49,10 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(best_time_to_buy_and_sell_stock::optimized_l1::calc_max_profit<Iter, Iter>)
+            NAMEOF_RAW(
+                best_time_to_buy_and_sell_stock::optimized_l1::
+                    calc_max_profit<Iter, Iter>
+            )
                 .c_str(),
             [&prices]() noexcept {
                 auto const volatile r{
@@ -59,7 +64,10 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(best_time_to_buy_and_sell_stock::optimized_l2::calc_max_profit<Iter, Iter>)
+            NAMEOF_RAW(
+                best_time_to_buy_and_sell_stock::optimized_l2::
+                    calc_max_profit<Iter, Iter>
+            )
                 .c_str(),
             [&prices]() noexcept {
                 auto const volatile r{
