@@ -74,7 +74,9 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(speed_optimized::eval_expression<VecConstIter, VecConstIter>)
+            NAMEOF_RAW(
+                speed_optimized::eval_expression<VecConstIter, VecConstIter>
+            )
                 .c_str(),
             [&tokens]() noexcept {
 // Ignore Division by zero [core.DivideZero] warning.
