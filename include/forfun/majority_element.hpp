@@ -24,11 +24,10 @@ template <typename Elements>
     using Itr = Elements::const_iterator;
 
     SizeType const size{elements.size()};
-    Itr const cend{elements.cend()};
 
     if (size < SizeType{3U})
     {
-        return cend;
+        return elements.cend();
     }
 
     SizeType threshold{(size / SizeType{2U}) + SizeType{1U}};
@@ -36,7 +35,7 @@ template <typename Elements>
     ElementType majority_elm{} /*[[indeterminate]]*/;
     Itr majority_itr{} /*[[indeterminate]]*/;
 
-    for (Itr itr{elements.cbegin()}; itr != cend; ++itr)
+    for (Itr itr{elements.cbegin()}; itr != elements.cend(); ++itr)
     {
         if (count == SizeType{0U})
         {
@@ -58,7 +57,7 @@ template <typename Elements>
         }
     }
 
-    for (auto itr{elements.cbegin()}; itr != cend; ++itr)
+    for (auto itr{elements.cbegin()}; itr != elements.cend(); ++itr)
     {
         if (*itr == majority_elm)
         {
@@ -71,7 +70,7 @@ template <typename Elements>
         }
     }
 
-    return cend;
+    return elements.cend();
 }
 
 } // namespace forfun::majority_element

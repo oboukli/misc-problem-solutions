@@ -17,34 +17,24 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) -> void
 {
     using DiffC = std::vector<std::vector<int>>::value_type::difference_type;
 
-    auto const matrix_begin{matrix.begin()};
-    auto const matrix_end{matrix.end()};
-
-    if (matrix_begin == matrix_end)
+    if ((matrix.begin() == matrix.end()) || matrix.front().empty())
     {
         return;
     }
 
-    if (matrix_begin->empty())
-    {
-        return;
-    }
-
-    auto const first_element_itr{matrix_begin->begin()};
+    auto const first_element_itr{matrix.front().begin()};
     bool is_first_col_zeroed{false};
 
-    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
     {
-        assert(matrix_begin->size() == itr_r->size());
+        assert(matrix.front().size() == itr_r->size());
 
-        auto const itr_c_begin{itr_r->begin()};
-        auto const itr_c_end{itr_r->end()};
         DiffC col_offset{0};
-        for (auto itr_c{itr_c_begin}; itr_c != itr_c_end; ++itr_c)
+        for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
         {
             if (*itr_c == 0)
             {
-                *itr_c_begin = 0;
+                itr_r->front() = 0;
 
                 if (col_offset == DiffC{0})
                 {
@@ -60,12 +50,11 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) -> void
     }
 
     // Zero all columns, except for the first one.
-    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
     {
-        auto const itr_c_end{itr_r->end()};
         DiffC col_offset{1};
         // clang-format off
-        for (auto itr_c{itr_r->begin() + col_offset}; itr_c != itr_c_end;
+        for (auto itr_c{itr_r->begin() + col_offset}; itr_c != itr_r->end();
             ++itr_c)
         // clang-format on
         {
@@ -79,12 +68,11 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) -> void
     }
 
     // Zero all rows.
-    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
     {
         if (itr_r->front() == 0)
         {
-            auto const itr_c_end{itr_r->end()};
-            for (auto itr_c{itr_r->begin()}; itr_c != itr_c_end; ++itr_c)
+            for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
             {
                 *itr_c = 0;
             }
@@ -94,9 +82,9 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) -> void
     if (is_first_col_zeroed)
     {
         // Zero first column.
-        for (auto itr{matrix_begin}; itr != matrix_end; ++itr)
+        for (auto itr{matrix.begin()}; itr != matrix.end(); ++itr)
         {
-            *itr->begin() = 0;
+            itr->front() = 0;
         }
     }
 }
@@ -109,34 +97,24 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 {
     using DiffC = std::vector<std::vector<int>>::value_type::difference_type;
 
-    auto const matrix_begin{matrix.begin()};
-    auto const matrix_end{matrix.end()};
-
-    if (matrix_begin == matrix_end)
+    if ((matrix.begin() == matrix.end()) || matrix.begin()->empty())
     {
         return;
     }
 
-    if (matrix_begin->empty())
-    {
-        return;
-    }
-
-    auto const first_element_itr{matrix_begin->begin()};
+    auto const front_itr{matrix.begin()->begin()};
     bool is_first_col_zeroed{false};
 
-    for (auto itr_r{matrix_begin}; itr_r != matrix_end; ++itr_r)
+    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
     {
-        assert(matrix_begin->size() == itr_r->size());
+        assert(matrix.front().size() == itr_r->size());
 
-        auto const itr_c_begin{itr_r->begin()};
-        auto const itr_c_end{itr_r->end()};
         DiffC col_offset{0};
-        for (auto itr_c{itr_c_begin}; itr_c != itr_c_end; ++itr_c)
+        for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
         {
             if (*itr_c == 0)
             {
-                *itr_c_begin = 0;
+                itr_r->front() = 0;
 
                 if (col_offset == DiffC{0})
                 {
@@ -144,7 +122,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
                 }
                 else
                 {
-                    *(first_element_itr + col_offset) = 0;
+                    *(front_itr + col_offset) = 0;
                 }
             }
             ++col_offset;
@@ -152,14 +130,12 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     }
 
     // Zero all rows and columns, except for the first ones.
-    for (auto itr_r{matrix_begin + 1}; itr_r != matrix_end; ++itr_r)
+    for (auto itr_r{matrix.begin() + 1}; itr_r != matrix.end(); ++itr_r)
     {
-        auto const itr_c_end{itr_r->end()};
-        auto const row_front{itr_r->front()};
         DiffC col_offset{1};
-        for (auto itr_c{itr_r->begin() + 1}; itr_c != itr_c_end; ++itr_c)
+        for (auto itr_c{itr_r->begin() + 1}; itr_c != itr_r->end(); ++itr_c)
         {
-            if ((*(first_element_itr + col_offset) == 0) || (row_front == 0))
+            if ((*(front_itr + col_offset) == 0) || (itr_r->front() == 0))
             {
                 *itr_c = 0;
             }
@@ -168,11 +144,10 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         }
     }
 
-    if (*first_element_itr == 0)
+    if (*front_itr == 0)
     {
         // Zero first row.
-        auto const itr_c_end{matrix_begin->end()};
-        for (auto itr_c{first_element_itr + 1}; itr_c != itr_c_end; ++itr_c)
+        for (auto itr_c{front_itr + 1}; itr_c != matrix.begin()->end(); ++itr_c)
         {
             *itr_c = 0;
         }
@@ -181,9 +156,9 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     if (is_first_col_zeroed)
     {
         // Zero first column.
-        for (auto itr{matrix_begin}; itr != matrix_end; ++itr)
+        for (auto itr{matrix.begin()}; itr != matrix.end(); ++itr)
         {
-            *itr->begin() = 0;
+            itr->front() = 0;
         }
     }
 }

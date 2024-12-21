@@ -40,8 +40,7 @@ namespace ascii_optimized {
     std::vector<char8_t> expected;
     expected.reserve(s.size());
 
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr};
             (c & char8_t{0b00000011}) == char8_t{0b00000001})
@@ -80,8 +79,7 @@ namespace circuit_breaker {
     std::vector<char8_t> expected{};
     expected.reserve(s.size());
 
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
         {
@@ -111,8 +109,7 @@ namespace deque_based {
 
     std::deque<char8_t> expected{};
 
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
         {
@@ -153,14 +150,12 @@ namespace dyn_array_based {
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
         = std::make_unique_for_overwrite<char8_t[]>(s.size());
 
-    char8_t* const expected_begin{expected.get()};
-    assert(expected_begin != nullptr);
+    assert(expected.get() != nullptr);
 
     char8_t* back_ptr{nullptr};
     char8_t back{};
 
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
         {
@@ -169,7 +164,7 @@ namespace dyn_array_based {
                 return false;
             }
 
-            if (back_ptr == expected_begin)
+            if (back_ptr == expected.get())
             {
                 back_ptr = nullptr;
                 back = char8_t{};
@@ -186,7 +181,7 @@ namespace dyn_array_based {
             back = map_open_to_closed(c);
             if (back_ptr == nullptr)
             {
-                back_ptr = expected_begin;
+                back_ptr = expected.get();
             }
             else
             {
@@ -213,8 +208,7 @@ namespace vector_based {
     std::vector<char8_t> expected{};
     expected.reserve(s.size());
 
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
         {
@@ -246,8 +240,7 @@ namespace vector_based_demi_allocated {
     expected.reserve(s.size() / 2U);
 
     char8_t back{};
-    ConstIter const cend{s.cend()};
-    for (ConstIter itr{s.cbegin()}; itr != cend; ++itr)
+    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
     {
         if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
         {

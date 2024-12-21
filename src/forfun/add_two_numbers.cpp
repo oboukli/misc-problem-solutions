@@ -16,29 +16,27 @@ namespace forfun::add_two_numbers::stl {
     std::forward_list<unsigned int> const& addend_b
 ) noexcept -> std::forward_list<unsigned int>
 {
-    auto addend_a_iter{addend_a.cbegin()};
-    auto const addend_a_end{addend_a.cend()};
-
-    auto addend_b_iter{addend_b.cbegin()};
-    auto const addend_b_end{addend_b.cend()};
+    auto iter_a{addend_a.cbegin()};
+    auto iter_b{addend_b.cbegin()};
 
     std::forward_list<unsigned int> result{};
     auto back_iter{result.before_begin()};
 
     unsigned int carry{0U};
     unsigned int column_sum{0U};
-    while ((addend_a_iter != addend_a_end) || (addend_b_iter != addend_b_end))
+
+    while ((iter_a != addend_a.cend()) || (iter_b != addend_b.cend()))
     {
-        if (addend_a_iter != addend_a_end)
+        if (iter_a != addend_a.cend())
         {
-            assert(*addend_a_iter <= 9U);
-            column_sum += *addend_a_iter++;
+            assert(*iter_a <= 9U);
+            column_sum += *iter_a++;
         }
 
-        if (addend_b_iter != addend_b_end)
+        if (iter_b != addend_b.cend())
         {
-            assert(*addend_b_iter <= 9U);
-            column_sum += *addend_b_iter++;
+            assert(*iter_b <= 9U);
+            column_sum += *iter_b++;
         }
 
         back_iter = result.insert_after(back_iter, column_sum % 10U);
