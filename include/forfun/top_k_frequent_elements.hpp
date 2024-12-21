@@ -79,10 +79,10 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
     for (auto iter{counts.crbegin()}; k != std::size_t{0U}; ++iter)
     {
         assert(iter != counts.crend());
-        auto const iter_cend{iter->cend()};
+
         // clang-format off
-        for (auto j{iter->cbegin()}; j != iter_cend && k != std::size_t{0U};
-            ++j)
+        for (auto j{iter->cbegin()};
+            (j != iter->cend()) && (k != std::size_t{0U}); ++j)
         // clang-format on
         {
             result.push_back(*j);

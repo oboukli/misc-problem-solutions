@@ -64,13 +64,12 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
         lookup_map.insert({*iter, iter});
     }
 
-    auto const lookup_map_cend{lookup_map.cend()};
     for (auto iter{first}; iter != end; ++iter)
     {
         auto const addend{target - *iter};
 
         if (auto const found_iter{lookup_map.find(addend)};
-            (found_iter != lookup_map_cend) && (found_iter->second != iter))
+            (found_iter != lookup_map.cend()) && (found_iter->second != iter))
         {
             return {iter, found_iter->second};
         }
