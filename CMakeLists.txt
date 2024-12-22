@@ -6,23 +6,17 @@
 
 cmake_minimum_required(VERSION 3.27)
 
-set(CMAKE_C_STANDARD 90)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS OFF)
-
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 project(
   ForFun
-  LANGUAGES C CXX
 )
 
 add_library(
   forfun
   SHARED
 )
+set_target_properties(forfun PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun
   PUBLIC
@@ -119,6 +113,9 @@ add_library(
   forfun_graph
   SHARED
 )
+set_target_properties(forfun_graph PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun_graph PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun_graph PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_graph
   PUBLIC
@@ -163,6 +160,9 @@ add_library(
   forfun_search
   SHARED
 )
+set_target_properties(forfun_search PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun_search PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun_search PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_search
   PUBLIC
@@ -203,6 +203,9 @@ add_library(
   "src/forfun/sorting/insertion_sort.cpp"
   "src/forfun/sorting/quicksort.cpp"
 )
+set_target_properties(forfun_sorting PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_sorting
   PUBLIC
@@ -213,6 +216,9 @@ add_library(
   forfun_c
   SHARED
 )
+set_target_properties(forfun_c PROPERTIES C_EXTENSIONS OFF)
+set_target_properties(forfun_c PROPERTIES C_STANDARD 90)
+set_target_properties(forfun_c PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c
   PUBLIC
@@ -247,6 +253,9 @@ add_library(
   forfun_c_experimental
   SHARED
 )
+set_target_properties(forfun_c_experimental PROPERTIES C_EXTENSIONS OFF)
+set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD 90)
+set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c_experimental
   PUBLIC
@@ -284,6 +293,9 @@ add_library(
   forfun_experimental
   SHARED
 )
+set_target_properties(forfun_experimental PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_experimental
   PUBLIC
@@ -332,6 +344,9 @@ find_package(Catch2 3 REQUIRED)
 add_executable(
   test_driver
 )
+set_target_properties(test_driver PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(test_driver PROPERTIES CXX_STANDARD 23)
+set_target_properties(test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   test_driver
   PRIVATE
@@ -399,6 +414,9 @@ target_link_libraries(
 add_executable(
   test_driver_experimental
 )
+set_target_properties(test_driver_experimental PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(test_driver_experimental PROPERTIES CXX_STANDARD 23)
+set_target_properties(test_driver_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   test_driver_experimental
   PRIVATE
@@ -434,6 +452,9 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark_driver
 )
+set_target_properties(benchmark_driver PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(benchmark_driver PROPERTIES CXX_STANDARD 23)
+set_target_properties(benchmark_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   benchmark_driver
   PRIVATE
@@ -498,6 +519,9 @@ target_link_libraries(
 add_executable(
   benchmark_driver_experimental
 )
+set_target_properties(benchmark_driver_experimental PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(benchmark_driver_experimental PROPERTIES CXX_STANDARD 23)
+set_target_properties(benchmark_driver_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   benchmark_driver_experimental
   PRIVATE
