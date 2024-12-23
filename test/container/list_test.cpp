@@ -243,4 +243,19 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         REQUIRE(list.size() == std::size_t{0U});
         REQUIRE(list.empty());
     }
+
+    SECTION("Method front() returns a reference")
+    {
+        forfun::experimental::container::list list{};
+
+        REQUIRE(list.empty());
+
+        list.push_back(1339);
+
+        REQUIRE(list.front() == 1339);
+
+        list.front() = 1340;
+
+        REQUIRE(list.front() == 1340);
+    }
 }

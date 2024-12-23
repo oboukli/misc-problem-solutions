@@ -225,7 +225,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         list.push_back(1291);
         REQUIRE(*list.begin() == 1291);
 
-        *list.begin() = 1297;
+        list.front() = 1297;
 
         REQUIRE(*list.begin() == 1297);
     }
