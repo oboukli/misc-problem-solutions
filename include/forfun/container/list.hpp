@@ -22,15 +22,15 @@ namespace forfun::experimental::container {
 
 class list final {
 public:
-    using const_iterator = internal::list_const_iterator;
-
-    using iterator = internal::list_iterator;
+    using value_type = int;
 
     using size_type = std::size_t;
 
-    using value_type = int;
-
     using reference = int&;
+
+    using iterator = internal::list_iterator;
+
+    using const_iterator = internal::list_const_iterator;
 
     constexpr list() noexcept(false) :
         end_{new internal::list_node(int{}, nullptr, nullptr)}
