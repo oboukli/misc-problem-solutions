@@ -22,6 +22,8 @@ class forward_list final {
 public:
     using value_type = T;
 
+    using reference = T&;
+
     forward_list() noexcept = default;
 
     forward_list(forward_list<T> const&) = delete;
@@ -37,7 +39,7 @@ public:
 
     auto operator=(forward_list<T>&&) -> forward_list& = delete;
 
-    [[nodiscard]] auto front() const noexcept -> value_type
+    [[nodiscard]] auto front() const noexcept -> reference
     {
         return head_->value;
     }

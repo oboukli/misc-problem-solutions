@@ -169,4 +169,19 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
         REQUIRE(forward_list.empty());
     }
+
+    SECTION("Method front() returns a reference")
+    {
+        forfun::experimental::container::forward_list<int> forward_list{};
+
+        REQUIRE(forward_list.empty());
+
+        forward_list.push_front(1399);
+
+        REQUIRE(forward_list.front() == 1399);
+
+        forward_list.front() = 1400;
+
+        REQUIRE(forward_list.front() == 1400);
+    }
 }

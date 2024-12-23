@@ -30,6 +30,8 @@ public:
 
     using value_type = int;
 
+    using reference = int&;
+
     constexpr list() noexcept(false) :
         end_{new internal::list_node(int{}, nullptr, nullptr)}
     {
@@ -62,7 +64,7 @@ public:
         return size_ == size_type{};
     }
 
-    [[nodiscard]] auto front() const noexcept -> value_type
+    [[nodiscard]] auto front() const noexcept -> reference
     {
         return head_->value_;
     }
