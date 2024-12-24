@@ -32,7 +32,7 @@ namespace bucket_sort_based {
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
-top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
+top_frequent(Iter const first, Sentinel const end, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
@@ -42,13 +42,13 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
         return {};
     }
 
-    std::sort(first, end);
-
     std::size_t const size{static_cast<std::size_t>(end - first)};
 
     std::vector<std::vector<ValType>> counts(size);
 
     k = std::min(k, size);
+
+    std::sort(first, end);
 
     ValType current{*first};
     std::size_t current_count{0U};
@@ -102,7 +102,7 @@ namespace bucket_sort_based_functional {
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
-top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
+top_frequent(Iter const first, Sentinel const end, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
@@ -112,11 +112,11 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k) noexcept
         return {};
     }
 
-    std::sort(first, end);
-
     std::vector<std::vector<ValType>> counts(
         static_cast<std::size_t>(end - first)
     );
+
+    std::sort(first, end);
 
     ValType current{*first};
     std::size_t current_count{0U};
@@ -156,8 +156,7 @@ namespace priority_queue_based {
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] auto
-top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
+[[nodiscard]] auto top_frequent(Iter iter, Sentinel const end, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
@@ -175,8 +174,9 @@ top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
         ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
     }
 
-    auto const comparator
-        = [](auto const& a, auto const& b) { return a.second < b.second; };
+    auto const comparator = [](auto const& a, auto const& b) noexcept {
+        return a.second < b.second;
+    };
     using T = std::pair<ValType, std::size_t>;
     std::priority_queue<T, std::vector<T>, decltype(comparator)> intermediate(
         comparator
@@ -205,8 +205,7 @@ namespace priority_queue_based_functional {
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] auto
-top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
+[[nodiscard]] auto top_frequent(Iter iter, Sentinel const end, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
@@ -252,8 +251,7 @@ namespace unordered_map_based {
 /// Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto
-top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
+[[nodiscard]] auto top_frequent(Iter iter, Sentinel const end, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
@@ -279,7 +277,9 @@ top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
     std::sort(
         intermediate.begin(),
         intermediate.end(),
-        [](auto const& a, auto const& b) { return a.second > b.second; }
+        [](auto const& a, auto const& b) noexcept {
+            return a.second > b.second;
+        }
     );
 
     std::vector<ValType> result;
@@ -289,7 +289,7 @@ top_frequent(Iter iter, Sentinel const end, std::size_t k) noexcept
         intermediate.cbegin()
             + static_cast<decltype(intermediate)::difference_type>(k),
         std::back_inserter(result),
-        [](auto const& bucket) { return bucket.first; }
+        [](auto const& bucket) noexcept { return bucket.first; }
     );
 
     return result;
@@ -303,7 +303,7 @@ namespace unordered_map_based_functional {
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto
-top_frequent(Iter iter, Sentinel const end, std::size_t const k) noexcept
+top_frequent(Iter iter, Sentinel const end, std::size_t const k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
