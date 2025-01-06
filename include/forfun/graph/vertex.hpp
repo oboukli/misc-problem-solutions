@@ -58,7 +58,7 @@ constexpr auto get_adjacencies_iter(
     return std::find_if(
         vertex_adjacency_list.cbegin(),
         vertex_adjacency_list.cend(),
-        [v](VertexAdjacencyList<T>::value_type const& target) {
+        [v](VertexAdjacencyList<T>::value_type const& target) noexcept {
             return target.front() == v;
         }
     );
