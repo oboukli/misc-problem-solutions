@@ -93,7 +93,8 @@ public:
         return node_ == other.node_;
     }
 
-    auto operator==(std::default_sentinel_t const& /*unused*/) const -> bool
+    auto operator==(std::default_sentinel_t const& /*unused*/) const noexcept
+        -> bool
     {
         return node_->next_ == nullptr;
     }
@@ -103,7 +104,8 @@ public:
         return node_ != other.node_;
     }
 
-    auto operator!=(std::default_sentinel_t const& /*unused*/) const -> bool
+    auto operator!=(std::default_sentinel_t const& /*unused*/) const noexcept
+        -> bool
     {
         return node_->next_ != nullptr;
     }
