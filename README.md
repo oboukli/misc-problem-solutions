@@ -18,6 +18,7 @@ leveraged by this project:
 - C (standard C90) and C++ (standard C++17, C++20, and C++23)
 - The C and C++ standard libraries
 - Strongly-typed approach, leveraging C++ templates and C++20 concepts
+- Exception safety-aware design
 - Const correctness where applicable--except for fields
 - Functional programming
 - Strict standard conformance and strict compilation rules
