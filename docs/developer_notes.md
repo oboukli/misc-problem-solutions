@@ -11,6 +11,17 @@ are compiled correctly. An example is `test/palindrome_test.cpp`.
 For the MSVC compiler, the command-line option `/source-charset:utf-8`
 should be passed, as seen in the `CMakePresets.json` file.
 
+## Exception safety-aware design
+
+Functions and methods are annotated with the `noexcept` specifier where
+applicable. In addition, special care is taken to order calls to throwing
+functions and methods to achieve the strongest exception safety possible.
+
+An example can be seen in the
+[`bucket_sort_based::top_frequent`](../include/forfun/top_k_frequent_elements.hpp)
+strategy where a call to `std::sort` is delayed till after the possibly throwing
+`std::vector` constructor.
+
 ## Problem-specific notes
 
 ### Meeting Rooms
