@@ -50,14 +50,11 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
 ) noexcept -> void
 {
-    auto const src_cbegin{src.cbegin()};
-    auto const src_cend{src.cend()};
-    auto const dest_begin{dest.begin()};
     for (std::size_t i{0U}; i < 2U; ++i)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto itr{dest_begin + (Size * i)};
-        for (auto src_itr{src_cbegin}; src_itr != src_cend; ++src_itr)
+        auto itr{dest.begin() + (Size * i)};
+        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
         {
             *(itr++) = *src_itr;
         }
@@ -73,21 +70,17 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
 ) noexcept -> void
 {
-    auto const src_cbegin{src.cbegin()};
-    auto const src_cend{src.cend()};
-    auto const dest_begin{dest.begin()};
-
     {
-        auto itr{dest_begin};
-        for (auto src_itr{src_cbegin}; src_itr != src_cend; ++src_itr)
+        auto itr{dest.begin()};
+        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
         {
             *(itr++) = *src_itr;
         }
     }
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto itr{dest_begin + Size};
-        for (auto src_itr{src_cbegin}; src_itr != src_cend; ++src_itr)
+        auto itr{dest.begin() + Size};
+        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
         {
             *(itr++) = *src_itr;
         }
@@ -103,11 +96,10 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
 ) noexcept -> void
 {
-    auto const src_cend{src.cend()};
     auto dest1_itr{dest.begin()};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
     auto dest2_itr{dest1_itr + Size};
-    for (auto src_itr{src.cbegin()}; src_itr != src_cend; ++src_itr)
+    for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
     {
         *(dest1_itr++) = *src_itr;
         *(dest2_itr++) = *src_itr;
