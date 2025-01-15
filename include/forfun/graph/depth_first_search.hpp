@@ -37,16 +37,11 @@ constexpr auto depth_first_search_imp(
     vertex_state_list[start] = vertex_visit_state::visited;
     preorder_step(start);
 
-    auto const adjacencies_iter{
-        get_adjacencies_iter(vertex_adjacency_list, start)
-    };
+    auto const adj_iter{get_adjacencies_iter(vertex_adjacency_list, start)};
 
-    auto itr{adjacencies_iter->cbegin()};
-    auto const end{adjacencies_iter->cend()};
-
-    for (; itr != end; ++itr)
+    for (auto iter{adj_iter->cbegin()}; iter != adj_iter->cend(); ++iter)
     {
-        if (auto const adjacency{*itr};
+        if (auto const adjacency{*iter};
             vertex_state_list[adjacency] == vertex_visit_state::unvisited)
         {
             depth_first_search_imp(
