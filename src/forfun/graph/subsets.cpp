@@ -24,7 +24,7 @@ auto do_explode_subsets(
     Container& subsets
 ) -> void
 {
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         subsets.emplace_back(subset);
         return;

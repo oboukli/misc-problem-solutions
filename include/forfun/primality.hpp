@@ -20,12 +20,12 @@ template <std::unsigned_integral UInteger>
 is_prime(UInteger const n) noexcept(noexcept(std::sqrt(std::declval<UInteger>())
 )) -> bool
 {
-    if (n < UInteger{2U})
+    if (n < UInteger{2U}) [[unlikely]]
     {
         return false;
     }
 
-    if (n == UInteger{2U})
+    if (n == UInteger{2U}) [[unlikely]]
     {
         return true;
     }

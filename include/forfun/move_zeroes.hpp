@@ -27,7 +27,7 @@ constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
     auto itr_j{itr};
     for (; itr != end; ++itr)
     {
-        if (*itr != ValType{0})
+        if (*itr != ValType{0}) [[likely]]
         {
             std::iter_swap(itr, itr_j);
             ++itr_j;
@@ -48,7 +48,7 @@ constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
     auto itr_j{itr};
     for (; itr != end; ++itr)
     {
-        if (*itr != ValType{0})
+        if (*itr != ValType{0}) [[likely]]
         {
             *itr_j = *itr;
             ++itr_j;
@@ -74,7 +74,7 @@ constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
     auto itr_j{itr};
     for (; itr != end; ++itr)
     {
-        if (*itr != ValType{0})
+        if (*itr != ValType{0}) [[likely]]
         {
             *itr_j = *itr;
             ++itr_j;

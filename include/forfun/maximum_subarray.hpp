@@ -31,7 +31,7 @@ max_sum(Iter const first, Sentinel const end) noexcept
 {
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
-    if (first == end)
+    if (first == end) [[unlikely]]
     {
         return T{0};
     }
@@ -67,7 +67,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     PromotedValueType<std::iter_value_t<Iter>> sum
 ) noexcept -> PromotedValueType<std::iter_value_t<Iter>>
 {
-    if (iter == end)
+    if (iter == end) [[unlikely]]
     {
         return sum;
     }
@@ -87,7 +87,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
-    if (iter == end)
+    if (iter == end) [[unlikely]]
     {
         return T{0};
     }
@@ -106,7 +106,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         return T{0};
     }

@@ -38,9 +38,9 @@ namespace recursive {
 template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto fib(T const n) noexcept -> T
 {
-    if (n <= T{2})
+    if (n <= T{2}) [[unlikely]]
     {
-        if (n < T{1})
+        if (n < T{1}) [[unlikely]]
         {
             return T{0};
         }

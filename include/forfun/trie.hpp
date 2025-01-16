@@ -53,7 +53,7 @@ auto insert(T& root, StringViewT<T> const& word) -> void
     using LenT = StringViewT<T>::size_type;
 
     auto const word_len{word.length()};
-    if (word_len == LenT{0U})
+    if (word_len == LenT{0U}) [[unlikely]]
     {
         return;
     }

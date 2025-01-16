@@ -39,7 +39,7 @@ constexpr auto sum_each(
 
     auto const sums_size{sums.size()};
 
-    if (sums_size == SizeType{0U})
+    if (sums_size == SizeType{0U}) [[unlikely]]
     {
         return;
     }

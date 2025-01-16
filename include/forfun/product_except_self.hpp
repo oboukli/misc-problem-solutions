@@ -100,7 +100,7 @@ constexpr auto product_except_self(
     using ValType = std::iter_value_t<OutItr>;
     using DiffType = std::iter_difference_t<InItr>;
 
-    if (first == last)
+    if (first == last) [[unlikely]]
     {
         return;
     }

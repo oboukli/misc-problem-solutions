@@ -24,7 +24,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 {
     using TypeValue = std::iter_value_t<Iter>;
 
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         return TypeValue{0};
     }
@@ -59,7 +59,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 {
     using TypeValue = std::iter_value_t<Iter>;
 
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         return TypeValue{0};
     }
@@ -96,7 +96,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 {
     using TypeValue = std::iter_value_t<Iter>;
 
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         return TypeValue{0};
     }

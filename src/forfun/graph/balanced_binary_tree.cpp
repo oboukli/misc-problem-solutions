@@ -19,7 +19,7 @@ namespace {
 auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
     -> std::pair<std::size_t, bool>
 {
-    if (head == nullptr)
+    if (head == nullptr) [[unlikely]]
     {
         return {std::size_t{0U}, false};
     }
@@ -68,7 +68,7 @@ namespace {
 
 auto measure_depth_internal(binary_tree_node const* const head) noexcept -> int
 {
-    if (head == nullptr)
+    if (head == nullptr) [[unlikely]]
     {
         return 0;
     }
@@ -112,7 +112,7 @@ namespace {
 auto measure_depth_internal(binary_tree_node const* const head) noexcept
     -> std::size_t
 {
-    if (head == nullptr)
+    if (head == nullptr) [[unlikely]]
     {
         return std::size_t{0U};
     }
@@ -130,7 +130,7 @@ auto measure_depth_internal(binary_tree_node const* const head) noexcept
 [[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
     -> bool
 {
-    if (head == nullptr)
+    if (head == nullptr) [[unlikely]]
     {
         return true;
     }

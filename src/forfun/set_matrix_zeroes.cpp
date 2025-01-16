@@ -17,7 +17,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) -> void
 {
     using DiffC = std::vector<std::vector<int>>::value_type::difference_type;
 
-    if ((matrix.begin() == matrix.end()) || matrix.front().empty())
+    if ((matrix.begin() == matrix.end()) || matrix.front().empty()) [[unlikely]]
     {
         return;
     }
@@ -98,6 +98,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     using DiffC = std::vector<std::vector<int>>::value_type::difference_type;
 
     if ((matrix.begin() == matrix.end()) || matrix.begin()->empty())
+        [[unlikely]]
     {
         return;
     }
@@ -175,14 +176,14 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     auto const matrix_r_size{matrix.size()};
 
-    if (matrix_r_size == SizeTypeR{0U})
+    if (matrix_r_size == SizeTypeR{0U}) [[unlikely]]
     {
         return;
     }
 
     auto const matrix_c_size{matrix.begin()->size()};
 
-    if (matrix_c_size == SizeTypeC{0U})
+    if (matrix_c_size == SizeTypeC{0U}) [[unlikely]]
     {
         return;
     }
