@@ -51,7 +51,7 @@ template <common::concepts::addition_unpromoted T>
 {
     assert(n >= T{0});
 
-    if (n <= T{1})
+    if (n <= T{1}) [[unlikely]]
     {
         return T{1};
     }

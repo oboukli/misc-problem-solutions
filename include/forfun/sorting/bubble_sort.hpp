@@ -21,7 +21,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::sortable<Iter>
 constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
 {
-    if (begin == end)
+    if (begin == end) [[unlikely]]
     {
         return;
     }
@@ -58,7 +58,7 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 
-    if (begin == end)
+    if (begin == end) [[unlikely]]
     {
         return;
     }

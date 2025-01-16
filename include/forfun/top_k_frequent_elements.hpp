@@ -37,7 +37,7 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 {
     using ValType = std::iter_value_t<Iter>;
 
-    if (first == end)
+    if (first == end) [[unlikely]]
     {
         return {};
     }
@@ -107,7 +107,7 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 {
     using ValType = std::iter_value_t<Iter>;
 
-    if (first == end)
+    if (first == end) [[unlikely]]
     {
         return {};
     }

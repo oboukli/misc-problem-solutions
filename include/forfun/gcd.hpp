@@ -18,7 +18,7 @@ namespace detail {
 
 [[nodiscard]] constexpr auto gcd_imp(int const m, int const n) noexcept -> int
 {
-    if (n == 0)
+    if (n == 0) [[unlikely]]
     {
         return m;
     }

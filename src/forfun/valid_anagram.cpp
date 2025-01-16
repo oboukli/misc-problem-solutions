@@ -19,7 +19,7 @@ namespace forfun::valid_anagram::char_only {
 {
     using Iter = std::string_view::const_iterator;
 
-    if (s.length() != t.length())
+    if (s.length() != t.length()) [[unlikely]]
     {
         return false;
     }

@@ -22,7 +22,7 @@ constexpr auto insertion_sort(Iter const begin, Sentinel const end) noexcept
 {
     using DiffType = std::iter_difference_t<Iter>;
 
-    if (begin != end)
+    if (begin != end) [[likely]]
     {
         for (Iter it_i{begin + DiffType{1}}; it_i != end; ++it_i)
         {

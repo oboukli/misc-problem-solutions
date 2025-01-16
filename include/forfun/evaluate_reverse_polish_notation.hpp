@@ -27,7 +27,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
-    if (iter == end)
+    if (iter == end) [[unlikely]]
     {
         return {0, std::errc{}};
     }
@@ -76,7 +76,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator *= operand_2;
                 break;
             case '/':
-                if (operand_2 == 0)
+                if (operand_2 == 0) [[unlikely]]
                 {
                     // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
                     goto invalid_argument;
@@ -109,7 +109,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
-    if (iter == end)
+    if (iter == end) [[unlikely]]
     {
         return {0, std::errc{}};
     }

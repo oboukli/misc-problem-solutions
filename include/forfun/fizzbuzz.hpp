@@ -68,7 +68,7 @@ fizzbuzz(int start, int const last, BinaryFunc write) noexcept(noexcept(write))
         {
             write(buzz.data(), buzz.size());
         }
-        else if (is_numeric)
+        else if (is_numeric) [[likely]]
         {
             // Create char buffer sufficient for int's maximum number of decimal
             // digits and one sign.

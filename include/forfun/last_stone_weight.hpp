@@ -30,7 +30,7 @@ last_stone_weight(Iter const first, Sentinel last) noexcept
 {
     using ValueType = std::iter_value_t<Iter>;
 
-    if (first == last)
+    if (first == last) [[unlikely]]
     {
         return ValueType{0};
     }
@@ -136,7 +136,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 last_stone_weight(Iter const first, Sentinel last) noexcept
     -> std::iter_value_t<Iter>
 {
-    if (first == last)
+    if (first == last) [[unlikely]]
     {
         return 0;
     }

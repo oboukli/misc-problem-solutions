@@ -41,7 +41,7 @@ auto list::push_back(list::value_type value) noexcept(false) -> void
         new internal::list_node(value, tail_, end_)
     };
 
-    if (head_ == end_)
+    if (head_ == end_) [[unlikely]]
     {
         head_ = n;
     }
@@ -56,7 +56,7 @@ auto list::push_back(list::value_type value) noexcept(false) -> void
 
 auto list::pop_back() noexcept -> void
 {
-    if (tail_ == end_)
+    if (tail_ == end_) [[unlikely]]
     {
         assert(head_ == end_);
         assert(size_ == size_type{});
@@ -67,7 +67,7 @@ auto list::pop_back() noexcept -> void
     assert(size_ > size_type{});
     assert(head_ != end_);
 
-    if (tail_->previous_ == end_)
+    if (tail_->previous_ == end_) [[unlikely]]
     {
         assert(size_ == size_type{1});
         assert(head_ == tail_);

@@ -22,7 +22,7 @@ namespace forfun::sonar {
     int const width{std::abs(area.right - area.left)};
     int const height{std::abs(area.bottom - area.top)};
 
-    if ((width + height) == 0)
+    if ((width + height) == 0) [[unlikely]]
     {
         return 1;
     }
