@@ -44,7 +44,7 @@ leveraged by this project:
 | ---                              | ---      | ---                                                                                                                        |
 | Add two numbers                  | C++17    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
 | Add two numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
-| Balanced binary tree             | C++17    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
+| Balanced binary tree             | C++20    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
 | Best time to buy and sell stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
 | Binary search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-first search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                           |
@@ -58,7 +58,7 @@ leveraged by this project:
 | First missing positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                   |
 | Fizz buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                               |
 | Forward list                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
-| Greatest common divisor          | C++17    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
+| Greatest common divisor          | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Last stone weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
 | Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
@@ -76,7 +76,7 @@ leveraged by this project:
 | Primality test                   | C++20    | [`include/forfun/primality.hpp`](include/forfun/primality.hpp)                                                             |
 | Product of array except self     | C++20    | [`include/forfun/product_except_self.hpp`](include/forfun/product_except_self.hpp)                                         |
 | Quicksort                        | C++20    | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                             |
-| Set matrix zeroes                | C++17    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
+| Set matrix zeroes                | C++20    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
 | Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](include/forfun/graph/subsets.hpp)                                                     |
 | Sums of subarrays of length k    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
 | Top K frequent elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
