@@ -151,16 +151,6 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         REQUIRE_FALSE(list.empty());
     }
 
-    SECTION("Pop back one element out of empty list")
-    {
-        forfun::experimental::container::list list{};
-
-        list.pop_back();
-
-        REQUIRE(list.empty());
-        REQUIRE(list.size() == std::size_t{0U});
-    }
-
     SECTION("Pop back one element out of list of one element")
     {
         forfun::experimental::container::list list{};

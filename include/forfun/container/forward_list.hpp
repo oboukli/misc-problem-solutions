@@ -10,6 +10,7 @@
 #ifndef FORFUN_CONTAINER_FORWARD_LIST_HPP_
 #define FORFUN_CONTAINER_FORWARD_LIST_HPP_
 
+#include <cassert>
 #include <concepts>
 #include <utility>
 
@@ -59,12 +60,10 @@ public:
         head_->next = aux;
     }
 
+    /// The behavior is undefined when popping the front of an empty container.
     auto pop_front() noexcept -> void
     {
-        if (head_ == nullptr)
-        {
-            return;
-        }
+        assert(head_ != nullptr);
 
         internal::forward_list_node<T>* const aux{head_};
         head_ = head_->next;
