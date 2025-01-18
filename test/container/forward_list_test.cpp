@@ -91,15 +91,6 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
         REQUIRE_FALSE(forward_list.empty());
     }
 
-    SECTION("Pop back one element out of empty list")
-    {
-        forfun::experimental::container::forward_list<int> forward_list{};
-
-        forward_list.pop_front();
-
-        REQUIRE(forward_list.empty());
-    }
-
     SECTION("Pop back one element out of list of one element")
     {
         forfun::experimental::container::forward_list<int> forward_list{};
