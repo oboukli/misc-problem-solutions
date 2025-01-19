@@ -175,4 +175,23 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
         REQUIRE(forward_list.front() == 1400);
     }
+
+    SECTION("Method front() const returns a reference to const")
+    {
+        forfun::experimental::container::forward_list<int> forward_list{};
+
+        REQUIRE(forward_list.empty());
+
+        forward_list.push_front(1397);
+
+        forfun::experimental::container::forward_list<int> const& alias{
+            forward_list
+        };
+
+        REQUIRE(alias.front() == 1397);
+
+        forward_list.front() = 1398;
+
+        REQUIRE(alias.front() == 1398);
+    }
 }
