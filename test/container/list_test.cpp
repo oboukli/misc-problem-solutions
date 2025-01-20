@@ -248,4 +248,21 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
         REQUIRE(list.front() == 1340);
     }
+
+    SECTION("Method front() const returns a reference to const")
+    {
+        forfun::experimental::container::list list{};
+
+        REQUIRE(list.empty());
+
+        list.push_back(1337);
+
+        forfun::experimental::container::list const& alias{list};
+
+        REQUIRE(alias.front() == 1337);
+
+        list.front() = 1338;
+
+        REQUIRE(alias.front() == 1338);
+    }
 }

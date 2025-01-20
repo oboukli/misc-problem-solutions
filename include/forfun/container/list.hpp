@@ -26,7 +26,9 @@ public:
 
     using size_type = std::size_t;
 
-    using reference = int&;
+    using reference = value_type&;
+
+    using const_reference = value_type const&;
 
     using iterator = internal::list_iterator;
 
@@ -64,7 +66,12 @@ public:
         return size_ == size_type{};
     }
 
-    [[nodiscard]] auto front() const noexcept -> reference
+    [[nodiscard]] auto front() noexcept -> reference
+    {
+        return head_->value_;
+    }
+
+    [[nodiscard]] auto front() const noexcept -> const_reference
     {
         return head_->value_;
     }
