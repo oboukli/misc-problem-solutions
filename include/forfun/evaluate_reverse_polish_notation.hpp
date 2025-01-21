@@ -40,14 +40,11 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     for (; iter != end; ++iter)
     {
-        auto const sv_begin{iter->data()};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto const sv_end{sv_begin + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
-        if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)
-            };
+        if (std::from_chars_result const parse_result{std::from_chars(
+                iter->data(), iter->data() + iter->size(), operand
+            )};
             parse_result.ec == std::errc{}
             && parse_result.ptr == iter->data() + iter->size())
         {
@@ -122,14 +119,11 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     for (; iter != end; ++iter)
     {
-        auto const sv_begin{iter->data()};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto const sv_end{sv_begin + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
-        if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)
-            };
+        if (std::from_chars_result const parse_result{std::from_chars(
+                iter->data(), iter->data() + iter->size(), operand
+            )};
             parse_result.ec == std::errc{})
         {
             evaluation_stack.push_back(operand);
@@ -186,13 +180,12 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     for (; iter != end; ++iter)
     {
-        auto const sv_begin{iter->data()};
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto const sv_end{sv_begin + iter->size()};
+        auto const sv_end{iter->data() + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
         if (std::from_chars_result const parse_result{
-                std::from_chars(sv_begin, sv_end, operand)
+                std::from_chars(iter->data(), sv_end, operand)
             };
             parse_result.ec == std::errc{})
         {
