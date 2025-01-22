@@ -19,11 +19,11 @@ class list_iterator_helper {
 public:
     using difference_type = std::ptrdiff_t;
 
+    using pointer = Derived;
+
     using iterator_category = std::bidirectional_iterator_tag;
 
     using iterator_concept = std::bidirectional_iterator_tag;
-
-    using pointer = Derived;
 
     constexpr ~list_iterator_helper() noexcept = default;
 
@@ -39,6 +39,37 @@ public:
         return *this;
     }
 
+#ifdef __cpp_explicit_this_parameter
+    auto operator++(this auto&& self) noexcept -> decltype(auto)
+    {
+        self.node_ = self.node_->next_;
+
+        return self;
+    }
+
+    auto operator++(this auto&& self, int) noexcept -> decltype(auto)
+    {
+        auto aux{self};
+        ++self;
+
+        return aux;
+    }
+
+    auto operator--(this auto&& self) noexcept -> decltype(auto)
+    {
+        self.node_ = self.node_->previous_;
+
+        return self;
+    }
+
+    auto operator--(this auto&& self, int) noexcept -> decltype(auto)
+    {
+        auto aux{self};
+        self.node_ = self.node_->previous_;
+
+        return aux;
+    }
+#else
     auto operator++() noexcept -> Derived&
     {
         node_ = node_->next_;
@@ -68,6 +99,7 @@ public:
 
         return aux;
     }
+#endif // __cpp_explicit_this_parameter
 
     auto operator==(Derived const& other) const noexcept -> bool
     {
