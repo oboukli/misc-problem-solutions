@@ -18,9 +18,11 @@ namespace forfun::experimental::container::internal {
 class list_iterator final
     : public internal::list_iterator_helper<list_iterator> {
 public:
-    using const_reference = int const&;
+    using value_type = int;
 
-    using reference = int&;
+    using reference = value_type&;
+
+    using const_reference = value_type const&;
 
     constexpr explicit list_iterator() noexcept = default;
 
