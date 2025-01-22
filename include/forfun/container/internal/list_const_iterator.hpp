@@ -18,7 +18,9 @@ namespace forfun::experimental::container::internal {
 class list_const_iterator final
     : public internal::list_iterator_helper<list_const_iterator> {
 public:
-    using const_reference = int const&;
+    using value_type = int;
+
+    using const_reference = value_type const&;
 
     using reference = const_reference;
 
