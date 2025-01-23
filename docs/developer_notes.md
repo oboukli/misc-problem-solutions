@@ -24,12 +24,9 @@ strategy where a call to `std::sort` is delayed till after the possibly throwing
 
 ## Curiously recurring template pattern
 
-An occurrence of the curiously recurring template pattern (CRTP), can be seen in
+An occurrence of the curiously recurring template pattern (CRTP), as a mixin
+utilizing C++23's explicit object parameter, can be seen in
 `list_iterator_helper`.
-
-At the time of writing, Apple Clang (version 16.0.0) did not support C++23's
-explicit object parameter, and hence the said C++23 feature is could not be
-utilized.
 
 ## Problem-specific notes
 
