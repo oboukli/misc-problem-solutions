@@ -22,6 +22,15 @@ An example can be seen in the
 strategy where a call to `std::sort` is delayed till after the possibly throwing
 `std::vector` constructor.
 
+## Curiously recurring template pattern
+
+An occurrence of the curiously recurring template pattern (CRTP), can be seen in
+`list_iterator_helper`.
+
+At the time of writing, Apple Clang (version 16.0.0) did not support C++23's
+explicit object parameter, and hence the said C++23 feature is could not be
+utilized.
+
 ## Problem-specific notes
 
 ### Meeting Rooms
