@@ -59,6 +59,7 @@ leveraged by this project:
 | Fizz buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                               |
 | Forward list                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest common divisor          | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
+| House robber                     | C++20    | [`include/forfun/house_robber.hpp`](include/forfun/house_robber.hpp)                                                       |
 | Insertion sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Last stone weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
 | Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
