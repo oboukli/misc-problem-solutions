@@ -44,7 +44,7 @@ CheckOptions:
   bugprone-argument-comment.StrictMode: "0"
   bugprone-assert-side-effect.AssertMacros: assert,NSAssert,NSCAssert
   bugprone-assert-side-effect.CheckFunctionCalls: "false"
-  bugprone-assert-side-effect.IgnoredFunctions: __builtin_expect
+  bugprone-assert-side-effect.IgnoredFunctions: "__builtin_expect"
   bugprone-dangling-handle.HandleClasses: "std::basic_string_view;std::experimental::basic_string_view"
   bugprone-easily-swappable-parameters.IgnoredParameterNames: '"";iterator;Iterator;begin;Begin;end;End;first;First;last;Last;lhs;LHS;rhs;RHS'
   bugprone-easily-swappable-parameters.IgnoredParameterTypeSuffixes: "bool;Bool;_Bool;it;It;iterator;Iterator;inputit;InputIt;forwardit;ForwardIt;bidirit;BidirIt;constiterator;const_iterator;Const_Iterator;Constiterator;ConstIterator;RandomIt;randomit;random_iterator;ReverseIt;reverse_iterator;reverse_const_iterator;ConstReverseIterator;Const_Reverse_Iterator;const_reverse_iterator;Constreverseiterator;constreverseiterator;Itr"
@@ -161,13 +161,6 @@ CheckOptions:
   cert-str34-c.DiagnoseSignedUnsignedCharComparisons: "false"
   cppcoreguidelines-avoid-c-arrays.AllowStringArrays: "false"
   cppcoreguidelines-avoid-do-while.IgnoreMacros: "false"
-  cppcoreguidelines-avoid-magic-numbers.IgnoreAllFloatingPointValues: "false"
-  cppcoreguidelines-avoid-magic-numbers.IgnoreBitFieldsWidths: "true"
-  cppcoreguidelines-avoid-magic-numbers.IgnorePowersOf2IntegerValues: "false"
-  cppcoreguidelines-avoid-magic-numbers.IgnoreTypeAliases: "false"
-  cppcoreguidelines-avoid-magic-numbers.IgnoreUserDefinedLiterals: "false"
-  cppcoreguidelines-avoid-magic-numbers.IgnoredFloatingPointValues: "1.0;100.0;"
-  cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: "1;2;3;4;"
   cppcoreguidelines-avoid-non-const-global-variables.AllowInternalLinkage: "false"
   cppcoreguidelines-explicit-virtual-functions.AllowOverrideAndFinal: "false"
   cppcoreguidelines-explicit-virtual-functions.FinalSpelling: final
@@ -339,6 +332,7 @@ CheckOptions:
   modernize-use-emplace.TupleTypes: "::std::pair;::std::tuple"
   modernize-use-equals-default.IgnoreMacros: "true"
   modernize-use-equals-delete.IgnoreMacros: "true"
+  modernize-use-integer-sign-comparison.IncludeStyle: llvm
   modernize-use-nodiscard.ReplacementString: "[[nodiscard]]"
   modernize-use-noexcept.ReplacementString: ""
   modernize-use-noexcept.UseNoexceptFalse: "true"
@@ -431,7 +425,7 @@ CheckOptions:
   readability-static-accessed-through-instance.NameSpecifierNestingThreshold: "3"
   readability-string-compare.StringLikeClasses: "::std::basic_string;::std::basic_string_view"
   readability-suspicious-call-argument.Abbreviation: "true"
-  readability-suspicious-call-argument.Abbreviations: "lst=list;arr=array;num=number;ptr=pointer;vec=vector;val=value;cpy=copy;src=source;dest=destination;i=index;idx=index;wdth=width;nr=number;elem=element;ln=line;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;str=string;addr=address;attr=attribute;col=column;cnt=count;ref=reference"
+  readability-suspicious-call-argument.Abbreviations: "lst=list;arr=array;num=number;ptr=pointer;i=index;vec=vector;cpy=copy;src=source;dest=destination;val=value;idx=index;wdth=width;nr=number;elem=element;ln=line;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;str=string;addr=address;attr=attribute;col=column;cnt=count;ref=reference"
   readability-suspicious-call-argument.Dice: "true"
   readability-suspicious-call-argument.DiceDissimilarBelow: "60"
   readability-suspicious-call-argument.DiceSimilarAbove: "70"
