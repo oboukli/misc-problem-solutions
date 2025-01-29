@@ -553,3 +553,29 @@ target_link_libraries(
   PRIVATE forfun_experimental
   PRIVATE forfun_c_experimental
 )
+
+add_executable(
+  static_test_driver
+)
+set_target_properties(static_test_driver PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(static_test_driver PROPERTIES CXX_STANDARD 23)
+set_target_properties(static_test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
+target_sources(
+  static_test_driver
+  PRIVATE
+  "test/maximum_subarray_static_test.cpp"
+)
+get_target_property(forfun_static_tests static_test_driver SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/test/"
+  PREFIX "Source files"
+  FILES ${forfun_static_tests}
+)
+target_link_libraries(
+  static_test_driver
+  PRIVATE Catch2::Catch2WithMain
+)
+target_link_libraries(
+  static_test_driver
+  PRIVATE forfun
+)
