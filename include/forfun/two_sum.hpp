@@ -54,7 +54,7 @@ namespace map_based {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] constexpr auto two_sum(
+[[nodiscard]] auto two_sum(
     Iter const first, Sentinel const end, std::iter_value_t<Iter> const target
 ) -> std::array<Iter, 2U>
 {
