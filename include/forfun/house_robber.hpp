@@ -23,17 +23,17 @@ template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
     using DiffType = std::iter_difference_t<Iter>;
 
     auto const size{std::distance(first, last)};
-    if (size == DiffType{0})
+    if (size == DiffType{0}) [[unlikely]]
     {
         return 0;
     }
 
-    if (size == DiffType{1})
+    if (size == DiffType{1}) [[unlikely]]
     {
         return *first;
     }
 
-    if (size == DiffType{2})
+    if (size == DiffType{2}) [[unlikely]]
     {
         return std::max(*first, *(std::next(first)));
     }
