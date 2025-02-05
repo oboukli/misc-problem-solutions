@@ -84,32 +84,3 @@ TEMPLATE_TEST_CASE_SIG(
         }
     }
 }
-
-TEST_CASE("Palindromic number (static)", "[palindromic_number]")
-{
-    SECTION("Palindromic integrals")
-    {
-        STATIC_REQUIRE(
-            forfun::palindromic_number::fast::is_palindrome(char{33})
-        );
-
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(7));
-
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(1881));
-
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(55L));
-
-        STATIC_REQUIRE(forfun::palindromic_number::fast::is_palindrome(33ULL));
-    }
-
-    SECTION("Non-palindromic integrals")
-    {
-        STATIC_REQUIRE_FALSE(
-            forfun::palindromic_number::fast::is_palindrome(-1)
-        );
-
-        STATIC_REQUIRE_FALSE(
-            forfun::palindromic_number::fast::is_palindrome(char{65})
-        );
-    }
-}

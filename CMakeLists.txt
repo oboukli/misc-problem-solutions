@@ -564,6 +564,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "test/maximum_subarray_static_test.cpp"
+  "test/palindromic_number_static_test.cpp"
   "test/two_sum_static_test.cpp"
 )
 get_target_property(forfun_static_tests static_test_driver SOURCES)
