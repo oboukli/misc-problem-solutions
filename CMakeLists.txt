@@ -563,6 +563,7 @@ set_target_properties(static_test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   static_test_driver
   PRIVATE
+  "test/majority_element_static_test.cpp"
   "test/maximum_subarray_static_test.cpp"
   "test/palindromic_number_static_test.cpp"
   "test/two_sum_static_test.cpp"

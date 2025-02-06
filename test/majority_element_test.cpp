@@ -19,32 +19,32 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Empty collection should have no majority")
     {
-        constexpr std::array<int, 0U> const elements{};
+        std::array<int, 0U> const elements{};
 
-        STATIC_REQUIRE(majority_element(elements) == elements.cend());
+        REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("One-element collection should have no majority")
     {
-        constexpr std::array const elements{7};
+        std::array const elements{7};
 
-        static_assert(elements.size() == 1U);
+        CHECK(elements.size() == 1U);
 
-        STATIC_REQUIRE(majority_element(elements) == elements.cend());
+        REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("A collection of two unique elements should have no majority")
     {
-        constexpr std::array const elements{5, 7};
+        std::array const elements{5, 7};
 
-        static_assert(elements.size() == 2U);
+        CHECK(elements.size() == 2U);
 
-        STATIC_REQUIRE(majority_element(elements) == elements.cend());
+        REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("A collection of three unique elements should have no majority")
     {
-        constexpr std::array const elements{3, 5, 7};
+        std::array const elements{3, 5, 7};
 
         CAPTURE(elements);
 
@@ -53,7 +53,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("A collection of four unique elements should have no majority")
     {
-        constexpr std::array const elements{3, 5, 7, 11};
+        std::array const elements{3, 5, 7, 11};
 
         CAPTURE(elements);
 
@@ -62,7 +62,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Left contiguous majority")
     {
-        constexpr std::array const elements{11, 11, 11, 11, 13, 13, 13};
+        std::array const elements{11, 11, 11, 11, 13, 13, 13};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -76,7 +76,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Right contiguous majority")
     {
-        constexpr std::array const elements{17, 17, 17, 19, 19, 19, 19};
+        std::array const elements{17, 17, 17, 19, 19, 19, 19};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -90,7 +90,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Equality among an odd number of elements of each group")
     {
-        constexpr std::array const elements{5, 5, 5, 7, 7, 7};
+        std::array const elements{5, 5, 5, 7, 7, 7};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -102,7 +102,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Equality among an even number of elements of each group")
     {
-        constexpr std::array const elements{5, 5, 5, 5, 7, 7, 7, 7};
+        std::array const elements{5, 5, 5, 5, 7, 7, 7, 7};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -114,7 +114,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Three elements with majority")
     {
-        constexpr std::array const elements{1, 2, 1};
+        std::array const elements{1, 2, 1};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -128,7 +128,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Four elements with majority")
     {
-        constexpr std::array const elements{2, 7, 2, 2};
+        std::array const elements{2, 7, 2, 2};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -142,7 +142,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Eleven elements with majority")
     {
-        constexpr std::array const elements{5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5};
+        std::array const elements{5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -169,7 +169,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Sixty-four elements with majority (benchmark case)")
     {
-        constexpr std::array const elements{
+        std::array const elements{
             // clang-format off
             5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
             5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
@@ -179,7 +179,7 @@ TEST_CASE("Majority element", "[majority_element]")
         };
         using ConstItr = decltype(elements)::const_iterator;
 
-        static_assert(elements.size() == 64U);
+        CHECK(elements.size() == 64U);
 
         CAPTURE(elements);
 
