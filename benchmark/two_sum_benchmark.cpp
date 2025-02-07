@@ -53,5 +53,15 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
             }
         )
 
+        .run(
+            NAMEOF_RAW(presorted::two_sum<ConstIter, ConstIter>).c_str(),
+            [&nums]() noexcept {
+                auto const volatile r{
+                    presorted::two_sum(nums.cbegin(), nums.cend(), 681)
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
         ;
 }

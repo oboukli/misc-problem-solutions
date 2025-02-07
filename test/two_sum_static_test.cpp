@@ -19,7 +19,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum static tests",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter0UZ, ConstIter0UZ>)
+    (forfun::two_sum::brute_force::two_sum<ConstIter0UZ, ConstIter0UZ>),
+    (forfun::two_sum::presorted::two_sum<ConstIter0UZ, ConstIter0UZ>)
 )
 {
     SECTION("Empty input")
@@ -49,6 +50,30 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr int const target{6};
         static constexpr std::array const expected{
             std::next(nums.cbegin(), 1), std::next(nums.cbegin(), 2)
+        };
+
+        static constexpr auto const actual{
+            two_sum(nums.cbegin(), nums.cend(), target)
+        };
+
+        STATIC_REQUIRE(actual == expected);
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Two sum static tests (presorted container)",
+    "[two_sum]",
+    (auto two_sum, two_sum),
+    (forfun::two_sum::brute_force::two_sum<ConstIter1UZ, ConstIter1UZ>),
+    (forfun::two_sum::presorted::two_sum<ConstIter1UZ, ConstIter1UZ>)
+)
+{
+    SECTION("Sorted input")
+    {
+        static constexpr std::array const nums{2, 3, 4};
+        static constexpr int const target{6};
+        static constexpr std::array const expected{
+            nums.cbegin(), std::next(nums.cbegin(), 2)
         };
 
         static constexpr auto const actual{

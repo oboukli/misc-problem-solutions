@@ -84,7 +84,7 @@ leveraged by this project:
 | Top K frequent elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
 | Tower of Hanoi                   | C++20    | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                   |
 | Trie                             | C++20    | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                       |
-| Two sum                          | C++20    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                 |
+| Two sum (I, II)                  | C++20    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                 |
 | Two-pass Boyer-Moore majority    | C++20    | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                               |
 | Valid anagram                    | C++20    | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                     |
 | Valid parentheses                | C++20    | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                     |
