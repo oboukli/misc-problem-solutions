@@ -6,6 +6,7 @@
 
 /// Problem source:
 /// https://leetcode.com/problems/two-sum/
+/// https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 ///
 /// Original problem text:
 /// Given an array of integers nums and an integer target, return indices of the
@@ -16,6 +17,7 @@
 #ifndef FORFUN_TWO_SUM_HPP_
 #define FORFUN_TWO_SUM_HPP_
 
+#include <algorithm>
 #include <array>
 #include <concepts>
 #include <iterator>
@@ -33,10 +35,9 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     for (; iter != end; ++iter)
     {
-        auto const addend{target - *iter};
+        decltype(target) const addend{target - *iter};
 
-        auto itr_j{iter};
-        for (++itr_j; itr_j != end; ++itr_j)
+        for (auto itr_j{std::next(iter)}; itr_j != end; ++itr_j)
         {
             if (*itr_j == addend)
             {
@@ -79,6 +80,30 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 }
 
 } // namespace map_based
+
+namespace presorted {
+
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] constexpr auto
+two_sum(Iter iter, Sentinel const end, std::iter_value_t<Iter> const target)
+    -> std::array<Iter, 2U>
+{
+    for (; iter != end; ++iter)
+    {
+        decltype(target) const addend{target - (*iter)};
+
+        if (auto const iter_j{std::lower_bound(std::next(iter), end, addend)};
+            iter_j != end)
+        {
+            return {iter, iter_j};
+        }
+    }
+
+    return {end, end};
+}
+
+} // namespace presorted
 
 } // namespace forfun::two_sum
 
