@@ -60,7 +60,7 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
 
         aux_node_ptr->value = sum % 10U;
 
-        sum = sum / 10U;
+        sum /= 10U;
 
         if ((addend_a == NULL) && (addend_b == NULL) && (sum == 0U))
         {
