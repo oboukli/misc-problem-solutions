@@ -16,37 +16,35 @@ namespace forfun::add_two_numbers::stl {
     std::forward_list<unsigned int> const& addend_b
 ) noexcept -> std::forward_list<unsigned int>
 {
-    auto iter_a{addend_a.cbegin()};
-    auto iter_b{addend_b.cbegin()};
-
     std::forward_list<unsigned int> result{};
     auto back_iter{result.before_begin()};
 
-    unsigned int carry{0U};
+    auto iter_a{addend_a.cbegin()};
+    auto iter_b{addend_b.cbegin()};
     unsigned int column_sum{0U};
 
     while ((iter_a != addend_a.cend()) || (iter_b != addend_b.cend()))
+        [[likely]]
     {
-        if (iter_a != addend_a.cend())
+        if (iter_a != addend_a.cend()) [[likely]]
         {
             assert(*iter_a <= 9U);
             column_sum += *iter_a++;
         }
 
-        if (iter_b != addend_b.cend())
+        if (iter_b != addend_b.cend()) [[likely]]
         {
             assert(*iter_b <= 9U);
             column_sum += *iter_b++;
         }
 
         back_iter = result.insert_after(back_iter, column_sum % 10U);
-        carry = column_sum / 10U;
-        column_sum = carry;
+        column_sum /= 10U;
     }
 
-    if (carry != 0U)
+    if (column_sum != 0U)
     {
-        result.insert_after(back_iter, carry);
+        result.insert_after(back_iter, column_sum);
     }
 
     return result;
