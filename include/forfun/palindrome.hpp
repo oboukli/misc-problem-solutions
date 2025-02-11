@@ -54,9 +54,8 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     using SizeType = std::string_view::size_type;
 
-    SizeType const length{s.length()};
-    SizeType const end{length - 1U};
-    SizeType const mid{length / 2U};
+    SizeType const end{s.length() - 1U};
+    SizeType const mid{s.length() / 2U};
 
     for (SizeType i{0U}; i != mid; ++i)
     {
@@ -84,18 +83,17 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     -> bool
 {
     using ConstIter = std::basic_string_view<CharT>::const_iterator;
-    using ConstRevIter = std::basic_string_view<CharT>::const_reverse_iterator;
     using DiffType = std::basic_string_view<CharT>::difference_type;
     using SizeType = std::basic_string_view<CharT>::size_type;
 
-    SizeType const length{s.length()};
-    ConstIter const cbegin{s.cbegin()};
-    ConstRevIter upper{s.crbegin()};
+    auto upper{s.crbegin()};
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-    ConstIter const mid{cbegin + static_cast<DiffType>(length / 2U)};
+    ConstIter const mid{
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U})
+    };
 
-    for (ConstIter lower{cbegin}; lower != mid; ++lower)
+    for (auto lower{s.cbegin()}; lower != mid; ++lower)
     {
         if ((*lower) != (*upper))
         {
@@ -112,14 +110,15 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
 inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     using ConstIter = std::string_view::const_iterator;
-    using ConstRevIter = std::string_view::const_reverse_iterator;
     using DiffType = std::string_view::difference_type;
+    using SizeType = std::string_view::size_type;
 
-    ConstIter const cbegin{s.cbegin()};
-    ConstRevIter upper{s.crbegin()};
-    ConstIter const mid{cbegin + static_cast<DiffType>(s.length() / 2U)};
+    auto upper{s.crbegin()};
+    ConstIter const mid{
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U})
+    };
 
-    for (ConstIter lower{cbegin}; lower != mid; ++lower)
+    for (ConstIter lower{s.cbegin()}; lower != mid; ++lower)
     {
         if (std::tolower(static_cast<unsigned char>(*lower))
             != std::tolower(static_cast<unsigned char>(*upper)))
@@ -144,13 +143,13 @@ template <std::integral CharT>
 constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     -> bool
 {
-    using ConstIter = std::basic_string_view<CharT>::const_iterator;
     using DiffType = std::basic_string_view<CharT>::difference_type;
-
-    ConstIter const cbegin{s.cbegin()};
+    using SizeType = std::basic_string_view<CharT>::size_type;
 
     return std::equal(
-        cbegin, cbegin + static_cast<DiffType>(s.length() / 2U), s.crbegin()
+        s.cbegin(),
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U}),
+        s.crbegin()
     );
 }
 
@@ -164,10 +163,11 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     -> bool
 {
     using DiffType = std::basic_string_view<CharT>::difference_type;
+    using SizeType = std::basic_string_view<CharT>::size_type;
 
     return std::equal(
         s.cbegin(),
-        std::next(s.cbegin(), static_cast<DiffType>(s.length() / 2U)),
+        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2U})),
         s.crbegin()
     );
 }
@@ -186,14 +186,12 @@ inline auto equal_case_insensitive(char const a, char const b) noexcept -> bool
 [[nodiscard]]
 inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
-    using ConstIter = std::string_view::const_iterator;
     using DiffType = std::string_view::difference_type;
-
-    ConstIter const cbegin{s.cbegin()};
+    using SizeType = std::string_view::size_type;
 
     return std::equal(
-        cbegin,
-        std::next(cbegin, static_cast<DiffType>(s.length() / 2U)),
+        s.cbegin(),
+        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2U})),
         s.crbegin(),
         detail::equal_case_insensitive
     );
