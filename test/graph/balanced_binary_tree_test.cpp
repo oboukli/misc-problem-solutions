@@ -182,9 +182,9 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("GeeksforGeeks case 1")
     {
         binary_tree_node h_l_l_l{8};
-        binary_tree_node const h_l_r{5};
+        binary_tree_node h_l_r{5};
         binary_tree_node h_l_l{4, &h_l_l_l, nullptr};
-        binary_tree_node h_l{2, &h_l_l, nullptr};
+        binary_tree_node h_l{2, &h_l_l, &h_l_r};
         binary_tree_node h_r{3};
         binary_tree_node const root{1, &h_l, &h_r};
 
@@ -194,9 +194,9 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("GeeksforGeeks case 2")
     {
         binary_tree_node h_r_l{15};
-        binary_tree_node const h_r_r{20};
+        binary_tree_node h_r_r{20};
         binary_tree_node h_l{5};
-        binary_tree_node h_r{30, &h_r_l, &h_r_l};
+        binary_tree_node h_r{30, &h_r_l, &h_r_r};
         binary_tree_node const root{10, &h_l, &h_r};
 
         REQUIRE(is_balanced(&root));

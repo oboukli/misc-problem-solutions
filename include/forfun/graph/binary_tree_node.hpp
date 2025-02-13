@@ -9,21 +9,21 @@
 
 namespace forfun::graph {
 
-class binary_tree_node final {
+class [[nodiscard]] binary_tree_node final {
 public:
     using value_type = int;
 
-    binary_tree_node() noexcept :
+    explicit constexpr binary_tree_node() noexcept :
         value_{}, left_node_{nullptr}, right_node_{nullptr}
     {
     }
 
-    explicit binary_tree_node(value_type value) noexcept :
+    explicit constexpr binary_tree_node(value_type value) noexcept :
         value_{value}, left_node_{nullptr}, right_node_{nullptr}
     {
     }
 
-    binary_tree_node(
+    explicit binary_tree_node(
         // NOLINTBEGIN(bugprone-easily-swappable-parameters)
         value_type value,
         binary_tree_node* left,

@@ -366,6 +366,7 @@ target_sources(
   "test/gcd_test.cpp"
   "test/house_robber_test.cpp"
   "test/graph/balanced_binary_tree_test.cpp"
+  "test/graph/binary_tree_node_test.cpp"
   "test/graph/breadth_first_search_test.cpp"
   "test/graph/depth_first_search_test.cpp"
   "test/graph/subsets_test.cpp"
@@ -564,6 +565,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "test/contains_duplicate_static_test.cpp"
+  "test/graph/binary_tree_node_static_test.cpp"
   "test/majority_element_static_test.cpp"
   "test/maximum_subarray_static_test.cpp"
   "test/palindromic_number_static_test.cpp"
