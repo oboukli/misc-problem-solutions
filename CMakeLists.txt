@@ -565,6 +565,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "test/contains_duplicate_static_test.cpp"
+  "test/fibonacci_static_test.cpp"
   "test/graph/binary_tree_node_static_test.cpp"
   "test/majority_element_static_test.cpp"
   "test/maximum_subarray_static_test.cpp"
