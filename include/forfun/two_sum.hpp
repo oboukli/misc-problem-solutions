@@ -25,19 +25,19 @@
 
 namespace forfun::two_sum {
 
-namespace brute_force {
+namespace quadratic {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
-    Iter iter, Sentinel const end, std::iter_value_t<Iter> const target
+    Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
 ) noexcept -> std::array<Iter, 2U>
 {
-    for (; iter != end; ++iter)
+    for (; iter != last; ++iter)
     {
-        decltype(target) const addend{target - *iter};
+        decltype(target) const addend{target - (*iter)};
 
-        for (auto itr_j{std::next(iter)}; itr_j != end; ++itr_j)
+        for (auto itr_j{std::next(iter)}; itr_j != last; ++itr_j)
         {
             if (*itr_j == addend)
             {
@@ -46,26 +46,26 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
         }
     }
 
-    return {end, end};
+    return {last, last};
 }
 
-} // namespace brute_force
+} // namespace quadratic
 
 namespace map_based {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto two_sum(
-    Iter const first, Sentinel const end, std::iter_value_t<Iter> const target
+    Iter const first, Sentinel const last, std::iter_value_t<Iter> const target
 ) -> std::array<Iter, 2U>
 {
     std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
-    for (auto iter{first}; iter != end; ++iter)
+    for (auto iter{first}; iter != last; ++iter)
     {
         lookup_map.insert({*iter, iter});
     }
 
-    for (auto iter{first}; iter != end; ++iter)
+    for (auto iter{first}; iter != last; ++iter)
     {
         auto const addend{target - *iter};
 
@@ -76,7 +76,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
         }
     }
 
-    return {end, end};
+    return {last, last};
 }
 
 } // namespace map_based
@@ -86,21 +86,21 @@ namespace presorted {
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-two_sum(Iter iter, Sentinel const end, std::iter_value_t<Iter> const target)
+two_sum(Iter iter, Sentinel const last, std::iter_value_t<Iter> const target)
     -> std::array<Iter, 2U>
 {
-    for (; iter != end; ++iter)
+    for (; iter != last; ++iter)
     {
         decltype(target) const addend{target - (*iter)};
 
-        if (auto const iter_j{std::lower_bound(std::next(iter), end, addend)};
-            iter_j != end)
+        if (auto const iter_j{std::lower_bound(std::next(iter), last, addend)};
+            iter_j != last)
         {
             return {iter, iter_j};
         }
     }
 
-    return {end, end};
+    return {last, last};
 }
 
 } // namespace presorted

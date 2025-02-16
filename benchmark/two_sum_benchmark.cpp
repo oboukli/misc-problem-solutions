@@ -34,10 +34,10 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(brute_force::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(quadratic::two_sum<ConstIter, ConstIter>).c_str(),
             [&nums]() noexcept {
                 auto const volatile r{
-                    brute_force::two_sum(nums.cbegin(), nums.cend(), 681)
+                    quadratic::two_sum(nums.cbegin(), nums.cend(), 681)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

@@ -13,14 +13,14 @@
 #include "forfun/two_sum.hpp"
 
 using ConstIter0UZ = std::array<int, 0U>::const_iterator;
-using ConstIter1UZ = std::array<int, 3U>::const_iterator;
+using ConstIter3UZ = std::array<int, 3U>::const_iterator;
 
 TEMPLATE_TEST_CASE_SIG(
     "Two sum static tests",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter0UZ, ConstIter0UZ>),
-    (forfun::two_sum::presorted::two_sum<ConstIter0UZ, ConstIter0UZ>)
+    (forfun::two_sum::presorted::two_sum<ConstIter0UZ, ConstIter0UZ>),
+    (forfun::two_sum::quadratic::two_sum<ConstIter0UZ, ConstIter0UZ>)
 )
 {
     SECTION("Empty input")
@@ -41,7 +41,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum static tests",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter1UZ, ConstIter1UZ>)
+    (forfun::two_sum::quadratic::two_sum<ConstIter3UZ, ConstIter3UZ>)
 )
 {
     SECTION("Unsorted input")
@@ -64,8 +64,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum static tests (presorted container)",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter1UZ, ConstIter1UZ>),
-    (forfun::two_sum::presorted::two_sum<ConstIter1UZ, ConstIter1UZ>)
+    (forfun::two_sum::quadratic::two_sum<ConstIter3UZ, ConstIter3UZ>),
+    (forfun::two_sum::presorted::two_sum<ConstIter3UZ, ConstIter3UZ>)
 )
 {
     SECTION("Sorted input")
