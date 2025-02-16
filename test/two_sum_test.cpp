@@ -22,7 +22,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum (unsorted container)",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>)
 )
 {
@@ -125,7 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum (presorted container)",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::brute_force::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::presorted::two_sum<ConstIter, ConstIter>)
 )
