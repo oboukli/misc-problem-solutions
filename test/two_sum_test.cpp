@@ -119,6 +119,20 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
+
+    SECTION("Ten integers")
+    {
+        std::vector const nums{-5, 0, 0, 0, -2, 4, 7, 0, 9, 8};
+        static constexpr int const target{-1};
+        std::array const expected{nums.cbegin(), std::next(nums.cbegin(), 5)};
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
 }
 
 TEMPLATE_TEST_CASE_SIG(
