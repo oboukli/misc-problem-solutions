@@ -133,6 +133,33 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
+
+    SECTION("First sixty-four prime numbers (benchmark case)")
+    {
+        std::vector const nums{
+            // clang-format off
+            131, 89,  61,  37,  103,  5,    41,  73,
+            233, 127, 101, 163, 283,  109,  257, 263,
+            191, 79,  11,  97,  1601, 7,    211, 43,
+            281, 179, 2,   271, 223,  181,  13,  137,
+            3,   53,  157, 277, 193,  1607, 71,  269,
+            139, 151, 167, 83,  47,   199,  59,  239,
+            229, 293, 173, 241, 251,  19,   227, 67,
+            17,  197, 29,  113, 149,  31,   107, 23,
+            // clang-format on
+        };
+        static constexpr int const target{1601 + 1607};
+        std::array const expected{
+            std::next(nums.cbegin(), 20), std::next(nums.cbegin(), 37)
+        };
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
 }
 
 TEMPLATE_TEST_CASE_SIG(
@@ -236,33 +263,6 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr int const target{38};
         std::array const expected{
             std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
-        };
-
-        CAPTURE(nums);
-        CAPTURE(target);
-
-        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
-    }
-
-    SECTION("First sixty-four prime numbers (benchmark case)")
-    {
-        std::vector const nums{
-            // clang-format off
-            2,   3,   5,   7,   11,  13,  17,  19,
-            23,  29,  31,  37,  41,  43,  47,  53,
-            59,  61,  67,  71,  73,  79,  83,  89,
-            97,  101, 103, 107, 109, 113, 127, 131,
-            137, 139, 149, 151, 157, 163, 167, 173,
-            179, 181, 191, 193, 197, 199, 211, 223,
-            227, 229, 233, 239, 241, 251, 257, 263,
-            269, 271, 277, 281, 283, 293, 307, 311,
-            // clang-format on
-        };
-        static constexpr int const target{307 + 311};
-        std::array const expected{
-            std::next(nums.cbegin(), 62), std::next(nums.cbegin(), 63)
         };
 
         CAPTURE(nums);
