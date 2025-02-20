@@ -58,6 +58,16 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
             }
         )
 
+        .run(
+            NAMEOF_RAW(single_pass::two_sum<ConstIter, ConstIter>).c_str(),
+            [&nums]() noexcept {
+                auto const volatile r{
+                    single_pass::two_sum(nums.cbegin(), nums.cend(), 3208)
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
         ;
 }
 
@@ -110,6 +120,16 @@ TEST_CASE("Two sum II benchmarking", "[benchmark][two_sum]")
         [&nums]() noexcept {
             auto const volatile r{
                 presorted::two_sum(nums.cbegin(), nums.cend(), 3208)
+            };
+            ankerl::nanobench::doNotOptimizeAway(&r);
+        }
+    )
+
+    .run(
+        NAMEOF_RAW(single_pass::two_sum<ConstIter, ConstIter>).c_str(),
+        [&nums]() noexcept {
+            auto const volatile r{
+                single_pass::two_sum(nums.cbegin(), nums.cend(), 3208)
             };
             ankerl::nanobench::doNotOptimizeAway(&r);
         }
