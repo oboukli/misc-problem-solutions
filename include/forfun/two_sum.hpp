@@ -51,6 +51,33 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
 } // namespace quadratic
 
+namespace single_pass {
+
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+[[nodiscard]] auto two_sum(
+    Iter const first, Sentinel const last, std::iter_value_t<Iter> const target
+) -> std::array<Iter, 2U>
+{
+    std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
+    for (auto iter{first}; iter != last; ++iter)
+    {
+        auto const addend{target - (*iter)};
+
+        if (auto const found_iter{lookup_map.find(addend)};
+            (found_iter != lookup_map.cend()))
+        {
+            return {iter, found_iter->second};
+        }
+
+        lookup_map.insert({*iter, iter});
+    }
+
+    return {last, last};
+}
+
+} // namespace single_pass
+
 namespace map_based {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>

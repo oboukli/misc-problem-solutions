@@ -23,7 +23,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[two_sum]",
     (auto two_sum, two_sum),
     (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>)
+    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::single_pass::two_sum<ConstIter, ConstIter>)
 )
 {
     SECTION("Two integers")
@@ -168,7 +169,8 @@ TEMPLATE_TEST_CASE_SIG(
     (auto two_sum, two_sum),
     (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::presorted::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>)
+    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::single_pass::two_sum<ConstIter, ConstIter>)
 )
 {
     SECTION("Empty input")
