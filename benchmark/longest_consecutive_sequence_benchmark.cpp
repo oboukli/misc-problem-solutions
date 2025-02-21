@@ -21,16 +21,7 @@ TEST_CASE(
 {
     using namespace forfun;
 
-    std::vector nums{
-        // clang-format off
-        1,  1,   2,   3,   44,  45,  46,  47,
-        47, 47,  47,  48,  7,   8,   9,   10,
-        11, 173, 179, 181, 191, 193, 197, 199,
-        22, 23,  24,  211, 283, 293, 307, 311,
-        // clang format on
-    };
-
-    using Iter = decltype(nums)::iterator;
+    using Iter = std::vector<int>::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -39,13 +30,22 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                longest_consecutive_sequence::measured::
+                longest_consecutive_sequence::counted::
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            [&nums]() noexcept {
+            []() noexcept {
+                std::vector nums{
+                    // clang-format off
+                    1,  1,   2,   3,   44,  45,  46,  47,
+                    47, 47,  47,  48,  7,   8,   9,   10,
+                    11, 173, 179, 181, 191, 193, 197, 199,
+                    22, 23,  24,  211, 283, 293, 307, 311,
+                    // clang format on
+                };
+
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::measured::
+                    forfun::longest_consecutive_sequence::counted::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -54,13 +54,22 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                longest_consecutive_sequence::counted::
+                longest_consecutive_sequence::measured::
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            [&nums]() noexcept {
+            []() noexcept {
+                std::vector nums{
+                    // clang-format off
+                    1,  1,   2,   3,   44,  45,  46,  47,
+                    47, 47,  47,  48,  7,   8,   9,   10,
+                    11, 173, 179, 181, 191, 193, 197, 199,
+                    22, 23,  24,  211, 283, 293, 307, 311,
+                    // clang format on
+                };
+
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::counted::
+                    forfun::longest_consecutive_sequence::measured::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -73,7 +82,16 @@ TEST_CASE(
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            [&nums]() noexcept {
+            []() noexcept {
+                std::vector nums{
+                    // clang-format off
+                    1,  1,   2,   3,   44,  45,  46,  47,
+                    47, 47,  47,  48,  7,   8,   9,   10,
+                    11, 173, 179, 181, 191, 193, 197, 199,
+                    22, 23,  24,  211, 283, 293, 307, 311,
+                    // clang format on
+                };
+
                 auto const volatile r{
                     forfun::longest_consecutive_sequence::set_scanning::
                         longest_consecutive(nums.begin(), nums.end())
@@ -88,7 +106,16 @@ TEST_CASE(
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            [&nums]() noexcept {
+            []() noexcept {
+                std::vector nums{
+                    // clang-format off
+                    1,  1,   2,   3,   44,  45,  46,  47,
+                    47, 47,  47,  48,  7,   8,   9,   10,
+                    11, 173, 179, 181, 191, 193, 197, 199,
+                    22, 23,  24,  211, 283, 293, 307, 311,
+                    // clang format on
+                };
+
                 auto const volatile r{
                     forfun::longest_consecutive_sequence::set_sliding::
                         longest_consecutive(nums.begin(), nums.end())
