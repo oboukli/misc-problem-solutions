@@ -29,18 +29,16 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
         .run(
             NAMEOF_RAW(recursive::toh<Rod, Monk, std::size_t>).c_str(),
             []() noexcept {
-                static constexpr std::size_t const num_disks{4U};
-                // NOLINTBEGIN(misc-const-correctness)
                 Rod src{};
                 Rod des{};
                 Rod aux{};
-                // NOLINTEND(misc-const-correctness)
+                std::size_t const volatile num_disks{4U};
 
                 forfun::tower_of_hanoi::recursive::toh(
                     src, des, aux, [](Rod&, Rod&) noexcept -> void {}, num_disks
                 );
 
-                ankerl::nanobench::doNotOptimizeAway(des);
+                ankerl::nanobench::doNotOptimizeAway(&des);
             }
         )
 
