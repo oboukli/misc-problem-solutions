@@ -15,8 +15,6 @@
 #include "forfun/common.hpp"
 #include "forfun/fibonacci_sequence.hpp"
 
-inline constexpr int const f{514'229};
-
 namespace {
 
 template <forfun::common::concepts::addition_unpromoted T>
@@ -41,20 +39,22 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
         .run(
             NAMEOF_RAW(slow::fib_seq<int, int, fn_int_t>).c_str(),
             []() noexcept {
+                int const volatile f{514'229};
                 int r{0};
                 slow::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
             NAMEOF_RAW(fast::fib_seq<int, int, fn_int_t>).c_str(),
             []() noexcept {
+                int const volatile f{514'229};
                 int r{0};
                 fast::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
@@ -64,23 +64,25 @@ TEST_CASE("Fibonacci sequence benchmarking", "[benchmark][fibonacci_sequence]")
             )
                 .c_str(),
             []() noexcept {
+                uint_fast32_t const volatile f{514'229};
                 std::uint_fast32_t r{0U};
                 fast::
                     fib_seq<std::uint_fast32_t, std::uint_fast32_t, fn_fast_t>(
-                        std::uint_fast32_t{f}, dummy_callback, r
+                        f, dummy_callback, r
                     );
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
             NAMEOF_RAW(creel::fib_seq<int, int, fn_int_t>).c_str(),
             []() noexcept {
+                int const volatile f{514'229};
                 int r{0};
                 creel::fib_seq<int, int, fn_int_t>(f, dummy_callback, r);
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 

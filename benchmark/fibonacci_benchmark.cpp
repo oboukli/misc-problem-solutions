@@ -18,8 +18,6 @@ TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
 {
     using namespace forfun::fibonacci;
 
-    static constexpr std::uint_fast32_t const n{7U};
-
     ankerl::nanobench::Bench()
 
         .title("Fibonacci number")
@@ -28,18 +26,22 @@ TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
         .run(
             NAMEOF_RAW(iterative::fib<std::uint_fast32_t>).c_str(),
             []() noexcept {
+                std::uint_fast32_t const volatile n{7U};
+
                 auto const r{iterative::fib(n)};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
             NAMEOF_RAW(recursive::fib<std::uint_fast32_t>).c_str(),
             []() noexcept {
+                std::uint_fast32_t const volatile n{7U};
+
                 auto const r{recursive::fib(n)};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
