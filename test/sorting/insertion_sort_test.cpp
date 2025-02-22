@@ -14,17 +14,6 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 {
     using forfun::sorting::insertion_sort;
 
-    SECTION("Empty container")
-    {
-        std::vector<int> test_input{};
-        std::vector<int> const expected_output{};
-        insertion_sort(test_input.begin(), test_input.end());
-
-        CHECK(test_input.empty());
-
-        REQUIRE(test_input == expected_output);
-    }
-
     SECTION("One element")
     {
         std::vector test_input{7};

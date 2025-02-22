@@ -11,70 +11,76 @@
 #define FORFUN_SORTING_BUBBLE_SORT_HPP_
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 
 namespace forfun::sorting {
 
 namespace plain {
 
-template <std::sortable IterA, std::bidirectional_iterator IterB>
-constexpr auto bubble_sort(IterA const first, IterB last) noexcept -> void
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// range of elements, otherwise the behavior of the strategy is undefined.
+template <typename IterA, typename IterB>
+    requires std::sortable<IterA>
+    and std::bidirectional_iterator<IterA>
+    and std::bidirectional_iterator<IterB>
+auto bubble_sort(IterA const first, IterB last) noexcept -> void
 {
-    if (first == last) [[unlikely]]
-    {
-        return;
-    }
-
     // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-    bool f /*[[indeterminate]]*/;
+    bool is_unsorted /*[[indeterminate]]*/;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
         --last;
-        f = false;
+        is_unsorted = false;
         for (IterA it_i{first}; it_i != last; ++it_i)
         {
-            auto const it_ii{std::next(it_i)};
+            auto it_ii{it_i};
+            ++it_ii;
             if (*it_i > *it_ii)
             {
                 auto const aux{*it_ii};
                 *it_ii = *it_i;
                 *it_i = aux;
 
-                f = true;
+                is_unsorted = true;
             }
         }
-    } while (f);
+    } while (is_unsorted);
 }
 
 } // namespace plain
 
 namespace stl {
 
-template <std::sortable IterA, std::bidirectional_iterator IterB>
-constexpr auto bubble_sort(IterA const first, IterB last) noexcept -> void
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// range of elements, otherwise the behavior of the strategy is undefined.
+template <typename IterA, typename IterB>
+    requires std::sortable<IterA>
+    and std::bidirectional_iterator<IterA>
+    and std::bidirectional_iterator<IterB>
+auto bubble_sort(IterA const first, IterB last) noexcept -> void
 {
-    if (first == last) [[unlikely]]
-    {
-        return;
-    }
+    using std::greater;
+    using std::iter_swap;
+    using std::next;
 
     // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-    bool f /*[[indeterminate]]*/;
+    bool is_unsorted /*[[indeterminate]]*/;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
         --last;
-        f = false;
+        is_unsorted = false;
         for (IterA it_i{first}; it_i != last; ++it_i)
         {
-            if (*it_i > *std::next(it_i))
+            if (greater{}(*it_i, *next(it_i)))
             {
-                std::iter_swap(it_i, std::next(it_i));
-                f = true;
+                iter_swap(it_i, next(it_i));
+                is_unsorted = true;
             }
         }
-    } while (f);
+    } while (is_unsorted);
 }
 
 } // namespace stl

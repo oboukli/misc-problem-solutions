@@ -25,17 +25,6 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::sorting::stl::bubble_sort<VecIter, VecIter>)
 )
 {
-    SECTION("Empty container")
-    {
-        std::vector<int> test_input{};
-        std::vector<int> expected_output{};
-        bubble_sort(test_input.begin(), test_input.end());
-
-        CHECK(test_input.empty());
-
-        REQUIRE(test_input == expected_output);
-    }
-
     SECTION("One element")
     {
         std::vector test_input{7};

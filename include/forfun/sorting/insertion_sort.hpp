@@ -15,22 +15,26 @@
 
 namespace forfun::sorting {
 
-template <std::bidirectional_iterator Iter, std::sentinel_for<Iter> Sentinel>
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// range of elements, otherwise the behavior of the strategy is undefined.
+template <typename Iter, typename Sentinel>
     requires std::sortable<Iter>
-constexpr auto insertion_sort(Iter const first, Sentinel const last) noexcept
-    -> void
+    and std::bidirectional_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+auto insertion_sort(Iter const first, Sentinel const last) noexcept -> void
 {
-    if (first != last) [[likely]]
+    using std::iter_swap;
+    using std::less;
+    using std::next;
+    using std::prev;
+
+    for (Iter it_i{next(first)}; it_i != last; ++it_i)
     {
-        for (Iter it_i{std::next(first)}; it_i != last; ++it_i)
+        for (
+            Iter it_j{it_i}; it_j != first && less{}(*it_j, *prev(it_j)); --it_j
+        )
         {
-            for (
-                Iter it_j{it_i}; it_j != first && (*it_j < *std::prev(it_j));
-                --it_j
-            )
-            {
-                std::iter_swap(it_j, std::prev(it_j));
-            }
+            iter_swap(it_j, prev(it_j));
         }
     }
 }
