@@ -65,6 +65,7 @@ leveraged by this project:
 | Least recently used (LRU) cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
 | Linked list                      | C++20    | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                   |
 | List bidirectional iterator      | C++20    | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)               |
+| Longest consecutive sequence     | C++20    | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                       |
 | Maximum subarray                 | C++20    | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                               |
 | Meeting rooms                    | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
 | Meeting rooms 2                  | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
