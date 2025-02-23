@@ -10,6 +10,8 @@ project(
   ForFun
 )
 
+include(cmake/CompileOptions.cmake)
+
 add_library(
   forfun
   SHARED
@@ -112,6 +114,7 @@ source_group(
   PREFIX "Header files"
   FILES ${forfun_headers}
 )
+forfun_common_target_compile_options(forfun)
 
 add_library(
   forfun_graph
@@ -159,6 +162,7 @@ source_group(
   PREFIX "Source files"
   FILES ${forfun_graph_sources}
 )
+forfun_common_target_compile_options(forfun_graph)
 
 add_library(
   forfun_search
@@ -196,6 +200,7 @@ source_group(
   PREFIX "Source files"
   FILES ${forfun_search_sources}
 )
+forfun_common_target_compile_options(forfun_search)
 
 add_library(
   forfun_sorting
@@ -215,6 +220,7 @@ target_include_directories(
   PUBLIC
   "include/"
 )
+forfun_common_target_compile_options(forfun_sorting)
 
 add_library(
   forfun_c
@@ -252,6 +258,7 @@ source_group(
   PREFIX "Header files"
   FILES ${forfun_c_headers}
 )
+forfun_common_target_compile_options(forfun_c)
 
 add_library(
   forfun_c_experimental
@@ -291,6 +298,7 @@ source_group(
   PREFIX "Header files"
   FILES ${forfun_c_experimental_headers}
 )
+forfun_common_target_compile_options(forfun_c_experimental)
 
 find_package(Microsoft.GSL CONFIG REQUIRED)
 add_library(
@@ -343,6 +351,7 @@ target_link_libraries(
   forfun_experimental
   PRIVATE Microsoft.GSL::GSL
 )
+forfun_common_target_compile_options(forfun_experimental)
 
 find_package(Catch2 3 REQUIRED)
 add_executable(
@@ -417,6 +426,7 @@ target_link_libraries(
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
+forfun_common_target_compile_options(test_driver)
 
 add_executable(
   test_driver_experimental
@@ -448,6 +458,7 @@ target_link_libraries(
   PRIVATE forfun_c_experimental
   PRIVATE forfun_experimental
 )
+forfun_common_target_compile_options(test_driver_experimental)
 
 include(CTest)
 include(Catch)
@@ -524,6 +535,7 @@ target_link_libraries(
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
+forfun_common_target_compile_options(benchmark_driver)
 
 add_executable(
   benchmark_driver_experimental
@@ -558,6 +570,7 @@ target_link_libraries(
   PRIVATE forfun_experimental
   PRIVATE forfun_c_experimental
 )
+forfun_common_target_compile_options(benchmark_driver_experimental)
 
 add_executable(
   static_test_driver
@@ -590,3 +603,4 @@ target_link_libraries(
   static_test_driver
   PRIVATE forfun
 )
+forfun_common_target_compile_options(static_test_driver)

@@ -33,16 +33,14 @@
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true,
+        "FORFUN_COMMON_CFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
+        "FORFUN_COMMON_CXXFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:enumTypes /Zc:preprocessor"
       },
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
-      },
-      "environment": {
-        "CFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
-        "CXXFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:enumTypes /Zc:preprocessor"
       }
     },
     {
@@ -60,15 +58,13 @@
         "CMAKE_XCODE_XCCONFIG": {
           "value": "${sourceDir}/vendor/XcodeWarnings/XcodeWarnings.xcconfig",
           "type": "FILEPATH"
-        }
+        },
+        "FORFUN_COMMON_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
       },
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Darwin"
-      },
-      "environment": {
-        "CXXFLAGS": "-D_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
       }
     },
     {
@@ -85,11 +81,9 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        }
-      },
-      "environment": {
-        "CFLAGS": "-Wall -Wextra -pedantic",
-        "CXXFLAGS": "-Wall -pedantic -Wcast-align=strict -Wcast-qual -Wchanges-meaning -Wconversion -Wconversion-null -Wctor-dtor-privacy -Wdangling-pointer -Wdangling-reference -Wdate-time -Wdelete-incomplete -Wdelete-non-virtual-dtor -Wdeprecated-copy -Wdeprecated-copy-dtor -Wdeprecated-enum-enum-conversion -Wdeprecated-enum-float-conversion -Wdisabled-optimization -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wexceptions -Wextra -Wformat=2 -Wimplicit-fallthrough=5 -Winaccessible-base -Winherited-variadic-ctor -Winit-list-lifetime -Winit-self -Winterference-size -Winvalid-constexpr -Winvalid-imported-macros -Winvalid-offsetof -Winvalid-pch -Winvalid-utf8 -Wlogical-op -Wmisleading-indentation -Wmismatched-new-delete -Wmismatched-tags -Wmissing-declarations -Wmissing-noreturn -Wmissing-requires -Wmissing-template-keyword -Wmultichar -Wmultiple-inheritance -Wnarrowing -Wnoexcept -Wnoexcept-type -Wnon-template-friend -Wnon-virtual-dtor -Wnull-dereference -Wold-style-cast -Wopenacc-parallelism -Woverlength-strings -Woverloaded-virtual -Wpacked -Wpacked-bitfield-compat -Wrange-loop-construct -Wredundant-decls -Wredundant-move -Wredundant-tags -Wregister -Wreorder -Wself-move -Wshadow -Wshift-negative-value -Wsign-conversion -Wsign-promo -Wsized-deallocation -Wstack-protector -Wstrict-null-sentinel -Wstrict-overflow -Wunused -Wunused-macros -Wuseless-cast -Wvariadic-macros -Wvector-operation-performance -Wvexing-parse -Wvirtual-inheritance -Wvirtual-move-assign -Wvla -Wvolatile -Wwrite-strings -Wzero-as-null-pointer-constant"
+        },
+        "FORFUN_COMMON_CFLAGS": "-Wall -Wextra -pedantic",
+        "FORFUN_COMMON_CXXFLAGS": "-Wall -pedantic -Wcast-align=strict -Wcast-qual -Wchanges-meaning -Wconversion -Wconversion-null -Wctor-dtor-privacy -Wdangling-pointer -Wdangling-reference -Wdate-time -Wdelete-incomplete -Wdelete-non-virtual-dtor -Wdeprecated-copy -Wdeprecated-copy-dtor -Wdeprecated-enum-enum-conversion -Wdeprecated-enum-float-conversion -Wdisabled-optimization -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wexceptions -Wextra -Wformat=2 -Wimplicit-fallthrough=5 -Winaccessible-base -Winherited-variadic-ctor -Winit-list-lifetime -Winit-self -Winterference-size -Winvalid-constexpr -Winvalid-imported-macros -Winvalid-offsetof -Winvalid-pch -Winvalid-utf8 -Wlogical-op -Wmisleading-indentation -Wmismatched-new-delete -Wmismatched-tags -Wmissing-declarations -Wmissing-noreturn -Wmissing-requires -Wmissing-template-keyword -Wmultichar -Wmultiple-inheritance -Wnarrowing -Wnoexcept -Wnoexcept-type -Wnon-template-friend -Wnon-virtual-dtor -Wnull-dereference -Wold-style-cast -Wopenacc-parallelism -Woverlength-strings -Woverloaded-virtual -Wpacked -Wpacked-bitfield-compat -Wrange-loop-construct -Wredundant-decls -Wredundant-move -Wredundant-tags -Wregister -Wreorder -Wself-move -Wshadow -Wshift-negative-value -Wsign-conversion -Wsign-promo -Wsized-deallocation -Wstack-protector -Wstrict-null-sentinel -Wstrict-overflow -Wunused -Wunused-macros -Wuseless-cast -Wvariadic-macros -Wvector-operation-performance -Wvexing-parse -Wvirtual-inheritance -Wvirtual-move-assign -Wvla -Wvolatile -Wwrite-strings -Wzero-as-null-pointer-constant"
       }
     }
   ],
