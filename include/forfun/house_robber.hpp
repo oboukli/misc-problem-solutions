@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 /// Problem source:
-/// https://leetcode.com/problems/house-robber/description/
+/// https://leetcode.com/problems/house-robber/
 
 #ifndef FORFUN_HOUSE_ROBBER_HPP_
 #define FORFUN_HOUSE_ROBBER_HPP_

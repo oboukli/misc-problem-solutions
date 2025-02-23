@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 /// Problem source:
-/// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+/// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
 #ifndef FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 #define FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_

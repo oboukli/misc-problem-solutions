@@ -8,7 +8,7 @@ found in the LICENSE file.
 
 /*
 Problem reference:
-https://leetcode.com/problems/add-two-numbers/description/
+https://leetcode.com/problems/add-two-numbers/
 */
 
 #ifndef FORFUN_C_ADD_TWO_NUMBERS_H_
