@@ -117,7 +117,7 @@ constexpr auto concatenate(
 {
     for (std::size_t i{0U}; i < 2U; ++i)
     {
-#if _MSC_VER
+#ifdef _MSC_VER
 // Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
@@ -127,7 +127,7 @@ constexpr auto concatenate(
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
             dest[j + (i * Size)] = src[j];
         }
-#if _MSC_VER
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif // _MSC_VER
     }
@@ -142,7 +142,7 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
 ) noexcept -> void
 {
-#if _MSC_VER
+#ifdef _MSC_VER
 // Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
@@ -154,7 +154,7 @@ constexpr auto concatenate(
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
         dest[i + Size] = src[i];
     }
-#if _MSC_VER
+#ifdef _MSC_VER
 #pragma warning(pop)
 #endif // _MSC_VER
 }
