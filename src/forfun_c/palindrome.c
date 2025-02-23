@@ -13,7 +13,7 @@ found in the LICENSE file.
 
 /* Adhere to C89/C90, for the fun of it. */
 
-#if __clang__
+#ifdef __clang__
 #pragma clang attribute push( \
     __attribute__(( \
         no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
@@ -40,11 +40,11 @@ int forfun_is_palindrome(char const* str, size_t const length)
 
     return 1;
 }
-#if __clang__
+#ifdef __clang__
 #pragma clang attribute pop
 #endif /* __clang__ */
 
-#if __clang__
+#ifdef __clang__
 #pragma clang attribute push( \
     __attribute__(( \
         no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
@@ -72,6 +72,6 @@ int forfun_is_palindrome_ci(char const* str, size_t const length)
 
     return 1;
 }
-#if __clang__
+#ifdef __clang__
 #pragma clang attribute pop
 #endif /* __clang__ */
