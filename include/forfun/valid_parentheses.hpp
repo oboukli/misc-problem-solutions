@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 /// Problem source:
-/// https://leetcode.com/problems/valid-parentheses/description/
+/// https://leetcode.com/problems/valid-parentheses/
 
 #ifndef FORFUN_VALID_PARENTHESES_HPP_
 #define FORFUN_VALID_PARENTHESES_HPP_

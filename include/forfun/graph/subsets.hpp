@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 /// Problem source:
-/// https://leetcode.com/problems/subsets/description/
+/// https://leetcode.com/problems/subsets/
 
 #ifndef FORFUN_GRAPH_SUBSETS_HPP_
 #define FORFUN_GRAPH_SUBSETS_HPP_

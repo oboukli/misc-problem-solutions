@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 /// Problem source:
-/// https://leetcode.com/problems/last-stone-weight/description/
+/// https://leetcode.com/problems/last-stone-weight/
 
 #ifndef FORFUN_LAST_STONE_WEIGHT_HPP_
 #define FORFUN_LAST_STONE_WEIGHT_HPP_

@@ -6,7 +6,7 @@
 
 /// References:
 /// https://en.wikipedia.org/wiki/Anagram
-/// https://leetcode.com/problems/valid-anagram/description/
+/// https://leetcode.com/problems/valid-anagram/
 
 #ifndef FORFUN_VALID_ANAGRAM_HPP_
 #define FORFUN_VALID_ANAGRAM_HPP_
