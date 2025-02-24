@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <array>
 #include <iterator>
 #include <vector>
 
@@ -19,32 +18,28 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Empty collection should have no majority")
     {
-        std::array<int, 0U> const elements{};
+        std::vector<int> const elements{};
 
         REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("One-element collection should have no majority")
     {
-        std::array const elements{7};
-
-        CHECK(elements.size() == 1U);
+        std::vector const elements{7};
 
         REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("A collection of two unique elements should have no majority")
     {
-        std::array const elements{5, 7};
-
-        CHECK(elements.size() == 2U);
+        std::vector const elements{5, 7};
 
         REQUIRE(majority_element(elements) == elements.cend());
     }
 
     SECTION("A collection of three unique elements should have no majority")
     {
-        std::array const elements{3, 5, 7};
+        std::vector const elements{3, 5, 7};
 
         CAPTURE(elements);
 
@@ -53,7 +48,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("A collection of four unique elements should have no majority")
     {
-        std::array const elements{3, 5, 7, 11};
+        std::vector const elements{3, 5, 7, 11};
 
         CAPTURE(elements);
 
@@ -62,7 +57,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Left contiguous majority")
     {
-        std::array const elements{11, 11, 11, 11, 13, 13, 13};
+        std::vector const elements{11, 11, 11, 11, 13, 13, 13};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -76,7 +71,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Right contiguous majority")
     {
-        std::array const elements{17, 17, 17, 19, 19, 19, 19};
+        std::vector const elements{17, 17, 17, 19, 19, 19, 19};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -90,7 +85,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Equality among an odd number of elements of each group")
     {
-        std::array const elements{5, 5, 5, 7, 7, 7};
+        std::vector const elements{5, 5, 5, 7, 7, 7};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -102,7 +97,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Equality among an even number of elements of each group")
     {
-        std::array const elements{5, 5, 5, 5, 7, 7, 7, 7};
+        std::vector const elements{5, 5, 5, 5, 7, 7, 7, 7};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -114,7 +109,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Three elements with majority")
     {
-        std::array const elements{1, 2, 1};
+        std::vector const elements{1, 2, 1};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -128,7 +123,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Four elements with majority")
     {
-        std::array const elements{2, 7, 2, 2};
+        std::vector const elements{2, 7, 2, 2};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -142,7 +137,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Eleven elements with majority")
     {
-        std::array const elements{5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5};
+        std::vector const elements{5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5};
         using ConstItr = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
@@ -169,7 +164,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Sixty-four elements with majority (benchmark case)")
     {
-        std::array const elements{
+        std::vector const elements{
             // clang-format off
             5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
             5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
