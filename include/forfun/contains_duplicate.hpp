@@ -10,13 +10,25 @@
 #ifndef FORFUN_CONTAINS_DUPLICATE_HPP_
 #define FORFUN_CONTAINS_DUPLICATE_HPP_
 
+#include <concepts>
+#include <functional>
 #include <iterator>
+#include <utility>
 
 namespace forfun::contains_duplicate {
 
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <
+    std::forward_iterator Iter,
+    std::sentinel_for<Iter> Sentinel,
+    std::equivalence_relation<std::iter_value_t<Iter>, std::iter_value_t<Iter>>
+        BinaryPredicate>
 [[nodiscard]] constexpr auto
-contains_duplicate(Iter itr, Sentinel const last) noexcept -> bool
+contains_duplicate(Iter itr, Sentinel const last, BinaryPredicate eq) noexcept(
+    noexcept(eq.operator()(
+        std::declval<std::iter_value_t<Iter>>(),
+        std::declval<std::iter_value_t<Iter>>()
+    ))
+) -> bool
 {
     for (; itr != last; ++itr)
     {
@@ -24,7 +36,7 @@ contains_duplicate(Iter itr, Sentinel const last) noexcept -> bool
         auto it_j{itr};
         for (++it_j; it_j != last; ++it_j)
         {
-            if ((*it_j) == val)
+            if (eq(*it_j, val))
             {
                 return true;
             }
@@ -32,6 +44,20 @@ contains_duplicate(Iter itr, Sentinel const last) noexcept -> bool
     }
 
     return false;
+}
+
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+[[nodiscard]] constexpr auto
+contains_duplicate(Iter itr, Sentinel const last) noexcept(
+    noexcept(std::declval<std::equal_to<std::iter_value_t<Iter>>>().operator()(
+        std::declval<std::iter_value_t<Iter>>(),
+        std::declval<std::iter_value_t<Iter>>()
+    ))
+) -> bool
+{
+    return contains_duplicate(
+        itr, last, std::equal_to<std::iter_value_t<Iter>>{}
+    );
 }
 
 } // namespace forfun::contains_duplicate
