@@ -23,20 +23,20 @@ template <
     std::equivalence_relation<std::iter_value_t<Iter>, std::iter_value_t<Iter>>
         BinaryPredicate>
 [[nodiscard]] constexpr auto
-contains_duplicate(Iter itr, Sentinel const last, BinaryPredicate eq) noexcept(
+contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     noexcept(eq.operator()(
         std::declval<std::iter_value_t<Iter>>(),
         std::declval<std::iter_value_t<Iter>>()
     ))
 ) -> bool
 {
-    for (; itr != last; ++itr)
+    for (; iter != last; ++iter)
     {
-        auto const val{*itr};
-        auto it_j{itr};
-        for (++it_j; it_j != last; ++it_j)
+        auto const val{*iter};
+        auto iter_next{iter};
+        while (++iter_next != last)
         {
-            if (eq(*it_j, val))
+            if (eq(*iter_next, val))
             {
                 return true;
             }
@@ -48,7 +48,7 @@ contains_duplicate(Iter itr, Sentinel const last, BinaryPredicate eq) noexcept(
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
-contains_duplicate(Iter itr, Sentinel const last) noexcept(
+contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<std::iter_value_t<Iter>>>().operator()(
         std::declval<std::iter_value_t<Iter>>(),
         std::declval<std::iter_value_t<Iter>>()
@@ -56,7 +56,7 @@ contains_duplicate(Iter itr, Sentinel const last) noexcept(
 ) -> bool
 {
     return contains_duplicate(
-        itr, last, std::equal_to<std::iter_value_t<Iter>>{}
+        first, last, std::equal_to<std::iter_value_t<Iter>>{}
     );
 }
 
