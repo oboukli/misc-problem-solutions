@@ -27,7 +27,7 @@ namespace forfun::top_k_frequent_elements {
 
 namespace bucket_sort_based {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
@@ -91,7 +91,7 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 
 namespace bucket_sort_based_functional {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
@@ -140,7 +140,7 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 
 namespace priority_queue_based {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
@@ -189,7 +189,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace priority_queue_based_functional {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
@@ -236,7 +236,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace unordered_map_based {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto top_frequent(Iter iter, Sentinel const end, std::size_t k)
@@ -287,7 +287,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace unordered_map_based_functional {
 
-/// Assume input is valid and guarantees having a unique solution.
+/// @note Assume input is valid and guarantees having a unique solution.
 /// Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto
