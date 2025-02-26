@@ -80,7 +80,7 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     ))
 ) -> bool
 {
-    if (iter == last)
+    if (iter == last) [[unlikely]]
     {
         return false;
     }
