@@ -15,7 +15,7 @@ jobs:
     name: Build (MSVC Debug x86-64 Windows)
     env:
       CONFIGURE_PRESET_NAME: windows-x64
-      BUILD_PRESET_NAME: windows-x64-debug
+      PROJECT_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
     runs-on: windows-latest
@@ -55,13 +55,11 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --parallel
-          --preset ${{ env.BUILD_PRESET_NAME }}
           --
           -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
         shell: cmd
-
 
       - name: Run test driver
         run: >-
@@ -102,7 +100,7 @@ jobs:
     name: Build (MSVC Release x86-64 Windows)
     env:
       CONFIGURE_PRESET_NAME: windows-x64
-      BUILD_PRESET_NAME: windows-x64-release
+      PROJECT_BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
     runs-on: windows-latest
@@ -142,9 +140,8 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --parallel
-          --preset ${{ env.BUILD_PRESET_NAME }}
           --
           -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
         shell: cmd
@@ -190,7 +187,7 @@ jobs:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
       CONFIGURE_PRESET_NAME: strict-gcc
-      BUILD_PRESET_NAME: strict-gcc-debug
+      PROJECT_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
     runs-on: ubuntu-24.04
@@ -238,9 +235,8 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
 
       - name: Run and instrument test driver
         run: >-
@@ -291,7 +287,7 @@ jobs:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
       CONFIGURE_PRESET_NAME: strict-gcc
-      BUILD_PRESET_NAME: strict-gcc-release
+      PROJECT_BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
     runs-on: ubuntu-24.04
@@ -339,9 +335,8 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
 
       - name: Run and instrument test driver
         run: >-
@@ -390,7 +385,7 @@ jobs:
     name: Build (Apple Clang Debug AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
-      BUILD_PRESET_NAME: xcode
+      PROJECT_BINARY_DIR: ${{ github.workspace }}/out/build/xcode
       BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
       BUILD_CONFIGURATION: Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
@@ -438,10 +433,9 @@ jobs:
       - name: Build with sanitizers
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
           --
           -enableAddressSanitizer YES
           -enableUndefinedBehaviorSanitizer YES
@@ -485,7 +479,7 @@ jobs:
     name: Build (Apple Clang Release AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
-      BUILD_PRESET_NAME: xcode
+      PROJECT_BINARY_DIR: ${{ github.workspace }}/out/build/xcode
       BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
       BUILD_CONFIGURATION: Release
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
@@ -533,10 +527,9 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.PROJECT_BINARY_DIR }}'
           --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
 
       - name: Run test driver
         run: >-
