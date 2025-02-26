@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
-#include <utility>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -19,16 +18,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 {
     using namespace forfun::contains_duplicate;
 
-    using ContainerType = std::array<int, 32U>;
-    using Itr = ContainerType::iterator;
-
-    constexpr std::array const superprimes{
-        3,   5,   11,  17,  31,  41,  59,  67,  83,  109, 127,
-        157, 179, 191, 211, 241, 277, 283, 331, 353, 367, 401,
-        431, 461, 509, 547, 563, 587, 599, 617, 709, 739,
-    };
-
-    static_assert(superprimes.size() == std::tuple_size<ContainerType>::value);
+    using Iter = std::array<int, 32U>::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -36,10 +26,61 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(contains_duplicate<Itr, Itr>).c_str(),
-            [&superprimes]() noexcept {
+            NAMEOF_RAW(quadratic::contains_duplicate<Iter, Iter>).c_str(),
+            []() noexcept {
+                std::array const superprimes{
+                    // clang-format off
+                    3,   5,   11,  17,  31,  41,  59,  67,
+                    83,  109, 127, 157, 179, 191, 211, 241,
+                    277, 283, 331, 353, 367, 401, 431, 461,
+                    509, 547, 563, 587, 599, 617, 709, 739,
+                    // clang-format on
+                };
+
                 ankerl::nanobench::doNotOptimizeAway(
-                    contains_duplicate(superprimes.cbegin(), superprimes.cend())
+                    quadratic::contains_duplicate(
+                        superprimes.cbegin(), superprimes.cend()
+                    )
+                );
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(sorted::contains_duplicate<Iter, Iter>).c_str(),
+            []() noexcept {
+                std::array superprimes{
+                    // clang-format off
+                    3,   5,   11,  17,  31,  41,  59,  67,
+                    83,  109, 127, 157, 179, 191, 211, 241,
+                    277, 283, 331, 353, 367, 401, 431, 461,
+                    509, 547, 563, 587, 599, 617, 709, 739,
+                    // clang-format on
+                };
+
+                ankerl::nanobench::doNotOptimizeAway(
+                    sorted::contains_duplicate(
+                        superprimes.begin(), superprimes.end()
+                    )
+                );
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(stl::contains_duplicate<Iter, Iter>).c_str(),
+            []() noexcept {
+                std::array superprimes{
+                    // clang-format off
+                    3,   5,   11,  17,  31,  41,  59,  67,
+                    83,  109, 127, 157, 179, 191, 211, 241,
+                    277, 283, 331, 353, 367, 401, 431, 461,
+                    509, 547, 563, 587, 599, 617, 709, 739,
+                    // clang-format on
+                };
+
+                ankerl::nanobench::doNotOptimizeAway(
+                    stl::contains_duplicate(
+                        superprimes.begin(), superprimes.end()
+                    )
                 );
             }
         )

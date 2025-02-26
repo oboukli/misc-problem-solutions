@@ -6,25 +6,42 @@
 
 #include <array>
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/contains_duplicate.hpp"
 
-TEST_CASE("Contains duplicate", "[contains_duplicate]")
+TEMPLATE_TEST_CASE_SIG(
+    "Contains duplicate",
+    "[contains_duplicate]",
+    (auto contains_duplicate, contains_duplicate),
+    (forfun::contains_duplicate::quadratic::contains_duplicate<
+        std::array<int, 0U>::iterator,
+        std::array<int, 0U>::iterator>),
+    (forfun::contains_duplicate::sorted::contains_duplicate<
+        std::array<int, 0U>::iterator,
+        std::array<int, 0U>::iterator>),
+    (forfun::contains_duplicate::stl::contains_duplicate<
+        std::array<int, 0U>::iterator,
+        std::array<int, 0U>::iterator>)
+)
 {
-    using forfun::contains_duplicate::contains_duplicate;
-
     SECTION("Empty input")
     {
-        static constexpr std::array<int, 0U> const nums{};
+        std::array<int, 0U> nums{};
         static constexpr bool const expected{false};
 
         static constexpr auto const actual{
-            contains_duplicate(nums.cbegin(), nums.cend())
+            contains_duplicate(nums.begin(), nums.end())
         };
 
         STATIC_REQUIRE(actual == expected);
     }
+}
+
+TEST_CASE("Contains duplicate", "[contains_duplicate]")
+{
+    using forfun::contains_duplicate::quadratic::contains_duplicate;
 
     SECTION("One integer")
     {
