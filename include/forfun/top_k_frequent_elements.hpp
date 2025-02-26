@@ -52,7 +52,6 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 
     ValType current{*first};
     std::size_t current_count{0U};
-    std::size_t counts_size{1U};
     for (auto aux_iter{first}; aux_iter != end; ++aux_iter)
     {
         if (current == *aux_iter)
@@ -61,17 +60,12 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
         }
         else
         {
-            if (counts[current_count - 1U].empty())
-            {
-                ++counts_size;
-            }
             counts[current_count - 1U].push_back(current);
             current = *aux_iter;
             current_count = 1U;
         }
     }
     counts[current_count - 1U].push_back(current);
-    ++counts_size;
 
     std::vector<ValType> result;
     result.reserve(k);
@@ -120,7 +114,6 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
 
     ValType current{*first};
     std::size_t current_count{0U};
-    std::size_t counts_size{1U};
     for (auto aux_iter{first}; aux_iter != end; ++aux_iter)
     {
         if (current == *aux_iter)
@@ -129,17 +122,12 @@ top_frequent(Iter const first, Sentinel const end, std::size_t k)
         }
         else
         {
-            if (counts[current_count - 1U].empty())
-            {
-                ++counts_size;
-            }
             counts[current_count - 1U].push_back(current);
             current = *aux_iter;
             current_count = 1U;
         }
     }
     counts[current_count - 1U].push_back(current);
-    ++counts_size;
 
     return counts
         | std::views::reverse
