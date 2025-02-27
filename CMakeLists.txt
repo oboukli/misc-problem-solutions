@@ -63,6 +63,7 @@ target_sources(
   "include/forfun/two_sum.hpp"
   "include/forfun/valid_anagram.hpp"
   "include/forfun/valid_parentheses.hpp"
+  "include/forfun/valid_sudoku.hpp"
 )
 target_sources(
   forfun
@@ -101,6 +102,7 @@ target_sources(
   "src/forfun/two_sum.cpp"
   "src/forfun/valid_anagram.cpp"
   "src/forfun/valid_parentheses.cpp"
+  "src/forfun/valid_sudoku.cpp"
 )
 get_target_property(forfun_sources forfun SOURCES)
 source_group(
@@ -407,6 +409,7 @@ target_sources(
   "test/two_sum_test.cpp"
   "test/valid_anagram_test.cpp"
   "test/valid_parentheses_test.cpp"
+  "test/valid_sudoku_test.cpp"
 )
 get_target_property(forfun_tests test_driver SOURCES)
 source_group(
