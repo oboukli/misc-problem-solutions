@@ -89,6 +89,7 @@ leveraged by this project:
 | Two-pass Boyer-Moore majority    | C++20    | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                               |
 | Valid anagram                    | C++20    | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                     |
 | Valid parentheses                | C++20    | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                     |
+| Valid Sudoku                     | C++23    | [`include/forfun/valid_sudoku.hpp`](include/forfun/valid_sudoku.hpp)                                                       |
 
 ## Disclaimer
 
