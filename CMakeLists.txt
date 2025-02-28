@@ -519,6 +519,7 @@ target_sources(
   "benchmark/two_sum_benchmark.cpp"
   "benchmark/valid_anagram_benchmark.cpp"
   "benchmark/valid_parentheses_benchmark.cpp"
+  "benchmark/valid_sudoku_benchmark.cpp"
 )
 get_target_property(forfun_benchmark benchmark_driver SOURCES)
 source_group(
