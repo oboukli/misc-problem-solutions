@@ -18,9 +18,9 @@ TEMPLATE_TEST_CASE_SIG(
     "First missing positive (vector<int>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
-    (forfun::first_missing_positive::base::
-         lowest_missing<std::vector<int>::iterator, std::vector<int>::iterator>
-    ),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::vector<int>::iterator,
+        std::vector<int>::iterator>),
     // clang-format off
     (forfun::first_missing_positive::fast::lowest_missing<
         std::vector<int>::iterator,

@@ -128,9 +128,9 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
         noexcept(eq.operator()(
             std::declval<std::iter_value_t<Iter>>(),
             std::declval<std::iter_value_t<Iter>>()
-        ))
-    ) -> bool
-// clang-format on
+        )))
+    // clang-format on
+    -> bool
 {
     std::sort(first, last);
     auto const found{std::adjacent_find(first, last, eq)};

@@ -115,13 +115,11 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
 {
     SECTION("Positive")
     {
-        // clang-format off
         STATIC_REQUIRE(
             noexcept_callable<
                 decltype(dummy_noexcept_lambda),
                 int,
-                std::vector<int>&
-            >
+                std::vector<int>&>
         );
         STATIC_REQUIRE(noexcept_callable<decltype(dummy_noexcept_func)>);
 
@@ -136,23 +134,20 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
             noexcept_callable<
                 decltype([](int, char*) noexcept {}),
                 double,
-                char*
-            >
+                char*>
         );
 
         STATIC_REQUIRE(
             noexcept_callable<
                 decltype([](int, std::string_view) noexcept {}),
                 int,
-                std::string
-            >
+                std::string>
         );
         STATIC_REQUIRE(
             noexcept_callable<
                 decltype([](int, std::string&) noexcept {}),
                 int,
-                std::string&
-            >
+                std::string&>
         );
 
         STATIC_REQUIRE(noexcept_callable<decltype([]() noexcept {})>);
@@ -163,22 +158,19 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
                 int,
                 int,
                 int,
-                std::string
-            >
+                std::string>
         );
-        // clang-format on
     }
 
     SECTION("Negative")
     {
         SECTION("noexcept is false")
         {
-            // clang-format off
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
                     decltype(dummy_throwing_lambda),
-                    int, std::vector<int>
-                >
+                    int,
+                    std::vector<int>>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<decltype(dummy_throwing_func)>
@@ -188,54 +180,45 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
-                    decltype([](int, int) noexcept(false) {}), int, int
-                >
+                    decltype([](int, int) noexcept(false) {}),
+                    int,
+                    int>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
-                    decltype([](int, std::string&) {}), int, std::string&
-                >
+                    decltype([](int, std::string&) {}),
+                    int,
+                    std::string&>
             );
-            // clang-format off
         }
 
         SECTION("Parameter type mismatch")
         {
-            // clang-format off
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
                     decltype(dummy_noexcept_lambda),
                     int,
-                    std::vector<int>
-                >
+                    std::vector<int>>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
                     decltype(dummy_noexcept_lambda),
                     int,
-                    std::vector<char>&
-                >
+                    std::vector<char>&>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<
-                    decltype([](int, int&) noexcept {}),
-                    int,
-                    int
-                >
+                noexcept_callable<decltype([](int, int&) noexcept {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
                     decltype([](char, char&) noexcept {}),
                     int,
-                    int&
-                >
+                    int&>
             );
-            // clang-format on
         }
 
         SECTION("Parameter list mismatch")
         {
-            // clang-format off
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<decltype(dummy_noexcept_lambda), int, int&>
             );
@@ -251,7 +234,6 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<decltype([](int, int) noexcept {})>
             );
-            // clang-format on
         }
     }
 }

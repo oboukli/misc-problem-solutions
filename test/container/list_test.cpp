@@ -28,11 +28,9 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
         STATIC_REQUIRE(std::bidirectional_iterator<list::const_iterator>);
 
-        // clang-format off
         STATIC_REQUIRE_FALSE(
             std::indirectly_writable<list::const_iterator, int>
         );
-        // clang-format on
     }
 
     SECTION("List is initially empty")
