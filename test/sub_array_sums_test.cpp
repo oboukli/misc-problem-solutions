@@ -357,7 +357,6 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
 {
     SECTION("Positive")
     {
-        // clang-format off
         STATIC_REQUIRE(
             template_specialization<std::array<int, 0U>, std::array<int, 0U>>
         );
@@ -389,18 +388,15 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
         STATIC_REQUIRE(
             template_specialization<
                 DummyWithSizeType<std::vector<int>::size_type>,
-                std::vector<int>
-            >
+                std::vector<int>>
         );
         STATIC_REQUIRE(
             template_specialization<std::vector<AddableDummy>, std::vector<int>>
         );
-        // clang-format on
     }
 
     SECTION("Negative")
     {
-        // clang-format off
         STATIC_REQUIRE_FALSE(
             template_specialization<std::vector<int>, std::vector<std::string>>
         );
@@ -425,6 +421,5 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
         STATIC_REQUIRE_FALSE(
             template_specialization<DummyWithSizeType<char>, std::vector<int>>
         );
-        // clang-format on
     }
 }

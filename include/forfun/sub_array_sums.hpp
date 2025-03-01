@@ -19,16 +19,13 @@
 namespace forfun::sub_array_sums {
 
 template <typename Nums, typename Sums>
-// clang-format off
     requires std::contiguous_iterator<typename Nums::iterator>
-        and std::output_iterator<
-            typename Sums::iterator, typename Nums::value_type>
-        and std::same_as<typename Nums::size_type, typename Sums::size_type>
-        and requires(Nums::value_type num, Sums::value_type sum) {
+    and std::output_iterator<typename Sums::iterator, typename Nums::value_type>
+    and std::same_as<typename Nums::size_type, typename Sums::size_type>
+    and requires(Nums::value_type num, Sums::value_type sum) {
             sum += num;
             sum -= num;
         }
-// clang-format on
 constexpr auto sum_each(
     Nums const& nums, Sums& sums, typename Nums::size_type const sub_size
 ) noexcept -> void

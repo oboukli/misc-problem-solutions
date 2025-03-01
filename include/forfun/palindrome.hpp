@@ -74,10 +74,8 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 namespace iterator_based {
 
 template <std::integral CharT>
-// clang-format off
     requires std::contiguous_iterator<
         typename std::basic_string_view<CharT>::const_iterator>
-// clang-format on
 [[nodiscard]]
 constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     -> bool

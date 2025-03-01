@@ -10,13 +10,11 @@
 #include "forfun/fibonacci.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
-    // clang-format off
     "Find Fibonacci number",
     "[fibonacci]",
     (auto fib, fib),
     forfun::fibonacci::iterative::fib<int>,
     forfun::fibonacci::recursive::fib<int>
-    // clang-format on
 )
 {
     SECTION("Negative value case (n = -1)")

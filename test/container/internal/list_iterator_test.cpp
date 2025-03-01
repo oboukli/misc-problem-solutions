@@ -21,8 +21,7 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
     static_assert(
         std::same_as<
             forfun::experimental::container::internal::list_iterator,
-            forfun::experimental::container::list::iterator
-        >
+            forfun::experimental::container::list::iterator>
     );
     // clang-format on
 
@@ -39,33 +38,28 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
     {
         using forfun::experimental::container::internal::list_iterator;
 
-        // clang-format off
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<list_iterator>::iterator_category,
-                std::bidirectional_iterator_tag
-            >
+                std::bidirectional_iterator_tag>
         );
 
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<list_iterator>::iterator_concept,
-                std::bidirectional_iterator_tag
-            >
+                std::bidirectional_iterator_tag>
         );
 
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<list_iterator>::pointer,
-                list_iterator
-            >
+                list_iterator>
         );
 
         STATIC_REQUIRE_FALSE(
             std::same_as<
                 std::iterator_traits<list_iterator>::reference,
-                std::iterator_traits<list_iterator>::const_reference
-            >
+                std::iterator_traits<list_iterator>::const_reference>
         );
 
         STATIC_REQUIRE(
@@ -83,7 +77,6 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
         STATIC_REQUIRE(
             std::same_as<std::iter_difference_t<list_iterator>, std::ptrdiff_t>
         );
-        // clang-format on
 
         STATIC_REQUIRE(std::same_as<std::iter_value_t<list_iterator>, int>);
 

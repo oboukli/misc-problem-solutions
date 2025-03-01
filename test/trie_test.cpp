@@ -21,21 +21,21 @@ TEST_CASE("Trie", "[trie]")
 
     SECTION("Types")
     {
-        // clang-format off
         STATIC_REQUIRE(
-            std::is_same_v<TrieNode<>::children_t,
-            std::vector<std::unique_ptr<TrieNode<char>>>>
+            std::is_same_v<
+                TrieNode<>::children_t,
+                std::vector<std::unique_ptr<TrieNode<char>>>>
         );
         STATIC_REQUIRE(std::is_same_v<TrieNode<>::value_type, char>);
 
         STATIC_REQUIRE(
-            std::is_same_v<TrieNode<char32_t>::children_t,
-            std::vector<std::unique_ptr<TrieNode<char32_t>>>>
+            std::is_same_v<
+                TrieNode<char32_t>::children_t,
+                std::vector<std::unique_ptr<TrieNode<char32_t>>>>
         );
         STATIC_REQUIRE(
             std::is_same_v<TrieNode<char32_t>::value_type, char32_t>
         );
-        // clang-format on
     }
 
     SECTION("Constructor 1")
