@@ -17,7 +17,7 @@
 #include <ranges>
 #include <type_traits>
 
-#include "common.hpp"
+#include "forfun/common/concepts.hpp"
 
 namespace forfun::factorial {
 

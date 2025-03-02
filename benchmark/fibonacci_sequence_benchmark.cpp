@@ -12,7 +12,7 @@
 
 #include <nameof.hpp>
 
-#include "forfun/common.hpp"
+#include "forfun/common/concepts.hpp"
 #include "forfun/fibonacci_sequence.hpp"
 
 namespace {

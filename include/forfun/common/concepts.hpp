@@ -4,8 +4,8 @@
 
 // SPDX-License-Identifier: MIT
 
-#ifndef FORFUN_COMMON_HPP_
-#define FORFUN_COMMON_HPP_
+#ifndef FORFUN_COMMON_CONCEPTS_HPP_
+#define FORFUN_COMMON_CONCEPTS_HPP_
 
 #include <concepts>
 
@@ -18,4 +18,4 @@ concept addition_unpromoted = std::integral<T> and requires(T n) {
 
 } // namespace forfun::common::concepts
 
-#endif // FORFUN_COMMON_HPP_
+#endif // FORFUN_COMMON_CONCEPTS_HPP_

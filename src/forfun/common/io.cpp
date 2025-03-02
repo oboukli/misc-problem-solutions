@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/common.hpp" // IWYU pragma: keep
+#include "forfun/common/io.hpp" // IWYU pragma: keep
