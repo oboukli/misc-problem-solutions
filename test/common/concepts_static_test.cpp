@@ -10,7 +10,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common.hpp"
+#include "forfun/common/concepts.hpp"
 
 TEST_CASE("Concept addition_unpromoted", "[common]")
 {

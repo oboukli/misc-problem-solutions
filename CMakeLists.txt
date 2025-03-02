@@ -32,7 +32,6 @@ target_sources(
   "include/forfun/add_two_numbers.hpp"
   "include/forfun/array_concatenation.hpp"
   "include/forfun/best_time_to_buy_and_sell_stock.hpp"
-  "include/forfun/common.hpp"
   "include/forfun/contains_duplicate.hpp"
   "include/forfun/evaluate_reverse_polish_notation.hpp"
   "include/forfun/factorial.hpp"
@@ -71,7 +70,6 @@ target_sources(
   "src/forfun/add_two_numbers.cpp"
   "src/forfun/array_concatenation.cpp"
   "src/forfun/best_time_to_buy_and_sell_stock.cpp"
-  "src/forfun/common.cpp"
   "src/forfun/contains_duplicate.cpp"
   "src/forfun/evaluate_reverse_polish_notation.cpp"
   "src/forfun/factorial.cpp"
@@ -117,6 +115,46 @@ source_group(
   FILES ${forfun_headers}
 )
 forfun_common_target_compile_options(forfun)
+
+add_library(
+  forfun_common
+  SHARED
+)
+set_target_properties(forfun_common PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(forfun_common PROPERTIES CXX_STANDARD 23)
+set_target_properties(forfun_common PROPERTIES CXX_STANDARD_REQUIRED ON)
+target_include_directories(
+  forfun_common
+  PUBLIC
+  "include/"
+)
+target_sources(
+  forfun_common
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "include/forfun/common/concepts.hpp"
+  "include/forfun/common/io.hpp"
+)
+target_sources(
+  forfun_common
+  PRIVATE
+  "src/forfun/common/concepts.cpp"
+  "src/forfun/common/io.cpp"
+)
+get_target_property(forfun_common_headers forfun_common HEADER_SET)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/include/forfun/common/"
+  PREFIX "Header files"
+  FILES ${forfun_common_headers}
+)
+get_target_property(forfun_common_sources forfun_common SOURCES)
+source_group(
+  TREE "${CMAKE_SOURCE_DIR}/src/forfun/common/"
+  PREFIX "Source files"
+  FILES ${forfun_common_sources}
+)
+forfun_common_target_compile_options(forfun_common)
 
 add_library(
   forfun_graph
@@ -368,7 +406,7 @@ target_sources(
   "test/add_two_numbers_test.cpp"
   "test/array_concatenation_test.cpp"
   "test/best_time_to_buy_and_sell_stock_test.cpp"
-  "test/common_test.cpp"
+  "test/common/io_test.cpp"
   "test/contains_duplicate_test.cpp"
   "test/evaluate_reverse_polish_notation_test.cpp"
   "test/factorial_test.cpp"
@@ -425,6 +463,7 @@ target_link_libraries(
   test_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_common
   PRIVATE forfun_graph
   PRIVATE forfun_search
   PRIVATE forfun_sorting
@@ -535,6 +574,7 @@ target_link_libraries(
   benchmark_driver
   PRIVATE forfun
   PRIVATE forfun_c
+  PRIVATE forfun_common
   PRIVATE forfun_graph
   PRIVATE forfun_search
   PRIVATE forfun_sorting
@@ -585,6 +625,7 @@ set_target_properties(static_test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   static_test_driver
   PRIVATE
+  "test/common/concepts_static_test.cpp"
   "test/contains_duplicate_static_test.cpp"
   "test/fibonacci_static_test.cpp"
   "test/graph/binary_tree_node_static_test.cpp"
@@ -606,5 +647,6 @@ target_link_libraries(
 target_link_libraries(
   static_test_driver
   PRIVATE forfun
+  PRIVATE forfun_common
 )
 forfun_common_target_compile_options(static_test_driver)

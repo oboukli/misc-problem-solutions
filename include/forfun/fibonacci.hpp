@@ -10,7 +10,7 @@
 #ifndef FORFUN_FIBONACCI_HPP_
 #define FORFUN_FIBONACCI_HPP_
 
-#include "common.hpp"
+#include "forfun/common/concepts.hpp"
 
 namespace forfun::fibonacci {
 
