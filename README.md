@@ -52,6 +52,7 @@ leveraged by this project:
 | Concatenation of array           | C++17    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
 | Contains duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
 | Depth-first search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                               |
+| Encode and decode strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](src/forfun/encode_and_decode_strings.cpp)                                     |
 | Evaluate reverse polish notation | C++23    | [`include/forfun/evaluate_reverse_polish_notation.hpp`](include/forfun/evaluate_reverse_polish_notation.hpp)               |
 | Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
 | Fibonacci sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
