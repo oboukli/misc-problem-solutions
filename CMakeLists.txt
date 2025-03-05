@@ -525,6 +525,7 @@ target_sources(
   "benchmark/benchmark.cpp"
   "benchmark/best_time_to_buy_and_sell_stock_benchmark.cpp"
   "benchmark/contains_duplicate_benchmark.cpp"
+  "benchmark/encode_and_decode_strings_benchmark.cpp"
   "benchmark/evaluate_reverse_polish_notation_benchmark.cpp"
   "benchmark/factorial_benchmark.cpp"
   "benchmark/fibonacci_benchmark.cpp"
