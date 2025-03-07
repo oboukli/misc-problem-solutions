@@ -630,6 +630,9 @@ target_sources(
   static_test_driver
   PRIVATE
   "test/common/concepts_static_test.cpp"
+  "test/container/internal/list_const_iterator_static_test.cpp"
+  "test/container/internal/list_iterator_static_test.cpp"
+  "test/container/list_static_test.cpp"
   "test/contains_duplicate_static_test.cpp"
   "test/fibonacci_static_test.cpp"
   "test/graph/binary_tree_node_static_test.cpp"
