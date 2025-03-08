@@ -340,7 +340,7 @@ struct AddableDummy final {
     }
 
     // NOLINTNEXTLINE(hicpp-explicit-conversions)
-    explicit(false) operator int() const
+    [[maybe_unused]] explicit(false) operator int() const
     {
         return 0;
     }

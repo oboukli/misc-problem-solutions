@@ -169,7 +169,8 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         {
         }
 
-        auto put(std::size_t /*unused*/, int /*unused*/) noexcept -> void
+        [[maybe_unused]] auto
+        put(std::size_t /*unused*/, int /*unused*/) noexcept -> void
         {
         }
     };
@@ -180,7 +181,8 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         {
         }
 
-        [[nodiscard]] auto get(std::size_t /*unused*/) const noexcept -> int
+        [[maybe_unused]] [[nodiscard]] auto
+        get(std::size_t /*unused*/) const noexcept -> int
         {
             return value_;
         }
@@ -190,7 +192,7 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
     };
 
     struct Dummy4 final : public Dummy3 {
-        explicit Dummy4(std::size_t c) noexcept : Dummy3{c}
+        [[maybe_unused]] explicit Dummy4(std::size_t c) noexcept : Dummy3{c}
         {
         }
     };
