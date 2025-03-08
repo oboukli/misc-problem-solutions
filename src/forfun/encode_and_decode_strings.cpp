@@ -73,7 +73,7 @@ auto unescape(auto& ss, auto const sv) -> void
     SizeType sub_start{0};
     // clang-format off
     for (SizeType p{0}; p < encoded.size()
-         && ((p = encoded.find(delimiter_char, p)) != std::string_view::npos);)
+            && ((p = encoded.find(delimiter_char, p)) != std::string_view::npos);)
     // clang-format on
     {
         if ((p != SizeType{0}) && (encoded[p - 1] == escape_char))
