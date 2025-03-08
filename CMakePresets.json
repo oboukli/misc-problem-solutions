@@ -83,7 +83,26 @@
           "type": "FILEPATH"
         },
         "FORFUN_COMMON_CFLAGS": "-Wall -Wextra -pedantic",
-        "FORFUN_COMMON_CXXFLAGS": "-Wall -pedantic -Wcast-align=strict -Wcast-qual -Wchanges-meaning -Wconversion -Wconversion-null -Wctor-dtor-privacy -Wdangling-pointer -Wdangling-reference -Wdate-time -Wdelete-incomplete -Wdelete-non-virtual-dtor -Wdeprecated-copy -Wdeprecated-copy-dtor -Wdeprecated-enum-enum-conversion -Wdeprecated-enum-float-conversion -Wdisabled-optimization -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wexceptions -Wextra -Wformat=2 -Wimplicit-fallthrough=5 -Winaccessible-base -Winherited-variadic-ctor -Winit-list-lifetime -Winit-self -Winterference-size -Winvalid-constexpr -Winvalid-imported-macros -Winvalid-offsetof -Winvalid-pch -Winvalid-utf8 -Wlogical-op -Wmisleading-indentation -Wmismatched-new-delete -Wmismatched-tags -Wmissing-declarations -Wmissing-noreturn -Wmissing-requires -Wmissing-template-keyword -Wmultichar -Wmultiple-inheritance -Wnarrowing -Wnoexcept -Wnoexcept-type -Wnon-template-friend -Wnon-virtual-dtor -Wnull-dereference -Wold-style-cast -Wopenacc-parallelism -Woverlength-strings -Woverloaded-virtual -Wpacked -Wpacked-bitfield-compat -Wrange-loop-construct -Wredundant-decls -Wredundant-move -Wredundant-tags -Wregister -Wreorder -Wself-move -Wshadow -Wshift-negative-value -Wsign-conversion -Wsign-promo -Wsized-deallocation -Wstack-protector -Wstrict-null-sentinel -Wstrict-overflow -Wunused -Wunused-macros -Wuseless-cast -Wvariadic-macros -Wvector-operation-performance -Wvexing-parse -Wvirtual-inheritance -Wvirtual-move-assign -Wvla -Wvolatile -Wwrite-strings -Wzero-as-null-pointer-constant"
+        "FORFUN_COMMON_CXXFLAGS": "-Wall -Wextra -pedantic"
+      }
+    },
+    {
+      "name": "strict-clang",
+      "displayName": "Strict Clang options",
+      "description": "Build with Clang and enable most Clang diagnostics",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_COMPILE_WARNING_AS_ERROR": true,
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "FORFUN_COMMON_CFLAGS": "-Wall -Wextra -pedantic",
+        "FORFUN_COMMON_CXXFLAGS": "-pedantic -Wall -Wextra -Walloca -Wanon-enum-enum-conversion -Warc-maybe-repeated-use-of-weak -Warc-repeated-use-of-weak -Warray-bounds-pointer-arithmetic -Warray-parameter -Wassign-enum -Watomic-implicit-seq-cst -Watomic-properties -Wauto-decl-extensions -Wbad-function-cast -Wbit-int-extension -Wbitfield-enum-conversion -Wbitwise-op-parentheses -Wbool-conversion -Wbool-operation -Wcast-align -Wcast-function-type -Wcast-qual -Wchar-subscripts -Wcomma -Wcomment -Wcompletion-handler -Wcomplex-component-init -Wcompound-token-split -Wconditional-uninitialized -Wconsumed -Wconversion -Wcovered-switch-default -Wctor-dtor-privacy -Wcustom-atomic-properties -Wdate-time -Wdeclaration-after-statement -Wdelete-incomplete -Wdelete-non-virtual-dtor -Wdeprecated -Wdirect-ivar-access -Wdisabled-optimization -Wdocumentation -Wdocumentation-pedantic -Wdouble-promotion -Wdtor-name -Wduplicate-decl-specifier -Wduplicate-enum -Wduplicate-method-arg -Wduplicate-method-match -Wdynamic-exception-spec -Wembedded-directive -Wempty-translation-unit -Wenum-compare-conditional -Wenum-conversion -Wexceptions -Wexit-time-destructors -Wexpansion-to-defined -Wexplicit-ownership-type -Wextra-semi-stmt -Wextra-tokens -Wfatal-errors -Wflexible-array-extensions -Wfloat-equal -Wfloat-overflow-conversion -Wfloat-zero-conversion -Wfor-loop-analysis -Wformat=2 -Wfour-char-constants -Wframe-address -Wfunction-effects -Wglobal-constructors -Wheader-hygiene -Widiomatic-parentheses -Wimplicit -Wimplicit-atomic-properties -Wimplicit-fallthrough -Wimplicit-float-conversion -Wimplicit-int-conversion -Wimplicit-int-float-conversion -Wimplicit-retain-self -Winaccessible-base -Wincompatible-function-pointer-types-strict -Winconsistent-missing-destructor-override -Winfinite-recursion -Winit-self -Winline -Wint-in-bool-context -Winvalid-constexpr -Winvalid-offsetof -Winvalid-or-nonexistent-directory -Winvalid-pch -Winvalid-utf8 -Wkeyword-macro -Wlanguage-extension-token -Wliteral-conversion -Wliteral-range -Wlogical-op-parentheses -Wloop-analysis -Wmain -Wmain-return-type -Wmax-tokens -Wmethod-signatures -Wmisleading-indentation -Wmismatched-new-delete -Wmismatched-tags -Wmissing-braces -Wmissing-declarations -Wmissing-include-dirs -Wmissing-noreturn -Wmissing-prototypes -Wmissing-variable-declarations -Wmost -Wmove -Wmultichar -Wnarrowing -Wnested-anon-types -Wnewline-eof -Wnon-gcc -Wnon-modular-include-in-framework-module -Wnon-modular-include-in-module -Wnon-virtual-dtor -Wnonportable-private-system-apinotes-path -Wnonportable-system-include-path -Wnull-dereference -Wnull-pointer-arithmetic -Wnullable-to-nonnull-conversion -Wold-style-cast -Wover-aligned -Woverlength-strings -Woverloaded-virtual -Woverriding-method-mismatch -Wpacked -Wpacked-non-pod -Wparentheses -Wpartial-availability -Wpessimizing-move -Wpointer-arith -Wpoison-system-directories -Wpragma-pack -Wpragma-pack-suspicious-include -Wpragmas -Wquoted-include-in-framework-header -Wrange-loop-analysis -Wrange-loop-construct -Wreceiver-forward-class -Wredundant-decls -Wredundant-move -Wredundant-move -Wredundant-parens -Wregister -Wreorder -Wreserved-identifier -Wretained-language-linkage -Wselector -Wself-assign -Wself-assign-overloaded -Wself-move -Wsemicolon-before-method-body -Wshadow-all -Wshift-negative-value -Wshift-sign-overflow -Wshorten-64-to-32 -Wsign-compare -Wsign-conversion -Wsign-promo -Wsometimes-uninitialized -Wstack-protector -Wstatic-in-inline -Wstrict-overflow=5 -Wstrict-potentially-direct-selector -Wstrict-prototypes -Wstrict-selector-match -Wstring-concatenation -Wstring-conversion -Wsuggest-destructor-override -Wsuggest-override -Wsuper-class-method-mismatch -Wswitch-default -Wswitch-enum -Wtautological-compare -Wtautological-constant-in-range-compare -Wthread-safety -Wthread-safety-beta -Wthread-safety-negative -Wthread-safety-reference-return -Wunaligned-access -Wundeclared-selector -Wundef -Wundef-prefix -Wundefined-func-template -Wundefined-internal-type -Wundefined-reinterpret-cast -Wunguarded-availability -Wuninitialized -Wunknown-pragmas -Wunneeded-internal-declaration -Wunneeded-member-function -Wunreachable-code -Wunreachable-code-aggressive -Wunusable-partial-specialization -Wunused -Wunused-macros -Wused-but-marked-unused -Wvariadic-macros -Wvariadic-macros -Wvector-conversion -Wvexing-parse -Wvla -Wweak-vtables -Wwrite-strings -Wzero-as-null-pointer-constant -Wzero-as-null-pointer-constant -Wzero-length-array"
       }
     }
   ],
@@ -134,6 +153,20 @@
       "displayName": "GCC release",
       "description": "strict-gcc release build",
       "configurePreset": "strict-gcc",
+      "configuration": "Release"
+    },
+    {
+      "name": "strict-clang-debug",
+      "displayName": "Debug",
+      "description": "Debug build",
+      "configurePreset": "strict-clang",
+      "configuration": "Debug"
+    },
+    {
+      "name": "strict-clang-release",
+      "displayName": "Release",
+      "description": "Release build",
+      "configurePreset": "strict-clang",
       "configuration": "Release"
     }
   ]
