@@ -4,7 +4,7 @@
     {
       "name": "generic",
       "displayName": "Generic",
-      "description": "Target with Ninja and vcpkg",
+      "description": "Generic configuration with Ninja and vcpkg",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
@@ -20,7 +20,7 @@
     },
     {
       "name": "windows-x64",
-      "description": "Target Windows",
+      "description": "Build with MSVC for Windows",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "architecture": {
@@ -46,7 +46,7 @@
     {
       "name": "xcode",
       "displayName": "Xcode configuration",
-      "description": "Target Darwin with Xcode.",
+      "description": "Build for Darwin with Xcode",
       "generator": "Xcode",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
@@ -70,7 +70,7 @@
     {
       "name": "strict-gcc",
       "displayName": "Strict GCC options",
-      "description": "Builds with GCC and enables most, if not all, GCC warnings",
+      "description": "Build with GCC and enable most GCC diagnostics",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
