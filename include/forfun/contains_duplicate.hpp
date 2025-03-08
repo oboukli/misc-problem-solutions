@@ -133,9 +133,8 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
     -> bool
 {
     std::sort(first, last);
-    auto const found{std::adjacent_find(first, last, eq)};
 
-    return found != last;
+    return std::adjacent_find(first, last, eq) != last;
 }
 
 template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
