@@ -15,17 +15,14 @@ namespace forfun::common::io {
 // Adapted from https://stackoverflow.com/a/11826666
 class oblivion_stream final : public std::ostream {
 public:
-    oblivion_stream() noexcept : std::ostream(&os_buffer_)
-    {
-    }
+    oblivion_stream() noexcept;
+
+    virtual auto dummy() noexcept -> void;
 
 private:
     class oblivion_stream_buffer_ final : public std::streambuf {
     protected:
-        [[nodiscard]] auto overflow(int_type ch) noexcept -> int_type override
-        {
-            return ch;
-        }
+        [[nodiscard]] auto overflow(int_type ch) noexcept -> int_type override;
     };
 
     oblivion_stream_buffer_ os_buffer_{};

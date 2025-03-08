@@ -4,4 +4,23 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/common/io.hpp" // IWYU pragma: keep
+#include "forfun/common/io.hpp"
+
+namespace forfun::common::io {
+
+oblivion_stream::oblivion_stream() noexcept : std::ostream(&os_buffer_)
+{
+}
+
+auto oblivion_stream::dummy() noexcept -> void
+{
+}
+
+[[nodiscard]] auto
+oblivion_stream::oblivion_stream_buffer_::overflow(int_type ch) noexcept
+    -> int_type
+{
+    return ch;
+}
+
+} // namespace forfun::common::io
