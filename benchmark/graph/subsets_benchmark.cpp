@@ -16,7 +16,7 @@
 
 TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 {
-    using namespace forfun::subsets;
+    using namespace forfun;
 
     std::vector<int> const elements{23, 29, 31, 37};
 
@@ -26,11 +26,9 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(forfun::subsets::explode_subsets).c_str(),
+            NAMEOF_RAW(subsets::explode_subsets).c_str(),
             [&elements]() noexcept {
-                auto const volatile r{
-                    forfun::subsets::explode_subsets(elements)
-                };
+                auto const volatile r{subsets::explode_subsets(elements)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
