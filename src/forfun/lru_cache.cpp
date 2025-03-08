@@ -117,8 +117,8 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
     assert(size_ == cache_.size());
 
     // Update if key exists.
-    auto const iter_existing_key{lookup_.find(key)};
-    if (iter_existing_key != lookup_.end())
+    if (auto const iter_existing_key{lookup_.find(key)};
+        iter_existing_key != lookup_.end())
     {
         iter_existing_key->second->second = value;
 
