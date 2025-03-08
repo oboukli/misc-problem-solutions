@@ -1,3 +1,9 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
 root = true
 
 [*.{c,cpp,h,hpp}]
@@ -8,7 +14,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{md,js,json,sh,ts,yml}]
+[{*.{cff,js,json,md,sh,ts,yml},.clang-{format,tidy}}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
@@ -16,10 +22,16 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[CMakeLists.txt]
+[{CMakeLists.txt,*.cmake}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[{.editorconfig,.git*,CODEOWNERS,LICENSE}]
+charset = utf-8
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
