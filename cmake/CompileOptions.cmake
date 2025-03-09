@@ -14,6 +14,9 @@ function(forfun_common_target_compile_options target)
   separate_arguments(
     FORFUN_COMMON_CXXFLAGS UNIX_COMMAND "${FORFUN_COMMON_CXXFLAGS}"
   )
+  separate_arguments(
+    FORFUN_COMMON_LINK_OPTIONS UNIX_COMMAND "${FORFUN_COMMON_LINK_OPTIONS}"
+  )
 
   target_compile_definitions(
     ${target}
@@ -23,5 +26,10 @@ function(forfun_common_target_compile_options target)
     ${target}
     PRIVATE $<$<COMPILE_LANGUAGE:C>:${FORFUN_COMMON_CFLAGS}>
     PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${FORFUN_COMMON_CXXFLAGS}>
+  )
+
+  target_link_options(
+    ${target}
+    PRIVATE ${FORFUN_COMMON_LINK_OPTIONS}
   )
 endfunction()
