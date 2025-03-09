@@ -21,12 +21,14 @@ leveraged by this project:
 - Exception safety-aware design
 - Const correctness where applicable--except for fields
 - Functional programming
+- Generic programming
 - Strict standard conformance and strict compilation rules
 - Static analysis with Clang Tidy and Microsoft C++ Code Analysis
 - Dynamic analysis
 - LLVM-based sanitizer tools
-- CMake
+- Target property-based CMake configuration
 - Clean Git history and configuration
+- Conventional Commits
 - Extensive testing using Catch2 and CTest
 - Development dependency management using vcpkg
 - Own opinionated Clang Format configuration
@@ -68,8 +70,7 @@ leveraged by this project:
 | List bidirectional iterator      | C++20    | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)               |
 | Longest consecutive sequence     | C++20    | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                       |
 | Maximum subarray                 | C++20    | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                               |
-| Meeting rooms                    | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
-| Meeting rooms 2                  | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
+| Meeting rooms (I, II)            | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
 | Move zeroes                      | C++20    | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                         |
 | Multiples of three or five       | C++17    | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp) |
 | Nth Fibonacci number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                             |
