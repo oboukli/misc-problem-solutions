@@ -20,9 +20,21 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
     using std::string_view_literals::operator""sv;
     using forfun::encode_and_decode_strings::delimited::encode;
 
-    SECTION("Empty")
+    SECTION("Empty container")
     {
         std::vector<std::string> const tokens{};
+        std::ostringstream ss{};
+
+        CAPTURE(tokens);
+
+        encode(tokens.cbegin(), tokens.cend(), ss);
+
+        REQUIRE(ss.view().empty());
+    }
+
+    SECTION("Exactly one element. Element is empty string")
+    {
+        std::vector<std::string> const tokens{""};
         std::ostringstream ss{};
 
         CAPTURE(tokens);
@@ -78,6 +90,44 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         encode(tokens.cbegin(), tokens.cend(), ss);
 
         REQUIRE(ss.view() == "these are four words"sv);
+    }
+
+    SECTION("Element ends in escaped escape character")
+    {
+        std::vector<std::string> const tokens{"these", "are", "four~", "words"};
+        std::stringstream ss{};
+
+        CAPTURE(tokens);
+
+        encode(tokens.cbegin(), tokens.cend(), ss);
+
+        REQUIRE(ss.view() == "these are four~~ words"sv);
+    }
+
+    SECTION("Element ends in escaped delimiter character")
+    {
+        std::vector<std::string> const tokens{"these", "are ", "four", "words"};
+        std::stringstream ss{};
+
+        CAPTURE(tokens);
+
+        encode(tokens.cbegin(), tokens.cend(), ss);
+
+        REQUIRE(ss.view() == "these are~  four words"sv);
+    }
+
+    SECTION("Escape and delimiter characters")
+    {
+        std::vector<std::string> const tokens{
+            "w~e", "~are", "~four~", " t okens "
+        };
+        std::stringstream ss{};
+
+        CAPTURE(tokens);
+
+        encode(tokens.cbegin(), tokens.cend(), ss);
+
+        REQUIRE(ss.view() == "w~~e ~~are ~~four~~ ~ t~ okens~ "sv);
     }
 
     SECTION("One characters")
@@ -361,6 +411,42 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
         );
     }
 
+    SECTION("Element ends in escaped escape character")
+    {
+        std::string_view const encoded{"these are four~~ words"};
+
+        CAPTURE(encoded);
+
+        REQUIRE(
+            decode(encoded)
+            == std::vector<std::string>{"these", "are", "four~", "words"}
+        );
+    }
+
+    SECTION("Element ends in escaped delimiter character")
+    {
+        std::string_view const encoded{"these are~ three tokens"};
+
+        CAPTURE(encoded);
+
+        REQUIRE(
+            decode(encoded)
+            == std::vector<std::string>{"these", "are three", "tokens"}
+        );
+    }
+
+    SECTION("Escape and delimiter characters")
+    {
+        std::string_view const encoded{"w~~e ~~are ~~four~~ ~ t~ okens~ "};
+
+        CAPTURE(encoded);
+
+        REQUIRE(
+            decode(encoded)
+            == std::vector<std::string>{"w~e", "~are", "~four~", " t okens "}
+        );
+    }
+
     SECTION("One characters")
     {
         std::string_view const encoded{"1"};
@@ -554,33 +640,33 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
     {
         static constexpr std::string_view const encoded{"~"};
         static_assert(
-            encoded[0]
+            encoded.front()
             == forfun::encode_and_decode_strings::delimited::escape_char
         );
 
         CAPTURE(encoded);
 
-        REQUIRE(decode(encoded) == std::vector<std::string>{{"~"}});
-    }
-
-    SECTION("Invalid encoded string (case 1)")
-    {
-        static constexpr std::string_view const encoded{"~x"};
-        static_assert(
-            encoded[0]
-            == forfun::encode_and_decode_strings::delimited::escape_char
-        );
-
-        CAPTURE(encoded);
-
-        REQUIRE(decode(encoded) == std::vector<std::string>{{"x"}});
+        REQUIRE(decode(encoded) == std::vector<std::string>{{""}});
     }
 
     SECTION("Invalid encoded string (case 2)")
     {
+        static constexpr std::string_view const encoded{"~x"};
+        static_assert(
+            encoded.front()
+            == forfun::encode_and_decode_strings::delimited::escape_char
+        );
+
+        CAPTURE(encoded);
+
+        REQUIRE(decode(encoded) == std::vector<std::string>{{""}});
+    }
+
+    SECTION("Invalid encoded string (case 3)")
+    {
         static constexpr std::string_view const encoded{"~~~"};
         static_assert(
-            encoded[0]
+            encoded.front()
             == forfun::encode_and_decode_strings::delimited::escape_char
         );
 
