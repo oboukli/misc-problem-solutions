@@ -7,6 +7,7 @@
 #include "forfun/encode_and_decode_strings.hpp"
 
 #include <ios>
+#include <ostream>
 #include <sstream>
 #include <string>
 #include <string_view>
@@ -18,41 +19,44 @@ namespace delimited {
 
 namespace {
 
-auto unescape(auto& ss, auto const sv) -> void
+auto unescape(auto& ss, auto const sv) -> bool
 {
     using SizeType = decltype(sv)::size_type;
 
-    if (sv.size() < SizeType{2}) [[unlikely]]
-    {
-        ss.write(sv.data(), static_cast<std::streamsize>(sv.size()));
-
-        return;
-    }
-
+    bool pop_next{false};
     std::streamsize chunk_start{0};
     SizeType i{0};
     for (; i < sv.size(); ++i)
     {
-        if (sv[i] == escape_char)
+        if ((sv[i] == escape_char) || (sv[i] == delimiter_char))
         {
-            if ((i + SizeType{1}) < sv.size() && sv[i + 1] == escape_char)
+            if (pop_next)
             {
-                ++i;
+                ss << sv[i];
             }
-            ss.write(
-                sv.data() + chunk_start,
-                static_cast<std::streamsize>(i) - chunk_start
-            );
+            else
+            {
+                ss.write(
+                    sv.data() + chunk_start,
+                    static_cast<std::streamsize>(i) - chunk_start
+                );
 
-            chunk_start = static_cast<std::streamsize>(i + 1);
+                if (sv[i] == delimiter_char)
+                {
+                    return true;
+                }
 
-            continue;
+                chunk_start = static_cast<std::streamsize>(i + 2);
+            }
+            pop_next = !pop_next;
         }
     }
 
     ss.write(
         sv.data() + chunk_start, static_cast<std::streamsize>(i) - chunk_start
     );
+
+    return false;
 }
 
 } // namespace
@@ -71,24 +75,46 @@ auto unescape(auto& ss, auto const sv) -> void
 
     std::ostringstream ss{};
     SizeType sub_start{0};
+    bool has_delimiter{true};
     // clang-format off
-    for (SizeType p{0}; p < encoded.size()
-            && ((p = encoded.find(delimiter_char, p)) != std::string_view::npos);)
+    for (SizeType p{0};
+        ((p = encoded.find(delimiter_char, p)) != std::string_view::npos);)
     // clang-format on
     {
-        if ((p != SizeType{0}) && (encoded[p - 1] == escape_char))
+        auto const esc{
+            encoded.substr(sub_start, p - sub_start).find(escape_char)
+        };
+
+        if (has_delimiter && (esc == std::string_view::npos))
         {
-            ++p;
+            decoded_tokens.emplace_back(
+                encoded.data() + sub_start, p - sub_start
+            );
+            sub_start = ++p;
+
             continue;
         }
 
-        unescape(ss, encoded.substr(sub_start, p - sub_start));
-        decoded_tokens.emplace_back(
-            ss.view().substr(0, static_cast<SizeType>(ss.tellp()))
-        );
+        if (esc != std::string_view::npos)
+        {
+            ss.write(
+                encoded.data() + sub_start, static_cast<std::streamsize>(esc)
+            );
+            sub_start += esc;
+        }
+
+        has_delimiter
+            = unescape(ss, encoded.substr(sub_start, (p + 1) - sub_start));
+
+        if (has_delimiter)
+        {
+            decoded_tokens.emplace_back(
+                ss.view().substr(0, static_cast<SizeType>(ss.tellp()))
+            );
+            ss.seekp(0);
+        }
 
         sub_start = ++p;
-        ss.seekp(0);
     }
     unescape(ss, encoded.substr(sub_start, encoded.size() - sub_start));
     decoded_tokens.emplace_back(
