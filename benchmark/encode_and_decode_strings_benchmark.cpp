@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
+#include <ostream>
 #include <string_view>
 
 #include <catch2/catch_test_macros.hpp>
@@ -23,6 +24,8 @@ TEST_CASE(
     using namespace forfun::encode_and_decode_strings;
     using std::string_view_literals::operator""sv;
     using ConstIter = std::array<std::string_view, 2>::const_iterator;
+    using CharT = forfun::common::io::oblivion_stream::char_type;
+    using Traits = forfun::common::io::oblivion_stream::traits_type;
     using forfun::common::io::oblivion_stream;
 
     static constexpr std::array const tokens{
@@ -57,16 +60,12 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(
-                delimited::encode<ConstIter, ConstIter, decltype(output_stream)>
-            )
+            NAMEOF_RAW(delimited::encode<ConstIter, ConstIter, oblivion_stream, CharT, Traits>)
                 .c_str(),
             [&output_stream]() noexcept {
                 delimited::encode(
                     tokens.cbegin(), tokens.cend(), output_stream
                 );
-
-                // ankerl::nanobench::doNotOptimizeAway(&output_stream.);
             }
         )
 
@@ -79,6 +78,9 @@ TEST_CASE(
 {
     using namespace forfun::encode_and_decode_strings;
     using std::string_view_literals::operator""sv;
+
+    using CharT = std::string_view::value_type;
+    using Traits = std::string_view::traits_type;
 
     static constexpr std::string_view const encoded{
         // clang-format off
@@ -105,7 +107,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(delimited::decode).c_str(),
+            NAMEOF_RAW(delimited::decode<CharT, Traits>).c_str(),
             []() noexcept {
                 auto const volatile r{delimited::decode(encoded)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
