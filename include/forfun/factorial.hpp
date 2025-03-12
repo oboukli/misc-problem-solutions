@@ -46,7 +46,7 @@ namespace iterative {
 namespace recursive {
 
 /// @note Providing a negative argument for @p n results in undefined behavior.
-template <common::concepts::addition_unpromoted T>
+template <forfun::common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
 {
     assert(n >= T{0});
