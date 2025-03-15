@@ -2,6 +2,27 @@
   "version": 3,
   "configurePresets": [
     {
+      "name": "fuzz",
+      "displayName": "Fuzz test",
+      "description": "Fuzzing target with Ninja and vcpkg",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "ANTLR_BUILD_CPP_TESTS": "OFF",
+        "CMAKE_BUILD_TYPE": "RelWithDebug",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CONFIGURATION_TYPE": "RelWithDebInfo",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
+        "FUZZTEST_FUZZING_MODE": "ON"
+      }
+    },
+    {
       "name": "generic",
       "displayName": "Generic",
       "description": "Generic configuration with Ninja and vcpkg",
@@ -140,6 +161,13 @@
       "description": "Generic release build",
       "configurePreset": "generic",
       "configuration": "Release"
+    },
+    {
+      "name": "fuzz-release-with-debug",
+      "displayName": "Fuzz RelWithDebug",
+      "description": "Fuzz release with debug info build",
+      "configurePreset": "fuzz",
+      "configuration": "RelWithDebug"
     },
     {
       "name": "windows-x64-debug",

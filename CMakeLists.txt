@@ -657,3 +657,37 @@ target_link_libraries(
   PRIVATE forfun_common
 )
 forfun_common_target_compile_options(static_test_driver)
+
+if(FORFUN_BUILD_FUZZING_DRIVER)
+  enable_testing()
+
+  include(GoogleTest)
+
+  add_subdirectory(fuzztest)
+
+  fuzztest_setup_fuzzing_flags()
+
+  add_executable(
+    fuzzing_driver
+  )
+  set_target_properties(fuzzing_driver PROPERTIES CXX_EXTENSIONS OFF)
+  set_target_properties(fuzzing_driver PROPERTIES CXX_STANDARD 23)
+  set_target_properties(fuzzing_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
+  target_sources(
+    fuzzing_driver
+    PRIVATE
+    "fuzz/encode_and_decode_strings_fuzz.cpp"
+  )
+  get_target_property(forfun_fuzzing fuzzing_driver SOURCES)
+  source_group(
+    TREE "${CMAKE_SOURCE_DIR}/fuzz/"
+    PREFIX "Source files"
+    FILES ${forfun_fuzzing}
+  )
+  target_link_libraries(
+    fuzzing_driver
+    PRIVATE forfun
+  )
+  link_fuzztest(fuzzing_driver)
+  gtest_discover_tests(fuzzing_driver)
+endif()
