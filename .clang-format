@@ -82,13 +82,16 @@ AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: false
+AllowShortNamespacesOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
 AttributeMacros:
   - __capability
 BinPackArguments: false
+BinPackLongBracedList: true
 BinPackParameters: false
 BitFieldColonSpacing: Both
+BracedInitializerIndentWidth: -1
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
@@ -117,7 +120,8 @@ BreakBeforeBinaryOperators: All
 BreakBeforeConceptDeclarations: Always
 BreakBeforeBraces: Custom
 BreakBeforeInlineASMColon: OnlyMultiline
-BreakBeforeTernaryOperators: false
+BreakBeforeTemplateCloser: false
+BreakBeforeTernaryOperators: true
 BreakBinaryOperations: RespectPrecedence
 BreakConstructorInitializers: AfterColon
 BreakFunctionDefinitionParameters: false
@@ -161,6 +165,7 @@ IncludeIsMainSourceRegex: ""
 IndentAccessModifiers: false
 IndentCaseBlocks: false
 IndentCaseLabels: false
+IndentExportBlock: false
 IndentExternBlock: AfterExternBlock
 IndentGotoLabels: true
 IndentPPDirectives: None
@@ -199,6 +204,7 @@ ObjCSpaceBeforeProtocolList: true
 PackConstructorInitializers: NextLine
 PenaltyBreakAssignment: 2
 PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakBeforeMemberAccess: 150
 PenaltyBreakComment: 300
 PenaltyBreakFirstLessLess: 120
 PenaltyBreakOpenParenthesis: 0
@@ -280,4 +286,6 @@ WhitespaceSensitiveMacros:
   - NS_SWIFT_NAME
   - PP_STRINGIZE
   - STRINGIZE
-...
+WrapNamespaceBodyWithEmptyLines: Always
+---
+
