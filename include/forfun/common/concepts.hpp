@@ -12,8 +12,8 @@
 namespace forfun::common::concepts {
 
 template <typename T>
-concept addition_unpromoted = std::integral<T> and requires(T n) {
-    { n + n } -> std::same_as<T>;
+concept addition_unpromoted = requires(T v) {
+    { v + v } -> std::same_as<T>;
 };
 
 } // namespace forfun::common::concepts

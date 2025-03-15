@@ -12,6 +12,20 @@
 
 #include "forfun/common/concepts.hpp"
 
+namespace {
+
+struct AddableDummy final {
+    [[maybe_unused]] auto operator+(AddableDummy const& /*unused*/) noexcept
+        -> AddableDummy
+    {
+        return *this;
+    }
+};
+
+struct Dummy final {};
+
+} // namespace
+
 TEST_CASE("Concept addition_unpromoted", "[common]")
 {
     using forfun::common::concepts::addition_unpromoted;
@@ -20,11 +34,19 @@ TEST_CASE("Concept addition_unpromoted", "[common]")
     {
         STATIC_REQUIRE(addition_unpromoted<int>);
         STATIC_REQUIRE(addition_unpromoted<unsigned int>);
+
         STATIC_REQUIRE(addition_unpromoted<std::int32_t>);
         STATIC_REQUIRE(addition_unpromoted<std::uint32_t>);
         STATIC_REQUIRE(addition_unpromoted<std::size_t>);
         STATIC_REQUIRE(addition_unpromoted<std::int64_t>);
         STATIC_REQUIRE(addition_unpromoted<std::uint64_t>);
+
+        STATIC_REQUIRE(addition_unpromoted<float>);
+        STATIC_REQUIRE(addition_unpromoted<double>);
+
+        STATIC_REQUIRE(addition_unpromoted<std::string>);
+
+        STATIC_REQUIRE(addition_unpromoted<AddableDummy>);
     }
 
     SECTION("Negative")
@@ -32,14 +54,12 @@ TEST_CASE("Concept addition_unpromoted", "[common]")
         STATIC_REQUIRE_FALSE(addition_unpromoted<char>);
         STATIC_REQUIRE_FALSE(addition_unpromoted<short>);
         STATIC_REQUIRE_FALSE(addition_unpromoted<unsigned short>);
+
         STATIC_REQUIRE_FALSE(addition_unpromoted<std::int8_t>);
         STATIC_REQUIRE_FALSE(addition_unpromoted<std::uint8_t>);
         STATIC_REQUIRE_FALSE(addition_unpromoted<std::int16_t>);
         STATIC_REQUIRE_FALSE(addition_unpromoted<std::uint16_t>);
 
-        STATIC_REQUIRE_FALSE(addition_unpromoted<float>);
-        STATIC_REQUIRE_FALSE(addition_unpromoted<double>);
-
-        STATIC_REQUIRE_FALSE(addition_unpromoted<std::string>);
+        STATIC_REQUIRE_FALSE(addition_unpromoted<Dummy>);
     }
 }
