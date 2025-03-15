@@ -6,6 +6,8 @@
 
 #include "forfun/common/io.hpp"
 
+#include <ostream>
+
 namespace forfun::common::io {
 
 oblivion_stream::oblivion_stream() noexcept : std::ostream(&os_buffer_)
