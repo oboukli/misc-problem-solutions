@@ -263,6 +263,7 @@ CheckOptions:
   llvm-else-after-return.WarnOnConditionVariables: "false"
   llvm-else-after-return.WarnOnUnfixable: "false"
   llvm-qualified-auto.AddConstToQualified: "false"
+  misc-const-correctness.AllowedTypes: ""
   misc-const-correctness.AnalyzeReferences: "true"
   misc-const-correctness.AnalyzeValues: "true"
   misc-const-correctness.TransformPointersAsValues: "false"
@@ -332,6 +333,7 @@ CheckOptions:
   modernize-use-emplace.TupleTypes: "::std::pair;::std::tuple"
   modernize-use-equals-default.IgnoreMacros: "true"
   modernize-use-equals-delete.IgnoreMacros: "true"
+  modernize-use-integer-sign-comparison.EnableQtSupport: "false"
   modernize-use-integer-sign-comparison.IncludeStyle: llvm
   modernize-use-nodiscard.ReplacementString: "[[nodiscard]]"
   modernize-use-noexcept.ReplacementString: ""
@@ -380,6 +382,7 @@ CheckOptions:
   portability-restrict-system-includes.Includes: "*"
   portability-simd-intrinsics.Std: ""
   portability-simd-intrinsics.Suggest: "false"
+  readability-ambiguous-smartptr-reset-call.SmartPointers: "::std::shared_ptr;::std::unique_ptr;::boost::shared_ptr"
   readability-avoid-const-params-in-decls.IgnoreMacros: "true"
   readability-avoid-return-with-void-value.IgnoreMacros: "true"
   readability-avoid-return-with-void-value.StrictMode: "true"
@@ -425,7 +428,7 @@ CheckOptions:
   readability-static-accessed-through-instance.NameSpecifierNestingThreshold: "3"
   readability-string-compare.StringLikeClasses: "::std::basic_string;::std::basic_string_view"
   readability-suspicious-call-argument.Abbreviation: "true"
-  readability-suspicious-call-argument.Abbreviations: "lst=list;arr=array;num=number;ptr=pointer;i=index;vec=vector;cpy=copy;src=source;dest=destination;val=value;idx=index;wdth=width;nr=number;elem=element;ln=line;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;str=string;addr=address;attr=attribute;col=column;cnt=count;ref=reference"
+  readability-suspicious-call-argument.Abbreviations: "lst=list;arr=array;num=number;ptr=pointer;val=value;i=index;cpy=copy;src=source;dest=destination;vec=vector;idx=index;wdth=width;nr=number;elem=element;ln=line;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;str=string;addr=address;attr=attribute;col=column;cnt=count;ref=reference"
   readability-suspicious-call-argument.Dice: "true"
   readability-suspicious-call-argument.DiceDissimilarBelow: "60"
   readability-suspicious-call-argument.DiceSimilarAbove: "70"
@@ -451,4 +454,5 @@ CheckOptions:
   readability-uppercase-literal-suffix.NewSuffixes: ""
   readability-use-std-min-max.IncludeStyle: llvm
 SystemHeaders: false
-...
+---
+
