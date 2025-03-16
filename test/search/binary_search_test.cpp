@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <algorithm>
 #include <array>
 #include <cstddef>
 #include <iterator>
@@ -56,6 +57,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         CHECK(result == records.cbegin());
@@ -70,6 +73,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -93,6 +98,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         CHECK_FALSE(result == records.cend());
@@ -107,6 +114,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         CHECK_FALSE(result == records.cend());
@@ -120,6 +129,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -143,6 +154,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         CHECK_FALSE(result == records.cend());
@@ -156,6 +169,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -171,6 +186,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         CHECK_FALSE(result == records.cend());
@@ -184,6 +201,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -208,6 +227,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -225,6 +246,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -244,6 +267,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -260,6 +285,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -275,6 +302,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -296,6 +325,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
         );
@@ -310,6 +341,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
         );
@@ -323,6 +356,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
@@ -347,6 +382,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -362,6 +399,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -381,6 +420,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -397,6 +438,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
@@ -412,6 +455,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
@@ -433,6 +478,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
         );
@@ -447,6 +494,8 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(records);
         CAPTURE(target);
 
+        CHECK(std::ranges::is_sorted(records));
+
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
         );
@@ -460,6 +509,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         REQUIRE(
             find(records.cbegin(), records.cend(), target) == records.cend()
@@ -483,6 +534,8 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(records);
         CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
