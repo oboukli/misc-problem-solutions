@@ -78,6 +78,120 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
+    "Binary search in two-element collection",
+    "[search][binary_search]",
+    (auto find, find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<2>, int>),
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<2>, int>)
+)
+{
+    SECTION("Two-element collection, containing the target (case 1)")
+    {
+        constexpr int const target{5519};
+        std::array const records{5519, 5521};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        CHECK_FALSE(result == records.cend());
+        REQUIRE(*result == 5519);
+    }
+
+    SECTION("Two-element collection, containing the target (case 2)")
+    {
+        constexpr int const target{5521};
+        std::array const records{5519, 5521};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        CHECK_FALSE(result == records.cend());
+        REQUIRE(*result == 5521);
+    }
+
+    SECTION("Two-element collection, not containing the target")
+    {
+        constexpr int const target{19};
+        std::array const records{5519, 5521};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE(result == records.cend());
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Binary search in three-element collection",
+    "[search][binary_search]",
+    (auto find, find),
+    (forfun::search::binary_search::iterative::find<StdArrayConstItr<3>, int>),
+    (forfun::search::binary_search::recursive::find<StdArrayConstItr<3>, int>)
+)
+{
+    SECTION("Three-element collection, containing the target (case 1)")
+    {
+        constexpr int const target{-1};
+        std::array const records{-1, 1, 2};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        CHECK_FALSE(result == records.cend());
+        REQUIRE(*result == -1);
+    }
+
+    SECTION("Three-element collection, containing the target (case 2)")
+    {
+        constexpr int const target{1};
+        std::array const records{-1, 1, 2};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        CHECK_FALSE(result == records.cend());
+        REQUIRE(*result == 1);
+    }
+
+    SECTION("Three-element collection, containing the target (case 3)")
+    {
+        constexpr int const target{2};
+        std::array const records{-1, 1, 2};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        CHECK_FALSE(result == records.cend());
+        REQUIRE(*result == 2);
+    }
+
+    SECTION("Three-element collection, not containing the target")
+    {
+        constexpr int const target{19};
+        std::array const records{-1, 1, 2};
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE(result == records.cend());
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
     "Binary search in even collection",
     "[search][binary_search]",
     (auto find, find),
