@@ -677,6 +677,9 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     fuzzing_driver
     PRIVATE
     "fuzz/encode_and_decode_strings_fuzz.cpp"
+    "fuzz/sorting/bubble_sort_fuzz.cpp"
+    "fuzz/sorting/insertion_sort_fuzz.cpp"
+    "fuzz/sorting/quicksort_fuzz.cpp"
   )
   get_target_property(forfun_fuzzing fuzzing_driver SOURCES)
   source_group(
