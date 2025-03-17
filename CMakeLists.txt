@@ -677,6 +677,7 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     fuzzing_driver
     PRIVATE
     "fuzz/encode_and_decode_strings_fuzz.cpp"
+    "fuzz/search/binary_search_fuzz.cpp"
     "fuzz/sorting/bubble_sort_fuzz.cpp"
     "fuzz/sorting/insertion_sort_fuzz.cpp"
     "fuzz/sorting/quicksort_fuzz.cpp"
