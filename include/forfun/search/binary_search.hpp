@@ -10,6 +10,7 @@
 #ifndef FORFUN_SEARCH_BINARY_SEARCH_HPP_
 #define FORFUN_SEARCH_BINARY_SEARCH_HPP_
 
+#include <concepts>
 #include <iterator>
 
 namespace forfun::search::binary_search {
@@ -19,9 +20,12 @@ namespace iterative {
 /// @warning The strategy assumes that the iterator and its sentinel point to a
 /// container of elements sorted in non-descending order, otherwise the behavior
 /// of the strategy is undefined.
-template <std::random_access_iterator Itr, typename Target>
+template <
+    std::forward_iterator Itr,
+    std::sized_sentinel_for<Itr> Sentinel,
+    std::totally_ordered_with<std::iter_value_t<Itr>> Target>
 [[nodiscard]] constexpr auto
-find(Itr lhs, Itr const last, Target const target) noexcept -> Itr
+find(Itr lhs, Sentinel const last, Target const target) noexcept -> Itr
 {
     using DiffType = std::iter_difference_t<Itr>;
 
@@ -53,9 +57,13 @@ namespace recursive {
 
 namespace detail {
 
-template <std::random_access_iterator Itr, typename Target>
+template <
+    std::forward_iterator Itr,
+    std::sized_sentinel_for<Itr> Sentinel,
+    std::totally_ordered_with<std::iter_value_t<Itr>> Target>
 [[nodiscard]] constexpr auto
-do_find(Itr const first, Itr const last, Target const target) noexcept -> Itr
+do_find(Itr const first, Sentinel const last, Target const target) noexcept
+    -> Itr
 {
     using DiffType = std::iter_difference_t<Itr>;
 
@@ -86,9 +94,12 @@ do_find(Itr const first, Itr const last, Target const target) noexcept -> Itr
 /// @warning The strategy assumes that the iterator and its sentinel point to a
 /// container of elements sorted in non-descending order, otherwise the behavior
 /// of the strategy is undefined.
-template <std::random_access_iterator Itr, typename Target>
+template <
+    std::forward_iterator Itr,
+    std::sized_sentinel_for<Itr> Sentinel,
+    std::totally_ordered_with<std::iter_value_t<Itr>> Target>
 [[nodiscard]] constexpr auto
-find(Itr const first, Itr const last, Target const target) noexcept -> Itr
+find(Itr const first, Sentinel const last, Target const target) noexcept -> Itr
 {
     if (Itr const itr{detail::do_find(first, last, target)};
         (itr != last) && (*itr == target))
