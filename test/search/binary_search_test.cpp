@@ -29,8 +29,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in empty collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<0>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<0>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<0>, StdArrayConstItr<0>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<0>, StdArrayConstItr<0>, int>)
+    // clang-format on
 )
 {
     constexpr int const target{151};
@@ -44,8 +48,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in one-element collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<1>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<1>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<1>, StdArrayConstItr<1>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<1>, StdArrayConstItr<1>, int>)
+    // clang-format on
 )
 {
     SECTION("One-element collection, containing the target")
@@ -86,8 +94,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in two-element collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<2>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<2>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<2>, StdArrayConstItr<2>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<2>, StdArrayConstItr<2>, int>)
+    // clang-format on
 )
 {
     SECTION("Two-element collection, containing the target (case 1)")
@@ -142,8 +154,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in three-element collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<3>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<3>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<3>, StdArrayConstItr<3>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<3>, StdArrayConstItr<3>, int>)
+    // clang-format on
 )
 {
     SECTION("Three-element collection, containing the target (case 1)")
@@ -214,8 +230,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in even collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<12>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<12>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<12>, StdArrayConstItr<12>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<12>, StdArrayConstItr<12>, int>)
+    // clang-format on
 )
 {
     SECTION("Even collection containing the target once")
@@ -369,8 +389,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search in odd collection",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::iterative::find<StdArrayConstItr<11>, int>),
-    (forfun::search::binary_search::recursive::find<StdArrayConstItr<11>, int>)
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstItr<11>, StdArrayConstItr<11>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstItr<11>, StdArrayConstItr<11>, int>)
+    // clang-format on
 )
 {
     SECTION("Odd collection containing the target once")
@@ -522,7 +546,10 @@ TEMPLATE_TEST_CASE_SIG(
     "Binary search with std::vector",
     "[search][binary_search]",
     (auto find, find),
-    (forfun::search::binary_search::recursive::find<StdVectorConstItr, int>)
+    // clang-format off
+    (forfun::search::binary_search::recursive::
+        find<StdVectorConstItr, StdVectorConstItr, int>)
+    // clang-format on
 )
 {
     SECTION("Even collection (vector) containing the target odd times")

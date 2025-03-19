@@ -46,7 +46,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         )
 
         .run(
-            NAMEOF_RAW(iterative::find<Itr, int>).c_str(),
+            NAMEOF_RAW(iterative::find<Itr, Itr, int>).c_str(),
             [&records]() noexcept {
                 Itr const r{
                     iterative::find(records.cbegin(), records.cend(), 41)
@@ -56,7 +56,7 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         )
 
         .run(
-            NAMEOF_RAW(recursive::find<Itr, int>).c_str(),
+            NAMEOF_RAW(recursive::find<Itr, Itr, int>).c_str(),
             [&records]() noexcept {
                 Itr const r{
                     recursive::find(records.cbegin(), records.cend(), 41)
