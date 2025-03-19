@@ -16,6 +16,9 @@ namespace forfun::search::binary_search {
 
 namespace iterative {
 
+/// @warning The strategy assumes that the iterator and its sentinel point to a
+/// container of elements sorted in non-descending order, otherwise the behavior
+/// of the strategy is undefined.
 template <std::random_access_iterator Itr, typename Target>
 [[nodiscard]] constexpr auto
 find(Itr lhs, Itr const last, Target const target) noexcept -> Itr
@@ -80,6 +83,9 @@ do_find(Itr const first, Itr const last, Target const target) noexcept -> Itr
 
 } // namespace detail
 
+/// @warning The strategy assumes that the iterator and its sentinel point to a
+/// container of elements sorted in non-descending order, otherwise the behavior
+/// of the strategy is undefined.
 template <std::random_access_iterator Itr, typename Target>
 [[nodiscard]] constexpr auto
 find(Itr const first, Itr const last, Target const target) noexcept -> Itr
