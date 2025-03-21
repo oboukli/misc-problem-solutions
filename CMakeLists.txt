@@ -56,6 +56,7 @@ target_sources(
   "include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
   "include/forfun/set_matrix_zeroes.hpp"
   "include/forfun/sonar.hpp"
+  "include/forfun/squares_sorted_array.hpp"
   "include/forfun/sub_array_sums.hpp"
   "include/forfun/top_k_frequent_elements.hpp"
   "include/forfun/tower_of_hanoi.hpp"
@@ -95,6 +96,7 @@ target_sources(
   "src/forfun/project_euler/p0001_multiples_of_3_or_5.cpp"
   "src/forfun/set_matrix_zeroes.cpp"
   "src/forfun/sonar.cpp"
+  "src/forfun/squares_sorted_array.cpp"
   "src/forfun/sub_array_sums.cpp"
   "src/forfun/top_k_frequent_elements.cpp"
   "src/forfun/tower_of_hanoi.cpp"
@@ -440,6 +442,7 @@ target_sources(
   "test/search/binary_search_test.cpp"
   "test/set_matrix_zeroes_test.cpp"
   "test/sonar_test.cpp"
+  "test/squares_sorted_array_test.cpp"
   "test/sorting/bubble_sort_test.cpp"
   "test/sorting/insertion_sort_test.cpp"
   "test/sorting/quicksort_test.cpp"
@@ -639,6 +642,7 @@ target_sources(
   "test/majority_element_static_test.cpp"
   "test/maximum_subarray_static_test.cpp"
   "test/palindromic_number_static_test.cpp"
+  "test/squares_sorted_array_static_test.cpp"
   "test/two_sum_static_test.cpp"
 )
 get_target_property(forfun_static_tests static_test_driver SOURCES)
