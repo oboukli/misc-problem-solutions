@@ -16,6 +16,11 @@ concept addition_unpromoted = requires(T v) {
     { v + v } -> std::same_as<T>;
 };
 
+template <typename T, typename U>
+concept multipliable_as = requires(T v) {
+    { v * v } -> std::same_as<U>;
+};
+
 } // namespace forfun::common::concepts
 
 #endif // FORFUN_COMMON_CONCEPTS_HPP_
