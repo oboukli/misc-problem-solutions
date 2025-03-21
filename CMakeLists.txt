@@ -556,6 +556,7 @@ target_sources(
   "benchmark/search/binary_search_benchmark.cpp"
   "benchmark/set_matrix_zeroes_benchmark.cpp"
   "benchmark/sonar_benchmark.cpp"
+  "benchmark/squares_sorted_array_benchmark.cpp"
   "benchmark/sorting/bubble_sort_benchmark.cpp"
   "benchmark/sorting/insertion_sort_benchmark.cpp"
   "benchmark/sorting/quicksort_benchmark.cpp"
