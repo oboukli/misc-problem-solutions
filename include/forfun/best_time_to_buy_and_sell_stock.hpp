@@ -16,7 +16,7 @@
 
 namespace forfun::best_time_to_buy_and_sell_stock {
 
-template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept
@@ -51,7 +51,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 
 namespace optimized_l1 {
 
-template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept
@@ -88,7 +88,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 
 namespace optimized_l2 {
 
-template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept
