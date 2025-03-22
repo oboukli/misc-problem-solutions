@@ -13,6 +13,7 @@
 #include <concepts>
 #include <ios>
 #include <iterator>
+#include <memory>
 #include <ostream>
 #include <sstream>
 #include <string>
@@ -124,9 +125,12 @@ auto encode(Iter iter, Sentinel const last, OS& os) -> void
     }
 }
 
-template <typename CharT, typename Traits>
+template <
+    typename CharT,
+    typename Traits,
+    typename Allocator = std::allocator<CharT>>
 [[nodiscard]] auto decode(std::basic_string_view<CharT, Traits> const encoded)
-    -> std::vector<std::string>
+    -> std::vector<std::basic_string<CharT, Traits>>
 {
     using SizeType = decltype(encoded)::size_type;
 
@@ -135,21 +139,22 @@ template <typename CharT, typename Traits>
         return {};
     }
 
-    std::vector<std::string> decoded_tokens{};
+    std::vector<std::basic_string<CharT, Traits, Allocator>> decoded_tokens{};
 
-    std::ostringstream os{};
+    std::basic_ostringstream<CharT, Traits, Allocator> os{};
     SizeType sub_start{0};
     bool has_delimiter{true};
     // clang-format off
     for (SizeType p{0};
-        ((p = encoded.find(delimiter_char, p)) != std::string_view::npos);)
+        ((p = encoded.find(delimiter_char, p)) != std::basic_string_view<CharT, Traits>::npos);)
     // clang-format on
     {
         auto const esc{
             encoded.substr(sub_start, p - sub_start).find(escape_char)
         };
 
-        if (has_delimiter && (esc == std::string_view::npos))
+        if (has_delimiter
+            && (esc == std::basic_string_view<CharT, Traits>::npos))
         {
             decoded_tokens.emplace_back(
                 encoded.data() + sub_start, p - sub_start
@@ -159,7 +164,7 @@ template <typename CharT, typename Traits>
             continue;
         }
 
-        if (esc != std::string_view::npos)
+        if (esc != std::basic_string_view<CharT, Traits>::npos)
         {
             os.write(
                 encoded.data() + sub_start, static_cast<std::streamsize>(esc)
