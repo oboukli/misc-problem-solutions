@@ -15,23 +15,21 @@
 
 namespace forfun::sorting {
 
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::bidirectional_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::sortable<Iter>
-constexpr auto insertion_sort(Iter const begin, Sentinel const end) noexcept
+constexpr auto insertion_sort(Iter const first, Sentinel const last) noexcept
     -> void
 {
-    using DiffType = std::iter_difference_t<Iter>;
-
-    if (begin != end) [[likely]]
+    if (first != last) [[likely]]
     {
-        for (Iter it_i{begin + DiffType{1}}; it_i != end; ++it_i)
+        for (Iter it_i{std::next(first)}; it_i != last; ++it_i)
         {
             // clang-format off
             for (Iter it_j{it_i};
-                it_j != begin && (*it_j < *(it_j - DiffType{1})); --it_j)
+                it_j != first && (*it_j < *std::prev(it_j)); --it_j)
             // clang-format on
             {
-                std::iter_swap(it_j, it_j - DiffType{1});
+                std::iter_swap(it_j, std::prev(it_j));
             }
         }
     }
