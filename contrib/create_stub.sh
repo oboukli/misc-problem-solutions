@@ -192,7 +192,9 @@ benchmark_dir="benchmark/${solution_prefix}"
 header_file="include/forfun/${solution_prefix}${snake_name}.hpp"
 src_file="src/forfun/${solution_prefix}${snake_name}.cpp"
 test_file="test/${solution_prefix}${snake_name}_test.cpp"
+static_test_file="test/${solution_prefix}${snake_name}_static_test.cpp"
 benchmark_file="benchmark/${solution_prefix}${snake_name}_benchmark.cpp"
+fuzz_test_file="fuzz/${solution_prefix}${snake_name}_fuzz.cpp"
 
 mkdir -p "${path_prefix}/${header_dir}"
 mkdir -p "${path_prefix}/${src_dir}"
@@ -226,9 +228,17 @@ then
   touch "${path_prefix}/${test_file}"
   echo "\"${test_file}\"" >&2
 
+  # Create static test file
+  touch "${path_prefix}/${static_test_file}"
+  echo "\"${static_test_file}\"" >&2
+
   # Create benchmark file
   touch "${path_prefix}/${benchmark_file}"
   echo "\"${benchmark_file}\"" >&2
+
+  # Create fuzz test file
+  touch "${path_prefix}/${fuzz_test_file}"
+  echo "\"${fuzz_test_file}\"" >&2
 
   echo "${unaccent}" >&2
 fi
