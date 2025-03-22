@@ -15,14 +15,11 @@
 
 namespace forfun::sorting {
 
-template <std::contiguous_iterator Iter>
-    requires std::sortable<Iter>
-constexpr auto quicksort(Iter first, Iter last) noexcept -> void;
-
 namespace detail {
 
-template <std::contiguous_iterator Iter>
-[[nodiscard]] constexpr auto partition(Iter const first, Iter last) noexcept
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::bidirectional_iterator<Sentinel>
+[[nodiscard]] constexpr auto partition(Iter const first, Sentinel last) noexcept
     -> Iter
 {
     auto it_i{first};
@@ -49,13 +46,13 @@ template <std::contiguous_iterator Iter>
 
 } // namespace detail
 
-template <std::contiguous_iterator Iter>
-    requires std::sortable<Iter>
-constexpr auto quicksort(Iter const first, Iter const last) noexcept -> void
+template <std::sortable Iter, std::sized_sentinel_for<Iter> Sentinel>
+    requires std::bidirectional_iterator<Sentinel>
+constexpr auto quicksort(Iter const first, Sentinel const last) noexcept -> void
 {
     using DiffType = std::iter_difference_t<Iter>;
 
-    if ((last - first) < DiffType{2})
+    if (std::distance(first, last) < DiffType{2})
     {
         return;
     }
