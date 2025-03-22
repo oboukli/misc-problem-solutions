@@ -17,11 +17,11 @@ namespace forfun::sorting {
 
 namespace plain {
 
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::sortable<Iter>
-constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::bidirectional_iterator<Sentinel>
+constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
 {
-    if (begin == end) [[unlikely]]
+    if (first == last) [[unlikely]]
     {
         return;
     }
@@ -31,11 +31,11 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
-        --end;
+        --last;
         f = false;
-        for (Iter it_i{begin}; it_i != end; ++it_i)
+        for (Iter it_i{first}; it_i != last; ++it_i)
         {
-            auto const it_ii{it_i + std::iter_difference_t<Iter>{1}};
+            auto const it_ii{std::next(it_i)};
             if (*it_i > *it_ii)
             {
                 auto const aux{*it_ii};
@@ -52,13 +52,11 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
 
 namespace stl {
 
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::sortable<Iter>
-constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::bidirectional_iterator<Sentinel>
+constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
 {
-    using DiffType = std::iter_difference_t<Iter>;
-
-    if (begin == end) [[unlikely]]
+    if (first == last) [[unlikely]]
     {
         return;
     }
@@ -68,13 +66,13 @@ constexpr auto bubble_sort(Iter const begin, Sentinel end) noexcept -> void
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
-        --end;
+        --last;
         f = false;
-        for (Iter it_i{begin}; it_i != end; ++it_i)
+        for (Iter it_i{first}; it_i != last; ++it_i)
         {
-            if (*it_i > *(it_i + DiffType{1}))
+            if (*it_i > *std::next(it_i))
             {
-                std::iter_swap(it_i, it_i + DiffType{1});
+                std::iter_swap(it_i, std::next(it_i));
                 f = true;
             }
         }
