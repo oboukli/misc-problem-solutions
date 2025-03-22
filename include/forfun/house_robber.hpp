@@ -16,7 +16,7 @@
 
 namespace forfun::house_robber::recursive {
 
-template <std::input_or_output_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto rob(Iter const first, Sentinel const last) noexcept
 {
