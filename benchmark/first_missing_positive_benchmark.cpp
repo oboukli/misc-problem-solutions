@@ -23,7 +23,7 @@ TEST_CASE(
     using namespace forfun::first_missing_positive;
 
     using ContainerType = std::array<int, 128U>;
-    using Itr = ContainerType::iterator;
+    using Iter = ContainerType::iterator;
 
     ankerl::nanobench::Bench()
 
@@ -31,7 +31,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(base::lowest_missing<Itr, Itr>).c_str(),
+            NAMEOF_RAW(base::lowest_missing<Iter, Iter>).c_str(),
             []() noexcept {
                 std::array nums{
                     // clang-format off
@@ -59,7 +59,7 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(fast::lowest_missing<Itr, Itr>).c_str(),
+            NAMEOF_RAW(fast::lowest_missing<Iter, Iter>).c_str(),
             []() noexcept {
                 std::array nums{
                     // clang-format off
