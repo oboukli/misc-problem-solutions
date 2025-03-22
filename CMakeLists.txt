@@ -686,6 +686,7 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     "fuzz/sorting/bubble_sort_fuzz.cpp"
     "fuzz/sorting/insertion_sort_fuzz.cpp"
     "fuzz/sorting/quicksort_fuzz.cpp"
+    "fuzz/squares_sorted_array_fuzz.cpp"
   )
   get_target_property(forfun_fuzzing fuzzing_driver SOURCES)
   source_group(
