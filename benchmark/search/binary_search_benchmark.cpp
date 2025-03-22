@@ -18,7 +18,7 @@
 TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 {
     using namespace forfun::search::binary_search;
-    using Itr = std::array<int, 12U>::const_iterator;
+    using Iter = std::array<int, 12U>::const_iterator;
 
     std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
     static_assert(records.size() == 12U);
@@ -29,10 +29,10 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(std::find<Itr, int>).c_str(),
+            NAMEOF_RAW(std::find<Iter, int>).c_str(),
             [&records]() noexcept {
                 // NOLINTNEXTLINE(modernize-use-ranges)
-                Itr const r{std::find(records.cbegin(), records.cend(), 41)};
+                Iter const r{std::find(records.cbegin(), records.cend(), 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
         )
@@ -40,15 +40,15 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         .run(
             NAMEOF_RAW(std::ranges::find).c_str(),
             [&records]() noexcept {
-                Itr const r{std::ranges::find(records, 41)};
+                Iter const r{std::ranges::find(records, 41)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
         )
 
         .run(
-            NAMEOF_RAW(iterative::find<Itr, Itr, int>).c_str(),
+            NAMEOF_RAW(iterative::find<Iter, Iter, int>).c_str(),
             [&records]() noexcept {
-                Itr const r{
+                Iter const r{
                     iterative::find(records.cbegin(), records.cend(), 41)
                 };
                 ankerl::nanobench::doNotOptimizeAway(r);
@@ -56,9 +56,9 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         )
 
         .run(
-            NAMEOF_RAW(recursive::find<Itr, Itr, int>).c_str(),
+            NAMEOF_RAW(recursive::find<Iter, Iter, int>).c_str(),
             [&records]() noexcept {
-                Itr const r{
+                Iter const r{
                     recursive::find(records.cbegin(), records.cend(), 41)
                 };
                 ankerl::nanobench::doNotOptimizeAway(r);
