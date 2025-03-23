@@ -12,6 +12,7 @@
 
 #include <cassert>
 #include <charconv>
+#include <cstddef>
 #include <iterator>
 #include <memory>
 #include <string_view>
