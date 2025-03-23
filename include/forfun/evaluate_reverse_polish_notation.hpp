@@ -33,11 +33,10 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         return {0, std::errc{}};
     }
 
-    auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)
-    };
     std::vector<int> evaluation_stack;
-    evaluation_stack.reserve(evaluation_stack_size);
+    evaluation_stack.reserve(
+        static_cast<std::vector<int>::size_type>(end - iter)
+    );
 
     for (; iter != end; ++iter)
     {
@@ -112,11 +111,10 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         return {0, std::errc{}};
     }
 
-    auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)
-    };
     std::vector<int> evaluation_stack;
-    evaluation_stack.reserve(evaluation_stack_size);
+    evaluation_stack.reserve(
+        static_cast<std::vector<int>::size_type>(end - iter)
+    );
 
     for (; iter != end; ++iter)
     {
@@ -167,13 +165,12 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
-    auto const evaluation_stack_size{
-        static_cast<std::vector<int>::size_type>(end - iter)
-    };
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     std::unique_ptr<int[]> const evaluation_stack{
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
-        std::make_unique_for_overwrite<int[]>(evaluation_stack_size + 1U)
+        std::make_unique_for_overwrite<int[]>(
+            static_cast<std::size_t>(end - iter) + 1U
+        )
     };
 
     int* evaluation_stack_top{evaluation_stack.get()};
@@ -181,13 +178,11 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     for (; iter != end; ++iter)
     {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto const sv_end{iter->data() + iter->size()};
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
-        if (std::from_chars_result const parse_result{
-                std::from_chars(iter->data(), sv_end, operand)
-            };
+        if (std::from_chars_result const parse_result{std::from_chars(
+                iter->data(), iter->data() + iter->size(), operand
+            )};
             parse_result.ec == std::errc{})
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
