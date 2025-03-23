@@ -146,6 +146,9 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 break;
             case '/':
                 assert(operand_2 != 0);
+#if __has_cpp_attribute(assume)
+                [[assume(operand_2 != 0)]];
+#endif // __has_cpp_attribute(assume)
                 accumulator /= operand_2;
                 break;
             default:
@@ -210,6 +213,9 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 break;
             case '/':
                 assert(operand_2 != 0);
+#if __has_cpp_attribute(assume)
+                [[assume(operand_2 != 0)]];
+#endif // __has_cpp_attribute(assume)
                 accumulator /= operand_2;
                 break;
             default:
