@@ -4,9 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://leetcode.com/problems/two-sum/
-/// https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+/// Problem sources:
+/// - https://leetcode.com/problems/two-sum/
+/// - https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 ///
 /// Original problem text:
 /// Given an array of integers nums and an integer target, return indices of the

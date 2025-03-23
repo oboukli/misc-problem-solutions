@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Palindromic_number
 
 #ifndef FORFUN_PALINDROMIC_NUMBER_HPP_

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// Given an array, find all subarrays of length K
 /// Sum of all subarrays of size K
 /// https://www.youtube.com/watch?v=GcW4mgmgSbw

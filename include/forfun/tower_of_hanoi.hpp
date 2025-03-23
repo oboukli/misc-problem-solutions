@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Tower_of_Hanoi
 
 #ifndef FORFUN_TOWER_OF_HANOI_HPP_

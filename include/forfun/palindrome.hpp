@@ -134,8 +134,8 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
 namespace functional {
 
-/// Adapted from original source:
-/// https://en.cppreference.com/w/cpp/algorithm/equal
+/// @remark Adapted from an example on cppreference.com
+/// https://en.cppreference.com/w/cpp/algorithm/equal.
 template <std::integral CharT>
 [[nodiscard]]
 constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
@@ -153,8 +153,8 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
 
 namespace bloated {
 
-/// Adapted from original source:
-/// https://en.cppreference.com/w/cpp/algorithm/equal
+/// @remark Adapted from an example on cppreference.com
+/// https://en.cppreference.com/w/cpp/algorithm/equal.
 template <std::integral CharT>
 [[nodiscard]]
 constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept

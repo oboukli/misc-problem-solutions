@@ -4,9 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://leetcode.com/problems/top-k-frequent-elements/
-/// https://neetcode.io/problems/top-k-elements-in-list
+/// Problem sources:
+/// - https://leetcode.com/problems/top-k-frequent-elements/
+/// - https://neetcode.io/problems/top-k-elements-in-list
 
 #ifndef FORFUN_TOP_K_FREQUENT_ELEMENTS_HPP_
 #define FORFUN_TOP_K_FREQUENT_ELEMENTS_HPP_

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Linked_list
 
 #ifndef FORFUN_CONTAINER_FORWARD_LIST_HPP_
@@ -67,7 +67,8 @@ public:
         head_->next = aux;
     }
 
-    /// The behavior is undefined when popping the front of an empty container.
+    /// @note The behavior is undefined when popping the front of an empty
+    /// container.
     auto pop_front() noexcept -> void
     {
         assert(head_ != nullptr);

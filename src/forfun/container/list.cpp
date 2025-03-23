@@ -54,7 +54,8 @@ auto list::push_back(list::value_type value) noexcept(false) -> void
     end_->previous_ = n;
 }
 
-/// The behavior is undefined when popping the back of an empty container.
+/// @note The behavior is undefined when popping the back of an empty
+/// container.
 auto list::pop_back() noexcept -> void
 {
     assert(tail_ != end_);

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/add-two-numbers/
 
 #ifndef FORFUN_ADD_TWO_NUMBERS_HPP_

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/move-zeroes/
 
 #ifndef FORFUN_MOVE_ZEROES_HPP_

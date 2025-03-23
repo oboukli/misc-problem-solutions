@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/set-matrix-zeroes/
 
 #ifndef FORFUN_SET_MATRIX_ZEROES_HPP_

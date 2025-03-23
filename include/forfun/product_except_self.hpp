@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/product-of-array-except-self/
 
 #ifndef FORFUN_PRODUCT_EXCEPT_SELF_HPP_

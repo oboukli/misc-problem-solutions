@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/concatenation-of-array/
 
 #ifndef FORFUN_ARRAY_CONCATENATION_HPP_

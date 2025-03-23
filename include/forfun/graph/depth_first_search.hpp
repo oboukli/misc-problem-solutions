@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Depth-first_search
 
 #ifndef FORFUN_GRAPH_DEPTH_FIRST_SEARCH_HPP_

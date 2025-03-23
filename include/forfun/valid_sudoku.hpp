@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Sudoku
 
 #ifndef FORFUN_VALID_SUDOKU_HPP_

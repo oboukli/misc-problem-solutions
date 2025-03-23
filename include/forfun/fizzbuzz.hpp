@@ -4,8 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Fizz_buzz
 ///
 /// Original problem text:
@@ -41,7 +40,8 @@ auto fizzbuzz(int n, std::ostream& stream) -> void;
 
 namespace optimized {
 
-/// Support values of int up to std::numeric_limits<int>::max() - 1 inclusive.
+/// Values of int up to std::numeric_limits<int>::max() - 1 inclusive are
+/// suppored.
 template <typename BinaryFunc>
     requires std::invocable<BinaryFunc, char const*, std::streamsize>
 auto

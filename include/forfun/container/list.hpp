@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Linked_list
 
 #ifndef FORFUN_CONTAINER_LIST_HPP_

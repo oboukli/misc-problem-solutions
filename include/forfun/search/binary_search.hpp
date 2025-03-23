@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Binary_search_algorithm
 
 #ifndef FORFUN_SEARCH_BINARY_SEARCH_HPP_
@@ -17,7 +17,7 @@ namespace forfun::search::binary_search {
 
 namespace iterative {
 
-/// @warning The strategy assumes that @p lhs and @p last point to a span of
+/// @note The strategy assumes that @p lhs and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
 template <
@@ -91,7 +91,7 @@ do_find(Iter const first, Sentinel const last, Target const target) noexcept
 
 } // namespace detail
 
-/// @warning The strategy assumes that @p first and @p last point to a span of
+/// @note The strategy assumes that @p first and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
 template <

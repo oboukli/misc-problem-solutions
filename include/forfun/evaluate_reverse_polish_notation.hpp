@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/evaluate-reverse-polish-notation/
 
 #ifndef FORFUN_EVALUATE_REVERSE_POLISH_NOTATION_HPP_

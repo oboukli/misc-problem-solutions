@@ -4,9 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://simontoth.substack.com/p/daily-bite-of-c-smallest-missing
-/// https://compiler-explorer.com/z/G7r4rebhd
+/// Problem sources:
+/// - https://simontoth.substack.com/p/daily-bite-of-c-smallest-missing
+/// - https://compiler-explorer.com/z/G7r4rebhd
 ///
 /// Given a list of integers, determine the smallest missing
 /// positive integer.

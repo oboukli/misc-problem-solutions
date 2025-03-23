@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Quicksort
 
 #ifndef FORFUN_SORTING_QUICKSORT_HPP_
