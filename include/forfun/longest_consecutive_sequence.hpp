@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/longest-consecutive-sequence/
 
 #ifndef FORFUN_LONGEST_CONSECUTIVE_SEQUENCE_HPP_

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Maximum_subarray_problem
 
 #ifndef FORFUN_MAXIMUM_SUBARRAY_HPP_

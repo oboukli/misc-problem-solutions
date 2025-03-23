@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm
 
 #ifndef FORFUN_MAJORITY_ELEMENT_HPP_

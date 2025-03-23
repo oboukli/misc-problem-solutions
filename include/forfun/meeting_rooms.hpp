@@ -4,9 +4,9 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
-/// https://neetcode.io/problems/meeting-schedule
-/// https://neetcode.io/problems/meeting-schedule-ii
+/// Problem sources:
+/// - https://neetcode.io/problems/meeting-schedule
+/// - https://neetcode.io/problems/meeting-schedule-ii
 
 #ifndef FORFUN_MEETING_ROOMS_HPP_
 #define FORFUN_MEETING_ROOMS_HPP_
@@ -33,8 +33,8 @@ auto operator<<(std::ostream& os, interval intrvl) -> std::ostream&;
     return a.end > b.start;
 }
 
-/// Iterator arguments must be of a container of `interval` elements, where
-/// the elements are sorted by the `start` field in non-descending order;
+/// @note Iterator arguments must be of a container of `interval` elements,
+/// where the elements are sorted by the `start` field in non-descending order;
 /// Otherwise the behavior of the strategy is undefined.
 template <std::input_or_output_iterator Iter>
     requires std::same_as<std::iter_value_t<Iter>, interval>
@@ -58,9 +58,9 @@ template <std::input_or_output_iterator Iter>
     return true;
 }
 
-/// Iterator arguments must be of non-empty container of `interval` elements,
-// where the elements are sorted by the `start` field in non-descending order;
-// Otherwise the behavior of the strategy is undefined.
+/// @note Iterator arguments must be of a container of `interval` elements,
+/// where the elements are sorted by the `start` field in non-descending order;
+/// Otherwise the behavior of the strategy is undefined.
 template <std::input_or_output_iterator Iter>
     requires std::same_as<std::iter_value_t<Iter>, interval>
 [[nodiscard]] auto constexpr min_chronotopes(

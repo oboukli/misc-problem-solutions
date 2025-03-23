@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Factorial
 
 #ifndef FORFUN_FACTORIAL_HPP_
@@ -23,7 +23,9 @@ namespace forfun::factorial {
 
 namespace iterative {
 
-/// @note Providing a negative argument for @p n results in undefined behavior.
+/// @note Assumes @p n to be non-negative, otherwise the behavior of the
+/// strategy is undefined.
+///
 /// @note For large values of @p n, the result may overflow the return type.
 [[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
     -> decltype(n)
@@ -45,7 +47,8 @@ namespace iterative {
 
 namespace recursive {
 
-/// @note Providing a negative argument for @p n results in undefined behavior.
+/// @note Assumes @p n to be non-negative, otherwise the behavior of the
+/// strategy is undefined.
 template <forfun::common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
 {
@@ -63,7 +66,9 @@ template <forfun::common::concepts::addition_unpromoted T>
 
 namespace stl_functional {
 
-/// @note Providing a negative argument for @p n results in undefined behavior.
+/// @note Assumes @p n to be non-negative, otherwise the behavior of the
+/// strategy is undefined.
+///
 /// @note For large values of @p n, the result may overflow the return type.
 [[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
 {

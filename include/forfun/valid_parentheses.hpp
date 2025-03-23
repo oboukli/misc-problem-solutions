@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/valid-parentheses/
 
 #ifndef FORFUN_VALID_PARENTHESES_HPP_

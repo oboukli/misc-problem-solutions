@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Fibonacci_sequence
 
 #ifndef FORFUN_FIBONACCI_SEQUENCE_HPP_

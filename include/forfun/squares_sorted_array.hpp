@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/squares-of-a-sorted-array/
 
 #ifndef FORFUN_SQUARES_SORTED_ARRAY_HPP_
@@ -19,7 +19,7 @@ namespace forfun::squares_sorted_array {
 
 namespace detail {
 
-/// @warning Multiplication result value may overflow the value type of @p
+/// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
     std::input_iterator Iter,
@@ -37,7 +37,7 @@ template <
     }
 }
 
-/// @warning Multiplication result value may overflow the value type of @p
+/// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
     std::bidirectional_iterator Iter,
@@ -58,11 +58,11 @@ template <
 
 } // namespace detail
 
-/// @warning The strategy assumes that @p iter and @p last point to a span of
+/// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
 ///
-/// @warning Multiplication result value may overflow the value type of @p
+/// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
     std::bidirectional_iterator Iter,
@@ -119,11 +119,11 @@ constexpr auto squares_sorted(
     detail::calc_squares(iter, last, dest_iter);
 }
 
-/// @warning The strategy assumes that @p iter and @p last point to a span of
+/// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
 ///
-/// @warning Multiplication result value may overflow the value type of @p
+/// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
     std::bidirectional_iterator Iter,

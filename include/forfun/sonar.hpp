@@ -1,6 +1,6 @@
 /// Problem sources:
-/// https://simontoth.substack.com/p/daily-bite-of-c-sonar
-/// https://compiler-explorer.com/z/v4TdoqKc1
+/// - https://simontoth.substack.com/p/daily-bite-of-c-sonar
+/// - https://compiler-explorer.com/z/v4TdoqKc1
 ///
 /// Original problem text:
 /// You are given access to a ping method on a sonar system.

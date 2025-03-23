@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://neetcode.io/problems/string-encode-and-decode
 
 #ifndef FORFUN_ENCODE_AND_DECODE_STRINGS_HPP_

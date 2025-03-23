@@ -1,6 +1,6 @@
 /// Problem sources:
-/// https://simontoth.substack.com/p/daily-bite-of-c-lru-cache
-/// https://leetcode.com/problems/lru-cache/
+/// - https://simontoth.substack.com/p/daily-bite-of-c-lru-cache
+/// - https://leetcode.com/problems/lru-cache/
 
 #ifndef FORFUN_LRU_CACHE_HPP_
 #define FORFUN_LRU_CACHE_HPP_
@@ -66,7 +66,8 @@ private:
 
 namespace stl {
 
-/// Based on a solution by Simon Toth https://compiler-explorer.com/z/8PWETEYT8
+/// @remark Based on a solution by Simon Toth
+/// https://compiler-explorer.com/z/8PWETEYT8.
 class LRUCache final {
 public:
     explicit LRUCache(std::size_t capacity) noexcept;

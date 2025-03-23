@@ -4,6 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-/// See https://github.com/martinus/nanobench
+// See https://github.com/martinus/nanobench
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h> // IWYU pragma: keep

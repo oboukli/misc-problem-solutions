@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Insertion_sort
 
 #ifndef FORFUN_SORTING_INSERTION_SORT_HPP

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/last-stone-weight/
 
 #ifndef FORFUN_LAST_STONE_WEIGHT_HPP_
@@ -20,8 +20,9 @@ namespace forfun::last_stone_weight {
 
 namespace naive {
 
-/// Assume stones is not empty, and each element (stone) of stones is
-/// non-negative, otherwise the function's behavior is undefined.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of non-negative elements (weighs), otherwise the behavior of the
+/// strategy is undefined.
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
@@ -80,8 +81,9 @@ last_stone_weight(Iter const first, Sentinel last) noexcept
 
 namespace heapified {
 
-/// Assume each element (stone) of stones is non-negative, otherwise the
-/// function's behavior is undefined.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of non-negative elements (weighs), otherwise the behavior of the
+/// strategy is undefined.
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
@@ -120,16 +122,18 @@ last_stone_weight(Iter const first, Sentinel last) noexcept
 
 namespace priority_queue_based {
 
-/// Assume each element (stone) of stones is non-negative, otherwise the
-/// function's behavior is undefined.
+/// @note The strategy assumes that @p stones is a non-empty vector of
+/// non-negative elements (weighs), otherwise the behavior of the strategy is
+/// undefined.
 [[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) noexcept -> int;
 
 } // namespace priority_queue_based
 
 namespace sort_based {
 
-/// Assume stones is not empty, and each element (stone) of stones is
-/// non-negative, otherwise the function's behavior is undefined.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of non-negative elements (weighs), otherwise the behavior of the
+/// strategy is undefined.
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto

@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://en.wikipedia.org/wiki/Breadth-first_search
 
 #ifndef FORFUN_GRAPH_BREADTH_FIRST_SEARCH_HPP_

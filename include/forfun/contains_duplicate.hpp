@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-/// Problem source:
+/// Problem sources:
 /// https://leetcode.com/problems/contains-duplicate/
 
 #ifndef FORFUN_CONTAINS_DUPLICATE_HPP_
