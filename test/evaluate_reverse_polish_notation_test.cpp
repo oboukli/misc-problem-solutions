@@ -263,6 +263,66 @@ TEMPLATE_TEST_CASE_SIG(
         );
         REQUIRE(actual_error == std::errc{});
     }
+
+    SECTION("LeetCode case 1")
+    {
+        std::vector<std::string_view> const tokens{
+            "2"sv, "1"sv, "+"sv, "3"sv, "*"sv
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_result == ((2 + 1) * 3));
+        REQUIRE(actual_error == std::errc{});
+    }
+
+    SECTION("LeetCode case 2")
+    {
+        std::vector<std::string_view> const tokens{
+            "4"sv, "13"sv, "5"sv, "/"sv, "+"sv
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_result == (4 + (13 / 5)));
+        REQUIRE(actual_error == std::errc{});
+    }
+
+    SECTION("LeetCode case 3")
+    {
+        std::vector<std::string_view> const tokens{
+            "10"sv,
+            "6"sv,
+            "9"sv,
+            "3"sv,
+            "+"sv,
+            "-11"sv,
+            "*"sv,
+            "/"sv,
+            "*"sv,
+            "17"sv,
+            "+"sv,
+            "5"sv,
+            "+"sv,
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_result == ((10 * (6 / ((9 + 3) * -11))) + 17) + 5);
+        REQUIRE(actual_error == std::errc{});
+    }
 }
 
 TEST_CASE(
