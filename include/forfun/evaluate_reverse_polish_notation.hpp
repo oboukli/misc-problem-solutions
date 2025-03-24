@@ -12,8 +12,10 @@
 
 #include <cassert>
 #include <charconv>
+#include <cmath>
 #include <cstddef>
 #include <iterator>
+#include <limits>
 #include <memory>
 #include <string_view>
 #include <system_error>
@@ -28,14 +30,16 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
+    using calc_type = double;
+
     if (iter == end) [[unlikely]]
     {
         return {0, std::errc{}};
     }
 
-    std::vector<int> evaluation_stack;
+    std::vector<calc_type> evaluation_stack;
     evaluation_stack.reserve(
-        static_cast<std::vector<int>::size_type>(end - iter)
+        static_cast<decltype(evaluation_stack)::size_type>(end - iter)
     );
 
     for (; iter != end; ++iter)
@@ -57,9 +61,9 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         )
         // clang-format on
         {
-            int const operand_2{evaluation_stack.back()};
+            calc_type const operand_2{evaluation_stack.back()};
             evaluation_stack.pop_back();
-            int& accumulator{evaluation_stack.back()};
+            calc_type& accumulator{evaluation_stack.back()};
 
             switch (iter->front())
             {
@@ -73,12 +77,13 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator *= operand_2;
                 break;
             case '/':
-                if (operand_2 == 0) [[unlikely]]
+                if (operand_2 == 0.0) [[unlikely]]
                 {
                     // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
                     goto invalid_argument;
                 }
-                accumulator /= operand_2;
+                accumulator = std::trunc(accumulator / operand_2);
+
                 break;
             default:
                 // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
@@ -92,7 +97,14 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
         }
     }
 
-    return {evaluation_stack.back(), std::errc{}};
+    if (calc_type const intermediate{std::trunc(evaluation_stack.back())};
+        // clang-format off
+        ((intermediate >= std::numeric_limits<int>::min())
+        && (intermediate <= std::numeric_limits<int>::max())))
+        // clang-format off
+    {
+        return {static_cast<int>(intermediate), std::errc{}};
+    }
 
 invalid_argument:
     return {0, std::errc::invalid_argument};

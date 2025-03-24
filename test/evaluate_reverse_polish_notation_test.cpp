@@ -424,6 +424,77 @@ TEST_CASE(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
+        REQUIRE(actual_error == std::errc::invalid_argument);
+    }
+
+    SECTION("Overflow case 1")
+    {
+        std::vector<std::string_view> const tokens{
+            "-2147483648"sv,
+            "-1"sv,
+            "/"sv,
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_error == std::errc::invalid_argument);
+    }
+
+    SECTION("Overflow case 2")
+    {
+        std::vector<std::string_view> const tokens{
+            "2147483647"sv,
+            "1"sv,
+            "+"sv,
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_error == std::errc::invalid_argument);
+    }
+
+    SECTION("Overflow case 3")
+    {
+        std::vector<std::string_view> const tokens{
+            "2147483647"sv,
+            "10"sv,
+            "*"sv,
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_error == std::errc::invalid_argument);
+    }
+
+    SECTION("Overflow case 4")
+    {
+        std::vector<std::string_view> const tokens{
+            "0"sv,
+            "2147483647"sv,
+            "-"sv,
+            "2"sv,
+            "-"sv,
+        };
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 }
