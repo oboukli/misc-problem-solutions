@@ -226,6 +226,19 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual_error == std::errc{});
     }
 
+    SECTION("Invalid operator")
+    {
+        std::vector<std::string_view> const tokens{{"1"sv, "1"sv, "#"sv}};
+
+        CAPTURE(tokens);
+
+        auto const [actual_result, actual_error]{
+            eval_expression(tokens.cbegin(), tokens.cend())
+        };
+
+        REQUIRE(actual_error == std::errc::invalid_argument);
+    }
+
     SECTION(
         "((((((((149 * 2) + 61) + 223) - 2) / 11) + 71) * 293) - 101) "
         "(benchmark case)"

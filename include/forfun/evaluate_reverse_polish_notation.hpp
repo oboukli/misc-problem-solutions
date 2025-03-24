@@ -153,7 +153,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator /= operand_2;
                 break;
             default:
-                std::unreachable();
+                return {0, std::errc::invalid_argument};
             }
         }
     }
@@ -221,7 +221,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
                 accumulator /= operand_2;
                 break;
             default:
-                std::unreachable();
+                return {0, std::errc::invalid_argument};
             }
         }
     }
