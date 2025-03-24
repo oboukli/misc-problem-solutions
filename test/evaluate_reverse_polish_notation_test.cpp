@@ -42,6 +42,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == 0);
         REQUIRE(actual_error == std::errc{});
     }
@@ -50,13 +51,13 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0"}, 0},
-                {{"1"}, 1},
-                {{"2"}, 2},
-                {{"11"}, 11},
-                {{"-1"}, -1},
-                {{"-17"}, -17},
-                {{"7919"}, 7919},
+                {{"0"sv}, 0},
+                {{"1"sv}, 1},
+                {{"2"sv}, 2},
+                {{"11"sv}, 11},
+                {{"-1"sv}, -1},
+                {{"-17"sv}, -17},
+                {{"7919"sv}, 7919},
             })
         )};
 
@@ -65,6 +66,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -73,16 +75,16 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0", "0", "+"}, 0},
-                {{"0", "1", "+"}, 1},
-                {{"1", "0", "+"}, 1},
-                {{"1", "1", "+"}, 2},
-                {{"0", "23", "+"}, 23},
-                {{"23", "0", "+"}, 23},
-                {{"3", "17", "+"}, 20},
-                {{"17", "3", "+"}, 20},
-                {{"1000", "1", "+"}, 1001},
-                {{"1", "1000", "+"}, 1001},
+                {{"0"sv, "0"sv, "+"sv}, 0},
+                {{"0"sv, "1"sv, "+"sv}, 1},
+                {{"1"sv, "0"sv, "+"sv}, 1},
+                {{"1"sv, "1"sv, "+"sv}, 2},
+                {{"0"sv, "23"sv, "+"sv}, 23},
+                {{"23"sv, "0"sv, "+"sv}, 23},
+                {{"3"sv, "17"sv, "+"sv}, 20},
+                {{"17"sv, "3"sv, "+"sv}, 20},
+                {{"1000"sv, "1"sv, "+"sv}, 1001},
+                {{"1"sv, "1000"sv, "+"sv}, 1001},
             })
         )};
 
@@ -91,6 +93,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -99,12 +102,12 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0", "0", "-"}, 0},
-                {{"1", "1", "-"}, 0},
-                {{"1", "0", "-"}, 1},
-                {{"0", "1", "-"}, -1},
-                {{"3", "17", "-"}, -14},
-                {{"17", "3", "-"}, 14},
+                {{"0"sv, "0"sv, "-"sv}, 0},
+                {{"1"sv, "1"sv, "-"sv}, 0},
+                {{"1"sv, "0"sv, "-"sv}, 1},
+                {{"0"sv, "1"sv, "-"sv}, -1},
+                {{"3"sv, "17"sv, "-"sv}, -14},
+                {{"17"sv, "3"sv, "-"sv}, 14},
             })
         )};
 
@@ -113,6 +116,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -121,14 +125,14 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0", "0", "*"}, 0},
-                {{"0", "1", "*"}, 0},
-                {{"1", "0", "*"}, 0},
-                {{"1", "1", "*"}, 1},
-                {{"1", "311", "*"}, 311},
-                {{"311", "1", "*"}, 311},
-                {{"3", "17", "*"}, 51},
-                {{"17", "3", "*"}, 51},
+                {{"0"sv, "0"sv, "*"sv}, 0},
+                {{"0"sv, "1"sv, "*"sv}, 0},
+                {{"1"sv, "0"sv, "*"sv}, 0},
+                {{"1"sv, "1"sv, "*"sv}, 1},
+                {{"1"sv, "311"sv, "*"sv}, 311},
+                {{"311"sv, "1"sv, "*"sv}, 311},
+                {{"3"sv, "17"sv, "*"sv}, 51},
+                {{"17"sv, "3"sv, "*"sv}, 51},
             })
         )};
 
@@ -137,6 +141,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -145,11 +150,11 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"1", "1", "/"}, 1},
-                {{"3", "17", "/"}, 0},
-                {{"17", "3", "/"}, 5},
-                {{"0", "41", "/"}, 0},
-                {{"0", "-41", "/"}, 0},
+                {{"1"sv, "1"sv, "/"sv}, 1},
+                {{"3"sv, "17"sv, "/"sv}, 0},
+                {{"17"sv, "3"sv, "/"sv}, 5},
+                {{"0"sv, "41"sv, "/"sv}, 0},
+                {{"0"sv, "-41"sv, "/"sv}, 0},
             })
         )};
 
@@ -158,6 +163,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -166,14 +172,14 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"17", "0"}, 0},
-                {{"157", "163"}, 163},
-                {{"19", "-7"}, -7},
-                {{"-19", "7"}, 7},
-                {{"-15", "-31"}, -31},
-                {{"1", "1"}, 1},
-                {{"1", "1", "1"}, 1},
-                {{"3", "17", "0"}, 0},
+                {{"17"sv, "0"sv}, 0},
+                {{"157"sv, "163"sv}, 163},
+                {{"19"sv, "-7"sv}, -7},
+                {{"-19"sv, "7"sv}, 7},
+                {{"-15"sv, "-31"sv}, -31},
+                {{"1"sv, "1"sv}, 1},
+                {{"1"sv, "1"sv, "1"sv}, 1},
+                {{"3"sv, "17"sv, "0"sv}, 0},
             })
         )};
 
@@ -182,6 +188,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_result == expected);
         REQUIRE(actual_error == std::errc{});
     }
@@ -189,21 +196,21 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("(((((((211 - 283) - 137) * 47) / 241) + 113) - 67) * 89)")
     {
         std::vector<std::string_view> const tokens{
-            {"211"sv},
-            {"283"sv},
-            {"-"sv},
-            {"137"sv},
-            {"-"sv},
-            {"47"sv},
-            {"*"sv},
-            {"241"sv},
-            {"/"sv},
-            {"113"sv},
-            {"+"sv},
-            {"67"sv},
-            {"-"sv},
-            {"89"sv},
-            {"*"sv},
+            "211"sv,
+            "283"sv,
+            "-"sv,
+            "137"sv,
+            "-"sv,
+            "47"sv,
+            "*"sv,
+            "241"sv,
+            "/"sv,
+            "113"sv,
+            "+"sv,
+            "67"sv,
+            "-"sv,
+            "89"sv,
+            "*"sv,
         };
 
         CAPTURE(tokens);
@@ -211,6 +218,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(
             actual_result
             == (((((((211 - 283) - 137) * 47) / 241) + 113) - 67) * 89)
@@ -224,23 +232,23 @@ TEMPLATE_TEST_CASE_SIG(
     )
     {
         std::vector<std::string_view> const tokens{
-            {"149"sv},
-            {"2"sv},
-            {"*"sv},
-            {"61"sv},
-            {"+"sv},
-            {"223"sv},
-            {"+"sv},
-            {"-2"sv},
-            {"+"sv},
-            {"11"sv},
-            {"/"sv},
-            {"71"sv},
-            {"+"sv},
-            {"293"sv},
-            {"*"sv},
-            {"101"sv},
-            {"-"sv},
+            "149"sv,
+            "2"sv,
+            "*"sv,
+            "61"sv,
+            "+"sv,
+            "223"sv,
+            "+"sv,
+            "-2"sv,
+            "+"sv,
+            "11"sv,
+            "/"sv,
+            "71"sv,
+            "+"sv,
+            "293"sv,
+            "*"sv,
+            "101"sv,
+            "-"sv,
         };
 
         CAPTURE(tokens);
@@ -248,6 +256,7 @@ TEMPLATE_TEST_CASE_SIG(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(
             actual_result
             == ((((((((149 * 2) + 61) + 223) - 2) / 11) + 71) * 293) - 101)
@@ -272,6 +281,7 @@ TEST_CASE(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -279,14 +289,14 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{"3", "17", "@"}},
-                {{"17", "3", "="}},
-                {{"0", "41", "A"}},
-                {{"0", "-41", "b"}},
-                {{"0", "-41", ""}},
-                {{"0", "-41", "  "}},
-                {{"0", "-41", " + "}},
-                {{"0", "-41", "++"}},
+                {{"3"sv, "17"sv, "@"sv}},
+                {{"17"sv, "3"sv, "="sv}},
+                {{"0"sv, "41"sv, "A"sv}},
+                {{"0"sv, "-41"sv, "b"sv}},
+                {{"0"sv, "-41"sv, ""sv}},
+                {{"0"sv, "-41"sv, "  "sv}},
+                {{"0"sv, "-41"sv, " + "sv}},
+                {{"0"sv, "-41"sv, "++"sv}},
             })
         )};
 
@@ -295,6 +305,7 @@ TEST_CASE(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
+
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -302,14 +313,14 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{" 0", "0", "+"}},
-                {{"0 ", "1", "+"}},
-                {{"1", "1 1", "+"}},
-                {{"1", " 0 ", "+"}},
-                {{"3", "n", "+"}},
-                {{"", "", "+"}},
-                {{"n", "", "-"}},
-                {{"a", "b", "/"}},
+                {{" 0"sv, "0"sv, "+"sv}},
+                {{"0 "sv, "1"sv, "+"sv}},
+                {{"1"sv, "1 1"sv, "+"sv}},
+                {{"1"sv, " 0 "sv, "+"sv}},
+                {{"3"sv, "n"sv, "+"sv}},
+                {{""sv, ""sv, "+"sv}},
+                {{"n"sv, ""sv, "-"sv}},
+                {{"a"sv, "b"sv, "/"sv}},
             })
         )};
 
@@ -318,7 +329,7 @@ TEST_CASE(
         auto const [actual_result, actual_error]{
             eval_expression(tokens.cbegin(), tokens.cend())
         };
-        // REQUIRE(actual_result == 0);
+
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -326,12 +337,12 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{""}},
-                {{"0", "0", "++"}},
-                {{"invalid input"}},
-                {{"17", "invalid input", "+"}},
-                {{"0", "41", "invalid input"}},
-                {{"invalid input", "invalid input", "invalid input"}},
+                {{""sv}},
+                {{"0"sv, "0"sv, "++"sv}},
+                {{"invalid input"sv}},
+                {{"17"sv, "invalid input"sv, "+"sv}},
+                {{"0"sv, "41"sv, "invalid input"sv}},
+                {{"invalid input"sv, "invalid input"sv, "invalid input"sv}},
             })
         )};
 
