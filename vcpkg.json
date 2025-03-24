@@ -1,6 +1,7 @@
 {
   "dependencies": [
     "catch2",
+    "gtest",
     "ms-gsl",
     "nameof",
     "nanobench"
