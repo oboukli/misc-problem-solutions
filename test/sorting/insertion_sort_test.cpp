@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: MIT
 
 #include <array>
-#include <vector>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -21,9 +20,9 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array<int, 0U> const expected_output{};
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.empty());
+        CHECK(test_input.empty());
 
-        STATIC_REQUIRE(test_input == expected_output);
+        REQUIRE(test_input == expected_output);
     }
 
     SECTION("One element")
@@ -32,7 +31,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{7};
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 1U);
+        CHECK(test_input.size() == 1U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -43,7 +42,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{1, 1};
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 2U);
+        CHECK(test_input.size() == 2U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -54,7 +53,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{-6, 3, 11};
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 3U);
+        CHECK(test_input.size() == 3U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -67,7 +66,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 10U);
+        CHECK(test_input.size() == 10U);
 
         REQUIRE(test_input == expected_output);
     }
@@ -80,12 +79,12 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 10U);
+        CHECK(test_input.size() == 10U);
 
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::array")
+    SECTION("Arbitrary test (case 1)")
     {
         std::array test_input{200, 4, 7, 0, 9, -10, 2};
         static constexpr std::array const expected_output{
@@ -93,15 +92,15 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7U);
 
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::vector 01")
+    SECTION("Arbitrary test (case 2)")
     {
-        std::vector test_input{8, 4, 7, 0, 9, 5, 2};
-        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::array test_input{8, 4, 7, 0, 9, 5, 2};
+        std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7U);
@@ -109,10 +108,10 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         REQUIRE(test_input == expected_output);
     }
 
-    SECTION("Arbitrary test with std::vector 02")
+    SECTION("Arbitrary test (case 3)")
     {
-        std::vector test_input{8, 4, 7, 0, 9, 5, 2};
-        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::array test_input{8, 4, 7, 0, 9, 5, 2};
+        std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7U);
@@ -122,8 +121,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Negative numbers")
     {
-        std::vector test_input{-8, -4, -7, -4, -9, -5, -2};
-        std::vector const expected_output{-9, -8, -7, -5, -4, -4, -2};
+        std::array test_input{-8, -4, -7, -4, -9, -5, -2};
+        std::array const expected_output{-9, -8, -7, -5, -4, -4, -2};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7U);
