@@ -643,6 +643,7 @@ target_sources(
   "test/majority_element_static_test.cpp"
   "test/maximum_subarray_static_test.cpp"
   "test/palindromic_number_static_test.cpp"
+  "test/sorting/insertion_sort_static_test.cpp"
   "test/squares_sorted_array_static_test.cpp"
   "test/two_sum_static_test.cpp"
 )
