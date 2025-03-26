@@ -22,7 +22,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     using forfun::valid_sudoku::SudokuBoard;
 
-    SECTION("Wikipedia example (benchmark case)")
+    SECTION("Wikipedia example (valid benchmark case)")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
@@ -43,7 +43,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_valid_sudoku(board));
     }
 
-    SECTION("Invalid case 1")
+    SECTION("Invalid block")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
@@ -54,7 +54,7 @@ TEMPLATE_TEST_CASE_SIG(
             {4, 0, 0, 8, 0, 3, 0, 0, 1},
             {7, 0, 0, 0, 2, 0, 0, 0, 6},
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
-            {0, 0, 0, 4, 1, 9, 0, 2, 5}, // Repeated 2
+            {0, 0, 0, 4, 1, 9, 0, 2, 5}, // Repeated 2 in block.
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
             // clang-format on
         }};
@@ -64,7 +64,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
 
-    SECTION("Invalid case 2")
+    SECTION("Invalid column and row")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
@@ -76,7 +76,7 @@ TEMPLATE_TEST_CASE_SIG(
             {7, 0, 0, 0, 2, 0, 0, 0, 6},
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
-            {0, 9, 0, 0, 8, 0, 0, 7, 9}, // Repeated 9
+            {0, 9, 0, 0, 8, 0, 0, 7, 9}, // Repeated 9 in column and row.
             // clang-format on
         }};
 
@@ -85,7 +85,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
 
-    SECTION("LeetCode case 1")
+    SECTION("LeetCode valid case")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
@@ -106,13 +106,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_valid_sudoku(board));
     }
 
-    SECTION("LeetCode case 2")
+    SECTION("LeetCode invalid case")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
             {8, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
-            {0, 9, 8, 0, 0, 0, 0, 6, 0}, // Repeated 8
+            {0, 9, 8, 0, 0, 0, 0, 6, 0}, // Repeated 8 in block.
             {8, 0, 0, 0, 6, 0, 0, 0, 3},
             {4, 0, 0, 8, 0, 3, 0, 0, 1},
             {7, 0, 0, 0, 2, 0, 0, 0, 6},
@@ -127,7 +127,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
 
-    SECTION("NeetCode case 1")
+    SECTION("NeetCode valid case")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
@@ -148,13 +148,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_valid_sudoku(board));
     }
 
-    SECTION("NeetCode case 2")
+    SECTION("NeetCode invalid case")
     {
         SudokuBoard<std::uint8_t> const board{{
             // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
-            {0, 9, 1, 0, 0, 0, 0, 0, 3}, // Repeated 1
+            {0, 9, 1, 0, 0, 0, 0, 0, 3}, // Repeated 1 in block.
             {5, 0, 0, 0, 6, 0, 0, 0, 4},
             {0, 0, 0, 8, 0, 3, 0, 0, 5},
             {7, 0, 0, 0, 2, 0, 0, 0, 6},
