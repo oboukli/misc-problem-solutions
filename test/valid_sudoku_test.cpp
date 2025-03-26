@@ -42,6 +42,63 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_valid_sudoku(board));
     }
 
+    SECTION("Empty Sudoku")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // clang-format on
+        }};
+
+        REQUIRE(is_valid_sudoku(board));
+    }
+
+    SECTION("All invalid Sudoku board")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3},
+            // clang-format on
+        }};
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
+    SECTION("Invalid row")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {5, 3, 0, 0, 7, 0, 0, 0, 0},
+            {6, 0, 0, 1, 9, 5, 0, 0, 0},
+            {0, 9, 8, 0, 0, 0, 0, 6, 0},
+            {8, 0, 0, 0, 6, 0, 0, 0, 3},
+            {4, 0, 0, 8, 4, 3, 0, 0, 1}, // Repeated 4 in row.
+            {7, 0, 0, 0, 2, 0, 0, 0, 6},
+            {0, 6, 0, 0, 0, 0, 2, 8, 0},
+            {0, 0, 0, 4, 1, 9, 0, 0, 5},
+            {0, 0, 0, 0, 8, 0, 0, 7, 9},
+            // clang-format on
+        }};
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
     SECTION("Invalid column")
     {
         SudokuBoard<CellType> const board{{
@@ -93,6 +150,63 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 9, 0, 0, 8, 0, 0, 7, 9}, // Repeated 9 in column and row.
+            // clang-format on
+        }};
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
+    SECTION("Invalid column and block")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 5, 0, 0, 0},
+            {0, 0, 0, 0, 5, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 5, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // clang-format on
+        }};
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
+    SECTION("Invalid row and block")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 6, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {6, 0, 0, 0, 6, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // clang-format on
+        }};
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
+    SECTION("Invalid column, row, and block")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {0, 0, 0, 0, 0, 0, 0, 0, 9},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 9, 0},
+            {9, 0, 0, 0, 0, 0, 0, 0, 9},
             // clang-format on
         }};
 
