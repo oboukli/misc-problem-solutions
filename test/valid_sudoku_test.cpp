@@ -45,6 +45,27 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_valid_sudoku(board));
     }
 
+    SECTION("Invalid column")
+    {
+        SudokuBoard<CellType> const board{{
+            // clang-format off
+            {5, 3, 0, 0, 0, 0, 0, 7, 0},
+            {6, 0, 0, 1, 9, 5, 0, 0, 0},
+            {0, 9, 8, 0, 0, 0, 0, 6, 0},
+            {8, 0, 0, 0, 6, 0, 0, 0, 3},
+            {4, 0, 0, 8, 0, 3, 0, 0, 1},
+            {7, 0, 0, 0, 2, 0, 0, 0, 6},
+            {0, 6, 0, 0, 0, 0, 2, 8, 0},
+            {0, 0, 0, 4, 1, 9, 0, 7, 5}, // Repeated 7 in column.
+            {0, 0, 0, 0, 8, 0, 0, 0, 0},
+            // clang-format on
+        }};
+
+        CAPTURE(board);
+
+        REQUIRE_FALSE(is_valid_sudoku(board));
+    }
+
     SECTION("Invalid block")
     {
         SudokuBoard<CellType> const board{{
