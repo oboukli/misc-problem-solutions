@@ -308,9 +308,11 @@ top_frequent(Iter iter, Sentinel const end, std::size_t const k)
         std::ranges::to<std::vector<std::pair<ValType, std::size_t>>>(counts)
     };
 
-    std::ranges::sort(intermediate, [](auto&& a, auto&& b) noexcept {
-        return std::ranges::greater{}(a.second, b.second);
-    });
+    std::ranges::sort(
+        intermediate,
+        std::ranges::greater{},
+        &std::pair<ValType, std::size_t>::second
+    );
 
     return intermediate
         | std::views::take(k)
