@@ -6,7 +6,6 @@
 
 #include <cstdint>
 
-#include <catch2/catch_message.hpp>
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
@@ -40,8 +39,6 @@ TEMPLATE_TEST_CASE_SIG(
             // clang-format on
         }};
 
-        CAPTURE(board);
-
         REQUIRE(is_valid_sudoku(board));
     }
 
@@ -60,8 +57,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 8, 0, 0, 0, 0},
             // clang-format on
         }};
-
-        CAPTURE(board);
 
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
@@ -82,8 +77,6 @@ TEMPLATE_TEST_CASE_SIG(
             // clang-format on
         }};
 
-        CAPTURE(board);
-
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
 
@@ -102,8 +95,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 9, 0, 0, 8, 0, 0, 7, 9}, // Repeated 9 in column and row.
             // clang-format on
         }};
-
-        CAPTURE(board);
 
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
@@ -124,8 +115,6 @@ TEMPLATE_TEST_CASE_SIG(
             // clang-format on
         }};
 
-        CAPTURE(board);
-
         REQUIRE(is_valid_sudoku(board));
     }
 
@@ -144,8 +133,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
             // clang-format on
         }};
-
-        CAPTURE(board);
 
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
@@ -166,8 +153,6 @@ TEMPLATE_TEST_CASE_SIG(
             // clang-format on
         }};
 
-        CAPTURE(board);
-
         REQUIRE(is_valid_sudoku(board));
     }
 
@@ -186,8 +171,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
             // clang-format on
         }};
-
-        CAPTURE(board);
 
         REQUIRE_FALSE(is_valid_sudoku(board));
     }
