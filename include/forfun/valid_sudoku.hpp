@@ -29,15 +29,15 @@ namespace detail {
 {
     if (cell != decltype(cell){0})
     {
-        if (((1U << (cell - 1U)) & set) == 0U)
+        if (((1U << (cell - 1U)) & set) != 0U)
         {
-            return false;
+            return true;
         }
 
-        set ^= (1U << (cell - 1U));
+        set |= (1U << (cell - 1U));
     }
 
-    return true;
+    return false;
 }
 
 } // namespace detail
@@ -48,37 +48,27 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
     using SetType = unsigned int;
 
-    static constexpr unsigned initval{0x1FF};
-
-    // clang-format off
-        std::array<SetType, 9U> rows{
-            initval, initval, initval, initval, initval,
-            initval, initval, initval, initval,
-        };
-        std::array<SetType, 9U> boxes{
-            initval, initval, initval, initval, initval,
-            initval, initval, initval, initval,
-        };
-    // clang-format on
+    std::array<SetType, 9U> rows{};
+    std::array<SetType, 9U> boxes{};
 
     for (std::size_t i{}; i < board.size(); ++i)
     {
-        SetType col{initval};
+        SetType col{};
 
         for (std::size_t j{}; j < board.size(); ++j)
         {
             // NOLINTBEGIN(cppcoreguidelines-pro-bounds-constant-array-index)
-            if (not detail::tick_out(board[i][j], col))
+            if (detail::tick_out(board[i][j], col))
             {
                 return false;
             }
 
-            if (not detail::tick_out(board[j][i], rows[i]))
+            if (detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
             }
 
-            if (not detail::tick_out(
+            if (detail::tick_out(
                     board[(3 * (i / 3)) + (j / 3)][(3 * (i % 3)) + (j % 3)],
                     boxes[i]
                 ))
@@ -103,15 +93,15 @@ namespace detail {
 {
     if (cell != decltype(cell){0})
     {
-        if (not set.test(cell - 1U))
+        if (set.test(cell - 1U))
         {
-            return false;
+            return true;
         }
 
-        set.reset(cell - 1U);
+        set.set(cell - 1U);
     }
 
-    return true;
+    return false;
 }
 
 } // namespace detail
@@ -122,37 +112,27 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
     using SetType = std::bitset<9U>;
 
-    static constexpr unsigned initval{0x1FF};
-
-    // clang-format off
-    std::array<SetType, 9U> rows{
-        initval, initval, initval, initval, initval,
-        initval, initval, initval, initval,
-    };
-    std::array<SetType, 9U> boxes{
-        initval, initval, initval, initval, initval,
-        initval, initval, initval, initval,
-    };
-    // clang-format on
+    std::array<SetType, 9U> rows{};
+    std::array<SetType, 9U> boxes{};
 
     for (std::size_t i{}; i < board.size(); ++i)
     {
-        SetType col{initval};
+        SetType col{};
 
         for (std::size_t j{}; j < board.size(); ++j)
         {
             // NOLINTBEGIN(cppcoreguidelines-pro-bounds-constant-array-index)
-            if (not detail::tick_out(board[i][j], col))
+            if (detail::tick_out(board[i][j], col))
             {
                 return false;
             }
 
-            if (not detail::tick_out(board[j][i], rows[i]))
+            if (detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
             }
 
-            if (not detail::tick_out(
+            if (detail::tick_out(
                     board[(3 * (i / 3)) + (j / 3)][(3 * (i % 3)) + (j % 3)],
                     boxes[i]
                 ))
