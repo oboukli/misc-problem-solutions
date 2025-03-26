@@ -73,7 +73,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 return false;
             }
 
-            if (not detail::tick_out(board[j][i], rows[j]))
+            if (not detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
             }
@@ -147,7 +147,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 return false;
             }
 
-            if (not detail::tick_out(board[j][i], rows[j]))
+            if (not detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
             }
