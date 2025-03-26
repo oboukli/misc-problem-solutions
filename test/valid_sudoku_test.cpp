@@ -12,19 +12,21 @@
 
 #include "forfun/valid_sudoku.hpp"
 
+using CellType = std::uint8_t;
+
 TEMPLATE_TEST_CASE_SIG(
     "Valid Sudoku",
     "[valid_sudoku]",
     (auto is_valid_sudoku, is_valid_sudoku),
-    forfun::valid_sudoku::bitwise::is_valid_sudoku<std::uint8_t>,
-    forfun::valid_sudoku::stl_bitset::is_valid_sudoku<std::uint8_t>
+    forfun::valid_sudoku::bitwise::is_valid_sudoku<CellType>,
+    forfun::valid_sudoku::stl_bitset::is_valid_sudoku<CellType>
 )
 {
     using forfun::valid_sudoku::SudokuBoard;
 
     SECTION("Wikipedia example (valid benchmark case)")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -45,7 +47,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid block")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -66,7 +68,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid column and row")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -87,7 +89,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode valid case")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -108,7 +110,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode invalid case")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {8, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -129,7 +131,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("NeetCode valid case")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
@@ -150,7 +152,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("NeetCode invalid case")
     {
-        SudokuBoard<std::uint8_t> const board{{
+        SudokuBoard<CellType> const board{{
             // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
