@@ -14,7 +14,6 @@ include(cmake/CompileOptions.cmake)
 
 add_library(
   forfun
-  SHARED
 )
 set_target_properties(forfun PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun PROPERTIES CXX_STANDARD 23)
@@ -122,7 +121,6 @@ forfun_common_target_compile_options(forfun)
 
 add_library(
   forfun_common
-  SHARED
 )
 set_target_properties(forfun_common PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun_common PROPERTIES CXX_STANDARD 23)
@@ -162,7 +160,6 @@ forfun_common_target_compile_options(forfun_common)
 
 add_library(
   forfun_graph
-  SHARED
 )
 set_target_properties(forfun_graph PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun_graph PROPERTIES CXX_STANDARD 23)
@@ -210,7 +207,6 @@ forfun_common_target_compile_options(forfun_graph)
 
 add_library(
   forfun_search
-  SHARED
 )
 set_target_properties(forfun_search PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun_search PROPERTIES CXX_STANDARD 23)
@@ -248,7 +244,6 @@ forfun_common_target_compile_options(forfun_search)
 
 add_library(
   forfun_sorting
-  SHARED
   "include/forfun/sorting/bubble_sort.hpp"
   "include/forfun/sorting/insertion_sort.hpp"
   "include/forfun/sorting/quicksort.hpp"
@@ -268,7 +263,6 @@ forfun_common_target_compile_options(forfun_sorting)
 
 add_library(
   forfun_c
-  SHARED
 )
 set_target_properties(forfun_c PROPERTIES C_EXTENSIONS OFF)
 set_target_properties(forfun_c PROPERTIES C_STANDARD 90)
@@ -306,7 +300,6 @@ forfun_common_target_compile_options(forfun_c)
 
 add_library(
   forfun_c_experimental
-  SHARED
 )
 set_target_properties(forfun_c_experimental PROPERTIES C_EXTENSIONS OFF)
 set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD 90)
@@ -347,7 +340,6 @@ forfun_common_target_compile_options(forfun_c_experimental)
 find_package(Microsoft.GSL CONFIG REQUIRED)
 add_library(
   forfun_experimental
-  SHARED
 )
 set_target_properties(forfun_experimental PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD 23)

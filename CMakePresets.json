@@ -10,6 +10,7 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "ANTLR_BUILD_CPP_TESTS": "OFF",
+        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_BUILD_TYPE": "RelWithDebug",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
@@ -30,6 +31,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
@@ -49,6 +51,7 @@
         "strategy": "external"
       },
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
@@ -72,6 +75,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
@@ -96,6 +100,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
@@ -115,6 +120,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
@@ -134,6 +140,7 @@
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
