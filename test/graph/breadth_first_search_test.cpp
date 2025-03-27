@@ -36,9 +36,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("Empty adjacency list (graph)")
     {
-        VertexAdjacencyList<int> const adjacency_list{};
-        VertexStateList<int> state_list{};
-        constexpr vertex<int> const starting_vertex{0};
+        VertexAdjacencyList<char> const adjacency_list{};
+        VertexStateList<char> state_list{};
+        constexpr vertex<char> const starting_vertex{'0'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -53,7 +53,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept -> void {}
+            [](vertex<char>) noexcept -> void {}
         );
 
         CAPTURE(state_list);
@@ -96,16 +96,16 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("All graph vertices visited, starting from leaf vertex")
     {
-        VertexAdjacencyList<int> const adjacency_list{
-            {{1}, {2}, {3}, {4}},
-            {{2}, {1}},
-            {{3}, {1}},
-            {{4}, {1}, {5}},
-            {{5}, {4}, {6}},
-            {{6}, {5}},
+        VertexAdjacencyList<char> const adjacency_list{
+            {{'1'}, {'2'}, {'3'}, {'4'}},
+            {{'2'}, {'1'}},
+            {{'3'}, {'1'}},
+            {{'4'}, {'1'}, {'5'}},
+            {{'5'}, {'4'}, {'6'}},
+            {{'6'}, {'5'}},
         };
-        VertexStateList<int> state_list{};
-        constexpr vertex<int> const starting_vertex{1};
+        VertexStateList<char> state_list{};
+        constexpr vertex<char> const starting_vertex{'1'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -121,18 +121,18 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept {}
+            [](vertex<char>) noexcept {}
         );
 
         CAPTURE(state_list);
 
-        VertexStateList<int> const expected_state_list{
-            {{1}, vertex_visit_state::visited},
-            {{2}, vertex_visit_state::visited},
-            {{3}, vertex_visit_state::visited},
-            {{4}, vertex_visit_state::visited},
-            {{5}, vertex_visit_state::visited},
-            {{6}, vertex_visit_state::visited},
+        VertexStateList<char> const expected_state_list{
+            {{'1'}, vertex_visit_state::visited},
+            {{'2'}, vertex_visit_state::visited},
+            {{'3'}, vertex_visit_state::visited},
+            {{'4'}, vertex_visit_state::visited},
+            {{'5'}, vertex_visit_state::visited},
+            {{'6'}, vertex_visit_state::visited},
         };
 
         REQUIRE(state_list == expected_state_list);
@@ -141,16 +141,16 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
     {
-        VertexAdjacencyList<int> const adjacency_list{
-            {{1}, {2}, {3}, {4}},
-            {{2}, {1}},
-            {{3}, {1}},
-            {{4}, {1}, {5}},
-            {{5}, {4}, {6}},
-            {{6}, {5}},
+        VertexAdjacencyList<char> const adjacency_list{
+            {{'1'}, {'2'}, {'3'}, {'4'}},
+            {{'2'}, {'1'}},
+            {{'3'}, {'1'}},
+            {{'4'}, {'1'}, {'5'}},
+            {{'5'}, {'4'}, {'6'}},
+            {{'6'}, {'5'}},
         };
-        VertexStateList<int> state_list{};
-        constexpr vertex<int> const starting_vertex{5};
+        VertexStateList<char> state_list{};
+        vertex<char> const starting_vertex{'5'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -166,18 +166,18 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             adjacency_list,
             state_list,
             starting_vertex,
-            [](vertex<int>) noexcept {}
+            [](vertex<char>) noexcept {}
         );
 
         CAPTURE(state_list);
 
-        VertexStateList<int> const expected_state_list{
-            {{1}, vertex_visit_state::visited},
-            {{2}, vertex_visit_state::visited},
-            {{3}, vertex_visit_state::visited},
-            {{4}, vertex_visit_state::visited},
-            {{5}, vertex_visit_state::visited},
-            {{6}, vertex_visit_state::visited},
+        VertexStateList<char> const expected_state_list{
+            {{'1'}, vertex_visit_state::visited},
+            {{'2'}, vertex_visit_state::visited},
+            {{'3'}, vertex_visit_state::visited},
+            {{'4'}, vertex_visit_state::visited},
+            {{'5'}, vertex_visit_state::visited},
+            {{'6'}, vertex_visit_state::visited},
         };
 
         REQUIRE(state_list == expected_state_list);
