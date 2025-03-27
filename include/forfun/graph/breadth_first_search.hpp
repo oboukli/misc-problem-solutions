@@ -31,7 +31,7 @@ constexpr auto breadth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const step
+    Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
     vertex_state_list[start] = vertex_visit_state::visited;
@@ -59,7 +59,7 @@ constexpr auto breadth_first_search(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
-    Visitor const step
+    Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
     if (vertex_adjacency_list.empty())
