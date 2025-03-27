@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cassert>
 #include <cstddef>
 #include <vector>
 
@@ -43,8 +42,8 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.empty());
-        assert(state_list.empty());
+        CHECK(adjacency_list.empty());
+        CHECK(state_list.empty());
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -71,9 +70,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 1U);
-        assert(state_list.size() == 1U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 1U);
+        CHECK(state_list.size() == 1U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -103,9 +102,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 2U);
-        assert(state_list.size() == 2U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 2U);
+        CHECK(state_list.size() == 2U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -139,9 +138,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 6U);
-        assert(state_list.size() == 6U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 6U);
+        CHECK(state_list.size() == 6U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -184,9 +183,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 6U);
-        assert(state_list.size() == 6U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 6U);
+        CHECK(state_list.size() == 6U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -231,9 +230,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8U);
-        assert(state_list.size() == 8U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 8U);
+        CHECK(state_list.size() == 8U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -280,9 +279,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8U);
-        assert(state_list.size() == 8U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 8U);
+        CHECK(state_list.size() == 8U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
@@ -318,9 +317,9 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
 
-        assert(adjacency_list.size() == 8U);
-        assert(state_list.size() == 8U);
-        assert(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+        CHECK(adjacency_list.size() == 8U);
+        CHECK(state_list.size() == 8U);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
 
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
