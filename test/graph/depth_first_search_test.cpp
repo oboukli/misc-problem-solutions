@@ -23,6 +23,28 @@ CATCH_REGISTER_ENUM(
     //
 )
 
+namespace {
+
+class VisitRecorder final {
+public:
+    explicit VisitRecorder(
+        std::vector<forfun::graph::vertex<char>>* const visits
+    ) noexcept :
+        visits_{visits}
+    {
+    }
+
+    auto operator()(forfun::graph::vertex<char> const v) noexcept -> void
+    {
+        visits_->emplace_back(v);
+    }
+
+private:
+    std::vector<forfun::graph::vertex<char>>* visits_{};
+};
+
+} // namespace
+
 TEST_CASE("Depth-first search", "[graph][depth_first]")
 {
     using forfun::graph::init_state_list;
@@ -48,17 +70,19 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
+        std::vector<vertex<char>> visits{};
+        visits.reserve(0U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [](vertex<char>) noexcept -> void {}
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
 
-        REQUIRE(state_list.empty());
         REQUIRE(adjacency_list.empty());
+        REQUIRE(state_list.empty());
+        REQUIRE(visits.size() == std::size_t{0U});
     }
 
     SECTION("One-vertex graph")
@@ -77,12 +101,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::size_t call_count{};
+        std::vector<vertex<char>> visits{};
+        visits.reserve(1U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [&call_count](vertex<char>) noexcept { ++call_count; }
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -92,7 +116,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(call_count == 1);
+        REQUIRE(visits.size() == std::size_t{1U});
     }
 
     SECTION("Two-vertex graph")
@@ -114,12 +138,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::size_t call_count{};
+        std::vector<vertex<char>> visits{};
+        visits.reserve(2U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [&call_count](vertex<char>) noexcept { ++call_count; }
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -130,7 +154,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(call_count == 2);
+        REQUIRE(visits.size() == std::size_t{2U});
     }
 
     SECTION("All graph vertices visited, starting from leaf vertex")
@@ -156,11 +180,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
+        std::vector<vertex<char>> visits{};
+        visits.reserve(6U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [](vertex<char>) noexcept {}
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -176,6 +201,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 6U);
+        REQUIRE(visits.size() == std::size_t{6U});
     }
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
@@ -201,11 +227,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
+        std::vector<vertex<char>> visits{};
+        visits.reserve(6U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [](vertex<char>) noexcept {}
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -248,11 +275,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
+        std::vector<vertex<char>> visits{};
+        visits.reserve(8U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [](vertex<char>) noexcept {}
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -270,6 +298,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 8U);
+        REQUIRE(visits.size() == std::size_t{8U});
     }
 
     SECTION("Visitor call count is the same as the vertex count")
@@ -297,12 +326,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::size_t call_count{};
+        std::vector<vertex<char>> visits{};
+        visits.reserve(8U);
+        VisitRecorder visit_recorder(&visits);
+
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [&call_count](vertex<char>) noexcept { ++call_count; }
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -319,7 +348,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(call_count == 8);
+        REQUIRE(visits.size() == std::size_t{8U});
     }
 
     SECTION("Visitor is called and is passed valid arguments to")
@@ -347,16 +376,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> recorded_path{};
-        recorded_path.reserve(8);
+        std::vector<vertex<char>> visits{};
+        visits.reserve(8U);
+        VisitRecorder visit_recorder(&visits);
 
         depth_first_search(
-            adjacency_list,
-            state_list,
-            starting_vertex,
-            [&recorded_path](vertex<char> v) noexcept {
-                recorded_path.emplace_back(v);
-            }
+            adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
@@ -372,13 +397,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(recorded_path.size() == 8U);
-
         std::vector<vertex<char>> const expected_recorded_path{
             {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
         };
-        REQUIRE(recorded_path == expected_recorded_path);
 
         REQUIRE(state_list == expected_state_list);
+        REQUIRE(visits.size() == 8U);
+        REQUIRE(visits == expected_recorded_path);
     }
 }
