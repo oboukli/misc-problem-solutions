@@ -57,8 +57,11 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{};
+
         REQUIRE(state_list.empty());
         REQUIRE(adjacency_list.empty());
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("One-vertex graph")
@@ -89,7 +92,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited}
+        };
+
         REQUIRE(call_count == 1U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("Two-vertex graph")
@@ -121,7 +129,13 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+        };
+
         REQUIRE(call_count == 2U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("All graph vertices visited, starting from leaf vertex")
@@ -165,8 +179,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 6U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
@@ -210,8 +224,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 6U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("All graph vertices (vertex<char>) visited")
@@ -259,8 +273,8 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 8U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("Visitor call count is the same as the vertex count")
@@ -298,7 +312,19 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+            {{'d'}, vertex_visit_state::visited},
+            {{'e'}, vertex_visit_state::visited},
+            {{'f'}, vertex_visit_state::visited},
+            {{'g'}, vertex_visit_state::visited},
+            {{'h'}, vertex_visit_state::visited},
+        };
+
         REQUIRE(call_count == 8U);
+        REQUIRE(state_list == expected_state_list);
     }
 
     SECTION("Visitor is called and is passed valid arguments to")
@@ -342,9 +368,22 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         REQUIRE(recorded_path.size() == 8U);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+            {{'d'}, vertex_visit_state::visited},
+            {{'e'}, vertex_visit_state::visited},
+            {{'f'}, vertex_visit_state::visited},
+            {{'g'}, vertex_visit_state::visited},
+            {{'h'}, vertex_visit_state::visited},
+        };
+
         std::vector<vertex<char>> const expected_recorded_path{
             {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
         };
+
         REQUIRE(recorded_path == expected_recorded_path);
+        REQUIRE(state_list == expected_state_list);
     }
 }
