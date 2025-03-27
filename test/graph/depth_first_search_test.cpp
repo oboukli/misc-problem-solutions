@@ -87,6 +87,11 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited}
+        };
+
+        REQUIRE(state_list == expected_state_list);
         REQUIRE(call_count == 1);
     }
 
@@ -119,6 +124,12 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+        };
+
+        REQUIRE(state_list == expected_state_list);
         REQUIRE(call_count == 2);
     }
 
@@ -296,6 +307,18 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+            {{'d'}, vertex_visit_state::visited},
+            {{'e'}, vertex_visit_state::visited},
+            {{'f'}, vertex_visit_state::visited},
+            {{'g'}, vertex_visit_state::visited},
+            {{'h'}, vertex_visit_state::visited},
+        };
+
+        REQUIRE(state_list == expected_state_list);
         REQUIRE(call_count == 8);
     }
 
@@ -338,11 +361,24 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         CAPTURE(state_list);
 
+        VertexStateList<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+            {{'d'}, vertex_visit_state::visited},
+            {{'e'}, vertex_visit_state::visited},
+            {{'f'}, vertex_visit_state::visited},
+            {{'g'}, vertex_visit_state::visited},
+            {{'h'}, vertex_visit_state::visited},
+        };
+
         REQUIRE(recorded_path.size() == 8U);
 
         std::vector<vertex<char>> const expected_recorded_path{
             {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
         };
         REQUIRE(recorded_path == expected_recorded_path);
+
+        REQUIRE(state_list == expected_state_list);
     }
 }
