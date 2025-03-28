@@ -117,10 +117,10 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Twelve-node unbalanced tree (benchmark case)")
     {
         // As seen in graph 4 in graph docs.
-        binary_tree_node h_r_r_l_{12};
+        binary_tree_node h_r_r_l_l{12};
         binary_tree_node h_r_l_l{8};
         binary_tree_node h_r_l_r{9};
-        binary_tree_node h_r_r_l{10, &h_r_r_l_, nullptr};
+        binary_tree_node h_r_r_l{10, &h_r_r_l_l, nullptr};
         binary_tree_node h_r_r_r{11};
         binary_tree_node h_l_l{4};
         binary_tree_node h_l_r{5};
