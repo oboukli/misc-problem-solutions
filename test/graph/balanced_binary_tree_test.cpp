@@ -32,7 +32,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("Two node graph 1")
+    SECTION("Two node graph (case 1)")
     {
         binary_tree_node h_l{13};
         binary_tree_node const root{11, &h_l, nullptr};
@@ -40,7 +40,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("Two node graph 2")
+    SECTION("Two node graph (case 2)")
     {
         binary_tree_node h_r{17};
         binary_tree_node const root{11, nullptr, &h_r};
@@ -76,7 +76,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("Four-node unbalanced tree 1")
+    SECTION("Four-node unbalanced tree (case 1)")
     {
         binary_tree_node h_r_l_r{19};
         binary_tree_node h_r_l{17, nullptr, &h_r_l_r};
@@ -86,7 +86,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("Four-node unbalanced tree 2")
+    SECTION("Four-node unbalanced tree (case 2)")
     {
         binary_tree_node h_r_l{17};
         binary_tree_node h_r_r{19};
@@ -133,7 +133,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("LeetCode case 1")
+    SECTION("LeetCode (case 1)")
     {
         binary_tree_node h_r_l{15};
         binary_tree_node h_r_r{7};
@@ -144,7 +144,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("LeetCode case 2")
+    SECTION("LeetCode (case 2)")
     {
         binary_tree_node h_l_l_l{4};
         binary_tree_node h_l_l_r{4};
@@ -157,7 +157,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("NeetCode case 1")
+    SECTION("NeetCode (case 1)")
     {
         binary_tree_node h_r_l{4};
         binary_tree_node h_l{2};
@@ -167,7 +167,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("NeetCode case 2")
+    SECTION("NeetCode (case 2)")
     {
         binary_tree_node h_r_l_l{5};
         binary_tree_node h_r_l{4, &h_r_l_l, nullptr};
@@ -178,7 +178,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("GeeksforGeeks case 1")
+    SECTION("GeeksforGeeks (case 1)")
     {
         binary_tree_node h_l_l_l{8};
         binary_tree_node h_l_r{5};
@@ -190,7 +190,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("GeeksforGeeks case 2")
+    SECTION("GeeksforGeeks (case 2)")
     {
         binary_tree_node h_r_l{15};
         binary_tree_node h_r_r{20};
@@ -201,7 +201,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("GeeksforGeeks case 3")
+    SECTION("GeeksforGeeks (case 3)")
     {
         binary_tree_node h_l_l_l{5};
         binary_tree_node h_l_l{3, &h_l_l_l, nullptr};
@@ -213,7 +213,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_FALSE(is_balanced(&root));
     }
 
-    SECTION("GeeksforGeeks case 4")
+    SECTION("GeeksforGeeks (case 4)")
     {
         binary_tree_node h_l_l{3};
         binary_tree_node h_l_r{4};
