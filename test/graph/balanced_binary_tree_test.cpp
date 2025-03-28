@@ -57,10 +57,37 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(is_balanced(&root));
     }
 
-    SECTION("Three-node unbalanced tree")
+    SECTION("Three-node unbalanced tree (case 1)")
+    {
+        binary_tree_node h_l_l{17};
+        binary_tree_node h_l{13, &h_l_l, nullptr};
+        binary_tree_node const root{11, &h_l, nullptr};
+
+        REQUIRE_FALSE(is_balanced(&root));
+    }
+
+    SECTION("Three-node unbalanced tree (case 2)")
+    {
+        binary_tree_node h_l_r{17};
+        binary_tree_node h_l{13, nullptr, &h_l_r};
+        binary_tree_node const root{11, &h_l, nullptr};
+
+        REQUIRE_FALSE(is_balanced(&root));
+    }
+
+    SECTION("Three-node unbalanced tree (case 3)")
     {
         binary_tree_node h_r_l{17};
         binary_tree_node h_r{13, &h_r_l, nullptr};
+        binary_tree_node const root{11, nullptr, &h_r};
+
+        REQUIRE_FALSE(is_balanced(&root));
+    }
+
+    SECTION("Three-node unbalanced tree (case 4)")
+    {
+        binary_tree_node h_r_r{17};
+        binary_tree_node h_r{13, nullptr, &h_r_r};
         binary_tree_node const root{11, nullptr, &h_r};
 
         REQUIRE_FALSE(is_balanced(&root));
@@ -123,6 +150,25 @@ TEMPLATE_TEST_CASE_SIG(
         binary_tree_node h_r_r_l{10, &h_r_r_l_l, nullptr};
         binary_tree_node h_r_r_r{11};
         binary_tree_node h_l_l{4};
+        binary_tree_node h_l_r{5};
+        binary_tree_node h_r_l{6, &h_r_l_l, &h_r_l_r};
+        binary_tree_node h_r_r{7, &h_r_r_l, &h_r_r_r};
+        binary_tree_node h_l{2, &h_l_l, &h_l_r};
+        binary_tree_node h_r{3, &h_r_l, &h_r_r};
+        binary_tree_node const root{1, &h_l, &h_r};
+
+        REQUIRE_FALSE(is_balanced(&root));
+    }
+
+    SECTION("Twelve-node unbalanced tree (unbalanced on the left side)")
+    {
+        binary_tree_node h_l_l_l_l{13};
+        binary_tree_node h_l_l_l{8, &h_l_l_l_l, nullptr};
+        binary_tree_node h_r_l_l{9};
+        binary_tree_node h_r_l_r{10};
+        binary_tree_node h_r_r_l{11};
+        binary_tree_node h_r_r_r{12};
+        binary_tree_node h_l_l{4, &h_l_l_l, nullptr};
         binary_tree_node h_l_r{5};
         binary_tree_node h_r_l{6, &h_r_l_l, &h_r_l_r};
         binary_tree_node h_r_r{7, &h_r_r_l, &h_r_r_r};
