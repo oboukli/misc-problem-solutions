@@ -53,13 +53,5 @@ TEST_CASE(
             }
         )
 
-        .run(
-            NAMEOF_RAW(simple::is_balanced).c_str(),
-            [&root]() noexcept {
-                auto const volatile r{simple::is_balanced(&root)};
-                ankerl::nanobench::doNotOptimizeAway(&r);
-            }
-        )
-
         ;
 }

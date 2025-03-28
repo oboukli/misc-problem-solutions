@@ -25,12 +25,6 @@ namespace hacky {
 
 } // namespace hacky
 
-namespace simple {
-
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
-
-} // namespace simple
-
 } // namespace forfun::graph::balanced_binary_tree
 
 #endif // FORFUN_GRAPH_BALANCED_BINARY_TREE_HPP_
