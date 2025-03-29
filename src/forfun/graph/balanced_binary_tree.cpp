@@ -66,7 +66,8 @@ namespace hacky {
 
 namespace {
 
-auto measure_depth_internal(binary_tree_node const* const head) noexcept -> int
+auto measure_depth_internal(binary_tree_node const* const head) noexcept
+    -> std::ptrdiff_t
 {
     if (head == nullptr) [[unlikely]]
     {
