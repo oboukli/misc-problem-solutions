@@ -21,11 +21,10 @@ constexpr auto const dummy_noexcept_lambda{
     [](int const n, std::vector<int>& state) noexcept { state.push_back(n); }
 };
 
-// clang-format off
 constexpr auto const dummy_throwing_lambda{
-    []([[maybe_unused]] int const n, [[maybe_unused]] std::vector<int>& state)
-    noexcept(false) {}};
-// clang-format on
+    []([[maybe_unused]] int const n, [[maybe_unused]] std::vector<int>& state) {
+    }
+};
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -34,7 +33,7 @@ constexpr auto const dummy_throwing_lambda{
 
 [[maybe_unused]] auto dummy_noexcept_func() noexcept -> void;
 
-[[maybe_unused]] auto dummy_throwing_func() noexcept(false) -> void;
+[[maybe_unused]] auto dummy_throwing_func() -> void;
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
@@ -179,10 +178,7 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
                 noexcept_callable<decltype([](int, int) {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<
-                    decltype([](int, int) noexcept(false) {}),
-                    int,
-                    int>
+                noexcept_callable<decltype([](int, int) {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<

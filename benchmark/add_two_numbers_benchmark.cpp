@@ -81,7 +81,7 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
         .run(
             NAMEOF_RAW(stl::add_two_numbers).c_str(),
-            [&addend_a, &addend_b, &results_stl]() noexcept(false) {
+            [&addend_a, &addend_b, &results_stl]() {
                 auto r{stl::add_two_numbers(addend_a, addend_b)};
 
                 results_stl.push_front(std::move(r));

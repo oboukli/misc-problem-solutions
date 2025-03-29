@@ -14,7 +14,7 @@ namespace forfun::add_two_numbers::stl {
 [[nodiscard]] auto add_two_numbers(
     std::forward_list<unsigned int> const& addend_a,
     std::forward_list<unsigned int> const& addend_b
-) noexcept -> std::forward_list<unsigned int>
+) -> std::forward_list<unsigned int>
 {
     std::forward_list<unsigned int> result{};
     auto back_iter{result.before_begin()};
