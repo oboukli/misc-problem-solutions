@@ -162,6 +162,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Twelve-node unbalanced tree (unbalanced on the left side)")
     {
+        // As seen in graph 5 in graph docs.
         binary_tree_node h_l_l_l_l{13};
         binary_tree_node h_l_l_l{8, &h_l_l_l_l, nullptr};
         binary_tree_node h_r_l_l{9};

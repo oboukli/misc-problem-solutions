@@ -81,3 +81,25 @@ flowchart TB
     id7      --- id11((k))
     id10     --- id12((l))
 ```
+
+### Graph 5
+
+Twelve-node binary tree, unbalanced on the left side.
+
+```mermaid
+flowchart TB
+  id1((a)) --- id2((b))
+  id1      --- id3((c))
+
+  id2      --- id4((d))
+  id2      --- id5((e))
+  id4      --- id13((h))
+  id13     --- id14((m))
+
+  id3      --- id6((f))
+  id3      --- id7((g))
+  id6      --- id8((i))
+  id6      --- id9((j))
+  id7      --- id10((k))
+  id7      --- id11((l))
+```
