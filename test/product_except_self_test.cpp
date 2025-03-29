@@ -275,10 +275,12 @@ TEST_CASE("Product except self (concepts)", "[product_except_self]")
         STATIC_REQUIRE(product_computable<float, float>);
         STATIC_REQUIRE(product_computable<float, double>);
 
-        STATIC_REQUIRE_FALSE(product_computable<bool, bool>);
+        STATIC_REQUIRE(product_computable<bool, bool>);
+        STATIC_REQUIRE(product_computable<std::int32_t, std::int16_t>);
+        STATIC_REQUIRE(product_computable<std::int64_t, std::int32_t>);
+        STATIC_REQUIRE(product_computable<double, float>);
+
         STATIC_REQUIRE_FALSE(product_computable<Dummy, int>);
-        STATIC_REQUIRE_FALSE(product_computable<std::int32_t, std::int16_t>);
-        STATIC_REQUIRE_FALSE(product_computable<std::int64_t, std::int32_t>);
-        STATIC_REQUIRE_FALSE(product_computable<double, float>);
+        STATIC_REQUIRE_FALSE(product_computable<Dummy, Dummy>);
     }
 }

@@ -135,7 +135,8 @@ namespace sort_based {
 /// span of non-negative elements (weighs), otherwise the behavior of the
 /// strategy is undefined.
 template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+    requires std::sortable<Iter, std::greater<>>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 last_stone_weight(Iter const first, Sentinel last) noexcept
     -> std::iter_value_t<Iter>

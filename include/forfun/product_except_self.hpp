@@ -10,20 +10,16 @@
 #ifndef FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 #define FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 
+#include <concepts>
 #include <iterator>
-#include <type_traits>
 
 namespace forfun::product_except_self {
 
 namespace concepts {
 
 template <typename Factor, typename Product>
-concept product_computable = requires {
-    requires std::is_arithmetic_v<Factor>
-        and std::is_arithmetic_v<Product>
-        and requires(Factor f) {
-                requires sizeof(decltype(f * f)) <= sizeof(Product);
-            };
+concept product_computable = requires(Factor f, Product p) {
+    { f * f } -> std::convertible_to<Product>;
 };
 
 } // namespace concepts
@@ -37,13 +33,11 @@ using forfun::product_except_self::concepts::product_computable;
 template <
     std::contiguous_iterator InItr,
     std::sentinel_for<InItr> InItrSentinel,
-    typename OutItr,
+    std::contiguous_iterator OutItr,
     std::sentinel_for<OutItr> OutItrSentinel>
-// clang-format off
     requires product_computable<
-        std::iter_value_t<InItr>, std::iter_value_t<OutItr>>
-        and std::output_iterator<OutItr, std::iter_value_t<OutItr>>
-// clang-format on
+        std::iter_value_t<InItr>,
+        std::iter_value_t<OutItr>>
 constexpr auto product_except_self(
     InItr const first,
     InItrSentinel const last,
@@ -85,11 +79,9 @@ template <
     std::sentinel_for<InItr> InItrSentinel,
     std::contiguous_iterator OutItr,
     std::sized_sentinel_for<OutItr> OutItrSentinel>
-// clang-format off
     requires product_computable<
-        std::iter_value_t<InItr>, std::iter_value_t<OutItr>>
-        and std::output_iterator<OutItr, std::iter_value_t<OutItr>>
-// clang-format on
+        std::iter_value_t<InItr>,
+        std::iter_value_t<OutItr>>
 constexpr auto product_except_self(
     InItr const first,
     InItrSentinel const last,
