@@ -38,17 +38,17 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(complicated::is_balanced).c_str(),
+            NAMEOF_RAW(stl_pair::is_balanced).c_str(),
             [&root]() noexcept {
-                auto const volatile r{complicated::is_balanced(&root)};
+                auto const volatile r{stl_pair::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(hacky::is_balanced).c_str(),
+            NAMEOF_RAW(raw::is_balanced).c_str(),
             [&root]() noexcept {
-                auto const volatile r{hacky::is_balanced(&root)};
+                auto const volatile r{raw::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )

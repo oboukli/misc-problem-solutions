@@ -12,7 +12,7 @@
 
 namespace forfun::graph::balanced_binary_tree {
 
-namespace complicated {
+namespace stl_pair {
 
 namespace {
 
@@ -60,9 +60,9 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
     return not is_unbalanced_internal(head).second;
 }
 
-} // namespace complicated
+} // namespace stl_pair
 
-namespace hacky {
+namespace raw {
 
 namespace {
 
@@ -104,6 +104,6 @@ auto measure_depth_internal(binary_tree_node const* const head) noexcept
     return measure_depth_internal(head) != -1;
 }
 
-} // namespace hacky
+} // namespace raw
 
 } // namespace forfun::graph::balanced_binary_tree
