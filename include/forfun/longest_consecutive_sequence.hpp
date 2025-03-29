@@ -21,7 +21,7 @@ namespace forfun::longest_consecutive_sequence {
 
 namespace counted {
 
-template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto longest_consecutive(Iter iter, Sentinel const last) noexcept
     -> std::size_t
@@ -68,7 +68,9 @@ namespace detail {
 
 template <std::input_iterator Iter>
 [[nodiscard]] constexpr auto recalc_top_streak(
-    Iter const first, Iter const last, std::size_t const top_streak
+    Iter const first,
+    std::sized_sentinel_for<Iter> auto const last,
+    std::size_t const top_streak
 ) noexcept -> std::size_t
 {
     return std::max(
@@ -78,7 +80,7 @@ template <std::input_iterator Iter>
 
 } // namespace detail
 
-template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto longest_consecutive(Iter iter, Sentinel const last) noexcept
     -> std::size_t
