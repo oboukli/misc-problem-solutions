@@ -20,31 +20,47 @@ namespace {
 auto measure_depth_internal(binary_tree_node const* const head) noexcept
     -> std::ptrdiff_t
 {
-    if (head == nullptr) [[unlikely]]
+    if (head == nullptr)
     {
         return 0;
     }
 
     auto const left{measure_depth_internal(head->left_node_)};
-    if (left == -1)
+
+    if (left == std::ptrdiff_t{-1})
     {
         return -1;
     }
 
     auto const right{measure_depth_internal(head->right_node_)};
-    if (right == -1)
+
+    if (right == std::ptrdiff_t{-1})
     {
         return -1;
     }
 
-    auto diff{left > right ? left - right : right - left};
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+    std::ptrdiff_t min /*[[indeterminate]]*/;
+    // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+    std::ptrdiff_t max /*[[indeterminate]]*/;
 
-    if (diff > 1)
+    if (left < right)
+    {
+        min = left;
+        max = right;
+    }
+    else
+    {
+        min = right;
+        max = left;
+    }
+
+    if ((max - min) > std::ptrdiff_t{1})
     {
         return -1;
     }
 
-    return 1 + std::max(left, right);
+    return ++max;
 }
 
 } // namespace
@@ -52,7 +68,7 @@ auto measure_depth_internal(binary_tree_node const* const head) noexcept
 [[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
     -> bool
 {
-    return measure_depth_internal(head) != -1;
+    return measure_depth_internal(head) != std::ptrdiff_t{-1};
 }
 
 } // namespace raw
@@ -66,7 +82,7 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 {
     if (head == nullptr)
     {
-        return {std::size_t{0U}, false};
+        return {0U, false};
     }
 
     auto const left{is_unbalanced_internal(head->left_node_)};
@@ -159,12 +175,13 @@ namespace {
 auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
     -> std::pair<std::size_t, bool>
 {
-    if (head == nullptr) [[unlikely]]
+    if (head == nullptr)
     {
-        return {std::size_t{0U}, false};
+        return {0U, false};
     }
 
     auto const left{is_unbalanced_internal(head->left_node_)};
+
     if (left.second)
     {
         return left;
@@ -189,7 +206,7 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
         return {diff, true};
     }
 
-    return {std::size_t{1} + std::max(left.first, right.first), false};
+    return {std::max(left.first, right.first) + 1, false};
 }
 
 } // namespace
