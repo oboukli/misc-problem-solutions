@@ -46,7 +46,7 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 
     if (diff > std::size_t{1U})
     {
-        return {diff, true}; // Or {0, true}
+        return {diff, true};
     }
 
     return {std::size_t{1} + std::max(left.first, right.first), false};
