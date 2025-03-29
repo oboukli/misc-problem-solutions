@@ -19,6 +19,12 @@ namespace raw {
 
 } // namespace raw
 
+namespace stl_abs {
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+
+} // namespace stl_abs
+
 namespace stl_pair {
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;

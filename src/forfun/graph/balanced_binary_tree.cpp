@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdlib>
 #include <utility>
 
 namespace forfun::graph::balanced_binary_tree {
@@ -55,6 +56,54 @@ auto measure_depth_internal(binary_tree_node const* const head) noexcept
 }
 
 } // namespace raw
+
+namespace stl_abs {
+
+namespace {
+
+auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+    -> std::pair<std::size_t, bool>
+{
+    if (head == nullptr)
+    {
+        return {std::size_t{0U}, false};
+    }
+
+    auto const left{is_unbalanced_internal(head->left_node_)};
+
+    if (left.second)
+    {
+        return left;
+    }
+
+    auto const right{is_unbalanced_internal(head->right_node_)};
+
+    if (right.second)
+    {
+        return right;
+    }
+
+    auto const diff{std::abs(
+        static_cast<std::ptrdiff_t>(left.first)
+        - static_cast<std::ptrdiff_t>(right.first)
+    )};
+    if (diff > decltype(diff){1})
+    {
+        return {diff, true};
+    }
+
+    return {std::max(left.first, right.first) + 1, false};
+}
+
+} // namespace
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+    -> bool
+{
+    return not is_unbalanced_internal(head).second;
+}
+
+} // namespace stl_abs
 
 namespace stl_pair {
 
