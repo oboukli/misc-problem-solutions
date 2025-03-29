@@ -12,6 +12,50 @@
 
 namespace forfun::graph::balanced_binary_tree {
 
+namespace raw {
+
+namespace {
+
+auto measure_depth_internal(binary_tree_node const* const head) noexcept
+    -> std::ptrdiff_t
+{
+    if (head == nullptr) [[unlikely]]
+    {
+        return 0;
+    }
+
+    auto const left{measure_depth_internal(head->left_node_)};
+    if (left == -1)
+    {
+        return -1;
+    }
+
+    auto const right{measure_depth_internal(head->right_node_)};
+    if (right == -1)
+    {
+        return -1;
+    }
+
+    auto diff{left > right ? left - right : right - left};
+
+    if (diff > 1)
+    {
+        return -1;
+    }
+
+    return 1 + std::max(left, right);
+}
+
+} // namespace
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+    -> bool
+{
+    return measure_depth_internal(head) != -1;
+}
+
+} // namespace raw
+
 namespace stl_pair {
 
 namespace {
@@ -61,49 +105,5 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 }
 
 } // namespace stl_pair
-
-namespace raw {
-
-namespace {
-
-auto measure_depth_internal(binary_tree_node const* const head) noexcept
-    -> std::ptrdiff_t
-{
-    if (head == nullptr) [[unlikely]]
-    {
-        return 0;
-    }
-
-    auto const left{measure_depth_internal(head->left_node_)};
-    if (left == -1)
-    {
-        return -1;
-    }
-
-    auto const right{measure_depth_internal(head->right_node_)};
-    if (right == -1)
-    {
-        return -1;
-    }
-
-    auto diff{left > right ? left - right : right - left};
-
-    if (diff > 1)
-    {
-        return -1;
-    }
-
-    return 1 + std::max(left, right);
-}
-
-} // namespace
-
-[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
-    -> bool
-{
-    return measure_depth_internal(head) != -1;
-}
-
-} // namespace raw
 
 } // namespace forfun::graph::balanced_binary_tree

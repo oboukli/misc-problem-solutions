@@ -13,17 +13,17 @@ namespace forfun::graph::balanced_binary_tree {
 
 using forfun::graph::binary_tree_node;
 
-namespace stl_pair {
-
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
-
-} // namespace stl_pair
-
 namespace raw {
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
 
 } // namespace raw
+
+namespace stl_pair {
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+
+} // namespace stl_pair
 
 } // namespace forfun::graph::balanced_binary_tree
 
