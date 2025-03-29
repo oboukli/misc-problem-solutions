@@ -34,8 +34,7 @@ public:
 
     using const_iterator = internal::list_const_iterator;
 
-    constexpr list() noexcept(false) :
-        end_{new internal::list_node(int{}, nullptr, nullptr)}
+    list() : end_{new internal::list_node(int{}, nullptr, nullptr)}
     {
         head_ = end_;
         tail_ = end_;
@@ -81,7 +80,7 @@ public:
         return tail_->value_;
     }
 
-    auto push_back(value_type value) noexcept(false) -> void;
+    auto push_back(value_type value) -> void;
 
     auto pop_back() noexcept -> void;
 
