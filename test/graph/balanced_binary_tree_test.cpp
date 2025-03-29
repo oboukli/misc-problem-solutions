@@ -16,6 +16,7 @@ TEMPLATE_TEST_CASE_SIG(
     (auto is_balanced, is_balanced),
     forfun::graph::balanced_binary_tree::raw::is_balanced,
     forfun::graph::balanced_binary_tree::stl_abs::is_balanced,
+    forfun::graph::balanced_binary_tree::stl_minmax::is_balanced,
     forfun::graph::balanced_binary_tree::stl_pair::is_balanced
 )
 {

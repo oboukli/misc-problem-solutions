@@ -54,6 +54,14 @@ TEST_CASE(
         )
 
         .run(
+            NAMEOF_RAW(stl_minmax::is_balanced).c_str(),
+            [&root]() noexcept {
+                auto const volatile r{stl_minmax::is_balanced(&root)};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(raw::is_balanced).c_str(),
             [&root]() noexcept {
                 auto const volatile r{raw::is_balanced(&root)};

@@ -105,6 +105,53 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 
 } // namespace stl_abs
 
+namespace stl_minmax {
+
+namespace {
+
+auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+    -> std::pair<std::size_t, bool>
+{
+    if (head == nullptr)
+    {
+        return {0U, false};
+    }
+
+    auto const left{is_unbalanced_internal(head->left_node_)};
+
+    if (left.second)
+    {
+        return left;
+    }
+
+    auto const right{is_unbalanced_internal(head->right_node_)};
+
+    if (right.second)
+    {
+        return right;
+    }
+
+    auto const [min, max]{std::minmax(left.first, right.first)};
+
+    auto const diff{max - min};
+    if (diff > decltype(diff){1})
+    {
+        return {diff, true};
+    }
+
+    return {max + 1, false};
+}
+
+} // namespace
+
+[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+    -> bool
+{
+    return not is_unbalanced_internal(head).second;
+}
+
+} // namespace stl_minmax
+
 namespace stl_pair {
 
 namespace {
