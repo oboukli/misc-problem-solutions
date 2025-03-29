@@ -14,8 +14,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Balanced binary tree",
     "[balanced_binary_tree]",
     (auto is_balanced, is_balanced),
-    forfun::graph::balanced_binary_tree::stl_pair::is_balanced,
-    forfun::graph::balanced_binary_tree::raw::is_balanced
+    forfun::graph::balanced_binary_tree::raw::is_balanced,
+    forfun::graph::balanced_binary_tree::stl_pair::is_balanced
 )
 {
     using forfun::graph::balanced_binary_tree::binary_tree_node;
