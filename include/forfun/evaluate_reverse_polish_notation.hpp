@@ -83,7 +83,6 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
                     goto invalid_argument;
                 }
                 accumulator = std::trunc(accumulator / operand_2);
-
                 break;
             default:
                 // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)

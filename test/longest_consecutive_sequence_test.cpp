@@ -19,14 +19,16 @@ TEMPLATE_TEST_CASE_SIG(
     "Longest consecutive sequence",
     "[longest_consecutive_sequence]",
     (auto longest_consecutive, longest_consecutive),
+    // clang-format off
     (forfun::longest_consecutive_sequence::counted::
-         longest_consecutive<Iter, Iter>),
+        longest_consecutive<Iter, Iter>),
     (forfun::longest_consecutive_sequence::measured::
-         longest_consecutive<Iter, Iter>),
+        longest_consecutive<Iter, Iter>),
     (forfun::longest_consecutive_sequence::set_scanning::
-         longest_consecutive<Iter, Iter>),
+        longest_consecutive<Iter, Iter>),
     (forfun::longest_consecutive_sequence::set_sliding::
-         longest_consecutive<Iter, Iter>)
+        longest_consecutive<Iter, Iter>)
+    // clang-format on
 )
 {
     SECTION("Empty container")
