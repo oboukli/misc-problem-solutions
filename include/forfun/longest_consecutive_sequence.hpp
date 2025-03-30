@@ -141,10 +141,12 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
     std::size_t top_streak{1U};
     std::size_t streak{1U};
 
+    // clang-format off
     for (auto iter_a{lookup_set.cbegin()},
-         iter_b{std::next(lookup_set.cbegin())};
-         iter_b != lookup_set.cend();
-         ++iter_a, ++iter_b)
+        iter_b{std::next(lookup_set.cbegin())};
+        iter_b != lookup_set.cend();
+        ++iter_a, ++iter_b)
+    // clang-format on
     {
         if (ValueType{(*iter_a) + 1} == *iter_b)
         {
