@@ -389,11 +389,10 @@ jobs:
     name: Build (Apple Clang Debug AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
-      BUILD_PRESET_NAME: xcode
-      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
+      BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Debug
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
-      XCODE_RELEASE: "16.0"
+      XCODE_RELEASE: "16.2"
 
     runs-on: macos-15
 
@@ -437,10 +436,9 @@ jobs:
       - name: Build with sanitizers
         run: >-
           cmake
-          --build
+          --build '${{ env.BUILD_DIR }}'
           --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
           --
           -enableAddressSanitizer YES
           -enableUndefinedBehaviorSanitizer YES
@@ -450,45 +448,44 @@ jobs:
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run static test driver
         run: >-
           ./static_test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run test driver of experimental library
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
   apple_clang_release_aarch64_macos:
     name: Build (Apple Clang Release AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
-      BUILD_PRESET_NAME: xcode
-      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
+      BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Release
       VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
-      XCODE_RELEASE: "16.0"
+      XCODE_RELEASE: "16.2"
 
     runs-on: macos-15
 
@@ -532,45 +529,44 @@ jobs:
       - name: Build
         run: >-
           cmake
-          --build
+          --build '${{ env.BUILD_DIR }}'
           --config '${{ env.BUILD_CONFIGURATION }}'
           --parallel
-          --preset '${{ env.BUILD_PRESET_NAME }}'
 
       - name: Run test driver
         run: >-
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run static test driver
         run: >-
           ./static_test_driver
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run test driver of experimental library
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BINARY_DIR }}
+        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
   clang_debug_x86_64_linux:
     name: Build (Clang Debug x86-64 Linux)
