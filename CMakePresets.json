@@ -1,28 +1,6 @@
 {
-  "version": 3,
+  "version": 6,
   "configurePresets": [
-    {
-      "name": "fuzz",
-      "displayName": "Fuzz test",
-      "description": "Fuzzing target with Ninja and vcpkg",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "ANTLR_BUILD_CPP_TESTS": "OFF",
-        "BUILD_SHARED_LIBS": "OFF",
-        "CMAKE_BUILD_TYPE": "RelWithDebug",
-        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CONFIGURATION_TYPE": "RelWithDebInfo",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
-        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
-        "FUZZTEST_FUZZING_MODE": "ON"
-      }
-    },
     {
       "name": "generic",
       "displayName": "Generic",
@@ -43,7 +21,8 @@
     },
     {
       "name": "windows-x64",
-      "description": "Build with MSVC for Windows",
+      "displayName": "Windows (x64)",
+      "description": "Build with MSVC for x64 Windows",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "architecture": {
@@ -70,7 +49,7 @@
     {
       "name": "xcode",
       "displayName": "Xcode configuration",
-      "description": "Build for Darwin with Xcode",
+      "description": "Build with Xcode for Darwin",
       "generator": "Xcode",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
@@ -134,23 +113,67 @@
     },
     {
       "name": "clang-coverage",
-      "displayName": "Clang with code coverage",
+      "displayName": "Coverage with LLVM",
       "description": "Build with Clang and enable code coverage",
-      "generator": "Ninja Multi-Config",
+      "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
+        "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
+        "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
         "FORFUN_COMMON_CFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
         "FORFUN_COMMON_CXXFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
         "FORFUN_COMMON_LINK_OPTIONS": "-fcoverage-mapping -fprofile-instr-generate"
+      }
+    },
+    {
+      "name": "gcc-coverage",
+      "displayName": "Coverage with GCC",
+      "description": "Build with GCC and enable code coverage",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
+        "FORFUN_COMMON_CFLAGS": "--coverage",
+        "FORFUN_COMMON_CXXFLAGS": "--coverage",
+        "FORFUN_COMMON_LINK_OPTIONS": "--coverage"
+      }
+    },
+    {
+      "name": "fuzz",
+      "displayName": "Fuzz test",
+      "description": "Fuzzing target with Ninja and vcpkg",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "ANTLR_BUILD_CPP_TESTS": "OFF",
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
+        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
+        "FUZZTEST_FUZZING_MODE": "ON"
       }
     }
   ],
@@ -170,13 +193,6 @@
       "configuration": "Release"
     },
     {
-      "name": "fuzz-release-with-debug",
-      "displayName": "Fuzz RelWithDebug",
-      "description": "Fuzz release with debug info build",
-      "configurePreset": "fuzz",
-      "configuration": "RelWithDebug"
-    },
-    {
       "name": "windows-x64-debug",
       "displayName": "Windows x64 debug",
       "description": "Windows x64 debug build",
@@ -189,12 +205,6 @@
       "description": "Windows x64 release build",
       "configurePreset": "windows-x64",
       "configuration": "Release"
-    },
-    {
-      "name": "xcode",
-      "displayName": "Xcode build",
-      "description": "Xcode build",
-      "configurePreset": "xcode"
     },
     {
       "name": "strict-gcc-debug",
@@ -225,18 +235,25 @@
       "configuration": "Release"
     },
     {
-      "name": "clang-coverage-debug",
-      "displayName": "Debug",
-      "description": "Debug build",
-      "configurePreset": "clang-coverage",
-      "configuration": "Debug"
+      "name": "fuzz-release",
+      "displayName": "Fuzz Release",
+      "description": "Fuzz Release build",
+      "configurePreset": "fuzz",
+      "configuration": "Release"
     },
     {
-      "name": "clang-coverage-release",
-      "displayName": "Release",
-      "description": "Release build",
-      "configurePreset": "clang-coverage",
-      "configuration": "Release"
+      "name": "fuzz-rel-with-debug",
+      "displayName": "Fuzz RelWithDebug",
+      "description": "Fuzz RelWithDebug build",
+      "configurePreset": "fuzz",
+      "configuration": "RelWithDebug"
+    },
+    {
+      "name": "fuzz-debug",
+      "displayName": "Fuzz Debug",
+      "description": "Fuzz Debug build",
+      "configurePreset": "fuzz",
+      "configuration": "Debug"
     }
   ]
 }
