@@ -6,23 +6,12 @@
 
 #include "forfun/common/io.hpp"
 
-#include <ostream>
-
 namespace forfun::common::io {
 
-oblivion_stream::oblivion_stream() noexcept : std::ostream(&os_buffer_)
-{
-}
-
-auto oblivion_stream::dummy() noexcept -> void
-{
-}
-
-[[nodiscard]] auto
-oblivion_stream::oblivion_stream_buffer_::overflow(int_type ch) noexcept
+[[nodiscard]] auto null_streambuf::overflow(int_type const c) noexcept
     -> int_type
 {
-    return ch;
+    return traits_type::not_eof(c);
 }
 
 } // namespace forfun::common::io

@@ -4,17 +4,18 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <ostream>
+
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/common/io.hpp"
 
-TEST_CASE("Oblivion Stream", "[oblivion_stream]")
+TEST_CASE("Null stream buffer", "[null_streambuf]")
 {
-    using forfun::common::io::oblivion_stream;
-
-    SECTION("")
+    SECTION("Absorb input")
     {
-        oblivion_stream os{};
+        forfun::common::io::null_streambuf buffer{};
+        std::ostream os{&buffer};
 
         os << "Dummy";
 

@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <ios>
+#include <ostream>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -21,7 +22,8 @@ TEST_CASE("Fizz buzz benchmarking", "[benchmark][fizzbuzz]")
 
     using Func = void(char const*, std::streamsize);
 
-    forfun::common::io::oblivion_stream output_stream;
+    forfun::common::io::null_streambuf buffer{};
+    std::ostream output_stream{&buffer};
 
     ankerl::nanobench::Bench()
 
@@ -30,18 +32,18 @@ TEST_CASE("Fizz buzz benchmarking", "[benchmark][fizzbuzz]")
 
         .run(
             NAMEOF_RAW(basic::fizzbuzz).c_str(),
-            [&output_stream]() noexcept { basic::fizzbuzz(30, output_stream); }
+            [&output_stream]() { basic::fizzbuzz(30, output_stream); }
         )
 
         .run(
             NAMEOF_RAW(optimized::fizzbuzz<Func>).c_str(),
-            [&output_stream]() noexcept {
+            [&output_stream]() {
                 optimized::fizzbuzz(
                     1,
                     31,
                     [&output_stream](
-                        char const* const buffer, std::streamsize const size
-                    ) noexcept { output_stream.write(buffer, size); }
+                        char const* const buf, std::streamsize const size
+                    ) { output_stream.write(buf, size); }
                 );
             }
         )

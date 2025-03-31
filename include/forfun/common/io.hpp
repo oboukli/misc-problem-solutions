@@ -7,25 +7,29 @@
 #ifndef FORFUN_COMMON_IO_HPP_
 #define FORFUN_COMMON_IO_HPP_
 
-#include <ostream>
 #include <streambuf>
 
 namespace forfun::common::io {
 
-// Adapted from https://stackoverflow.com/a/11826666
-class oblivion_stream final : public std::ostream {
+class null_streambuf final : public std::streambuf {
 public:
-    oblivion_stream() noexcept;
+    null_streambuf()
+    {
+        this->setbuf(nullptr, 0); // DevSkim: ignore DS154189
+    }
 
-    virtual auto dummy() noexcept -> void;
+    null_streambuf(null_streambuf const&) = delete;
 
-private:
-    class oblivion_stream_buffer_ final : public std::streambuf {
-    protected:
-        [[nodiscard]] auto overflow(int_type ch) noexcept -> int_type override;
-    };
+    null_streambuf(null_streambuf&&) = delete;
 
-    oblivion_stream_buffer_ os_buffer_{};
+    ~null_streambuf() override = default;
+
+    auto operator=(null_streambuf const&) -> null_streambuf& = delete;
+
+    auto operator=(null_streambuf&&) -> null_streambuf& = delete;
+
+protected:
+    [[nodiscard]] auto overflow(int_type c) noexcept -> int_type override;
 };
 
 } // namespace forfun::common::io
