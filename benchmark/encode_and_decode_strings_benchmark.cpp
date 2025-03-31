@@ -24,9 +24,9 @@ TEST_CASE(
     using namespace forfun::encode_and_decode_strings;
     using std::string_view_literals::operator""sv;
     using ConstIter = std::array<std::string_view, 2>::const_iterator;
-    using CharT = forfun::common::io::oblivion_stream::char_type;
-    using Traits = forfun::common::io::oblivion_stream::traits_type;
-    using forfun::common::io::oblivion_stream;
+
+    forfun::common::io::null_streambuf buffer{};
+    std::ostream output_stream{&buffer};
 
     static constexpr std::array const tokens{
         // clang-format off
@@ -52,17 +52,15 @@ TEST_CASE(
     static_assert(tokens[0].size() == 256U);
     static_assert(tokens[1].size() == 256U);
 
-    forfun::common::io::oblivion_stream output_stream;
-
     ankerl::nanobench::Bench()
 
         .title("Encode strings")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(delimited::encode<ConstIter, ConstIter, oblivion_stream, CharT, Traits>)
+            NAMEOF_RAW(delimited::encode<ConstIter, ConstIter, std::ostream>)
                 .c_str(),
-            [&output_stream]() noexcept {
+            [&output_stream]() {
                 delimited::encode(
                     tokens.cbegin(), tokens.cend(), output_stream
                 );
@@ -108,7 +106,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(delimited::decode<CharT, Traits>).c_str(),
-            []() noexcept {
+            []() {
                 auto const volatile r{delimited::decode(encoded)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
