@@ -91,7 +91,7 @@ auto ArbitraryTokens() -> ::fuzztest::Domain<std::vector<std::string>>
             std::vector<OperandOperationStringPair> vec_{std::move(vec)};
             std::vector<std::string> res;
             res.push_back(std::move(std::to_string(first_operand)));
-            for (auto && [operand, operation] : vec_)
+            for (auto&& [operand, operation] : vec_)
             {
                 res.push_back(std::move(operand));
                 res.push_back(std::move(operation));

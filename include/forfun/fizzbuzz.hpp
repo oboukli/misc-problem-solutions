@@ -44,9 +44,9 @@ namespace optimized {
 /// suppored.
 template <typename BinaryFunc>
     requires std::invocable<BinaryFunc, char const*, std::streamsize>
-auto
-fizzbuzz(int start, int const last, BinaryFunc write) noexcept(noexcept(write))
-    -> void
+auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
+    noexcept(write)
+) -> void
 {
     static constexpr int const fizz_divider{3};
     static constexpr int const buzz_divider{5};
