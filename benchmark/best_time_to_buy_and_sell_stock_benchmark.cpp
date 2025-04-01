@@ -35,12 +35,13 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                best_time_to_buy_and_sell_stock::calc_max_profit<Iter, Iter>
+                best_time_to_buy_and_sell_stock::base::
+                    calc_max_profit<Iter, Iter>
             )
                 .c_str(),
             [&prices]() noexcept {
                 auto const volatile r{
-                    best_time_to_buy_and_sell_stock::calc_max_profit(
+                    best_time_to_buy_and_sell_stock::base::calc_max_profit(
                         prices.cbegin(), prices.cend()
                     )
                 };

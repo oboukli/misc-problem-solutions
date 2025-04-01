@@ -16,6 +16,8 @@
 
 namespace forfun::best_time_to_buy_and_sell_stock {
 
+namespace base {
+
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
@@ -48,6 +50,8 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept
 
     return max_profit;
 }
+
+} // namespace base
 
 namespace optimized_l1 {
 
