@@ -371,7 +371,7 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->is_terminal
-                // clang-format off
+                // clang-format on
             );
             REQUIRE(
                 root.children[0]

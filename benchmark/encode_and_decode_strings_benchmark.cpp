@@ -46,7 +46,7 @@ TEST_CASE(
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"sv,
-        // clang-format off
+        // clang-format on
     };
     static_assert(tokens.size() == 2U);
     static_assert(tokens[0].size() == 256U);
