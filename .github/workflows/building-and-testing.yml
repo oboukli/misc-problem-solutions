@@ -597,6 +597,7 @@ jobs:
 
           sudo apt-get install
           clang-19
+          clang-tools-19
           libc++-19-dev
           libc++1-19
           libc++abi-19-dev
@@ -720,6 +721,7 @@ jobs:
 
           sudo apt-get install
           clang-19
+          clang-tools-19
           libc++-19-dev
           libc++1-19
           libc++abi-19-dev
