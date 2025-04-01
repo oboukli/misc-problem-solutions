@@ -16,7 +16,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Best time to buy and sell stock",
     "[best_time_to_buy_and_sell_stock]",
     (auto calc_max_profit, calc_max_profit),
-    (forfun::best_time_to_buy_and_sell_stock::calc_max_profit<
+    (forfun::best_time_to_buy_and_sell_stock::base::calc_max_profit<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
     (forfun::best_time_to_buy_and_sell_stock::optimized_l1::calc_max_profit<
