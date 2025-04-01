@@ -96,11 +96,11 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         }
     }
 
+    // clang-format off
     if (calc_type const intermediate{std::trunc(evaluation_stack.back())};
-        // clang-format off
         ((intermediate >= std::numeric_limits<int>::min())
         && (intermediate <= std::numeric_limits<int>::max())))
-        // clang-format off
+    // clang-format on
     {
         return {static_cast<int>(intermediate), std::errc{}};
     }

@@ -86,7 +86,7 @@ auto ArbitraryTokens() -> ::fuzztest::Domain<std::vector<std::string>>
             // clang-format off
             std::vector<OperandOperationStringPair>&& vec,
             int first_operand
-            // clang-format off
+            // clang-format on
         ) -> ::fuzztest::Domain<std::vector<std::string>> {
             std::vector<OperandOperationStringPair> vec_{std::move(vec)};
             std::vector<std::string> res;

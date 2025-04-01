@@ -30,7 +30,7 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format off
     (forfun::squares_sorted_array::
         squares_sorted_special<IntVecConstIter, IntVecIter>)
-    // clang-format off
+    // clang-format on
 )
 {
     SECTION("Empty input")

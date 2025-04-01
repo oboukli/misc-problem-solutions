@@ -323,7 +323,7 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"sv,
-            // clang-format off
+            // clang-format on
         };
         static_assert(tokens.size() == 2U);
         static_assert(tokens[0].size() == 256U);
@@ -632,7 +632,7 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh",
-                // clang-format off
+                // clang-format on
             }
         );
     }
