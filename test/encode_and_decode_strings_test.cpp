@@ -336,7 +336,8 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         encode(tokens.cbegin(), tokens.cend(), ss);
 
         REQUIRE(ss.view().size() == 769U);
-        REQUIRE(ss.view() ==
+        REQUIRE(
+            ss.view() ==
             // clang-format off
             "abcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~"
             "~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ "
