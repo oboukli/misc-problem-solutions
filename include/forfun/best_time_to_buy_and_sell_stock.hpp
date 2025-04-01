@@ -10,7 +10,6 @@
 #ifndef FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 #define FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 
-#include <algorithm>
 #include <concepts>
 #include <iterator>
 
@@ -42,7 +41,10 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
             continue;
         }
 
-        max_profit = std::max(profit, max_profit);
+        if (profit > max_profit)
+        {
+            max_profit = profit;
+        }
     }
 
     return max_profit;
@@ -76,7 +78,10 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
             continue;
         }
 
-        max_profit = std::max(profit, max_profit);
+        if (profit > max_profit)
+        {
+            max_profit = profit;
+        }
     }
 
     return max_profit;
@@ -108,7 +113,10 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
             continue;
         }
 
-        max_profit = std::max(*iter - buyer_price, max_profit);
+        if (auto const profit{*iter - buyer_price}; profit > max_profit)
+        {
+            max_profit = profit;
+        }
     }
 
     return max_profit;
