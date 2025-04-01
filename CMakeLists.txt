@@ -4,7 +4,7 @@
 
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.31)
 
 project(
   ForFun
