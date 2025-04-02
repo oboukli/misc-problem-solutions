@@ -73,7 +73,7 @@ public:
     {
         assert(head_ != nullptr);
 
-        internal::forward_list_node<T>* const aux{head_};
+        internal::forward_list_node<T> const* const aux{head_};
         head_ = head_->next;
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
@@ -82,9 +82,12 @@ public:
 
     auto clear() noexcept -> void
     {
-        for (internal::forward_list_node<T>* node{head_}; node != nullptr;)
+        // clang-format off
+        for (internal::forward_list_node<T> const* node{head_};
+            node != nullptr;)
+        // clang-format on
         {
-            internal::forward_list_node<T>* const next = node->next;
+            internal::forward_list_node<T> const* const next = node->next;
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;
