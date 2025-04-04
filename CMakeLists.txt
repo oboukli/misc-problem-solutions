@@ -673,6 +673,7 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
       CXX_EXTENSIONS OFF
       CXX_STANDARD 23
       CXX_STANDARD_REQUIRED ON
+      LANGUAGE CXX
   )
   target_sources(
     fuzzing_driver
@@ -715,6 +716,7 @@ set_target_properties(
     CXX_EXTENSIONS OFF
     CXX_STANDARD 23
     CXX_STANDARD_REQUIRED ON
+    LANGUAGE CXX
 )
 
 set_target_properties(
@@ -727,6 +729,7 @@ set_target_properties(
     CXX_EXTENSIONS OFF
     CXX_STANDARD 23
     CXX_STANDARD_REQUIRED ON
+    LANGUAGE CXX
 )
 
 set_target_properties(
@@ -736,4 +739,5 @@ set_target_properties(
     C_EXTENSIONS OFF
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
+    LANGUAGE C
 )
