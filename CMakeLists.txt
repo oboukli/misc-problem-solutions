@@ -15,9 +15,6 @@ include(cmake/CompileOptions.cmake)
 add_library(
   forfun
 )
-set_target_properties(forfun PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun
   INTERFACE
@@ -124,9 +121,6 @@ forfun_common_target_compile_options(forfun)
 add_library(
   forfun_common
 )
-set_target_properties(forfun_common PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun_common PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun_common PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_common
   INTERFACE
@@ -165,9 +159,6 @@ forfun_common_target_compile_options(forfun_common)
 add_library(
   forfun_graph
 )
-set_target_properties(forfun_graph PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun_graph PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun_graph PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_graph
   INTERFACE
@@ -214,9 +205,6 @@ forfun_common_target_compile_options(forfun_graph)
 add_library(
   forfun_search
 )
-set_target_properties(forfun_search PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun_search PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun_search PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_search
   INTERFACE
@@ -253,9 +241,6 @@ forfun_common_target_compile_options(forfun_search)
 add_library(
   forfun_sorting
 )
-set_target_properties(forfun_sorting PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_sorting
   INTERFACE
@@ -296,9 +281,6 @@ forfun_common_target_compile_options(forfun_sorting)
 add_library(
   forfun_c
 )
-set_target_properties(forfun_c PROPERTIES C_EXTENSIONS OFF)
-set_target_properties(forfun_c PROPERTIES C_STANDARD 90)
-set_target_properties(forfun_c PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c
   INTERFACE
@@ -335,9 +317,6 @@ forfun_common_target_compile_options(forfun_c)
 add_library(
   forfun_c_experimental
 )
-set_target_properties(forfun_c_experimental PROPERTIES C_EXTENSIONS OFF)
-set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD 90)
-set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c_experimental
   INTERFACE
@@ -377,9 +356,6 @@ find_package(Microsoft.GSL CONFIG REQUIRED)
 add_library(
   forfun_experimental
 )
-set_target_properties(forfun_experimental PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD 23)
-set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_experimental
   INTERFACE
@@ -431,9 +407,6 @@ find_package(Catch2 3 REQUIRED)
 add_executable(
   test_driver
 )
-set_target_properties(test_driver PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(test_driver PROPERTIES CXX_STANDARD 23)
-set_target_properties(test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   test_driver
   PRIVATE
@@ -509,9 +482,6 @@ forfun_common_target_compile_options(test_driver)
 add_executable(
   test_driver_experimental
 )
-set_target_properties(test_driver_experimental PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(test_driver_experimental PROPERTIES CXX_STANDARD 23)
-set_target_properties(test_driver_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   test_driver_experimental
   PRIVATE
@@ -548,9 +518,6 @@ find_package(nanobench CONFIG REQUIRED)
 add_executable(
   benchmark_driver
 )
-set_target_properties(benchmark_driver PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(benchmark_driver PROPERTIES CXX_STANDARD 23)
-set_target_properties(benchmark_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   benchmark_driver
   PRIVATE
@@ -622,9 +589,6 @@ forfun_common_target_compile_options(benchmark_driver)
 add_executable(
   benchmark_driver_experimental
 )
-set_target_properties(benchmark_driver_experimental PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(benchmark_driver_experimental PROPERTIES CXX_STANDARD 23)
-set_target_properties(benchmark_driver_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   benchmark_driver_experimental
   PRIVATE
@@ -657,9 +621,6 @@ forfun_common_target_compile_options(benchmark_driver_experimental)
 add_executable(
   static_test_driver
 )
-set_target_properties(static_test_driver PROPERTIES CXX_EXTENSIONS OFF)
-set_target_properties(static_test_driver PROPERTIES CXX_STANDARD 23)
-set_target_properties(static_test_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_sources(
   static_test_driver
   PRIVATE
@@ -706,9 +667,13 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
   add_executable(
     fuzzing_driver
   )
-  set_target_properties(fuzzing_driver PROPERTIES CXX_EXTENSIONS OFF)
-  set_target_properties(fuzzing_driver PROPERTIES CXX_STANDARD 23)
-  set_target_properties(fuzzing_driver PROPERTIES CXX_STANDARD_REQUIRED ON)
+  set_target_properties(
+    fuzzing_driver
+    PROPERTIES
+      CXX_EXTENSIONS OFF
+      CXX_STANDARD 23
+      CXX_STANDARD_REQUIRED ON
+  )
   target_sources(
     fuzzing_driver
     PRIVATE
@@ -738,3 +703,37 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
   link_fuzztest(fuzzing_driver)
   gtest_discover_tests(fuzzing_driver)
 endif()
+
+set_target_properties(
+  forfun
+  forfun_common
+  forfun_experimental
+  forfun_graph
+  forfun_search
+  forfun_sorting
+  PROPERTIES
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD 23
+    CXX_STANDARD_REQUIRED ON
+)
+
+set_target_properties(
+  benchmark_driver
+  benchmark_driver_experimental
+  static_test_driver
+  test_driver
+  test_driver_experimental
+  PROPERTIES
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD 23
+    CXX_STANDARD_REQUIRED ON
+)
+
+set_target_properties(
+  forfun_c
+  forfun_c_experimental
+  PROPERTIES
+    C_EXTENSIONS OFF
+    C_STANDARD 90
+    C_STANDARD_REQUIRED ON
+)
