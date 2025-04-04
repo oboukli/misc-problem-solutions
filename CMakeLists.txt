@@ -10,11 +10,25 @@ project(
   ForFun
 )
 
+add_library(forfun)
+add_library(forfun_common)
+add_library(forfun_experimental)
+add_library(forfun_graph)
+add_library(forfun_search)
+add_library(forfun_sorting)
+
+add_library(forfun_c)
+add_library(forfun_c_experimental)
+
+add_executable(test_driver)
+add_executable(test_driver_experimental)
+add_executable(static_test_driver)
+
+add_executable(benchmark_driver)
+add_executable(benchmark_driver_experimental)
+
 include(cmake/CompileOptions.cmake)
 
-add_library(
-  forfun
-)
 target_include_directories(
   forfun
   INTERFACE
@@ -118,9 +132,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun)
 
-add_library(
-  forfun_common
-)
 target_include_directories(
   forfun_common
   INTERFACE
@@ -156,9 +167,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_common)
 
-add_library(
-  forfun_graph
-)
 target_include_directories(
   forfun_graph
   INTERFACE
@@ -202,9 +210,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_graph)
 
-add_library(
-  forfun_search
-)
 target_include_directories(
   forfun_search
   INTERFACE
@@ -238,9 +243,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_search)
 
-add_library(
-  forfun_sorting
-)
 target_include_directories(
   forfun_sorting
   INTERFACE
@@ -278,9 +280,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_sorting)
 
-add_library(
-  forfun_c
-)
 target_include_directories(
   forfun_c
   INTERFACE
@@ -314,9 +313,6 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_c)
 
-add_library(
-  forfun_c_experimental
-)
 target_include_directories(
   forfun_c_experimental
   INTERFACE
@@ -353,9 +349,7 @@ source_group(
 forfun_common_target_compile_options(forfun_c_experimental)
 
 find_package(Microsoft.GSL CONFIG REQUIRED)
-add_library(
-  forfun_experimental
-)
+
 target_include_directories(
   forfun_experimental
   INTERFACE
@@ -404,9 +398,7 @@ target_link_libraries(
 forfun_common_target_compile_options(forfun_experimental)
 
 find_package(Catch2 3 REQUIRED)
-add_executable(
-  test_driver
-)
+
 target_sources(
   test_driver
   PRIVATE
@@ -479,9 +471,6 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(test_driver)
 
-add_executable(
-  test_driver_experimental
-)
 target_sources(
   test_driver_experimental
   PRIVATE
@@ -515,9 +504,7 @@ catch_discover_tests(test_driver_experimental)
 
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
-add_executable(
-  benchmark_driver
-)
+
 target_sources(
   benchmark_driver
   PRIVATE
@@ -586,9 +573,6 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(benchmark_driver)
 
-add_executable(
-  benchmark_driver_experimental
-)
 target_sources(
   benchmark_driver_experimental
   PRIVATE
@@ -618,9 +602,6 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(benchmark_driver_experimental)
 
-add_executable(
-  static_test_driver
-)
 target_sources(
   static_test_driver
   PRIVATE
