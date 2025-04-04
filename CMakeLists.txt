@@ -244,12 +244,6 @@ forfun_common_target_compile_options(forfun_search)
 
 add_library(
   forfun_sorting
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/bubble_sort.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/insertion_sort.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/quicksort.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/bubble_sort.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/insertion_sort.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/quicksort.cpp"
 )
 set_target_properties(forfun_sorting PROPERTIES CXX_EXTENSIONS OFF)
 set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD 23)
@@ -258,6 +252,34 @@ target_include_directories(
   forfun_sorting
   PUBLIC
   "include/"
+)
+target_sources(
+  forfun_sorting
+  PUBLIC
+  FILE_SET HEADERS
+  FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/bubble_sort.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/insertion_sort.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/quicksort.hpp"
+)
+target_sources(
+  forfun_sorting
+  PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/bubble_sort.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/insertion_sort.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/quicksort.cpp"
+)
+get_target_property(forfun_sorting_headers forfun_sorting HEADER_SET)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/"
+  PREFIX "Header files"
+  FILES ${forfun_sorting_headers}
+)
+get_target_property(forfun_sorting_sources forfun_sorting SOURCES)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/"
+  PREFIX "Source files"
+  FILES ${forfun_sorting_sources}
 )
 forfun_common_target_compile_options(forfun_sorting)
 
