@@ -27,6 +27,7 @@ target_sources(
   forfun
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/add_two_numbers.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/array_concatenation.hpp"
@@ -134,6 +135,7 @@ target_sources(
   forfun_common
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
@@ -173,6 +175,7 @@ target_sources(
   forfun_graph
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/balanced_binary_tree.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_node.hpp"
@@ -220,6 +223,7 @@ target_sources(
   forfun_search
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/binary_search.hpp"
 )
@@ -257,6 +261,7 @@ target_sources(
   forfun_sorting
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/bubble_sort.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/insertion_sort.hpp"
@@ -298,6 +303,7 @@ target_sources(
   forfun_c
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/palindrome.h"
 )
@@ -335,6 +341,7 @@ target_sources(
   forfun_c_experimental
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/add_two_numbers.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/container/forward_list.h"
@@ -375,6 +382,7 @@ target_sources(
   forfun_experimental
   PUBLIC
   FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_const_iterator.hpp"
