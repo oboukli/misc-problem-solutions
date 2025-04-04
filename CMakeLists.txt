@@ -20,8 +20,9 @@ set_target_properties(forfun PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun
@@ -128,8 +129,9 @@ set_target_properties(forfun_common PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun_common PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_common
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_common
@@ -168,8 +170,9 @@ set_target_properties(forfun_graph PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun_graph PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_graph
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_graph
@@ -216,8 +219,9 @@ set_target_properties(forfun_search PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun_search PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_search
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_search
@@ -254,8 +258,9 @@ set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun_sorting PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_sorting
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_sorting
@@ -296,8 +301,9 @@ set_target_properties(forfun_c PROPERTIES C_STANDARD 90)
 set_target_properties(forfun_c PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_c
@@ -334,8 +340,9 @@ set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD 90)
 set_target_properties(forfun_c_experimental PROPERTIES C_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_c_experimental
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_c_experimental
@@ -375,8 +382,9 @@ set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD 23)
 set_target_properties(forfun_experimental PROPERTIES CXX_STANDARD_REQUIRED ON)
 target_include_directories(
   forfun_experimental
-  PUBLIC
-  "include/"
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
   forfun_experimental
