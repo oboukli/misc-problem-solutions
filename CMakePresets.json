@@ -175,6 +175,27 @@
         "FORFUN_BUILD_FUZZING_DRIVER": "ON",
         "FUZZTEST_FUZZING_MODE": "ON"
       }
+    },
+    {
+      "name": "generic-single-config",
+      "displayName": "Generic single configuration",
+      "description": "Release all targets with debug information",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "ANTLR_BUILD_CPP_TESTS": "OFF",
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
+        "FUZZTEST_FUZZING_MODE": "ON"
+      }
     }
   ],
   "buildPresets": [
