@@ -1,8 +1,9 @@
 ---
-Checks: '
+Checks: "
   -cert-err58-cpp,
   -cppcoreguidelines-avoid-non-const-global-variables,
   -misc-use-anonymous-namespace,
-  '
+  "
 InheritParentConfig: true
-...
+---
+
