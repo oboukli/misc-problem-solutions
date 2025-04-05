@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cstddef>
 #include <cstdint>
 #include <string>
 #include <system_error>
@@ -14,8 +13,6 @@
 #include <fuzztest/fuzztest.h>
 
 #include <gmock/gmock.h>
-
-#include <gtest/gtest.h>
 
 #include "forfun/evaluate_reverse_polish_notation.hpp"
 
