@@ -156,27 +156,6 @@
       }
     },
     {
-      "name": "fuzz",
-      "displayName": "Fuzz test",
-      "description": "Fuzzing target with Ninja and vcpkg",
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "ANTLR_BUILD_CPP_TESTS": "OFF",
-        "BUILD_SHARED_LIBS": "OFF",
-        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
-        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
-        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
-        "FUZZTEST_FUZZING_MODE": "ON"
-      }
-    },
-    {
       "name": "generic-single-config",
       "displayName": "Generic single configuration",
       "description": "Release all targets with debug information",
@@ -275,27 +254,6 @@
       "description": "Release build",
       "configurePreset": "strict-clang",
       "configuration": "Release"
-    },
-    {
-      "name": "fuzz-release",
-      "displayName": "Fuzz Release",
-      "description": "Fuzz Release build",
-      "configurePreset": "fuzz",
-      "configuration": "Release"
-    },
-    {
-      "name": "fuzz-rel-with-debug",
-      "displayName": "Fuzz RelWithDebug",
-      "description": "Fuzz RelWithDebug build",
-      "configurePreset": "fuzz",
-      "configuration": "RelWithDebug"
-    },
-    {
-      "name": "fuzz-debug",
-      "displayName": "Fuzz Debug",
-      "description": "Fuzz Debug build",
-      "configurePreset": "fuzz",
-      "configuration": "Debug"
     }
   ]
 }
