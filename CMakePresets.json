@@ -4,7 +4,7 @@
     {
       "name": "generic",
       "displayName": "Generic",
-      "description": "Generic configuration with Ninja and vcpkg",
+      "description": "Generic build with Ninja Multi-Config and vcpkg",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
@@ -180,8 +180,8 @@
   "buildPresets": [
     {
       "name": "generic-debug",
-      "displayName": "Generic debug",
-      "description": "Generic debug build",
+      "displayName": "Generic Debug",
+      "description": "Generic Debug build",
       "configurePreset": "generic",
       "configuration": "Debug"
     },
@@ -194,29 +194,29 @@
     },
     {
       "name": "generic-release",
-      "displayName": "Generic release",
-      "description": "Generic release build",
+      "displayName": "Generic Release",
+      "description": "Generic Release build",
       "configurePreset": "generic",
       "configuration": "Release"
     },
     {
       "name": "windows-x64-debug",
-      "displayName": "Windows x64 debug",
-      "description": "Windows x64 debug build",
+      "displayName": "Windows x64 Debug",
+      "description": "Windows x64 Debug build",
       "configurePreset": "windows-x64",
       "configuration": "Debug"
     },
     {
       "name": "windows-x64-release",
-      "displayName": "Windows x64 release",
-      "description": "Windows x64 release build",
+      "displayName": "Windows x64 Release",
+      "description": "Windows x64 Release build",
       "configurePreset": "windows-x64",
       "configuration": "Release"
     },
     {
       "name": "strict-gcc-debug",
-      "displayName": "GCC debug",
-      "description": "strict-gcc debug build",
+      "displayName": "GCC Debug",
+      "description": "Debug build with GCC diagnostics",
       "configurePreset": "strict-gcc",
       "configuration": "Debug"
     },
@@ -230,14 +230,14 @@
     {
       "name": "strict-gcc-release",
       "displayName": "GCC release",
-      "description": "strict-gcc release build",
+      "description": "Release build with GCC diagnostics",
       "configurePreset": "strict-gcc",
       "configuration": "Release"
     },
     {
       "name": "strict-clang-debug",
-      "displayName": "Debug",
-      "description": "Debug build",
+      "displayName": "Clang Debug",
+      "description": "Debug build with Clang diagnostics",
       "configurePreset": "strict-clang",
       "configuration": "Debug"
     },
@@ -250,8 +250,8 @@
     },
     {
       "name": "strict-clang-release",
-      "displayName": "Release",
-      "description": "Release build",
+      "displayName": "Clang Release",
+      "description": "Release build with Clang diagnostics",
       "configurePreset": "strict-clang",
       "configuration": "Release"
     }
