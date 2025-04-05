@@ -40,9 +40,9 @@ namespace ascii_optimized {
     std::vector<char8_t> expected;
     expected.reserve(s.size());
 
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr};
+        if (char8_t const c{*iter};
             (c & char8_t{0b00000011}) == char8_t{0b00000001})
         {
             if (expected.empty() || (expected.back() != c))
@@ -79,9 +79,10 @@ namespace circuit_breaker {
     std::vector<char8_t> expected{};
     expected.reserve(s.size());
 
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const c{*iter};
+            (c == u8')') || (c == u8']') || (c == u8'}'))
         {
             if (expected.empty() || expected.back() != c)
             {
@@ -109,9 +110,10 @@ namespace deque_based {
 
     std::deque<char8_t> expected{};
 
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const c{*iter};
+            (c == u8')') || (c == u8']') || (c == u8'}'))
         {
             if (expected.empty() || expected.back() != c)
             {
@@ -155,9 +157,10 @@ namespace dyn_array_based {
     char8_t* back_ptr{nullptr};
     char8_t back{};
 
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const c{*iter};
+            (c == u8')') || (c == u8']') || (c == u8'}'))
         {
             if ((back_ptr == nullptr) || (back != c))
             {
@@ -208,9 +211,10 @@ namespace vector_based {
     std::vector<char8_t> expected{};
     expected.reserve(s.size());
 
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const c{*iter};
+            (c == u8')') || (c == u8']') || (c == u8'}'))
         {
             if (expected.empty() || expected.back() != c)
             {
@@ -240,9 +244,10 @@ namespace vector_based_demi_allocated {
     expected.reserve(s.size() / 2U);
 
     char8_t back{};
-    for (ConstIter itr{s.cbegin()}; itr != s.cend(); ++itr)
+    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        if (char8_t const c{*itr}; (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const c{*iter};
+            (c == u8')') || (c == u8']') || (c == u8'}'))
         {
             if (expected.empty() || back != c)
             {

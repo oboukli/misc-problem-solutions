@@ -82,9 +82,9 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     if (is_first_col_zeroed)
     {
         // Zero first column.
-        for (auto itr{matrix.begin()}; itr != matrix.end(); ++itr)
+        for (auto iter{matrix.begin()}; iter != matrix.end(); ++iter)
         {
-            itr->front() = 0;
+            iter->front() = 0;
         }
     }
 }
@@ -157,9 +157,9 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     if (is_first_col_zeroed)
     {
         // Zero first column.
-        for (auto itr{matrix.begin()}; itr != matrix.end(); ++itr)
+        for (auto iter{matrix.begin()}; iter != matrix.end(); ++iter)
         {
-            itr->front() = 0;
+            iter->front() = 0;
         }
     }
 }

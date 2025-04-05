@@ -18,19 +18,19 @@ namespace forfun::move_zeroes {
 
 namespace sol1 {
 
-template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
-    requires std::integral<std::iter_value_t<Itr>>
-constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
-    auto itr_j{itr};
-    for (; itr != end; ++itr)
+    auto iter_j{iter};
+    for (; iter != last; ++iter)
     {
-        if (*itr != ValType{0}) [[likely]]
+        if (*iter != ValType{0})
         {
-            std::iter_swap(itr, itr_j);
-            ++itr_j;
+            std::iter_swap(iter, iter_j);
+            ++iter_j;
         }
     }
 }
@@ -39,25 +39,25 @@ constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 
 namespace sol2 {
 
-template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
-    requires std::integral<std::iter_value_t<Itr>>
-constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
-    auto itr_j{itr};
-    for (; itr != end; ++itr)
+    auto iter_j{iter};
+    for (; iter != last; ++iter)
     {
-        if (*itr != ValType{0}) [[likely]]
+        if (*iter != ValType{0})
         {
-            *itr_j = *itr;
-            ++itr_j;
+            *iter_j = *iter;
+            ++iter_j;
         }
     }
 
-    for (; itr_j != end; ++itr_j)
+    for (; iter_j != last; ++iter_j)
     {
-        *itr_j = ValType{0};
+        *iter_j = ValType{0};
     }
 }
 
@@ -65,23 +65,23 @@ constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
 
 namespace stl {
 
-template <std::sortable Itr, std::sentinel_for<Itr> Sentinel>
-    requires std::integral<std::iter_value_t<Itr>>
-constexpr auto move_zeroes(Itr itr, Sentinel const end) noexcept -> void
+template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
+    requires std::integral<std::iter_value_t<Iter>>
+constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
-    auto itr_j{itr};
-    for (; itr != end; ++itr)
+    auto iter_j{iter};
+    for (; iter != last; ++iter)
     {
-        if (*itr != ValType{0}) [[likely]]
+        if (*iter != ValType{0}) [[likely]]
         {
-            *itr_j = *itr;
-            ++itr_j;
+            *iter_j = *iter;
+            ++iter_j;
         }
     }
 
-    std::fill(itr_j, end, ValType{0});
+    std::fill(iter_j, last, ValType{0});
 }
 
 } // namespace stl

@@ -21,7 +21,7 @@ template <typename Elements>
 {
     using ElementType = Elements::value_type;
     using SizeType = Elements::size_type;
-    using Itr = Elements::const_iterator;
+    using Iter = Elements::const_iterator;
 
     SizeType const size{elements.size()};
 
@@ -33,22 +33,22 @@ template <typename Elements>
     SizeType threshold{(size / SizeType{2U}) + SizeType{1U}};
     SizeType count{0U};
     ElementType majority_elm{} /*[[indeterminate]]*/;
-    Itr majority_itr{} /*[[indeterminate]]*/;
+    Iter majority_iter{} /*[[indeterminate]]*/;
 
-    for (Itr itr{elements.cbegin()}; itr != elements.cend(); ++itr)
+    for (Iter iter{elements.cbegin()}; iter != elements.cend(); ++iter)
     {
         if (count == SizeType{0U})
         {
-            majority_elm = *itr;
-            majority_itr = itr;
+            majority_elm = *iter;
+            majority_iter = iter;
         }
 
-        if (*itr == majority_elm)
+        if (*iter == majority_elm)
         {
             ++count;
             if (count == threshold)
             {
-                return majority_itr;
+                return majority_iter;
             }
         }
         else
@@ -57,16 +57,16 @@ template <typename Elements>
         }
     }
 
-    for (auto itr{elements.cbegin()}; itr != elements.cend(); ++itr)
+    for (auto iter{elements.cbegin()}; iter != elements.cend(); ++iter)
     {
-        if (*itr == majority_elm)
+        if (*iter == majority_elm)
         {
             --threshold;
         }
 
         if (threshold == SizeType{0U})
         {
-            return majority_itr;
+            return majority_iter;
         }
     }
 
