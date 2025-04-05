@@ -437,10 +437,10 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/set_matrix_zeroes_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sonar_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/bubble_sort_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/top_k_frequent_elements_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_test.cpp"
@@ -540,10 +540,10 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/binary_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/set_matrix_zeroes_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sonar_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/squares_sorted_array_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/bubble_sort_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/insertion_sort_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/quicksort_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/squares_sorted_array_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sub_array_sums_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/top_k_frequent_elements_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/tower_of_hanoi_benchmark.cpp"
@@ -576,8 +576,8 @@ forfun_common_target_compile_options(benchmark_driver)
 target_sources(
   benchmark_driver_experimental
   PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/add_two_numbers_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
 )
