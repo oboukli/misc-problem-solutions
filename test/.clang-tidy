@@ -1,7 +1,8 @@
 ---
-Checks: '
+Checks: "
   -google-build-using-namespace,
   -google-explicit-constructor,
-  '
+  "
 InheritParentConfig: true
-...
+---
+
