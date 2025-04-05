@@ -186,6 +186,13 @@
       "configuration": "Debug"
     },
     {
+      "name": "generic-relwithdebinfo",
+      "displayName": "Generic RelWithDebInfo",
+      "description": "Generic RelWithDebInfo build",
+      "configurePreset": "generic",
+      "configuration": "RelWithDebInfo"
+    },
+    {
       "name": "generic-release",
       "displayName": "Generic release",
       "description": "Generic release build",
@@ -214,6 +221,13 @@
       "configuration": "Debug"
     },
     {
+      "name": "strict-gcc-relwithdebinfo",
+      "displayName": "GCC RelWithDebInfo",
+      "description": "RelWithDebInfo build with GCC diagnostics",
+      "configurePreset": "strict-gcc",
+      "configuration": "RelWithDebInfo"
+    },
+    {
       "name": "strict-gcc-release",
       "displayName": "GCC release",
       "description": "strict-gcc release build",
@@ -226,6 +240,13 @@
       "description": "Debug build",
       "configurePreset": "strict-clang",
       "configuration": "Debug"
+    },
+    {
+      "name": "strict-clang-relwithdebinfo",
+      "displayName": "Clang RelWithDebInfo",
+      "description": "RelWithDebInfo build with Clang diagnostics",
+      "configurePreset": "strict-clang",
+      "configuration": "RelWithDebInfo"
     },
     {
       "name": "strict-clang-release",
