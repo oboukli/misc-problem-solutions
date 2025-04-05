@@ -53,10 +53,10 @@ constexpr auto concatenate(
     for (std::size_t i{0U}; i < 2U; ++i)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto itr{dest.begin() + (Size * i)};
-        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
+        auto iter{dest.begin() + (Size * i)};
+        for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
         {
-            *(itr++) = *src_itr;
+            *(iter++) = *src_iter;
         }
     }
 }
@@ -71,18 +71,18 @@ constexpr auto concatenate(
 ) noexcept -> void
 {
     {
-        auto itr{dest.begin()};
-        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
+        auto iter{dest.begin()};
+        for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
         {
-            *(itr++) = *src_itr;
+            *(iter++) = *src_iter;
         }
     }
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto itr{dest.begin() + Size};
-        for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
+        auto iter{dest.begin() + Size};
+        for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
         {
-            *(itr++) = *src_itr;
+            *(iter++) = *src_iter;
         }
     }
 }
@@ -96,13 +96,13 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
 ) noexcept -> void
 {
-    auto dest1_itr{dest.begin()};
+    auto dest1_iter{dest.begin()};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-    auto dest2_itr{dest1_itr + Size};
-    for (auto src_itr{src.cbegin()}; src_itr != src.cend(); ++src_itr)
+    auto dest2_iter{dest1_iter + Size};
+    for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
     {
-        *(dest1_itr++) = *src_itr;
-        *(dest2_itr++) = *src_itr;
+        *(dest1_iter++) = *src_iter;
+        *(dest2_iter++) = *src_iter;
     }
 }
 

@@ -26,11 +26,11 @@ namespace forfun::first_missing_positive {
 
 namespace detail {
 
-template <std::contiguous_iterator Itr>
-    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
-constexpr auto quasi_sort(Itr const first, Itr const src) noexcept -> void
+template <std::contiguous_iterator Iter>
+    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
+constexpr auto quasi_sort(Iter const first, Iter const src) noexcept -> void
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
     if (auto const n{*src}; n > ValType{0})
     {
@@ -49,39 +49,39 @@ constexpr auto quasi_sort(Itr const first, Itr const src) noexcept -> void
 
 namespace base {
 
-template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
-    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-lowest_missing(Itr const begin, Sentinel const end) noexcept
-    -> std::iter_value_t<Itr>
+lowest_missing(Iter const first, Sentinel const last) noexcept
+    -> std::iter_value_t<Iter>
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
-    auto max{end - begin};
+    auto max{last - first};
 
-    for (auto itr{begin}; itr != end; ++itr)
+    for (auto iter{first}; iter != last; ++iter)
     {
-        if (auto const current{*itr}; current < ValType{1})
+        if (auto const current{*iter}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *itr = ValType{0};
+            *iter = ValType{0};
         }
         else
         {
-            detail::quasi_sort(begin, itr);
+            detail::quasi_sort(first, iter);
         }
     }
 
     ValType min_num{1};
 
-    auto const endItr{begin + max};
-    for (auto itr{begin}; itr != endItr; ++itr)
+    auto const endItr{first + max};
+    for (auto iter{first}; iter != endItr; ++iter)
     {
-        if (*itr == min_num)
+        if (*iter == min_num)
         {
             ++min_num;
         }
@@ -94,38 +94,38 @@ lowest_missing(Itr const begin, Sentinel const end) noexcept
 
 namespace fast {
 
-template <std::contiguous_iterator Itr, std::sized_sentinel_for<Itr> Sentinel>
-    requires std::sortable<Itr> and std::integral<std::iter_value_t<Itr>>
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
-lowest_missing(Itr const begin, Sentinel const end) noexcept
-    -> std::iter_value_t<Itr>
+lowest_missing(Iter const first, Sentinel const last) noexcept
+    -> std::iter_value_t<Iter>
 {
-    using ValType = std::iter_value_t<Itr>;
+    using ValType = std::iter_value_t<Iter>;
 
-    auto max{end - begin};
+    auto max{last - first};
 
-    for (auto itr{begin}; itr != end; ++itr)
+    for (auto iter{first}; iter != last; ++iter)
     {
-        if (auto const current{*itr}; current < ValType{1})
+        if (auto const current{*iter}; current < ValType{1})
         {
             --max;
         }
         else if (current > max)
         {
             --max;
-            *itr = ValType{0};
+            *iter = ValType{0};
         }
         else
         {
-            detail::quasi_sort(begin, itr);
+            detail::quasi_sort(first, iter);
         }
     }
 
     ValType min_num{1};
 
-    for (std::iter_difference_t<Itr> i{0}; i < max; ++i)
+    for (std::iter_difference_t<Iter> i{0}; i < max; ++i)
     {
-        if (begin[i] == min_num)
+        if (first[i] == min_num)
         {
             ++min_num;
         }
