@@ -607,19 +607,19 @@ forfun_common_target_compile_options(benchmark_driver_experimental)
 target_sources(
   static_test_driver
   PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_static_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_static_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
 )
 get_target_property(forfun_static_tests static_test_driver SOURCES)
 source_group(
