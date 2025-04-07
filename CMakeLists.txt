@@ -327,12 +327,14 @@ target_sources(
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/add_two_numbers.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/container/forward_list.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/mem/mem.h"
 )
 target_sources(
   forfun_c_experimental
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/add_two_numbers.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/container/forward_list.c"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/mem/mem.c"
 )
 get_target_property(forfun_c_experimental_sources forfun_c_experimental SOURCES)
 source_group(
@@ -481,6 +483,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
 )
 get_target_property(forfun_experimental_tests test_driver_experimental SOURCES)
 source_group(
