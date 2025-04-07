@@ -6,8 +6,8 @@ found in the LICENSE file.
 
 /* SPDX-License-Identifier: MIT */
 
-#ifndef FORFUN_C_CONTAINER_FORWARD_LIST_HPP_
-#define FORFUN_C_CONTAINER_FORWARD_LIST_HPP_
+#ifndef FORFUN_C_CONTAINER_FORWARD_LIST_H_
+#define FORFUN_C_CONTAINER_FORWARD_LIST_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,4 +25,4 @@ void forfun_free_node_list(struct forfun_forward_list_node* root_node_ptr);
 }
 #endif /* __cplusplus */
 
-#endif /* FORFUN_C_CONTAINER_FORWARD_LIST_HPP_ */
+#endif /* FORFUN_C_CONTAINER_FORWARD_LIST_H_ */
