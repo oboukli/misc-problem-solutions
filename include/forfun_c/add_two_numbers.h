@@ -31,7 +31,7 @@ struct forfun_forward_list_node* forfun_recursive_add_two_numbers(
 );
 
 #ifdef __cplusplus
-}
+} /* extern "C" */
 #endif /* __cplusplus */
 
 #endif /* FORFUN_C_ADD_TWO_NUMBERS_H_ */

@@ -25,7 +25,7 @@ int forfun_is_palindrome(char const* str, size_t length);
 int forfun_is_palindrome_ci(char const* str, size_t length);
 
 #ifdef __cplusplus
-}
+} /* extern "C" */
 #endif /* __cplusplus */
 
 #endif /* FORFUN_C_PALINDROME_H_ */

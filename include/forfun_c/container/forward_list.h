@@ -22,7 +22,7 @@ struct forfun_forward_list_node {
 void forfun_free_node_list(struct forfun_forward_list_node* root_node_ptr);
 
 #ifdef __cplusplus
-}
+} /* extern "C" */
 #endif /* __cplusplus */
 
 #endif /* FORFUN_C_CONTAINER_FORWARD_LIST_H_ */
