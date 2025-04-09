@@ -21,6 +21,8 @@ typedef struct forfun_mem {
     void (*ff_free)(void*);
 } forfun_mem;
 
+extern forfun_mem g_forfun_mem;
+
 void forfun_mem_set(forfun_mem mem);
 
 forfun_mem forfun_mem_get(void);

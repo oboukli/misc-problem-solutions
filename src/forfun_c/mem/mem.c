@@ -11,25 +11,25 @@ found in the LICENSE file.
 #include <stddef.h>
 #include <stdlib.h>
 
-static forfun_mem forfun_mem_;
+forfun_mem g_forfun_mem;
 
 void forfun_mem_set(forfun_mem const mem)
 {
-    forfun_mem_.ff_malloc = mem.ff_malloc;
-    forfun_mem_.ff_free = mem.ff_free;
+    g_forfun_mem.ff_malloc = mem.ff_malloc;
+    g_forfun_mem.ff_free = mem.ff_free;
 }
 
 forfun_mem forfun_mem_get(void)
 {
     forfun_mem mem;
-    mem.ff_malloc = forfun_mem_.ff_malloc;
-    mem.ff_free = forfun_mem_.ff_free;
+    mem.ff_malloc = g_forfun_mem.ff_malloc;
+    mem.ff_free = g_forfun_mem.ff_free;
 
     return mem;
 }
 
 void forfun_mem_reset_to_default(void)
 {
-    forfun_mem_.ff_malloc = &malloc;
-    forfun_mem_.ff_free = &free;
+    g_forfun_mem.ff_malloc = &malloc;
+    g_forfun_mem.ff_free = &free;
 }
