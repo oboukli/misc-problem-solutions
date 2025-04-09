@@ -18,7 +18,9 @@ add_library(forfun_search)
 add_library(forfun_sorting)
 
 add_library(forfun_c)
-add_library(forfun_c_experimental)
+
+# Defines and exports global thread-unsafe state.
+add_library(forfun_c_experimental STATIC)
 
 add_executable(test_driver)
 add_executable(test_driver_experimental)
