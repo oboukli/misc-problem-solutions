@@ -13,6 +13,7 @@ found in the LICENSE file.
 #include <stdlib.h>
 
 #include "forfun_c/container/forward_list.h"
+#include "forfun_c/mem/mem.h"
 
 struct forfun_internal_result {
     struct forfun_forward_list_node* node;
@@ -32,7 +33,7 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
 {
     unsigned int sum = 0U;
     struct forfun_forward_list_node* aux_node_ptr
-        = (struct forfun_forward_list_node*)malloc(
+        = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
             sizeof(struct forfun_forward_list_node)
         );
     struct forfun_forward_list_node* const root_node_ptr = aux_node_ptr;
@@ -69,9 +70,10 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
             return root_node_ptr;
         }
 
-        aux_node_ptr->next = (struct forfun_forward_list_node*)malloc(
-            sizeof(struct forfun_forward_list_node)
-        );
+        aux_node_ptr->next
+            = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
+                sizeof(struct forfun_forward_list_node)
+            );
         aux_node_ptr = aux_node_ptr->next;
         if (aux_node_ptr == NULL)
         {
@@ -111,7 +113,7 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
         struct forfun_forward_list_node* next_b
             = addend_b == NULL ? NULL : addend_b->next;
 
-        aux_node_ptr = (struct forfun_forward_list_node*)malloc(
+        aux_node_ptr = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
             sizeof(struct forfun_forward_list_node)
         );
         if (aux_node_ptr == NULL)
@@ -123,7 +125,7 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
         next_result = forfun_do_add_two_numbers(next_a, next_b, sum / 10U);
         if (next_result.error == 1)
         {
-            free(aux_node_ptr);
+            g_forfun_mem.ff_free(aux_node_ptr);
 
             goto error;
         }

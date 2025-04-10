@@ -18,6 +18,7 @@
 
 #include "forfun_c/add_two_numbers.h"
 #include "forfun_c/container/forward_list.h"
+#include "forfun_c/mem/mem.h"
 
 TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 {
@@ -55,6 +56,8 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
         ::forfun_forward_list_node,
         decltype(&::forfun_free_node_list)>>
         results_c_recursive{};
+
+    ::forfun_mem_reset_to_default();
 
     ankerl::nanobench::Bench()
 
