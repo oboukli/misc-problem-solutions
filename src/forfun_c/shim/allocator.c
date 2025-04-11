@@ -9,7 +9,8 @@ found in the LICENSE file.
 #include "forfun_c/shim/allocator.h"
 
 #include <stddef.h>
-#include <stdlib.h>
+
+#include <mimalloc.h>
 
 #include "forfun_c/mem/mem.h"
 
@@ -99,12 +100,12 @@ void* forfun_shim_malloc(size_t const size)
         return NULL;
     }
 
-    return malloc(size);
+    return mi_malloc(size);
 }
 
 void forfun_shim_free(void* const ptr)
 {
     ++g_shim_context_.shim_free_call_count;
 
-    free(ptr);
+    mi_free(ptr);
 }

@@ -315,6 +315,8 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_c)
 
+find_package(mimalloc CONFIG REQUIRED)
+
 target_include_directories(
   forfun_c_experimental
   INTERFACE
@@ -351,6 +353,10 @@ source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
   PREFIX "Header files"
   FILES ${forfun_c_experimental_headers}
+)
+target_link_libraries(
+  forfun_c_experimental
+  PRIVATE mimalloc-static
 )
 forfun_common_target_compile_options(forfun_c_experimental)
 
@@ -498,12 +504,9 @@ source_group(
 )
 target_link_libraries(
   test_driver_experimental
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  test_driver_experimental
   PRIVATE forfun_c_experimental
   PRIVATE forfun_experimental
+  PRIVATE Catch2::Catch2WithMain
 )
 forfun_common_target_compile_options(test_driver_experimental)
 
