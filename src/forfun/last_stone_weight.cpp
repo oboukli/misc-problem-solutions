@@ -4,14 +4,14 @@
 
 // SPDX-License-Identifier: MIT
 
+#include "forfun/last_stone_weight.hpp"
+
 #include <cassert>
 #include <functional>
 #include <queue>
 #include <type_traits>
 #include <utility>
 #include <vector>
-
-#include "forfun/last_stone_weight.hpp"
 
 namespace forfun::last_stone_weight::priority_queue_based {
 
