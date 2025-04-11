@@ -27,7 +27,7 @@ namespace recursive {
 namespace detail {
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
-constexpr auto depth_first_search_imp(
+auto depth_first_search_imp(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
@@ -57,7 +57,7 @@ constexpr auto depth_first_search_imp(
 } // namespace detail
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
-constexpr auto depth_first_search(
+auto depth_first_search(
     VertexAdjacencyList<T> const& vertex_adjacency_list,
     VertexStateList<T>& vertex_state_list,
     vertex<T> const& start,
