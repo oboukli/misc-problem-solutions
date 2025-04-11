@@ -315,6 +315,8 @@ source_group(
 )
 forfun_common_target_compile_options(forfun_c)
 
+find_package(mimalloc CONFIG REQUIRED)
+
 target_include_directories(
   forfun_c_experimental
   INTERFACE
@@ -351,6 +353,10 @@ source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
   PREFIX "Header files"
   FILES ${forfun_c_experimental_headers}
+)
+target_link_libraries(
+  forfun_c_experimental
+  PRIVATE mimalloc
 )
 forfun_common_target_compile_options(forfun_c_experimental)
 
@@ -483,6 +489,7 @@ target_sources(
   test_driver_experimental
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_c_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2/test_run_listener.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
@@ -499,6 +506,7 @@ source_group(
 target_link_libraries(
   test_driver_experimental
   PRIVATE Catch2::Catch2WithMain
+  PRIVATE mimalloc
 )
 target_link_libraries(
   test_driver_experimental
