@@ -6,10 +6,10 @@ found in the LICENSE file.
 
 /* SPDX-License-Identifier: MIT */
 
+#include "forfun_c/container/forward_list.h"
+
 #include <stddef.h>
 #include <stdlib.h>
-
-#include "forfun_c/container/forward_list.h"
 
 void forfun_free_node_list(struct forfun_forward_list_node* const root_node_ptr)
 {
