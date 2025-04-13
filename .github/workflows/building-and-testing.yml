@@ -77,6 +77,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           .\test_driver_experimental.exe
           --reporter console::out=-::colour-mode=ansi
@@ -163,6 +167,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           .\test_driver_experimental.exe
           --reporter console::out=-::colour-mode=ansi
@@ -260,6 +268,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
           --tool=memcheck
@@ -361,6 +373,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
           --tool=memcheck
@@ -458,6 +474,10 @@ jobs:
         working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
@@ -548,6 +568,10 @@ jobs:
         working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
 
       - name: Run test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
@@ -668,6 +692,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
           --tool=memcheck
@@ -792,6 +820,10 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
           --tool=memcheck
