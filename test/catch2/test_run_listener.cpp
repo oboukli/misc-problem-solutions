@@ -4,13 +4,22 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <iostream>
+
 #include <mimalloc.h>
 
-// Override the C++ new and delete operations.
-#include <mimalloc-new-delete.h>
-
+#include <catch2/interfaces/catch_interfaces_reporter.hpp>
+#include <catch2/internal/catch_test_run_info.hpp>
 #include <catch2/reporters/catch_reporter_event_listener.hpp>
 #include <catch2/reporters/catch_reporter_registrars.hpp>
+
+extern "C" ::mi_output_fun output_handler;
+
+extern "C" auto output_handler(char const* const msg, void* const /*arg*/)
+    -> void
+{
+    std::cout << msg;
+}
 
 namespace {
 
@@ -31,14 +40,11 @@ public:
     void
     testRunStarting(Catch::TestRunInfo const& /*testRunInfo*/) noexcept override
     {
-        // Ensure mimalloc.dll is loaded on Windows.
-        ::mi_version();
+        ::mi_register_output(&output_handler, nullptr);
     }
 };
 
-#ifdef _WIN32
 CATCH_REGISTER_LISTENER(TestRunListener)
-#endif // _WIN32
 
 TestRunListener::~TestRunListener() = default;
 
