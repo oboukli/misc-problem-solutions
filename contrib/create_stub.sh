@@ -192,7 +192,7 @@ benchmark_dir="benchmark/${solution_prefix}"
 header_file="include/forfun/${solution_prefix}${snake_name}.hpp"
 src_file="src/forfun/${solution_prefix}${snake_name}.cpp"
 test_file="test/${solution_prefix}${snake_name}_test.cpp"
-static_test_file="test/${solution_prefix}${snake_name}_static_test.cpp"
+static_test_file="test/${solution_prefix}${snake_name}_statictest.cpp"
 benchmark_file="benchmark/${solution_prefix}${snake_name}_benchmark.cpp"
 fuzz_test_file="fuzz/${solution_prefix}${snake_name}_fuzz.cpp"
 
@@ -218,27 +218,28 @@ then
 
   # Create header file
   touch "${path_prefix}/${header_file}"
-  echo "${accent}\"${header_file}\"" >&2
+  echo "${accent}" >&2
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${header_file}\"" >&2
 
   # Create source file
   touch "${path_prefix}/${src_file}"
-  echo "\"${src_file}\"" >&2
-
-  # Create test file
-  touch "${path_prefix}/${test_file}"
-  echo "\"${test_file}\"" >&2
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${src_file}\"" >&2
 
   # Create static test file
   touch "${path_prefix}/${static_test_file}"
-  echo "\"${static_test_file}\"" >&2
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${static_test_file}\"" >&2
+
+  # Create test file
+  touch "${path_prefix}/${test_file}"
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${test_file}\"" >&2
 
   # Create benchmark file
   touch "${path_prefix}/${benchmark_file}"
-  echo "\"${benchmark_file}\"" >&2
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${benchmark_file}\"" >&2
 
   # Create fuzz test file
   touch "${path_prefix}/${fuzz_test_file}"
-  echo "\"${fuzz_test_file}\"" >&2
+  echo "\"\${CMAKE_CURRENT_SOURCE_DIR}/${fuzz_test_file}\"" >&2
 
   echo "${unaccent}" >&2
 fi
