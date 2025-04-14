@@ -17,17 +17,17 @@
 namespace {
 
 [[nodiscard]] auto AnyHaystackSortedInNonDescendingOrderAndNeedle()
-    -> fuzztest::Domain<std::pair<std::vector<int>, int>>
+    -> ::fuzztest::Domain<std::pair<std::vector<int>, int>>
 {
-    return fuzztest::FlatMap(
+    return ::fuzztest::FlatMap(
         [](std::vector<int> vec)
-            -> fuzztest::Domain<std::pair<std::vector<int>, int>> {
+            -> ::fuzztest::Domain<std::pair<std::vector<int>, int>> {
             std::ranges::sort(vec);
-            return fuzztest::PairOf(
-                fuzztest::Just(vec), fuzztest::ElementOf(vec)
+            return ::fuzztest::PairOf(
+                ::fuzztest::Just(vec), ::fuzztest::ElementOf(vec)
             );
         },
-        fuzztest::NonEmpty(fuzztest::Arbitrary<std::vector<int>>())
+        ::fuzztest::NonEmpty(::fuzztest::Arbitrary<std::vector<int>>())
     );
 }
 
