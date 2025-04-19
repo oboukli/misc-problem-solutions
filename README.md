@@ -51,6 +51,7 @@ leveraged by this project:
 | Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                             |
 | Bubble Sort                      | C++20    | [`include/forfun/sorting/bubble_sort.hpp`](include/forfun/sorting/bubble_sort.hpp)                                         |
 | Concatenation of Array           | C++17    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
+| Container with Most Water        | C++20    | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                             |
 | Contains Duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
 | Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                                 |
 | Encode and Decode Strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](src/forfun/encode_and_decode_strings.cpp)                                     |
