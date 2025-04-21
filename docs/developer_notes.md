@@ -1,6 +1,6 @@
 # Developer notes
 
-## Architecture
+## Architecture and design
 
 ### Dynamic memory allocation
 
@@ -21,6 +21,10 @@ An example can be seen in the
 [`bucket_sort_based::top_frequent`](../include/forfun/top_k_frequent_elements.hpp)
 strategy where a call to `std::sort` is delayed till after the
 potentially-throwing `std::vector` constructor.
+
+## Internal checks
+
+The design avoids fail-fast guards as it favors performance and composability.
 
 ### Static and shared libraries
 
