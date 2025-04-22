@@ -32,6 +32,7 @@ TEMPLATE_TEST_CASE_SIG(
                 {"anagram"sv, "nagaram"sv}, // Benchmark case
                 {"nagaram"sv, "anagram"sv},
                 {"listen"sv, "silent"sv},
+                {"abaa"sv, "aaba"sv},
 
                 {"xyz"sv, "zyx"sv},
                 {"xyz"sv, "xzy"sv},
