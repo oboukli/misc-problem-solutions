@@ -7,8 +7,8 @@
 #include "forfun/valid_anagram.hpp"
 
 #include <array>
-#include <cassert>
 #include <cstddef>
+#include <iterator>
 #include <limits>
 #include <string_view>
 
@@ -19,7 +19,7 @@ namespace forfun::valid_anagram::char_only {
 {
     using Iter = std::string_view::const_iterator;
 
-    if (s.length() != t.length()) [[unlikely]]
+    if (s.length() != t.length())
     {
         return false;
     }
@@ -29,33 +29,23 @@ namespace forfun::valid_anagram::char_only {
         2U << static_cast<std::size_t>(
             std::numeric_limits<std::string_view::value_type>::digits
         )>
-        haystack{};
-    static_assert(haystack.size() == std::size_t{256U});
+        bucket{};
+    static_assert(bucket.size() == std::size_t{256U});
 
     for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
-        auto const index{
-            static_cast<std::size_t>(static_cast<unsigned char>(*iter))
-        };
-        assert(index < haystack.size());
-
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
-        ++haystack[index];
+        ++(*std::next(bucket.begin(), *iter));
     }
 
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
-        auto const index{
-            static_cast<std::size_t>(static_cast<unsigned char>(*iter))
-        };
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
-        if (haystack[index] == std::size_t{0U})
+        auto* const it{std::next(bucket.begin(), *iter)};
+        if (*it == std::size_t{0U})
         {
             return false;
         }
 
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
-        --haystack[index];
+        --(*it);
     }
 
     return true;
