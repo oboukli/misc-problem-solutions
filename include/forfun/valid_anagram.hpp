@@ -11,7 +11,11 @@
 #ifndef FORFUN_VALID_ANAGRAM_HPP_
 #define FORFUN_VALID_ANAGRAM_HPP_
 
+#include <array>
 #include <concepts>
+#include <cstddef>
+#include <iterator>
+#include <limits>
 #include <set>
 #include <string_view>
 
@@ -19,8 +23,42 @@ namespace forfun::valid_anagram {
 
 namespace char_only {
 
-[[nodiscard]] auto is_anagram(std::string_view s, std::string_view t) noexcept
-    -> bool;
+[[nodiscard]] constexpr auto
+is_anagram(std::string_view s, std::string_view t) noexcept -> bool
+{
+    using Iter = std::string_view::const_iterator;
+
+    if (s.length() != t.length())
+    {
+        return false;
+    }
+
+    std::array<
+        std::size_t,
+        2U << static_cast<std::size_t>(
+            std::numeric_limits<std::string_view::value_type>::digits
+        )>
+        bucket{};
+    static_assert(bucket.size() == std::size_t{256U});
+
+    for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    {
+        ++(*std::next(bucket.begin(), *iter));
+    }
+
+    for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
+    {
+        decltype(bucket)::iterator const it{std::next(bucket.begin(), *iter)};
+        if (*it == std::size_t{0U})
+        {
+            return false;
+        }
+
+        --(*it);
+    }
+
+    return true;
+}
 
 } // namespace char_only
 
