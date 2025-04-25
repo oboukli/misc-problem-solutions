@@ -17,7 +17,9 @@
 TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 {
     using namespace forfun::valid_anagram;
-    using std::string_view_literals::operator""sv;
+
+    std::string_view const s{"anagram"};
+    std::string_view const t{"nagaram"};
 
     ankerl::nanobench::Bench()
 
@@ -26,21 +28,19 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(char_only::is_anagram).c_str(),
-            []() noexcept {
-                bool const r{char_only::is_anagram("anagram"sv, "nagaram"sv)};
+            [s, t]() noexcept {
+                bool const volatile r{char_only::is_anagram(s, t)};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
             NAMEOF_RAW(generic::is_anagram<char>).c_str(),
-            []() {
-                bool const r{
-                    generic::is_anagram<char>("anagram"sv, "nagaram"sv)
-                };
+            [s, t]() {
+                bool const volatile r{generic::is_anagram<char>(s, t)};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
