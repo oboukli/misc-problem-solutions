@@ -20,6 +20,7 @@ TEMPLATE_TEST_CASE_SIG(
     "[valid_anagram]",
     (auto is_anagram, is_anagram),
     forfun::valid_anagram::char_only::is_anagram,
+    forfun::valid_anagram::map_based::is_anagram<char>,
     forfun::valid_anagram::generic::is_anagram<char>
 )
 {
