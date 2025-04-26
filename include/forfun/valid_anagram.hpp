@@ -16,6 +16,7 @@
 #include <cstddef>
 #include <iterator>
 #include <limits>
+#include <map>
 #include <set>
 #include <string_view>
 
@@ -61,6 +62,42 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
 }
 
 } // namespace char_only
+
+namespace map_based {
+
+template <std::integral CharT>
+[[nodiscard]] auto
+is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
+    -> bool
+{
+    using Iter = std::basic_string_view<CharT>::const_iterator;
+
+    if (s.length() != t.length())
+    {
+        return false;
+    }
+
+    std::map<CharT, std::size_t> bucket{};
+
+    for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    {
+        ++bucket[*iter];
+    }
+
+    for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
+    {
+        if (bucket[*iter] == std::size_t{0})
+        {
+            return false;
+        }
+
+        --bucket[*iter];
+    }
+
+    return true;
+}
+
+} // namespace map_based
 
 namespace generic {
 
