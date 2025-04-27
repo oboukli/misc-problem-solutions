@@ -36,6 +36,15 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
         )
 
         .run(
+            NAMEOF_RAW(map_based::is_anagram<char>).c_str(),
+            [s, t]() {
+                bool const volatile r{map_based::is_anagram<char>(s, t)};
+
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(generic::is_anagram<char>).c_str(),
             [s, t]() {
                 bool const volatile r{generic::is_anagram<char>(s, t)};
