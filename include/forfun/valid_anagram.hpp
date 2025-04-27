@@ -113,24 +113,23 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
         return false;
     }
 
-    std::multiset<typename std::basic_string_view<CharT>::value_type>
-        haystack{};
+    std::multiset<CharT> bucket{};
 
-    if constexpr (requires { haystack.insert_range(s); })
+    if constexpr (requires { bucket.insert_range(s); })
     {
-        haystack.insert_range(s);
+        bucket.insert_range(s);
     }
     else
     {
         for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
         {
-            haystack.emplace(*iter);
+            bucket.emplace(*iter);
         }
     }
 
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
-        if (auto const nh{haystack.extract(*iter)}; nh.empty())
+        if (auto const nh{bucket.extract(*iter)}; nh.empty())
         {
             return false;
         }
