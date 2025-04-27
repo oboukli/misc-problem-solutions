@@ -99,10 +99,14 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-TEST_CASE("Valid anagram (8-bit ordinal comparison)", "[valid_anagram]")
+TEMPLATE_TEST_CASE_SIG(
+    "Valid anagram (8-bit ordinal comparison)",
+    "[valid_anagram]",
+    (auto is_anagram, is_anagram),
+    forfun::valid_anagram::map_based::is_anagram<char8_t>,
+    forfun::valid_anagram::multiset_based::is_anagram<char8_t>
+)
 {
-    using forfun::valid_anagram::multiset_based::is_anagram;
-
     SECTION("Positive")
     {
         auto [s, t]{GENERATE(
@@ -180,10 +184,14 @@ TEST_CASE("Valid anagram (8-bit ordinal comparison)", "[valid_anagram]")
     }
 }
 
-TEST_CASE("Valid anagram (32-bit ordinal comparison)", "[valid_anagram]")
+TEMPLATE_TEST_CASE_SIG(
+    "Valid anagram (32-bit ordinal comparison)",
+    "[valid_anagram]",
+    (auto is_anagram, is_anagram),
+    forfun::valid_anagram::map_based::is_anagram<char32_t>,
+    forfun::valid_anagram::multiset_based::is_anagram<char32_t>
+)
 {
-    using forfun::valid_anagram::multiset_based::is_anagram;
-
     SECTION("Positive")
     {
         auto [s, t]{GENERATE(
