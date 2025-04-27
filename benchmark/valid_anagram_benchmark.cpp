@@ -45,9 +45,9 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
         )
 
         .run(
-            NAMEOF_RAW(generic::is_anagram<char>).c_str(),
+            NAMEOF_RAW(multiset_based::is_anagram<char>).c_str(),
             [s, t]() {
-                bool const volatile r{generic::is_anagram<char>(s, t)};
+                bool const volatile r{multiset_based::is_anagram<char>(s, t)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

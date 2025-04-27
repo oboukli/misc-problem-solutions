@@ -21,7 +21,7 @@ TEMPLATE_TEST_CASE_SIG(
     (auto is_anagram, is_anagram),
     forfun::valid_anagram::char_only::is_anagram,
     forfun::valid_anagram::map_based::is_anagram<char>,
-    forfun::valid_anagram::generic::is_anagram<char>
+    forfun::valid_anagram::multiset_based::is_anagram<char>
 )
 {
     SECTION("Positive")
@@ -101,7 +101,7 @@ TEMPLATE_TEST_CASE_SIG(
 
 TEST_CASE("Valid anagram (8-bit ordinal comparison)", "[valid_anagram]")
 {
-    using forfun::valid_anagram::generic::is_anagram;
+    using forfun::valid_anagram::multiset_based::is_anagram;
 
     SECTION("Positive")
     {
@@ -182,7 +182,7 @@ TEST_CASE("Valid anagram (8-bit ordinal comparison)", "[valid_anagram]")
 
 TEST_CASE("Valid anagram (32-bit ordinal comparison)", "[valid_anagram]")
 {
-    using forfun::valid_anagram::generic::is_anagram;
+    using forfun::valid_anagram::multiset_based::is_anagram;
 
     SECTION("Positive")
     {
