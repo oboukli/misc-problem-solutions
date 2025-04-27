@@ -274,7 +274,7 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
-// Web references:
+// References:
 // https://leetcode.com/problems/balanced-binary-tree/
 // https://neetcode.io/problems/balanced-binary-tree
 // https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
