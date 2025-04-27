@@ -99,7 +99,7 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
 
 } // namespace map_based
 
-namespace generic {
+namespace multiset_based {
 
 template <std::integral CharT>
 [[nodiscard]] auto
@@ -139,7 +139,7 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
     return true;
 }
 
-} // namespace generic
+} // namespace multiset_based
 
 } // namespace forfun::valid_anagram
 
