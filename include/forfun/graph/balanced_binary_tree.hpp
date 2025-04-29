@@ -15,25 +15,25 @@ using forfun::graph::binary_tree_node;
 
 namespace raw {
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+[[nodiscard]] auto is_balanced(binary_tree_node const* root) noexcept -> bool;
 
 } // namespace raw
 
 namespace stl_abs {
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+[[nodiscard]] auto is_balanced(binary_tree_node const* root) noexcept -> bool;
 
 } // namespace stl_abs
 
 namespace stl_minmax {
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+[[nodiscard]] auto is_balanced(binary_tree_node const* root) noexcept -> bool;
 
 } // namespace stl_minmax
 
 namespace stl_pair {
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* head) noexcept -> bool;
+[[nodiscard]] auto is_balanced(binary_tree_node const* root) noexcept -> bool;
 
 } // namespace stl_pair
 
