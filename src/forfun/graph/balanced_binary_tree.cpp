@@ -17,22 +17,22 @@ namespace raw {
 
 namespace {
 
-auto measure_depth_internal(binary_tree_node const* const head) noexcept
+auto measure_depth_internal(binary_tree_node const* const root) noexcept
     -> std::ptrdiff_t
 {
-    if (head == nullptr)
+    if (root == nullptr)
     {
         return 0;
     }
 
-    auto const left{measure_depth_internal(head->left_node_)};
+    auto const left{measure_depth_internal(root->left_node_)};
 
     if (left == std::ptrdiff_t{-1})
     {
         return -1;
     }
 
-    auto const right{measure_depth_internal(head->right_node_)};
+    auto const right{measure_depth_internal(root->right_node_)};
 
     if (right == std::ptrdiff_t{-1})
     {
@@ -65,10 +65,10 @@ auto measure_depth_internal(binary_tree_node const* const head) noexcept
 
 } // namespace
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+[[nodiscard]] auto is_balanced(binary_tree_node const* const root) noexcept
     -> bool
 {
-    return measure_depth_internal(head) != std::ptrdiff_t{-1};
+    return measure_depth_internal(root) != std::ptrdiff_t{-1};
 }
 
 } // namespace raw
@@ -77,22 +77,22 @@ namespace stl_abs {
 
 namespace {
 
-auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
 {
-    if (head == nullptr)
+    if (root == nullptr)
     {
         return {0U, false};
     }
 
-    auto const left{is_unbalanced_internal(head->left_node_)};
+    auto const left{is_unbalanced_internal(root->left_node_)};
 
     if (left.second)
     {
         return left;
     }
 
-    auto const right{is_unbalanced_internal(head->right_node_)};
+    auto const right{is_unbalanced_internal(root->right_node_)};
 
     if (right.second)
     {
@@ -113,10 +113,10 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 
 } // namespace
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+[[nodiscard]] auto is_balanced(binary_tree_node const* const root) noexcept
     -> bool
 {
-    return not is_unbalanced_internal(head).second;
+    return not is_unbalanced_internal(root).second;
 }
 
 } // namespace stl_abs
@@ -125,22 +125,22 @@ namespace stl_minmax {
 
 namespace {
 
-auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
 {
-    if (head == nullptr)
+    if (root == nullptr)
     {
         return {0U, false};
     }
 
-    auto const left{is_unbalanced_internal(head->left_node_)};
+    auto const left{is_unbalanced_internal(root->left_node_)};
 
     if (left.second)
     {
         return left;
     }
 
-    auto const right{is_unbalanced_internal(head->right_node_)};
+    auto const right{is_unbalanced_internal(root->right_node_)};
 
     if (right.second)
     {
@@ -160,10 +160,10 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 
 } // namespace
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+[[nodiscard]] auto is_balanced(binary_tree_node const* const root) noexcept
     -> bool
 {
-    return not is_unbalanced_internal(head).second;
+    return not is_unbalanced_internal(root).second;
 }
 
 } // namespace stl_minmax
@@ -172,22 +172,22 @@ namespace stl_pair {
 
 namespace {
 
-auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
+auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
 {
-    if (head == nullptr)
+    if (root == nullptr)
     {
         return {0U, false};
     }
 
-    auto const left{is_unbalanced_internal(head->left_node_)};
+    auto const left{is_unbalanced_internal(root->left_node_)};
 
     if (left.second)
     {
         return left;
     }
 
-    auto const right{is_unbalanced_internal(head->right_node_)};
+    auto const right{is_unbalanced_internal(root->right_node_)};
     if (right.second)
     {
         return right;
@@ -211,10 +211,10 @@ auto is_unbalanced_internal(binary_tree_node const* const head) noexcept
 
 } // namespace
 
-[[nodiscard]] auto is_balanced(binary_tree_node const* const head) noexcept
+[[nodiscard]] auto is_balanced(binary_tree_node const* const root) noexcept
     -> bool
 {
-    return not is_unbalanced_internal(head).second;
+    return not is_unbalanced_internal(root).second;
 }
 
 } // namespace stl_pair
