@@ -45,7 +45,7 @@ leveraged by this project:
 | ---                              | ---      | ---                                                                                                                        |
 | Add Two Numbers                  | C++17    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
 | Add Two Numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
-| Balanced Binary Tree             | C++20    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
+| Balanced Binary Tree             | C++23    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
 | Best Time to Buy And Sell Stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
 | Binary Search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                             |
