@@ -82,7 +82,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 {
     if (root == nullptr)
     {
-        return {0U, false};
+        return {0UZ, false};
     }
 
     auto const left{is_unbalanced_internal(root->left_node_)};
@@ -108,7 +108,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
         return {diff, true};
     }
 
-    return {std::max(left.first, right.first) + 1, false};
+    return {std::max(left.first, right.first) + 1UZ, false};
 }
 
 } // namespace
@@ -130,7 +130,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 {
     if (root == nullptr)
     {
-        return {0U, false};
+        return {0UZ, false};
     }
 
     auto const left{is_unbalanced_internal(root->left_node_)};
@@ -149,13 +149,13 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 
     auto const [min, max]{std::minmax(left.first, right.first)};
 
-    auto const diff{max - min};
-    if (diff > decltype(diff){1})
+    std::size_t const diff{max - min};
+    if (diff > 1UZ)
     {
         return {diff, true};
     }
 
-    return {max + 1, false};
+    return {max + 1UZ, false};
 }
 
 } // namespace
@@ -177,7 +177,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 {
     if (root == nullptr)
     {
-        return {0U, false};
+        return {0UZ, false};
     }
 
     auto const left{is_unbalanced_internal(root->left_node_)};
@@ -201,12 +201,12 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     };
     // clang-format on
 
-    if (diff > std::size_t{1U})
+    if (diff > 1UZ)
     {
         return {diff, true};
     }
 
-    return {std::max(left.first, right.first) + 1, false};
+    return {std::max(left.first, right.first) + 1UZ, false};
 }
 
 } // namespace
