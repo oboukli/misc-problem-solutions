@@ -188,6 +188,7 @@ header_dir="include/forfun/${solution_prefix}"
 src_dir="src/forfun/${solution_prefix}"
 test_dir="test/${solution_prefix}"
 benchmark_dir="benchmark/${solution_prefix}"
+fuzz_dir="fuzz/${solution_prefix}"
 
 header_file="include/forfun/${solution_prefix}${snake_name}.hpp"
 src_file="src/forfun/${solution_prefix}${snake_name}.cpp"
@@ -200,6 +201,7 @@ mkdir -p "${path_prefix}/${header_dir}"
 mkdir -p "${path_prefix}/${src_dir}"
 mkdir -p "${path_prefix}/${test_dir}"
 mkdir -p "${path_prefix}/${benchmark_dir}"
+mkdir -p "${path_prefix}/${fuzz_dir}"
 
 # New git branch command text
 echo 'Suggested Git command-line' >&2
