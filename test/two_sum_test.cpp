@@ -22,9 +22,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Two sum (unsorted container)",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::single_pass::two_sum<ConstIter, ConstIter>)
+    (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::mapped::two_sum<ConstIter, ConstIter>)
 )
 {
     SECTION("Two integers")
@@ -164,43 +163,15 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Two sum II (presorted container)",
+    "Two sum I, II (presorted container)",
     "[two_sum]",
     (auto two_sum, two_sum),
-    (forfun::two_sum::map_based::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::presorted::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::quadratic::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::single_pass::two_sum<ConstIter, ConstIter>)
+    (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::mapped::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_binary_searched::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_brute_searched::two_sum<ConstIter, ConstIter>)
 )
 {
-    SECTION("Empty input")
-    {
-        std::vector<int> const nums{};
-        static constexpr int const target{0};
-        std::array const expected{nums.cend(), nums.cend()};
-
-        CAPTURE(nums);
-        CAPTURE(target);
-
-        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
-    }
-
-    SECTION("One integer")
-    {
-        std::vector const nums{3};
-        static constexpr int const target{3};
-        std::array const expected{nums.cend(), nums.cend()};
-
-        CAPTURE(nums);
-        CAPTURE(target);
-
-        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
-    }
-
     SECTION("Two integers")
     {
         std::vector const nums{3, 3};
@@ -259,22 +230,6 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
-    SECTION("Four identical integers")
-    {
-        std::vector const nums{19, 19, 19, 19};
-        static constexpr int const target{38};
-        std::array const expected{
-            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
-        };
-
-        CAPTURE(nums);
-        CAPTURE(target);
-
-        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
-    }
-
     SECTION("LeetCode Two Sum II case 1")
     {
         std::vector const nums{2, 7, 11, 15};
@@ -311,6 +266,82 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::vector const nums{-1, 0};
         static constexpr int const target{-1};
+        std::array const expected{
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
+        };
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Two sum (empty container degenerate cases)",
+    "[two_sum]",
+    (auto two_sum, two_sum),
+    (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_binary_searched::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_brute_searched::two_sum<ConstIter, ConstIter>)
+)
+{
+    std::vector<int> const nums{};
+    static constexpr int const target{0};
+    std::array const expected{nums.cend(), nums.cend()};
+
+    CAPTURE(nums);
+    CAPTURE(target);
+
+    auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+    REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Two sum (miscellaneous degenerate cases)",
+    "[two_sum]",
+    (auto two_sum, two_sum),
+    (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::mapped::two_sum<ConstIter, ConstIter>)
+)
+{
+    SECTION("One integer")
+    {
+        std::vector const nums{3};
+        static constexpr int const target{3};
+        std::array const expected{nums.cend(), nums.cend()};
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
+    }
+
+    SECTION("Two solutions")
+    {
+        std::vector const nums{5, 16, 12, 1};
+        static constexpr int const target{17};
+        std::array const expected{
+            std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 2)
+        };
+
+        CAPTURE(nums);
+        CAPTURE(target);
+
+        auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
+
+    SECTION("Four identical integers")
+    {
+        std::vector const nums{19, 19, 19, 19};
+        static constexpr int const target{38};
         std::array const expected{
             std::next(nums.cbegin(), 0), std::next(nums.cbegin(), 1)
         };
