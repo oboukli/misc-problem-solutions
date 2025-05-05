@@ -39,30 +39,20 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(quadratic::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(brute_forced::two_sum<ConstIter, ConstIter>).c_str(),
             [&nums]() noexcept {
                 auto const volatile r{
-                    quadratic::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    brute_forced::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(map_based::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            NAMEOF_RAW(mapped::two_sum<ConstIter, ConstIter>).c_str(),
+            [&nums]() {
                 auto const volatile r{
-                    map_based::two_sum(nums.cbegin(), nums.cend(), 3208)
-                };
-                ankerl::nanobench::doNotOptimizeAway(&r);
-            }
-        )
-
-        .run(
-            NAMEOF_RAW(single_pass::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
-                auto const volatile r{
-                    single_pass::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    mapped::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -71,7 +61,7 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
         ;
 }
 
-TEST_CASE("Two sum II benchmarking", "[benchmark][two_sum]")
+TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 {
     using namespace forfun::two_sum;
 
@@ -96,40 +86,40 @@ TEST_CASE("Two sum II benchmarking", "[benchmark][two_sum]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(quadratic::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(brute_forced::two_sum<ConstIter, ConstIter>).c_str(),
             [&nums]() noexcept {
                 auto const volatile r{
-                    quadratic::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    brute_forced::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(map_based::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            NAMEOF_RAW(mapped::two_sum<ConstIter, ConstIter>).c_str(),
+            [&nums]() {
                 auto const volatile r{
-                    map_based::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    mapped::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(presorted::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(presorted_binary_searched::two_sum<ConstIter, ConstIter>).c_str(),
             [&nums]() noexcept {
                 auto const volatile r{
-                    presorted::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    presorted_binary_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(single_pass::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(presorted_brute_searched::two_sum<ConstIter, ConstIter>).c_str(),
             [&nums]() noexcept {
                 auto const volatile r{
-                    single_pass::two_sum(nums.cbegin(), nums.cend(), 3208)
+                    presorted_brute_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
