@@ -169,7 +169,8 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::mapped::two_sum<ConstIter, ConstIter>),
     (forfun::two_sum::presorted_binary_searched::two_sum<ConstIter, ConstIter>),
-    (forfun::two_sum::presorted_brute_searched::two_sum<ConstIter, ConstIter>)
+    (forfun::two_sum::presorted_brute_searched::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_linear::two_sum<ConstIter, ConstIter>)
 )
 {
     SECTION("Two integers")

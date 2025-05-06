@@ -61,7 +61,8 @@ TEMPLATE_TEST_CASE_SIG(
     (auto two_sum, two_sum),
     (forfun::two_sum::brute_forced::two_sum<CIter3, CIter3>),
     (forfun::two_sum::presorted_binary_searched::two_sum<CIter3, CIter3>),
-    (forfun::two_sum::presorted_brute_searched::two_sum<CIter3, CIter3>)
+    (forfun::two_sum::presorted_brute_searched::two_sum<CIter3, CIter3>),
+    (forfun::two_sum::presorted_linear::two_sum<CIter3, CIter3>)
 )
 {
     static constexpr std::array const nums{2, 3, 4};

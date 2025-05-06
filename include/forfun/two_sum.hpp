@@ -143,6 +143,35 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
 } // namespace presorted_brute_searched
 
+namespace presorted_linear {
+
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements sorted in non-decreasing order, and that the span has
+/// exactly one solution.
+template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
+    requires std::integral<std::iter_value_t<IterA>>
+[[nodiscard]] constexpr auto two_sum(
+    IterA iter_a, IterB iter_b, std::iter_value_t<IterA> const target
+) noexcept -> std::array<IterA, 2UZ>
+{
+    --iter_b;
+    while (not std::equal_to{}(target, std::plus{}(*iter_a, *iter_b)))
+    {
+        if (std::less{}(target, std::plus{}(*iter_a, *iter_b)))
+        {
+            --iter_b;
+        }
+        else
+        {
+            ++iter_a;
+        }
+    }
+
+    return {iter_a, iter_b};
+}
+
+} // namespace presorted_linear
+
 } // namespace forfun::two_sum
 
 #endif // FORFUN_TWO_SUM_HPP_
