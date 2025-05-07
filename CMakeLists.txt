@@ -492,7 +492,7 @@ target_sources(
   test_driver_experimental
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_c_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2/test_run_listener.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/test_run_listener.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
