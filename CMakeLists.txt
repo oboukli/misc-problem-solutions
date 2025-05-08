@@ -122,17 +122,17 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_parentheses.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_sudoku.cpp"
 )
-get_target_property(forfun_sources forfun SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
-  PREFIX "Source files"
-  FILES ${forfun_sources}
-)
 get_target_property(forfun_headers forfun HEADER_SET)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/"
   PREFIX "Header files"
   FILES ${forfun_headers}
+)
+get_target_property(forfun_sources forfun SOURCES)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
+  PREFIX "Source files"
+  FILES ${forfun_sources}
 )
 forfun_common_target_compile_options(forfun)
 
@@ -303,17 +303,17 @@ target_sources(
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/palindrome.c"
 )
-get_target_property(forfun_c_sources forfun_c SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/"
-  PREFIX "Source files"
-  FILES ${forfun_c_sources}
-)
 get_target_property(forfun_c_headers forfun_c HEADER_SET)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
   PREFIX "Header files"
   FILES ${forfun_c_headers}
+)
+get_target_property(forfun_c_sources forfun_c SOURCES)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/"
+  PREFIX "Source files"
+  FILES ${forfun_c_sources}
 )
 forfun_common_target_compile_options(forfun_c)
 
@@ -344,17 +344,21 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/mem/mem.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/shim/allocator.c"
 )
+get_target_property(
+  forfun_c_experimental_headers
+  forfun_c_experimental
+  HEADER_SET
+)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
+  PREFIX "Header files"
+  FILES ${forfun_c_experimental_headers}
+)
 get_target_property(forfun_c_experimental_sources forfun_c_experimental SOURCES)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/"
   PREFIX "Source files"
   FILES ${forfun_c_experimental_sources}
-)
-get_target_property(forfun_c_experimental_headers forfun_c_experimental HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
-  PREFIX "Header files"
-  FILES ${forfun_c_experimental_headers}
 )
 target_link_libraries(
   forfun_c_experimental
@@ -395,17 +399,17 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/list.cpp"
 )
-get_target_property(forfun_experimental_sources forfun_experimental SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
-  PREFIX "Source files"
-  FILES ${forfun_experimental_sources}
-)
 get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/"
   PREFIX "Header files"
   FILES ${forfun_experimental_headers}
+)
+get_target_property(forfun_experimental_sources forfun_experimental SOURCES)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
+  PREFIX "Source files"
+  FILES ${forfun_experimental_sources}
 )
 target_link_libraries(
   forfun_experimental
@@ -467,11 +471,17 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_parentheses_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_sudoku_test.cpp"
 )
-get_target_property(forfun_tests test_driver SOURCES)
+get_target_property(test_driver_headers test_driver HEADER_SET)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
+  PREFIX "Header files"
+  FILES ${test_driver_headers}
+)
+get_target_property(test_driver_sources test_driver SOURCES)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
   PREFIX "Source files"
-  FILES ${forfun_tests}
+  FILES ${test_driver_sources}
 )
 target_link_libraries(
   test_driver
@@ -500,11 +510,15 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/shim/allocator_test.cpp"
 )
-get_target_property(forfun_experimental_tests test_driver_experimental SOURCES)
+get_target_property(
+  test_driver_experimental_sources
+  test_driver_experimental
+  SOURCES
+)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
   PREFIX "Source files"
-  FILES ${forfun_experimental_tests}
+  FILES ${test_driver_experimental_sources}
 )
 target_link_libraries(
   test_driver_experimental
@@ -574,11 +588,11 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/valid_parentheses_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/valid_sudoku_benchmark.cpp"
 )
-get_target_property(forfun_benchmark benchmark_driver SOURCES)
+get_target_property(benchmark_driver_sources benchmark_driver SOURCES)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
   PREFIX "Source files"
-  FILES ${forfun_benchmark}
+  FILES ${benchmark_driver_sources}
 )
 target_link_libraries(
   benchmark_driver
@@ -604,13 +618,14 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
 )
 get_target_property(
-  forfun_experimental_benchmark
-  benchmark_driver_experimental SOURCES
+  benchmark_driver_experimental_sources
+  benchmark_driver_experimental
+  SOURCES
 )
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
   PREFIX "Source files"
-  FILES ${forfun_experimental_benchmark}
+  FILES ${benchmark_driver_experimental_sources}
 )
 target_link_libraries(
   benchmark_driver_experimental
@@ -641,11 +656,11 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
 )
-get_target_property(forfun_static_tests static_test_driver SOURCES)
+get_target_property(static_test_driver_sources static_test_driver SOURCES)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
   PREFIX "Source files"
-  FILES ${forfun_static_tests}
+  FILES ${static_test_driver_sources}
 )
 target_link_libraries(
   static_test_driver
@@ -689,11 +704,11 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/quicksort_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/squares_sorted_array_fuzz.cpp"
   )
-  get_target_property(forfun_fuzzing fuzzing_driver SOURCES)
+  get_target_property(fuzzing_driver_sources fuzzing_driver SOURCES)
   source_group(
     TREE "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/"
     PREFIX "Source files"
-    FILES ${forfun_fuzzing}
+    FILES ${fuzzing_driver_sources}
   )
   target_link_libraries(
     fuzzing_driver
