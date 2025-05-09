@@ -422,6 +422,14 @@ find_package(Catch2 3 REQUIRED)
 target_sources(
   test_driver
   PRIVATE
+  FILE_SET HEADERS
+  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/test"
+  FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers.hpp"
+)
+target_sources(
+  test_driver
+  PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/best_time_to_buy_and_sell_stock_test.cpp"
