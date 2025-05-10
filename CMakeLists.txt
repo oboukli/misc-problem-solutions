@@ -571,6 +571,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/breadth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/depth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/subsets_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/group_anagrams_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/house_robber_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/last_stone_weight_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/longest_consecutive_sequence_benchmark.cpp"
