@@ -9,40 +9,40 @@
 
 #include <algorithm>
 #include <functional>
+#include <iterator>
 #include <string>
-#include <vector>
+#include <type_traits>
+#include <utility>
 
 #include <catch2/catch_tostring.hpp>
 #include <catch2/internal/catch_is_permutation.hpp>
-#include <catch2/matchers/catch_matchers.hpp>
+#include <catch2/matchers/catch_matchers_templated.hpp>
 
 namespace forfun::testing::catch2_custom::matchers {
 
-// Disclaimer: Partially AI-assisted code (assisted by GitHub Copilot).
-class UnorderedVecOfVecOfStringMatcher
-    // clang-format off
-    : public Catch::Matchers::MatcherBase<
-        std::vector<std::vector<std::string>>> {
-    // clang-format on
+template <typename TargetRangeLike, typename Equality>
+class UnorderedNestedRangeEqualsMatcher final
+    : public Catch::Matchers::MatcherGenericBase {
+    using Range_ = std::remove_cvref_t<TargetRangeLike>;
+
 public:
-    explicit UnorderedVecOfVecOfStringMatcher(
-        std::vector<std::vector<std::string>> const& expected
-    ) :
-        expected_{expected}
+    explicit constexpr UnorderedNestedRangeEqualsMatcher(
+        auto&& expected, auto&& pred
+    ) noexcept :
+        expected_{std::forward<TargetRangeLike>(expected)},
+        equal_to_{std::forward<Equality>(pred)}
     {
     }
 
-    [[nodiscard]] auto
-    match(std::vector<std::vector<std::string>> const& actual) const
-        -> bool override
+    [[nodiscard]] auto match(auto&& actual) const -> bool
     {
         if (actual.size() != expected_.size())
         {
             return false;
         }
 
-        auto inner_sorted_expected{expected_};
-        auto inner_sorted_actual{actual};
+        Range_ inner_sorted_expected{std::forward<TargetRangeLike>(expected_)};
+        Range_ inner_sorted_actual{std::forward<TargetRangeLike>(actual)};
 
         for (auto& v : inner_sorted_expected)
         {
@@ -54,12 +54,15 @@ public:
             std::ranges::sort(v);
         }
 
+        using std::cbegin;
+        using std::cend;
+
         return Catch::Detail::is_permutation(
-            inner_sorted_expected.cbegin(),
-            inner_sorted_expected.cend(),
-            inner_sorted_actual.cbegin(),
-            inner_sorted_actual.cend(),
-            std::equal_to{}
+            cbegin(inner_sorted_expected),
+            cend(inner_sorted_expected),
+            cbegin(inner_sorted_actual),
+            cend(inner_sorted_actual),
+            equal_to_
         );
     }
 
@@ -69,15 +72,20 @@ public:
     }
 
 private:
-    std::vector<std::vector<std::string>> expected_;
+    Range_ expected_;
+    Equality equal_to_;
 };
 
-// Disclaimer: Partially AI-assisted code (assisted by GitHub Copilot).
-inline auto UnorderedVectorOfVectorsEquals(
-    std::vector<std::vector<std::string>> const& expected
-) -> UnorderedVecOfVecOfStringMatcher
+template <
+    typename RangeOfRange,
+    typename Equality = decltype(std::equal_to<>{})>
+constexpr auto UnorderedNestedRangeEquals(
+    RangeOfRange&& expected, Equality&& predicate = std::equal_to<>{}
+) -> UnorderedNestedRangeEqualsMatcher<RangeOfRange, Equality>
 {
-    return UnorderedVecOfVecOfStringMatcher{expected};
+    return UnorderedNestedRangeEqualsMatcher<RangeOfRange, Equality>{
+        std::forward<RangeOfRange>(expected), std::forward<Equality>(predicate)
+    };
 }
 
 } // namespace forfun::testing::catch2_custom::matchers
