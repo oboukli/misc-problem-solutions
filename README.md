@@ -45,7 +45,7 @@ leveraged by this project:
 | ---                              | ---      | ---                                                                                                                        |
 | Add Two Numbers                  | C++17    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
 | Add Two Numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
-| Balanced Binary Tree             | C++23    | [`include/forfun/graph/balanced_binary_tree.hpp`](include/forfun/graph/balanced_binary_tree.hpp)                           |
+| Balanced Binary Tree             | C++23    | [`include/forfun/graph/balanced_binary_tree.hpp`](src/forfun/graph/balanced_binary_tree.cpp)                               |
 | Best Time to Buy And Sell Stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
 | Binary Search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                             |
@@ -54,7 +54,7 @@ leveraged by this project:
 | Container with Most Water        | C++20    | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                             |
 | Contains Duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
 | Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                                 |
-| Encode and Decode Strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](src/forfun/encode_and_decode_strings.cpp)                                     |
+| Encode and Decode Strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](include/forfun/encode_and_decode_strings.hpp)                                 |
 | Evaluate Reverse Polish Notation | C++23    | [`include/forfun/evaluate_reverse_polish_notation.hpp`](include/forfun/evaluate_reverse_polish_notation.hpp)               |
 | Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
 | Fibonacci Sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                             |
@@ -84,7 +84,7 @@ leveraged by this project:
 | Quicksort                        | C++20    | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                             |
 | Set Matrix Zeroes                | C++20    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
 | Squares of a Sorted Array        | C++20    | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                       |
-| Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](include/forfun/graph/subsets.hpp)                                                     |
+| Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](src/forfun/graph/subsets.cpp)                                                         |
 | Sums of Subarrays of Length K    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
 | Top K Frequent Elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
 | Tower of Hanoi                   | C++20    | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                   |
