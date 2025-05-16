@@ -1,5 +1,25 @@
 # Developer notes
 
+## Goals
+
+This work aims at achieving:
+
+- correctness (including semantic correctness of code, among other things)
+- conformance to international standards (C, C++, Unicode, etc.)
+- portability to at least three major platforms
+- efficient and optimized runtime performance
+- compatibility with at least four stable major compilers
+- producing open and free (libre) deliverables
+
+Non-goals include:
+
+- Providing solutions in a language other than C and C++
+- Supporting C standards aside from C90
+- Supporting C++ standards before C++23
+- Fast compilation
+- Supporting non-latest compiler versions
+- Optimizing for a specific processor or platform
+
 ## Architecture and design
 
 ### Dynamic memory allocation
