@@ -32,7 +32,7 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
                 Rod src{};
                 Rod des{};
                 Rod aux{};
-                std::size_t const volatile num_disks{4U};
+                std::size_t const volatile num_disks{4UZ};
 
                 forfun::tower_of_hanoi::recursive::toh(
                     src, des, aux, [](Rod&, Rod&) noexcept -> void {}, num_disks
