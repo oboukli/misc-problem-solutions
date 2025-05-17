@@ -21,7 +21,7 @@ namespace functional {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
     std::copy(src.cbegin(), src.cend(), dest.begin());
@@ -34,7 +34,7 @@ namespace functional_minimal {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
     std::copy(src.cbegin(), src.cend(), dest.begin());
@@ -47,10 +47,10 @@ namespace iterator_based {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
-    for (std::size_t i{0U}; i < 2U; ++i)
+    for (std::size_t i{0UZ}; i < 2UZ; ++i)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         auto iter{dest.begin() + (Size * i)};
@@ -67,7 +67,7 @@ namespace iterator_based_double {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
     {
@@ -93,7 +93,7 @@ namespace iterator_unfolded {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
     auto dest1_iter{dest.begin()};
@@ -112,17 +112,17 @@ namespace nested_loops {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
-    for (std::size_t i{0U}; i < 2U; ++i)
+    for (std::size_t i{0UZ}; i < 2UZ; ++i)
     {
 #ifdef _MSC_VER
 // Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER
-        for (std::size_t j{0U}; j < Size; ++j)
+        for (std::size_t j{0UZ}; j < Size; ++j)
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
             dest[j + (i * Size)] = src[j];
@@ -139,7 +139,7 @@ namespace semi_unfolded {
 
 template <typename T, std::size_t Size>
 constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, std::size_t{2U * Size}>& dest
+    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
 #ifdef _MSC_VER
@@ -147,7 +147,7 @@ constexpr auto concatenate(
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER
-    for (std::size_t i{0U}; i < Size; ++i)
+    for (std::size_t i{0UZ}; i < Size; ++i)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
         dest[i] = src[i];

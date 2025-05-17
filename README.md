@@ -50,7 +50,7 @@ leveraged by this project:
 | Binary Search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                             |
 | Bubble Sort                      | C++20    | [`include/forfun/sorting/bubble_sort.hpp`](include/forfun/sorting/bubble_sort.hpp)                                         |
-| Concatenation of Array           | C++17    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
+| Concatenation of Array           | C++23    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
 | Container with Most Water        | C++20    | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                             |
 | Contains Duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
 | Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                                 |
@@ -66,12 +66,12 @@ leveraged by this project:
 | House Robber                     | C++20    | [`include/forfun/house_robber.hpp`](include/forfun/house_robber.hpp)                                                       |
 | Insertion Sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Last Stone Weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
-| Least Recently Used (LRU) Cache  | C++20    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
+| Least Recently Used (LRU) Cache  | C++23    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
 | Linked List                      | C++20    | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                   |
 | List Bidirectional Iterator      | C++20    | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)               |
-| Longest Consecutive Sequence     | C++20    | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                       |
+| Longest Consecutive Sequence     | C++23    | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                       |
 | Maximum Subarray                 | C++20    | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                               |
-| Meeting Rooms (I, II)            | C++20    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
+| Meeting Rooms (I, II)            | C++23    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
 | Move Zeroes                      | C++20    | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                         |
 | Multiples of Three or Five       | C++17    | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp) |
 | Nth Fibonacci Number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                               |
@@ -91,7 +91,7 @@ leveraged by this project:
 | Trie                             | C++20    | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                       |
 | Two Sum (I, II)                  | C++23    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                 |
 | Two-pass Boyer-Moore Majority    | C++20    | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                               |
-| Valid Anagram                    | C++20    | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                     |
+| Valid Anagram                    | C++23    | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                     |
 | Valid Parentheses                | C++20    | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                     |
 | Valid Sudoku                     | C++23    | [`include/forfun/valid_sudoku.hpp`](include/forfun/valid_sudoku.hpp)                                                       |
 
