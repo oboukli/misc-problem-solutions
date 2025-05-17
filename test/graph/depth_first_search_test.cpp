@@ -82,7 +82,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(adjacency_list.empty());
         REQUIRE(state_list.empty());
-        REQUIRE(visits.size() == std::size_t{0U});
+        REQUIRE(visits.size() == 0ZU);
     }
 
     SECTION("One-vertex graph")
@@ -116,7 +116,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == std::size_t{1U});
+        REQUIRE(visits.size() == 1ZU);
     }
 
     SECTION("Two-vertex graph")
@@ -154,7 +154,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == std::size_t{2U});
+        REQUIRE(visits.size() == 2ZU);
     }
 
     SECTION("All graph vertices visited, starting from leaf vertex")
@@ -201,7 +201,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 6U);
-        REQUIRE(visits.size() == std::size_t{6U});
+        REQUIRE(visits.size() == 6ZU);
     }
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
@@ -298,7 +298,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(state_list == expected_state_list);
         REQUIRE(adjacency_list.size() == 8U);
-        REQUIRE(visits.size() == std::size_t{8U});
+        REQUIRE(visits.size() == 8ZU);
     }
 
     SECTION("Visitor call count is the same as the vertex count")
@@ -348,7 +348,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == std::size_t{8U});
+        REQUIRE(visits.size() == 8ZU);
     }
 
     SECTION("Visitor is called and is passed valid arguments to")

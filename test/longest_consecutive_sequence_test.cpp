@@ -37,9 +37,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{0U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 0ZU);
     }
 
     SECTION("Single element")
@@ -48,9 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{1U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
     }
 
     SECTION("Two consecutive elements")
@@ -59,9 +55,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{2U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 2ZU);
     }
 
     SECTION("Three consecutive elements")
@@ -70,9 +64,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{3U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 3ZU);
     }
 
     SECTION("Four consecutive elements")
@@ -81,9 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{4U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
     }
 
     SECTION("Two non-consecutive elements")
@@ -92,9 +82,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{1U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
     }
 
     SECTION("Three non-consecutive elements")
@@ -103,9 +91,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{1U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
     }
 
     SECTION("Four non-consecutive elements")
@@ -114,9 +100,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{1U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
     }
 
     SECTION("Container of consecutive and repeated elements (case 1)")
@@ -125,9 +109,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{4U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
     }
 
     SECTION("Container of consecutive and repeated elements (benchmark case)")
@@ -143,9 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{5U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 5ZU);
     }
 
     SECTION("LeetCode case 1")
@@ -154,9 +134,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{4U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
     }
 
     SECTION("LeetCode case 2")
@@ -165,8 +143,6 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(
-            longest_consecutive(nums.begin(), nums.end()) == std::size_t{9U}
-        );
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 9ZU);
     }
 }

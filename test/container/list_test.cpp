@@ -23,21 +23,21 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list const list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
     }
 
     SECTION("Push back one element (benchmark case)")
     {
         forfun::experimental::container::list list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
 
         list.push_back(1301);
 
         REQUIRE(list.front() == 1301);
         REQUIRE(list.back() == 1301);
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE_FALSE(list.empty());
     }
 
@@ -45,21 +45,21 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
 
         list.push_back(1303);
 
         REQUIRE(list.front() == 1303);
         REQUIRE(list.back() == 1303);
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1307);
 
         REQUIRE(list.front() == 1303);
         REQUIRE(list.back() == 1307);
-        REQUIRE(list.size() == std::size_t{2U});
+        REQUIRE(list.size() == 2ZU);
         REQUIRE_FALSE(list.empty());
     }
 
@@ -67,28 +67,28 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
 
         list.push_back(1319);
 
         REQUIRE(list.front() == 1319);
         REQUIRE(list.back() == 1319);
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1321);
 
         REQUIRE(list.front() == 1319);
         REQUIRE(list.back() == 1321);
-        REQUIRE(list.size() == std::size_t{2U});
+        REQUIRE(list.size() == 2ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1327);
 
         REQUIRE(list.front() == 1319);
         REQUIRE(list.back() == 1327);
-        REQUIRE(list.size() == std::size_t{3U});
+        REQUIRE(list.size() == 3ZU);
         REQUIRE_FALSE(list.empty());
     }
 
@@ -96,35 +96,35 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
 
         list.push_back(1361);
 
         REQUIRE(list.front() == 1361);
         REQUIRE(list.back() == 1361);
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1021);
 
         REQUIRE(list.front() == 1361);
         REQUIRE(list.back() == 1021);
-        REQUIRE(list.size() == std::size_t{2U});
+        REQUIRE(list.size() == 2ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1367);
 
         REQUIRE(list.front() == 1361);
         REQUIRE(list.back() == 1367);
-        REQUIRE(list.size() == std::size_t{3U});
+        REQUIRE(list.size() == 3ZU);
         REQUIRE_FALSE(list.empty());
 
         list.push_back(1373);
 
         REQUIRE(list.front() == 1361);
         REQUIRE(list.back() == 1373);
-        REQUIRE(list.size() == std::size_t{4U});
+        REQUIRE(list.size() == 4ZU);
         REQUIRE_FALSE(list.empty());
     }
 
@@ -136,7 +136,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         list.pop_back();
 
         REQUIRE(list.empty());
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
     }
 
     SECTION("Pop back one element out of list of two elements")
@@ -148,7 +148,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         list.pop_back();
 
         REQUIRE_FALSE(list.empty());
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE(list.front() == 1399);
         REQUIRE(list.back() == 1399);
     }
@@ -163,7 +163,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         list.pop_back();
 
         REQUIRE_FALSE(list.empty());
-        REQUIRE(list.size() == std::size_t{2U});
+        REQUIRE(list.size() == 2ZU);
         REQUIRE(list.front() == 1399);
         REQUIRE(list.back() == 1409);
     }
@@ -172,12 +172,12 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list list{};
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
 
         list.clear();
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
     }
 
@@ -186,12 +186,12 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         forfun::experimental::container::list list{};
         list.push_back(5);
 
-        REQUIRE(list.size() == std::size_t{1U});
+        REQUIRE(list.size() == 1ZU);
         REQUIRE_FALSE(list.empty());
 
         list.clear();
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
     }
 
@@ -202,12 +202,12 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         list.push_back(7);
         list.push_back(11);
 
-        REQUIRE(list.size() == std::size_t{3U});
+        REQUIRE(list.size() == 3ZU);
         REQUIRE_FALSE(list.empty());
 
         list.clear();
 
-        REQUIRE(list.size() == std::size_t{0U});
+        REQUIRE(list.size() == 0ZU);
         REQUIRE(list.empty());
     }
 

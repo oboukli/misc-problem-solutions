@@ -226,7 +226,7 @@ TEMPLATE_TEST_CASE_SIG(
             std::uint64_t{0U},
         };
 
-        static_assert(nums.size() == std::size_t{16U});
+        static_assert(nums.size() == 16UZ);
 
         static constexpr std::array<std::uint64_t, 16U> const expected{
             0U,
