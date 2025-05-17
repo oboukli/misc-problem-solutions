@@ -27,7 +27,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept :
     int result{-1};
     std::int64_t lowest_tick_count{ticks_};
 
-    std::size_t i{0U};
+    std::size_t i{0UZ};
     for (; i < size_; ++i)
     {
         if (cache_[i].key_ == key)
@@ -62,7 +62,7 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 {
     assert(size_ <= capacity_);
 
-    for (std::size_t i{0U}; i < size_; ++i)
+    for (std::size_t i{0UZ}; i < size_; ++i)
     {
         if (cache_[i].key_ == key)
         {

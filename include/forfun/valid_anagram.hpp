@@ -40,7 +40,7 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
             std::numeric_limits<std::string_view::value_type>::digits
         )>
         bucket{};
-    static_assert(bucket.size() == std::size_t{256U});
+    static_assert(bucket.size() == 256UZ);
 
     for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
     {
@@ -50,7 +50,7 @@ is_anagram(std::string_view s, std::string_view t) noexcept -> bool
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
         decltype(bucket)::iterator const it{std::next(bucket.begin(), *iter)};
-        if (*it == std::size_t{0U})
+        if (*it == 0ZU)
         {
             return false;
         }
@@ -86,7 +86,7 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
 
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
-        if (bucket[*iter] == std::size_t{0})
+        if (bucket[*iter] == 0ZU)
         {
             return false;
         }

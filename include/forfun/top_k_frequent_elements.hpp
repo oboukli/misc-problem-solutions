@@ -51,7 +51,7 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
     std::sort(first, last);
 
     ValType current{*first};
-    std::size_t current_count{0U};
+    std::size_t current_count{0UZ};
     for (auto aux_iter{first}; aux_iter != last; ++aux_iter)
     {
         if (current == *aux_iter)
@@ -70,13 +70,13 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
     std::vector<ValType> result;
     result.reserve(k);
 
-    for (auto iter{counts.crbegin()}; k != std::size_t{0U}; ++iter)
+    for (auto iter{counts.crbegin()}; k != 0ZU; ++iter)
     {
         assert(iter != counts.crend());
 
         // clang-format off
         for (auto j{iter->cbegin()};
-            (j != iter->cend()) && (k != std::size_t{0U}); ++j)
+            (j != iter->cend()) && (k != 0ZU); ++j)
         // clang-format on
         {
             result.push_back(*j);
@@ -113,7 +113,7 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
     std::sort(first, last);
 
     ValType current{*first};
-    std::size_t current_count{0U};
+    std::size_t current_count{0UZ};
     for (auto aux_iter{first}; aux_iter != last; ++aux_iter)
     {
         if (current == *aux_iter)
@@ -159,7 +159,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     for (; iter != last; ++iter)
     {
-        ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
+        ++counts.try_emplace(*iter, 0ZU).first->second;
     }
 
     auto const comparator = [](auto const& a, auto const& b) noexcept {
@@ -176,7 +176,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     std::vector<ValType> result;
     result.reserve(k);
-    for (std::size_t i{0U}; i < k; ++i)
+    for (std::size_t i{0UZ}; i < k; ++i)
     {
         result.push_back(intermediate.top().first);
         intermediate.pop();
@@ -208,7 +208,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     for (; iter != last; ++iter)
     {
-        ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
+        ++counts.try_emplace(*iter, 0ZU).first->second;
     }
 
     auto const comparator = [](auto const& a, auto const& b) noexcept -> bool {
@@ -223,7 +223,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     std::vector<ValType> result;
     result.reserve(k);
-    for (std::size_t i{0U}; i < k; ++i)
+    for (std::size_t i{0UZ}; i < k; ++i)
     {
         result.push_back(intermediate.top().first);
         intermediate.pop();
@@ -254,7 +254,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     for (; iter != last; ++iter)
     {
-        ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
+        ++counts.try_emplace(*iter, 0ZU).first->second;
     }
 
     std::vector<std::pair<ValType, std::size_t>> intermediate;
@@ -301,7 +301,7 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 
     for (; iter != last; ++iter)
     {
-        ++counts.try_emplace(*iter, std::size_t{0U}).first->second;
+        ++counts.try_emplace(*iter, 0ZU).first->second;
     }
 
     auto intermediate{

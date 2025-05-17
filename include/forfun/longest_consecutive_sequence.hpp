@@ -28,14 +28,14 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     if (iter == last) [[unlikely]]
     {
-        return std::size_t{0U};
+        return 0ZU;
     }
 
     std::sort(iter, last);
     auto const last_unique{std::unique(iter, last)};
 
-    std::size_t top_streak{1U};
-    std::size_t streak{1U};
+    std::size_t top_streak{1UZ};
+    std::size_t streak{1UZ};
 
     for (auto iter_b{std::next(iter)}; iter_b != last_unique; ++iter, ++iter_b)
     {
@@ -46,7 +46,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
         }
         else
         {
-            streak = std::size_t{1U};
+            streak = 1ZU;
 
             // Conclude if no higher streak is possible.
             if (static_cast<std::size_t>(std::distance(iter_b, last_unique))
@@ -87,13 +87,13 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     if (iter == last) [[unlikely]]
     {
-        return std::size_t{0U};
+        return 0ZU;
     }
 
     std::sort(iter, last);
     auto const last_unique{std::unique(iter, last)};
 
-    std::size_t top_streak{1U};
+    std::size_t top_streak{1UZ};
     auto streak_begin_iter{iter};
 
     auto iter_b{std::next(iter)};
@@ -131,15 +131,15 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
 {
     if (first == last) [[unlikely]]
     {
-        return std::size_t{0U};
+        return 0ZU;
     }
 
     using ValueType = std::iter_value_t<Iter>;
 
     std::set<ValueType> const lookup_set(first, last);
 
-    std::size_t top_streak{1U};
-    std::size_t streak{1U};
+    std::size_t top_streak{1UZ};
+    std::size_t streak{1UZ};
 
     // clang-format off
     for (auto iter_a{lookup_set.cbegin()},
@@ -155,7 +155,7 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
         }
         else
         {
-            streak = std::size_t{1U};
+            streak = 1ZU;
 
             // Conclude if no higher streak is possible.
             if (static_cast<std::size_t>(
@@ -188,10 +188,10 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
         std::is_same_v<std::size_t, typename decltype(lookup)::size_type>
     );
 
-    std::size_t top_streak{0U};
+    std::size_t top_streak{0UZ};
 
     auto lu_iter{lookup.cbegin()};
-    for (std::size_t i{0U}; i < lookup.size(); ++i)
+    for (std::size_t i{0UZ}; i < lookup.size(); ++i)
     {
         auto const a{*lu_iter};
         if (not lookup.contains(a - 1))
