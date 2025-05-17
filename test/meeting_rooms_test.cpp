@@ -201,10 +201,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("Two conflicting intervals")
@@ -216,10 +213,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{2U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 2ZU);
     }
 
     SECTION("Two non-conflicting intervals")
@@ -231,10 +225,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("Three, all conflicting, intervals")
@@ -247,10 +238,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{3U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 3ZU);
     }
 
     SECTION("Three intervals, two of which are conflicting")
@@ -263,10 +251,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{2U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 2ZU);
     }
 
     SECTION("Three non-conflicting intervals")
@@ -279,10 +264,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("Three successive intervals")
@@ -295,10 +277,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("Four intervals, two of which are conflicting")
@@ -312,10 +291,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{2U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 2ZU);
     }
 
     SECTION("Four non-conflicting intervals")
@@ -329,10 +305,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("Sixteen non-conflicting sorted intervals (benchmark case)")
@@ -358,10 +331,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 
     SECTION("NeetCode test case 1")
@@ -374,10 +344,7 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{2U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 2ZU);
     }
 
     SECTION("NeetCode test case 2")
@@ -386,9 +353,6 @@ TEST_CASE("Meeting rooms 2", "[meeting_rooms_2]")
 
         CAPTURE(intervals);
 
-        REQUIRE(
-            min_chronotopes(intervals.cbegin(), intervals.cend())
-            == std::size_t{1U}
-        );
+        REQUIRE(min_chronotopes(intervals.cbegin(), intervals.cend()) == 1ZU);
     }
 }
