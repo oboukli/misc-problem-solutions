@@ -106,7 +106,9 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
 
     if ((carry != 0U) || (addend_a != NULL) || (addend_b != NULL))
     {
+        /* Assigned and checked before use. */
         struct forfun_forward_list_node* aux_node_ptr;
+
         struct forfun_internal_result next_result;
         struct forfun_forward_list_node const* const next_a
             = addend_a == NULL ? NULL : addend_a->next;
