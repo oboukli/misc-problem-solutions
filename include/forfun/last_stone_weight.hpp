@@ -23,13 +23,13 @@ namespace naive {
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of non-negative elements (weighs), otherwise the behavior of the
 /// strategy is undefined.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <std::contiguous_iterator IterA, std::bidirectional_iterator IterB>
+    requires std::integral<std::iter_value_t<IterA>>
 [[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel last) noexcept
-    -> std::iter_value_t<Iter>
+last_stone_weight(IterA const first, IterB last) noexcept
+    -> std::iter_value_t<IterA>
 {
-    using ValueType = std::iter_value_t<Iter>;
+    using ValueType = std::iter_value_t<IterA>;
 
     if (first == last) [[unlikely]]
     {
@@ -84,13 +84,13 @@ namespace heapified {
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of non-negative elements (weighs), otherwise the behavior of the
 /// strategy is undefined.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <std::contiguous_iterator IterA, std::bidirectional_iterator IterB>
+    requires std::integral<std::iter_value_t<IterA>>
 [[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel last) noexcept
-    -> std::iter_value_t<Iter>
+last_stone_weight(IterA const first, IterB last) noexcept
+    -> std::iter_value_t<IterA>
 {
-    using ValueType = std::iter_value_t<Iter>;
+    using ValueType = std::iter_value_t<IterA>;
     using DiffType = decltype(last - first);
 
     std::make_heap(first, last);
@@ -134,12 +134,12 @@ namespace sort_based {
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of non-negative elements (weighs), otherwise the behavior of the
 /// strategy is undefined.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::sortable<Iter, std::greater<>>
-    and std::integral<std::iter_value_t<Iter>>
+template <std::contiguous_iterator IterA, std::bidirectional_iterator IterB>
+    requires std::sortable<IterA, std::greater<>>
+    and std::integral<std::iter_value_t<IterA>>
 [[nodiscard]] constexpr auto
-last_stone_weight(Iter const first, Sentinel last) noexcept
-    -> std::iter_value_t<Iter>
+last_stone_weight(IterA const first, IterB last) noexcept
+    -> std::iter_value_t<IterA>
 {
     if (first == last) [[unlikely]]
     {

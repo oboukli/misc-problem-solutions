@@ -114,7 +114,7 @@ invalid_argument:
 namespace unhardened {
 
 /// @note Calculation may overflow without notice or error.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {
@@ -177,7 +177,7 @@ template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
 namespace speed_optimized {
 
 /// @note Calculation may overflow without notice or error.
-template <std::contiguous_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
     -> std::pair<int, std::errc>
 {

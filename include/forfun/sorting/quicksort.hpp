@@ -17,10 +17,9 @@ namespace forfun::sorting {
 
 namespace detail {
 
-template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::bidirectional_iterator<Sentinel>
-[[nodiscard]] constexpr auto partition(Iter const first, Sentinel last) noexcept
-    -> Iter
+template <std::sortable IterA, std::bidirectional_iterator IterB>
+[[nodiscard]] constexpr auto partition(IterA const first, IterB last) noexcept
+    -> IterA
 {
     auto it_i{first};
 
@@ -46,11 +45,10 @@ template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
 
 } // namespace detail
 
-template <std::sortable Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::bidirectional_iterator<Sentinel>
-constexpr auto quicksort(Iter const first, Sentinel const last) noexcept -> void
+template <std::sortable IterA, std::bidirectional_iterator IterB>
+constexpr auto quicksort(IterA const first, IterB const last) noexcept -> void
 {
-    using DiffType = std::iter_difference_t<Iter>;
+    using DiffType = std::iter_difference_t<IterA>;
 
     if (std::distance(first, last) < DiffType{2})
     {

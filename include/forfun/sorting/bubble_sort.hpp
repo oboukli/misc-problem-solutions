@@ -17,9 +17,8 @@ namespace forfun::sorting {
 
 namespace plain {
 
-template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::bidirectional_iterator<Sentinel>
-constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
+template <std::sortable IterA, std::bidirectional_iterator IterB>
+constexpr auto bubble_sort(IterA const first, IterB last) noexcept -> void
 {
     if (first == last) [[unlikely]]
     {
@@ -33,7 +32,7 @@ constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
     {
         --last;
         f = false;
-        for (Iter it_i{first}; it_i != last; ++it_i)
+        for (IterA it_i{first}; it_i != last; ++it_i)
         {
             auto const it_ii{std::next(it_i)};
             if (*it_i > *it_ii)
@@ -52,9 +51,8 @@ constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
 
 namespace stl {
 
-template <std::sortable Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::bidirectional_iterator<Sentinel>
-constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
+template <std::sortable IterA, std::bidirectional_iterator IterB>
+constexpr auto bubble_sort(IterA const first, IterB last) noexcept -> void
 {
     if (first == last) [[unlikely]]
     {
@@ -68,7 +66,7 @@ constexpr auto bubble_sort(Iter const first, Sentinel last) noexcept -> void
     {
         --last;
         f = false;
-        for (Iter it_i{first}; it_i != last; ++it_i)
+        for (IterA it_i{first}; it_i != last; ++it_i)
         {
             if (*it_i > *std::next(it_i))
             {
