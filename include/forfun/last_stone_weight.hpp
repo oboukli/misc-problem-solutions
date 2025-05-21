@@ -125,7 +125,7 @@ namespace priority_queue_based {
 /// @note The strategy assumes that @p stones is a non-empty vector of
 /// non-negative elements (weighs), otherwise the behavior of the strategy is
 /// undefined.
-[[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) noexcept -> int;
+[[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) -> int;
 
 } // namespace priority_queue_based
 
@@ -149,7 +149,7 @@ last_stone_weight(IterA const first, IterB last) noexcept
     auto second{first};
     ++second;
 
-    for (; second != last;)
+    while (second != last)
     {
         std::sort(first, last, std::greater<>());
 

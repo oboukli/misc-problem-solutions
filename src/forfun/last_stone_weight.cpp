@@ -15,7 +15,7 @@
 
 namespace forfun::last_stone_weight::priority_queue_based {
 
-[[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) noexcept -> int
+[[nodiscard]] auto last_stone_weight(std::vector<int>&& stones) -> int
 {
     using SizeType = std::remove_cvref_t<decltype(stones)>::size_type;
     using ValueType = std::remove_cvref_t<decltype(stones)>::value_type;
