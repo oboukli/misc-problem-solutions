@@ -151,7 +151,7 @@ last_stone_weight(IterA const first, IterB last) noexcept
 
     while (second != last)
     {
-        std::sort(first, last, std::greater<>());
+        std::sort(first, last, std::greater{});
 
         *first -= *second;
         *second = *--last;

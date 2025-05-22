@@ -77,7 +77,7 @@ namespace stl_functional {
     assert(n >= T{0});
 
     return std::ranges::fold_left(
-        std::views::iota(T{1}) | std::views::take(n), T{1}, std::multiplies<>()
+        std::views::iota(T{1}) | std::views::take(n), T{1}, std::multiplies{}
     );
 }
 

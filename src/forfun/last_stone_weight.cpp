@@ -20,7 +20,7 @@ namespace forfun::last_stone_weight::priority_queue_based {
     using SizeType = std::remove_cvref_t<decltype(stones)>::size_type;
     using ValueType = std::remove_cvref_t<decltype(stones)>::value_type;
 
-    std::priority_queue max_priority_queue(std::less<>(), std::move(stones));
+    std::priority_queue max_priority_queue(std::less{}, std::move(stones));
 
     while (max_priority_queue.size() > SizeType{1})
     {
