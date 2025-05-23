@@ -108,9 +108,9 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
     {
         struct forfun_forward_list_node* aux_node_ptr;
         struct forfun_internal_result next_result;
-        struct forfun_forward_list_node* next_a
+        struct forfun_forward_list_node const* const next_a
             = addend_a == NULL ? NULL : addend_a->next;
-        struct forfun_forward_list_node* next_b
+        struct forfun_forward_list_node const* const next_b
             = addend_b == NULL ? NULL : addend_b->next;
 
         aux_node_ptr = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(

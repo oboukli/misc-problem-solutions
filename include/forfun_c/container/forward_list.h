@@ -19,7 +19,9 @@ struct forfun_forward_list_node {
     unsigned int value;
 };
 
-void forfun_free_node_list(struct forfun_forward_list_node* root_node_ptr);
+void forfun_free_node_list(
+    struct forfun_forward_list_node const* root_node_ptr
+);
 
 #ifdef __cplusplus
 } /* extern "C" */
