@@ -20,7 +20,7 @@ public:
     value_type value_{};
 
     explicit constexpr list_node(
-        value_type value,
+        value_type const value,
         // NOLINTNEXTLINE(bugprone-easily-swappable-parameters)
         list_node* previous_node,
         list_node* next_node

@@ -18,16 +18,16 @@ public:
     {
     }
 
-    explicit constexpr binary_tree_node(value_type value) noexcept :
+    explicit constexpr binary_tree_node(value_type const value) noexcept :
         value_{value}, left_node_{nullptr}, right_node_{nullptr}
     {
     }
 
     explicit binary_tree_node(
         // NOLINTBEGIN(bugprone-easily-swappable-parameters)
-        value_type value,
-        binary_tree_node* left,
-        binary_tree_node* right
+        value_type const value,
+        binary_tree_node* const left,
+        binary_tree_node* const right
         // NOLINTEND(bugprone-easily-swappable-parameters)
     ) noexcept :
         value_{value}, left_node_{left}, right_node_{right}

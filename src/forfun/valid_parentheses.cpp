@@ -16,7 +16,7 @@ namespace forfun::valid_parentheses {
 
 namespace {
 
-[[nodiscard]] auto map_open_to_closed(char8_t c) noexcept -> char8_t
+[[nodiscard]] auto map_open_to_closed(char8_t const c) noexcept -> char8_t
 {
     switch (c)
     {
