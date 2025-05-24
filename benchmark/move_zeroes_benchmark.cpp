@@ -19,7 +19,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
 {
     using namespace forfun::move_zeroes;
 
-    using ContainerType = std::array<int, 128U>;
+    using ContainerType = std::array<int, 128>;
     using Iter = ContainerType::iterator;
 
     ankerl::nanobench::Bench()

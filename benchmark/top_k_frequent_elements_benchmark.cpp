@@ -21,7 +21,7 @@ TEST_CASE(
 {
     using namespace forfun::top_k_frequent_elements;
 
-    using ContainerType = std::array<int, 16U>;
+    using ContainerType = std::array<int, 16>;
     using Iter = ContainerType::iterator;
 
     ankerl::nanobench::Bench()

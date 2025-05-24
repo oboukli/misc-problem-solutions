@@ -148,18 +148,18 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<int, 0U>)",
+    "First missing positive (array<int, 0>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<int, 0U>::iterator,
-        std::array<int, 0U>::iterator>),
+        std::array<int, 0>::iterator,
+        std::array<int, 0>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<int, 0U>::iterator,
-        std::array<int, 0U>::iterator>)
+        std::array<int, 0>::iterator,
+        std::array<int, 0>::iterator>)
 )
 {
-    std::array<int, 0U> test_input{};
+    std::array<int, 0> test_input{};
 
     CAPTURE(test_input);
 
@@ -171,15 +171,15 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<int, 16U>)",
+    "First missing positive (array<int, 16>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<int, 16U>::iterator,
-        std::array<int, 16U>::iterator>),
+        std::array<int, 16>::iterator,
+        std::array<int, 16>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<int, 16U>::iterator,
-        std::array<int, 16U>::iterator>)
+        std::array<int, 16>::iterator,
+        std::array<int, 16>::iterator>)
 )
 {
     std::array test_input{9, 9, 7, 5, 4, 3, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0};
@@ -192,15 +192,15 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<char, 2U>)",
+    "First missing positive (array<char, 2>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<char, 2U>::iterator,
-        std::array<char, 2U>::iterator>),
+        std::array<char, 2>::iterator,
+        std::array<char, 2>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<char, 2U>::iterator,
-        std::array<char, 2U>::iterator>)
+        std::array<char, 2>::iterator,
+        std::array<char, 2>::iterator>)
 )
 {
     std::array test_input{char{1}, char{2}};
@@ -210,15 +210,15 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<unsigned int, 3U>)",
+    "First missing positive (array<unsigned int, 3>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<unsigned int, 3U>::iterator,
-        std::array<unsigned int, 3U>::iterator>),
+        std::array<unsigned int, 3>::iterator,
+        std::array<unsigned int, 3>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<unsigned int, 3U>::iterator,
-        std::array<unsigned int, 3U>::iterator>)
+        std::array<unsigned int, 3>::iterator,
+        std::array<unsigned int, 3>::iterator>)
 )
 {
     std::array test_input{1U, 2U, 4U};
@@ -226,15 +226,15 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<int, 3U>)",
+    "First missing positive (array<int, 3>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<int, 3U>::iterator,
-        std::array<int, 3U>::iterator>),
+        std::array<int, 3>::iterator,
+        std::array<int, 3>::iterator>),
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<int, 3U>::iterator,
-        std::array<int, 3U>::iterator>)
+        std::array<int, 3>::iterator,
+        std::array<int, 3>::iterator>)
 )
 {
     std::array test_input{1, 2, 4};

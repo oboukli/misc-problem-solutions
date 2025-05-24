@@ -12,8 +12,8 @@
 
 #include "forfun/two_sum.hpp"
 
-using CIter0 = std::array<int, 0UZ>::const_iterator;
-using CIter3 = std::array<int, 3UZ>::const_iterator;
+using CIter0 = std::array<int, 0>::const_iterator;
+using CIter3 = std::array<int, 3>::const_iterator;
 
 TEMPLATE_TEST_CASE_SIG(
     "Two sum (I, II) static tests (empty container degenerate case)",
@@ -24,7 +24,7 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::two_sum::presorted_brute_searched::two_sum<CIter0, CIter0>)
 )
 {
-    static constexpr std::array<int, 0UZ> const nums{};
+    static constexpr std::array<int, 0> const nums{};
     static constexpr int const target{0};
     static constexpr std::array const expected{nums.cend(), nums.cend()};
 

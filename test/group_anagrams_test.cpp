@@ -24,7 +24,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("One element which is an empty string")
     {
-        std::array<std::string, 1UZ> const input{{""}};
+        std::array<std::string, 1> const input{{""}};
         std::vector<std::vector<std::string>> const expected{{""}};
 
         CAPTURE(input);
@@ -34,7 +34,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("One element which is a string of one character")
     {
-        std::array<std::string, 1UZ> const input{"x"};
+        std::array<std::string, 1> const input{"x"};
         std::vector<std::vector<std::string>> const expected{{"x"}};
 
         CAPTURE(input);
@@ -44,7 +44,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Two elements which are not anagrams of each other")
     {
-        std::array<std::string, 2UZ> const input{"cat", "dog"};
+        std::array<std::string, 2> const input{"cat", "dog"};
         std::vector<std::vector<std::string>> const expected{{"cat"}, {"dog"}};
 
         CAPTURE(input);
@@ -57,7 +57,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Two elements which are synogram of each other")
     {
-        std::array<std::string, 2UZ> const input{"note", "tone"};
+        std::array<std::string, 2> const input{"note", "tone"};
         std::vector<std::vector<std::string>> const expected{{"note", "tone"}};
 
         CAPTURE(input);
@@ -70,7 +70,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Three elements which are all anagrams of each other")
     {
-        std::array<std::string, 3UZ> const input{"ether", "there", "three"};
+        std::array<std::string, 3> const input{"ether", "there", "three"};
         std::vector<std::vector<std::string>> const expected{
             {"ether", "there", "three"}
         };
@@ -85,7 +85,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Three elements, two of which are antigrams of each other")
     {
-        std::array<std::string, 3UZ> const input{"united", "abcdef", "untied"};
+        std::array<std::string, 3> const input{"united", "abcdef", "untied"};
         std::vector<std::vector<std::string>> const expected{
             {"abcdef"}, {"united", "untied"}
         };
@@ -100,9 +100,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Three elements, all of which are not anagrams of each other")
     {
-        std::array<std::string, 3UZ> const input{
-            "always", "live", "consciously"
-        };
+        std::array<std::string, 3> const input{"always", "live", "consciously"};
         std::vector<std::vector<std::string>> const expected{
             {"always"}, {"live"}, {"consciously"}
         };
@@ -117,7 +115,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("Thirty-two elements (benchmark case)")
     {
-        std::array<std::string, 32UZ> const input{
+        std::array<std::string, 32> const input{
             "abcd",    "cadb", "no",   "xyz",  "anagram", "silent",
             "listen",  "zyx",  "xzy",  "abcd", "cat",     "bcda",
             "nagaram", "xyz",  "yxz",  "xyz",  "",        "anagram",
@@ -148,7 +146,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("LeetCode case 1")
     {
-        std::array<std::string, 6UZ> const input{
+        std::array<std::string, 6> const input{
             "eat", "tea", "tan", "ate", "nat", "bat"
         };
         std::vector<std::vector<std::string>> const expected{
@@ -165,7 +163,7 @@ TEST_CASE("Group anagrams", "[group_anagrams]")
 
     SECTION("NeetCode case 1")
     {
-        std::array<std::string, 6UZ> const input{
+        std::array<std::string, 6> const input{
             "act", "pots", "tops", "cat", "stop", "hat"
         };
         std::vector<std::vector<std::string>> const expected{

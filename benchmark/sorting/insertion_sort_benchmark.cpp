@@ -19,7 +19,7 @@ TEST_CASE("Insertion sort benchmarking", "[benchmark][sorting][insertion_sort]")
 {
     using namespace forfun::sorting;
 
-    using ContainerType = std::array<int, 16U>;
+    using ContainerType = std::array<int, 16>;
     using Iter = ContainerType::iterator;
 
     ankerl::nanobench::Bench()

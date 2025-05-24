@@ -19,7 +19,7 @@ TEST_CASE("Quicksort benchmarking", "[benchmark][sorting][quicksort]")
 {
     using namespace forfun::sorting;
 
-    using ContainerType = std::array<int, 16U>;
+    using ContainerType = std::array<int, 16>;
     using Iter = ContainerType::iterator;
 
     ankerl::nanobench::Bench()

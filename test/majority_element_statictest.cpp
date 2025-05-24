@@ -16,7 +16,7 @@ TEST_CASE("Majority element", "[majority_element]")
 
     SECTION("Empty collection should have no majority")
     {
-        constexpr std::array<int, 0U> const elements{};
+        constexpr std::array<int, 0> const elements{};
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }

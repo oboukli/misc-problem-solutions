@@ -16,19 +16,19 @@ TEMPLATE_TEST_CASE_SIG(
     "[contains_duplicate]",
     (auto contains_duplicate, contains_duplicate),
     (forfun::contains_duplicate::quadratic::contains_duplicate<
-        std::array<int, 0U>::iterator,
-        std::array<int, 0U>::iterator>),
+        std::array<int, 0>::iterator,
+        std::array<int, 0>::iterator>),
     (forfun::contains_duplicate::sorted::contains_duplicate<
-        std::array<int, 0U>::iterator,
-        std::array<int, 0U>::iterator>),
+        std::array<int, 0>::iterator,
+        std::array<int, 0>::iterator>),
     (forfun::contains_duplicate::stl::contains_duplicate<
-        std::array<int, 0U>::iterator,
-        std::array<int, 0U>::iterator>)
+        std::array<int, 0>::iterator,
+        std::array<int, 0>::iterator>)
 )
 {
     SECTION("Empty input")
     {
-        std::array<int, 0U> nums{};
+        std::array<int, 0> nums{};
         static constexpr bool const expected{false};
 
         static constexpr auto const actual{

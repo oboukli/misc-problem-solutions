@@ -16,8 +16,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Empty container")
     {
-        std::array<int, 0U> test_input{};
-        static constexpr std::array<int, 0U> const expected_output{};
+        std::array<int, 0> test_input{};
+        static constexpr std::array<int, 0> const expected_output{};
         insertion_sort(test_input.begin(), test_input.end());
 
         STATIC_CHECK(test_input.empty());

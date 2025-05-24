@@ -18,7 +18,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 {
     using namespace forfun::contains_duplicate;
 
-    using Iter = std::array<int, 32U>::iterator;
+    using Iter = std::array<int, 32>::iterator;
 
     ankerl::nanobench::Bench()
 

@@ -19,7 +19,7 @@ TEST_CASE("Group Anagrams benchmarking", "[benchmark][group_anagrams]")
 {
     using namespace forfun::group_anagrams;
 
-    std::array<std::string, 32UZ> const input{
+    std::array<std::string, 32> const input{
         "abcd", "cadb",    "no",   "xyz",     "anagram", "silent",  "listen",
         "zyx",  "xzy",     "abcd", "cat",     "bcda",    "nagaram", "xyz",
         "yxz",  "xyz",     "",     "anagram", "dabc",    "cat",     "abcd",
