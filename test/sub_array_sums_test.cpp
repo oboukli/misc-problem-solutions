@@ -347,7 +347,7 @@ struct AddableDummy final {
 };
 
 template <typename SizeType>
-struct DummyWithSizeType final : public std::array<unsigned char, 0U> {
+struct DummyWithSizeType final : public std::array<unsigned char, 0> {
     using size_type = SizeType;
 };
 
@@ -358,19 +358,19 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
     SECTION("Positive")
     {
         STATIC_REQUIRE(
-            template_specialization<std::array<int, 0U>, std::array<int, 0U>>
+            template_specialization<std::array<int, 0>, std::array<int, 0>>
         );
         STATIC_REQUIRE(
             template_specialization<std::vector<int>, std::vector<int>>
         );
         STATIC_REQUIRE(
-            template_specialization<std::vector<int>, std::array<int, 0U>>
+            template_specialization<std::vector<int>, std::array<int, 0>>
         );
         STATIC_REQUIRE(
-            template_specialization<std::array<int, 0U>, std::vector<int>>
+            template_specialization<std::array<int, 0>, std::vector<int>>
         );
         STATIC_REQUIRE(
-            template_specialization<std::array<int, 0U>, std::list<int>>
+            template_specialization<std::array<int, 0>, std::list<int>>
         );
         STATIC_REQUIRE(
             template_specialization<std::vector<int>, std::vector<unsigned>>
@@ -404,7 +404,7 @@ TEST_CASE("Constraints of sub_array_sums", "[sub_array_sums]")
             template_specialization<std::vector<std::string>, std::vector<int>>
         );
         STATIC_REQUIRE_FALSE(
-            template_specialization<std::list<int>, std::array<int, 0U>>
+            template_specialization<std::list<int>, std::array<int, 0>>
         );
 
         STATIC_REQUIRE_FALSE(

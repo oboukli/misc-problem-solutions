@@ -38,7 +38,7 @@ TEMPLATE_TEST_CASE_SIG(
 )
 {
     constexpr int const target{151};
-    std::array<int, 0U> const records{};
+    std::array<int, 0> const records{};
     static_assert(records.empty());
 
     REQUIRE(find(records.cbegin(), records.cend(), target) == records.cend());

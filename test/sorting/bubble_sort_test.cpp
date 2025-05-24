@@ -12,16 +12,16 @@
 
 #include "forfun/sorting/bubble_sort.hpp"
 
-using Arr0Iter = std::array<int, 0U>::iterator;
-using Arr1Iter = std::array<int, 1U>::iterator;
-using Arr2Iter = std::array<int, 2U>::iterator;
-using Arr3Iter = std::array<int, 3U>::iterator;
-using Arr7Iter = std::array<int, 7U>::iterator;
-using Arr10Iter = std::array<int, 10U>::iterator;
+using Arr0Iter = std::array<int, 0>::iterator;
+using Arr1Iter = std::array<int, 1>::iterator;
+using Arr2Iter = std::array<int, 2>::iterator;
+using Arr3Iter = std::array<int, 3>::iterator;
+using Arr7Iter = std::array<int, 7>::iterator;
+using Arr10Iter = std::array<int, 10>::iterator;
 using VecIter = std::vector<int>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 0U>)",
+    "Bubble sort (std::array<int, 0>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr0Iter, Arr0Iter>),
@@ -30,8 +30,8 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Empty container")
     {
-        std::array<int, 0U> test_input{};
-        std::array<int, 0U> expected_output{};
+        std::array<int, 0> test_input{};
+        std::array<int, 0> expected_output{};
         bubble_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.empty());
@@ -41,7 +41,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 1U>)",
+    "Bubble sort (std::array<int, 1>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr1Iter, Arr1Iter>),
@@ -61,7 +61,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 2U>)",
+    "Bubble sort (std::array<int, 2>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr2Iter, Arr2Iter>),
@@ -81,7 +81,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 3U>)",
+    "Bubble sort (std::array<int, 3>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr3Iter, Arr3Iter>),
@@ -101,7 +101,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 10U>)",
+    "Bubble sort (std::array<int, 10>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr10Iter, Arr10Iter>),
@@ -132,7 +132,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Bubble sort (std::array<int, 7U>)",
+    "Bubble sort (std::array<int, 7>)",
     "[sorting][bubble_sort]",
     (auto bubble_sort, bubble_sort),
     (forfun::sorting::plain::bubble_sort<Arr7Iter, Arr7Iter>),

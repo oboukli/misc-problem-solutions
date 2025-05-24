@@ -19,7 +19,7 @@ TEST_CASE("Meeting rooms", "[meeting_rooms]")
 
     SECTION("Empty container")
     {
-        std::array<interval, 0U> const intervals{};
+        std::array<interval, 0> const intervals{};
 
         CAPTURE(intervals);
 

@@ -21,10 +21,10 @@ using IntVecItr = std::vector<int>::iterator;
 using IntVecConstItr = std::vector<int>::const_iterator;
 using FloatVecConstItr = std::vector<float>::const_iterator;
 using DoubleVecItr = std::vector<double>::iterator;
-using IntArr3ConstItr = std::array<int, 3U>::const_iterator;
-using IntArr3Itr = std::array<int, 3U>::iterator;
-using U64ArrConstItr = std::array<std::uint64_t, 16U>::const_iterator;
-using U64ArrItr = std::array<std::uint64_t, 16U>::iterator;
+using IntArr3ConstItr = std::array<int, 3>::const_iterator;
+using IntArr3Itr = std::array<int, 3>::iterator;
+using U64ArrConstItr = std::array<std::uint64_t, 16>::const_iterator;
+using U64ArrItr = std::array<std::uint64_t, 16>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
@@ -157,7 +157,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Product of array except self (std::array<int, 3U>)",
+    "Product of array except self (std::array<int, 3>)",
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
@@ -179,7 +179,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::array<int, 3U> actual{};
+        std::array<int, 3> actual{};
 
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
@@ -228,7 +228,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         static_assert(nums.size() == 16UZ);
 
-        static constexpr std::array<std::uint64_t, 16U> const expected{
+        static constexpr std::array<std::uint64_t, 16> const expected{
             0U,
             0U,
             0U,
@@ -249,7 +249,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::array<std::uint64_t, 16U> actual{};
+        std::array<std::uint64_t, 16> actual{};
 
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()

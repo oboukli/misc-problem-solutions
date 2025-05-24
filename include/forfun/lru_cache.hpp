@@ -29,7 +29,7 @@ concept lru_cache = requires(T cache, std::size_t k, int v) {
 namespace naive {
 
 struct CacheItem final {
-    std::int64_t ticks_{0U};
+    std::int64_t ticks_{0};
     std::size_t key_{};
     int value_{};
 };
@@ -59,7 +59,7 @@ private:
     std::size_t capacity_{0UZ};
     std::size_t size_{0UZ};
     std::size_t least_recent_idx_{0UZ};
-    std::int64_t ticks_{0U};
+    std::int64_t ticks_{0};
 };
 
 } // namespace naive

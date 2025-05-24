@@ -17,7 +17,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Empty container")
     {
-        std::array<int, 0U> const stashes{};
+        std::array<int, 0> const stashes{};
 
         CAPTURE(stashes);
 

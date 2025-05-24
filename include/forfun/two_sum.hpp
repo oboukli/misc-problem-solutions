@@ -32,7 +32,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
-) noexcept -> std::array<Iter, 2UZ>
+) noexcept -> std::array<Iter, 2>
 {
     for (; iter != last; ++iter)
     {
@@ -60,7 +60,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
 two_sum(Iter iter, Sentinel const last, std::iter_value_t<Iter> const target)
-    -> std::array<Iter, 2UZ>
+    -> std::array<Iter, 2>
 {
     std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
     lookup_map.emplace(*iter, iter);
@@ -91,7 +91,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
-) noexcept -> std::array<Iter, 2UZ>
+) noexcept -> std::array<Iter, 2>
 {
     for (; iter != last; ++iter)
     {
@@ -118,7 +118,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
-) noexcept -> std::array<Iter, 2UZ>
+) noexcept -> std::array<Iter, 2>
 {
     for (; iter != last; ++iter)
     {
@@ -152,7 +152,7 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
     requires std::integral<std::iter_value_t<IterA>>
 [[nodiscard]] constexpr auto two_sum(
     IterA iter_a, IterB iter_b, std::iter_value_t<IterA> const target
-) noexcept -> std::array<IterA, 2UZ>
+) noexcept -> std::array<IterA, 2>
 {
     --iter_b;
     while (not std::equal_to{}(target, std::plus{}(*iter_a, *iter_b)))

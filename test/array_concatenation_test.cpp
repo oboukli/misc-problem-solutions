@@ -16,19 +16,19 @@ TEMPLATE_TEST_CASE_SIG(
     "Concatenate empty array",
     "[array_concatenation]",
     (auto concatenate, concatenate),
-    (forfun::array_concatenation::functional::concatenate<int, 0U>),
-    (forfun::array_concatenation::functional_minimal::concatenate<int, 0U>),
-    (forfun::array_concatenation::iterator_based::concatenate<int, 0U>),
-    (forfun::array_concatenation::iterator_based_double::concatenate<int, 0U>),
-    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 0U>),
-    (forfun::array_concatenation::nested_loops::concatenate<int, 0U>),
-    (forfun::array_concatenation::semi_unfolded::concatenate<int, 0U>)
+    (forfun::array_concatenation::functional::concatenate<int, 0>),
+    (forfun::array_concatenation::functional_minimal::concatenate<int, 0>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 0>),
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 0>),
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 0>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 0>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 0>)
 )
 {
-    static constexpr std::array<int, 0U> const src{};
-    static constexpr std::array<int, 0U> const expected{};
+    static constexpr std::array<int, 0> const src{};
+    static constexpr std::array<int, 0> const expected{};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 0U> dest /*[[indeterminate]]*/;
+    std::array<int, 0> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -41,19 +41,19 @@ TEMPLATE_TEST_CASE_SIG(
     "Concatenate one-element array",
     "[array_concatenation]",
     (auto concatenate, concatenate),
-    (forfun::array_concatenation::functional::concatenate<int, 1U>),
-    (forfun::array_concatenation::functional_minimal::concatenate<int, 1U>),
-    (forfun::array_concatenation::iterator_based::concatenate<int, 1U>),
-    (forfun::array_concatenation::iterator_based_double::concatenate<int, 1U>),
-    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 1U>),
-    (forfun::array_concatenation::nested_loops::concatenate<int, 1U>),
-    (forfun::array_concatenation::semi_unfolded::concatenate<int, 1U>)
+    (forfun::array_concatenation::functional::concatenate<int, 1>),
+    (forfun::array_concatenation::functional_minimal::concatenate<int, 1>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 1>),
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 1>),
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 1>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 1>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 1>)
 )
 {
-    static constexpr std::array<int, 1U> const src{17};
-    static constexpr std::array<int, 2U> const expected{17, 17};
+    static constexpr std::array<int, 1> const src{17};
+    static constexpr std::array<int, 2> const expected{17, 17};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 2U> dest /*[[indeterminate]]*/;
+    std::array<int, 2> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -66,19 +66,19 @@ TEMPLATE_TEST_CASE_SIG(
     "Concatenate three-element array",
     "[array_concatenation]",
     (auto concatenate, concatenate),
-    (forfun::array_concatenation::functional::concatenate<int, 3U>),
-    (forfun::array_concatenation::functional_minimal::concatenate<int, 3U>),
-    (forfun::array_concatenation::iterator_based::concatenate<int, 3U>),
-    (forfun::array_concatenation::iterator_based_double::concatenate<int, 3U>),
-    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 3U>),
-    (forfun::array_concatenation::nested_loops::concatenate<int, 3U>),
-    (forfun::array_concatenation::semi_unfolded::concatenate<int, 3U>)
+    (forfun::array_concatenation::functional::concatenate<int, 3>),
+    (forfun::array_concatenation::functional_minimal::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 3>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 3>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 3>)
 )
 {
-    static constexpr std::array<int, 3U> const src{19, 23, 29};
-    static constexpr std::array<int, 6U> const expected{19, 23, 29, 19, 23, 29};
+    static constexpr std::array<int, 3> const src{19, 23, 29};
+    static constexpr std::array<int, 6> const expected{19, 23, 29, 19, 23, 29};
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 6U> dest /*[[indeterminate]]*/;
+    std::array<int, 6> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -91,21 +91,21 @@ TEMPLATE_TEST_CASE_SIG(
     "Concatenate four-element array",
     "[array_concatenation]",
     (auto concatenate, concatenate),
-    (forfun::array_concatenation::functional::concatenate<int, 4U>),
-    (forfun::array_concatenation::functional_minimal::concatenate<int, 4U>),
-    (forfun::array_concatenation::iterator_based::concatenate<int, 4U>),
-    (forfun::array_concatenation::iterator_based_double::concatenate<int, 4U>),
-    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 4U>),
-    (forfun::array_concatenation::nested_loops::concatenate<int, 4U>),
-    (forfun::array_concatenation::semi_unfolded::concatenate<int, 4U>)
+    (forfun::array_concatenation::functional::concatenate<int, 4>),
+    (forfun::array_concatenation::functional_minimal::concatenate<int, 4>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 4>),
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 4>),
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 4>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 4>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 4>)
 )
 {
-    static constexpr std::array<int, 4U> const src{31, 37, 41, 43};
-    static constexpr std::array<int, 8U> const expected{
+    static constexpr std::array<int, 4> const src{31, 37, 41, 43};
+    static constexpr std::array<int, 8> const expected{
         31, 37, 41, 43, 31, 37, 41, 43
     };
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 8U> dest /*[[indeterminate]]*/;
+    std::array<int, 8> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 
@@ -118,19 +118,19 @@ TEMPLATE_TEST_CASE_SIG(
     "Concatenate 256-element array (benchmark case)",
     "[array_concatenation]",
     (auto concatenate, concatenate),
-    (forfun::array_concatenation::functional::concatenate<int, 256U>),
-    (forfun::array_concatenation::functional_minimal::concatenate<int, 256U>),
-    (forfun::array_concatenation::iterator_based::concatenate<int, 256U>),
+    (forfun::array_concatenation::functional::concatenate<int, 256>),
+    (forfun::array_concatenation::functional_minimal::concatenate<int, 256>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 256>),
     // clang-format off
     (forfun::array_concatenation::iterator_based_double::
-        concatenate<int, 256U>),
+        concatenate<int, 256>),
     // clang-format on
-    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 256U>),
-    (forfun::array_concatenation::nested_loops::concatenate<int, 256U>),
-    (forfun::array_concatenation::semi_unfolded::concatenate<int, 256U>)
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 256>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 256>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 256>)
 )
 {
-    static constexpr std::array<int, 256U> const src{
+    static constexpr std::array<int, 256> const src{
         // clang-format off
            2,    3,    5,    7,   11,   13,   17,   19,
           23,   29,   31,   37,   41,   43,   47,   53,
@@ -166,7 +166,7 @@ TEMPLATE_TEST_CASE_SIG(
         1579, 1583, 1597, 1601, 1607, 1609, 1613, 1619,
         // clang-format on
     };
-    static constexpr std::array<int, 512U> const expected{
+    static constexpr std::array<int, 512> const expected{
         // clang-format off
            2,    3,    5,    7,   11,   13,   17,   19,
           23,   29,   31,   37,   41,   43,   47,   53,
@@ -236,7 +236,7 @@ TEMPLATE_TEST_CASE_SIG(
         // clang-format on
     };
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-    std::array<int, 512U> dest /*[[indeterminate]]*/;
+    std::array<int, 512> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
 

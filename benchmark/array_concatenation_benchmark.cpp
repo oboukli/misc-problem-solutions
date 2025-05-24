@@ -20,7 +20,7 @@ TEST_CASE(
 {
     using namespace forfun::array_concatenation;
 
-    constexpr std::array<int, 256U> const src{
+    constexpr std::array<int, 256> const src{
         // clang-format off
            2,    3,    5,    7,   11,   13,   17,   19,
           23,   29,   31,   37,   41,   43,   47,   53,
@@ -63,70 +63,70 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(functional::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(functional::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 functional::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(functional_minimal::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(functional_minimal::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 functional_minimal::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(iterator_based::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(iterator_based::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 iterator_based::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(iterator_based_double::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(iterator_based_double::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 iterator_based_double::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(iterator_unfolded::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(iterator_unfolded::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 iterator_unfolded::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(nested_loops::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(nested_loops::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 nested_loops::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }
         )
 
         .run(
-            NAMEOF_RAW(semi_unfolded::concatenate<int, 256U>).c_str(),
+            NAMEOF_RAW(semi_unfolded::concatenate<int, 256>).c_str(),
             [&src]() noexcept {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512U> dest /*[[indeterminate]]*/;
+                std::array<int, 512> dest /*[[indeterminate]]*/;
                 semi_unfolded::concatenate(src, dest);
                 ankerl::nanobench::doNotOptimizeAway(dest);
             }

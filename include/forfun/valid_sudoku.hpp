@@ -18,7 +18,7 @@
 namespace forfun::valid_sudoku {
 
 template <std::integral CellType>
-using SudokuBoard = std::array<std::array<CellType, 9U>, 9U>;
+using SudokuBoard = std::array<std::array<CellType, 9>, 9>;
 
 namespace bitwise {
 
@@ -48,8 +48,8 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
     using SetType = unsigned int;
 
-    std::array<SetType, 9U> rows{};
-    std::array<SetType, 9U> boxes{};
+    std::array<SetType, 9> rows{};
+    std::array<SetType, 9> boxes{};
 
     for (std::size_t i{}; i < board.size(); ++i)
     {
@@ -110,10 +110,10 @@ template <typename CellType>
 [[nodiscard]] constexpr auto
 is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
-    using SetType = std::bitset<9U>;
+    using SetType = std::bitset<9>;
 
-    std::array<SetType, 9U> rows{};
-    std::array<SetType, 9U> boxes{};
+    std::array<SetType, 9> rows{};
+    std::array<SetType, 9> boxes{};
 
     for (std::size_t i{}; i < board.size(); ++i)
     {

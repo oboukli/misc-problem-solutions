@@ -18,7 +18,7 @@
 TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 {
     using namespace forfun::search::binary_search;
-    using Iter = std::array<int, 12U>::const_iterator;
+    using Iter = std::array<int, 12>::const_iterator;
 
     std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
     static_assert(records.size() == 12U);

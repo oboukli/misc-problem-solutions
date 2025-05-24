@@ -32,7 +32,7 @@ TEST_CASE(
         8, 8, 8, 8, 8, 8, 8, 8,
         // clang-format on
     };
-    std::array<int, 8U> sums{};
+    std::array<int, 8> sums{};
 
     ankerl::nanobench::Bench()
 
@@ -40,7 +40,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(sum_each<std::array<int, 64U>, std::array<int, 8U>>)
+            NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
             [&numbers, &sums]() noexcept {
                 decltype(numbers)::size_type const volatile sub_size{8U};
