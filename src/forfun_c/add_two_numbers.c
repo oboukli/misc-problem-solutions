@@ -33,9 +33,7 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
 {
     unsigned int sum = 0U;
     struct forfun_forward_list_node* aux_node_ptr
-        = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
-            sizeof(struct forfun_forward_list_node)
-        );
+        = g_forfun_mem.ff_malloc(sizeof(struct forfun_forward_list_node));
     struct forfun_forward_list_node* const root_node_ptr = aux_node_ptr;
     if (aux_node_ptr == NULL)
     {
@@ -71,9 +69,7 @@ struct forfun_forward_list_node* forfun_iterative_add_two_numbers(
         }
 
         aux_node_ptr->next
-            = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
-                sizeof(struct forfun_forward_list_node)
-            );
+            = g_forfun_mem.ff_malloc(sizeof(struct forfun_forward_list_node));
         aux_node_ptr = aux_node_ptr->next;
         if (aux_node_ptr == NULL)
         {
