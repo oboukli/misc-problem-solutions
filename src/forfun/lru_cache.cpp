@@ -142,7 +142,7 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
     [[maybe_unused]] auto const num_elements_removed{
         lookup_.erase(cache_.begin()->first)
     };
-    assert(num_elements_removed == 1U);
+    assert(num_elements_removed == 1UZ);
     cache_.splice(cache_.end(), cache_, cache_.begin());
     [[maybe_unused]] auto const replacement_key_insert_result{
         lookup_.insert({key, std::prev(cache_.end())})

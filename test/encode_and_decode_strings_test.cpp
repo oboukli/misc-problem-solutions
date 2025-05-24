@@ -325,9 +325,9 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
             "abcd    ~~~~efghabcd    ~~~~efgh"sv,
             // clang-format on
         };
-        static_assert(tokens.size() == 2U);
-        static_assert(tokens[0].size() == 256U);
-        static_assert(tokens[1].size() == 256U);
+        static_assert(tokens.size() == 2UZ);
+        static_assert(tokens[0].size() == 256UZ);
+        static_assert(tokens[1].size() == 256UZ);
 
         std::ostringstream ss{};
 
@@ -335,7 +335,7 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
 
         encode(tokens.cbegin(), tokens.cend(), ss);
 
-        REQUIRE(ss.view().size() == 769U);
+        REQUIRE(ss.view().size() == 769UZ);
         REQUIRE(
             ss.view() ==
             // clang-format off

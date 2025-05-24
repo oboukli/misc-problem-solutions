@@ -56,7 +56,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        CHECK(test_input.size() == 1U);
+        CHECK(test_input.size() == 1UZ);
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
@@ -83,7 +83,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        CHECK(test_input.size() == 2U);
+        CHECK(test_input.size() == 2UZ);
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
@@ -111,7 +111,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        CHECK(test_input.size() == 3U);
+        CHECK(test_input.size() == 3UZ);
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
@@ -138,7 +138,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(test_input);
 
-        CHECK(test_input.size() == 10U);
+        CHECK(test_input.size() == 10UZ);
 
         REQUIRE(
             first_missing_positive(test_input.begin(), test_input.end())
@@ -186,7 +186,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     CAPTURE(test_input);
 
-    CHECK(test_input.size() == 16U);
+    CHECK(test_input.size() == 16UZ);
 
     REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 6);
 }
@@ -222,7 +222,9 @@ TEMPLATE_TEST_CASE_SIG(
 )
 {
     std::array test_input{1U, 2U, 4U};
-    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 3U);
+    REQUIRE(
+        first_missing_positive(test_input.begin(), test_input.end()) == 3UZ
+    );
 }
 
 TEMPLATE_TEST_CASE_SIG(

@@ -34,7 +34,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 1U);
+        STATIC_CHECK(test_input.size() == 1UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -46,7 +46,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 2U);
+        STATIC_CHECK(test_input.size() == 2UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -58,7 +58,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 3U);
+        STATIC_CHECK(test_input.size() == 3UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -72,7 +72,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 10U);
+        STATIC_CHECK(test_input.size() == 10UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -86,7 +86,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 10U);
+        STATIC_CHECK(test_input.size() == 10UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -100,7 +100,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
         quicksort(test_input.begin(), test_input.end());
 
-        STATIC_CHECK(test_input.size() == 7U);
+        STATIC_CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -111,7 +111,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
         std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         quicksort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -122,7 +122,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
         std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         quicksort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -133,7 +133,7 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
         std::vector const expected_output{-9, -8, -7, -5, -4, -4, -2};
         quicksort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }

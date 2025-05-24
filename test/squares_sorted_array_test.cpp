@@ -275,7 +275,7 @@ TEMPLATE_TEST_CASE_SIG(
             14884, 14884, 15129, 15129, 15376, 15376, 15625, 15625, 15876,
             15876, 16129, 16129, 16384
         };
-        static_assert(expected.size() == 256U);
+        static_assert(expected.size() == 256UZ);
 
         std::vector const input{
             -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117,
@@ -303,7 +303,7 @@ TEMPLATE_TEST_CASE_SIG(
             115,  116,  117,  118,  119,  120,  121,  122,  123,  124,  125,
             126,  127,  128
         };
-        CHECK(input.size() == 256U);
+        CHECK(input.size() == 256UZ);
 
         std::vector<int> result_squares(256U);
 
