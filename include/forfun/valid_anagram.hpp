@@ -50,7 +50,7 @@ is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
         decltype(bucket)::iterator const it{std::next(bucket.begin(), *iter)};
-        if (*it == 0ZU)
+        if (*it == 0UZ)
         {
             return false;
         }
@@ -86,7 +86,7 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
 
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
-        if (bucket[*iter] == 0ZU)
+        if (bucket[*iter] == 0UZ)
         {
             return false;
         }

@@ -48,9 +48,9 @@ TEST_CASE(
         "abcd    ~~~~efghabcd    ~~~~efgh"sv,
         // clang-format on
     };
-    static_assert(tokens.size() == 2U);
-    static_assert(tokens[0].size() == 256U);
-    static_assert(tokens[1].size() == 256U);
+    static_assert(tokens.size() == 2UZ);
+    static_assert(tokens[0].size() == 256UZ);
+    static_assert(tokens[1].size() == 256UZ);
 
     ankerl::nanobench::Bench()
 
@@ -97,7 +97,7 @@ TEST_CASE(
         "h"sv
         // clang-format on
     };
-    static_assert(encoded.size() == 769U);
+    static_assert(encoded.size() == 769UZ);
 
     ankerl::nanobench::Bench()
 

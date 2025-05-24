@@ -174,7 +174,7 @@ TEST_CASE("Majority element", "[majority_element]")
         };
         using ConstItr = decltype(elements)::const_iterator;
 
-        CHECK(elements.size() == 64U);
+        CHECK(elements.size() == 64UZ);
 
         CAPTURE(elements);
 

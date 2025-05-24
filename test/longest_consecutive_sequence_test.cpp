@@ -37,7 +37,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 0ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 0UZ);
     }
 
     SECTION("Single element")
@@ -46,7 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1UZ);
     }
 
     SECTION("Two consecutive elements")
@@ -55,7 +55,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 2ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 2UZ);
     }
 
     SECTION("Three consecutive elements")
@@ -64,7 +64,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 3ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 3UZ);
     }
 
     SECTION("Four consecutive elements")
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4UZ);
     }
 
     SECTION("Two non-consecutive elements")
@@ -82,7 +82,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1UZ);
     }
 
     SECTION("Three non-consecutive elements")
@@ -91,7 +91,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1UZ);
     }
 
     SECTION("Four non-consecutive elements")
@@ -100,7 +100,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 1UZ);
     }
 
     SECTION("Container of consecutive and repeated elements (case 1)")
@@ -109,7 +109,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4UZ);
     }
 
     SECTION("Container of consecutive and repeated elements (benchmark case)")
@@ -125,7 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 5ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 5UZ);
     }
 
     SECTION("LeetCode case 1")
@@ -134,7 +134,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 4UZ);
     }
 
     SECTION("LeetCode case 2")
@@ -143,6 +143,6 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 9ZU);
+        REQUIRE(longest_consecutive(nums.begin(), nums.end()) == 9UZ);
     }
 }

@@ -92,7 +92,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("0 + 0")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 0U};
@@ -109,13 +109,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->value == 0U);
         REQUIRE(actual->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 1ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 1UZ);
     }
 
     SECTION("0 + 1")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 0U};
@@ -132,13 +132,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->value == 1U);
         REQUIRE(actual->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 1ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 1UZ);
     }
 
     SECTION("1 + 0")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 1U};
@@ -155,13 +155,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->value == 1U);
         REQUIRE(actual->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 1ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 1UZ);
     }
 
     SECTION("1 + 1")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 1U};
@@ -178,13 +178,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->value == 2U);
         REQUIRE(actual->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 1ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 1UZ);
     }
 
     SECTION("3 + 7")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 3U};
@@ -204,13 +204,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->value == 1U);
         REQUIRE(actual->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 2ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 2UZ);
     }
 
     SECTION("1 + 10")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 1U};
@@ -231,13 +231,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->value == 1U);
         REQUIRE(actual->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 2ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 2UZ);
     }
 
     SECTION("100 + 100")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 1U};
         ::forfun_forward_list_node node_a_1 = {.next = &node_a_2, .value = 0U};
@@ -264,13 +264,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->next->value == 2U);
         REQUIRE(actual->next->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 3ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 3UZ);
     }
 
     SECTION("100 + 910")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 1U};
         ::forfun_forward_list_node node_a_1 = {.next = &node_a_2, .value = 0U};
@@ -300,13 +300,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->next->next->value == 1U);
         REQUIRE(actual->next->next->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 4ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 4UZ);
     }
 
     SECTION("342 + 465 = 807 (LeetCode test case)")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 3U};
         ::forfun_forward_list_node node_a_1 = {.next = &node_a_2, .value = 4U};
@@ -333,13 +333,13 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->next->value == 8U);
         REQUIRE(actual->next->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 3ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 3UZ);
     }
 
     SECTION("9999999 + 9999 = 10009998 (LeetCode test case)")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_6 = {.next = nullptr, .value = 9U};
         ::forfun_forward_list_node node_a_5 = {.next = &node_a_6, .value = 9U};
@@ -390,13 +390,13 @@ TEMPLATE_TEST_CASE_SIG(
             actual->next->next->next->next->next->next->next->next == nullptr
         );
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 8ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 8UZ);
     }
 
     SECTION("256541 + 997991 = 1254532 (benchmark case)")
     {
         shim_context_scoped_guard shim_context_guard;
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_5 = {.next = nullptr, .value = 2U};
         ::forfun_forward_list_node node_a_4 = {.next = &node_a_5, .value = 5U};
@@ -441,7 +441,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(actual->next->next->next->next->next->next->value == 1U);
         REQUIRE(actual->next->next->next->next->next->next->next == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 7ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 7UZ);
     }
 }
 
@@ -467,7 +467,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         shim_context_scoped_guard shim_context_guard;
         ::forfun_shim_set_malloc_fail_after(0);
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 0U};
@@ -481,14 +481,14 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(actual == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 1ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 1UZ);
     }
 
     SECTION("3 + 7")
     {
         shim_context_scoped_guard shim_context_guard;
         ::forfun_shim_set_malloc_fail_after(1);
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 0ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 3U};
@@ -502,7 +502,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(actual == nullptr);
 
-        REQUIRE(::forfun_shim_get_malloc_call_count() == 2ZU);
+        REQUIRE(::forfun_shim_get_malloc_call_count() == 2UZ);
     }
 }
 

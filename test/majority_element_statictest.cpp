@@ -25,7 +25,7 @@ TEST_CASE("Majority element", "[majority_element]")
     {
         constexpr std::array const elements{7};
 
-        static_assert(elements.size() == 1U);
+        static_assert(elements.size() == 1UZ);
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }
@@ -34,7 +34,7 @@ TEST_CASE("Majority element", "[majority_element]")
     {
         constexpr std::array const elements{5, 7};
 
-        static_assert(elements.size() == 2U);
+        static_assert(elements.size() == 2UZ);
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }
@@ -43,7 +43,7 @@ TEST_CASE("Majority element", "[majority_element]")
     {
         constexpr std::array const elements{3, 5, 7};
 
-        static_assert(elements.size() == 3U);
+        static_assert(elements.size() == 3UZ);
 
         STATIC_REQUIRE(majority_element(elements) == elements.cend());
     }

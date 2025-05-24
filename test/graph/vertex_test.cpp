@@ -145,7 +145,7 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(adjacency_list.size() == 6U);
+        REQUIRE(adjacency_list.size() == 6UZ);
     }
 
     SECTION("Graph state list initialized (std::string)")
@@ -179,6 +179,6 @@ TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(adjacency_list.size() == 6U);
+        REQUIRE(adjacency_list.size() == 6UZ);
     }
 }

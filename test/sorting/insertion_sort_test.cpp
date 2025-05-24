@@ -31,7 +31,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{7};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 1U);
+        CHECK(test_input.size() == 1UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -42,7 +42,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{1, 1};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 2U);
+        CHECK(test_input.size() == 2UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -53,7 +53,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         static constexpr std::array const expected_output{-6, 3, 11};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 3U);
+        CHECK(test_input.size() == 3UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -66,7 +66,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10U);
+        CHECK(test_input.size() == 10UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -79,7 +79,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 10U);
+        CHECK(test_input.size() == 10UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -92,7 +92,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         };
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -103,7 +103,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -114,7 +114,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }
@@ -125,7 +125,7 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
         std::array const expected_output{-9, -8, -7, -5, -4, -4, -2};
         insertion_sort(test_input.begin(), test_input.end());
 
-        CHECK(test_input.size() == 7U);
+        CHECK(test_input.size() == 7UZ);
 
         REQUIRE(test_input == expected_output);
     }

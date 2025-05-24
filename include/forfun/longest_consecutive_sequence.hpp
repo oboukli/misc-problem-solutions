@@ -28,7 +28,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     if (iter == last) [[unlikely]]
     {
-        return 0ZU;
+        return 0UZ;
     }
 
     std::sort(iter, last);
@@ -46,7 +46,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
         }
         else
         {
-            streak = 1ZU;
+            streak = 1UZ;
 
             // Conclude if no higher streak is possible.
             if (static_cast<std::size_t>(std::distance(iter_b, last_unique))
@@ -87,7 +87,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 {
     if (iter == last) [[unlikely]]
     {
-        return 0ZU;
+        return 0UZ;
     }
 
     std::sort(iter, last);
@@ -131,7 +131,7 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
 {
     if (first == last) [[unlikely]]
     {
-        return 0ZU;
+        return 0UZ;
     }
 
     using ValueType = std::iter_value_t<Iter>;
@@ -155,7 +155,7 @@ longest_consecutive(Iter const first, Sentinel const last) noexcept
         }
         else
         {
-            streak = 1ZU;
+            streak = 1UZ;
 
             // Conclude if no higher streak is possible.
             if (static_cast<std::size_t>(
