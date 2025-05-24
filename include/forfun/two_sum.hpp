@@ -130,11 +130,6 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
             {
                 return {iter, iter_j};
             }
-
-            if (std::greater{}(*iter, *iter_j))
-            {
-                break;
-            }
         }
     }
 
