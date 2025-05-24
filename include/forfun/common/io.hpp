@@ -13,10 +13,7 @@ namespace forfun::common::io {
 
 class null_streambuf final : public std::streambuf {
 public:
-    null_streambuf()
-    {
-        this->setbuf(nullptr, 0); // DevSkim: ignore DS154189
-    }
+    null_streambuf() = default;
 
     null_streambuf(null_streambuf const&) = delete;
 
