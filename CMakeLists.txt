@@ -435,6 +435,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/best_time_to_buy_and_sell_stock_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/io_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container_with_most_water_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_test.cpp"
