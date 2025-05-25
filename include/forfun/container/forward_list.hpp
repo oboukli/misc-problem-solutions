@@ -62,7 +62,7 @@ public:
         internal::forward_list_node<T>* const aux{head_};
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        head_ = new internal::forward_list_node<T>(std::move(value));
+        head_ = new internal::forward_list_node<T>{std::move(value)};
 
         head_->next = aux;
     }
@@ -87,7 +87,7 @@ public:
             node != nullptr;)
         // clang-format on
         {
-            internal::forward_list_node<T> const* const next = node->next;
+            internal::forward_list_node<T> const* const next{node->next};
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;

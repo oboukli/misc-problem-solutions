@@ -15,8 +15,7 @@
 
 namespace forfun::experimental::container::internal {
 
-class list_iterator final
-    : public internal::list_iterator_helper<list_iterator> {
+class list_iterator final : public list_iterator_helper<list_iterator> {
 public:
     using value_type = int;
 
@@ -26,15 +25,15 @@ public:
 
     constexpr explicit list_iterator() noexcept = default;
 
-    constexpr explicit list_iterator(internal::list_node* const node) noexcept :
-        internal::list_iterator_helper<list_iterator>{node}
+    constexpr explicit list_iterator(list_node* const node) noexcept :
+        list_iterator_helper{node}
     {
     }
 
     constexpr list_iterator(list_iterator const& other) noexcept = default;
 
     constexpr list_iterator(list_iterator&& other) noexcept :
-        internal::list_iterator_helper<list_iterator>(std::move(other))
+        list_iterator_helper{std::move(other)}
     {
     }
 
