@@ -8,6 +8,7 @@
 #define FORFUN_TESTING_CATCH2_CUSTOM_MATCHERS_HPP_
 
 #include <algorithm>
+#include <format>
 #include <functional>
 #include <iterator>
 #include <string>
@@ -15,76 +16,103 @@
 #include <utility>
 
 #include <catch2/catch_tostring.hpp>
-#include <catch2/internal/catch_is_permutation.hpp>
 #include <catch2/matchers/catch_matchers_templated.hpp>
 
 namespace forfun::testing::catch2_custom::matchers {
 
-template <typename TargetRangeLike, typename Equality>
+template <
+    typename TargetRangeOfRangeLike,
+    typename OuterEquality,
+    typename InnerLess>
 class UnorderedNestedRangeEqualsMatcher final
     : public Catch::Matchers::MatcherGenericBase {
-    using Range_ = std::remove_cvref_t<TargetRangeLike>;
-
 public:
     explicit constexpr UnorderedNestedRangeEqualsMatcher(
-        auto&& expected, auto&& pred
-    ) noexcept :
-        expected_{std::forward<TargetRangeLike>(expected)},
-        equal_to_{std::forward<Equality>(pred)}
+        auto&& expected, auto&& outer_equal_to, auto&& inner_less
+    ) :
+        expected_{std::forward<TargetRangeOfRangeLike>(expected)},
+        outer_equal_to_{std::forward<OuterEquality>(outer_equal_to)},
+        inner_less_{std::forward<InnerLess>(inner_less)},
+        description_(
+            std::format(
+                "unordered elements are {}", Catch::Detail::stringify(expected_)
+            )
+        )
     {
+        using std::ranges::sort;
+
+        for (auto& v : expected_)
+        {
+            sort(v, inner_less_);
+        }
     }
 
-    [[nodiscard]] auto match(auto&& actual) const -> bool
+    template <typename RangeOfRange>
+    [[nodiscard]] auto match(RangeOfRange&& actual) const -> bool
     {
-        if (actual.size() != expected_.size())
+        using std::size;
+
+        if (size(actual) != size(expected_))
         {
             return false;
         }
 
-        Range_ inner_sorted_expected{std::forward<TargetRangeLike>(expected_)};
-        Range_ inner_sorted_actual{std::forward<TargetRangeLike>(actual)};
+        using std::ranges::sort;
 
-        for (auto& v : inner_sorted_expected)
-        {
-            std::ranges::sort(v);
-        }
+        auto semi_sorted_actual{std::forward<RangeOfRange>(actual)};
 
-        for (auto& v : inner_sorted_actual)
+        for (auto& v : semi_sorted_actual)
         {
-            std::ranges::sort(v);
+            sort(v, inner_less_);
         }
 
         using std::cbegin;
         using std::cend;
 
-        return Catch::Detail::is_permutation(
-            cbegin(inner_sorted_expected),
-            cend(inner_sorted_expected),
-            cbegin(inner_sorted_actual),
-            cend(inner_sorted_actual),
-            equal_to_
+        return std::is_permutation(
+            cbegin(expected_),
+            cend(expected_),
+            cbegin(semi_sorted_actual),
+            cend(semi_sorted_actual),
+            // clang-format off
+            [equal_to = outer_equal_to_]
+            // clang-format on
+            (auto const& a, auto const& b) noexcept -> bool {
+                return (size(a) == size(b))
+                    && std::equal(cbegin(a), cend(a), cbegin(b), equal_to);
+            }
         );
     }
 
     [[nodiscard]] auto describe() const -> std::string override
     {
-        return "unordered elements are " + Catch::Detail::stringify(expected_);
+        return description_;
     }
 
 private:
-    Range_ expected_;
-    Equality equal_to_;
+    std::remove_cvref_t<TargetRangeOfRangeLike> expected_;
+    std::remove_cvref_t<OuterEquality> outer_equal_to_;
+    std::remove_cvref_t<InnerLess> inner_less_;
+    std::string description_;
 };
 
 template <
     typename RangeOfRange,
-    typename Equality = decltype(std::equal_to<>{})>
+    typename OuterEquality = std::equal_to<>,
+    typename InnerLess = std::less<>>
 constexpr auto UnorderedNestedRangeEquals(
-    RangeOfRange&& expected, Equality&& predicate = std::equal_to<>{}
-) -> UnorderedNestedRangeEqualsMatcher<RangeOfRange, Equality>
+    RangeOfRange&& expected,
+    OuterEquality&& outer_equal_to = std::equal_to{},
+    InnerLess&& inner_less = std::less{}
+) -> UnorderedNestedRangeEqualsMatcher<RangeOfRange, OuterEquality, InnerLess>
 {
-    return UnorderedNestedRangeEqualsMatcher<RangeOfRange, Equality>{
-        std::forward<RangeOfRange>(expected), std::forward<Equality>(predicate)
+    return UnorderedNestedRangeEqualsMatcher<
+        RangeOfRange,
+        OuterEquality,
+        InnerLess>{
+        std::forward<RangeOfRange>(expected),
+        std::forward<OuterEquality>(outer_equal_to),
+        std::forward<InnerLess>(inner_less)
     };
 }
 
