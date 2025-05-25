@@ -11,7 +11,7 @@
 
 namespace forfun::graph::balanced_binary_tree {
 
-using forfun::graph::binary_tree_node;
+using graph::binary_tree_node;
 
 namespace raw {
 

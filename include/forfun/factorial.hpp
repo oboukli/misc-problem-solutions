@@ -49,7 +49,7 @@ namespace recursive {
 
 /// @note Assumes @p n to be non-negative, otherwise the behavior of the
 /// strategy is undefined.
-template <forfun::common::concepts::addition_unpromoted T>
+template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
 {
     assert(n >= T{0});

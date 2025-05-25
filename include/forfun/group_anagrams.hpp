@@ -33,9 +33,9 @@ constexpr std::size_t const bucket_size{(last_char - first_char) + 1UZ};
 
 template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 constexpr auto fill_bucket(Iter iter, Sentinel const last) noexcept
-    -> std::array<std::size_t, detail::bucket_size>
+    -> std::array<std::size_t, bucket_size>
 {
-    std::array<std::size_t, detail::bucket_size> bucket{};
+    std::array<std::size_t, bucket_size> bucket{};
     for (; iter != last; ++iter)
     {
         ++(*std::next(bucket.begin(), (*iter) - first_char));
