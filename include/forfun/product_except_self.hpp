@@ -26,7 +26,7 @@ concept product_computable = requires(Factor f, Product p) {
 
 namespace alg1 {
 
-using forfun::product_except_self::concepts::product_computable;
+using concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
@@ -70,7 +70,7 @@ constexpr auto product_except_self(
 
 namespace alg2 {
 
-using forfun::product_except_self::concepts::product_computable;
+using concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
