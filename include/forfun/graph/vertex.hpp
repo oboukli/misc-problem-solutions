@@ -24,7 +24,7 @@ enum class vertex_visit_state : bool {
 template <std::regular V>
 struct vertex final {
     V value{};
-    constexpr auto operator==(vertex<V> const&) const -> bool = default;
+    constexpr auto operator==(vertex const&) const -> bool = default;
 };
 
 template <std::regular T>

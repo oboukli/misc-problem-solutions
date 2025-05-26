@@ -52,15 +52,13 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
-    noexcept(std::declval<std::equal_to<std::iter_value_t<Iter>>>().operator()(
+    noexcept(std::declval<std::equal_to<>>()(
         std::declval<std::iter_value_t<Iter>>(),
         std::declval<std::iter_value_t<Iter>>()
     ))
 ) -> bool
 {
-    return contains_duplicate(
-        first, last, std::equal_to<std::iter_value_t<Iter>>{}
-    );
+    return contains_duplicate(first, last, std::equal_to{});
 }
 
 } // namespace quadratic
@@ -101,15 +99,13 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
-    noexcept(std::declval<std::equal_to<std::iter_value_t<Iter>>>().operator()(
+    noexcept(std::declval<std::equal_to<>>()(
         std::declval<std::iter_value_t<Iter>>(),
         std::declval<std::iter_value_t<Iter>>()
     ))
 ) -> bool
 {
-    return contains_duplicate(
-        first, last, std::equal_to<std::iter_value_t<Iter>>{}
-    );
+    return contains_duplicate(first, last, std::equal_to{});
 }
 
 } // namespace sorted
@@ -140,15 +136,13 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
 template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
-    noexcept(std::declval<std::equal_to<std::iter_value_t<Iter>>>().operator()(
+    noexcept(std::declval<std::equal_to<>>()(
         std::declval<std::iter_value_t<Iter>>(),
         std::declval<std::iter_value_t<Iter>>()
     ))
 ) -> bool
 {
-    return contains_duplicate(
-        first, last, std::equal_to<std::iter_value_t<Iter>>{}
-    );
+    return contains_duplicate(first, last, std::equal_to{});
 }
 
 } // namespace stl
