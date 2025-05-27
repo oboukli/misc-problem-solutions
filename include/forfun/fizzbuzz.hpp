@@ -78,14 +78,14 @@ auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
             std::array<char, buffer_size> buffer /*[[indeterminate]]*/;
 
-            std::to_chars_result const result{
+            auto const [ptr, ec]{
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
                 std::to_chars(buffer.data(), buffer.data() + buffer_size, start)
             };
 
-            assert(result.ec == std::errc{});
+            assert(ec == std::errc{});
 
-            write(buffer.data(), result.ptr - buffer.data());
+            write(buffer.data(), ptr - buffer.data());
         }
     }
 }

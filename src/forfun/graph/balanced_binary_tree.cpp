@@ -149,8 +149,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 
     auto const [min, max]{std::minmax(left.first, right.first)};
 
-    std::size_t const diff{max - min};
-    if (diff > 1UZ)
+    if (std::size_t const diff{max - min}; diff > 1UZ)
     {
         return {diff, true};
     }
