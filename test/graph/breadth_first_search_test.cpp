@@ -34,7 +34,7 @@ public:
     {
     }
 
-    auto operator()(forfun::graph::vertex<char> const v) noexcept -> void
+    auto operator()(forfun::graph::vertex<char> const v) const noexcept -> void
     {
         visits_->emplace_back(v);
     }

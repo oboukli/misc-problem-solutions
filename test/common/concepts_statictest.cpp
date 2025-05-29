@@ -15,8 +15,8 @@
 namespace {
 
 struct AddableDummy final {
-    [[maybe_unused]] auto operator+(AddableDummy const& /*unused*/) noexcept
-        -> AddableDummy
+    [[maybe_unused]] auto
+    operator+(AddableDummy const& /*unused*/) const noexcept -> AddableDummy
     {
         return *this;
     }
@@ -26,7 +26,8 @@ struct Dummy final {};
 
 struct MultipliableDummy final {
     [[maybe_unused]] auto
-    operator*(MultipliableDummy const& /*unused*/) noexcept -> MultipliableDummy
+    operator*(MultipliableDummy const& /*unused*/) const noexcept
+        -> MultipliableDummy
     {
         return *this;
     }
