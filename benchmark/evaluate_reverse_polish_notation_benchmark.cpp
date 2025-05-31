@@ -79,13 +79,10 @@ TEST_CASE(
             )
                 .c_str(),
             [&tokens]() noexcept {
-// Ignore Division by zero [core.DivideZero] warning.
-#ifndef __clang_analyzer__
                 auto const r{speed_optimized::eval_expression(
                     tokens.cbegin(), tokens.cend()
                 )};
                 ankerl::nanobench::doNotOptimizeAway(r);
-#endif // __clang_analyzer__
             }
         )
 
