@@ -191,8 +191,8 @@
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "FORFUN_COMMON_CFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer",
-        "FORFUN_COMMON_CXXFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer",
+        "FORFUN_COMMON_CFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
+        "FORFUN_COMMON_CXXFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
         "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
         "FORFUN_COMMON_LINK_OPTIONS": "-fsanitize=address -flto -fvisibility=default"
       }
