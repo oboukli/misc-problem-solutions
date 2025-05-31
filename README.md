@@ -86,6 +86,7 @@ leveraged by this project:
 | Squares of a Sorted Array        | C++20    | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                       |
 | Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](src/forfun/graph/subsets.cpp)                                                         |
 | Sums of Subarrays of Length K    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
+| Three Sum (3SUM)                 | C++20    | [`include/forfun/three_sum.hpp`](include/forfun/three_sum.hpp)                                                             |
 | Top K Frequent Elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
 | Tower of Hanoi                   | C++20    | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                   |
 | Trie                             | C++20    | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                       |
