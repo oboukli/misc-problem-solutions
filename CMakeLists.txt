@@ -596,6 +596,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/project_euler/p0001_multiples_of_3_or_5_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/binary_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/set_matrix_zeroes_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/single_number_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sonar_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/bubble_sort_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/insertion_sort_benchmark.cpp"
