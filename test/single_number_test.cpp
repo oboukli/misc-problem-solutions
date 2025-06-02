@@ -4,18 +4,40 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <concepts>
 #include <limits>
+#include <ranges>
+#include <utility>
 #include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/single_number.hpp"
+#include "forfun_c/single_number.h"
+
+namespace {
+
+template <std::ranges::contiguous_range Range>
+    requires std::ranges::sized_range<Range>
+    and std::same_as<int, std::ranges::range_value_t<Range>>
+[[nodiscard]] auto adapt_forfun_c_get_single(Range&& nums) noexcept
+    -> std::ranges::range_value_t<Range>
+{
+    Range const& nums_{std::forward<Range>(nums)};
+
+    return ::forfun_get_single(
+        std::ranges::cdata(nums_), std::ranges::size(nums_)
+    );
+}
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Single number",
     "[single_number]",
     (auto get_single, get_single),
+    adapt_forfun_c_get_single<std::vector<int> const&>,
     forfun::single_number::functional::get_single<std::vector<int> const&>,
     forfun::single_number::imperative::get_single<std::vector<int> const&>
 )

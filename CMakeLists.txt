@@ -303,11 +303,13 @@ target_sources(
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/palindrome.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/single_number.h"
 )
 target_sources(
   forfun_c
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/palindrome.c"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/single_number.c"
 )
 get_target_property(forfun_c_headers forfun_c HEADER_SET)
 source_group(
