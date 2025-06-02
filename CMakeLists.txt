@@ -672,6 +672,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
