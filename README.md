@@ -48,18 +48,18 @@ leveraged by this project:
 | Balanced Binary Tree             | C++23    | [`include/forfun/graph/balanced_binary_tree.hpp`](src/forfun/graph/balanced_binary_tree.cpp)                               |
 | Best Time to Buy And Sell Stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
 | Binary Search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
-| Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                             |
+| Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                           |
 | Bubble Sort                      | C++20    | [`include/forfun/sorting/bubble_sort.hpp`](include/forfun/sorting/bubble_sort.hpp)                                         |
 | Concatenation of Array           | C++23    | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                         |
 | Container with Most Water        | C++20    | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                             |
 | Contains Duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
-| Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                                 |
+| Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                               |
 | Encode and Decode Strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](include/forfun/encode_and_decode_strings.hpp)                                 |
 | Evaluate Reverse Polish Notation | C++23    | [`include/forfun/evaluate_reverse_polish_notation.hpp`](include/forfun/evaluate_reverse_polish_notation.hpp)               |
 | Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
-| Fibonacci Sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                             |
-| First Missing Positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                     |
-| Fizz Buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                                 |
+| Fibonacci Sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
+| First Missing Positive           | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                   |
+| Fizz Buzz                        | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                               |
 | Forward List                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest Common Divisor          | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Group Anagrams                   | C++23    | [`include/forfun/group_anagrams.hpp`](include/forfun/group_anagrams.hpp)                                                   |
@@ -74,7 +74,7 @@ leveraged by this project:
 | Meeting Rooms (I, II)            | C++23    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
 | Move Zeroes                      | C++20    | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                         |
 | Multiples of Three or Five       | C++17    | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp) |
-| Nth Fibonacci Number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                               |
+| Nth Fibonacci Number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                             |
 | Number of Ships in a Rectangle   | C++20    | [`src/forfun/sonar.cpp`](src/forfun/sonar.cpp)                                                                             |
 | Palindrome                       | C++20    | [`include/forfun/palindrome.hpp`](include/forfun/palindrome.hpp)                                                           |
 | Palindrome (in C)                | C90      | [`src/forfun_c/palindrome.c`](src/forfun_c/palindrome.c)                                                                   |
