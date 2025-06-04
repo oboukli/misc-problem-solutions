@@ -63,6 +63,7 @@ leveraged by this project:
 | Forward List                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest Common Divisor          | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Group Anagrams                   | C++23    | [`include/forfun/group_anagrams.hpp`](include/forfun/group_anagrams.hpp)                                                   |
+| Hamming Weight                   | C++20    | [`include/forfun/hamming_weight.hpp`](include/forfun/hamming_weight.hpp)                                                   |
 | House Robber                     | C++20    | [`include/forfun/house_robber.hpp`](include/forfun/house_robber.hpp)                                                       |
 | Insertion Sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Last Stone Weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
