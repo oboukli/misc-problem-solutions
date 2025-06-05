@@ -12,14 +12,12 @@ found in the LICENSE file.
 
 #include "forfun_c/mem/mem.h"
 
-void forfun_free_node_list(
-    struct forfun_forward_list_node const* const root_node_ptr
-)
+void forfun_free_node_list(struct forfun_forward_list_node* root_node_ptr)
 {
-    struct forfun_forward_list_node const* node_ptr = root_node_ptr;
+    struct forfun_forward_list_node* node_ptr = root_node_ptr;
     while (node_ptr != NULL)
     {
-        struct forfun_forward_list_node const* const aux = node_ptr->next;
+        struct forfun_forward_list_node* const aux = node_ptr->next;
 
         g_forfun_mem.ff_free((void*)node_ptr);
 
