@@ -8,7 +8,8 @@ on:
     branches:
       - main
 
-permissions: {}
+permissions:
+  packages: write
 
 jobs:
   msvc_debug_x86_64_windows:
@@ -17,7 +18,7 @@ jobs:
       CONFIGURE_PRESET_NAME: windows-x64
       BUILD_PRESET_NAME: windows-x64-debug
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: windows-latest
 
     steps:
@@ -33,19 +34,24 @@ jobs:
           path: ${{ github.workspace }}\vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          dotnet nuget add source "${{ env.FEED_URL }}"
+          --name GitHubPackages
+          --username "${{ github.repository_owner }}"
+          --password "${{ secrets.GITHUB_TOKEN }}"
+          --store-password-in-clear-text
+
+          dotnet nuget update source GitHubPackages
+          --username "${{ github.repository_owner }}"
+          --password "${{ secrets.GITHUB_TOKEN }}"
+          --store-password-in-clear-text
 
       - name: Configure CMake
         run: >-
@@ -107,7 +113,7 @@ jobs:
       CONFIGURE_PRESET_NAME: windows-x64
       BUILD_PRESET_NAME: windows-x64-release
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: windows-latest
 
     steps:
@@ -123,19 +129,24 @@ jobs:
           path: ${{ github.workspace }}\vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          dotnet nuget add source "${{ env.FEED_URL }}"
+          --name GitHubPackages
+          --username "${{ github.repository_owner }}"
+          --password "${{ secrets.GITHUB_TOKEN }}"
+          --store-password-in-clear-text
+
+          dotnet nuget update source GitHubPackages
+          --username "${{ github.repository_owner }}"
+          --password "${{ secrets.GITHUB_TOKEN }}"
+          --store-password-in-clear-text
 
       - name: Configure CMake
         run: >-
@@ -199,7 +210,7 @@ jobs:
       CONFIGURE_PRESET_NAME: strict-gcc
       BUILD_PRESET_NAME: strict-gcc-debug
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-24.04
 
     steps:
@@ -208,6 +219,7 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          mono-complete
           ninja-build
           valgrind
 
@@ -223,19 +235,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
@@ -304,7 +321,7 @@ jobs:
       CONFIGURE_PRESET_NAME: strict-gcc
       BUILD_PRESET_NAME: strict-gcc-release
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-24.04
 
     steps:
@@ -313,6 +330,7 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          mono-complete
           ninja-build
           valgrind
 
@@ -328,19 +346,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
@@ -407,7 +430,7 @@ jobs:
       CONFIGURE_PRESET_NAME: xcode
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Debug
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       XCODE_RELEASE: "16.2"
 
     runs-on: macos-15
@@ -423,6 +446,10 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install tools
+        run: >-
+          brew install mono
+
       - name: Check out vcpkg
         uses: actions/checkout@v4
         with:
@@ -430,19 +457,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
@@ -504,7 +536,7 @@ jobs:
       CONFIGURE_PRESET_NAME: xcode
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Release
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       XCODE_RELEASE: "16.2"
 
     runs-on: macos-15
@@ -520,6 +552,10 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install tools
+        run: >-
+          brew install mono
+
       - name: Check out vcpkg
         uses: actions/checkout@v4
         with:
@@ -527,19 +563,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
@@ -598,7 +639,7 @@ jobs:
       CONFIGURE_PRESET_NAME: strict-clang
       BUILD_PRESET_NAME: strict-clang-debug
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Debug
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-24.04
 
     steps:
@@ -626,6 +667,7 @@ jobs:
           libc++1-20
           libc++abi-20-dev
           libc++abi1-20
+          mono-complete
           ninja-build
           valgrind
 
@@ -647,19 +689,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
@@ -728,7 +775,7 @@ jobs:
       CONFIGURE_PRESET_NAME: strict-clang
       BUILD_PRESET_NAME: strict-clang-release
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Release
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-24.04
 
     steps:
@@ -756,6 +803,7 @@ jobs:
           libc++1-20
           libc++abi-20-dev
           libc++abi1-20
+          mono-complete
           ninja-build
           valgrind
 
@@ -777,19 +825,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
@@ -857,7 +910,7 @@ jobs:
     env:
       CONFIGURE_PRESET_NAME: clang-sanitizers
       BINARY_DIR: ${{ github.workspace }}/out/build/clang-sanitizers
-      VCPKG_BINARY_SOURCES: clear;x-gha,readwrite
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-24.04
 
     steps:
@@ -885,6 +938,7 @@ jobs:
           libc++1-20
           libc++abi-20-dev
           libc++abi1-20
+          mono-complete
           ninja-build
 
           sudo update-alternatives
@@ -905,19 +959,24 @@ jobs:
           path: ${{ github.workspace }}/vcpkg
           persist-credentials: false
 
-      - name: Export GitHub Actions cache environment variables
-        uses: actions/github-script@v7
-        with:
-          script: |-
-            core.exportVariable(
-              'ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || ''
-            );
-            core.exportVariable(
-              'ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || ''
-            );
-
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `./vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
 
       # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
