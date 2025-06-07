@@ -606,7 +606,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble
+          Suites: llvm-toolchain-noble-20
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -620,20 +620,20 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-19
-          clang-tools-19
-          libc++-19-dev
-          libc++1-19
-          libc++abi-19-dev
-          libc++abi1-19
+          clang-20
+          clang-tools-20
+          libc++-20-dev
+          libc++1-20
+          libc++abi-20-dev
+          libc++abi1-20
           ninja-build
           valgrind
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-19 100
+          --install /usr/bin/cc cc /usr/bin/clang-20 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-19 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -661,8 +661,10 @@ jobs:
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 
+      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
         run: >-
+          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -734,7 +736,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble
+          Suites: llvm-toolchain-noble-20
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -748,20 +750,20 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-19
-          clang-tools-19
-          libc++-19-dev
-          libc++1-19
-          libc++abi-19-dev
-          libc++abi1-19
+          clang-20
+          clang-tools-20
+          libc++-20-dev
+          libc++1-20
+          libc++abi-20-dev
+          libc++abi1-20
           ninja-build
           valgrind
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-19 100
+          --install /usr/bin/cc cc /usr/bin/clang-20 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-19 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -789,8 +791,10 @@ jobs:
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 
+      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
         run: >-
+          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -861,7 +865,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble
+          Suites: llvm-toolchain-noble-20
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -875,19 +879,19 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-19
-          clang-tools-19
-          libc++-19-dev
-          libc++1-19
-          libc++abi-19-dev
-          libc++abi1-19
+          clang-20
+          clang-tools-20
+          libc++-20-dev
+          libc++1-20
+          libc++abi-20-dev
+          libc++abi1-20
           ninja-build
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-19 100
+          --install /usr/bin/cc cc /usr/bin/clang-20 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-19 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
         uses: actions/checkout@v4
@@ -915,8 +919,10 @@ jobs:
       - name: Bootstrap vcpkg
         run: ./vcpkg/bootstrap-vcpkg.sh -disableMetrics
 
+      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
         run: >-
+          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
