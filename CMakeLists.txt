@@ -195,6 +195,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/breadth_first_search.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/depth_first_search.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/invert_binary_tree.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/subsets.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/vertex.hpp"
 )
@@ -205,6 +206,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/binary_tree_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/breadth_first_search.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/depth_first_search.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/invert_binary_tree.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/subsets.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/vertex.cpp"
 )
@@ -459,6 +461,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/breadth_first_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/depth_first_search_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/invert_binary_tree_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/subsets_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/vertex_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/group_anagrams_test.cpp"
@@ -582,6 +585,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/balanced_binary_tree_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/breadth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/depth_first_search_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/invert_binary_tree_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/subsets_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/group_anagrams_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/house_robber_benchmark.cpp"
