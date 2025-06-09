@@ -14,7 +14,17 @@
 
 namespace forfun::graph::invert_binary_tree {
 
+namespace iterative {
+
 auto invert_binary_tree(binary_tree_node& root) -> void;
+
+} // namespace iterative
+
+namespace recursive {
+
+auto invert_binary_tree(binary_tree_node& root) noexcept -> void;
+
+} // namespace recursive
 
 } // namespace forfun::graph::invert_binary_tree
 

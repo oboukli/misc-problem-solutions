@@ -13,6 +13,8 @@
 
 namespace forfun::graph::invert_binary_tree {
 
+namespace iterative {
+
 auto invert_binary_tree(binary_tree_node& root) -> void
 {
     std::deque<binary_tree_node*> tracker{};
@@ -37,5 +39,26 @@ auto invert_binary_tree(binary_tree_node& root) -> void
         }
     }
 }
+
+} // namespace iterative
+
+namespace recursive {
+
+auto invert_binary_tree(binary_tree_node& root) noexcept -> void
+{
+    std::swap(root.left_node_, root.right_node_);
+
+    if (root.left_node_ != nullptr)
+    {
+        invert_binary_tree(*root.left_node_);
+    }
+
+    if (root.right_node_ != nullptr)
+    {
+        invert_binary_tree(*root.right_node_);
+    }
+}
+
+} // namespace recursive
 
 } // namespace forfun::graph::invert_binary_tree

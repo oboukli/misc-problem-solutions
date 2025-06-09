@@ -4,15 +4,21 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/graph/binary_tree_node.hpp"
 #include "forfun/graph/invert_binary_tree.hpp"
 
-TEST_CASE("Invert binary tree", "[invert_binary_tree]")
+TEMPLATE_TEST_CASE_SIG(
+    "Invert binary tree",
+    "[invert_binary_tree]",
+    (auto invert_binary_tree, invert_binary_tree),
+    forfun::graph::invert_binary_tree::iterative::invert_binary_tree,
+    forfun::graph::invert_binary_tree::recursive::invert_binary_tree
+)
 {
     using forfun::graph::binary_tree_node;
-    using forfun::graph::invert_binary_tree::invert_binary_tree;
 
     SECTION("One node graph")
     {

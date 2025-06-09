@@ -66,7 +66,7 @@ leveraged by this project:
 | Hamming Weight                   | C++20    | [`include/forfun/hamming_weight.hpp`](include/forfun/hamming_weight.hpp)                                                   |
 | House Robber                     | C++20    | [`include/forfun/house_robber.hpp`](include/forfun/house_robber.hpp)                                                       |
 | Insertion Sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
-| Invert Binary Tree               | C++17    | [`include/forfun/graph/invert_binary_tree.hpp`](include/forfun/graph/invert_binary_tree.hpp)                               |
+| Invert Binary Tree               | C++17    | [`src/forfun/graph/invert_binary_tree.cpp`](src/forfun/graph/invert_binary_tree.cpp)                                       |
 | Last Stone Weight                | C++20    | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                             |
 | Least Recently Used (LRU) Cache  | C++23    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                     |
 | Linked List                      | C++20    | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                   |
