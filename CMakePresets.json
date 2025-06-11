@@ -194,7 +194,7 @@
         "FORFUN_COMMON_CFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
         "FORFUN_COMMON_CXXFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
         "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
-        "FORFUN_COMMON_LINK_OPTIONS": "-fsanitize=address -flto -fvisibility=default"
+        "FORFUN_COMMON_LINK_OPTIONS": "-fsanitize=address -fsanitize=undefined -flto -fvisibility=default"
       }
     }
   ],
