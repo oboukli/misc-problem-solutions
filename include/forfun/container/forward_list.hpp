@@ -27,13 +27,13 @@ public:
 
     using const_reference = value_type const&;
 
-    forward_list() noexcept = default;
+    constexpr forward_list() noexcept = default;
 
     forward_list(forward_list const&) = delete;
 
     forward_list(forward_list&&) = delete;
 
-    ~forward_list() noexcept
+    constexpr ~forward_list() noexcept
     {
         clear();
     }
@@ -42,17 +42,17 @@ public:
 
     auto operator=(forward_list&&) -> forward_list& = delete;
 
-    [[nodiscard]] auto front() noexcept -> reference
+    [[nodiscard]] constexpr auto front() noexcept -> reference
     {
         return head_->value;
     }
 
-    [[nodiscard]] auto front() const noexcept -> const_reference
+    [[nodiscard]] constexpr auto front() const noexcept -> const_reference
     {
         return head_->value;
     }
 
-    [[nodiscard]] auto empty() const noexcept -> bool
+    [[nodiscard]] constexpr auto empty() const noexcept -> bool
     {
         return head_ == nullptr;
     }
@@ -80,7 +80,7 @@ public:
         delete aux;
     }
 
-    auto clear() noexcept -> void
+    constexpr auto clear() noexcept -> void
     {
         // clang-format off
         for (internal::forward_list_node<T> const* node{head_};
