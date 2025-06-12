@@ -674,6 +674,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_statictest.cpp"
