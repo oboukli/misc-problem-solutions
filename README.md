@@ -84,6 +84,7 @@ leveraged by this project:
 | Primality Test                   | C++20    | [`include/forfun/primality.hpp`](include/forfun/primality.hpp)                                                             |
 | Product of Array Except Self     | C++20    | [`include/forfun/product_except_self.hpp`](include/forfun/product_except_self.hpp)                                         |
 | Quicksort                        | C++20    | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                             |
+| Reverse Forward List             | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Set Matrix Zeroes                | C++20    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
 | Single Number                    | C++20    | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                     |
 | Squares of a Sorted Array        | C++20    | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                       |
