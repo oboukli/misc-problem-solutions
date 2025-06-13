@@ -98,6 +98,24 @@ public:
         head_ = nullptr;
     }
 
+    constexpr auto reverse() noexcept -> void
+    {
+        internal::forward_list_node<T>* prev{nullptr};
+        internal::forward_list_node<T>* node{head_};
+
+        while (node != nullptr)
+        {
+            internal::forward_list_node<T>* next{node->next};
+
+            node->next = prev;
+
+            prev = node;
+            node = next;
+        }
+
+        head_ = prev;
+    }
+
 private:
     internal::forward_list_node<T>* head_;
 };
