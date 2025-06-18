@@ -63,7 +63,7 @@ leveraged by this project:
 | Forward List                     | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Greatest Common Divisor          | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                         |
 | Group Anagrams                   | C++23    | [`include/forfun/group_anagrams.hpp`](include/forfun/group_anagrams.hpp)                                                   |
-| Hamming Weight                   | C++20    | [`include/forfun/hamming_weight.hpp`](include/forfun/hamming_weight.hpp)                                                   |
+| Hamming Weight                   | C++23    | [`include/forfun/hamming_weight.hpp`](include/forfun/hamming_weight.hpp)                                                   |
 | House Robber                     | C++20    | [`include/forfun/house_robber.hpp`](include/forfun/house_robber.hpp)                                                       |
 | Insertion Sort                   | C++20    | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                   |
 | Invert Binary Tree               | C++17    | [`src/forfun/graph/invert_binary_tree.cpp`](src/forfun/graph/invert_binary_tree.cpp)                                       |
@@ -86,7 +86,7 @@ leveraged by this project:
 | Quicksort                        | C++20    | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                             |
 | Reverse Forward List             | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                   |
 | Set Matrix Zeroes                | C++20    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
-| Single Number                    | C++20    | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                     |
+| Single Number                    | C++23    | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                     |
 | Squares of a Sorted Array        | C++20    | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                       |
 | Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](src/forfun/graph/subsets.cpp)                                                         |
 | Sums of Subarrays of Length K    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
