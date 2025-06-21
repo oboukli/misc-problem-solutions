@@ -16,11 +16,15 @@
 
 #include "forfun/squares_sorted_array.hpp"
 
+namespace {
+
 using IntVecConstIter = std::vector<int>::const_iterator;
 using IntVecIter = std::vector<int>::iterator;
 
 using UIntVecConstIter = std::vector<unsigned int>::const_iterator;
 using UIntVecIter = std::vector<unsigned int>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Squares of a sorted array",

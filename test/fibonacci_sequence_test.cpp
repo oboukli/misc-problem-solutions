@@ -39,9 +39,9 @@ constexpr auto const dummy_throwing_lambda{
 #pragma GCC diagnostic pop
 #endif // __GNUC__
 
-} // namespace
-
 using namespace forfun::fibonacci::sequence;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Fibonacci sequence",

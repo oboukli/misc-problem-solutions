@@ -12,8 +12,12 @@
 
 #include "forfun/two_sum.hpp"
 
+namespace {
+
 using CIter0 = std::array<int, 0>::const_iterator;
 using CIter3 = std::array<int, 3>::const_iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Two sum (I, II) static tests (empty container degenerate case)",

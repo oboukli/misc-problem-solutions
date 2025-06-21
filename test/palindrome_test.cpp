@@ -37,9 +37,9 @@ adapt_func_is_palindrome(BasicStringView&& s) noexcept -> bool
     }
 }
 
-} // namespace
-
 using std::string_view_literals::operator""sv;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     // clang-format off

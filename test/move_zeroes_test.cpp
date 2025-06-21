@@ -15,8 +15,12 @@
 
 #include "forfun/move_zeroes.hpp"
 
+namespace {
+
 using VecItr = std::vector<int>::iterator;
 using Arr5Itr = std::array<int, 5>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Move zeroes (std::vector)",

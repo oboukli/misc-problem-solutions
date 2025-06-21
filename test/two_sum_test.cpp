@@ -16,7 +16,11 @@
 
 #include "forfun/two_sum.hpp"
 
+namespace {
+
 using ConstIter = std::vector<int>::const_iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Two sum (unsorted container)",

@@ -13,7 +13,11 @@
 
 #include "forfun/valid_anagram.hpp"
 
+namespace {
+
 using std::string_view_literals::operator""sv;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Valid anagram (char ordinal comparison)",
