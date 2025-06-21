@@ -12,13 +12,18 @@
 
 #include "forfun/sorting/bubble_sort.hpp"
 
+namespace {
+
 using Arr0Iter = std::array<int, 0>::iterator;
 using Arr1Iter = std::array<int, 1>::iterator;
 using Arr2Iter = std::array<int, 2>::iterator;
 using Arr3Iter = std::array<int, 3>::iterator;
 using Arr7Iter = std::array<int, 7>::iterator;
 using Arr10Iter = std::array<int, 10>::iterator;
+
 using VecIter = std::vector<int>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Bubble sort (std::array<int, 0>)",

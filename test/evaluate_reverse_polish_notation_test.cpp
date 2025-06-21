@@ -15,9 +15,13 @@
 
 #include "forfun/evaluate_reverse_polish_notation.hpp"
 
+namespace {
+
 using std::string_view_literals::operator""sv;
 
 using VecConstIter = std::vector<std::string_view>::const_iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Evaluate reverse polish notation (Well-formed input)",

@@ -13,7 +13,11 @@
 
 #include "forfun/last_stone_weight.hpp"
 
+namespace {
+
 using Iter = std::vector<int>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Last stone weight (iterator-based strategies)",

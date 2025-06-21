@@ -11,8 +11,12 @@
 
 #include "forfun/squares_sorted_array.hpp"
 
+namespace {
+
 using ConstIter = std::array<int, 0>::const_iterator;
 using Iter = std::array<int, 0>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Squares of a sorted array",

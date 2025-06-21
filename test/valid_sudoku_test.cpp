@@ -11,7 +11,11 @@
 
 #include "forfun/valid_sudoku.hpp"
 
+namespace {
+
 using CellType = std::uint8_t;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Valid Sudoku",

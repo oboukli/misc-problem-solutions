@@ -13,7 +13,11 @@
 
 #include "forfun/longest_consecutive_sequence.hpp"
 
+namespace {
+
 using Iter = std::vector<int>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Longest consecutive sequence",
