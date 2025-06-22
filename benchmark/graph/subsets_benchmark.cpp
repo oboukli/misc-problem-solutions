@@ -18,7 +18,7 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 {
     using namespace forfun;
 
-    std::vector<int> const elements{23, 29, 31, 37};
+    std::vector const elements{23, 29, 31, 37};
 
     ankerl::nanobench::Bench()
 
