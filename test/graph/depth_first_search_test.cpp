@@ -59,7 +59,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
     {
         VertexAdjacencyList<char> const adjacency_list{};
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'0'};
+        static constexpr vertex const starting_vertex{'0'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -89,7 +89,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
     {
         VertexAdjacencyList<char> const adjacency_list{{{'a'}}};
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'a'};
+        static constexpr vertex const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -126,7 +126,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'b'}, {'a'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'a'};
+        static constexpr vertex const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -168,7 +168,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'6'}, {'5'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'1'};
+        static constexpr vertex const starting_vertex{'1'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -215,7 +215,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'6'}, {'5'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'5'};
+        static constexpr vertex const starting_vertex{'5'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -263,7 +263,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'c'};
+        static constexpr vertex const starting_vertex{'c'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -314,7 +314,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'h'};
+        static constexpr vertex const starting_vertex{'h'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -364,7 +364,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         VertexStateList<char> state_list{};
-        static constexpr vertex<char> const starting_vertex{'e'};
+        static constexpr vertex const starting_vertex{'e'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
