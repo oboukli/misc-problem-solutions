@@ -21,7 +21,7 @@ TEST_CASE("Vertex conversion", "[graph][vertex]")
 
         std::ostringstream buffer{};
 
-        forfun::graph::vertex<int> const v{17};
+        forfun::graph::vertex const v{17};
         forfun::graph::operator<<(buffer, v);
 
         REQUIRE(buffer.str() == "17"sv);
@@ -35,7 +35,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
     SECTION("Empty adjacency list (graph)")
     {
-        constexpr vertex<int> const vertex{17};
+        constexpr vertex const vertex{17};
         VertexAdjacencyList<int> const adjacency_list{};
 
         CAPTURE(vertex);
@@ -47,9 +47,9 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
         );
     }
 
-    SECTION("Adjacency list can be found for vertex<int>")
+    SECTION("Adjacency list can be found for vertex")
     {
-        constexpr vertex<int> const vertex{4};
+        constexpr vertex const vertex{4};
         VertexAdjacencyList<int> const adjacency_list{
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
