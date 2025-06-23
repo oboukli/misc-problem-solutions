@@ -71,7 +71,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list<int> const disks{1};
+        std::initializer_list const disks{1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -100,7 +100,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list<int> const disks{2, 1};
+        std::initializer_list const disks{2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -129,7 +129,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list<int> const disks{3, 2, 1};
+        std::initializer_list const disks{3, 2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
@@ -158,7 +158,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list<int> const disks{4, 3, 2, 1};
+        std::initializer_list const disks{4, 3, 2, 1};
         push_range(src_rod, disks);
 
         // NOLINTBEGIN(misc-const-correctness)
