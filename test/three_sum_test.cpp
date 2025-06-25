@@ -71,7 +71,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Four numbers without a three-sum (case 1)")
     {
         std::vector const nums{11, 7, -10, 5};
-        std::vector<std::array<int, 3>> expected{};
+        std::vector<std::array<int, 3>> const expected{};
 
         CAPTURE(nums);
 
@@ -333,7 +333,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Three numbers without a three-sum (case 1)")
     {
         std::vector const nums{-6, 0, 7};
-        std::vector<std::array<int, 3>> expected{};
+        std::vector<std::array<int, 3>> const expected{};
 
         CAPTURE(nums);
 
