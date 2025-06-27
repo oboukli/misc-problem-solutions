@@ -27,7 +27,7 @@ namespace {
 
 class TestRunListener final : public Catch::EventListenerBase {
 public:
-    using Catch::EventListenerBase::EventListenerBase;
+    using EventListenerBase::EventListenerBase;
 
     TestRunListener(TestRunListener const&) = default;
 
