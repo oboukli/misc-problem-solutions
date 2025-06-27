@@ -525,10 +525,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("5 + 7")
     {
-        auto const m{::forfun_mem_get()};
+        auto const [ff_malloc, ff_free]{::forfun_mem_get()};
 
-        REQUIRE(m.ff_malloc == &std::malloc);
-        REQUIRE(m.ff_free == &std::free);
+        REQUIRE(ff_malloc == &std::malloc);
+        REQUIRE(ff_free == &std::free);
 
         ::forfun_forward_list_node const node_a
             = {.next = nullptr, .value = 5U};
