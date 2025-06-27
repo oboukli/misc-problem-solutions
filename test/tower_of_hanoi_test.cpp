@@ -196,7 +196,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             unsigned int count{0};
             // NOLINTEND(misc-const-correctness)
 
-            forfun::tower_of_hanoi::recursive::toh(
+            toh(
                 src_rod,
                 des_rod,
                 aux_rod,
