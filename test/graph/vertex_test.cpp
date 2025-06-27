@@ -35,21 +35,20 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
     SECTION("Empty adjacency list (graph)")
     {
-        constexpr vertex const vertex{17};
+        constexpr vertex const v{17};
         VertexAdjacencyList<int> const adjacency_list{};
 
-        CAPTURE(vertex);
+        CAPTURE(v);
         CAPTURE(adjacency_list);
 
         REQUIRE(
-            get_adjacencies_iter(adjacency_list, vertex)
-            == adjacency_list.cend()
+            get_adjacencies_iter(adjacency_list, v) == adjacency_list.cend()
         );
     }
 
     SECTION("Adjacency list can be found for vertex")
     {
-        constexpr vertex const vertex{4};
+        constexpr vertex const v{4};
         VertexAdjacencyList<int> const adjacency_list{
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
@@ -59,11 +58,11 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
             {{6}, {5}},
         };
 
-        CAPTURE(vertex);
+        CAPTURE(v);
         CAPTURE(adjacency_list);
 
         REQUIRE(
-            get_adjacencies_iter(adjacency_list, vertex)
+            get_adjacencies_iter(adjacency_list, v)
             == std::next(adjacency_list.cbegin(), 3)
         );
     }
@@ -72,7 +71,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
     {
         using std::string_view_literals::operator""sv;
 
-        constexpr vertex<std::string_view> const vertex{"five"sv};
+        constexpr vertex const v{"five"sv};
         VertexAdjacencyList<std::string_view> const adjacency_list{
             {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
             {{"two"sv}, {"one"sv}},
@@ -82,11 +81,11 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
             {{"six"sv}, {"five"sv}},
         };
 
-        CAPTURE(vertex);
+        CAPTURE(v);
         CAPTURE(adjacency_list);
 
         REQUIRE(
-            get_adjacencies_iter(adjacency_list, vertex)
+            get_adjacencies_iter(adjacency_list, v)
             == std::next(adjacency_list.cbegin(), 4)
         );
     }
