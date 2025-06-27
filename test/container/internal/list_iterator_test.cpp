@@ -79,91 +79,93 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Iterator and sentinel of empty list are equal")
     {
-        forfun::experimental::container::list const list{};
+        list const some_list{};
 
-        REQUIRE(list.begin() == list.end());
-        REQUIRE_FALSE(list.begin() != list.end());
+        REQUIRE(some_list.begin() == some_list.end());
+        REQUIRE_FALSE(some_list.begin() != some_list.end());
     }
 
     SECTION("Iterator of non-empty list is not sentinel")
     {
-        forfun::experimental::container::list list{};
-        list.push_back(1009);
+        list some_list{}; // TODO: RENAME
+        some_list.push_back(1009);
 
-        REQUIRE_FALSE(list.begin() == list.end());
+        REQUIRE_FALSE(some_list.begin() == some_list.end());
     }
 
     SECTION("Iterator and sentinel of non-empty list are unequal")
     {
-        forfun::experimental::container::list list{};
-        list.push_back(1019);
+        list some_list{};
+        some_list.push_back(1019);
 
-        REQUIRE(list.begin() != list.end());
+        REQUIRE(some_list.begin() != some_list.end());
     }
 
     SECTION("Empty list iterator equality")
     {
-        forfun::experimental::container::list const list{};
+        list const some_list{};
 
-        REQUIRE(list.begin() == list.begin());
-        REQUIRE_FALSE(list.begin() != list.begin());
+        REQUIRE(some_list.begin() == some_list.begin());
+        REQUIRE_FALSE(some_list.begin() != some_list.begin());
     }
 
     SECTION("Non-empty list iterator equality")
     {
-        forfun::experimental::container::list list{};
-        list.push_back(1049);
+        list some_list{};
+        some_list.push_back(1049);
 
-        REQUIRE(list.begin() == list.begin());
-        REQUIRE_FALSE(list.begin() != list.begin());
+        REQUIRE(some_list.begin() == some_list.begin());
+        REQUIRE_FALSE(some_list.begin() != some_list.begin());
     }
 
     SECTION("Iterator inequality")
     {
-        forfun::experimental::container::list list{};
-        list.push_back(1061);
-        list.push_back(1063);
+        list some_list{};
+        some_list.push_back(1061);
+        some_list.push_back(1063);
 
-        auto iter{list.begin()};
+        auto iter{some_list.begin()};
         ++iter;
 
-        REQUIRE(iter != list.begin());
-        REQUIRE_FALSE(iter == list.begin());
+        REQUIRE(iter != some_list.begin());
+        REQUIRE_FALSE(iter == some_list.begin());
     }
 
     SECTION("Dereferencing iterator of begin")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1283);
+        some_list.push_back(1283);
 
-        REQUIRE(*list.begin() == 1283);
+        REQUIRE(*some_list.begin() == 1283);
     }
 
     SECTION("Dereferencing iterator and mutating dereferenced element")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1291);
-        REQUIRE(*list.begin() == 1291);
+        some_list.push_back(1291);
+        REQUIRE(*some_list.begin() == 1291);
 
-        list.front() = 1297;
+        some_list.front() = 1297;
 
-        REQUIRE(*list.begin() == 1297);
+        REQUIRE(*some_list.begin() == 1297);
     }
 }
 
 TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 {
+    using forfun::experimental::container::list;
+
     SECTION("Increment iterator once")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1091);
-        list.push_back(1093);
+        some_list.push_back(1091);
+        some_list.push_back(1093);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
 
         REQUIRE(*iter == 1093);
@@ -171,14 +173,14 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Increment iterator an even number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1109);
-        list.push_back(1117);
-        list.push_back(1123);
+        some_list.push_back(1109);
+        some_list.push_back(1117);
+        some_list.push_back(1123);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
         ++iter;
 
@@ -187,15 +189,15 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Increment iterator an odd number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1163);
-        list.push_back(1171);
-        list.push_back(1181);
-        list.push_back(1187);
+        some_list.push_back(1163);
+        some_list.push_back(1171);
+        some_list.push_back(1181);
+        some_list.push_back(1187);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
         ++iter;
         ++iter;
@@ -205,32 +207,32 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Increment iterator one time off size")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1223);
-        list.push_back(1229);
-        list.push_back(1231);
-        list.push_back(1237);
+        some_list.push_back(1223);
+        some_list.push_back(1229);
+        some_list.push_back(1231);
+        some_list.push_back(1237);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
         ++iter;
         ++iter;
         ++iter;
 
-        REQUIRE(iter == list.end());
+        REQUIRE(iter == some_list.end());
     }
 
     SECTION("Postfix increment iterator once")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1453);
-        list.push_back(1459);
+        some_list.push_back(1453);
+        some_list.push_back(1459);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         iter++;
 
         REQUIRE(*iter == 1459);
@@ -238,14 +240,14 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix increment iterator an even number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1471);
-        list.push_back(1481);
-        list.push_back(1483);
+        some_list.push_back(1471);
+        some_list.push_back(1481);
+        some_list.push_back(1483);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         iter++;
         iter++;
 
@@ -254,15 +256,15 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix increment iterator an odd number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1487);
-        list.push_back(1489);
-        list.push_back(1493);
-        list.push_back(1499);
+        some_list.push_back(1487);
+        some_list.push_back(1489);
+        some_list.push_back(1493);
+        some_list.push_back(1499);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         iter++;
         iter++;
         iter++;
@@ -272,47 +274,47 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix increment iterator one time off size")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1511);
-        list.push_back(1523);
-        list.push_back(1531);
-        list.push_back(1543);
+        some_list.push_back(1511);
+        some_list.push_back(1523);
+        some_list.push_back(1531);
+        some_list.push_back(1543);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         iter++;
         iter++;
         iter++;
         iter++;
 
-        REQUIRE(iter == list.end());
+        REQUIRE(iter == some_list.end());
     }
 
     SECTION("Result of postfix increment")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1549);
-        list.push_back(1553);
+        some_list.push_back(1549);
+        some_list.push_back(1553);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
 
-        REQUIRE(iter++ == list.begin());
-        REQUIRE_FALSE(iter == list.begin());
+        REQUIRE(iter++ == some_list.begin());
+        REQUIRE_FALSE(iter == some_list.begin());
         REQUIRE(*iter == 1553);
     }
 
     SECTION("Dereferencing result of postfix increment")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1559);
-        list.push_back(1567);
+        some_list.push_back(1559);
+        some_list.push_back(1567);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
 
         REQUIRE(*iter == 1559);
         REQUIRE(*iter++ == 1559);
@@ -322,14 +324,16 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
 TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 {
+    using forfun::experimental::container::list;
+
     SECTION("Decrement iterator once from end")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1579);
+        some_list.push_back(1579);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         --iter;
 
         REQUIRE(*iter == 1579);
@@ -337,13 +341,13 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Decrement iterator an even number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1597);
-        list.push_back(1601);
+        some_list.push_back(1597);
+        some_list.push_back(1601);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         --iter;
         --iter;
 
@@ -352,15 +356,15 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Decrement iterator an odd number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1607);
-        list.push_back(1609);
-        list.push_back(1613);
-        list.push_back(1619);
+        some_list.push_back(1607);
+        some_list.push_back(1609);
+        some_list.push_back(1613);
+        some_list.push_back(1619);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         --iter;
         --iter;
         --iter;
@@ -370,32 +374,32 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Decrement iterator to beginning iterator")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1621);
-        list.push_back(1627);
-        list.push_back(1637);
-        list.push_back(1657);
+        some_list.push_back(1621);
+        some_list.push_back(1627);
+        some_list.push_back(1637);
+        some_list.push_back(1657);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         --iter;
         --iter;
         --iter;
         --iter;
 
-        REQUIRE(iter == list.begin());
+        REQUIRE(iter == some_list.begin());
     }
 
     SECTION("Postfix decrement iterator once")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1663);
-        list.push_back(1667);
+        some_list.push_back(1663);
+        some_list.push_back(1667);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         iter--;
 
         REQUIRE(*iter == 1667);
@@ -403,14 +407,14 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix decrement iterator an even number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1669);
-        list.push_back(1693);
-        list.push_back(1697);
+        some_list.push_back(1669);
+        some_list.push_back(1693);
+        some_list.push_back(1697);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         iter--;
         iter--;
 
@@ -419,15 +423,15 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix decrement iterator an odd number of times within range")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1699);
-        list.push_back(1709);
-        list.push_back(1721);
-        list.push_back(1723);
+        some_list.push_back(1699);
+        some_list.push_back(1709);
+        some_list.push_back(1721);
+        some_list.push_back(1723);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         iter--;
         iter--;
         iter--;
@@ -437,46 +441,46 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Postfix decrement iterator one time off size")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1733);
-        list.push_back(1741);
-        list.push_back(1747);
-        list.push_back(1753);
+        some_list.push_back(1733);
+        some_list.push_back(1741);
+        some_list.push_back(1747);
+        some_list.push_back(1753);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         iter--;
         iter--;
         iter--;
         iter--;
 
-        REQUIRE(iter == list.begin());
+        REQUIRE(iter == some_list.begin());
     }
 
     SECTION("Result of postfix decrement")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1759);
+        some_list.push_back(1759);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
 
-        REQUIRE(iter-- == list.end());
-        REQUIRE_FALSE(iter == list.end());
-        REQUIRE(iter == list.begin());
+        REQUIRE(iter-- == some_list.end());
+        REQUIRE_FALSE(iter == some_list.end());
+        REQUIRE(iter == some_list.begin());
     }
 
     SECTION("Dereferencing result of postfix decrement")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1783);
-        list.push_back(1787);
+        some_list.push_back(1783);
+        some_list.push_back(1787);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
         --iter;
 
         REQUIRE(*iter-- == 1787);
@@ -485,12 +489,14 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
 TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 {
+    using forfun::experimental::container::list;
+
     SECTION("Iterator at beginning of empty list")
     {
-        forfun::experimental::container::list const list{};
+        list const some_list{};
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
 
         REQUIRE(iter == std::default_sentinel);
         REQUIRE_FALSE(iter != std::default_sentinel);
@@ -498,12 +504,12 @@ TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 
     SECTION("Iterator at beginning of non-empty list")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1571);
+        some_list.push_back(1571);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
 
         REQUIRE_FALSE(iter == std::default_sentinel);
         REQUIRE(iter != std::default_sentinel);
@@ -511,10 +517,10 @@ TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 
     SECTION("Iterator at end of list")
     {
-        forfun::experimental::container::list const list{};
+        list const some_list{};
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.end();
+            = some_list.end();
 
         REQUIRE(iter == std::default_sentinel);
         REQUIRE_FALSE(iter != std::default_sentinel);
@@ -522,12 +528,12 @@ TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 
     SECTION("Incremented iterator to end of non-empty list")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1583);
+        some_list.push_back(1583);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
 
         REQUIRE(iter == std::default_sentinel);
@@ -536,13 +542,13 @@ TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
 
     SECTION("Incremented iterator to non-end of non-empty list")
     {
-        forfun::experimental::container::list list{};
+        list some_list{};
 
-        list.push_back(1789);
-        list.push_back(1801);
+        some_list.push_back(1789);
+        some_list.push_back(1801);
 
         forfun::experimental::container::internal::list_iterator iter
-            = list.begin();
+            = some_list.begin();
         ++iter;
 
         REQUIRE_FALSE(iter == std::default_sentinel);
