@@ -74,6 +74,7 @@ leveraged by this project:
 | Longest Consecutive Sequence     | C++23    | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                       |
 | Maximum Subarray                 | C++20    | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                               |
 | Meeting Rooms (I, II)            | C++23    | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                     |
+| Missing Number                   | C++23    | [`include/forfun/missing_number.hpp`](include/forfun/missing_number.hpp)                                                   |
 | Move Zeroes                      | C++20    | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                         |
 | Multiples of Three or Five       | C++17    | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp) |
 | Nth Fibonacci Number             | C++20    | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                             |
