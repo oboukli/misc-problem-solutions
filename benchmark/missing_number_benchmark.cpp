@@ -57,5 +57,13 @@ TEST_CASE("Missing number benchmarking", "[benchmark][missing_number]")
             }
         )
 
+        .run(
+            NAMEOF_RAW(optimized::find_missing_number<RangeType>).c_str(),
+            [&nums]() noexcept {
+                auto const volatile r{optimized::find_missing_number(nums)};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
         ;
 }

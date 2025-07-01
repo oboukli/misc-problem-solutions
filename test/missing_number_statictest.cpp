@@ -23,7 +23,8 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find_missing_number, find_missing_number),
     forfun::missing_number::bitwise::find_missing_number<Range const&>,
     forfun::missing_number::functional::find_missing_number<Range const&>,
-    forfun::missing_number::imperative::find_missing_number<Range const&>
+    forfun::missing_number::imperative::find_missing_number<Range const&>,
+    forfun::missing_number::optimized::find_missing_number<Range const&>
 )
 {
     SECTION("Ten numbers")
