@@ -82,6 +82,31 @@ template <std::ranges::input_range Range>
 
 } // namespace imperative
 
+namespace optimized {
+
+template <std::ranges::input_range Range>
+    requires std::ranges::sized_range<Range>
+    and std::integral<std::ranges::range_value_t<Range>>
+[[nodiscard]] constexpr auto find_missing_number(Range&& range) noexcept
+    -> std::ranges::range_value_t<Range>
+{
+    auto const n{std::ranges::size(range)};
+
+    auto const sum{
+        static_cast<std::ranges::range_value_t<Range>>(((n * n) + n) / 2)
+    };
+
+    std::ranges::range_value_t<Range> acc{};
+    for (auto&& val : std::forward<Range>(range))
+    {
+        acc += val;
+    }
+
+    return sum - acc;
+}
+
+} // namespace optimized
+
 } // namespace forfun::missing_number
 
 #endif // FORFUN_MISSING_NUMBER_HPP_
