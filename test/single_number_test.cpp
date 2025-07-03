@@ -44,7 +44,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Zero")
     {
-        std::vector<int> const nums{0};
+        std::vector const nums{0};
 
         REQUIRE(get_single(nums) == 0);
     }

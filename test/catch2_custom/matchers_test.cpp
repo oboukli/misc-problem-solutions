@@ -35,9 +35,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     SECTION("Matching number containers")
     {
         std::vector<std::vector<int>> const expected{{1, 2, 3}, {4, 5, 6}};
-        std::array<std::array<int, 3>, 2> const actual{
-            std::array{1, 2, 3}, std::array{4, 5, 6}
-        };
+        std::array<std::array<int, 3>, 2> const actual{{{1, 2, 3}, {4, 5, 6}}};
 
         REQUIRE_THAT(actual, UnorderedNestedRangeEquals(expected));
     }
@@ -46,7 +44,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     {
         std::vector<std::vector<int>> const expected{{}, {4, 5}, {17, 11, 13}};
         std::array<std::vector<int>, 3> const actual{
-            std::vector{4, 5}, std::vector<int>{}, std::vector{13, 17, 11}
+            {{4, 5}, {}, {13, 17, 11}}
         };
 
         REQUIRE_THAT(actual, UnorderedNestedRangeEquals(expected));
@@ -55,9 +53,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     SECTION("Unmatching number containers")
     {
         std::vector<std::vector<int>> const expected{{9, 2, 3}, {4, 5, 6}};
-        std::array<std::array<int, 3>, 2> const actual{
-            std::array{4, 5, 6}, std::array{1, 2, 3}
-        };
+        std::array<std::array<int, 3>, 2> const actual{{{4, 5, 6}, {1, 2, 3}}};
 
         REQUIRE_THAT(actual, not UnorderedNestedRangeEquals(expected));
     }
@@ -66,8 +62,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     {
         std::vector<std::vector<int>> const expected{{5003, 5009}, {5011}};
         std::vector<std::vector<int>> const actual{
-            std::vector{5003, 5009, 5011, 5021},
-            std::vector{5003, 5009, 5011, 5021, 5023, 5039}
+            {5003, 5009, 5011, 5021}, {5003, 5009, 5011, 5021, 5023, 5039}
         };
 
         REQUIRE_THAT(actual, not UnorderedNestedRangeEquals(expected));
@@ -86,9 +81,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
             == "unordered elements are { { 127, 227, 131 }, { 109, 239, 113 } }"
         );
 
-        std::array<std::array<int, 3>, 2> const actual{
-            std::array{4, 5, 6}, std::array{1, 2, 3}
-        };
+        std::array<std::array<int, 3>, 2> const actual{{{4, 5, 6}, {1, 2, 3}}};
         REQUIRE_FALSE(matcher.match(actual));
 
         REQUIRE(
