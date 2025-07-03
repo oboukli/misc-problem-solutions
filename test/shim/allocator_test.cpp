@@ -93,7 +93,7 @@ TEST_CASE("Shim memory allocator", "[shim_allocator]")
         REQUIRE(::forfun_shim_is_enabled() == 0);
     }
 
-    SECTION("Confirm shim inital state")
+    SECTION("Confirm shim initial state")
     {
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0);
         REQUIRE(::forfun_shim_get_free_call_count() == 0);
