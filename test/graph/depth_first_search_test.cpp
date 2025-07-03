@@ -72,7 +72,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(0U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -103,7 +103,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(1U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -140,7 +140,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(2U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -182,7 +182,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(6U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -229,7 +229,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(6U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -277,7 +277,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(8U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -328,7 +328,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(8U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -378,7 +378,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         std::vector<vertex<char>> visits{};
         visits.reserve(8U);
-        VisitRecorder visit_recorder(&visits);
+        VisitRecorder const visit_recorder(&visits);
 
         depth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
