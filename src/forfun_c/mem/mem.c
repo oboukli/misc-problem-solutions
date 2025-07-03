@@ -8,7 +8,6 @@ found in the LICENSE file.
 
 #include "forfun_c/mem/mem.h"
 
-#include <stddef.h>
 #include <stdlib.h>
 
 forfun_mem g_forfun_mem;

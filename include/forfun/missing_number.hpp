@@ -14,7 +14,6 @@
 #include <concepts>
 #include <cstddef>
 #include <functional>
-#include <iterator>
 #include <ranges>
 
 namespace forfun::missing_number {
