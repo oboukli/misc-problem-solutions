@@ -24,7 +24,7 @@ TEST_CASE("Trie", "[trie]")
         STATIC_REQUIRE(
             std::is_same_v<
                 TrieNode<>::children_t,
-                std::vector<std::unique_ptr<TrieNode<char>>>>
+                std::vector<std::unique_ptr<TrieNode<>>>>
         );
         STATIC_REQUIRE(std::is_same_v<TrieNode<>::value_type, char>);
 
