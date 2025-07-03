@@ -86,12 +86,12 @@ TEMPLATE_TEST_CASE_SIG(
         ::forfun_forward_list_node,
         decltype(&::forfun_free_node_list)>;
 
-    shim_scoped_guard shim_guard;
+    shim_scoped_guard const shim_guard;
     REQUIRE(shim_guard.is_valid());
 
     SECTION("0 + 0")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -114,7 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("0 + 1")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -137,7 +137,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("1 + 0")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -160,7 +160,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("1 + 1")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -183,7 +183,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("3 + 7")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -209,7 +209,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("1 + 10")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node const node_a
@@ -236,7 +236,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("100 + 100")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 1U};
@@ -269,7 +269,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("100 + 910")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 1U};
@@ -305,7 +305,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("342 + 465 = 807 (LeetCode test case)")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_2 = {.next = nullptr, .value = 3U};
@@ -338,7 +338,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("9999999 + 9999 = 10009998 (LeetCode test case)")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_6 = {.next = nullptr, .value = 9U};
@@ -395,7 +395,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("256541 + 997991 = 1254532 (benchmark case)")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
         ::forfun_forward_list_node node_a_5 = {.next = nullptr, .value = 2U};
@@ -460,12 +460,12 @@ TEMPLATE_TEST_CASE_SIG(
         ::forfun_forward_list_node,
         decltype(&::forfun_free_node_list)>;
 
-    shim_scoped_guard shim_guard;
+    shim_scoped_guard const shim_guard;
     REQUIRE(shim_guard.is_valid());
 
     SECTION("0 + 0")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         ::forfun_shim_set_malloc_fail_after(0);
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
@@ -486,7 +486,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("3 + 7")
     {
-        shim_context_scoped_guard shim_context_guard;
+        shim_context_scoped_guard const shim_context_guard;
         ::forfun_shim_set_malloc_fail_after(1);
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0UZ);
 
