@@ -10,7 +10,6 @@ found in the LICENSE file.
 
 #include <assert.h>
 #include <stddef.h>
-#include <stdlib.h>
 
 #include "forfun_c/container/forward_list.h"
 #include "forfun_c/mem/mem.h"
