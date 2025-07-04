@@ -17,8 +17,6 @@
 
 namespace {
 
-using std::string_view_literals::operator""sv;
-
 using VecConstIter = std::vector<std::string_view>::const_iterator;
 
 } // namespace
@@ -55,13 +53,13 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0"sv}, 0},
-                {{"1"sv}, 1},
-                {{"2"sv}, 2},
-                {{"11"sv}, 11},
-                {{"-1"sv}, -1},
-                {{"-17"sv}, -17},
-                {{"7919"sv}, 7919},
+                {{"0"}, 0},
+                {{"1"}, 1},
+                {{"2"}, 2},
+                {{"11"}, 11},
+                {{"-1"}, -1},
+                {{"-17"}, -17},
+                {{"7919"}, 7919},
             })
         )};
 
@@ -79,16 +77,16 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0"sv, "0"sv, "+"sv}, 0},
-                {{"0"sv, "1"sv, "+"sv}, 1},
-                {{"1"sv, "0"sv, "+"sv}, 1},
-                {{"1"sv, "1"sv, "+"sv}, 2},
-                {{"0"sv, "23"sv, "+"sv}, 23},
-                {{"23"sv, "0"sv, "+"sv}, 23},
-                {{"3"sv, "17"sv, "+"sv}, 20},
-                {{"17"sv, "3"sv, "+"sv}, 20},
-                {{"1000"sv, "1"sv, "+"sv}, 1001},
-                {{"1"sv, "1000"sv, "+"sv}, 1001},
+                {{"0", "0", "+"}, 0},
+                {{"0", "1", "+"}, 1},
+                {{"1", "0", "+"}, 1},
+                {{"1", "1", "+"}, 2},
+                {{"0", "23", "+"}, 23},
+                {{"23", "0", "+"}, 23},
+                {{"3", "17", "+"}, 20},
+                {{"17", "3", "+"}, 20},
+                {{"1000", "1", "+"}, 1001},
+                {{"1", "1000", "+"}, 1001},
             })
         )};
 
@@ -106,12 +104,12 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0"sv, "0"sv, "-"sv}, 0},
-                {{"1"sv, "1"sv, "-"sv}, 0},
-                {{"1"sv, "0"sv, "-"sv}, 1},
-                {{"0"sv, "1"sv, "-"sv}, -1},
-                {{"3"sv, "17"sv, "-"sv}, -14},
-                {{"17"sv, "3"sv, "-"sv}, 14},
+                {{"0", "0", "-"}, 0},
+                {{"1", "1", "-"}, 0},
+                {{"1", "0", "-"}, 1},
+                {{"0", "1", "-"}, -1},
+                {{"3", "17", "-"}, -14},
+                {{"17", "3", "-"}, 14},
             })
         )};
 
@@ -129,14 +127,14 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"0"sv, "0"sv, "*"sv}, 0},
-                {{"0"sv, "1"sv, "*"sv}, 0},
-                {{"1"sv, "0"sv, "*"sv}, 0},
-                {{"1"sv, "1"sv, "*"sv}, 1},
-                {{"1"sv, "311"sv, "*"sv}, 311},
-                {{"311"sv, "1"sv, "*"sv}, 311},
-                {{"3"sv, "17"sv, "*"sv}, 51},
-                {{"17"sv, "3"sv, "*"sv}, 51},
+                {{"0", "0", "*"}, 0},
+                {{"0", "1", "*"}, 0},
+                {{"1", "0", "*"}, 0},
+                {{"1", "1", "*"}, 1},
+                {{"1", "311", "*"}, 311},
+                {{"311", "1", "*"}, 311},
+                {{"3", "17", "*"}, 51},
+                {{"17", "3", "*"}, 51},
             })
         )};
 
@@ -154,11 +152,11 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"1"sv, "1"sv, "/"sv}, 1},
-                {{"3"sv, "17"sv, "/"sv}, 0},
-                {{"17"sv, "3"sv, "/"sv}, 5},
-                {{"0"sv, "41"sv, "/"sv}, 0},
-                {{"0"sv, "-41"sv, "/"sv}, 0},
+                {{"1", "1", "/"}, 1},
+                {{"3", "17", "/"}, 0},
+                {{"17", "3", "/"}, 5},
+                {{"0", "41", "/"}, 0},
+                {{"0", "-41", "/"}, 0},
             })
         )};
 
@@ -176,14 +174,14 @@ TEMPLATE_TEST_CASE_SIG(
     {
         auto [tokens, expected]{GENERATE(
             table<std::vector<std::string_view>, int>({
-                {{"17"sv, "0"sv}, 0},
-                {{"157"sv, "163"sv}, 163},
-                {{"19"sv, "-7"sv}, -7},
-                {{"-19"sv, "7"sv}, 7},
-                {{"-15"sv, "-31"sv}, -31},
-                {{"1"sv, "1"sv}, 1},
-                {{"1"sv, "1"sv, "1"sv}, 1},
-                {{"3"sv, "17"sv, "0"sv}, 0},
+                {{"17", "0"}, 0},
+                {{"157", "163"}, 163},
+                {{"19", "-7"}, -7},
+                {{"-19", "7"}, 7},
+                {{"-15", "-31"}, -31},
+                {{"1", "1"}, 1},
+                {{"1", "1", "1"}, 1},
+                {{"3", "17", "0"}, 0},
             })
         )};
 
@@ -200,21 +198,21 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("(((((((211 - 283) - 137) * 47) / 241) + 113) - 67) * 89)")
     {
         std::vector<std::string_view> const tokens{
-            "211"sv,
-            "283"sv,
-            "-"sv,
-            "137"sv,
-            "-"sv,
-            "47"sv,
-            "*"sv,
-            "241"sv,
-            "/"sv,
-            "113"sv,
-            "+"sv,
-            "67"sv,
-            "-"sv,
-            "89"sv,
-            "*"sv,
+            "211",
+            "283",
+            "-",
+            "137",
+            "-",
+            "47",
+            "*",
+            "241",
+            "/",
+            "113",
+            "+",
+            "67",
+            "-",
+            "89",
+            "*",
         };
 
         CAPTURE(tokens);
@@ -232,7 +230,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid operator")
     {
-        std::vector<std::string_view> const tokens{{"1"sv, "1"sv, "#"sv}};
+        std::vector<std::string_view> const tokens{{"1", "1", "#"}};
 
         CAPTURE(tokens);
 
@@ -249,23 +247,23 @@ TEMPLATE_TEST_CASE_SIG(
     )
     {
         std::vector<std::string_view> const tokens{
-            "149"sv,
-            "2"sv,
-            "*"sv,
-            "61"sv,
-            "+"sv,
-            "223"sv,
-            "+"sv,
-            "-2"sv,
-            "+"sv,
-            "11"sv,
-            "/"sv,
-            "71"sv,
-            "+"sv,
-            "293"sv,
-            "*"sv,
-            "101"sv,
-            "-"sv,
+            "149",
+            "2",
+            "*",
+            "61",
+            "+",
+            "223",
+            "+",
+            "-2",
+            "+",
+            "11",
+            "/",
+            "71",
+            "+",
+            "293",
+            "*",
+            "101",
+            "-",
         };
 
         CAPTURE(tokens);
@@ -283,9 +281,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode case 1")
     {
-        std::vector<std::string_view> const tokens{
-            "2"sv, "1"sv, "+"sv, "3"sv, "*"sv
-        };
+        std::vector<std::string_view> const tokens{"2", "1", "+", "3", "*"};
 
         CAPTURE(tokens);
 
@@ -299,9 +295,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode case 2")
     {
-        std::vector<std::string_view> const tokens{
-            "4"sv, "13"sv, "5"sv, "/"sv, "+"sv
-        };
+        std::vector<std::string_view> const tokens{"4", "13", "5", "/", "+"};
 
         CAPTURE(tokens);
 
@@ -316,19 +310,19 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("LeetCode case 3")
     {
         std::vector<std::string_view> const tokens{
-            "10"sv,
-            "6"sv,
-            "9"sv,
-            "3"sv,
-            "+"sv,
-            "-11"sv,
-            "*"sv,
-            "/"sv,
-            "*"sv,
-            "17"sv,
-            "+"sv,
-            "5"sv,
-            "+"sv,
+            "10",
+            "6",
+            "9",
+            "3",
+            "+",
+            "-11",
+            "*",
+            "/",
+            "*",
+            "17",
+            "+",
+            "5",
+            "+",
         };
 
         CAPTURE(tokens);
@@ -351,7 +345,7 @@ TEST_CASE(
 
     SECTION("Division by zero")
     {
-        std::vector<std::string_view> const tokens{"1093"sv, "0"sv, "/"sv};
+        std::vector<std::string_view> const tokens{"1093", "0", "/"};
 
         CAPTURE(tokens);
 
@@ -366,14 +360,14 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{"3"sv, "17"sv, "@"sv}},
-                {{"17"sv, "3"sv, "="sv}},
-                {{"0"sv, "41"sv, "A"sv}},
-                {{"0"sv, "-41"sv, "b"sv}},
-                {{"0"sv, "-41"sv, ""sv}},
-                {{"0"sv, "-41"sv, "  "sv}},
-                {{"0"sv, "-41"sv, " + "sv}},
-                {{"0"sv, "-41"sv, "++"sv}},
+                {{"3", "17", "@"}},
+                {{"17", "3", "="}},
+                {{"0", "41", "A"}},
+                {{"0", "-41", "b"}},
+                {{"0", "-41", ""}},
+                {{"0", "-41", "  "}},
+                {{"0", "-41", " + "}},
+                {{"0", "-41", "++"}},
             })
         )};
 
@@ -390,14 +384,14 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{" 0"sv, "0"sv, "+"sv}},
-                {{"0 "sv, "1"sv, "+"sv}},
-                {{"1"sv, "1 1"sv, "+"sv}},
-                {{"1"sv, " 0 "sv, "+"sv}},
-                {{"3"sv, "n"sv, "+"sv}},
-                {{""sv, ""sv, "+"sv}},
-                {{"n"sv, ""sv, "-"sv}},
-                {{"a"sv, "b"sv, "/"sv}},
+                {{" 0", "0", "+"}},
+                {{"0 ", "1", "+"}},
+                {{"1", "1 1", "+"}},
+                {{"1", " 0 ", "+"}},
+                {{"3", "n", "+"}},
+                {{"", "", "+"}},
+                {{"n", "", "-"}},
+                {{"a", "b", "/"}},
             })
         )};
 
@@ -414,12 +408,12 @@ TEST_CASE(
     {
         auto [tokens]{GENERATE(
             table<std::vector<std::string_view>>({
-                {{""sv}},
-                {{"0"sv, "0"sv, "++"sv}},
-                {{"invalid input"sv}},
-                {{"17"sv, "invalid input"sv, "+"sv}},
-                {{"0"sv, "41"sv, "invalid input"sv}},
-                {{"invalid input"sv, "invalid input"sv, "invalid input"sv}},
+                {{""}},
+                {{"0", "0", "++"}},
+                {{"invalid input"}},
+                {{"17", "invalid input", "+"}},
+                {{"0", "41", "invalid input"}},
+                {{"invalid input", "invalid input", "invalid input"}},
             })
         )};
 
@@ -435,9 +429,9 @@ TEST_CASE(
     SECTION("Overflow case 1")
     {
         std::vector<std::string_view> const tokens{
-            "-2147483648"sv,
-            "-1"sv,
-            "/"sv,
+            "-2147483648",
+            "-1",
+            "/",
         };
 
         CAPTURE(tokens);
@@ -452,9 +446,9 @@ TEST_CASE(
     SECTION("Overflow case 2")
     {
         std::vector<std::string_view> const tokens{
-            "2147483647"sv,
-            "1"sv,
-            "+"sv,
+            "2147483647",
+            "1",
+            "+",
         };
 
         CAPTURE(tokens);
@@ -469,9 +463,9 @@ TEST_CASE(
     SECTION("Overflow case 3")
     {
         std::vector<std::string_view> const tokens{
-            "2147483647"sv,
-            "10"sv,
-            "*"sv,
+            "2147483647",
+            "10",
+            "*",
         };
 
         CAPTURE(tokens);
@@ -486,11 +480,11 @@ TEST_CASE(
     SECTION("Overflow case 4")
     {
         std::vector<std::string_view> const tokens{
-            "0"sv,
-            "2147483647"sv,
-            "-"sv,
-            "2"sv,
-            "-"sv,
+            "0",
+            "2147483647",
+            "-",
+            "2",
+            "-",
         };
 
         CAPTURE(tokens);
