@@ -17,7 +17,7 @@ TEST_CASE("Sonar", "[sonar]")
 
     SECTION("Sonar test case 1")
     {
-        sonar const sonar{{{.x = 0, .y = 0}}};
+        sonar const some_sonar{{{.x = 0, .y = 0}}};
 
         auto const [a, expected_num_ships]{GENERATE(
             table<area, int>({
@@ -28,13 +28,13 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(sonar, a)};
+        int const num_ships{count_ships(some_sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 2")
     {
-        sonar const sonar{{
+        sonar const some_sonar{{
             {.x = 0, .y = 7},
             {.x = 2, .y = 5},
             {.x = 3, .y = 3},
@@ -51,13 +51,13 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(sonar, a)};
+        int const num_ships{count_ships(some_sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 3")
     {
-        sonar const sonar{{
+        sonar const some_sonar{{
             {.x = 1, .y = 1},
             {.x = 2, .y = 2},
             {.x = 3, .y = 3},
@@ -73,23 +73,23 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(sonar, a)};
+        int const num_ships{count_ships(some_sonar, a)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
     SECTION("Sonar test case 4")
     {
-        sonar const sonar{{{.x = 345, .y = 456}}};
+        sonar const some_sonar{{{.x = 345, .y = 456}}};
 
         int const num_ships{count_ships(
-            sonar, {.top = 1, .bottom = 1000, .left = 1, .right = 1000}
+            some_sonar, {.top = 1, .bottom = 1000, .left = 1, .right = 1000}
         )};
         REQUIRE(num_ships == 1);
     }
 
     SECTION("Sonar test case 5")
     {
-        sonar const sonar{{{
+        sonar const some_sonar{{{
             {.x = 102, .y = 430}, {.x = 488, .y = 821}, {.x = 863, .y = 875},
             {.x = 820, .y = 684}, {.x = 453, .y = 603}, {.x = 99, .y = 476},
             {.x = 516, .y = 730}, {.x = 582, .y = 54},  {.x = 349, .y = 987},
@@ -126,7 +126,7 @@ TEST_CASE("Sonar", "[sonar]")
         }}};
 
         int const num_ships{count_ships(
-            sonar, {.top = 1, .bottom = 1000, .left = 1, .right = 1000}
+            some_sonar, {.top = 1, .bottom = 1000, .left = 1, .right = 1000}
         )};
         REQUIRE(num_ships == 99);
     }
