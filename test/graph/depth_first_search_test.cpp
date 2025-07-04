@@ -82,7 +82,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
         REQUIRE(adjacency_list.empty());
         REQUIRE(state_list.empty());
-        REQUIRE(visits.size() == 0UZ);
+        REQUIRE(visits.empty());
     }
 
     SECTION("One-vertex graph")
