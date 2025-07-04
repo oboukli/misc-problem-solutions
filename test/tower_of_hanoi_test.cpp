@@ -218,7 +218,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             unsigned int count{0};
             // NOLINTEND(misc-const-correctness)
 
-            forfun::tower_of_hanoi::recursive::toh(
+            toh(
                 src_rod,
                 des_rod,
                 aux_rod,
@@ -240,7 +240,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             unsigned int count{0};
             // NOLINTEND(misc-const-correctness)
 
-            forfun::tower_of_hanoi::recursive::toh(
+            toh(
                 src_rod,
                 des_rod,
                 aux_rod,
@@ -262,7 +262,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             unsigned int count{0};
             // NOLINTEND(misc-const-correctness)
 
-            forfun::tower_of_hanoi::recursive::toh(
+            toh(
                 src_rod,
                 des_rod,
                 aux_rod,
@@ -285,7 +285,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE_FALSE(
-                noexcept(forfun::tower_of_hanoi::recursive::toh(
+                noexcept(toh(
                     src_rod,
                     des_rod,
                     aux_rod,
@@ -304,7 +304,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE(
-                noexcept(forfun::tower_of_hanoi::recursive::toh(
+                noexcept(toh(
                     src_rod,
                     des_rod,
                     aux_rod,
