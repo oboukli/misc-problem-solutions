@@ -17,8 +17,6 @@ TEST_CASE("Trie", "[trie]")
 {
     using namespace forfun::trie::experimental;
 
-    using std::string_view_literals::operator""sv;
-
     SECTION("Types")
     {
         STATIC_REQUIRE(
@@ -75,7 +73,7 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert")
     {
         TrieNode root{'\0'};
-        static constexpr std::string_view const word{"c"sv};
+        static constexpr std::string_view const word{"c"};
 
         insert(root, word);
 
@@ -94,7 +92,7 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert one word")
     {
         TrieNode root{'\0'};
-        static constexpr std::string_view const word{"cat"sv};
+        static constexpr std::string_view const word{"cat"};
 
         insert(root, word);
 
@@ -127,8 +125,8 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert two words")
     {
         TrieNode root{'\0'};
-        static constexpr std::string_view const word1{"cat"sv};
-        static constexpr std::string_view const word2{"car"sv};
+        static constexpr std::string_view const word1{"cat"};
+        static constexpr std::string_view const word2{"car"};
 
         insert(root, word1);
         insert(root, word2);
@@ -167,7 +165,7 @@ TEST_CASE("Trie", "[trie]")
 
         SECTION("Insert prefixed")
         {
-            static constexpr std::string_view const prefixed1{"catnip"sv};
+            static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
             REQUIRE(root.children[0]->value == 'c');
@@ -282,8 +280,8 @@ TEST_CASE("Trie", "[trie]")
     SECTION("Insert two independent words")
     {
         TrieNode root{'\0'};
-        static constexpr std::string_view const word1{"cat"sv};
-        static constexpr std::string_view const word2{"dog"sv};
+        static constexpr std::string_view const word1{"cat"};
+        static constexpr std::string_view const word2{"dog"};
 
         insert(root, word1);
         insert(root, word2);
@@ -336,7 +334,7 @@ TEST_CASE("Trie", "[trie]")
 
         SECTION("Insert prefixed")
         {
-            static constexpr std::string_view const prefixed1{"catnip"sv};
+            static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
             REQUIRE(root.children[0]->value == 'c');
