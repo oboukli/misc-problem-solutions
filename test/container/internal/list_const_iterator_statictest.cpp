@@ -7,7 +7,12 @@
 #include <concepts>
 #include <cstddef>
 #include <iterator>
-#include <version>
+#include <ranges>
+
+#if !defined(__cpp_lib_ranges_as_const) || __cpp_lib_ranges_as_const < 202207L
+#include <catch2/catch_message.hpp>
+#endif // !defined(__cpp_lib_ranges_as_const) || __cpp_lib_ranges_as_const <
+       // 202207L
 
 #include <catch2/catch_test_macros.hpp>
 

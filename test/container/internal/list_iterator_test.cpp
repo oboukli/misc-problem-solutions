@@ -43,7 +43,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         list_iterator iterator1{&node1};
 
         list_node node2{1433, nullptr, nullptr};
-        list_iterator iterator2{&node2};
+        [[maybe_unused]] list_iterator iterator2{&node2};
 
         iterator2 = iterator1;
 
@@ -68,7 +68,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         list_iterator iterator1{&node1};
 
         list_node node2{1451, nullptr, nullptr};
-        list_iterator iterator2{&node2};
+        [[maybe_unused]] list_iterator iterator2{&node2};
 
         iterator2 = std::move(iterator1);
 
@@ -87,7 +87,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
 
     SECTION("Iterator of non-empty list is not sentinel")
     {
-        list some_list{}; // TODO: RENAME
+        list some_list{};
         some_list.push_back(1009);
 
         REQUIRE_FALSE(some_list.begin() == some_list.end());
