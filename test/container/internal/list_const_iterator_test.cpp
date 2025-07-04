@@ -17,7 +17,6 @@ TEST_CASE(
     "Linked list const iterator", "[container][list][list_const_iterator]"
 )
 {
-    using forfun::experimental::container::list;
     using forfun::experimental::container::internal::list_const_iterator;
     using forfun::experimental::container::internal::list_node;
 
@@ -45,7 +44,7 @@ TEST_CASE(
         list_const_iterator iterator1{&node1};
 
         list_node node2{1831, nullptr, nullptr};
-        list_const_iterator iterator2{&node2};
+        [[maybe_unused]] list_const_iterator iterator2{&node2};
 
         iterator2 = iterator1;
 
@@ -70,7 +69,7 @@ TEST_CASE(
         list_const_iterator iterator1{&node1};
 
         list_node node2{1867, nullptr, nullptr};
-        list_const_iterator iterator2{&node2};
+        [[maybe_unused]] list_const_iterator iterator2{&node2};
 
         iterator2 = std::move(iterator1);
 
@@ -81,7 +80,7 @@ TEST_CASE(
 
     SECTION("Const iterator and const sentinel of empty list are equal")
     {
-        list const some_list{};
+        forfun::experimental::container::list const some_list{};
 
         REQUIRE(some_list.cbegin() == some_list.cend());
         REQUIRE_FALSE(some_list.cbegin() != some_list.cend());
