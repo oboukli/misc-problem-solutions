@@ -10,16 +10,15 @@ found in the LICENSE file.
 
 #include <stddef.h>
 
-int forfun_get_single(int const* nums, size_t const nums_size)
+int forfun_get_single(int const* nums, size_t nums_size)
 {
-    int result = 0;
-    size_t i = 0UL;
+    unsigned int result = 0U;
 
-    while (i++ < nums_size)
+    while (nums_size--)
     {
-        result ^= *nums;
+        result ^= (unsigned int)*nums;
         ++nums;
     }
 
-    return result;
+    return (int)result;
 }
