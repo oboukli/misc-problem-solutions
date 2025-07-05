@@ -19,7 +19,7 @@ TEST_CASE(
     "[benchmark][longest_consecutive_sequence]"
 )
 {
-    using namespace forfun;
+    using namespace forfun::longest_consecutive_sequence;
 
     using Iter = std::vector<int>::iterator;
 
@@ -29,11 +29,7 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(
-                longest_consecutive_sequence::counted::
-                    longest_consecutive<Iter, Iter>
-            )
-                .c_str(),
+            NAMEOF_RAW(counted::longest_consecutive<Iter, Iter>).c_str(),
             []() noexcept {
                 std::vector nums{
                     // clang-format off
@@ -45,7 +41,7 @@ TEST_CASE(
                 };
 
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::counted::
+                    counted::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -54,7 +50,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                longest_consecutive_sequence::measured::
+                measured::
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
@@ -69,7 +65,7 @@ TEST_CASE(
                 };
 
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::measured::
+                    measured::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -78,7 +74,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                longest_consecutive_sequence::set_scanning::
+                set_scanning::
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
@@ -93,7 +89,7 @@ TEST_CASE(
                 };
 
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::set_scanning::
+                    set_scanning::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -102,7 +98,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                longest_consecutive_sequence::set_sliding::
+                set_sliding::
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
@@ -117,7 +113,7 @@ TEST_CASE(
                 };
 
                 auto const volatile r{
-                    forfun::longest_consecutive_sequence::set_sliding::
+                    set_sliding::
                         longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
