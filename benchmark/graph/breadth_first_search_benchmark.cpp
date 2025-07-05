@@ -44,7 +44,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(recursive::breadth_first_search<int, Visitor>).c_str(),
             [&adjacency_list]() noexcept {
-                static constexpr vertex<int> const starting_vertex{1};
+                static constexpr vertex const starting_vertex{1};
 
                 // NOLINTNEXTLINE(misc-const-correctness)
                 VertexStateList<int> state_list{
