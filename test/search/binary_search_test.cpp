@@ -37,8 +37,8 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format on
 )
 {
-    constexpr int const target{151};
-    std::array<int, 0> const records{};
+    static constexpr int const target{151};
+    static constexpr std::array<int, 0> const records{};
     static_assert(records.empty());
 
     REQUIRE(find(records.cbegin(), records.cend(), target) == records.cend());
@@ -58,8 +58,8 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("One-element collection, containing the target")
     {
-        constexpr int const target{277};
-        std::array const records{277};
+        static constexpr int const target{277};
+        static constexpr std::array const records{277};
         static_assert(records.size() == 1UZ);
 
         CAPTURE(records);
@@ -75,8 +75,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("One-element collection, not containing the target")
     {
-        constexpr int const target{19};
-        std::array const records{7};
+        static constexpr int const target{19};
+        static constexpr std::array const records{7};
         static_assert(records.size() == 1UZ);
 
         CAPTURE(records);
@@ -104,8 +104,8 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Two-element collection, containing the target (case 1)")
     {
-        constexpr int const target{5519};
-        std::array const records{5519, 5521};
+        static constexpr int const target{5519};
+        static constexpr std::array const records{5519, 5521};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -120,8 +120,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Two-element collection, containing the target (case 2)")
     {
-        constexpr int const target{5521};
-        std::array const records{5519, 5521};
+        static constexpr int const target{5521};
+        static constexpr std::array const records{5519, 5521};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -136,8 +136,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Two-element collection, not containing the target")
     {
-        constexpr int const target{19};
-        std::array const records{5519, 5521};
+        static constexpr int const target{19};
+        static constexpr std::array const records{5519, 5521};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -164,8 +164,8 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Three-element collection, containing the target (case 1)")
     {
-        constexpr int const target{-1};
-        std::array const records{-1, 1, 2};
+        static constexpr int const target{-1};
+        static constexpr std::array const records{-1, 1, 2};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -180,8 +180,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Three-element collection, containing the target (case 2)")
     {
-        constexpr int const target{1};
-        std::array const records{-1, 1, 2};
+        static constexpr int const target{1};
+        static constexpr std::array const records{-1, 1, 2};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -196,8 +196,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Three-element collection, containing the target (case 3)")
     {
-        constexpr int const target{2};
-        std::array const records{-1, 1, 2};
+        static constexpr int const target{2};
+        static constexpr std::array const records{-1, 1, 2};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -212,8 +212,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Three-element collection, not containing the target")
     {
-        constexpr int const target{19};
-        std::array const records{-1, 1, 2};
+        static constexpr int const target{19};
+        static constexpr std::array const records{-1, 1, 2};
 
         CAPTURE(records);
         CAPTURE(target);
@@ -240,8 +240,10 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Even collection containing the target once")
     {
-        constexpr int const target{5};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        static constexpr int const target{5};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
+        };
         static_assert(records.size() == 12UZ);
 
         CAPTURE(records);
@@ -258,8 +260,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection containing the target even times")
     {
-        constexpr int const target{163};
-        std::array const records{
+        static constexpr int const target{163};
+        static constexpr std::array const records{
             149, 151, 157, 163, 163, 163, 163, 181, 191, 193, 197, 199
         };
         static_assert(records.size() == 12UZ);
@@ -278,8 +280,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection containing the target odd times")
     {
-        constexpr int const target{257};
-        std::array const records{
+        static constexpr int const target{257};
+        static constexpr std::array const records{
             227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281
         };
         static_assert(records.size() == 12UZ);
@@ -298,8 +300,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection containing the target at the lower offset")
     {
-        constexpr int const target{2};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        static constexpr int const target{2};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
+        };
         static_assert(records.size() == 12UZ);
 
         CAPTURE(records);
@@ -316,8 +320,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection containing the target at the upper offset")
     {
-        constexpr int const target{37};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        static constexpr int const target{37};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
+        };
         static_assert(records.size() == 12UZ);
 
         CAPTURE(records);
@@ -334,8 +340,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection not containing the in-range target")
     {
-        constexpr int const target{35};
-        constexpr std::array const records{
+        static constexpr int const target{35};
+        static constexpr std::array const records{
             29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73
         };
         static_assert(records.size() == 12UZ);
@@ -354,8 +360,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection where target is smaller than smallest element")
     {
-        constexpr int const target{1};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        static constexpr int const target{1};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
+        };
         static_assert(records.size() == 12UZ);
 
         CAPTURE(records);
@@ -370,8 +378,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Even collection where target is larger than largest element")
     {
-        constexpr int const target{41};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+        static constexpr int const target{41};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
+        };
         static_assert(records.size() == 12UZ);
 
         CAPTURE(records);
@@ -399,8 +409,10 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Odd collection containing the target once")
     {
-        constexpr int const target{23};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        static constexpr int const target{23};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -417,8 +429,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection containing the target even times")
     {
-        constexpr int const target{17};
-        std::array const records{2, 3, 5, 7, 11, 17, 17, 17, 17, 29, 31};
+        static constexpr int const target{17};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 17, 17, 17, 17, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -435,8 +449,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection containing the target odd times")
     {
-        constexpr int const target{239};
-        std::array const records{
+        static constexpr int const target{239};
+        static constexpr std::array const records{
             227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277
         };
         static_assert(records.size() == 11UZ);
@@ -455,8 +469,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection containing the target at the lower offset")
     {
-        constexpr int const target{2};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        static constexpr int const target{2};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -473,8 +489,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection containing the target at the upper offset")
     {
-        constexpr int const target{31};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        static constexpr int const target{31};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -491,8 +509,8 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection not containing the in-range target")
     {
-        constexpr int const target{35};
-        constexpr std::array const records{
+        static constexpr int const target{35};
+        static constexpr std::array const records{
             29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
         };
         static_assert(records.size() == 11UZ);
@@ -511,8 +529,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection where target is smaller than smallest element")
     {
-        constexpr int const target{1};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        static constexpr int const target{1};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -527,8 +547,10 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Odd collection where target is larger than largest element")
     {
-        constexpr int const target{41};
-        std::array const records{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        static constexpr int const target{41};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
         static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
@@ -554,7 +576,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Even collection (vector) containing the target odd times")
     {
-        constexpr int const target{257};
+        static constexpr int const target{257};
         std::vector const records{
             227, 229, 233, 239, 241, 251, 257, 257, 257, 271, 277, 281
         };

@@ -29,7 +29,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("One node graph")
     {
-        binary_tree_node const root{11};
+        static constexpr binary_tree_node const root{11};
 
         REQUIRE(is_balanced(&root));
     }

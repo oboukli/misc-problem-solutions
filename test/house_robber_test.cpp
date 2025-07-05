@@ -17,7 +17,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Empty container")
     {
-        std::array<int, 0> const stashes{};
+        static constexpr std::array<int, 0> const stashes{};
 
         CAPTURE(stashes);
 
@@ -26,7 +26,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("One element")
     {
-        std::array const stashes{5};
+        static constexpr std::array const stashes{5};
 
         CAPTURE(stashes);
 
@@ -35,7 +35,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Two equal elements")
     {
-        std::array const stashes{1, 1};
+        static constexpr std::array const stashes{1, 1};
 
         CAPTURE(stashes);
 
@@ -44,7 +44,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Two elements")
     {
-        std::array const stashes{37, 53};
+        static constexpr std::array const stashes{37, 53};
 
         CAPTURE(stashes);
 
@@ -53,7 +53,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Three equal elements")
     {
-        std::array const stashes{1, 1, 1};
+        static constexpr std::array const stashes{1, 1, 1};
 
         CAPTURE(stashes);
 
@@ -62,7 +62,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Three elements")
     {
-        std::array const stashes{83, 41, 59};
+        static constexpr std::array const stashes{83, 41, 59};
 
         CAPTURE(stashes);
 
@@ -71,7 +71,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Four equal elements")
     {
-        std::array const stashes{1, 1, 1, 1};
+        static constexpr std::array const stashes{1, 1, 1, 1};
 
         CAPTURE(stashes);
 
@@ -80,7 +80,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Four elements")
     {
-        std::array const stashes{67, 79, 19, 89};
+        static constexpr std::array const stashes{67, 79, 19, 89};
 
         CAPTURE(stashes);
 
@@ -89,7 +89,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Five elements where target value is four")
     {
-        std::array const stashes{1, 3, 1, 0, 1};
+        static constexpr std::array const stashes{1, 3, 1, 0, 1};
 
         CAPTURE(stashes);
 
@@ -98,7 +98,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Six elements where target value is three")
     {
-        std::array const stashes{1, 0, 1, 0, 1, 0};
+        static constexpr std::array const stashes{1, 0, 1, 0, 1, 0};
 
         CAPTURE(stashes);
 
@@ -107,7 +107,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Seven elements where target value is four")
     {
-        std::array const stashes{1, 0, 1, 0, 1, 0, 1};
+        static constexpr std::array const stashes{1, 0, 1, 0, 1, 0, 1};
 
         CAPTURE(stashes);
 
@@ -116,7 +116,7 @@ TEST_CASE("House robber", "[house_robber]")
 
     SECTION("Seven elements where target value is six")
     {
-        std::array const stashes{1, 4, 1, 0, 1, 0, 1};
+        static constexpr std::array const stashes{1, 4, 1, 0, 1, 0, 1};
 
         CAPTURE(stashes);
 
@@ -145,7 +145,7 @@ TEST_CASE("House robber", "[house_robber]")
         };
         static_assert(expected == 2152);
 
-        std::array const stashes{
+        static constexpr std::array const stashes{
             2,   5,   11,  17,  23,  29,  41,  47,  53,  59,  71,
             83,  89,  101, 107, 113, 131, 137, 149, 167, 173, 179,
             191, 197, 227, 233, 239, 251, 257, 263, 269, 271,
@@ -176,7 +176,7 @@ TEST_CASE("House robber", "[house_robber]")
         };
         static_assert(expected == 2598);
 
-        std::array const stashes{
+        static constexpr std::array const stashes{
             149, 47,  179, 107, 11,  251, 71,  197, 137, 53,  59,
             233, 227, 101, 41,  257, 269, 167, 17,  5,   113, 239,
             271, 89,  29,  173, 23,  191, 2,   83,  263, 131,

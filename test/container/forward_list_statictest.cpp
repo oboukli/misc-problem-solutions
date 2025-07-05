@@ -12,8 +12,8 @@ TEST_CASE("Forward list", "[container][forward_list]")
 {
     SECTION("Forward list is initially empty")
     {
-        constexpr forfun::experimental::container::forward_list<int> const
-            forward_list{};
+        static constexpr forfun::experimental::container::forward_list<
+            int> const forward_list{};
 
         STATIC_REQUIRE(forward_list.empty());
     }

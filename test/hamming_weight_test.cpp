@@ -33,7 +33,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Eighty-five in decimal has four ones in binary")
     {
-        constexpr std::size_t const n{0b01010101};
+        static constexpr std::size_t const n{0b01010101};
         static_assert(n == 85UZ);
 
         REQUIRE(get_hamming_weight(n) == 4UZ);
@@ -59,7 +59,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Only the most and least significant bits are set (benchmark case)")
     {
-        constexpr std::size_t const n{
+        static constexpr std::size_t const n{
             (1UZ << std::size_t{std::numeric_limits<std::size_t>::digits - 1})
             | 1UZ
         };

@@ -12,7 +12,7 @@ TEST_CASE("Binary tree node", "[binary_tree_node_static]")
 {
     SECTION("Constructor 1")
     {
-        constexpr forfun::graph::binary_tree_node const node{};
+        static constexpr forfun::graph::binary_tree_node const node{};
 
         STATIC_REQUIRE(node.left_node_ == nullptr);
         STATIC_REQUIRE(node.right_node_ == nullptr);
@@ -21,7 +21,7 @@ TEST_CASE("Binary tree node", "[binary_tree_node_static]")
 
     SECTION("Constructor 2")
     {
-        constexpr forfun::graph::binary_tree_node const node{136279841};
+        static constexpr forfun::graph::binary_tree_node const node{136279841};
 
         STATIC_REQUIRE(node.left_node_ == nullptr);
         STATIC_REQUIRE(node.right_node_ == nullptr);

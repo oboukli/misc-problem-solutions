@@ -21,7 +21,7 @@ TEST_CASE("Vertex conversion", "[graph][vertex]")
 
         std::ostringstream buffer{};
 
-        forfun::graph::vertex const v{17};
+        static constexpr forfun::graph::vertex const v{17};
         forfun::graph::operator<<(buffer, v);
 
         REQUIRE(buffer.str() == "17"sv);
@@ -35,7 +35,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
     SECTION("Empty adjacency list (graph)")
     {
-        constexpr vertex const v{17};
+        static constexpr vertex const v{17};
         VertexAdjacencyList<int> const adjacency_list{};
 
         CAPTURE(v);
@@ -48,7 +48,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
     SECTION("Adjacency list can be found for vertex")
     {
-        constexpr vertex const v{4};
+        static constexpr vertex const v{4};
         VertexAdjacencyList<int> const adjacency_list{
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
@@ -71,7 +71,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
     {
         using std::string_view_literals::operator""sv;
 
-        constexpr vertex const v{"five"sv};
+        static constexpr vertex const v{"five"sv};
         VertexAdjacencyList<std::string_view> const adjacency_list{
             {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
             {{"two"sv}, {"one"sv}},

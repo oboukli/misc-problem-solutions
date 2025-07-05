@@ -30,7 +30,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Empty input")
     {
         std::vector<int> nums{};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -42,7 +42,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("One integer")
     {
         std::vector nums{3};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -54,7 +54,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Two identical integers")
     {
         std::vector nums{3, 3};
-        bool const expected{true};
+        static constexpr bool const expected{true};
 
         CAPTURE(nums);
 
@@ -66,7 +66,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Two unique items #1")
     {
         std::vector nums{2, 3};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -78,7 +78,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Two unique items #2")
     {
         std::vector nums{3, 2};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -90,7 +90,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Three identical integers")
     {
         std::vector nums{19, 19, 19};
-        bool const expected{true};
+        static constexpr bool const expected{true};
 
         CAPTURE(nums);
 
@@ -102,7 +102,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Three integers, one of which is unique")
     {
         std::vector nums{19, 7, 19};
-        bool const expected{true};
+        static constexpr bool const expected{true};
 
         CAPTURE(nums);
 
@@ -114,7 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Three unique integers #1")
     {
         std::vector nums{2, -5, 3};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -126,7 +126,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Three unique integers #2")
     {
         std::vector nums{3, 2, 1};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -138,7 +138,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Four identical integers")
     {
         std::vector nums{11, 11, 11, 11};
-        bool const expected{true};
+        static constexpr bool const expected{true};
 
         CAPTURE(nums);
 
@@ -166,7 +166,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Four sorted unique floats")
     {
         std::vector nums{0.0F, 0.00000001F, 2.0F, 2.001F};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -178,7 +178,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Four unsorted unique floats")
     {
         std::vector nums{2.0F, 2.001F, 0.0F, 0.00000001F};
-        bool const expected{false};
+        static constexpr bool const expected{false};
 
         CAPTURE(nums);
 
@@ -190,7 +190,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Five unsorted floats, two of which are identical")
     {
         std::vector nums{2.0F, 2.001F, 0.0F, 0.00000001F, 2.001F};
-        bool const expected{true};
+        static constexpr bool const expected{true};
 
         CAPTURE(nums);
 

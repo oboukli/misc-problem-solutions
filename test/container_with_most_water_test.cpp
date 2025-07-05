@@ -27,8 +27,6 @@ TEST_CASE(
 
     std::vector<int> const input{};
 
-    CAPTURE(input);
-
     REQUIRE(calc_max_area(input.cbegin(), input.cend()) == 0);
 }
 
