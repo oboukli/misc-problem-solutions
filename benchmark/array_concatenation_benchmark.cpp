@@ -20,7 +20,7 @@ TEST_CASE(
 {
     using namespace forfun::array_concatenation;
 
-    static constexpr std::array<int, 256> const src{
+    static constexpr std::array const src{
         // clang-format off
            2,    3,    5,    7,   11,   13,   17,   19,
           23,   29,   31,   37,   41,   43,   47,   53,

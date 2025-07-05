@@ -24,8 +24,8 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 {
     using namespace forfun::add_two_numbers;
 
-    std::forward_list<unsigned> const addend_a{1U, 4U, 5U, 6U, 5U, 2U};
-    std::forward_list<unsigned> const addend_b{1U, 9U, 9U, 7U, 9U, 9U};
+    std::forward_list const addend_a{1U, 4U, 5U, 6U, 5U, 2U};
+    std::forward_list const addend_b{1U, 9U, 9U, 7U, 9U, 9U};
     std::forward_list<std::forward_list<unsigned>> results_stl{};
 
     ::forfun_forward_list_node node_a_5 = {.next = nullptr, .value = 2U};
