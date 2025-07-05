@@ -110,6 +110,8 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
         struct forfun_forward_list_node const* const next_b
             = addend_b == NULL ? NULL : addend_b->next;
 
+        assert(g_forfun_mem.ff_malloc != NULL);
+
         aux_node_ptr = (struct forfun_forward_list_node*)g_forfun_mem.ff_malloc(
             sizeof(struct forfun_forward_list_node)
         );
@@ -122,6 +124,8 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
         next_result = forfun_do_add_two_numbers(next_a, next_b, sum / 10U);
         if (next_result.error == 1)
         {
+            assert(g_forfun_mem.ff_free != NULL);
+
             g_forfun_mem.ff_free(aux_node_ptr);
 
             goto error;
