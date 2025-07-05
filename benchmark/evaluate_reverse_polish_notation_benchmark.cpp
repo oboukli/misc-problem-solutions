@@ -20,30 +20,28 @@ TEST_CASE(
     "[benchmark][evaluate_reverse_polish_notation]"
 )
 {
-    using std::string_view_literals::operator""sv;
-
     using namespace forfun::evaluate_reverse_polish_notation;
 
     using VecConstIter = std::vector<std::string_view>::const_iterator;
 
     std::vector<std::string_view> const tokens{
-        "149"sv,
-        "2"sv,
-        "*"sv,
-        "61"sv,
-        "+"sv,
-        "223"sv,
-        "+"sv,
-        "-2"sv,
-        "+"sv,
-        "11"sv,
-        "/"sv,
-        "71"sv,
-        "+"sv,
-        "293"sv,
-        "*"sv,
-        "101"sv,
-        "-"sv,
+        "149",
+        "2",
+        "*",
+        "61",
+        "+",
+        "223",
+        "+",
+        "-2",
+        "+",
+        "11",
+        "/",
+        "71",
+        "+",
+        "293",
+        "*",
+        "101",
+        "-",
     };
 
     ankerl::nanobench::Bench()

@@ -17,13 +17,11 @@
 
 TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 {
-    using std::string_view_literals::operator""sv;
-
     using namespace forfun::palindrome;
 
     static constexpr std::string_view const palindrome{
         "oooooooooooooooooooooooooooooooooooooooooooooooooo"
-        "oooooooooooooooooooooooooooooooooooooooooooooooooo"sv
+        "oooooooooooooooooooooooooooooooooooooooooooooooooo"
     };
 
     SECTION("Case-sensitive")

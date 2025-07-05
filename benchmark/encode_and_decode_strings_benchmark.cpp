@@ -75,7 +75,6 @@ TEST_CASE(
 )
 {
     using namespace forfun::encode_and_decode_strings;
-    using std::string_view_literals::operator""sv;
 
     using CharT = std::string_view::value_type;
     using Traits = std::string_view::traits_type;
@@ -94,7 +93,7 @@ TEST_CASE(
         "habcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~"
         "~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~"
         " ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efg"
-        "h"sv
+        "h"
         // clang-format on
     };
     static_assert(encoded.size() == 769UZ);
