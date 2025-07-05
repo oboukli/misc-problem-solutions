@@ -26,7 +26,7 @@ namespace linear_functional {
         std::views::iota(0UZ)
             | std::views::take(std::numeric_limits<std::size_t>::digits),
         0UZ,
-        [n](std::size_t a, std::size_t b) noexcept -> std::size_t {
+        [n](std::size_t const a, std::size_t const b) noexcept -> std::size_t {
             return a + ((n >> b) & 1UZ);
         }
     );
