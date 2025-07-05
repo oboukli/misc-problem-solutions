@@ -29,7 +29,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Wikipedia example (valid benchmark case)")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -48,7 +48,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Empty Sudoku")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -67,7 +67,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("All invalid Sudoku board")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
@@ -86,7 +86,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid row")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -105,7 +105,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid column")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 0, 0, 0, 7, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -124,7 +124,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid block")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -143,7 +143,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid column and row")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -162,7 +162,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid column and block")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 5, 0, 0, 0},
@@ -181,7 +181,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid row and block")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -200,7 +200,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Invalid column, row, and block")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 9},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -219,7 +219,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode valid case")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -238,7 +238,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("LeetCode invalid case")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {8, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -257,7 +257,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("NeetCode valid case")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
@@ -276,7 +276,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("NeetCode invalid case")
     {
-        SudokuBoard<CellType> const board{{
+        static constexpr SudokuBoard<CellType> const board{{
             // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},

@@ -30,7 +30,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         static constexpr std::array<int, 0> expected{};
 
-        std::array<int, 0> const input{};
+        static constexpr std::array<int, 0> const input{};
         std::array<int, 0> result_squares{};
 
         squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
@@ -47,7 +47,7 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
     {
         static constexpr std::array<unsigned int, 0> expected{};
 
-        std::array<unsigned int, 0> const input{};
+        static constexpr std::array<unsigned int, 0> const input{};
         std::array<unsigned int, 0> result_squares{};
 
         squares_sorted(input.cbegin(), input.cend(), result_squares.begin());

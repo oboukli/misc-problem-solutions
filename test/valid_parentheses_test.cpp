@@ -28,7 +28,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         SECTION("Empty string")
         {
-            constexpr std::u8string_view const s{};
+            static constexpr std::u8string_view const s{};
 
             CAPTURE(s);
 
@@ -37,7 +37,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("()")
         {
-            constexpr std::u8string_view const s{u8"()"};
+            static constexpr std::u8string_view const s{u8"()"};
 
             CAPTURE(s);
 
@@ -46,7 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("[]")
         {
-            constexpr std::u8string_view const s{u8"[]"};
+            static constexpr std::u8string_view const s{u8"[]"};
 
             CAPTURE(s);
 
@@ -55,7 +55,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("{}")
         {
-            constexpr std::u8string_view const s{u8"{}"};
+            static constexpr std::u8string_view const s{u8"{}"};
 
             CAPTURE(s);
 
@@ -64,7 +64,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("()[]{}")
         {
-            constexpr std::u8string_view const s{u8"()[]{}"};
+            static constexpr std::u8string_view const s{u8"()[]{}"};
 
             CAPTURE(s);
 
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("(())")
         {
-            constexpr std::u8string_view const s{u8"(())"};
+            static constexpr std::u8string_view const s{u8"(())"};
 
             CAPTURE(s);
 
@@ -82,7 +82,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("([{}])")
         {
-            constexpr std::u8string_view const s{u8"([{}])"};
+            static constexpr std::u8string_view const s{u8"([{}])"};
 
             CAPTURE(s);
 
@@ -91,7 +91,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("[]{{{{{()}}}}}(([[[[]]]]))")
         {
-            constexpr std::u8string_view const s{
+            static constexpr std::u8string_view const s{
                 u8"[]{{{{{()}}}}}(([[[[]]]]))"
             };
 
@@ -102,7 +102,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("Benchmark valid case")
         {
-            constexpr std::u8string_view const s{
+            static constexpr std::u8string_view const s{
                 u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                 "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
                 "]]]]))))}}}}}}}}}}}}}}}}}}}}}}}}"
@@ -119,7 +119,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         SECTION("(")
         {
-            constexpr std::u8string_view const s{u8"("};
+            static constexpr std::u8string_view const s{u8"("};
 
             CAPTURE(s);
 
@@ -128,7 +128,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION(")")
         {
-            constexpr std::u8string_view const s{u8")"};
+            static constexpr std::u8string_view const s{u8")"};
 
             CAPTURE(s);
 
@@ -137,7 +137,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("[")
         {
-            constexpr std::u8string_view const s{u8"["};
+            static constexpr std::u8string_view const s{u8"["};
 
             CAPTURE(s);
 
@@ -146,7 +146,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("]")
         {
-            constexpr std::u8string_view const s{u8"]"};
+            static constexpr std::u8string_view const s{u8"]"};
 
             CAPTURE(s);
 
@@ -155,7 +155,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("{")
         {
-            constexpr std::u8string_view const s{u8"{"};
+            static constexpr std::u8string_view const s{u8"{"};
 
             CAPTURE(s);
 
@@ -164,7 +164,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("}")
         {
-            constexpr std::u8string_view const s{u8"}"};
+            static constexpr std::u8string_view const s{u8"}"};
 
             CAPTURE(s);
 
@@ -173,7 +173,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("(()")
         {
-            constexpr std::u8string_view const s{u8"(()"};
+            static constexpr std::u8string_view const s{u8"(()"};
 
             CAPTURE(s);
 
@@ -182,7 +182,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("{[(")
         {
-            constexpr std::u8string_view const s{u8"{[("};
+            static constexpr std::u8string_view const s{u8"{[("};
 
             CAPTURE(s);
 
@@ -191,7 +191,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("})]")
         {
-            constexpr std::u8string_view const s{u8"})]"};
+            static constexpr std::u8string_view const s{u8"})]"};
 
             CAPTURE(s);
 
@@ -200,7 +200,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("(){}[")
         {
-            constexpr std::u8string_view const s{u8"(){}["};
+            static constexpr std::u8string_view const s{u8"(){}["};
 
             CAPTURE(s);
 
@@ -209,7 +209,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("(})")
         {
-            constexpr std::u8string_view const s{u8"(})"};
+            static constexpr std::u8string_view const s{u8"(})"};
 
             CAPTURE(s);
 
@@ -218,7 +218,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("(({((})))")
         {
-            constexpr std::u8string_view const s{u8"(({((})))"};
+            static constexpr std::u8string_view const s{u8"(({((})))"};
 
             CAPTURE(s);
 
@@ -230,7 +230,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         SECTION("(]")
         {
-            constexpr std::u8string_view const s{u8"(]"};
+            static constexpr std::u8string_view const s{u8"(]"};
 
             CAPTURE(s);
 
@@ -239,7 +239,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("{{")
         {
-            constexpr std::u8string_view const s{u8"{{"};
+            static constexpr std::u8string_view const s{u8"{{"};
 
             CAPTURE(s);
 
@@ -248,7 +248,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("]]")
         {
-            constexpr std::u8string_view const s{u8"]]"};
+            static constexpr std::u8string_view const s{u8"]]"};
 
             CAPTURE(s);
 
@@ -257,7 +257,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("([{)}]")
         {
-            constexpr std::u8string_view const s{u8"([{)}]"};
+            static constexpr std::u8string_view const s{u8"([{)}]"};
 
             CAPTURE(s);
 
@@ -266,7 +266,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         SECTION("Benchmark invalid case")
         {
-            constexpr std::u8string_view const s{
+            static constexpr std::u8string_view const s{
                 u8"[[[[[[[[[[[[[[[[(((((((((((((((("
                 "{{{{{{{{{{{{{{{{{{{{{{{{(((([[[["
                 "]]]]))))}}}}}}}}}}}}}}}}}}}}}}}}"
@@ -281,7 +281,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Malformed input")
     {
-        constexpr std::u8string_view const s{u8"Malformed input"};
+        static constexpr std::u8string_view const s{u8"Malformed input"};
 
         CAPTURE(s);
 

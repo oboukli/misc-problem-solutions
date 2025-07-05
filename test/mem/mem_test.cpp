@@ -56,7 +56,7 @@ TEST_CASE("Memory allocator manager", "[mem]")
         ::forfun_mem_reset_to_default();
         ::forfun_mem const mem_current_state{::forfun_mem_get()};
 
-        ::forfun_mem const mem_dummy{
+        static constexpr ::forfun_mem const mem_dummy{
             .ff_malloc = &dummy_malloc,
             .ff_free = &dummy_free,
         };

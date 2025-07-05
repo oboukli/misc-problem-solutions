@@ -18,8 +18,8 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
 
     SECTION("Empty")
     {
-        std::vector<std::vector<int>> const expected{};
-        std::array<std::array<int, 0>, 0> const actual{};
+        static constexpr std::array<std::array<int, 0>, 0> const expected{};
+        static constexpr std::array<std::array<int, 0>, 0> const actual{};
 
         REQUIRE_THAT(actual, UnorderedNestedRangeEquals(expected));
     }
@@ -27,7 +27,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     SECTION("One of one")
     {
         std::vector<std::vector<int>> const expected{{1}};
-        std::array<std::array<int, 1>, 1> const actual{{{1}}};
+        static constexpr std::array<std::array<int, 1>, 1> const actual{{{1}}};
 
         REQUIRE_THAT(actual, UnorderedNestedRangeEquals(expected));
     }
@@ -35,7 +35,9 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     SECTION("Matching number containers")
     {
         std::vector<std::vector<int>> const expected{{1, 2, 3}, {4, 5, 6}};
-        std::array<std::array<int, 3>, 2> const actual{{{1, 2, 3}, {4, 5, 6}}};
+        static constexpr std::array<std::array<int, 3>, 2> const actual{
+            {{1, 2, 3}, {4, 5, 6}}
+        };
 
         REQUIRE_THAT(actual, UnorderedNestedRangeEquals(expected));
     }
@@ -53,7 +55,9 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
     SECTION("Unmatching number containers")
     {
         std::vector<std::vector<int>> const expected{{9, 2, 3}, {4, 5, 6}};
-        std::array<std::array<int, 3>, 2> const actual{{{4, 5, 6}, {1, 2, 3}}};
+        static constexpr std::array<std::array<int, 3>, 2> const actual{
+            {{4, 5, 6}, {1, 2, 3}}
+        };
 
         REQUIRE_THAT(actual, not UnorderedNestedRangeEquals(expected));
     }
@@ -81,7 +85,9 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
             == "unordered elements are { { 127, 227, 131 }, { 109, 239, 113 } }"
         );
 
-        std::array<std::array<int, 3>, 2> const actual{{{4, 5, 6}, {1, 2, 3}}};
+        static constexpr std::array<std::array<int, 3>, 2> const actual{
+            {{4, 5, 6}, {1, 2, 3}}
+        };
         REQUIRE_FALSE(matcher.match(actual));
 
         REQUIRE(

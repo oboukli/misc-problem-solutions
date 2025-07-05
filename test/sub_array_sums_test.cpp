@@ -11,6 +11,7 @@
 
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_range_equals.hpp>
 
 #include "forfun/sub_array_sums.hpp"
 
@@ -53,7 +54,7 @@ TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
         CAPTURE(sub_size);
         sum_each(numbers, sums, sub_size);
 
-        REQUIRE(sums == expected);
+        REQUIRE_THAT(sums, Catch::Matchers::RangeEquals(expected));
     }
 
     SECTION("None of one")
@@ -287,7 +288,7 @@ TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
 
     SECTION("8 of 64 (benchmark case)")
     {
-        constexpr std::array const numbers{
+        static constexpr std::array const numbers{
             // clang-format off
             1, 1, 1, 1, 1, 1, 1, 1,
             2, 2, 2, 2, 2, 2, 2, 2,
