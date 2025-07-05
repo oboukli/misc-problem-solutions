@@ -15,16 +15,16 @@ namespace {
 
 extern "C" {
 
-[[nodiscard]] auto dummy_malloc(std::size_t /*unused*/) noexcept -> void*;
+[[nodiscard]] auto dummy_malloc(std::size_t /*unused*/) -> void*;
 
-auto dummy_free(void* /*unused*/) noexcept -> void;
+auto dummy_free(void* /*unused*/) -> void;
 
-[[nodiscard]] auto dummy_malloc(std::size_t /*unused*/) noexcept -> void*
+[[nodiscard]] auto dummy_malloc(std::size_t /*unused*/) -> void*
 {
     return nullptr;
 }
 
-auto dummy_free(void* /*unused*/) noexcept -> void
+auto dummy_free(void* /*unused*/) -> void
 {
 }
 
