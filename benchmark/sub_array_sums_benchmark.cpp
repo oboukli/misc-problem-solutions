@@ -20,7 +20,7 @@ TEST_CASE(
 {
     using namespace forfun::sub_array_sums;
 
-    constexpr std::array const numbers{
+    static constexpr std::array const numbers{
         // clang-format off
         1, 1, 1, 1, 1, 1, 1, 1,
         2, 2, 2, 2, 2, 2, 2, 2,
@@ -42,7 +42,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
-            [&numbers, &sums]() noexcept {
+            [&sums]() noexcept {
                 decltype(numbers)::size_type const volatile sub_size{8U};
                 sum_each(numbers, sums, sub_size);
 
