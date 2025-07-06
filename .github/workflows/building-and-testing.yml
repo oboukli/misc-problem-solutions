@@ -911,6 +911,9 @@ jobs:
       CONFIGURE_PRESET_NAME: clang-sanitizers
       BINARY_DIR: ${{ github.workspace }}/out/build/clang-sanitizers
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
+      ASAN_OPTIONS: check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1
+      ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-20
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${{ github.workspace }}/ci/clang_ubsan_supp
     runs-on: ubuntu-24.04
 
     steps:
@@ -978,10 +981,8 @@ jobs:
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
         run: >-
-          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -995,14 +996,12 @@ jobs:
         run: >-
           ./test_driver
           --reporter console::out=-::colour-mode=ansi
-          --success
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run static test driver
         run: >-
           ./static_test_driver
           --reporter console::out=-::colour-mode=ansi
-          --success
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run and instrument test driver of experimental library
@@ -1013,19 +1012,16 @@ jobs:
         run: >-
           ./test_driver_experimental
           --reporter console::out=-::colour-mode=ansi
-          --success
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
-          --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
-          --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
