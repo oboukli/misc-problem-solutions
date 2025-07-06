@@ -143,6 +143,20 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
+TEMPLATE_TEST_CASE_SIG(
+    "Single number (empty container degenerate case)",
+    "[single_number]",
+    (auto get_single, get_single),
+    adapt_forfun_c_get_single<std::vector<int> const&>,
+    forfun::single_number::functional::get_single<std::vector<int> const&>,
+    forfun::single_number::imperative::get_single<std::vector<int> const&>
+)
+{
+    std::vector<int> const nums{};
+
+    REQUIRE(get_single(nums) == 0);
+}
+
 // References:
 // - https://leetcode.com/problems/single-number/
 // - https://neetcode.io/problems/single-number
