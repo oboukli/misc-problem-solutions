@@ -187,17 +187,18 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
+        "CMAKE_C_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
+        "CMAKE_CXX_FLAGS": "-D_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION -fno-builtin-std-forward_like -fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -flto -fvisibility=default -fno-sanitize-recover=all",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        },
-        "FORFUN_COMMON_CFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
-        "FORFUN_COMMON_CXXFLAGS": "-O1 -g -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover",
-        "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
-        "FORFUN_COMMON_LINK_OPTIONS": "-fsanitize=address -fsanitize=undefined -flto -fvisibility=default",
-        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
+        }
       }
     }
   ],
