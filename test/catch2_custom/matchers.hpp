@@ -33,11 +33,9 @@ public:
         expected_{std::forward<TargetRangeOfRangeLike>(expected)},
         outer_equal_to_{std::forward<OuterEquality>(outer_equal_to)},
         inner_less_{std::forward<InnerLess>(inner_less)},
-        description_(
-            std::format(
-                "unordered elements are {}", Catch::Detail::stringify(expected_)
-            )
-        )
+        description_{std::format(
+            "unordered elements are {}", Catch::Detail::stringify(expected_)
+        )}
     {
         using std::ranges::sort;
 
