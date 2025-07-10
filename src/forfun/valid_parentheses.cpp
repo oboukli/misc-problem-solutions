@@ -25,8 +25,10 @@ namespace {
     case u8'[':
         return u8']';
     default:
-        return u8'}';
+        break;
     }
+
+    return u8'}';
 }
 
 } // namespace
