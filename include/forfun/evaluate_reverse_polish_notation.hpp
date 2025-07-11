@@ -53,13 +53,12 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             && parse_result.ptr == iter->data() + iter->size())
         {
             evaluation_stack.push_back(operand);
+
+            continue;
         }
-        // clang-format off
-        else if (
-            (iter->length() == std::string_view::size_type{1})
-            && (evaluation_stack.size() >= std::vector<int>::size_type{2})
-        )
-        // clang-format on
+
+        if ((iter->length() == std::string_view::size_type{1})
+            && (evaluation_stack.size() >= std::vector<int>::size_type{2}))
         {
             calc_type const operand_2{evaluation_stack.back()};
             evaluation_stack.pop_back();
@@ -69,31 +68,26 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             {
             case '+':
                 accumulator += operand_2;
-                break;
+                continue;
             case '-':
                 accumulator -= operand_2;
-                break;
+                continue;
             case '*':
                 accumulator *= operand_2;
-                break;
+                continue;
             case '/':
                 if (operand_2 == 0.0) [[unlikely]]
                 {
-                    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-                    goto invalid_argument;
+                    break;
                 }
                 accumulator = std::trunc(accumulator / operand_2);
-                break;
+                continue;
             default:
-                // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-                goto invalid_argument;
+                break;
             }
         }
-        else
-        {
-            // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-            goto invalid_argument;
-        }
+
+        return {0, std::errc::invalid_argument};
     }
 
     // clang-format off
@@ -105,7 +99,6 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         return {static_cast<int>(intermediate), std::errc{}};
     }
 
-invalid_argument:
     return {0, std::errc::invalid_argument};
 }
 
@@ -138,35 +131,37 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             parse_result.ec == std::errc{})
         {
             evaluation_stack.push_back(operand);
-        }
-        else
-        {
-            int const operand_2{evaluation_stack.back()};
-            evaluation_stack.pop_back();
-            int& accumulator{evaluation_stack.back()};
 
-            switch (iter->front())
-            {
-            case '+':
-                accumulator += operand_2;
-                break;
-            case '-':
-                accumulator -= operand_2;
-                break;
-            case '*':
-                accumulator *= operand_2;
-                break;
-            case '/':
-                assert(operand_2 != 0);
-#if __has_cpp_attribute(assume)
-                [[assume(operand_2 != 0)]];
-#endif // __has_cpp_attribute(assume)
-                accumulator /= operand_2;
-                break;
-            default:
-                return {0, std::errc::invalid_argument};
-            }
+            continue;
         }
+
+        int const operand_2{evaluation_stack.back()};
+        evaluation_stack.pop_back();
+        int& accumulator{evaluation_stack.back()};
+
+        switch (iter->front())
+        {
+        case '+':
+            accumulator += operand_2;
+            continue;
+        case '-':
+            accumulator -= operand_2;
+            continue;
+        case '*':
+            accumulator *= operand_2;
+            continue;
+        case '/':
+            assert(operand_2 != 0);
+#if __has_cpp_attribute(assume)
+            [[assume(operand_2 != 0)]];
+#endif // __has_cpp_attribute(assume)
+            accumulator /= operand_2;
+            continue;
+        default:
+            break;
+        }
+
+        return {0, std::errc::invalid_argument};
     }
 
     return {evaluation_stack.back(), std::errc{}};
@@ -203,37 +198,39 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
             ++evaluation_stack_top;
             *evaluation_stack_top = operand;
+
+            continue;
         }
-        else
+
+        int const operand_2{*evaluation_stack_top};
+
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        --evaluation_stack_top;
+        int& accumulator{*evaluation_stack_top};
+
+        switch (iter->front())
         {
-            int const operand_2{*evaluation_stack_top};
-
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-            --evaluation_stack_top;
-            int& accumulator{*evaluation_stack_top};
-
-            switch (iter->front())
-            {
-            case '+':
-                accumulator += operand_2;
-                break;
-            case '-':
-                accumulator -= operand_2;
-                break;
-            case '*':
-                accumulator *= operand_2;
-                break;
-            case '/':
-                assert(operand_2 != 0);
+        case '+':
+            accumulator += operand_2;
+            continue;
+        case '-':
+            accumulator -= operand_2;
+            continue;
+        case '*':
+            accumulator *= operand_2;
+            continue;
+        case '/':
+            assert(operand_2 != 0);
 #if __has_cpp_attribute(assume)
-                [[assume(operand_2 != 0)]];
+            [[assume(operand_2 != 0)]];
 #endif // __has_cpp_attribute(assume)
-                accumulator /= operand_2;
-                break;
-            default:
-                return {0, std::errc::invalid_argument};
-            }
+            accumulator /= operand_2;
+            continue;
+        default:
+            break;
         }
+
+        return {0, std::errc::invalid_argument};
     }
 
     return {*evaluation_stack_top, std::errc{}};
