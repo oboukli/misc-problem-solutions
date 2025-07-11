@@ -337,7 +337,7 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEST_CASE(
-    "Evaluate reverse polish notation (Invalid input)",
+    "Evaluate reverse polish notation (Invalid or out-of-domain input cases)",
     "[evaluate_reverse_polish_notation]"
 )
 {
@@ -440,7 +440,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
-        REQUIRE(actual_error == std::errc::invalid_argument);
+        REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
     SECTION("Overflow case 2")
@@ -457,7 +457,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
-        REQUIRE(actual_error == std::errc::invalid_argument);
+        REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
     SECTION("Overflow case 3")
@@ -474,7 +474,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
-        REQUIRE(actual_error == std::errc::invalid_argument);
+        REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
     SECTION("Overflow case 4")
@@ -493,6 +493,6 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
-        REQUIRE(actual_error == std::errc::invalid_argument);
+        REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 }

@@ -99,7 +99,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         return {static_cast<int>(intermediate), std::errc{}};
     }
 
-    return {0, std::errc::invalid_argument};
+    return {0, std::errc::argument_out_of_domain};
 }
 
 } // namespace hardened
