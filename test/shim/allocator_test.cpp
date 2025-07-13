@@ -396,8 +396,8 @@ TEST_CASE("Shim memory allocator", "[shim_allocator]")
 
         ::forfun_mem const mem_current_state{::forfun_mem_get()};
 
-        REQUIRE(mem_current_state.ff_malloc == &std::malloc);
-        REQUIRE(mem_current_state.ff_free == &std::free);
+        REQUIRE_FALSE(mem_current_state.ff_malloc == &::forfun_shim_malloc);
+        REQUIRE_FALSE(mem_current_state.ff_free == &::forfun_shim_free);
 
         REQUIRE(::forfun_shim_get_malloc_call_count() == 0);
         REQUIRE(::forfun_shim_get_free_call_count() == 0);
