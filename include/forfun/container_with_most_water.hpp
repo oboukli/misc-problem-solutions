@@ -18,8 +18,8 @@ namespace forfun::container_with_most_water {
 namespace brute {
 
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto calc_max_area(Iter iter_a, Sentinel const last) noexcept
-    -> int
+[[nodiscard]] constexpr auto
+calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
 {
     int max_area{0};
 
@@ -43,7 +43,8 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 namespace enhanced {
 
 template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
-[[nodiscard]] auto calc_max_area(IterA iter_a, IterB iter_b) noexcept -> int
+[[nodiscard]] constexpr auto calc_max_area(IterA iter_a, IterB iter_b) noexcept
+    -> int
 {
     int max_area{0};
 
