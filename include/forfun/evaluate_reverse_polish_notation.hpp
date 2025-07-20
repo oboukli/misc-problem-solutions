@@ -27,22 +27,22 @@ namespace forfun::evaluate_reverse_polish_notation {
 namespace hardened {
 
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
     using calc_type = double;
 
-    if (iter == end) [[unlikely]]
+    if (iter == last) [[unlikely]]
     {
         return {0, std::errc{}};
     }
 
     std::vector<calc_type> evaluation_stack;
     evaluation_stack.reserve(
-        static_cast<decltype(evaluation_stack)::size_type>(end - iter)
+        static_cast<decltype(evaluation_stack)::size_type>(last - iter)
     );
 
-    for (; iter != end; ++iter)
+    for (; iter != last; ++iter)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
@@ -60,27 +60,27 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         if ((iter->length() == std::string_view::size_type{1})
             && (evaluation_stack.size() >= std::vector<int>::size_type{2}))
         {
-            calc_type const operand_2{evaluation_stack.back()};
+            calc_type const operand_b{evaluation_stack.back()};
             evaluation_stack.pop_back();
             calc_type& accumulator{evaluation_stack.back()};
 
             switch (iter->front())
             {
             case '+':
-                accumulator += operand_2;
+                accumulator += operand_b;
                 continue;
             case '-':
-                accumulator -= operand_2;
+                accumulator -= operand_b;
                 continue;
             case '*':
-                accumulator *= operand_2;
+                accumulator *= operand_b;
                 continue;
             case '/':
-                if (operand_2 == 0.0) [[unlikely]]
+                if (operand_b == 0.0) [[unlikely]]
                 {
                     break;
                 }
-                accumulator = std::trunc(accumulator / operand_2);
+                accumulator = std::trunc(accumulator / operand_b);
                 continue;
             default:
                 break;
@@ -90,13 +90,11 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         return {0, std::errc::invalid_argument};
     }
 
-    // clang-format off
-    if (calc_type const intermediate{std::trunc(evaluation_stack.back())};
-        ((intermediate >= std::numeric_limits<int>::min())
-        && (intermediate <= std::numeric_limits<int>::max())))
-    // clang-format on
+    if (calc_type const res{std::trunc(evaluation_stack.back())};
+        (res >= std::numeric_limits<int>::min())
+        && (res <= std::numeric_limits<int>::max()))
     {
-        return {static_cast<int>(intermediate), std::errc{}};
+        return {static_cast<int>(res), std::errc{}};
     }
 
     return {0, std::errc::argument_out_of_domain};
@@ -108,20 +106,20 @@ namespace unhardened {
 
 /// @note Calculation may overflow without notice or error.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
-    if (iter == end) [[unlikely]]
+    if (iter == last) [[unlikely]]
     {
         return {0, std::errc{}};
     }
 
     std::vector<int> evaluation_stack;
     evaluation_stack.reserve(
-        static_cast<std::vector<int>::size_type>(end - iter)
+        static_cast<std::vector<int>::size_type>(last - iter)
     );
 
-    for (; iter != end; ++iter)
+    for (; iter != last; ++iter)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
@@ -135,27 +133,27 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             continue;
         }
 
-        int const operand_2{evaluation_stack.back()};
+        int const operand_b{evaluation_stack.back()};
         evaluation_stack.pop_back();
         int& accumulator{evaluation_stack.back()};
 
         switch (iter->front())
         {
         case '+':
-            accumulator += operand_2;
+            accumulator += operand_b;
             continue;
         case '-':
-            accumulator -= operand_2;
+            accumulator -= operand_b;
             continue;
         case '*':
-            accumulator *= operand_2;
+            accumulator *= operand_b;
             continue;
         case '/':
-            assert(operand_2 != 0);
+            assert(operand_b != 0);
 #if __has_cpp_attribute(assume)
-            [[assume(operand_2 != 0)]];
+            [[assume(operand_b != 0)]];
 #endif // __has_cpp_attribute(assume)
-            accumulator /= operand_2;
+            accumulator /= operand_b;
             continue;
         default:
             break;
@@ -173,20 +171,20 @@ namespace speed_optimized {
 
 /// @note Calculation may overflow without notice or error.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-[[nodiscard]] auto eval_expression(Iter iter, Sentinel const end)
+[[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
     std::unique_ptr const evaluation_stack{
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
         std::make_unique_for_overwrite<int[]>(
-            static_cast<std::size_t>(end - iter) + 1U
+            static_cast<std::size_t>(last - iter) + 1U
         )
     };
 
     int* evaluation_stack_top{evaluation_stack.get()};
     *evaluation_stack_top = 0;
 
-    for (; iter != end; ++iter)
+    for (; iter != last; ++iter)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int operand /*[[indeterminate]]*/;
@@ -202,7 +200,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             continue;
         }
 
-        int const operand_2{*evaluation_stack_top};
+        int const operand_b{*evaluation_stack_top};
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
         --evaluation_stack_top;
@@ -211,20 +209,20 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         switch (iter->front())
         {
         case '+':
-            accumulator += operand_2;
+            accumulator += operand_b;
             continue;
         case '-':
-            accumulator -= operand_2;
+            accumulator -= operand_b;
             continue;
         case '*':
-            accumulator *= operand_2;
+            accumulator *= operand_b;
             continue;
         case '/':
-            assert(operand_2 != 0);
+            assert(operand_b != 0);
 #if __has_cpp_attribute(assume)
-            [[assume(operand_2 != 0)]];
+            [[assume(operand_b != 0)]];
 #endif // __has_cpp_attribute(assume)
-            accumulator /= operand_2;
+            accumulator /= operand_b;
             continue;
         default:
             break;
