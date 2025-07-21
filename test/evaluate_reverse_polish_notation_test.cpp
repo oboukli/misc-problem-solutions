@@ -35,20 +35,6 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format on
 )
 {
-    SECTION("Empty")
-    {
-        std::vector<std::string_view> const tokens{};
-
-        CAPTURE(tokens);
-
-        auto const [actual_result, actual_error]{
-            eval_expression(tokens.cbegin(), tokens.cend())
-        };
-
-        REQUIRE(actual_result == 0);
-        REQUIRE(actual_error == std::errc{});
-    }
-
     SECTION("Return as is")
     {
         auto [tokens, expected]{GENERATE(
@@ -336,6 +322,32 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
+TEMPLATE_TEST_CASE_SIG(
+    "Evaluate reverse polish notation (empty container degenerate case)",
+    "[evaluate_reverse_polish_notation]",
+    (auto eval_expression, eval_expression),
+    // clang-format off
+    (forfun::evaluate_reverse_polish_notation::hardened::
+        eval_expression<VecConstIter, VecConstIter>),
+    (forfun::evaluate_reverse_polish_notation::speed_optimized::
+        eval_expression<VecConstIter, VecConstIter>),
+    (forfun::evaluate_reverse_polish_notation::unhardened::
+        eval_expression<VecConstIter, VecConstIter>)
+    // clang-format on
+)
+{
+    std::vector<std::string_view> const tokens{};
+
+    CAPTURE(tokens);
+
+    auto const [actual_result, actual_error]{
+        eval_expression(tokens.cbegin(), tokens.cend())
+    };
+
+    REQUIRE(actual_result == 0);
+    REQUIRE(actual_error == std::errc{});
+}
+
 TEST_CASE(
     "Evaluate reverse polish notation (Invalid or out-of-domain input cases)",
     "[evaluate_reverse_polish_notation]"
@@ -353,6 +365,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -377,6 +390,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -401,6 +415,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -423,6 +438,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::invalid_argument);
     }
 
@@ -440,6 +456,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
@@ -457,6 +474,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
@@ -474,6 +492,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 
@@ -493,6 +512,7 @@ TEST_CASE(
             eval_expression(tokens.cbegin(), tokens.cend())
         };
 
+        CHECK(actual_result == 0);
         REQUIRE(actual_error == std::errc::argument_out_of_domain);
     }
 }
