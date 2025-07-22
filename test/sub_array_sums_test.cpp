@@ -348,7 +348,7 @@ struct AddableDummy final {
 };
 
 template <typename SizeType>
-struct DummyWithSizeType final : public std::array<unsigned char, 0> {
+struct DummyWithSizeType final : std::array<unsigned char, 0> {
     using size_type = SizeType;
 };
 

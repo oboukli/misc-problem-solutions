@@ -158,13 +158,13 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
 {
     struct Dummy0 {};
 
-    struct Dummy1 : public Dummy0 {
+    struct Dummy1 : Dummy0 {
         explicit Dummy1(std::size_t /*unused*/) noexcept
         {
         }
     };
 
-    struct Dummy2 : public Dummy1 {
+    struct Dummy2 : Dummy1 {
         explicit Dummy2(std::size_t const c) noexcept : Dummy1{c}
         {
         }
@@ -191,7 +191,7 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         int value_{0};
     };
 
-    struct Dummy4 final : public Dummy3 {
+    struct Dummy4 final : Dummy3 {
         [[maybe_unused]] explicit Dummy4(std::size_t const c) noexcept :
             Dummy3{c}
         {
