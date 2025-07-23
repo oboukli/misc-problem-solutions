@@ -330,12 +330,12 @@ struct AddableDummy final {
     {
     }
 
-    auto operator+=(auto const /*unused*/) noexcept -> int
+    [[maybe_unused]] auto operator+=(auto const /*unused*/) noexcept -> int
     {
         return 0;
     }
 
-    auto operator-=(auto const /*unused*/) noexcept -> int
+    [[maybe_unused]] auto operator-=(auto const /*unused*/) noexcept -> int
     {
         return 0;
     }
