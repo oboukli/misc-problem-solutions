@@ -279,9 +279,9 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         SECTION("noexcept(false)")
         {
             // NOLINTBEGIN(misc-const-correctness)
-            int src_rod{};
-            int des_rod{};
-            int aux_rod{};
+            [[maybe_unused]] int src_rod{};
+            [[maybe_unused]] int des_rod{};
+            [[maybe_unused]] int aux_rod{};
             // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE_FALSE(
@@ -298,9 +298,9 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
         SECTION("noexcept(true)")
         {
             // NOLINTBEGIN(misc-const-correctness)
-            int src_rod{};
-            int des_rod{};
-            int aux_rod{};
+            [[maybe_unused]] int src_rod{};
+            [[maybe_unused]] int des_rod{};
+            [[maybe_unused]] int aux_rod{};
             // NOLINTEND(misc-const-correctness)
 
             STATIC_REQUIRE(
