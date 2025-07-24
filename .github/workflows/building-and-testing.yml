@@ -54,18 +54,19 @@ jobs:
           --store-password-in-clear-text
 
       - name: Configure CMake
-        run: >-
-          cmake
-          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+        run: |-
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          cmake --preset ${{ env.CONFIGURE_PRESET_NAME }}
+        shell: cmd
 
       - name: Build
         run: >-
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+
           cmake
           --build
           --parallel
           --preset ${{ env.BUILD_PRESET_NAME }}
-          --
-          -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
         shell: cmd
 
       - name: Run test driver
@@ -152,18 +153,19 @@ jobs:
           --store-password-in-clear-text
 
       - name: Configure CMake
-        run: >-
-          cmake
-          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+        run: |-
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          cmake --preset ${{ env.CONFIGURE_PRESET_NAME }}
+        shell: cmd
 
       - name: Build
         run: >-
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+
           cmake
           --build
           --parallel
           --preset ${{ env.BUILD_PRESET_NAME }}
-          --
-          -consoleLoggerParameters:ForceConsoleColor;ShowCommandLine
         shell: cmd
 
       - name: Run test driver
