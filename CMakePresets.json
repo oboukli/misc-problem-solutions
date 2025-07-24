@@ -23,6 +23,7 @@
       "name": "windows-x64",
       "displayName": "Windows (x64)",
       "description": "Build with MSVC for x64 Windows",
+      "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "architecture": {
@@ -31,7 +32,11 @@
       },
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "ON",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
@@ -230,6 +235,13 @@
       "description": "Windows x64 Debug build",
       "configurePreset": "windows-x64",
       "configuration": "Debug"
+    },
+    {
+      "name": "windows-x64-relwithdebinfo",
+      "displayName": "Windows x64 RelWithDebInfo",
+      "description": "Windows x64 RelWithDebInfo build",
+      "configurePreset": "windows-x64",
+      "configuration": "RelWithDebInfo"
     },
     {
       "name": "windows-x64-release",
