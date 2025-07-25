@@ -42,8 +42,8 @@
           "type": "FILEPATH"
         },
         "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON",
-        "FORFUN_COMMON_CFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
-        "FORFUN_COMMON_CXXFLAGS": "/permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:enumTypes /Zc:preprocessor"
+        "CMAKE_C_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
+        "CMAKE_CXX_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /EHsc /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:checkGwOdr /Zc:enumTypes /Zc:inline /Zc:preprocessor /Zc:templateScope /Zc:throwingNew"
       },
       "condition": {
         "type": "equals",
