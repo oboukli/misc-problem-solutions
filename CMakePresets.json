@@ -52,6 +52,30 @@
       }
     },
     {
+      "name": "visual-studio",
+      "displayName": "Visual Studio 17 2022",
+      "description": "Build with Visual Studio 17 2022",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "ON",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON",
+        "CMAKE_C_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
+        "CMAKE_CXX_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /EHsc /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:checkGwOdr /Zc:enumTypes /Zc:inline /Zc:preprocessor /Zc:templateScope /Zc:throwingNew"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
       "name": "xcode",
       "displayName": "Xcode configuration",
       "description": "Build with Xcode for Darwin",
