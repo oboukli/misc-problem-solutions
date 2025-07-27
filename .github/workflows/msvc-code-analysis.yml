@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   analyze:
     env:
-      BUILD: ${{ github.workspace }}\out\build\windows-x64
+      BUILD: ${{ github.workspace }}\out\build\visual-studio
       CONFIG: Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     permissions:
@@ -58,7 +58,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_CONFIGURE_PRESET_NAME: windows-x64
+          CMAKE_CONFIGURE_PRESET_NAME: visual-studio
         run: >-
           cmake
           --preset '${{ env.CMAKE_CONFIGURE_PRESET_NAME }}'
