@@ -12,13 +12,29 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
+max_line_length = 80
 trim_trailing_whitespace = true
 
-[{*.{cff,js,json,md,sh,ts,yml},.clang-{format,tidy}}]
+[{*.md,LICENSE}]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 80
+trim_trailing_whitespace = true
+
+[{*.{cff,json,yml},.clang-{format,tidy}}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[{.editorconfig,.git*,CODEOWNERS}]
+charset = utf-8
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
@@ -27,11 +43,5 @@ charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
-insert_final_newline = true
-trim_trailing_whitespace = true
-
-[{.editorconfig,.git*,CODEOWNERS,LICENSE}]
-charset = utf-8
-end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
