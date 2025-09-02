@@ -682,9 +682,8 @@ jobs:
           clang-20
           clang-tools-20
           libc++-20-dev
-          libc++1-20
+          libc++-20
           libc++abi-20-dev
-          libc++abi1-20
           mono-complete
           ninja-build
           valgrind
@@ -821,9 +820,8 @@ jobs:
           clang-20
           clang-tools-20
           libc++-20-dev
-          libc++1-20
+          libc++-20
           libc++abi-20-dev
-          libc++abi1-20
           mono-complete
           ninja-build
           valgrind
@@ -962,9 +960,8 @@ jobs:
           clang-20
           clang-tools-20
           libc++-20-dev
-          libc++1-20
+          libc++-20
           libc++abi-20-dev
-          libc++abi1-20
           mono-complete
           ninja-build
 
