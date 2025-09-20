@@ -28,27 +28,24 @@ namespace detail {
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
 auto depth_first_search_imp(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    VertexStateList<T>& vertex_state_list,
+    VertexAdjacencyList<T> const& adjacency_list,
+    VertexStateList<T>& state_list,
     vertex<T> const& start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
-    vertex_state_list[start] = vertex_visit_state::visited;
+    state_list[start] = vertex_visit_state::visited;
     preorder_step(start);
 
-    auto const adj_iter{get_adjacencies_iter(vertex_adjacency_list, start)};
+    auto const adj_iter{get_adjacencies_iter(adjacency_list, start)};
 
     for (auto iter{adj_iter->cbegin()}; iter != adj_iter->cend(); ++iter)
     {
         if (auto const adjacency{*iter};
-            vertex_state_list[adjacency] == vertex_visit_state::unvisited)
+            state_list[adjacency] == vertex_visit_state::unvisited)
         {
             depth_first_search_imp(
-                vertex_adjacency_list,
-                vertex_state_list,
-                adjacency,
-                preorder_step
+                adjacency_list, state_list, adjacency, preorder_step
             );
         }
     }
@@ -58,19 +55,19 @@ auto depth_first_search_imp(
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
 auto depth_first_search(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    VertexStateList<T>& vertex_state_list,
+    VertexAdjacencyList<T> const& adjacency_list,
+    VertexStateList<T>& state_list,
     vertex<T> const& start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
-    if (vertex_adjacency_list.empty())
+    if (adjacency_list.empty())
     {
         return;
     }
 
     detail::depth_first_search_imp(
-        vertex_adjacency_list, vertex_state_list, start, preorder_step
+        adjacency_list, state_list, start, preorder_step
     );
 }
 

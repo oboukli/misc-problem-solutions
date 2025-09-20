@@ -28,25 +28,23 @@ namespace detail {
 
 template <typename T, std::invocable<vertex<T>> Visitor>
 auto breadth_first_search_imp(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    VertexStateList<T>& vertex_state_list,
+    VertexAdjacencyList<T> const& adjacency_list,
+    VertexStateList<T>& state_list,
     vertex<T> const& start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
-    vertex_state_list[start] = vertex_visit_state::visited;
+    state_list[start] = vertex_visit_state::visited;
     step(start);
 
-    auto const adjacencies_iter{
-        get_adjacencies_iter(vertex_adjacency_list, start)
-    };
+    auto const adjacencies_iter{get_adjacencies_iter(adjacency_list, start)};
 
     for (auto const adjacency : *adjacencies_iter)
     {
-        if (vertex_state_list[adjacency] == vertex_visit_state::unvisited)
+        if (state_list[adjacency] == vertex_visit_state::unvisited)
         {
             breadth_first_search_imp(
-                vertex_adjacency_list, vertex_state_list, adjacency, step
+                adjacency_list, state_list, adjacency, step
             );
         }
     }
@@ -56,20 +54,18 @@ auto breadth_first_search_imp(
 
 template <typename T, std::invocable<vertex<T>> Visitor>
 auto breadth_first_search(
-    VertexAdjacencyList<T> const& vertex_adjacency_list,
-    VertexStateList<T>& vertex_state_list,
+    VertexAdjacencyList<T> const& adjacency_list,
+    VertexStateList<T>& state_list,
     vertex<T> const& start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
-    if (vertex_adjacency_list.empty())
+    if (adjacency_list.empty())
     {
         return;
     }
 
-    detail::breadth_first_search_imp(
-        vertex_adjacency_list, vertex_state_list, start, step
-    );
+    detail::breadth_first_search_imp(adjacency_list, state_list, start, step);
 }
 
 } // namespace recursive
