@@ -24,10 +24,10 @@ namespace iterative {
 
 namespace recursive {
 
-namespace detail {
-
+/// @note The function assumes that @p adjacency_list and @p state_list are
+/// valid and non-empty, otherwise the behavior of the function is undefined.
 template <std::regular T, std::invocable<T> Visitor>
-auto depth_first_search_imp(
+auto depth_first_search(
     vertex_adjacency_list<T> const& adjacency_list,
     vertex_state_list<T>& state_list,
     T const start,
@@ -44,31 +44,11 @@ auto depth_first_search_imp(
         if (auto const adjacency{*iter};
             state_list[adjacency] == vertex_visit_state::unvisited)
         {
-            depth_first_search_imp(
+            depth_first_search(
                 adjacency_list, state_list, adjacency, preorder_step
             );
         }
     }
-}
-
-} // namespace detail
-
-template <std::regular T, std::invocable<T> Visitor>
-auto depth_first_search(
-    vertex_adjacency_list<T> const& adjacency_list,
-    vertex_state_list<T>& state_list,
-    T const start,
-    Visitor preorder_step
-) noexcept(noexcept(preorder_step(start))) -> void
-{
-    if (adjacency_list.empty())
-    {
-        return;
-    }
-
-    detail::depth_first_search_imp(
-        adjacency_list, state_list, start, preorder_step
-    );
 }
 
 } // namespace recursive
