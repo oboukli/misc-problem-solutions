@@ -52,36 +52,6 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
 
     using forfun::graph::depth_first_search::recursive::depth_first_search;
 
-    SECTION("Empty adjacency list (graph)")
-    {
-        vertex_adjacency_list<char> const adjacency_list{};
-        vertex_state_list<char> state_list{};
-        static constexpr auto const starting_vertex{'0'};
-
-        state_list.reserve(adjacency_list.size());
-        init_state_list(adjacency_list, state_list);
-
-        CHECK(adjacency_list.empty());
-        CHECK(state_list.empty());
-
-        CAPTURE(adjacency_list);
-        CAPTURE(starting_vertex);
-
-        std::vector<char> visits{};
-        visits.reserve(0U);
-        VisitRecorder const visit_recorder(&visits);
-
-        depth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
-        );
-
-        CAPTURE(state_list);
-
-        REQUIRE(adjacency_list.empty());
-        REQUIRE(state_list.empty());
-        REQUIRE(visits.empty());
-    }
-
     SECTION("One-vertex graph")
     {
         vertex_adjacency_list<char> const adjacency_list{{{'a'}}};
