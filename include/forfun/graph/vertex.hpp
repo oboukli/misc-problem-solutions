@@ -52,12 +52,12 @@ using VertexStateList
 
 template <std::regular T>
 constexpr auto get_adjacencies_iter(
-    VertexAdjacencyList<T> const& vertex_adjacency_list, vertex<T> const& v
+    VertexAdjacencyList<T> const& adjacency_list, vertex<T> const& v
 ) noexcept -> VertexAdjacencyList<T>::const_iterator
 {
     return std::find_if(
-        vertex_adjacency_list.cbegin(),
-        vertex_adjacency_list.cend(),
+        adjacency_list.cbegin(),
+        adjacency_list.cend(),
         [v](VertexAdjacencyList<T>::value_type const& target) noexcept {
             return target.front() == v;
         }
