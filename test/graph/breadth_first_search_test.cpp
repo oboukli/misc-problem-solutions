@@ -49,16 +49,16 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 {
     using forfun::graph::init_state_list;
     using forfun::graph::vertex;
+    using forfun::graph::vertex_adjacency_list;
+    using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;
-    using forfun::graph::VertexAdjacencyList;
-    using forfun::graph::VertexStateList;
 
     using forfun::graph::breadth_first_search::recursive::breadth_first_search;
 
     SECTION("Empty adjacency list (graph)")
     {
-        VertexAdjacencyList<char> const adjacency_list{};
-        VertexStateList<char> state_list{};
+        vertex_adjacency_list<char> const adjacency_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'0'};
 
         state_list.reserve(adjacency_list.size());
@@ -87,10 +87,10 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("One-vertex graph")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'a'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
@@ -113,7 +113,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited}
         };
 
@@ -123,11 +123,11 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("Two-vertex graph")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}},
             {{'b'}, {'a'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
@@ -150,7 +150,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited},
             {{'b'}, vertex_visit_state::visited},
         };
@@ -161,7 +161,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("All graph vertices visited, starting from leaf vertex")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'1'}, {'2'}, {'3'}, {'4'}},
             {{'2'}, {'1'}},
             {{'3'}, {'1'}},
@@ -169,7 +169,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'5'}, {'4'}, {'6'}},
             {{'6'}, {'5'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'1'};
 
         state_list.reserve(adjacency_list.size());
@@ -192,7 +192,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'1'}, vertex_visit_state::visited},
             {{'2'}, vertex_visit_state::visited},
             {{'3'}, vertex_visit_state::visited},
@@ -208,7 +208,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'1'}, {'2'}, {'3'}, {'4'}},
             {{'2'}, {'1'}},
             {{'3'}, {'1'}},
@@ -216,7 +216,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'5'}, {'4'}, {'6'}},
             {{'6'}, {'5'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'5'};
 
         state_list.reserve(adjacency_list.size());
@@ -239,7 +239,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'1'}, vertex_visit_state::visited},
             {{'2'}, vertex_visit_state::visited},
             {{'3'}, vertex_visit_state::visited},
@@ -255,7 +255,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("All graph vertices (vertex) visited")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -265,7 +265,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'c'};
 
         state_list.reserve(adjacency_list.size());
@@ -288,7 +288,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited},
             {{'b'}, vertex_visit_state::visited},
             {{'c'}, vertex_visit_state::visited},
@@ -306,7 +306,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("Visitor call count is the same as the vertex count")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -316,7 +316,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'h'};
 
         state_list.reserve(adjacency_list.size());
@@ -339,7 +339,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         CAPTURE(state_list);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited},
             {{'b'}, vertex_visit_state::visited},
             {{'c'}, vertex_visit_state::visited},
@@ -356,7 +356,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("Visitor is called and is passed valid arguments to")
     {
-        VertexAdjacencyList<char> const adjacency_list{
+        vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}, {'c'}, {'d'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
@@ -366,7 +366,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
             {{'g'}, {'e'}, {'h'}},
             {{'h'}, {'f'}, {'g'}},
         };
-        VertexStateList<char> state_list{};
+        vertex_state_list<char> state_list{};
         static constexpr vertex const starting_vertex{'e'};
 
         state_list.reserve(adjacency_list.size());
@@ -391,7 +391,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
         REQUIRE(visits.size() == 8UZ);
 
-        VertexStateList<char> const expected_state_list{
+        vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited},
             {{'b'}, vertex_visit_state::visited},
             {{'c'}, vertex_visit_state::visited},
