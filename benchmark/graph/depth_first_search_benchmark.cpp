@@ -19,12 +19,11 @@ TEST_CASE(
 {
     using namespace forfun::graph::depth_first_search;
 
-    using forfun::graph::vertex;
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;
 
-    using Visitor = decltype([](vertex<int>) noexcept -> void {});
+    using Visitor = decltype([](int) noexcept -> void {});
 
     vertex_adjacency_list<int> const adjacency_list{
         {{1}, {2}, {3}, {4}},
@@ -43,7 +42,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
             [&adjacency_list]() noexcept {
-                static constexpr vertex const starting_vertex{1};
+                static constexpr int const starting_vertex{1};
 
                 // NOLINTNEXTLINE(misc-const-correctness)
                 vertex_state_list<int> state_list{
@@ -59,7 +58,7 @@ TEST_CASE(
                     adjacency_list,
                     state_list,
                     starting_vertex,
-                    [](vertex<int>) noexcept -> void {}
+                    [](int) noexcept -> void {}
                 );
                 ankerl::nanobench::doNotOptimizeAway(state_list);
             }

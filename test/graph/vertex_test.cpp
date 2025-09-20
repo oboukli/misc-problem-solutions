@@ -13,29 +13,14 @@
 
 #include "forfun/graph/vertex.hpp"
 
-TEST_CASE("Vertex conversion", "[graph][vertex]")
-{
-    SECTION("Covert vertex to ostream")
-    {
-        using std::string_view_literals::operator""sv;
-
-        std::ostringstream buffer{};
-
-        static constexpr forfun::graph::vertex const v{17};
-        forfun::graph::operator<<(buffer, v);
-
-        REQUIRE(buffer.str() == "17"sv);
-    }
-}
-
 TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 {
-    using forfun::graph::vertex;
+    using forfun::graph::get_adjacencies_iter;
     using forfun::graph::vertex_adjacency_list;
 
     SECTION("Empty adjacency list (graph)")
     {
-        static constexpr vertex const v{17};
+        static constexpr auto const v{17};
         vertex_adjacency_list<int> const adjacency_list{};
 
         CAPTURE(v);
@@ -48,7 +33,7 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 
     SECTION("Adjacency list can be found for vertex")
     {
-        static constexpr vertex const v{4};
+        static constexpr auto const v{4};
         vertex_adjacency_list<int> const adjacency_list{
             {{1}, {2}, {3}, {4}},
             {{2}, {1}},
@@ -67,11 +52,11 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
         );
     }
 
-    SECTION("Adjacency list can be found for vertex<std::string>")
+    SECTION("Adjacency list can be found for std::string_view")
     {
         using std::string_view_literals::operator""sv;
 
-        static constexpr vertex const v{"five"sv};
+        static constexpr auto const v{"five"sv};
         vertex_adjacency_list<std::string_view> const adjacency_list{
             {{"one"sv}, {"two"sv}, {"three"sv}, {"four"sv}},
             {{"two"sv}, {"one"sv}},
@@ -94,7 +79,6 @@ TEST_CASE("Get vertex adjacencies iterator", "[graph][get_adjacencies_iter]")
 TEST_CASE("Initialize graph state list", "[graph][init_state_list]")
 {
     using forfun::graph::init_state_list;
-    using forfun::graph::vertex;
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;

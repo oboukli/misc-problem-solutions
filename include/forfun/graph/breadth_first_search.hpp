@@ -26,11 +26,11 @@ namespace recursive {
 
 namespace detail {
 
-template <typename T, std::invocable<vertex<T>> Visitor>
+template <typename T, std::invocable<T> Visitor>
 auto breadth_first_search_imp(
     vertex_adjacency_list<T> const& adjacency_list,
     vertex_state_list<T>& state_list,
-    vertex<T> const& start,
+    T const start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
@@ -52,11 +52,11 @@ auto breadth_first_search_imp(
 
 } // namespace detail
 
-template <typename T, std::invocable<vertex<T>> Visitor>
+template <typename T, std::invocable<T> Visitor>
 auto breadth_first_search(
     vertex_adjacency_list<T> const& adjacency_list,
     vertex_state_list<T>& state_list,
-    vertex<T> const& start,
+    T const start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
