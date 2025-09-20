@@ -11,6 +11,7 @@
 #include <cstddef>
 #include <functional>
 #include <ostream>
+#include <type_traits>
 #include <unordered_map>
 #include <vector>
 
@@ -27,7 +28,7 @@ struct vertex final {
     constexpr auto operator==(vertex const&) const -> bool = default;
 };
 
-template <std::regular T>
+template <typename T>
 struct vertex_hash final {
     constexpr auto operator()(vertex<T> const& vertex) const noexcept
         -> std::size_t
@@ -43,12 +44,14 @@ struct vertex_hash final {
     }
 };
 
-template <std::regular T>
-using vertex_adjacency_list = std::vector<std::vector<vertex<T>>>;
+template <typename V>
+    requires std::is_trivially_copyable_v<V>
+using vertex_adjacency_list = std::vector<std::vector<vertex<V>>>;
 
-template <std::regular T>
+template <typename V>
+    requires std::is_trivially_copyable_v<V>
 using vertex_state_list
-    = std::unordered_map<vertex<T>, vertex_visit_state, vertex_hash<T>>;
+    = std::unordered_map<vertex<V>, vertex_visit_state, vertex_hash<V>>;
 
 template <std::regular T>
 constexpr auto get_adjacencies_iter(
