@@ -21,13 +21,13 @@ TEST_CASE(
     using namespace forfun::graph::breadth_first_search;
 
     using forfun::graph::vertex;
+    using forfun::graph::vertex_adjacency_list;
+    using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;
-    using forfun::graph::VertexAdjacencyList;
-    using forfun::graph::VertexStateList;
 
     using Visitor = decltype([](vertex<int>) noexcept -> void {});
 
-    VertexAdjacencyList<int> const adjacency_list{
+    vertex_adjacency_list<int> const adjacency_list{
         {{1}, {2}, {3}, {4}},
         {{2}, {1}},
         {{3}, {1}},
@@ -47,7 +47,7 @@ TEST_CASE(
                 static constexpr vertex const starting_vertex{1};
 
                 // NOLINTNEXTLINE(misc-const-correctness)
-                VertexStateList<int> state_list{
+                vertex_state_list<int> state_list{
                     {{1}, vertex_visit_state::unvisited},
                     {{2}, vertex_visit_state::unvisited},
                     {{3}, vertex_visit_state::unvisited},

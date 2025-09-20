@@ -44,21 +44,21 @@ struct vertex_hash final {
 };
 
 template <std::regular T>
-using VertexAdjacencyList = std::vector<std::vector<vertex<T>>>;
+using vertex_adjacency_list = std::vector<std::vector<vertex<T>>>;
 
 template <std::regular T>
-using VertexStateList
+using vertex_state_list
     = std::unordered_map<vertex<T>, vertex_visit_state, vertex_hash<T>>;
 
 template <std::regular T>
 constexpr auto get_adjacencies_iter(
-    VertexAdjacencyList<T> const& adjacency_list, vertex<T> const& v
-) noexcept -> VertexAdjacencyList<T>::const_iterator
+    vertex_adjacency_list<T> const& adjacency_list, vertex<T> const& v
+) noexcept -> vertex_adjacency_list<T>::const_iterator
 {
     return std::find_if(
         adjacency_list.cbegin(),
         adjacency_list.cend(),
-        [v](VertexAdjacencyList<T>::value_type const& target) noexcept {
+        [v](vertex_adjacency_list<T>::value_type const& target) noexcept {
             return target.front() == v;
         }
     );
@@ -66,7 +66,8 @@ constexpr auto get_adjacencies_iter(
 
 template <std::regular T>
 auto init_state_list(
-    VertexAdjacencyList<T> const& adjacency_list, VertexStateList<T>& state_list
+    vertex_adjacency_list<T> const& adjacency_list,
+    vertex_state_list<T>& state_list
 ) -> void
 {
     for (auto const& adjacencies : adjacency_list)

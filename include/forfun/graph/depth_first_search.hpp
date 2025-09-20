@@ -28,8 +28,8 @@ namespace detail {
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
 auto depth_first_search_imp(
-    VertexAdjacencyList<T> const& adjacency_list,
-    VertexStateList<T>& state_list,
+    vertex_adjacency_list<T> const& adjacency_list,
+    vertex_state_list<T>& state_list,
     vertex<T> const& start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
@@ -55,8 +55,8 @@ auto depth_first_search_imp(
 
 template <std::regular T, std::invocable<vertex<T>> Visitor>
 auto depth_first_search(
-    VertexAdjacencyList<T> const& adjacency_list,
-    VertexStateList<T>& state_list,
+    vertex_adjacency_list<T> const& adjacency_list,
+    vertex_state_list<T>& state_list,
     vertex<T> const& start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void

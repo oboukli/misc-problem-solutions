@@ -28,8 +28,8 @@ namespace detail {
 
 template <typename T, std::invocable<vertex<T>> Visitor>
 auto breadth_first_search_imp(
-    VertexAdjacencyList<T> const& adjacency_list,
-    VertexStateList<T>& state_list,
+    vertex_adjacency_list<T> const& adjacency_list,
+    vertex_state_list<T>& state_list,
     vertex<T> const& start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
@@ -54,8 +54,8 @@ auto breadth_first_search_imp(
 
 template <typename T, std::invocable<vertex<T>> Visitor>
 auto breadth_first_search(
-    VertexAdjacencyList<T> const& adjacency_list,
-    VertexStateList<T>& state_list,
+    vertex_adjacency_list<T> const& adjacency_list,
+    vertex_state_list<T>& state_list,
     vertex<T> const& start,
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
