@@ -27,20 +27,18 @@ namespace {
 
 class VisitRecorder final {
 public:
-    explicit VisitRecorder(
-        std::vector<forfun::graph::vertex<char>>* const visits
-    ) noexcept :
+    explicit VisitRecorder(std::vector<char>* const visits) noexcept :
         visits_{visits}
     {
     }
 
-    auto operator()(forfun::graph::vertex<char> const v) const noexcept -> void
+    auto operator()(char const v) const noexcept -> void
     {
         visits_->emplace_back(v);
     }
 
 private:
-    std::vector<forfun::graph::vertex<char>>* visits_{};
+    std::vector<char>* visits_{};
 };
 
 } // namespace
@@ -48,7 +46,6 @@ private:
 TEST_CASE("Depth-first search", "[graph][depth_first]")
 {
     using forfun::graph::init_state_list;
-    using forfun::graph::vertex;
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;
@@ -59,7 +56,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
     {
         vertex_adjacency_list<char> const adjacency_list{};
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'0'};
+        static constexpr auto const starting_vertex{'0'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -70,7 +67,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(0U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -89,7 +86,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
     {
         vertex_adjacency_list<char> const adjacency_list{{{'a'}}};
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'a'};
+        static constexpr auto const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -101,7 +98,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(1U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -126,7 +123,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'b'}, {'a'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'a'};
+        static constexpr auto const starting_vertex{'a'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -138,7 +135,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(2U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -168,7 +165,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'6'}, {'5'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'1'};
+        static constexpr auto const starting_vertex{'1'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -180,7 +177,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(6U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -215,7 +212,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'6'}, {'5'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'5'};
+        static constexpr auto const starting_vertex{'5'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -227,7 +224,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(6U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -250,7 +247,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         REQUIRE(adjacency_list.size() == 6UZ);
     }
 
-    SECTION("All graph vertices (vertex<char>) visited")
+    SECTION("All graph vertices (char) visited")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}, {'c'}, {'d'}},
@@ -263,7 +260,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'c'};
+        static constexpr auto const starting_vertex{'c'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -275,7 +272,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(8U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -314,7 +311,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'h'};
+        static constexpr auto const starting_vertex{'h'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -326,7 +323,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(8U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -364,7 +361,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, {'f'}, {'g'}},
         };
         vertex_state_list<char> state_list{};
-        static constexpr vertex const starting_vertex{'e'};
+        static constexpr auto const starting_vertex{'e'};
 
         state_list.reserve(adjacency_list.size());
         init_state_list(adjacency_list, state_list);
@@ -376,7 +373,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<vertex<char>> visits{};
+        std::vector<char> visits{};
         visits.reserve(8U);
         VisitRecorder const visit_recorder(&visits);
 
@@ -397,7 +394,7 @@ TEST_CASE("Depth-first search", "[graph][depth_first]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        std::vector<vertex<char>> const expected_recorded_path{
+        std::vector<char> const expected_recorded_path{
             {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
         };
 

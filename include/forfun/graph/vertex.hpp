@@ -7,10 +7,9 @@
 #ifndef FORFUN_GRAPH_VERTEX_HPP_
 #define FORFUN_GRAPH_VERTEX_HPP_
 
+#include <algorithm>
 #include <concepts>
-#include <cstddef>
 #include <functional>
-#include <ostream>
 #include <type_traits>
 #include <unordered_map>
 #include <vector>
@@ -22,40 +21,17 @@ enum struct vertex_visit_state : bool {
     visited = true,
 };
 
-template <std::regular V>
-struct vertex final {
-    V value{};
-    constexpr auto operator==(vertex const&) const -> bool = default;
-};
+template <typename V>
+    requires std::is_trivially_copyable_v<V>
+using vertex_adjacency_list = std::vector<std::vector<V>>;
+
+template <typename V>
+    requires std::regular<V> and std::is_trivially_copyable_v<V>
+using vertex_state_list = std::unordered_map<V, vertex_visit_state>;
 
 template <typename T>
-struct vertex_hash final {
-    constexpr auto operator()(vertex<T> const& vertex) const noexcept
-        -> std::size_t
-    {
-        if constexpr (std::integral<T> and (sizeof(T) <= sizeof(std::size_t)))
-        {
-            return static_cast<std::size_t>(vertex.value);
-        }
-        else
-        {
-            return std::hash<T>{}(vertex.value);
-        }
-    }
-};
-
-template <typename V>
-    requires std::is_trivially_copyable_v<V>
-using vertex_adjacency_list = std::vector<std::vector<vertex<V>>>;
-
-template <typename V>
-    requires std::is_trivially_copyable_v<V>
-using vertex_state_list
-    = std::unordered_map<vertex<V>, vertex_visit_state, vertex_hash<V>>;
-
-template <std::regular T>
 constexpr auto get_adjacencies_iter(
-    vertex_adjacency_list<T> const& adjacency_list, vertex<T> const& v
+    vertex_adjacency_list<T> const& adjacency_list, T const v
 ) noexcept -> vertex_adjacency_list<T>::const_iterator
 {
     return std::find_if(
@@ -77,17 +53,6 @@ auto init_state_list(
     {
         state_list.insert({adjacencies.front(), vertex_visit_state::unvisited});
     }
-}
-
-template <std::regular T>
-    requires requires(std::ostream os, vertex<T> v) {
-        { os << v.value } -> std::convertible_to<std::ostream&>;
-    }
-auto operator<<(std::ostream& os, vertex<T> const& v) -> std::ostream&
-{
-    os << v.value;
-
-    return os;
 }
 
 } // namespace forfun::graph

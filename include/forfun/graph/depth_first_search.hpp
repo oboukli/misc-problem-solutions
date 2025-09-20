@@ -26,11 +26,11 @@ namespace recursive {
 
 namespace detail {
 
-template <std::regular T, std::invocable<vertex<T>> Visitor>
+template <std::regular T, std::invocable<T> Visitor>
 auto depth_first_search_imp(
     vertex_adjacency_list<T> const& adjacency_list,
     vertex_state_list<T>& state_list,
-    vertex<T> const& start,
+    T const start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
@@ -53,11 +53,11 @@ auto depth_first_search_imp(
 
 } // namespace detail
 
-template <std::regular T, std::invocable<vertex<T>> Visitor>
+template <std::regular T, std::invocable<T> Visitor>
 auto depth_first_search(
     vertex_adjacency_list<T> const& adjacency_list,
     vertex_state_list<T>& state_list,
-    vertex<T> const& start,
+    T const start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
