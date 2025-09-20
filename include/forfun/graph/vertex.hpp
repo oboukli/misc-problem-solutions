@@ -17,7 +17,7 @@
 
 namespace forfun::graph {
 
-enum class vertex_visit_state : bool {
+enum struct vertex_visit_state : bool {
     unvisited = false,
     visited = true,
 };
