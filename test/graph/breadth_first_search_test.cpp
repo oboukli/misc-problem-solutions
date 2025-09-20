@@ -43,7 +43,7 @@ private:
 
 } // namespace
 
-TEST_CASE("Depth-first search", "[graph][breadth_first]")
+TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
 {
     using forfun::graph::init_state_list;
     using forfun::graph::vertex_adjacency_list;
@@ -54,9 +54,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
 
     SECTION("One-vertex graph")
     {
-        vertex_adjacency_list<char> const adjacency_list{
-            {{'a'}},
-        };
+        vertex_adjacency_list<char> const adjacency_list{{{'a'}, {}}};
         vertex_state_list<char> state_list{};
         static constexpr auto const starting_vertex{'a'};
 
@@ -71,7 +69,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(1U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -108,7 +106,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(2U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -129,11 +127,11 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices visited, starting from leaf vertex")
     {
         vertex_adjacency_list<char> const adjacency_list{
-            {{'1'}, {'2'}, {'3'}, {'4'}},
+            {{'1'}, {'2', '3', '4'}},
             {{'2'}, {'1'}},
             {{'3'}, {'1'}},
-            {{'4'}, {'1'}, {'5'}},
-            {{'5'}, {'4'}, {'6'}},
+            {{'4'}, {'1', '5'}},
+            {{'5'}, {'4', '6'}},
             {{'6'}, {'5'}},
         };
         vertex_state_list<char> state_list{};
@@ -150,7 +148,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(6U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -176,11 +174,11 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices visited, starting from non-leaf vertex")
     {
         vertex_adjacency_list<char> const adjacency_list{
-            {{'1'}, {'2'}, {'3'}, {'4'}},
+            {{'1'}, {'2', '3', '4'}},
             {{'2'}, {'1'}},
             {{'3'}, {'1'}},
-            {{'4'}, {'1'}, {'5'}},
-            {{'5'}, {'4'}, {'6'}},
+            {{'4'}, {'1', '5'}},
+            {{'5'}, {'4', '6'}},
             {{'6'}, {'5'}},
         };
         vertex_state_list<char> state_list{};
@@ -197,7 +195,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(6U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -223,14 +221,14 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("All graph vertices (vertex) visited")
     {
         vertex_adjacency_list<char> const adjacency_list{
-            {{'a'}, {'b'}, {'c'}, {'d'}},
+            {{'a'}, {'b', 'c', 'd'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
-            {{'d'}, {'a'}, {'e'}},
-            {{'e'}, {'d'}, {'f'}, {'g'}},
-            {{'f'}, {'e'}, {'h'}},
-            {{'g'}, {'e'}, {'h'}},
-            {{'h'}, {'f'}, {'g'}},
+            {{'d'}, {'a', 'e'}},
+            {{'e'}, {'d', 'f', 'g'}},
+            {{'f'}, {'e', 'h'}},
+            {{'g'}, {'e', 'h'}},
+            {{'h'}, {'f', 'g'}},
         };
         vertex_state_list<char> state_list{};
         static constexpr auto const starting_vertex{'c'};
@@ -246,7 +244,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(8U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -274,14 +272,14 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("Visitor call count is the same as the vertex count")
     {
         vertex_adjacency_list<char> const adjacency_list{
-            {{'a'}, {'b'}, {'c'}, {'d'}},
+            {{'a'}, {'b', 'c', 'd'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
-            {{'d'}, {'a'}, {'e'}},
-            {{'e'}, {'d'}, {'f'}, {'g'}},
-            {{'f'}, {'e'}, {'h'}},
-            {{'g'}, {'e'}, {'h'}},
-            {{'h'}, {'f'}, {'g'}},
+            {{'d'}, {'a', 'e'}},
+            {{'e'}, {'d', 'f', 'g'}},
+            {{'f'}, {'e', 'h'}},
+            {{'g'}, {'e', 'h'}},
+            {{'h'}, {'f', 'g'}},
         };
         vertex_state_list<char> state_list{};
         static constexpr auto const starting_vertex{'h'};
@@ -297,7 +295,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         CAPTURE(starting_vertex);
 
         std::vector<char> visits{};
-        visits.reserve(8U);
+        visits.reserve(adjacency_list.size());
         VisitRecorder const visit_recorder(&visits);
 
         breadth_first_search(
@@ -324,14 +322,14 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
     SECTION("Visitor is called and is passed valid arguments to")
     {
         vertex_adjacency_list<char> const adjacency_list{
-            {{'a'}, {'b'}, {'c'}, {'d'}},
+            {{'a'}, {'b', 'c', 'd'}},
             {{'b'}, {'a'}},
             {{'c'}, {'a'}},
-            {{'d'}, {'a'}, {'e'}},
-            {{'e'}, {'d'}, {'f'}, {'g'}},
-            {{'f'}, {'e'}, {'h'}},
-            {{'g'}, {'e'}, {'h'}},
-            {{'h'}, {'f'}, {'g'}},
+            {{'d'}, {'a', 'e'}},
+            {{'e'}, {'d', 'f', 'g'}},
+            {{'f'}, {'e', 'h'}},
+            {{'g'}, {'e', 'h'}},
+            {{'h'}, {'f', 'g'}},
         };
         vertex_state_list<char> state_list{};
         static constexpr auto const starting_vertex{'e'};
@@ -370,7 +368,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first]")
         };
 
         std::vector<char> const expected_visits{
-            {{'e'}, {'d'}, {'a'}, {'b'}, {'c'}, {'f'}, {'h'}, {'g'}}
+            {'e', 'd', 'a', 'b', 'c', 'f', 'h', 'g'}
         };
 
         REQUIRE(visits == expected_visits);

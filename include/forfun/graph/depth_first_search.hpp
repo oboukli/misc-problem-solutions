@@ -26,23 +26,20 @@ namespace recursive {
 
 /// @note The function assumes that @p adjacency_list and @p state_list are
 /// valid and non-empty, otherwise the behavior of the function is undefined.
-template <std::regular T, std::invocable<T> Visitor>
+template <std::regular Vertex, std::invocable<Vertex> Visitor>
 auto depth_first_search(
-    vertex_adjacency_list<T> const& adjacency_list,
-    vertex_state_list<T>& state_list,
-    T const start,
+    vertex_adjacency_list<Vertex> const& adjacency_list,
+    vertex_state_list<Vertex>& state_list,
+    Vertex const start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
-    state_list[start] = vertex_visit_state::visited;
+    state_list.find(start)->second = vertex_visit_state::visited;
     preorder_step(start);
 
-    auto const adj_iter{get_adjacencies_iter(adjacency_list, start)};
-
-    for (auto iter{adj_iter->cbegin()}; iter != adj_iter->cend(); ++iter)
+    for (auto const& adjacency : adjacency_list.find(start)->second)
     {
-        if (auto const adjacency{*iter};
-            state_list[adjacency] == vertex_visit_state::unvisited)
+        if (state_list.find(adjacency)->second == vertex_visit_state::unvisited)
         {
             depth_first_search(
                 adjacency_list, state_list, adjacency, preorder_step
