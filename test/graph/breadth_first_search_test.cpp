@@ -27,18 +27,18 @@ namespace {
 
 class VisitRecorder final {
 public:
-    explicit VisitRecorder(std::vector<char>* const visits) noexcept :
-        visits_{visits}
+    explicit VisitRecorder(std::vector<char>* const visit_log) noexcept :
+        visit_log_{visit_log}
     {
     }
 
     auto operator()(char const v) const noexcept -> void
     {
-        visits_->emplace_back(v);
+        visit_log_->emplace_back(v);
     }
 
 private:
-    std::vector<char>* visits_{};
+    std::vector<char>* visit_log_{};
 };
 
 } // namespace
@@ -68,9 +68,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -82,11 +82,13 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'a'}, vertex_visit_state::visited}
         };
 
+        std::vector<char> expected_visit_log{'a'};
+
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == 1UZ);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
-    SECTION("Two-vertex graph")
+    SECTION("Two-vertex cyclic graph")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b'}},
@@ -105,9 +107,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -120,8 +122,10 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'b'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(visits.size() == 2UZ);
+        std::vector<char> expected_visit_log{'a', 'b'};
+
         REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
     SECTION("All graph vertices visited, starting from leaf vertex")
@@ -147,9 +151,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -166,9 +170,10 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(adjacency_list.size() == 6UZ);
+        std::vector<char> expected_visit_log{'1', '2', '3', '4', '5', '6'};
+
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == 6UZ);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
     SECTION("All graph vertices visited, starting from non-leaf vertex")
@@ -194,9 +199,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -213,12 +218,13 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(adjacency_list.size() == 6UZ);
+        std::vector<char> expected_visit_log{'5', '4', '6', '1', '2', '3'};
+
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == 6UZ);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
-    SECTION("All graph vertices (vertex) visited")
+    SECTION("All graph vertices (char) visited")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b', 'c', 'd'}},
@@ -243,9 +249,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -264,9 +270,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        REQUIRE(adjacency_list.size() == 8UZ);
+        std::vector<char> expected_visit_log{
+            {'c', 'a', 'b', 'd', 'e', 'f', 'g', 'h'}
+        };
+
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == 8UZ);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
     SECTION("Visitor call count is the same as the vertex count")
@@ -294,9 +303,9 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(adjacency_list.size());
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
@@ -315,8 +324,12 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
+        std::vector<char> expected_visit_log{
+            'h', 'f', 'g', 'e', 'd', 'a', 'b', 'c'
+        };
+
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visits.size() == 8UZ);
+        REQUIRE(visit_log == expected_visit_log);
     }
 
     SECTION("Visitor is called and is passed valid arguments to")
@@ -344,17 +357,15 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
         CAPTURE(adjacency_list);
         CAPTURE(starting_vertex);
 
-        std::vector<char> visits{};
-        visits.reserve(8);
-        VisitRecorder const visit_recorder(&visits);
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
             adjacency_list, state_list, starting_vertex, visit_recorder
         );
 
         CAPTURE(state_list);
-
-        REQUIRE(visits.size() == 8UZ);
 
         vertex_state_list<char> const expected_state_list{
             {{'a'}, vertex_visit_state::visited},
@@ -367,11 +378,11 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> const expected_visits{
-            {'e', 'd', 'a', 'b', 'c', 'f', 'h', 'g'}
+        std::vector<char> expected_visit_log{
+            'e', 'd', 'f', 'g', 'a', 'b', 'c', 'h'
         };
 
-        REQUIRE(visits == expected_visits);
         REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_log == expected_visit_log);
     }
 }

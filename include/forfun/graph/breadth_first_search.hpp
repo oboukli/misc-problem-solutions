@@ -11,6 +11,7 @@
 #define FORFUN_GRAPH_BREADTH_FIRST_SEARCH_HPP_
 
 #include <concepts>
+#include <deque>
 
 #include "forfun/graph/vertex.hpp"
 
@@ -23,6 +24,37 @@ namespace iterative {
 } // namespace iterative
 
 namespace recursive {
+
+namespace detail {
+
+template <typename Vertex, std::invocable<Vertex> Visitor>
+auto do_breadth_first_search_(
+    vertex_adjacency_list<Vertex> const& adjacency_list,
+    vertex_state_list<Vertex>& state_list,
+    Vertex const start,
+    Visitor step
+) noexcept(noexcept(step(start))) -> void
+{
+    std::deque<Vertex> to_visit{};
+    for (auto const& adjacency : adjacency_list.find(start)->second)
+    {
+        if (auto& adj_state = state_list.find(adjacency)->second;
+            adj_state == vertex_visit_state::unvisited)
+        {
+            adj_state = vertex_visit_state::visited;
+            step(adjacency);
+
+            to_visit.emplace_back(adjacency);
+        }
+    }
+
+    for (auto const vertex : to_visit)
+    {
+        do_breadth_first_search_(adjacency_list, state_list, vertex, step);
+    }
+}
+
+} // namespace detail
 
 /// @note The function assumes that @p adjacency_list and @p state_list are
 /// valid and non-empty, otherwise the behavior of the function is undefined.
@@ -37,13 +69,7 @@ auto breadth_first_search(
     state_list.find(start)->second = vertex_visit_state::visited;
     step(start);
 
-    for (auto const& adjacency : adjacency_list.find(start)->second)
-    {
-        if (state_list.find(adjacency)->second == vertex_visit_state::unvisited)
-        {
-            breadth_first_search(adjacency_list, state_list, adjacency, step);
-        }
-    }
+    detail::do_breadth_first_search_(adjacency_list, state_list, start, step);
 }
 
 } // namespace recursive
