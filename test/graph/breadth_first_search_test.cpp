@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cstddef>
 #include <vector>
 
 #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
@@ -12,6 +11,8 @@
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_tostring.hpp>
+#include <catch2/matchers/catch_matchers.hpp>
+#include <catch2/matchers/catch_matchers_range_equals.hpp>
 
 #include "forfun/graph/breadth_first_search.hpp"
 #include "forfun/graph/vertex.hpp"
@@ -43,7 +44,7 @@ private:
 
 } // namespace
 
-TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
+TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
 {
     using forfun::graph::init_state_list;
     using forfun::graph::vertex_adjacency_list;
@@ -52,7 +53,7 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
 
     using forfun::graph::breadth_first_search::recursive::breadth_first_search;
 
-    SECTION("One-vertex graph")
+    SECTION("One-vertex acyclic graph")
     {
         vertex_adjacency_list<char> const adjacency_list{{{'a'}, {}}};
         vertex_state_list<char> state_list{};
@@ -82,10 +83,92 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'a'}, vertex_visit_state::visited}
         };
 
-        std::vector<char> expected_visit_log{'a'};
+        static constexpr std::array const expected_visit_log{'a'};
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
+    }
+
+    SECTION("One-vertex cyclic graph")
+    {
+        vertex_adjacency_list<char> const adjacency_list{{{'a'}, {'a'}}};
+        vertex_state_list<char> state_list{};
+        static constexpr auto const starting_vertex{'a'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        CHECK(adjacency_list.size() == 1UZ);
+        CHECK(state_list.size() == 1UZ);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
+
+        breadth_first_search(
+            adjacency_list, state_list, starting_vertex, visit_recorder
+        );
+
+        CAPTURE(state_list);
+
+        vertex_state_list<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited}
+        };
+
+        static constexpr std::array const expected_visit_log{'a'};
+
+        REQUIRE(state_list == expected_state_list);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
+    }
+
+    SECTION("Two-vertex acyclic graph")
+    {
+        vertex_adjacency_list<char> const adjacency_list{
+            {{'a'}, {}},
+            {{'b'}, {'a'}},
+        };
+        vertex_state_list<char> state_list{};
+        static constexpr auto const starting_vertex{'b'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        CHECK(adjacency_list.size() == 2UZ);
+        CHECK(state_list.size() == 2UZ);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
+
+        breadth_first_search(
+            adjacency_list, state_list, starting_vertex, visit_recorder
+        );
+
+        CAPTURE(state_list);
+
+        vertex_state_list<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+        };
+
+        static constexpr std::array const expected_visit_log{'b', 'a'};
+
+        REQUIRE(state_list == expected_state_list);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
     SECTION("Two-vertex cyclic graph")
@@ -122,13 +205,147 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'b'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{'a', 'b'};
+        static constexpr std::array const expected_visit_log{'a', 'b'};
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
-    SECTION("All graph vertices visited, starting from leaf vertex")
+    SECTION("Three-vertex acyclic graph (case 1)")
+    {
+        vertex_adjacency_list<char> const adjacency_list{
+            {{'a'}, {'b'}},
+            {{'b'}, {'c'}},
+            {{'c'}, {}},
+        };
+        vertex_state_list<char> state_list{};
+        static constexpr auto const starting_vertex{'a'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        CHECK(adjacency_list.size() == 3UZ);
+        CHECK(state_list.size() == 3UZ);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
+
+        breadth_first_search(
+            adjacency_list, state_list, starting_vertex, visit_recorder
+        );
+
+        CAPTURE(state_list);
+
+        vertex_state_list<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+        };
+
+        static constexpr std::array const expected_visit_log{'a', 'b', 'c'};
+
+        REQUIRE(state_list == expected_state_list);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
+    }
+
+    SECTION("Three-vertex acyclic graph (case 2)")
+    {
+        vertex_adjacency_list<char> const adjacency_list{
+            {{'a'}, {'b'}},
+            {{'b'}, {'c'}},
+            {{'c'}, {}},
+        };
+        vertex_state_list<char> state_list{};
+        static constexpr auto const starting_vertex{'b'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        CHECK(adjacency_list.size() == 3UZ);
+        CHECK(state_list.size() == 3UZ);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
+
+        breadth_first_search(
+            adjacency_list, state_list, starting_vertex, visit_recorder
+        );
+
+        CAPTURE(state_list);
+
+        vertex_state_list<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::unvisited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+        };
+
+        static constexpr std::array const expected_visit_log{'b', 'c'};
+
+        REQUIRE(state_list == expected_state_list);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
+    }
+
+    SECTION("Three-vertex cyclic graph")
+    {
+        vertex_adjacency_list<char> const adjacency_list{
+            {{'a'}, {'b'}},
+            {{'b'}, {'c'}},
+            {{'c'}, {'a'}},
+        };
+        vertex_state_list<char> state_list{};
+        static constexpr auto const starting_vertex{'b'};
+
+        state_list.reserve(adjacency_list.size());
+        init_state_list(adjacency_list, state_list);
+
+        CHECK(adjacency_list.size() == 3UZ);
+        CHECK(state_list.size() == 3UZ);
+        CHECK(state_list.at(starting_vertex) == vertex_visit_state::unvisited);
+
+        CAPTURE(adjacency_list);
+        CAPTURE(starting_vertex);
+
+        std::vector<char> visit_log{};
+        visit_log.reserve(adjacency_list.size());
+        VisitRecorder const visit_recorder(&visit_log);
+
+        breadth_first_search(
+            adjacency_list, state_list, starting_vertex, visit_recorder
+        );
+
+        CAPTURE(state_list);
+
+        vertex_state_list<char> const expected_state_list{
+            {{'a'}, vertex_visit_state::visited},
+            {{'b'}, vertex_visit_state::visited},
+            {{'c'}, vertex_visit_state::visited},
+        };
+
+        static constexpr std::array const expected_visit_log{'b', 'c', 'a'};
+
+        REQUIRE(state_list == expected_state_list);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
+    }
+
+    SECTION("All graph vertices visited (case 1)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'1'}, {'2', '3', '4'}},
@@ -170,13 +387,17 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{'1', '2', '3', '4', '5', '6'};
+        static constexpr std::array const expected_visit_log{
+            '1', '2', '3', '4', '5', '6'
+        };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
-    SECTION("All graph vertices visited, starting from non-leaf vertex")
+    SECTION("All graph vertices visited (case 2)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'1'}, {'2', '3', '4'}},
@@ -218,13 +439,17 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'6'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{'5', '4', '6', '1', '2', '3'};
+        static constexpr std::array const expected_visit_log{
+            '5', '4', '6', '1', '2', '3'
+        };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
-    SECTION("All graph vertices (char) visited")
+    SECTION("All graph vertices visited (case 3)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b', 'c', 'd'}},
@@ -270,15 +495,17 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{
-            {'c', 'a', 'b', 'd', 'e', 'f', 'g', 'h'}
+        static constexpr std::array const expected_visit_log{
+            'c', 'a', 'b', 'd', 'e', 'f', 'g', 'h'
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
-    SECTION("Visitor call count is the same as the vertex count")
+    SECTION("All graph vertices visited (case 4)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b', 'c', 'd'}},
@@ -324,15 +551,17 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{
+        static constexpr std::array const expected_visit_log{
             'h', 'f', 'g', 'e', 'd', 'a', 'b', 'c'
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 
-    SECTION("Visitor is called and is passed valid arguments to")
+    SECTION("All graph vertices visited (case 5)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {{'a'}, {'b', 'c', 'd'}},
@@ -378,11 +607,13 @@ TEST_CASE("Depth-first search", "[graph][breadth_first_search]")
             {{'h'}, vertex_visit_state::visited},
         };
 
-        std::vector<char> expected_visit_log{
+        static constexpr std::array const expected_visit_log{
             'e', 'd', 'f', 'g', 'a', 'b', 'c', 'h'
         };
 
         REQUIRE(state_list == expected_state_list);
-        REQUIRE(visit_log == expected_visit_log);
+        REQUIRE_THAT(
+            visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
+        );
     }
 }
