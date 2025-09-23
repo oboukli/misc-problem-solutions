@@ -9,6 +9,7 @@
 #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
 
 #include <catch2/catch_message.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_tostring.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
@@ -44,14 +45,22 @@ private:
 
 } // namespace
 
-TEST_CASE("Depth-first search", "[graph][depth_first_search]")
+TEMPLATE_TEST_CASE_SIG(
+    "Depth-first search",
+    "[graph][depth_first_search]",
+    (auto depth_first_search, depth_first_search),
+    // clang-format off
+    (forfun::graph::depth_first_search::iterative::
+        depth_first_search<char, VisitRecorder>),
+    (forfun::graph::depth_first_search::recursive::
+        depth_first_search<char, VisitRecorder>)
+    // clang-format on
+)
 {
     using forfun::graph::init_state_list;
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_state_list;
     using forfun::graph::vertex_visit_state;
-
-    using forfun::graph::depth_first_search::recursive::depth_first_search;
 
     SECTION("One-vertex acyclic graph")
     {
