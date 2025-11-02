@@ -23,97 +23,97 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
     SECTION("Empty container")
     {
         std::vector<std::string> const tokens{};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view().empty());
+        REQUIRE(stream.view().empty());
     }
 
     SECTION("Exactly one element. Element is empty string")
     {
         std::vector<std::string> const tokens{""};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view().empty());
+        REQUIRE(stream.view().empty());
     }
 
     SECTION("One element")
     {
         std::vector<std::string> const tokens{{"One"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "One"sv);
+        REQUIRE(stream.view() == "One"sv);
     }
 
     SECTION("Two elements")
     {
         std::vector<std::string> const tokens{{"Two"}, {"2"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "Two 2"sv);
+        REQUIRE(stream.view() == "Two 2"sv);
     }
 
     SECTION("Three elements")
     {
         std::vector<std::string> const tokens{{"Three"}, {"3"}, {"III"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "Three 3 III"sv);
+        REQUIRE(stream.view() == "Three 3 III"sv);
     }
 
     SECTION("Four elements")
     {
         std::vector<std::string> const tokens{"these", "are", "four", "words"};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "these are four words"sv);
+        REQUIRE(stream.view() == "these are four words"sv);
     }
 
     SECTION("Element ends in escaped escape character")
     {
         std::vector<std::string> const tokens{"these", "are", "four~", "words"};
-        std::stringstream ss{};
+        std::stringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "these are four~~ words"sv);
+        REQUIRE(stream.view() == "these are four~~ words"sv);
     }
 
     SECTION("Element ends in escaped delimiter character")
     {
         std::vector<std::string> const tokens{"these", "are ", "four", "words"};
-        std::stringstream ss{};
+        std::stringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "these are~  four words"sv);
+        REQUIRE(stream.view() == "these are~  four words"sv);
     }
 
     SECTION("Escape and delimiter characters")
@@ -121,55 +121,55 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         std::vector<std::string> const tokens{
             "w~e", "~are", "~four~", " t okens "
         };
-        std::stringstream ss{};
+        std::stringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "w~~e ~~are ~~four~~ ~ t~ okens~ "sv);
+        REQUIRE(stream.view() == "w~~e ~~are ~~four~~ ~ t~ okens~ "sv);
     }
 
     SECTION("One characters")
     {
         std::vector<std::string> const tokens{{"1"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "1"sv);
+        REQUIRE(stream.view() == "1"sv);
     }
 
     SECTION("Two characters")
     {
         std::vector<std::string> const tokens{{"12"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "12"sv);
+        REQUIRE(stream.view() == "12"sv);
     }
 
     SECTION("Three characters")
     {
         std::vector<std::string> const tokens{{"abc"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "abc"sv);
+        REQUIRE(stream.view() == "abc"sv);
     }
 
     SECTION("Stand-alone escape character")
     {
         std::vector<std::string> const tokens{{"~"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CHECK(
             tokens.front().front()
@@ -178,129 +178,129 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "~~"sv);
+        REQUIRE(stream.view() == "~~"sv);
     }
 
     SECTION("Stand-alone delimiter character")
     {
         std::vector<std::string> const tokens{{}, {}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == " "sv);
+        REQUIRE(stream.view() == " "sv);
     }
 
     SECTION("Delimiter at the begining")
     {
         std::vector<std::string> const tokens{{""}, {"Hello"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == " Hello"sv);
+        REQUIRE(stream.view() == " Hello"sv);
     }
 
     SECTION("Two delimiters at the begining")
     {
         std::vector<std::string> const tokens{{""}, {""}, {"Hello"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "  Hello"sv);
+        REQUIRE(stream.view() == "  Hello"sv);
     }
 
     SECTION("Delimiter at the end")
     {
         std::vector<std::string> const tokens{{"Hello"}, {""}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "Hello "sv);
+        REQUIRE(stream.view() == "Hello "sv);
     }
 
     SECTION("Two delimiters at the end")
     {
         std::vector<std::string> const tokens{{"Hello"}, {""}, {""}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "Hello  "sv);
+        REQUIRE(stream.view() == "Hello  "sv);
     }
 
     SECTION("Delimiters, one at the begining and one at the end")
     {
         std::vector<std::string> const tokens{{""}, {"Hello"}, {""}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == " Hello "sv);
+        REQUIRE(stream.view() == " Hello "sv);
     }
 
     SECTION("Escape (case 1)")
     {
         std::vector<std::string> const tokens{{" "}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "~ "sv);
+        REQUIRE(stream.view() == "~ "sv);
     }
 
     SECTION("Escape (case 2)")
     {
         std::vector<std::string> const tokens{{"Hello, World!"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "Hello,~ World!"sv);
+        REQUIRE(stream.view() == "Hello,~ World!"sv);
     }
 
     SECTION("Escape (case 3)")
     {
         std::vector<std::string> const tokens{{"a   b ~ Z~~~"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "a~ ~ ~ b~ ~~~ Z~~~~~~"sv);
+        REQUIRE(stream.view() == "a~ ~ ~ b~ ~~~ Z~~~~~~"sv);
     }
 
     SECTION("Escape (case 4)")
     {
         std::vector<std::string> const tokens{{"a   "}, {"b ~ Z~~~"}};
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view() == "a~ ~ ~  b~ ~~~ Z~~~~~~"sv);
+        REQUIRE(stream.view() == "a~ ~ ~  b~ ~~~ Z~~~~~~"sv);
     }
 
     SECTION("Escape (benchmark case)")
@@ -329,15 +329,15 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         static_assert(tokens.front().size() == 256UZ);
         static_assert(tokens.at(1).size() == 256UZ);
 
-        std::ostringstream ss{};
+        std::ostringstream stream{};
 
         CAPTURE(tokens);
 
-        encode(tokens.cbegin(), tokens.cend(), ss);
+        encode(tokens.cbegin(), tokens.cend(), stream);
 
-        REQUIRE(ss.view().size() == 769UZ);
+        REQUIRE(stream.view().size() == 769UZ);
         REQUIRE(
-            ss.view() ==
+            stream.view() ==
             // clang-format off
             "abcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~"
             "~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ "
