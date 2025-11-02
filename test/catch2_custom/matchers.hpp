@@ -4,8 +4,8 @@
 
 // SPDX-License-Identifier: MIT
 
-#ifndef FORFUN_TESTING_CATCH2_CUSTOM_MATCHERS_HPP_
-#define FORFUN_TESTING_CATCH2_CUSTOM_MATCHERS_HPP_
+#ifndef FORFUN_TESTING_TEST_CATCH2_CUSTOM_MATCHERS_HPP_
+#define FORFUN_TESTING_TEST_CATCH2_CUSTOM_MATCHERS_HPP_
 
 #include <algorithm>
 #include <format>
@@ -117,4 +117,4 @@ constexpr auto UnorderedNestedRangeEquals(
 
 } // namespace forfun::testing::catch2_custom::matchers
 
-#endif // FORFUN_TESTING_CATCH2_CUSTOM_MATCHERS_HPP_
+#endif // FORFUN_TESTING_TEST_CATCH2_CUSTOM_MATCHERS_HPP_
