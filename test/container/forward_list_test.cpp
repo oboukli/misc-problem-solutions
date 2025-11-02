@@ -13,7 +13,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
     SECTION("Forward list is initially empty (case 1)")
     {
         // Intentionally non-const and not default-initialized.
-        // NOLINTNEXTLINE([misc-const-correctness)
+        // NOLINTNEXTLINE(misc-const-correctness)
         forfun::experimental::container::forward_list<int> forward_list;
 
         REQUIRE(forward_list.empty());
