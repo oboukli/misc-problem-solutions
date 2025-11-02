@@ -319,7 +319,7 @@ namespace {
 template <typename Nums, typename Sums>
 // clang-format off
 concept template_specialization
-    = requires(Nums nums, Sums sums, typename Nums::size_type sub_size) {
+    = requires(Nums nums, Sums sums, Nums::size_type sub_size) {
         forfun::sub_array_sums::sum_each(nums, sums, sub_size);
     };
 // clang-format on
