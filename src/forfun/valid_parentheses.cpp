@@ -16,9 +16,9 @@ namespace forfun::valid_parentheses {
 
 namespace {
 
-[[nodiscard]] auto map_open_to_closed(char8_t const c) noexcept -> char8_t
+[[nodiscard]] auto map_open_to_closed(char8_t const chr) noexcept -> char8_t
 {
-    switch (c)
+    switch (chr)
     {
     case u8'(':
         return u8')';
@@ -35,19 +35,19 @@ namespace {
 
 namespace ascii_optimized {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
     std::vector<char8_t> expected;
-    expected.reserve(s.size());
+    expected.reserve(view.size());
 
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c & char8_t{0b00000011}) == char8_t{0b00000001})
+        if (char8_t const chr{*iter};
+            (chr & char8_t{0b00000011}) == char8_t{0b00000001})
         {
-            if (expected.empty() || (expected.back() != c))
+            if (expected.empty() || (expected.back() != chr))
             {
                 return false;
             }
@@ -56,7 +56,7 @@ namespace ascii_optimized {
         }
         else
         {
-            expected.push_back(c == u8'(' ? u8')' : c + char8_t{2});
+            expected.push_back(chr == u8'(' ? u8')' : chr + char8_t{2});
         }
     }
 
@@ -67,26 +67,26 @@ namespace ascii_optimized {
 
 namespace circuit_breaker {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
     using SizeType = std::u8string_view::size_type;
 
     // Odd strings are always invalid.
-    if ((s.size() % SizeType{2}) != SizeType{})
+    if ((view.size() % SizeType{2}) != SizeType{})
     {
         return false;
     }
 
     std::vector<char8_t> expected{};
-    expected.reserve(s.size());
+    expected.reserve(view.size());
 
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const chr{*iter};
+            (chr == u8')') || (chr == u8']') || (chr == u8'}'))
         {
-            if (expected.empty() || expected.back() != c)
+            if (expected.empty() || expected.back() != chr)
             {
                 return false;
             }
@@ -95,7 +95,7 @@ namespace circuit_breaker {
         }
         else
         {
-            expected.push_back(map_open_to_closed(c));
+            expected.push_back(map_open_to_closed(chr));
         }
     }
 
@@ -106,18 +106,18 @@ namespace circuit_breaker {
 
 namespace deque_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
     std::deque<char8_t> expected{};
 
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const chr{*iter};
+            (chr == u8')') || (chr == u8']') || (chr == u8'}'))
         {
-            if (expected.empty() || expected.back() != c)
+            if (expected.empty() || expected.back() != chr)
             {
                 return false;
             }
@@ -126,7 +126,7 @@ namespace deque_based {
         }
         else
         {
-            expected.push_back(map_open_to_closed(c));
+            expected.push_back(map_open_to_closed(chr));
         }
     }
 
@@ -138,13 +138,13 @@ namespace deque_based {
 namespace dyn_array_based {
 
 /// @note Utilizes odd string circuit breaker and a dynamic array.
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
     using SizeType = std::u8string_view::size_type;
 
     // Odd strings are always invalid.
-    if ((s.size() % SizeType{2}) != SizeType{})
+    if ((view.size() % SizeType{2}) != SizeType{})
     {
         return false;
     }
@@ -152,19 +152,19 @@ namespace dyn_array_based {
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     std::unique_ptr<char8_t[]> const expected
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
-        = std::make_unique_for_overwrite<char8_t[]>(s.size());
+        = std::make_unique_for_overwrite<char8_t[]>(view.size());
 
     assert(expected.get() != nullptr);
 
     char8_t* back_ptr{nullptr};
     char8_t back{};
 
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const chr{*iter};
+            (chr == u8')') || (chr == u8']') || (chr == u8'}'))
         {
-            if ((back_ptr == nullptr) || (back != c))
+            if ((back_ptr == nullptr) || (back != chr))
             {
                 return false;
             }
@@ -183,7 +183,7 @@ namespace dyn_array_based {
         }
         else
         {
-            back = map_open_to_closed(c);
+            back = map_open_to_closed(chr);
             if (back_ptr == nullptr)
             {
                 back_ptr = expected.get();
@@ -206,19 +206,19 @@ namespace dyn_array_based {
 
 namespace vector_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
     std::vector<char8_t> expected{};
-    expected.reserve(s.size());
+    expected.reserve(view.size());
 
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const chr{*iter};
+            (chr == u8')') || (chr == u8']') || (chr == u8'}'))
         {
-            if (expected.empty() || expected.back() != c)
+            if (expected.empty() || expected.back() != chr)
             {
                 return false;
             }
@@ -227,7 +227,7 @@ namespace vector_based {
         }
         else
         {
-            expected.push_back(map_open_to_closed(c));
+            expected.push_back(map_open_to_closed(chr));
         }
     }
 
@@ -238,20 +238,20 @@ namespace vector_based {
 
 namespace vector_based_demi_allocated {
 
-[[nodiscard]] auto is_valid(std::u8string_view const s) -> bool
+[[nodiscard]] auto is_valid(std::u8string_view const view) -> bool
 {
     using ConstIter = std::u8string_view::const_iterator;
 
     std::vector<char8_t> expected{};
-    expected.reserve(s.size() / 2UZ);
+    expected.reserve(view.size() / 2UZ);
 
     char8_t back{};
-    for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
-        if (char8_t const c{*iter};
-            (c == u8')') || (c == u8']') || (c == u8'}'))
+        if (char8_t const chr{*iter};
+            (chr == u8')') || (chr == u8']') || (chr == u8'}'))
         {
-            if (expected.empty() || back != c)
+            if (expected.empty() || back != chr)
             {
                 return false;
             }
@@ -262,7 +262,7 @@ namespace vector_based_demi_allocated {
         }
         else
         {
-            back = map_open_to_closed(c);
+            back = map_open_to_closed(chr);
             expected.push_back(back);
         }
     }

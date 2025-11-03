@@ -26,16 +26,16 @@ namespace forfun::last_stone_weight::priority_queue_based {
     {
         assert(max_priority_queue.top() >= ValueType{});
 
-        ValueType s{max_priority_queue.top()};
+        ValueType stone{max_priority_queue.top()};
         max_priority_queue.pop();
 
         assert(max_priority_queue.top() >= ValueType{});
 
-        s -= max_priority_queue.top();
+        stone -= max_priority_queue.top();
         max_priority_queue.pop();
-        if (s != ValueType{})
+        if (stone != ValueType{})
         {
-            max_priority_queue.emplace(s);
+            max_priority_queue.emplace(stone);
         }
     }
 
