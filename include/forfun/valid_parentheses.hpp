@@ -16,37 +16,37 @@ namespace forfun::valid_parentheses {
 
 namespace ascii_optimized {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace ascii_optimized
 
 namespace circuit_breaker {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace circuit_breaker
 
 namespace deque_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace deque_based
 
 namespace dyn_array_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace dyn_array_based
 
 namespace vector_based {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace vector_based
 
 namespace vector_based_demi_allocated {
 
-[[nodiscard]] auto is_valid(std::u8string_view s) -> bool;
+[[nodiscard]] auto is_valid(std::u8string_view view) -> bool;
 
 } // namespace vector_based_demi_allocated
 

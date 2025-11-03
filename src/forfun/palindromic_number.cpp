@@ -12,15 +12,15 @@ namespace forfun::palindromic_number::stl {
 
 [[nodiscard]] auto is_palindrome(int const n) noexcept -> bool
 {
-    int nn{};
-    std::div_t d{.quot = n, .rem = 0};
-    while (d.quot > 0)
+    int carried{};
+    std::div_t division_result{.quot = n, .rem = 0};
+    while (division_result.quot > 0)
     {
-        d = std::div(d.quot, 10);
-        nn = (nn * 10) + d.rem;
+        division_result = std::div(division_result.quot, 10);
+        carried = (carried * 10) + division_result.rem;
     }
 
-    return n == nn;
+    return n == carried;
 }
 
 } // namespace forfun::palindromic_number::stl
