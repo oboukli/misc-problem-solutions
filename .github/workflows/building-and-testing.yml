@@ -19,7 +19,7 @@ jobs:
       BUILD_PRESET_NAME: windows-x64-debug
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     steps:
       - name: Check out repository
@@ -118,7 +118,7 @@ jobs:
       BUILD_PRESET_NAME: windows-x64-release
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     steps:
       - name: Check out repository
