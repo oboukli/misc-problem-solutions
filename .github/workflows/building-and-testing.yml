@@ -447,7 +447,7 @@ jobs:
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       XCODE_RELEASE: "16.4"
 
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Set default Xcode release
@@ -556,7 +556,7 @@ jobs:
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       XCODE_RELEASE: "16.4"
 
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - name: Set default Xcode release
