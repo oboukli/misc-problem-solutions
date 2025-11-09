@@ -26,6 +26,27 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
         .relative(true)
 
         .run(
+            NAMEOF_RAW(adjacent_find_based::contains_duplicate<Iter, Iter>)
+                .c_str(),
+            [] noexcept -> void {
+                std::array superprimes{
+                    // clang-format off
+                    3,   5,   11,  17,  31,  41,  59,  67,
+                    83,  109, 127, 157, 179, 191, 211, 241,
+                    277, 283, 331, 353, 367, 401, 431, 461,
+                    509, 547, 563, 587, 599, 617, 709, 739,
+                    // clang-format on
+                };
+
+                ankerl::nanobench::doNotOptimizeAway(
+                    adjacent_find_based::contains_duplicate(
+                        superprimes.begin(), superprimes.end()
+                    )
+                );
+            }
+        )
+
+        .run(
             NAMEOF_RAW(quadratic::contains_duplicate<Iter, Iter>).c_str(),
             [] noexcept -> void {
                 std::array const superprimes{
@@ -59,26 +80,6 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 
                 ankerl::nanobench::doNotOptimizeAway(
                     sorted::contains_duplicate(
-                        superprimes.begin(), superprimes.end()
-                    )
-                );
-            }
-        )
-
-        .run(
-            NAMEOF_RAW(stl::contains_duplicate<Iter, Iter>).c_str(),
-            [] noexcept -> void {
-                std::array superprimes{
-                    // clang-format off
-                    3,   5,   11,  17,  31,  41,  59,  67,
-                    83,  109, 127, 157, 179, 191, 211, 241,
-                    277, 283, 331, 353, 367, 401, 431, 461,
-                    509, 547, 563, 587, 599, 617, 709, 739,
-                    // clang-format on
-                };
-
-                ankerl::nanobench::doNotOptimizeAway(
-                    stl::contains_duplicate(
                         superprimes.begin(), superprimes.end()
                     )
                 );
