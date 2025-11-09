@@ -257,6 +257,13 @@ This document is not AI-generated.
 
 ## Problem-specific notes
 
+## Contains duplicate
+
+An interesting approach based on `std::adjacent_find` is provided.
+
+A conjectured approach is to tailored sort algorithm that checks for duplicates
+as it sorts, i.e, combine sort and search for consecutive duplicates.
+
 ### Encoding and decoding strings
 
 The strategy does not implement error detection and error reporting.
