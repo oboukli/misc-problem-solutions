@@ -116,3 +116,65 @@ TEST_CASE("Concept multipliable_as", "[common]")
         STATIC_REQUIRE_FALSE(multipliable_as<Dummy, Dummy>);
     }
 }
+
+TEST_CASE("Concept noexcept_callable", "[common]")
+{
+    using forfun::common::concepts::noexcept_callable;
+
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(noexcept_callable<auto() noexcept -> void>);
+        STATIC_REQUIRE(noexcept_callable<auto(int) noexcept -> void, int>);
+        STATIC_REQUIRE(
+            noexcept_callable<auto(int, int) noexcept -> void, int, int>
+        );
+        STATIC_REQUIRE(
+            noexcept_callable<auto(int, char*) noexcept -> void, double, char*>
+        );
+        STATIC_REQUIRE(
+            noexcept_callable<
+                auto(int, std::string_view) noexcept -> void,
+                int,
+                std::string>
+        );
+    }
+
+    SECTION("Negative")
+    {
+        SECTION("noexcept is false")
+        {
+            STATIC_REQUIRE_FALSE(noexcept_callable<auto()->void>);
+        }
+
+        SECTION("Parameter type mismatch")
+        {
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<
+                    auto(int, std::vector<char>&) noexcept -> void,
+                    std::string,
+                    std::vector<char>&>
+            );
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto(int, int&) noexcept -> void, int, int>
+            );
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto(char, char&) noexcept -> void, int, int&>
+            );
+        }
+
+        SECTION("Parameter list mismatch")
+        {
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto() noexcept -> void, int, int>
+            );
+            STATIC_REQUIRE_FALSE(noexcept_callable<auto(int) noexcept -> void>);
+
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto(int) noexcept -> void, int, int>
+            );
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto(int, int) noexcept -> void>
+            );
+        }
+    }
+}
