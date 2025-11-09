@@ -22,11 +22,15 @@ namespace quadratic {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <
-    std::forward_iterator Iter,
-    std::sentinel_for<Iter> Sentinel,
-    std::equivalence_relation<std::iter_value_t<Iter>, std::iter_value_t<Iter>>
-        BinaryPredicate>
+template <typename Iter, typename Sentinel, typename BinaryPredicate>
+// clang-format off
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+    and std::equivalence_relation<
+        BinaryPredicate,
+        std::iter_value_t<Iter>,
+        std::iter_value_t<Iter>>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     noexcept(eq.operator()(
@@ -55,7 +59,11 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+// clang-format off
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(
@@ -73,11 +81,15 @@ namespace sorted {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <
-    std::random_access_iterator Iter,
-    std::sentinel_for<Iter> Sentinel,
-    std::equivalence_relation<std::iter_value_t<Iter>, std::iter_value_t<Iter>>
-        BinaryPredicate>
+template <typename Iter, typename Sentinel, typename BinaryPredicate>
+// clang-format off
+    requires std::random_access_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+    and std::equivalence_relation<
+        BinaryPredicate,
+        std::iter_value_t<Iter>,
+        std::iter_value_t<Iter>>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     noexcept(eq.operator()(
@@ -103,7 +115,11 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+// clang-format off
+    requires std::random_access_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(
@@ -119,11 +135,15 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 
 namespace adjacent_find_based {
 
-template <
-    std::random_access_iterator Iter,
-    std::sentinel_for<Iter> Sentinel,
-    std::equivalence_relation<std::iter_value_t<Iter>, std::iter_value_t<Iter>>
-        BinaryPredicate>
+template <typename Iter, typename Sentinel, typename BinaryPredicate>
+// clang-format off
+    requires std::random_access_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+    and std::equivalence_relation<
+        BinaryPredicate,
+        std::iter_value_t<Iter>,
+        std::iter_value_t<Iter>>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
     // clang-format off
@@ -140,7 +160,11 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
     return std::adjacent_find(first, last, eq) != last;
 }
 
-template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+// clang-format off
+    requires std::random_access_iterator<Iter>
+    and std::sentinel_for<Sentinel, Iter>
+// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(
