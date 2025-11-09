@@ -117,7 +117,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 
 } // namespace sorted
 
-namespace stl {
+namespace adjacent_find_based {
 
 template <
     std::random_access_iterator Iter,
@@ -152,7 +152,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
     return contains_duplicate(first, last, std::equal_to{});
 }
 
-} // namespace stl
+} // namespace adjacent_find_based
 
 } // namespace forfun::contains_duplicate
 

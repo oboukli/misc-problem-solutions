@@ -16,13 +16,13 @@ TEMPLATE_TEST_CASE_SIG(
     "Contains duplicate",
     "[contains_duplicate]",
     (auto contains_duplicate, contains_duplicate),
+    (forfun::contains_duplicate::adjacent_find_based::contains_duplicate<
+        std::vector<int>::iterator,
+        std::vector<int>::iterator>),
     (forfun::contains_duplicate::quadratic::contains_duplicate<
         std::vector<int>::iterator,
         std::vector<int>::iterator>),
     (forfun::contains_duplicate::sorted::contains_duplicate<
-        std::vector<int>::iterator,
-        std::vector<int>::iterator>),
-    (forfun::contains_duplicate::stl::contains_duplicate<
         std::vector<int>::iterator,
         std::vector<int>::iterator>)
 )
@@ -140,13 +140,13 @@ TEMPLATE_TEST_CASE_SIG(
     "Contains duplicate",
     "[contains_duplicate]",
     (auto contains_duplicate, contains_duplicate),
+    (forfun::contains_duplicate::adjacent_find_based::contains_duplicate<
+        std::vector<float>::iterator,
+        std::vector<float>::iterator>),
     (forfun::contains_duplicate::quadratic::contains_duplicate<
         std::vector<float>::iterator,
         std::vector<float>::iterator>),
     (forfun::contains_duplicate::sorted::contains_duplicate<
-        std::vector<float>::iterator,
-        std::vector<float>::iterator>),
-    (forfun::contains_duplicate::stl::contains_duplicate<
         std::vector<float>::iterator,
         std::vector<float>::iterator>)
 )
@@ -192,7 +192,7 @@ TEST_CASE(
     "Contains duplicate (empty input degenerate case)", "[contains_duplicate]"
 )
 {
-    using forfun::contains_duplicate::stl::contains_duplicate;
+    using forfun::contains_duplicate::adjacent_find_based::contains_duplicate;
 
     std::vector<int> nums{};
     static constexpr bool const expected{false};
