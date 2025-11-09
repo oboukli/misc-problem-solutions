@@ -12,8 +12,10 @@
 
 #include <algorithm>
 #include <concepts>
+#include <cstddef>
 #include <functional>
 #include <iterator>
+#include <unordered_set>
 #include <utility>
 
 namespace forfun::contains_duplicate {
@@ -177,6 +179,57 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 }
 
 } // namespace adjacent_find_based
+
+namespace unordered_set_based {
+
+template <typename Iter, typename Sentinel, typename BinaryPredicate>
+// clang-format off
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Sentinel, Iter>
+    and std::equivalence_relation<
+        BinaryPredicate,
+        std::iter_value_t<Iter>,
+        std::iter_value_t<Iter>>
+// clang-format on
+[[nodiscard]] constexpr auto
+contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
+    -> bool
+{
+    using std::distance;
+    using std::hash;
+
+    using ValueType = std::iter_value_t<Iter>;
+
+    std::unordered_set<ValueType, hash<ValueType>, BinaryPredicate> tracker(
+        static_cast<std::size_t>(distance(first, last)), hash<ValueType>{}, eq
+    );
+
+    for (auto iter{first}; iter != last; ++iter)
+    {
+        if (auto const result{tracker.insert(*iter)}; not result.second)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Sentinel, Iter>
+[[nodiscard]] constexpr auto
+contains_duplicate(Iter const first, Sentinel const last) noexcept(
+    noexcept(std::declval<std::equal_to<>>()(
+        std::declval<std::iter_value_t<Iter>>(),
+        std::declval<std::iter_value_t<Iter>>()
+    ))
+) -> bool
+{
+    return contains_duplicate(first, last, std::equal_to{});
+}
+
+} // namespace unordered_set_based
 
 } // namespace forfun::contains_duplicate
 

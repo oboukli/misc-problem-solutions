@@ -24,6 +24,9 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector<int>::iterator>),
     (forfun::contains_duplicate::sorted::contains_duplicate<
         std::vector<int>::iterator,
+        std::vector<int>::iterator>),
+    (forfun::contains_duplicate::unordered_set_based::contains_duplicate<
+        std::vector<int>::iterator,
         std::vector<int>::iterator>)
 )
 {
@@ -154,6 +157,9 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector<float>::iterator,
         std::vector<float>::iterator>),
     (forfun::contains_duplicate::sorted::contains_duplicate<
+        std::vector<float>::iterator,
+        std::vector<float>::iterator>),
+    (forfun::contains_duplicate::unordered_set_based::contains_duplicate<
         std::vector<float>::iterator,
         std::vector<float>::iterator>)
 )

@@ -84,5 +84,17 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
             }
         )
 
+        .run(
+            NAMEOF_RAW(unordered_set_based::contains_duplicate<Iter, Iter>)
+                .c_str(),
+            [&primes] noexcept -> void {
+                ankerl::nanobench::doNotOptimizeAway(
+                    unordered_set_based::contains_duplicate(
+                        primes.begin(), primes.end()
+                    )
+                );
+            }
+        )
+
         ;
 }
