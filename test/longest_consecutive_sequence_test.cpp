@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cstddef>
 #include <vector>
 
 #include <catch2/catch_message.hpp>
