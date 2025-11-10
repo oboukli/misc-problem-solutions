@@ -125,8 +125,7 @@ namespace set_sliding {
 
 template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
-[[nodiscard]] auto
-longest_consecutive(Iter const first, Sentinel const last) noexcept
+[[nodiscard]] auto longest_consecutive(Iter const first, Sentinel const last)
     -> std::size_t
 {
     if (first == last) [[unlikely]]
