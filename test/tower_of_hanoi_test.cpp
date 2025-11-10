@@ -14,15 +14,13 @@
 
 namespace {
 
-constexpr auto push_range(auto& dest_container, auto const& src_list) noexcept
-    -> void
+constexpr auto push_range(auto& dest_container, auto const& src_list) -> void
     requires requires { dest_container.push_range(src_list); }
 {
     dest_container.push_range(src_list);
 }
 
-constexpr auto push_range(auto& dest_container, auto const& src_list) noexcept
-    -> void
+constexpr auto push_range(auto& dest_container, auto const& src_list) -> void
 {
     for (auto const e : src_list)
     {
@@ -36,14 +34,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 {
     using forfun::tower_of_hanoi::recursive::toh;
 
-    auto const monk{
-        [](std::stack<int>& src, std::stack<int>& des) noexcept -> void {
-            assert(src.empty() == false);
+    auto const monk{[](std::stack<int>& src, std::stack<int>& des) -> void {
+        assert(src.empty() == false);
 
-            des.push(src.top());
-            src.pop();
-        }
-    };
+        des.push(src.top());
+        src.pop();
+    }};
 
     SECTION("Empty")
     {
