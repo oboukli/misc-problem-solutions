@@ -28,7 +28,7 @@ TEST_CASE(
                 list.push_back(1301);
 
                 auto const r{list.back()};
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
@@ -39,7 +39,7 @@ TEST_CASE(
                 list.push_back(1301);
 
                 auto const r{list.back()};
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
