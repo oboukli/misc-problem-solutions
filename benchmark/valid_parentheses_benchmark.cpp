@@ -37,7 +37,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{deque_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -53,7 +53,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{vector_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -69,7 +69,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{circuit_breaker::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -85,7 +85,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{ascii_optimized::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -101,7 +101,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{vector_based_demi_allocated::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -117,7 +117,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{dyn_array_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -143,7 +143,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{deque_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -159,7 +159,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{vector_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -175,7 +175,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{circuit_breaker::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -191,7 +191,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{ascii_optimized::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -207,7 +207,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{vector_based_demi_allocated::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 
@@ -223,7 +223,7 @@ TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 
                     bool const r{dyn_array_based::is_valid(s)};
 
-                    ankerl::nanobench::doNotOptimizeAway(r);
+                    ankerl::nanobench::doNotOptimizeAway(&r);
                 }
             )
 

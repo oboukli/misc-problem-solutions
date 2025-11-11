@@ -56,7 +56,7 @@ TEST_CASE(
                 auto const r{
                     hardened::eval_expression(tokens.cbegin(), tokens.cend())
                 };
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
@@ -67,7 +67,7 @@ TEST_CASE(
                 auto const r{
                     unhardened::eval_expression(tokens.cbegin(), tokens.cend())
                 };
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
@@ -80,7 +80,7 @@ TEST_CASE(
                 auto const r{speed_optimized::eval_expression(
                     tokens.cbegin(), tokens.cend()
                 )};
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 

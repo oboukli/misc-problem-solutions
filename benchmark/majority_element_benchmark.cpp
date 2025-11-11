@@ -34,7 +34,7 @@ TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
                 using ConstIter = decltype(elements)::const_iterator;
 
                 ConstIter const r{majority_element(elements)};
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 

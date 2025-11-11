@@ -54,7 +54,7 @@ TEST_CASE(
 
                 auto const r{base::lowest_missing(nums.begin(), nums.end())};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
@@ -82,7 +82,7 @@ TEST_CASE(
 
                 auto const r{fast::lowest_missing(nums.begin(), nums.end())};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
