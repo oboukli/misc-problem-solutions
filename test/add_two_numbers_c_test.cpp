@@ -21,22 +21,23 @@ namespace {
 
 class shim_scoped_guard final {
 public:
-    shim_scoped_guard() : is_valid_{::forfun_shim_enable() == 0}
+    shim_scoped_guard() noexcept : is_valid_{::forfun_shim_enable() == 0}
     {
     }
 
-    ~shim_scoped_guard()
+    shim_scoped_guard(shim_scoped_guard const&) noexcept = delete;
+
+    shim_scoped_guard(shim_scoped_guard&&) noexcept = delete;
+
+    ~shim_scoped_guard() noexcept
     {
         ::forfun_shim_disable();
     }
 
-    shim_scoped_guard(shim_scoped_guard const&) = delete;
+    auto operator=(shim_scoped_guard const&) noexcept
+        -> shim_scoped_guard& = delete;
 
-    shim_scoped_guard(shim_scoped_guard&&) = delete;
-
-    auto operator=(shim_scoped_guard const&) -> shim_scoped_guard& = delete;
-
-    auto operator=(shim_scoped_guard&&) -> shim_scoped_guard& = delete;
+    auto operator=(shim_scoped_guard&&) noexcept -> shim_scoped_guard& = delete;
 
     [[nodiscard]] auto is_valid() const noexcept -> bool
     {

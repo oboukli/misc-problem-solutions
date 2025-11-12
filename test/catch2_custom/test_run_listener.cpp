@@ -29,16 +29,6 @@ class TestRunListener final : public Catch::EventListenerBase {
 public:
     using EventListenerBase::EventListenerBase;
 
-    TestRunListener(TestRunListener const&) = default;
-
-    TestRunListener(TestRunListener&&) = delete;
-
-    ~TestRunListener() override;
-
-    auto operator=(TestRunListener const&) -> TestRunListener& = default;
-
-    auto operator=(TestRunListener&&) -> TestRunListener& = delete;
-
     void
     testRunStarting(Catch::TestRunInfo const& /*testRunInfo*/) noexcept override
     {
@@ -47,7 +37,5 @@ public:
 };
 
 CATCH_REGISTER_LISTENER(TestRunListener)
-
-TestRunListener::~TestRunListener() = default;
 
 } // namespace
