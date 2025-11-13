@@ -294,7 +294,7 @@ TEMPLATE_TEST_CASE_SIG(
 )
 {
     std::vector<int> const nums{};
-    static constexpr int const target{0};
+    static constexpr int const target{};
     std::array const expected{nums.cend(), nums.cend()};
 
     CAPTURE(nums);

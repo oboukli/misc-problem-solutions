@@ -46,7 +46,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top zero of one element")
     {
         std::vector nums{5};
-        static constexpr std::size_t const k{0UZ};
+        static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -59,7 +59,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top zero of two elements")
     {
         std::vector nums{11, 13};
-        static constexpr std::size_t const k{0UZ};
+        static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -72,7 +72,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top zero of three elements")
     {
         std::vector nums{11, 13, 17};
-        static constexpr std::size_t const k{0UZ};
+        static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -85,7 +85,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top one of one element")
     {
         std::vector nums{7};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{7};
 
@@ -104,7 +104,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top one of two elements")
     {
         std::vector nums{11, 13};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -117,7 +117,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top one of three elements")
     {
         std::vector nums{11, 13, 17};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -130,7 +130,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top four of two elements")
     {
         std::vector nums{11, 13};
-        static constexpr std::size_t const k{4UZ};
+        static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{11, 13};
 
@@ -149,7 +149,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top four of three elements")
     {
         std::vector nums{11, 13, 17};
-        static constexpr std::size_t const k{4UZ};
+        static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{11, 13, 17};
 
@@ -168,7 +168,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top five of two elements")
     {
         std::vector nums{11, 13};
-        static constexpr std::size_t const k{5UZ};
+        static constexpr std::size_t const k{5};
 
         static constexpr std::array const expected{11, 13};
 
@@ -187,7 +187,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top five of three elements")
     {
         std::vector nums{11, 13, 17};
-        static constexpr std::size_t const k{5UZ};
+        static constexpr std::size_t const k{5};
 
         static constexpr std::array const expected{11, 13, 17};
 
@@ -206,7 +206,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top one of three identical elements")
     {
         std::vector nums{19, 19, 19};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{19};
 
@@ -225,7 +225,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top one of four identical elements")
     {
         std::vector nums{19, 19, 19, 19};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{19};
 
@@ -244,7 +244,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top three of six elements")
     {
         std::vector nums{23, 43, 31, 43, 23, 43};
-        static constexpr std::size_t const k{3UZ};
+        static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{43, 31, 23};
 
@@ -259,7 +259,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top three of three unique elements")
     {
         std::vector nums{23, 31, 43};
-        static constexpr std::size_t const k{3UZ};
+        static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{23, 31, 43};
 
@@ -274,7 +274,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top four of four unique elements")
     {
         std::vector nums{19, 23, 31, 43};
-        static constexpr std::size_t const k{4UZ};
+        static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{19, 23, 31, 43};
 
@@ -289,7 +289,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Signed integers")
     {
         std::vector nums{5, -9, -8, -9, 42, 42, -8, -8, 42, 42};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{42, -8};
 
@@ -304,7 +304,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top two of seventeen elements (benchmark case)")
     {
         std::vector nums{5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{7, 11};
 
@@ -319,7 +319,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("LeetCode test case 1")
     {
         std::vector nums{1, 1, 1, 2, 2, 3};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{1, 2};
 
@@ -334,7 +334,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("LeetCode test case 2")
     {
         std::vector nums{1};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{1};
 
@@ -349,7 +349,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("NeetCode test case 1")
     {
         std::vector nums{1, 2, 2, 3, 3, 3};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{2, 3};
 
@@ -364,7 +364,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("NeetCode test case 2")
     {
         std::vector nums{7, 7};
-        static constexpr std::size_t const k{1UZ};
+        static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{7};
 
@@ -379,7 +379,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("GeeksforGeeks test case 1")
     {
         std::vector nums{3, 1, 4, 4, 5, 2, 6, 1};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{1, 4};
 
@@ -394,7 +394,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("GeeksforGeeks test case 2")
     {
         std::vector nums{7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
-        static constexpr std::size_t const k{3UZ};
+        static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{5, 7, 11};
 
@@ -415,7 +415,7 @@ TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
     SECTION("Top three of three identical elements")
     {
         std::vector nums{19, 19, 19};
-        static constexpr std::size_t const k{3UZ};
+        static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{19};
 
@@ -434,7 +434,7 @@ TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
     SECTION("Top four of four identical elements")
     {
         std::vector nums{23, 23, 23, 23};
-        static constexpr std::size_t const k{4UZ};
+        static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{23};
 
@@ -476,7 +476,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top zero of empty")
     {
         std::vector<int> nums{};
-        static constexpr std::size_t const k{0UZ};
+        static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -489,7 +489,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top two of empty")
     {
         std::vector<int> nums{};
-        static constexpr std::size_t const k{2UZ};
+        static constexpr std::size_t const k{2};
 
         CAPTURE(nums);
         CAPTURE(k);
@@ -502,7 +502,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Top three of empty")
     {
         std::vector<int> nums{};
-        static constexpr std::size_t const k{3UZ};
+        static constexpr std::size_t const k{3};
 
         CAPTURE(nums);
         CAPTURE(k);

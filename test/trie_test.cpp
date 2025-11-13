@@ -43,7 +43,7 @@ TEST_CASE("Trie", "[trie]")
         /*STATIC_*/ REQUIRE(node.value == 'B');
         /*STATIC_*/ REQUIRE_FALSE(node.is_terminal);
         /*STATIC_*/ REQUIRE(
-            node.children.size() == TrieNode<>::children_t::size_type{0U}
+            node.children.size() == TrieNode<>::children_t::size_type{}
         );
     }
 
@@ -54,7 +54,7 @@ TEST_CASE("Trie", "[trie]")
         /*STATIC_*/ REQUIRE(node.value == 'C');
         /*STATIC_*/ REQUIRE(node.is_terminal);
         /*STATIC_*/ REQUIRE(
-            node.children.size() == TrieNode<>::children_t::size_type{0U}
+            node.children.size() == TrieNode<>::children_t::size_type{}
         );
     }
 
@@ -67,7 +67,7 @@ TEST_CASE("Trie", "[trie]")
 
         REQUIRE(root.value == 'X');
         REQUIRE_FALSE(root.is_terminal);
-        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{0U});
+        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{});
     }
 
     SECTION("Insert")
@@ -79,13 +79,13 @@ TEST_CASE("Trie", "[trie]")
 
         REQUIRE(root.value == '\0');
         REQUIRE_FALSE(root.is_terminal);
-        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1U});
+        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
         REQUIRE(root.children[0]->value == 'c');
         REQUIRE(root.children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
     }
 
@@ -98,27 +98,27 @@ TEST_CASE("Trie", "[trie]")
 
         REQUIRE(root.value == '\0');
         REQUIRE_FALSE(root.is_terminal);
-        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1U});
+        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
         REQUIRE(root.children[0]->value == 'c');
         REQUIRE_FALSE(root.children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[0]->children[0]->value == 'a');
         REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
         REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
     }
 
@@ -133,34 +133,34 @@ TEST_CASE("Trie", "[trie]")
 
         REQUIRE(root.value == '\0');
         REQUIRE_FALSE(root.is_terminal);
-        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1U});
+        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
         REQUIRE(root.children[0]->value == 'c');
         REQUIRE_FALSE(root.children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[0]->children[0]->value == 'a');
         REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{2U}
+            == TrieNode<>::children_t::size_type{2}
         );
 
         REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
         REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
 
         REQUIRE(root.children[0]->children[0]->children[1]->value == 'r');
         REQUIRE(root.children[0]->children[0]->children[1]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children[1]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
 
         SECTION("Insert prefixed")
@@ -172,7 +172,7 @@ TEST_CASE("Trie", "[trie]")
             REQUIRE_FALSE(root.children[0]->is_terminal);
             REQUIRE(
                 root.children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(root.children[0]->children[0]->value == 'a');
@@ -208,7 +208,7 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
@@ -237,7 +237,7 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
@@ -265,14 +265,14 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{0U}
+                == TrieNode<>::children_t::size_type{}
             );
 
             REQUIRE(root.children[0]->children[0]->children[1]->value == 'r');
             REQUIRE(root.children[0]->children[0]->children[1]->is_terminal);
             REQUIRE(
                 root.children[0]->children[0]->children[1]->children.size()
-                == TrieNode<>::children_t::size_type{0U}
+                == TrieNode<>::children_t::size_type{}
             );
         }
     }
@@ -288,48 +288,48 @@ TEST_CASE("Trie", "[trie]")
 
         REQUIRE(root.value == '\0');
         REQUIRE_FALSE(root.is_terminal);
-        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{2U});
+        REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{2});
 
         REQUIRE(root.children[0]->value == 'c');
         REQUIRE_FALSE(root.children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[0]->children[0]->value == 'a');
         REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
         REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[0]->children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
 
         REQUIRE(root.children[1]->value == 'd');
         REQUIRE_FALSE(root.children[1]->is_terminal);
         REQUIRE(
             root.children[1]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[1]->children[0]->value == 'o');
         REQUIRE_FALSE(root.children[1]->children[0]->is_terminal);
         REQUIRE(
             root.children[1]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{1U}
+            == TrieNode<>::children_t::size_type{1}
         );
 
         REQUIRE(root.children[1]->children[0]->children[0]->value == 'g');
         REQUIRE(root.children[1]->children[0]->children[0]->is_terminal);
         REQUIRE(
             root.children[1]->children[0]->children[0]->children.size()
-            == TrieNode<>::children_t::size_type{0U}
+            == TrieNode<>::children_t::size_type{}
         );
 
         SECTION("Insert prefixed")
@@ -341,21 +341,21 @@ TEST_CASE("Trie", "[trie]")
             REQUIRE_FALSE(root.children[0]->is_terminal);
             REQUIRE(
                 root.children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(root.children[0]->children[0]->value == 'a');
             REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
             REQUIRE(
                 root.children[0]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
             REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
             REQUIRE(
                 root.children[0]->children[0]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
@@ -377,7 +377,7 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
@@ -406,7 +406,7 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
@@ -434,28 +434,28 @@ TEST_CASE("Trie", "[trie]")
                     ->children[0]
                     ->children[0]
                     ->children.size()
-                == TrieNode<>::children_t::size_type{0U}
+                == TrieNode<>::children_t::size_type{}
             );
 
             REQUIRE(root.children[1]->value == 'd');
             REQUIRE_FALSE(root.children[1]->is_terminal);
             REQUIRE(
                 root.children[1]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(root.children[1]->children[0]->value == 'o');
             REQUIRE_FALSE(root.children[1]->children[0]->is_terminal);
             REQUIRE(
                 root.children[1]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1U}
+                == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(root.children[1]->children[0]->children[0]->value == 'g');
             REQUIRE(root.children[1]->children[0]->children[0]->is_terminal);
             REQUIRE(
                 root.children[1]->children[0]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{0U}
+                == TrieNode<>::children_t::size_type{}
             );
         }
     }

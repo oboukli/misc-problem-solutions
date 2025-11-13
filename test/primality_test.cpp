@@ -46,7 +46,7 @@ TEST_CASE("Primality", "[primality]")
     SECTION("Largest prime less than the limit of std::uint32_t")
     {
         // https://en.wikipedia.org/wiki/Double_Mersenne_number
-        static constexpr std::uint32_t const max_uint32_prime{2'147'483'647U};
+        static constexpr std::uint32_t const max_uint32_prime{2'147'483'647};
         REQUIRE(is_prime(max_uint32_prime));
     }
 }

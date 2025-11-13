@@ -183,13 +183,13 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         SECTION("Given no disk then no moves")
         {
-            static constexpr unsigned int const num_disks{0};
+            static constexpr unsigned int const num_disks{};
 
             // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{0};
+            unsigned int count{};
             // NOLINTEND(misc-const-correctness)
 
             toh(
@@ -211,7 +211,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{0};
+            unsigned int count{};
             // NOLINTEND(misc-const-correctness)
 
             toh(
@@ -233,7 +233,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{0};
+            unsigned int count{};
             // NOLINTEND(misc-const-correctness)
 
             toh(
@@ -255,7 +255,7 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{0};
+            unsigned int count{};
             // NOLINTEND(misc-const-correctness)
 
             toh(

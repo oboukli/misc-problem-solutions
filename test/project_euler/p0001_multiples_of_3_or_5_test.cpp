@@ -15,7 +15,7 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 0")
     {
-        unsigned int const volatile test_input{0U};
+        unsigned int const volatile test_input{};
         CAPTURE(test_input);
 
         unsigned int const actual{find_sum_mult_three_five(test_input)};
@@ -70,7 +70,7 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 11")
     {
-        unsigned int const volatile test_input{11U};
+        unsigned int const volatile test_input{11};
         CAPTURE(test_input);
 
         unsigned int const actual{find_sum_mult_three_five(test_input)};
@@ -103,7 +103,7 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
     {
         static_assert(sizeof(unsigned int) >= 4U);
 
-        unsigned int const volatile test_input{999U};
+        unsigned int const volatile test_input{999};
         CAPTURE(test_input);
 
         unsigned int const actual{find_sum_mult_three_five(test_input)};
@@ -118,7 +118,7 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
     {
         static_assert(sizeof(unsigned int) >= 4U);
 
-        unsigned int const volatile test_input{89'738U};
+        unsigned int const volatile test_input{89'738};
         CAPTURE(test_input);
 
         unsigned int const actual{find_sum_mult_three_five(test_input)};

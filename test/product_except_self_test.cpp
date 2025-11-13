@@ -207,22 +207,22 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Factorial product value")
     {
         static constexpr std::array const nums{
-            std::uint64_t{1U},
-            std::uint64_t{2U},
-            std::uint64_t{3U},
-            std::uint64_t{4U},
-            std::uint64_t{5U},
-            std::uint64_t{6U},
-            std::uint64_t{7U},
-            std::uint64_t{8U},
-            std::uint64_t{9U},
-            std::uint64_t{10U},
-            std::uint64_t{11U},
-            std::uint64_t{12U},
-            std::uint64_t{13U},
-            std::uint64_t{14U},
-            std::uint64_t{15U},
-            std::uint64_t{0U},
+            std::uint64_t{1},
+            std::uint64_t{2},
+            std::uint64_t{3},
+            std::uint64_t{4},
+            std::uint64_t{5},
+            std::uint64_t{6},
+            std::uint64_t{7},
+            std::uint64_t{8},
+            std::uint64_t{9},
+            std::uint64_t{10},
+            std::uint64_t{11},
+            std::uint64_t{12},
+            std::uint64_t{13},
+            std::uint64_t{14},
+            std::uint64_t{15},
+            std::uint64_t{},
         };
 
         static_assert(nums.size() == 16UZ);

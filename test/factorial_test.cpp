@@ -26,7 +26,7 @@ TEMPLATE_TEST_CASE(
 
     SECTION("0! is one")
     {
-        static constexpr auto const n{TestType{0}};
+        static constexpr auto const n{TestType{}};
         static constexpr auto const expected{TestType{1}};
 
         STATIC_REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
