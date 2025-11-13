@@ -26,7 +26,7 @@ TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
         .run(
             NAMEOF_RAW(iterative::fib<std::uint_fast32_t>).c_str(),
             [] noexcept -> void {
-                std::uint_fast32_t const volatile n{7U};
+                std::uint_fast32_t const volatile n{7};
 
                 auto const r{iterative::fib(n)};
 
@@ -37,7 +37,7 @@ TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
         .run(
             NAMEOF_RAW(recursive::fib<std::uint_fast32_t>).c_str(),
             [] noexcept -> void {
-                std::uint_fast32_t const volatile n{7U};
+                std::uint_fast32_t const volatile n{7};
 
                 auto const r{recursive::fib(n)};
 

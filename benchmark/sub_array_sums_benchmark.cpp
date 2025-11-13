@@ -43,7 +43,7 @@ TEST_CASE(
             NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
             [&sums] noexcept -> void {
-                decltype(numbers)::size_type const volatile sub_size{8U};
+                decltype(numbers)::size_type const volatile sub_size{8};
                 sum_each(numbers, sums, sub_size);
 
                 ankerl::nanobench::doNotOptimizeAway(sums);

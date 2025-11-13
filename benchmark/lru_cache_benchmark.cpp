@@ -20,8 +20,8 @@ auto wrapper(std::size_t const capacity) noexcept -> int
 {
     T cache(capacity);
 
-    int x{0};
-    for (std::size_t i{0UZ}; i < capacity; ++i)
+    int x{};
+    for (std::size_t i{}; i < capacity; ++i)
     {
         cache.put(i, x);
         ++x;
@@ -45,7 +45,7 @@ auto wrapper(std::size_t const capacity) noexcept -> int
 
     val = cache.get(3U);
 
-    for (std::size_t i{0UZ}; i < capacity; ++i)
+    for (std::size_t i{}; i < capacity; ++i)
     {
         val = cache.get(i);
     }
