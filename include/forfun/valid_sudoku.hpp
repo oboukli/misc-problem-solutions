@@ -27,7 +27,7 @@ namespace detail {
 [[nodiscard]] constexpr auto tick_out(auto const cell, auto& set) noexcept
     -> bool
 {
-    if (cell != decltype(cell){0})
+    if (cell != decltype(cell){})
     {
         if (((1U << (cell - 1U)) & set) != 0U)
         {
@@ -91,7 +91,7 @@ namespace detail {
 [[nodiscard]] constexpr auto tick_out(auto const cell, auto& set) noexcept
     -> bool
 {
-    if (cell != decltype(cell){0})
+    if (cell != decltype(cell){})
     {
         if (set.test(cell - 1U))
         {

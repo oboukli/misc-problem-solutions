@@ -23,7 +23,7 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     using DiffType = std::iter_difference_t<Iter>;
 
     auto const size{std::distance(first, last)};
-    if (size == DiffType{0}) [[unlikely]]
+    if (size == DiffType{}) [[unlikely]]
     {
         return 0;
     }

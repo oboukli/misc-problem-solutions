@@ -37,7 +37,7 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
-    for (std::size_t i{0UZ}; i < 2UZ; ++i)
+    for (std::size_t i{}; i < 2UZ; ++i)
     {
         auto iter{dest.begin()};
         std::advance(iter, Size * i);
@@ -100,14 +100,14 @@ constexpr auto concatenate(
     std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
 ) noexcept -> void
 {
-    for (std::size_t i{0UZ}; i < 2UZ; ++i)
+    for (std::size_t i{}; i < 2UZ; ++i)
     {
 #ifdef _MSC_VER
 // Disable LOOP_BODY_NEVER_EXECUTED code analysis
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER
-        for (std::size_t j{0UZ}; j < Size; ++j)
+        for (std::size_t j{}; j < Size; ++j)
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
             dest[j + (i * Size)] = src[j];
@@ -132,7 +132,7 @@ constexpr auto concatenate(
 #pragma warning(push)
 #pragma warning(disable : 6294)
 #endif // _MSC_VER
-    for (std::size_t i{0UZ}; i < Size; ++i)
+    for (std::size_t i{}; i < Size; ++i)
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
         dest[i] = src[i];

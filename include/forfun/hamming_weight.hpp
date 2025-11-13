@@ -39,8 +39,8 @@ namespace linear_imperative {
 [[nodiscard]] constexpr auto get_hamming_weight(std::size_t const n) noexcept
     -> std::size_t
 {
-    std::size_t result{0};
-    for (std::size_t i{0}; i < std::numeric_limits<std::size_t>::digits; ++i)
+    std::size_t result{};
+    for (std::size_t i{}; i < std::numeric_limits<std::size_t>::digits; ++i)
     {
         result += (n >> i) & 1UZ;
     }
@@ -55,7 +55,7 @@ namespace optimized_imperative {
 [[nodiscard]] constexpr auto get_hamming_weight(std::size_t n) noexcept
     -> std::size_t
 {
-    std::size_t result{0};
+    std::size_t result{};
     while (n != 0UZ)
     {
         n &= n - 1UZ;

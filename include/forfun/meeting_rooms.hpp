@@ -67,7 +67,7 @@ template <std::input_or_output_iterator Iter>
     Iter iter, std::sentinel_for<Iter> auto const last
 ) noexcept -> std::size_t
 {
-    std::size_t chronotopes{1UZ};
+    std::size_t chronotopes{1};
 
     while (std::next(iter) != last) [[likely]]
     {

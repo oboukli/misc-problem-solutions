@@ -45,7 +45,7 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
     auto const last_i{std::next(iter, std::distance(iter, last) - 2)};
     for (auto prev_i{last}; iter != last_i; ++iter)
     {
-        if (std::greater{}(*iter, ValueType{0}))
+        if (std::greater{}(*iter, ValueType{}))
         {
             break;
         }
@@ -57,11 +57,11 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
 
         prev_i = iter;
 
-        auto const target{std::minus{}(ValueType{0}, *iter)};
+        auto const target{std::minus{}(ValueType{}, *iter)};
         auto iter_j{std::next(iter)};
         auto iter_k{last};
         --iter_k;
-        while (std::distance(iter_j, iter_k) > DiffType{0})
+        while (std::distance(iter_j, iter_k) > DiffType{})
         {
             if (auto const addend{std::plus{}(*iter_j, *iter_k)};
                 std::equal_to{}(target, addend))
@@ -71,13 +71,13 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
                 result.emplace_back(std::array{*iter, val_j, val_k});
                 ++iter_j;
                 --iter_k;
-                while ((std::distance(iter_j, iter_k) > DiffType{0})
+                while ((std::distance(iter_j, iter_k) > DiffType{})
                        && (std::equal_to{}(val_j, *iter_j)))
                 {
                     ++iter_j;
                 }
 
-                while ((std::distance(iter_j, iter_k) > DiffType{0})
+                while ((std::distance(iter_j, iter_k) > DiffType{})
                        && (std::equal_to{}(val_k, *iter_k)))
                 {
                     --iter_k;
@@ -172,7 +172,7 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         ++iter_a)
     // clang-format on
     {
-        if (std::greater{}(*iter_a, ValueType{0}))
+        if (std::greater{}(*iter_a, ValueType{}))
         {
             break;
         }
@@ -197,7 +197,7 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             }
 
             ValueType const target{
-                std::minus{}(ValueType{0}, std::plus{}(*iter_a, *iter_b))
+                std::minus{}(ValueType{}, std::plus{}(*iter_a, *iter_b))
             };
 
             if (auto const iter_c
@@ -293,7 +293,7 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             auto const a{std::plus{}(*iter_i, *iter_j)};
             for (auto iter_k{std::next(iter_j)}; iter_k != last; ++iter_k)
             {
-                if (std::equal_to{}(std::plus{}(a, *iter_k), ValueType{0}))
+                if (std::equal_to{}(std::plus{}(a, *iter_k), ValueType{}))
                 {
                     auto const tri{
                         detail::make_sorted_array(*iter_i, *iter_j, *iter_k)
@@ -335,7 +335,7 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     auto const last_i{std::next(first, std::distance(first, last) - 2)};
     for (auto iter_i{first}; iter_i != last_i; ++iter_i)
     {
-        auto const minuend{std::minus{}(ValueType{0}, *iter_i)};
+        auto const minuend{std::minus{}(ValueType{}, *iter_i)};
 
         auto const last_j{std::next(first, std::distance(first, last) - 1)};
         for (auto iter_j{std::next(iter_i)}; iter_j != last_j; ++iter_j)

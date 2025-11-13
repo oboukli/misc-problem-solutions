@@ -26,7 +26,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    int max_profit{0};
+    int max_profit{};
 
     auto buyer_iter{iter};
     while (++iter != last)
@@ -56,7 +56,7 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    int max_profit{0};
+    int max_profit{};
 
     auto buyer_price{*iter};
     while (++iter != last)
@@ -88,7 +88,7 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    int max_profit{0};
+    int max_profit{};
 
     auto buyer_price{*iter};
     while (++iter != last)

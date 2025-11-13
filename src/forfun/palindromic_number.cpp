@@ -12,7 +12,7 @@ namespace forfun::palindromic_number::stl {
 
 [[nodiscard]] auto is_palindrome(int const n) noexcept -> bool
 {
-    int nn{0};
+    int nn{};
     std::div_t d{.quot = n, .rem = 0};
     while (d.quot > 0)
     {

@@ -24,22 +24,22 @@ namespace forfun::last_stone_weight::priority_queue_based {
 
     while (max_priority_queue.size() > SizeType{1})
     {
-        assert(max_priority_queue.top() >= ValueType{0});
+        assert(max_priority_queue.top() >= ValueType{});
 
         ValueType s{max_priority_queue.top()};
         max_priority_queue.pop();
 
-        assert(max_priority_queue.top() >= ValueType{0});
+        assert(max_priority_queue.top() >= ValueType{});
 
         s -= max_priority_queue.top();
         max_priority_queue.pop();
-        if (s != ValueType{0})
+        if (s != ValueType{})
         {
             max_priority_queue.emplace(s);
         }
     }
 
-    return max_priority_queue.empty() ? ValueType{0} : max_priority_queue.top();
+    return max_priority_queue.empty() ? ValueType{} : max_priority_queue.top();
 }
 
 } // namespace forfun::last_stone_weight::priority_queue_based

@@ -29,7 +29,7 @@ concept lru_cache = requires(T cache, std::size_t k, int v) {
 namespace naive {
 
 struct CacheItem final {
-    std::int64_t ticks_{0};
+    std::int64_t ticks_{};
     std::size_t key_{};
     int value_{};
 };
@@ -56,10 +56,10 @@ public:
 private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     std::unique_ptr<CacheItem[]> cache_;
-    std::size_t capacity_{0UZ};
-    std::size_t size_{0UZ};
-    std::size_t least_recent_idx_{0UZ};
-    std::int64_t ticks_{0};
+    std::size_t capacity_{};
+    std::size_t size_{};
+    std::size_t least_recent_idx_{};
+    std::int64_t ticks_{};
 };
 
 } // namespace naive
@@ -90,8 +90,8 @@ private:
     using cache_item_t = std::pair<std::size_t, int>;
     std::list<cache_item_t> cache_;
     std::unordered_map<std::size_t, std::list<cache_item_t>::iterator> lookup_;
-    std::size_t capacity_{0UZ};
-    std::size_t size_{0UZ};
+    std::size_t capacity_{};
+    std::size_t size_{};
 };
 
 } // namespace stl

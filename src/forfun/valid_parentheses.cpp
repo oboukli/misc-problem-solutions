@@ -73,7 +73,7 @@ namespace circuit_breaker {
     using SizeType = std::u8string_view::size_type;
 
     // Odd strings are always invalid.
-    if ((s.size() % SizeType{2}) != SizeType{0})
+    if ((s.size() % SizeType{2}) != SizeType{})
     {
         return false;
     }
@@ -144,7 +144,7 @@ namespace dyn_array_based {
     using SizeType = std::u8string_view::size_type;
 
     // Odd strings are always invalid.
-    if ((s.size() % SizeType{2}) != SizeType{0})
+    if ((s.size() % SizeType{2}) != SizeType{})
     {
         return false;
     }
@@ -243,7 +243,7 @@ namespace vector_based_demi_allocated {
     using ConstIter = std::u8string_view::const_iterator;
 
     std::vector<char8_t> expected{};
-    expected.reserve(s.size() / 2U);
+    expected.reserve(s.size() / 2UZ);
 
     char8_t back{};
     for (ConstIter iter{s.cbegin()}; iter != s.cend(); ++iter)

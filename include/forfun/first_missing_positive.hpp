@@ -32,9 +32,9 @@ constexpr auto quasi_sort(Iter const first, Iter const src) noexcept -> void
 {
     using ValType = std::iter_value_t<Iter>;
 
-    if (auto const n{*src}; n > ValType{0})
+    if (auto const n{*src}; n > ValType{})
     {
-        auto const dest{first + std::max<ValType>(ValType{0}, n - ValType{1})};
+        auto const dest{first + std::max<ValType>(ValType{}, n - ValType{1})};
         if (auto const aux{*dest}; aux != n)
         {
             *dest = n;
@@ -68,7 +68,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
         else if (current > max)
         {
             --max;
-            *iter = ValType{0};
+            *iter = ValType{};
         }
         else
         {
@@ -113,7 +113,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
         else if (current > max)
         {
             --max;
-            *iter = ValType{0};
+            *iter = ValType{};
         }
         else
         {
@@ -123,7 +123,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     ValType min_num{1};
 
-    for (std::iter_difference_t<Iter> i{0}; i < max; ++i)
+    for (std::iter_difference_t<Iter> i{}; i < max; ++i)
     {
         if (first[i] == min_num)
         {

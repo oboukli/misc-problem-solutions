@@ -32,10 +32,10 @@ constexpr auto is_palindrome(
 {
     using SizeType = std::basic_string_view<CharT>::size_type;
 
-    SizeType end{length - 1U};
-    SizeType const mid{length / 2U};
+    SizeType end{length - 1UZ};
+    SizeType const mid{length / 2UZ};
 
-    for (SizeType i{0U}; i != mid; ++i)
+    for (SizeType i{}; i != mid; ++i)
     {
         if (s[i] != s[end--])
         {
@@ -54,10 +54,10 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 {
     using SizeType = std::string_view::size_type;
 
-    SizeType const end{s.length() - 1U};
-    SizeType const mid{s.length() / 2U};
+    SizeType const end{s.length() - 1UZ};
+    SizeType const mid{s.length() / 2UZ};
 
-    for (SizeType i{0U}; i != mid; ++i)
+    for (SizeType i{}; i != mid; ++i)
     {
         if (std::tolower(static_cast<unsigned char>(s[i]))
             != std::tolower(static_cast<unsigned char>(s[end - i])))
@@ -88,7 +88,7 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
     ConstIter const mid{
-        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U})
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2})
     };
 
     for (auto lower{s.cbegin()}; lower != mid; ++lower)
@@ -113,7 +113,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
     auto upper{s.crbegin()};
     ConstIter const mid{
-        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U})
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2})
     };
 
     for (ConstIter lower{s.cbegin()}; lower != mid; ++lower)
@@ -146,7 +146,7 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
 
     return std::equal(
         s.cbegin(),
-        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2U}),
+        s.cbegin() + static_cast<DiffType>(s.length() / SizeType{2}),
         s.crbegin()
     );
 }
@@ -165,7 +165,7 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
 
     return std::equal(
         s.cbegin(),
-        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2U})),
+        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2})),
         s.crbegin()
     );
 }
@@ -189,7 +189,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
     return std::equal(
         s.cbegin(),
-        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2U})),
+        std::next(s.cbegin(), static_cast<DiffType>(s.length() / SizeType{2})),
         s.crbegin(),
         detail::equal_case_insensitive
     );
