@@ -24,7 +24,7 @@ namespace fast {
 
     T nn{};
     auto d{n};
-    while (d > T{0})
+    while (d > T{})
     {
         nn = static_cast<T>((nn * T{10}) + (d % T{10}));
         d /= T{10};

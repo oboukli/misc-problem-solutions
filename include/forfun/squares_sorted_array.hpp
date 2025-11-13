@@ -163,7 +163,7 @@ constexpr auto squares_sorted_special(
     using ValueType = std::iter_value_t<Iter>;
 
     // Can assume all values are non-negative.
-    if (*iter >= ValueType{0})
+    if (*iter >= ValueType{})
     {
         detail::calc_squares(iter, last, dest_iter);
 
@@ -173,7 +173,7 @@ constexpr auto squares_sorted_special(
     auto upper{std::prev(last)};
 
     // Can assume all values are negative.
-    if (*upper < ValueType{0})
+    if (*upper < ValueType{})
     {
         detail::calc_squares_reversed(iter, last, dest_iter);
 

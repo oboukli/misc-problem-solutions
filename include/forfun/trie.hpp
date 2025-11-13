@@ -53,12 +53,12 @@ auto insert(T& root, StringViewT<T> const& word) -> void
     using LenT = StringViewT<T>::size_type;
 
     auto const word_len{word.length()};
-    if (word_len == LenT{0U}) [[unlikely]]
+    if (word_len == LenT{}) [[unlikely]]
     {
         return;
     }
 
-    auto const prfx{word[LenT{0U}]};
+    auto const prfx{word[LenT{}]};
 
     T* parent{nullptr};
     for (auto const& node_ptr : root.children)

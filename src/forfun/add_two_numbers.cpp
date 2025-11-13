@@ -21,7 +21,7 @@ namespace forfun::add_two_numbers::stl {
 
     auto iter_a{addend_a.cbegin()};
     auto iter_b{addend_b.cbegin()};
-    unsigned int column_sum{0U};
+    unsigned int column_sum{};
 
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do

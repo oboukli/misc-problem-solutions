@@ -64,8 +64,8 @@ auto unescape(OS& os, std::basic_string_view<CharT, Traits> const sv) -> bool
     using SizeType = decltype(sv)::size_type;
 
     bool pop_next{false};
-    std::streamsize chunk_start{0};
-    SizeType i{0};
+    std::streamsize chunk_start{};
+    SizeType i{};
     for (; i < sv.size(); ++i)
     {
         if ((sv[i] == escape_char) || (sv[i] == delimiter_char))
@@ -142,10 +142,10 @@ template <
     std::vector<std::basic_string<CharT, Traits, Allocator>> decoded_tokens{};
 
     std::basic_ostringstream<CharT, Traits, Allocator> os{};
-    SizeType sub_start{0};
+    SizeType sub_start{};
     bool has_delimiter{true};
     // clang-format off
-    for (SizeType p{0};
+    for (SizeType p{};
         ((p = encoded.find(delimiter_char, p)) != std::basic_string_view<CharT, Traits>::npos);)
     // clang-format on
     {

@@ -19,9 +19,9 @@ namespace iterative {
 template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto fib(T const n) noexcept -> T
 {
-    T a{0};
+    T a{};
 
-    for (T i{0}, b{1}; i < n; ++i)
+    for (T i{}, b{1}; i < n; ++i)
     {
         T const c{a + b};
         a = b;
@@ -42,7 +42,7 @@ template <common::concepts::addition_unpromoted T>
     {
         if (n < T{1}) [[unlikely]]
         {
-            return T{0};
+            return T{};
         }
 
         return T{1};

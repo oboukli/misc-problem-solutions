@@ -49,7 +49,7 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 
     {
         ValType current{*first};
-        std::size_t current_count{0UZ};
+        std::size_t current_count{};
         auto aux_iter{first};
 
         ++current_count;
@@ -112,7 +112,7 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 
     {
         ValType current{*first};
-        std::size_t current_count{0UZ};
+        std::size_t current_count{};
         auto aux_iter{first};
 
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
@@ -184,7 +184,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     std::vector<ValType> result;
     result.reserve(k);
-    for (std::size_t i{0UZ}; i < k; ++i)
+    for (std::size_t i{}; i < k; ++i)
     {
         result.push_back(intermediate.top().first);
         intermediate.pop();
@@ -233,7 +233,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     std::vector<ValType> result;
     result.reserve(k);
-    for (std::size_t i{0UZ}; i < k; ++i)
+    for (std::size_t i{}; i < k; ++i)
     {
         result.push_back(intermediate.top().first);
         intermediate.pop();

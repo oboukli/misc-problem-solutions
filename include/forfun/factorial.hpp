@@ -32,7 +32,7 @@ namespace iterative {
 {
     using T = std::remove_const_t<decltype(n)>;
 
-    assert(n >= T{0});
+    assert(n >= T{});
 
     T result{1};
     for (auto i{n}; i > T{1}; --i)
@@ -52,7 +52,7 @@ namespace recursive {
 template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
 {
-    assert(n >= T{0});
+    assert(n >= T{});
 
     if (n <= T{1}) [[unlikely]]
     {
@@ -74,7 +74,7 @@ namespace stl_functional {
 {
     using T = decltype(n);
 
-    assert(n >= T{0});
+    assert(n >= T{});
 
     return std::ranges::fold_left(
         std::views::iota(T{1}) | std::views::take(n), T{1}, std::multiplies{}

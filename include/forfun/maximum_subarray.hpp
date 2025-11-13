@@ -33,13 +33,13 @@ max_sum(Iter const first, Sentinel const last) noexcept
 
     if (first == last) [[unlikely]]
     {
-        return T{0};
+        return T{};
     }
 
     T max_sum{std::numeric_limits<T>::min()};
     for (auto iter_i{first}; iter_i != last; ++iter_i)
     {
-        T sum{0};
+        T sum{};
         for (auto iter_j{iter_i}; iter_j != last; ++iter_j)
         {
             sum += *iter_j;
@@ -89,10 +89,10 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     if (iter == last) [[unlikely]]
     {
-        return T{0};
+        return T{};
     }
 
-    return detail::max_sum_internal(iter, last, std::min(T{0}, *iter));
+    return detail::max_sum_internal(iter, last, std::min(T{}, *iter));
 }
 
 } // namespace recursive
@@ -108,10 +108,10 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     if (iter == last) [[unlikely]]
     {
-        return T{0};
+        return T{};
     }
 
-    T sum{std::min(T{0}, *iter)};
+    T sum{std::min(T{}, *iter)};
     T max_sum{sum};
     for (; iter != last; ++iter)
     {

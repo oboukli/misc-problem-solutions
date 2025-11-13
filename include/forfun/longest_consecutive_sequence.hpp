@@ -34,8 +34,8 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     std::sort(iter, last);
     auto const last_unique{std::unique(iter, last)};
 
-    std::size_t top_streak{1UZ};
-    std::size_t streak{1UZ};
+    std::size_t top_streak{1};
+    std::size_t streak{1};
 
     for (auto iter_b{std::next(iter)}; iter_b != last_unique; ++iter, ++iter_b)
     {
@@ -93,7 +93,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     std::sort(iter, last);
     auto const last_unique{std::unique(iter, last)};
 
-    std::size_t top_streak{1UZ};
+    std::size_t top_streak{1};
     auto streak_begin_iter{iter};
 
     auto iter_b{std::next(iter)};
@@ -137,8 +137,8 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
     std::set<ValueType> const lookup_set(first, last);
 
-    std::size_t top_streak{1UZ};
-    std::size_t streak{1UZ};
+    std::size_t top_streak{1};
+    std::size_t streak{1};
 
     // clang-format off
     for (auto iter_a{lookup_set.cbegin()},
@@ -186,10 +186,10 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
         std::is_same_v<std::size_t, typename decltype(lookup)::size_type>
     );
 
-    std::size_t top_streak{0UZ};
+    std::size_t top_streak{};
 
     auto lu_iter{lookup.cbegin()};
-    for (std::size_t i{0UZ}; i < lookup.size(); ++i)
+    for (std::size_t i{}; i < lookup.size(); ++i)
     {
         auto const a{*lu_iter};
         if (not lookup.contains(a - 1))

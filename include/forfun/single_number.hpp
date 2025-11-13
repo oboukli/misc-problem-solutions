@@ -24,7 +24,7 @@ template <std::ranges::input_range Range>
 [[nodiscard]] constexpr auto get_single(Range&& nums) noexcept
     -> std::ranges::range_value_t<Range>
 {
-    std::ranges::range_value_t<Range> result{0};
+    std::ranges::range_value_t<Range> result{};
 
     for (auto const n : std::forward<Range>(nums))
     {
@@ -46,7 +46,7 @@ template <std::ranges::input_range Range>
 {
     return std::ranges::fold_left(
         std::forward<Range>(nums),
-        std::ranges::range_value_t<Range>{0},
+        std::ranges::range_value_t<Range>{},
         std::bit_xor{}
     );
 }

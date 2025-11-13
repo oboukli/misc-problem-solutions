@@ -21,7 +21,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
 {
-    int max_area{0};
+    int max_area{};
 
     for (; iter_a != last; ++iter_a)
     {
@@ -46,7 +46,7 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
 [[nodiscard]] constexpr auto calc_max_area(IterA iter_a, IterB iter_b) noexcept
     -> int
 {
-    int max_area{0};
+    int max_area{};
 
     --iter_b;
     int width{static_cast<int>(std::distance(iter_a, iter_b))};

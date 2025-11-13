@@ -19,7 +19,7 @@ constexpr auto toh(
     Rod& src, Rod& des, Rod& aux, Monk monk, std::integral auto num_moves
 ) noexcept(noexcept(monk(src, des))) -> void
 {
-    if (num_moves == decltype(num_moves){0}) [[unlikely]]
+    if (num_moves == decltype(num_moves){}) [[unlikely]]
     {
         return;
     }

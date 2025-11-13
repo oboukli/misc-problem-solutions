@@ -25,19 +25,19 @@ template <typename Elements>
 
     SizeType const size{elements.size()};
 
-    if (size < SizeType{3U})
+    if (size < SizeType{3})
     {
         return elements.cend();
     }
 
-    SizeType threshold{(size / SizeType{2U}) + SizeType{1U}};
-    SizeType count{0U};
+    SizeType threshold{(size / SizeType{2}) + SizeType{1}};
+    SizeType count{};
     ElementType majority_elm{} /*[[indeterminate]]*/;
     Iter majority_iter{} /*[[indeterminate]]*/;
 
     for (Iter iter{elements.cbegin()}; iter != elements.cend(); ++iter)
     {
-        if (count == SizeType{0U})
+        if (count == SizeType{})
         {
             majority_elm = *iter;
             majority_iter = iter;
@@ -64,7 +64,7 @@ template <typename Elements>
             --threshold;
         }
 
-        if (threshold == SizeType{0U})
+        if (threshold == SizeType{})
         {
             return majority_iter;
         }

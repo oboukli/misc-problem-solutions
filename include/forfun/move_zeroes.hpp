@@ -27,7 +27,7 @@ constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
     auto iter_j{iter};
     for (; iter != last; ++iter)
     {
-        if (*iter != ValType{0})
+        if (*iter != ValType{})
         {
             std::iter_swap(iter, iter_j);
             ++iter_j;
@@ -48,7 +48,7 @@ constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
     auto iter_j{iter};
     for (; iter != last; ++iter)
     {
-        if (*iter != ValType{0})
+        if (*iter != ValType{})
         {
             *iter_j = *iter;
             ++iter_j;
@@ -57,7 +57,7 @@ constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
 
     for (; iter_j != last; ++iter_j)
     {
-        *iter_j = ValType{0};
+        *iter_j = ValType{};
     }
 }
 
@@ -74,14 +74,14 @@ constexpr auto move_zeroes(Iter iter, Sentinel const last) noexcept -> void
     auto iter_j{iter};
     for (; iter != last; ++iter)
     {
-        if (*iter != ValType{0}) [[likely]]
+        if (*iter != ValType{}) [[likely]]
         {
             *iter_j = *iter;
             ++iter_j;
         }
     }
 
-    std::fill(iter_j, last, ValType{0});
+    std::fill(iter_j, last, ValType{});
 }
 
 } // namespace stl

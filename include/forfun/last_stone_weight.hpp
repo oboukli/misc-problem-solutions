@@ -35,11 +35,11 @@ last_stone_weight(IterA const first, IterB last) noexcept
 
     for (auto stop{std::next(first)}; stop != last;)
     {
-        ValueType s2{0};
+        ValueType s2{};
         auto it_s1{last};
         auto it_s2{last};
 
-        s1 = ValueType{0};
+        s1 = ValueType{};
 
         // Find the heaviest two stones, where s1 is larger than or equal to s2.
         for (auto it{first}; it != last; ++it)
@@ -100,7 +100,7 @@ last_stone_weight(IterA const first, IterB last) noexcept
         s -= *first;
         std::pop_heap(first, last--);
 
-        if (s != ValueType{0})
+        if (s != ValueType{})
         {
             *last = s;
             ++last;
@@ -110,7 +110,7 @@ last_stone_weight(IterA const first, IterB last) noexcept
         size = last - first;
     }
 
-    return size == DiffType{0} ? ValueType{0} : *first;
+    return size == DiffType{} ? ValueType{} : *first;
 }
 
 } // namespace heapified
