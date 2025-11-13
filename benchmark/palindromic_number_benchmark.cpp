@@ -20,7 +20,7 @@ TEST_CASE("Palindromic number benchmarking", "[benchmark][palindromic_number]")
 
     static constexpr int const palindromic_num{1234554321};
     static_assert(
-        (palindromic_num >= decltype(palindromic_num){0})
+        (palindromic_num >= decltype(palindromic_num){})
         and (palindromic_num <= std::numeric_limits<decltype(palindromic_num)>::max())
     );
 
