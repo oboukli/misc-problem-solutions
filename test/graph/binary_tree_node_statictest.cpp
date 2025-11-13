@@ -16,7 +16,7 @@ TEST_CASE("Binary tree node", "[binary_tree_node_static]")
 
         STATIC_REQUIRE(node.left_node_ == nullptr);
         STATIC_REQUIRE(node.right_node_ == nullptr);
-        STATIC_REQUIRE(node.value_ == decltype(node)::value_type{0});
+        STATIC_REQUIRE(node.value_ == decltype(node)::value_type{});
     }
 
     SECTION("Constructor 2")

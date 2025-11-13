@@ -29,7 +29,7 @@ TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
         std::vector<int> const numbers{};
         std::vector<int> sums(1);
         std::vector const expected{0};
-        static constexpr auto const sub_size{0};
+        static constexpr int const sub_size{};
 
         CAPTURE(numbers);
         CAPTURE(sums.size());
@@ -48,7 +48,7 @@ TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
         std::vector<int> const numbers{};
         std::vector<int> sums{};
         std::vector<int> const expected{};
-        static constexpr auto const sub_size{0};
+        static constexpr int const sub_size{};
 
         CAPTURE(numbers);
         CAPTURE(sums.size());

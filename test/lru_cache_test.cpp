@@ -188,7 +188,7 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         }
 
     private:
-        int value_{0};
+        int value_{};
     };
 
     struct Dummy4 final : Dummy3 {

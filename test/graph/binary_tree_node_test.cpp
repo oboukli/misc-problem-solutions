@@ -16,7 +16,7 @@ TEST_CASE("Binary tree node", "[binary_tree_node]")
 
         REQUIRE(node.left_node_ == nullptr);
         REQUIRE(node.right_node_ == nullptr);
-        REQUIRE(node.value_ == decltype(node)::value_type{0});
+        REQUIRE(node.value_ == decltype(node)::value_type{});
     }
 
     SECTION("Constructor 2")

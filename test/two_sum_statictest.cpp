@@ -29,7 +29,7 @@ TEMPLATE_TEST_CASE_SIG(
 )
 {
     static constexpr std::array<int, 0> const nums{};
-    static constexpr int const target{0};
+    static constexpr int const target{};
     static constexpr std::array const expected{nums.cend(), nums.cend()};
 
     static constexpr auto const actual{
