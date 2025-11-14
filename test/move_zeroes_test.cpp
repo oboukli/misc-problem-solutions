@@ -17,8 +17,8 @@
 
 namespace {
 
-using VecItr = std::vector<int>::iterator;
-using Arr5Itr = std::array<int, 5>::iterator;
+using VecIter = std::vector<int>::iterator;
+using Arr5Iter = std::array<int, 5>::iterator;
 
 } // namespace
 
@@ -26,9 +26,9 @@ TEMPLATE_TEST_CASE_SIG(
     "Move zeroes (std::vector)",
     "[move_zeroes]",
     (auto move_zeroes, move_zeroes),
-    (forfun::move_zeroes::sol1::move_zeroes<VecItr, VecItr>),
-    (forfun::move_zeroes::sol2::move_zeroes<VecItr, VecItr>),
-    (forfun::move_zeroes::stl::move_zeroes<VecItr, VecItr>)
+    (forfun::move_zeroes::sol1::move_zeroes<VecIter, VecIter>),
+    (forfun::move_zeroes::sol2::move_zeroes<VecIter, VecIter>),
+    (forfun::move_zeroes::stl::move_zeroes<VecIter, VecIter>)
 )
 {
     auto [test_input, expected]{GENERATE(
@@ -57,9 +57,9 @@ TEMPLATE_TEST_CASE_SIG(
     "Move zeroes (std::array)",
     "[move_zeroes]",
     (auto move_zeroes, move_zeroes),
-    (forfun::move_zeroes::sol1::move_zeroes<Arr5Itr, Arr5Itr>),
-    (forfun::move_zeroes::sol2::move_zeroes<Arr5Itr, Arr5Itr>),
-    (forfun::move_zeroes::stl::move_zeroes<Arr5Itr, Arr5Itr>)
+    (forfun::move_zeroes::sol1::move_zeroes<Arr5Iter, Arr5Iter>),
+    (forfun::move_zeroes::sol2::move_zeroes<Arr5Iter, Arr5Iter>),
+    (forfun::move_zeroes::stl::move_zeroes<Arr5Iter, Arr5Iter>)
 )
 {
     static constexpr std::array const expected{1, 3, 12, 0, 0};

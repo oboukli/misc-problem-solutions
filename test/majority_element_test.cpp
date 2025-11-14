@@ -58,11 +58,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Left contiguous majority")
     {
         std::vector const elements{11, 11, 11, 11, 13, 13, 13};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == elements.cbegin());
@@ -72,11 +72,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Right contiguous majority")
     {
         std::vector const elements{17, 17, 17, 19, 19, 19, 19};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == std::next(elements.cbegin(), 6));
@@ -86,11 +86,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Equality among an odd number of elements of each group")
     {
         std::vector const elements{5, 5, 5, 7, 7, 7};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE(result == elements.cend());
     }
@@ -98,11 +98,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Equality among an even number of elements of each group")
     {
         std::vector const elements{5, 5, 5, 5, 7, 7, 7, 7};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE(result == elements.cend());
     }
@@ -110,11 +110,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Three elements with majority")
     {
         std::vector const elements{1, 2, 1};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == std::next(elements.cbegin(), 2));
@@ -124,11 +124,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Four elements with majority")
     {
         std::vector const elements{2, 7, 2, 2};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == std::next(elements.cbegin(), 2));
@@ -138,11 +138,11 @@ TEST_CASE("Majority element", "[majority_element]")
     SECTION("Eleven elements with majority")
     {
         std::vector const elements{5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5};
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == std::next(elements.cbegin(), 10));
@@ -172,13 +172,13 @@ TEST_CASE("Majority element", "[majority_element]")
             5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
             // clang-format on
         };
-        using ConstItr = decltype(elements)::const_iterator;
+        using ConstIter = decltype(elements)::const_iterator;
 
         CHECK(elements.size() == 64UZ);
 
         CAPTURE(elements);
 
-        ConstItr const result{majority_element(elements)};
+        ConstIter const result{majority_element(elements)};
 
         REQUIRE_FALSE(result == elements.cend());
         CHECK(result == std::next(elements.cbegin(), 24));
