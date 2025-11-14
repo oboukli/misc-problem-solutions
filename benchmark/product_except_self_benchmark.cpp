@@ -42,7 +42,7 @@ TEST_CASE(
         0U,
     };
 
-    using ConstItr = decltype(input)::const_iterator;
+    using ConstIter = decltype(input)::const_iterator;
     using Iter = std::remove_const_t<decltype(input)>::iterator;
 
     ankerl::nanobench::Bench()
@@ -52,7 +52,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(
-                alg1::product_except_self<ConstItr, ConstItr, Iter, Iter>
+                alg1::product_except_self<ConstIter, ConstIter, Iter, Iter>
             )
                 .c_str(),
             [] noexcept -> void {
@@ -67,7 +67,7 @@ TEST_CASE(
         )
         .run(
             NAMEOF_RAW(
-                alg2::product_except_self<ConstItr, ConstItr, Iter, Iter>
+                alg2::product_except_self<ConstIter, ConstIter, Iter, Iter>
             )
                 .c_str(),
             [] noexcept -> void {
