@@ -16,29 +16,29 @@
 
 #include "forfun/product_except_self.hpp"
 
-using IntVecItr = std::vector<int>::iterator;
-using IntVecConstItr = std::vector<int>::const_iterator;
-using FloatVecConstItr = std::vector<float>::const_iterator;
-using DoubleVecItr = std::vector<double>::iterator;
-using IntArr3ConstItr = std::array<int, 3>::const_iterator;
-using IntArr3Itr = std::array<int, 3>::iterator;
-using U64ArrConstItr = std::array<std::uint64_t, 16>::const_iterator;
-using U64ArrItr = std::array<std::uint64_t, 16>::iterator;
+using IntVecIter = std::vector<int>::iterator;
+using IntVecConstIter = std::vector<int>::const_iterator;
+using FloatVecConstIter = std::vector<float>::const_iterator;
+using DoubleVecIter = std::vector<double>::iterator;
+using IntArr3ConstIter = std::array<int, 3>::const_iterator;
+using IntArr3Iter = std::array<int, 3>::iterator;
+using U64ArrConstIter = std::array<std::uint64_t, 16>::const_iterator;
+using U64ArrIter = std::array<std::uint64_t, 16>::iterator;
 
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
-        IntVecConstItr,
-        IntVecConstItr,
-        IntVecItr,
-        IntVecItr>),
+        IntVecConstIter,
+        IntVecConstIter,
+        IntVecIter,
+        IntVecIter>),
     (forfun::product_except_self::alg2::product_except_self<
-        IntVecConstItr,
-        IntVecConstItr,
-        IntVecItr,
-        IntVecItr>)
+        IntVecConstIter,
+        IntVecConstIter,
+        IntVecIter,
+        IntVecIter>)
 )
 {
     SECTION("Empty input")
@@ -127,15 +127,15 @@ TEMPLATE_TEST_CASE_SIG(
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
-        FloatVecConstItr,
-        FloatVecConstItr,
-        DoubleVecItr,
-        DoubleVecItr>),
+        FloatVecConstIter,
+        FloatVecConstIter,
+        DoubleVecIter,
+        DoubleVecIter>),
     (forfun::product_except_self::alg2::product_except_self<
-        FloatVecConstItr,
-        FloatVecConstItr,
-        DoubleVecItr,
-        DoubleVecItr>)
+        FloatVecConstIter,
+        FloatVecConstIter,
+        DoubleVecIter,
+        DoubleVecIter>)
 )
 {
     SECTION("Input is of four floats, output type is of four doubles")
@@ -160,15 +160,15 @@ TEMPLATE_TEST_CASE_SIG(
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
-        IntArr3ConstItr,
-        IntArr3ConstItr,
-        IntArr3Itr,
-        IntArr3Itr>),
+        IntArr3ConstIter,
+        IntArr3ConstIter,
+        IntArr3Iter,
+        IntArr3Iter>),
     (forfun::product_except_self::alg2::product_except_self<
-        IntArr3ConstItr,
-        IntArr3ConstItr,
-        IntArr3Itr,
-        IntArr3Itr>)
+        IntArr3ConstIter,
+        IntArr3ConstIter,
+        IntArr3Iter,
+        IntArr3Iter>)
 )
 {
     SECTION("Input is of three integers")
@@ -193,15 +193,15 @@ TEMPLATE_TEST_CASE_SIG(
     "[product_except_self]",
     (auto product_except_self, product_except_self),
     (forfun::product_except_self::alg1::product_except_self<
-        U64ArrConstItr,
-        U64ArrConstItr,
-        U64ArrItr,
-        U64ArrItr>),
+        U64ArrConstIter,
+        U64ArrConstIter,
+        U64ArrIter,
+        U64ArrIter>),
     (forfun::product_except_self::alg2::product_except_self<
-        U64ArrConstItr,
-        U64ArrConstItr,
-        U64ArrItr,
-        U64ArrItr>)
+        U64ArrConstIter,
+        U64ArrConstIter,
+        U64ArrIter,
+        U64ArrIter>)
 )
 {
     SECTION("Factorial product value")

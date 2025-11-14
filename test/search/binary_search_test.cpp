@@ -19,9 +19,9 @@
 namespace {
 
 template <std::size_t Size>
-using StdArrayConstItr = std::array<int, Size>::const_iterator;
+using StdArrayConstIter = std::array<int, Size>::const_iterator;
 
-using StdVectorConstItr = std::vector<int>::const_iterator;
+using StdVectorConstIter = std::vector<int>::const_iterator;
 
 } // namespace
 
@@ -31,9 +31,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<0>, StdArrayConstItr<0>, int>),
+        find<StdArrayConstIter<0>, StdArrayConstIter<0>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<0>, StdArrayConstItr<0>, int>)
+        find<StdArrayConstIter<0>, StdArrayConstIter<0>, int>)
     // clang-format on
 )
 {
@@ -50,9 +50,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<1>, StdArrayConstItr<1>, int>),
+        find<StdArrayConstIter<1>, StdArrayConstIter<1>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<1>, StdArrayConstItr<1>, int>)
+        find<StdArrayConstIter<1>, StdArrayConstIter<1>, int>)
     // clang-format on
 )
 {
@@ -96,9 +96,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<2>, StdArrayConstItr<2>, int>),
+        find<StdArrayConstIter<2>, StdArrayConstIter<2>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<2>, StdArrayConstItr<2>, int>)
+        find<StdArrayConstIter<2>, StdArrayConstIter<2>, int>)
     // clang-format on
 )
 {
@@ -156,9 +156,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<3>, StdArrayConstItr<3>, int>),
+        find<StdArrayConstIter<3>, StdArrayConstIter<3>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<3>, StdArrayConstItr<3>, int>)
+        find<StdArrayConstIter<3>, StdArrayConstIter<3>, int>)
     // clang-format on
 )
 {
@@ -232,9 +232,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<12>, StdArrayConstItr<12>, int>),
+        find<StdArrayConstIter<12>, StdArrayConstIter<12>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<12>, StdArrayConstItr<12>, int>)
+        find<StdArrayConstIter<12>, StdArrayConstIter<12>, int>)
     // clang-format on
 )
 {
@@ -401,9 +401,9 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstItr<11>, StdArrayConstItr<11>, int>),
+        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstItr<11>, StdArrayConstItr<11>, int>)
+        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>)
     // clang-format on
 )
 {
@@ -570,7 +570,7 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::recursive::
-        find<StdVectorConstItr, StdVectorConstItr, int>)
+        find<StdVectorConstIter, StdVectorConstIter, int>)
     // clang-format on
 )
 {
