@@ -31,21 +31,21 @@ using concepts::product_computable;
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <
-    std::contiguous_iterator InItr,
-    std::sentinel_for<InItr> InItrSentinel,
-    std::contiguous_iterator OutItr,
-    std::sentinel_for<OutItr> OutItrSentinel>
+    std::contiguous_iterator InIter,
+    std::sentinel_for<InIter> InIterSentinel,
+    std::contiguous_iterator OutIter,
+    std::sentinel_for<OutIter> OutIterSentinel>
     requires product_computable<
-        std::iter_value_t<InItr>,
-        std::iter_value_t<OutItr>>
+        std::iter_value_t<InIter>,
+        std::iter_value_t<OutIter>>
 constexpr auto product_except_self(
-    InItr const first,
-    InItrSentinel const last,
-    OutItr const products_first,
-    OutItrSentinel const products_last
+    InIter const first,
+    InIterSentinel const last,
+    OutIter const products_first,
+    OutIterSentinel const products_last
 ) noexcept -> void
 {
-    using ValType = std::iter_value_t<OutItr>;
+    using ValType = std::iter_value_t<OutIter>;
 
     for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
     {
@@ -75,33 +75,33 @@ using concepts::product_computable;
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <
-    std::contiguous_iterator InItr,
-    std::sentinel_for<InItr> InItrSentinel,
-    std::contiguous_iterator OutItr,
-    std::sized_sentinel_for<OutItr> OutItrSentinel>
+    std::contiguous_iterator InIter,
+    std::sentinel_for<InIter> InIterSentinel,
+    std::contiguous_iterator OutIter,
+    std::sized_sentinel_for<OutIter> OutIterSentinel>
     requires product_computable<
-        std::iter_value_t<InItr>,
-        std::iter_value_t<OutItr>>
+        std::iter_value_t<InIter>,
+        std::iter_value_t<OutIter>>
 constexpr auto product_except_self(
-    InItr const first,
-    InItrSentinel const last,
-    OutItr const products_itr,
-    OutItrSentinel const products_last
+    InIter const first,
+    InIterSentinel const last,
+    OutIter const products_iter,
+    OutIterSentinel const products_last
 ) noexcept -> void
 {
-    using ValType = std::iter_value_t<OutItr>;
-    using DiffType = std::iter_difference_t<InItr>;
+    using ValType = std::iter_value_t<OutIter>;
+    using DiffType = std::iter_difference_t<InIter>;
 
     if (first == last) [[unlikely]]
     {
         return;
     }
 
-    auto const length{products_last - products_itr};
-    for (auto it_prd{products_itr}; it_prd != products_last; ++it_prd)
+    auto const length{products_last - products_iter};
+    for (auto it_prd{products_iter}; it_prd != products_last; ++it_prd)
     {
         *it_prd = ValType{1};
-        auto const idx_prd{it_prd - products_itr};
+        auto const idx_prd{it_prd - products_iter};
         for (auto j{DiffType{1}}; j < length; ++j)
         {
             *it_prd *= static_cast<ValType>(first[(idx_prd + j) % length]);

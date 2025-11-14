@@ -22,19 +22,19 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         return;
     }
 
-    auto const first_element_itr{matrix.front().begin()};
+    auto const first_element_iter{matrix.front().begin()};
     bool is_first_col_zeroed{false};
 
-    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
+    for (auto row{matrix.begin()}; row != matrix.end(); ++row)
     {
-        assert(matrix.front().size() == itr_r->size());
+        assert(matrix.front().size() == row->size());
 
         DiffC col_offset{0};
-        for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
+        for (auto col{row->begin()}; col != row->end(); ++col)
         {
-            if (*itr_c == 0)
+            if (*col == 0)
             {
-                itr_r->front() = 0;
+                row->front() = 0;
 
                 if (col_offset == DiffC{0})
                 {
@@ -42,7 +42,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
                 }
                 else
                 {
-                    *(first_element_itr + col_offset) = 0;
+                    *(first_element_iter + col_offset) = 0;
                 }
             }
             ++col_offset;
@@ -50,17 +50,17 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     }
 
     // Zero all columns, except for the first one.
-    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
+    for (auto row{matrix.begin()}; row != matrix.end(); ++row)
     {
         DiffC col_offset{1};
         // clang-format off
-        for (auto itr_c{itr_r->begin() + col_offset}; itr_c != itr_r->end();
-            ++itr_c)
+        for (auto col{row->begin() + col_offset}; col != row->end();
+            ++col)
         // clang-format on
         {
-            if (*(first_element_itr + col_offset) == 0)
+            if (*(first_element_iter + col_offset) == 0)
             {
-                *itr_c = 0;
+                *col = 0;
             }
 
             ++col_offset;
@@ -68,13 +68,13 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     }
 
     // Zero all rows.
-    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
+    for (auto row{matrix.begin()}; row != matrix.end(); ++row)
     {
-        if (itr_r->front() == 0)
+        if (row->front() == 0)
         {
-            for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
+            for (auto col{row->begin()}; col != row->end(); ++col)
             {
-                *itr_c = 0;
+                *col = 0;
             }
         }
     }
@@ -103,19 +103,19 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
         return;
     }
 
-    auto const front_itr{matrix.begin()->begin()};
+    auto const front_iter{matrix.begin()->begin()};
     bool is_first_col_zeroed{false};
 
-    for (auto itr_r{matrix.begin()}; itr_r != matrix.end(); ++itr_r)
+    for (auto row{matrix.begin()}; row != matrix.end(); ++row)
     {
-        assert(matrix.front().size() == itr_r->size());
+        assert(matrix.front().size() == row->size());
 
         DiffC col_offset{0};
-        for (auto itr_c{itr_r->begin()}; itr_c != itr_r->end(); ++itr_c)
+        for (auto col{row->begin()}; col != row->end(); ++col)
         {
-            if (*itr_c == 0)
+            if (*col == 0)
             {
-                itr_r->front() = 0;
+                row->front() = 0;
 
                 if (col_offset == DiffC{0})
                 {
@@ -123,7 +123,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
                 }
                 else
                 {
-                    *(front_itr + col_offset) = 0;
+                    *(front_iter + col_offset) = 0;
                 }
             }
             ++col_offset;
@@ -131,26 +131,26 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     }
 
     // Zero all rows and columns, except for the first ones.
-    for (auto itr_r{matrix.begin() + 1}; itr_r != matrix.end(); ++itr_r)
+    for (auto row{matrix.begin() + 1}; row != matrix.end(); ++row)
     {
         DiffC col_offset{1};
-        for (auto itr_c{itr_r->begin() + 1}; itr_c != itr_r->end(); ++itr_c)
+        for (auto col{row->begin() + 1}; col != row->end(); ++col)
         {
-            if ((*(front_itr + col_offset) == 0) || (itr_r->front() == 0))
+            if ((*(front_iter + col_offset) == 0) || (row->front() == 0))
             {
-                *itr_c = 0;
+                *col = 0;
             }
 
             ++col_offset;
         }
     }
 
-    if (*front_itr == 0)
+    if (*front_iter == 0)
     {
         // Zero first row.
-        for (auto itr_c{front_itr + 1}; itr_c != matrix.begin()->end(); ++itr_c)
+        for (auto col{front_iter + 1}; col != matrix.begin()->end(); ++col)
         {
-            *itr_c = 0;
+            *col = 0;
         }
     }
 
