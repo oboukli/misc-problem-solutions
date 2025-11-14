@@ -78,8 +78,8 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     ValType min_num{1};
 
-    auto const endItr{first + max};
-    for (auto iter{first}; iter != endItr; ++iter)
+    auto const endIter{first + max};
+    for (auto iter{first}; iter != endIter; ++iter)
     {
         if (*iter == min_num)
         {
