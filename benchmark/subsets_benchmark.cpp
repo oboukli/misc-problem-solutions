@@ -12,7 +12,7 @@
 
 #include <nameof.hpp>
 
-#include "forfun/graph/subsets.hpp"
+#include "forfun/subsets.hpp"
 
 TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 {
