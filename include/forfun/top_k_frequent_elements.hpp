@@ -27,8 +27,10 @@ namespace forfun::top_k_frequent_elements {
 
 namespace bucket_sort_based {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
@@ -36,11 +38,6 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
 {
     using ValType = std::iter_value_t<Iter>;
-
-    if (first == last) [[unlikely]]
-    {
-        return {};
-    }
 
     std::size_t const size{static_cast<std::size_t>(last - first)};
 
@@ -50,22 +47,29 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 
     std::sort(first, last);
 
-    ValType current{*first};
-    std::size_t current_count{0UZ};
-    for (auto aux_iter{first}; aux_iter != last; ++aux_iter)
     {
-        if (current == *aux_iter)
+        ValType current{*first};
+        std::size_t current_count{0UZ};
+        auto aux_iter{first};
+
+        ++current_count;
+        ++aux_iter;
+
+        for (; aux_iter != last; ++aux_iter)
         {
-            ++current_count;
+            if (current != *aux_iter)
+            {
+                counts[current_count - 1UZ].push_back(current);
+                current = *aux_iter;
+                current_count = 1UZ;
+            }
+            else
+            {
+                ++current_count;
+            }
         }
-        else
-        {
-            counts[current_count - 1U].push_back(current);
-            current = *aux_iter;
-            current_count = 1U;
-        }
+        counts[current_count - 1UZ].push_back(current);
     }
-    counts[current_count - 1U].push_back(current);
 
     std::vector<ValType> result;
     result.reserve(k);
@@ -74,10 +78,7 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
     {
         assert(iter != counts.crend());
 
-        // clang-format off
-        for (auto j{iter->cbegin()};
-            (j != iter->cend()) && (k != 0UZ); ++j)
-        // clang-format on
+        for (auto j{iter->cbegin()}; (j != iter->cend()) && (k != 0UZ); ++j)
         {
             result.push_back(*j);
             --k;
@@ -91,8 +92,10 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 
 namespace bucket_sort_based_functional {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
@@ -101,33 +104,36 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 {
     using ValType = std::iter_value_t<Iter>;
 
-    if (first == last) [[unlikely]]
-    {
-        return {};
-    }
-
     std::vector<std::vector<ValType>> counts(
         static_cast<std::size_t>(last - first)
     );
 
     std::sort(first, last);
 
-    ValType current{*first};
-    std::size_t current_count{0UZ};
-    for (auto aux_iter{first}; aux_iter != last; ++aux_iter)
     {
-        if (current == *aux_iter)
+        ValType current{*first};
+        std::size_t current_count{0UZ};
+        auto aux_iter{first};
+
+        // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+        do
         {
-            ++current_count;
-        }
-        else
-        {
-            counts[current_count - 1U].push_back(current);
-            current = *aux_iter;
-            current_count = 1U;
-        }
+            if (current == *aux_iter)
+            {
+                ++current_count;
+            }
+            else
+            {
+                counts[current_count - 1UZ].push_back(current);
+                current = *aux_iter;
+                current_count = 1UZ;
+            }
+
+            ++aux_iter;
+        } while (aux_iter != last);
+
+        counts[current_count - 1UZ].push_back(current);
     }
-    counts[current_count - 1U].push_back(current);
 
     return counts
         | std::views::reverse
@@ -140,8 +146,10 @@ top_frequent(Iter const first, Sentinel const last, std::size_t k)
 
 namespace priority_queue_based {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto top_frequent(Iter iter, Sentinel const last, std::size_t k)
@@ -189,8 +197,10 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace priority_queue_based_functional {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     requires std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto top_frequent(Iter iter, Sentinel const last, std::size_t k)
@@ -236,8 +246,10 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace unordered_map_based {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto top_frequent(Iter iter, Sentinel const last, std::size_t k)
     -> std::vector<std::iter_value_t<Iter>>
@@ -287,8 +299,10 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
 namespace unordered_map_based_functional {
 
-/// @note Assume input is valid and guarantees having a unique solution.
-/// Invalid input may result in undefined behavior.
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+/// @note The strategy assumes that the input is valid and has a unique
+/// solution. Invalid input may result in undefined behavior.
 template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto
 top_frequent(Iter iter, Sentinel const last, std::size_t const k)

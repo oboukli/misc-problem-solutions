@@ -43,45 +43,6 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format on
 )
 {
-    SECTION("Top zero of empty")
-    {
-        std::vector<int> nums{};
-        static constexpr std::size_t const k{0UZ};
-
-        CAPTURE(nums);
-        CAPTURE(k);
-
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
-    }
-
-    SECTION("Top two of empty")
-    {
-        std::vector<int> nums{};
-        static constexpr std::size_t const k{2UZ};
-
-        CAPTURE(nums);
-        CAPTURE(k);
-
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
-    }
-
-    SECTION("Top three of empty")
-    {
-        std::vector<int> nums{};
-        static constexpr std::size_t const k{3UZ};
-
-        CAPTURE(nums);
-        CAPTURE(k);
-
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
-
-        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
-    }
-
     SECTION("Top zero of one element")
     {
         std::vector nums{5};
@@ -487,5 +448,67 @@ TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
             Catch::Matchers::SizeIs(1U)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Top K frequent elements (degenerate cases)",
+    "[top_k_frequent_elements]",
+    (auto top_frequent, top_frequent),
+    // clang-format off
+    (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
+        std::vector<int>::const_iterator,
+        std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::priority_queue_based_functional::
+        top_frequent<
+            std::vector<int>::const_iterator,
+            std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::unordered_map_based::top_frequent<
+        std::vector<int>::const_iterator,
+        std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::unordered_map_based_functional::
+        top_frequent<
+            std::vector<int>::const_iterator,
+            std::vector<int>::const_iterator>)
+    // clang-format on
+)
+{
+    SECTION("Top zero of empty")
+    {
+        std::vector<int> nums{};
+        static constexpr std::size_t const k{0UZ};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
+    }
+
+    SECTION("Top two of empty")
+    {
+        std::vector<int> nums{};
+        static constexpr std::size_t const k{2UZ};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
+    }
+
+    SECTION("Top three of empty")
+    {
+        std::vector<int> nums{};
+        static constexpr std::size_t const k{3UZ};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
     }
 }

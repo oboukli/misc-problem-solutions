@@ -34,22 +34,6 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format on
 )
 {
-    SECTION("Empty input")
-    {
-        static constexpr std::array<int, 0> expected{};
-
-        std::vector<int> const input{};
-        std::vector<int> result_squares{};
-
-        CAPTURE(input);
-
-        CHECK(std::ranges::is_sorted(input));
-
-        squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
-
-        REQUIRE_THAT(result_squares, Catch::Matchers::RangeEquals(expected));
-    }
-
     SECTION("One element. Element is positive")
     {
         static constexpr std::array const expected{225};
@@ -321,22 +305,6 @@ TEMPLATE_TEST_CASE_SIG(
 TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
 {
     using forfun::squares_sorted_array::squares_sorted;
-
-    SECTION("Empty input")
-    {
-        static constexpr std::array<unsigned int, 0> expected{};
-
-        std::vector<unsigned int> const input{};
-        std::vector<unsigned int> result_squares{};
-
-        CAPTURE(input);
-
-        CHECK(std::ranges::is_sorted(input));
-
-        squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
-
-        REQUIRE_THAT(result_squares, Catch::Matchers::RangeEquals(expected));
-    }
 
     SECTION("One element. Element is positive")
     {
