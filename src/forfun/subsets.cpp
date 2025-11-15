@@ -18,9 +18,9 @@ template <
     std::sentinel_for<ConstIter> Sentinel,
     typename Container>
 auto do_explode_subsets(
-    std::vector<std::iter_value_t<ConstIter>>& subset,
-    ConstIter first,
-    Sentinel last,
+    std::vector<std::iter_value_t<ConstIter>> const& subset,
+    ConstIter const& first,
+    Sentinel const& last,
     Container& subsets
 ) -> void
 {
@@ -35,13 +35,12 @@ auto do_explode_subsets(
 
     current_subset.assign(subset.cbegin(), subset.cend());
 
-    auto const element{*first};
-    ++first;
+    auto const next{std::next(first)};
 
-    do_explode_subsets(current_subset, first, last, subsets);
+    do_explode_subsets(current_subset, next, last, subsets);
 
-    current_subset.emplace_back(element);
-    do_explode_subsets(current_subset, first, last, subsets);
+    current_subset.emplace_back(*first);
+    do_explode_subsets(current_subset, next, last, subsets);
 }
 
 } // namespace
