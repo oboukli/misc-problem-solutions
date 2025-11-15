@@ -51,8 +51,7 @@ auto do_explode_subsets(
     std::vector<std::vector<int>> subsets{};
     subsets.reserve(1UZ << elements.size());
 
-    std::vector<int> empty_subset{};
-    empty_subset.reserve(0UZ);
+    std::vector<int> const empty_subset{};
 
     do_explode_subsets(
         empty_subset, elements.cbegin(), elements.cend(), subsets
