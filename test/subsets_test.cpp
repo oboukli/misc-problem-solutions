@@ -16,7 +16,7 @@
 
 TEST_CASE("Subsets", "[subsets]")
 {
-    using forfun::subsets::explode_subsets;
+    using forfun::subsets::recursive::explode_subsets;
 
     SECTION("One element container")
     {
@@ -151,7 +151,7 @@ TEST_CASE("Subsets", "[subsets]")
 
 TEST_CASE("Subsets (degenerate case)", "[subsets]")
 {
-    using forfun::subsets::explode_subsets;
+    using forfun::subsets::recursive::explode_subsets;
 
     SECTION("Empty container")
     {

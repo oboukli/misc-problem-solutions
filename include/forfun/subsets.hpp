@@ -15,6 +15,14 @@
 
 namespace forfun::subsets {
 
+namespace iterative {
+
+// (Placeholder)
+
+} // namespace iterative
+
+namespace recursive {
+
 namespace detail {
 
 template <
@@ -69,6 +77,8 @@ template <
 
     return subsets;
 }
+
+} // namespace recursive
 
 } // namespace forfun::subsets
 
