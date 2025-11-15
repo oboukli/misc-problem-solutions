@@ -39,11 +39,14 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{225};
 
         std::vector const input{15};
-        std::vector<int> result_squares(1U);
+        std::vector<int> result_squares(1UZ);
 
         CAPTURE(input);
 
+        CHECK(input.size() == 1UZ);
         CHECK(std::ranges::is_sorted(input));
+        CHECK(result_squares.size() == 1UZ);
+        CHECK(result_squares.front() == 0);
 
         squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
 
@@ -55,11 +58,14 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{36};
 
         std::vector const input{-6};
-        std::vector<int> result_squares(1U);
+        std::vector<int> result_squares(1UZ);
 
         CAPTURE(input);
 
+        CHECK(input.size() == 1UZ);
         CHECK(std::ranges::is_sorted(input));
+        CHECK(result_squares.size() == 1UZ);
+        CHECK(result_squares.front() == 0);
 
         squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
 
@@ -71,7 +77,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{25, 25};
 
         std::vector const input{-5, 5};
-        std::vector<int> result_squares(2U);
+        std::vector<int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -87,7 +93,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{4, 16};
 
         std::vector const input{2, 4};
-        std::vector<int> result_squares(2U);
+        std::vector<int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -103,7 +109,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{4, 49};
 
         std::vector const input{-7, -2};
-        std::vector<int> result_squares(2U);
+        std::vector<int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -119,7 +125,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{1, 4};
 
         std::vector const input{-2, 1};
-        std::vector<int> result_squares(2U);
+        std::vector<int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -135,7 +141,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{1, 9, 49};
 
         std::vector const input{1, 3, 7};
-        std::vector<int> result_squares(3U);
+        std::vector<int> result_squares(3UZ);
 
         CAPTURE(input);
 
@@ -151,7 +157,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{9, 16, 25};
 
         std::vector const input{-5, -4, -3};
-        std::vector<int> result_squares(3U);
+        std::vector<int> result_squares(3UZ);
 
         CAPTURE(input);
 
@@ -167,7 +173,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array const expected{36, 64, 121};
 
         std::vector const input{-6, 8, 11};
-        std::vector<int> result_squares(3U);
+        std::vector<int> result_squares(3UZ);
 
         CAPTURE(input);
 
@@ -183,7 +189,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array expected{9, 16, 100};
 
         std::vector const input{-4, 3, 10};
-        std::vector<int> result_squares(3U);
+        std::vector<int> result_squares(3UZ);
 
         CAPTURE(input);
 
@@ -199,7 +205,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array expected{4, 64, 64, 289};
 
         std::vector const input{-8, 2, 8, 17};
-        std::vector<int> result_squares(4U);
+        std::vector<int> result_squares(4UZ);
 
         CAPTURE(input);
 
@@ -215,7 +221,7 @@ TEMPLATE_TEST_CASE_SIG(
         static constexpr std::array expected{0, 16, 25, 49, 81};
 
         std::vector const input{-7, -5, 0, 4, 9};
-        std::vector<int> result_squares(5U);
+        std::vector<int> result_squares(5UZ);
 
         CAPTURE(input);
 
@@ -290,7 +296,7 @@ TEMPLATE_TEST_CASE_SIG(
         };
         CHECK(input.size() == 256UZ);
 
-        std::vector<int> result_squares(256U);
+        std::vector<int> result_squares(256UZ);
 
         CAPTURE(input);
 
@@ -311,11 +317,14 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
         static constexpr std::array const expected{225U};
 
         std::vector const input{15U};
-        std::vector<unsigned int> result_squares(1U);
+        std::vector<unsigned int> result_squares(1UZ);
 
         CAPTURE(input);
 
+        CHECK(input.size() == 1UZ);
         CHECK(std::ranges::is_sorted(input));
+        CHECK(result_squares.size() == 1UZ);
+        CHECK(result_squares.front() == 0);
 
         squares_sorted(input.cbegin(), input.cend(), result_squares.begin());
 
@@ -327,7 +336,7 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
         static constexpr std::array const expected{25U, 25U};
 
         std::vector const input{5U, 5U};
-        std::vector<unsigned int> result_squares(2U);
+        std::vector<unsigned int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -343,7 +352,7 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
         static constexpr std::array const expected{4U, 16U};
 
         std::vector const input{2U, 4U};
-        std::vector<unsigned int> result_squares(2U);
+        std::vector<unsigned int> result_squares(2UZ);
 
         CAPTURE(input);
 
@@ -359,7 +368,7 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
         static constexpr std::array const expected{1U, 9U, 49U};
 
         std::vector const input{1U, 3U, 7U};
-        std::vector<unsigned int> result_squares(3U);
+        std::vector<unsigned int> result_squares(3UZ);
 
         CAPTURE(input);
 
@@ -375,7 +384,7 @@ TEST_CASE("Squares of a sorted array (unsigned)", "[squares_sorted_array]")
         static constexpr std::array expected{1U, 4U, 64U, 289U};
 
         std::vector const input{1U, 2U, 8U, 17U};
-        std::vector<unsigned int> result_squares(4U);
+        std::vector<unsigned int> result_squares(4UZ);
 
         CAPTURE(input);
 
