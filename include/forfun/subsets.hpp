@@ -20,7 +20,9 @@ namespace detail {
 template <
     std::input_iterator ConstIter,
     std::sentinel_for<ConstIter> Sentinel,
-    typename Container>
+    typename Container,
+    typename SubsetAllocator
+    = std::vector<std::iter_value_t<ConstIter>>::allocator_type>
 constexpr auto do_explode_subsets(
     std::vector<std::iter_value_t<ConstIter>> const& subset,
     ConstIter const& first,
@@ -34,7 +36,7 @@ constexpr auto do_explode_subsets(
         return;
     }
 
-    std::vector<std::iter_value_t<ConstIter>> current_subset{};
+    std::vector<std::iter_value_t<ConstIter>, SubsetAllocator> current_subset{};
     current_subset.reserve(subset.size() + 1UZ);
 
     current_subset.assign(subset.cbegin(), subset.cend());
@@ -49,13 +51,17 @@ constexpr auto do_explode_subsets(
 
 } // namespace detail
 
+template <
+    typename SubsetAllocator = std::vector<int>::allocator_type,
+    typename SetAllocator
+    = std::vector<std::vector<int, SubsetAllocator>>::allocator_type>
 [[nodiscard]] constexpr auto explode_subsets(std::vector<int> const& elements)
     -> std::vector<std::vector<int>>
 {
-    std::vector<std::vector<int>> subsets{};
+    std::vector<std::vector<int, SubsetAllocator>, SetAllocator> subsets{};
     subsets.reserve(1UZ << elements.size());
 
-    std::vector<int> const empty_subset{};
+    std::vector<int, SubsetAllocator> const empty_subset{};
 
     detail::do_explode_subsets(
         empty_subset, elements.cbegin(), elements.cend(), subsets
