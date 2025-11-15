@@ -31,11 +31,6 @@ last_stone_weight(IterA const first, IterB last) noexcept
 {
     using ValueType = std::iter_value_t<IterA>;
 
-    if (first == last) [[unlikely]]
-    {
-        return ValueType{0};
-    }
-
     ValueType s1{*first};
     auto stop{first};
     for (++stop; stop != last;)
@@ -141,13 +136,7 @@ template <std::contiguous_iterator IterA, std::bidirectional_iterator IterB>
 last_stone_weight(IterA const first, IterB last) noexcept
     -> std::iter_value_t<IterA>
 {
-    if (first == last) [[unlikely]]
-    {
-        return 0;
-    }
-
-    auto second{first};
-    ++second;
+    auto second{std::next(first)};
 
     while (second != last)
     {

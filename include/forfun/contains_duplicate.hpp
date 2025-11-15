@@ -20,6 +20,8 @@ namespace forfun::contains_duplicate {
 
 namespace quadratic {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
 template <
     std::forward_iterator Iter,
     std::sentinel_for<Iter> Sentinel,
@@ -33,7 +35,8 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     ))
 ) -> bool
 {
-    for (; iter != last; ++iter)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    do
     {
         auto const val{*iter};
         auto iter_next{iter};
@@ -44,11 +47,14 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
                 return true;
             }
         }
-    }
+        ++iter;
+    } while (iter != last);
 
     return false;
 }
 
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
@@ -65,6 +71,8 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 
 namespace sorted {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
 template <
     std::random_access_iterator Iter,
     std::sentinel_for<Iter> Sentinel,
@@ -78,11 +86,6 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     ))
 ) -> bool
 {
-    if (iter == last) [[unlikely]]
-    {
-        return false;
-    }
-
     std::sort(iter, last);
 
     for (auto iter_next{iter}; ++iter_next != last; iter = iter_next)
@@ -96,6 +99,8 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     return false;
 }
 
+/// @note The strategy assumes that @p first and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
 template <std::random_access_iterator Iter, std::sentinel_for<Iter> Sentinel>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(

@@ -28,15 +28,6 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::last_stone_weight::sort_based::last_stone_weight<Iter, Iter>)
 )
 {
-    SECTION("Empty container")
-    {
-        std::vector<int> stones{};
-
-        CAPTURE(stones);
-
-        REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 0);
-    }
-
     SECTION("One element; Element is positive non-zero")
     {
         std::vector stones{17};
@@ -257,16 +248,6 @@ TEST_CASE(
 )
 {
     using forfun::last_stone_weight::priority_queue_based::last_stone_weight;
-
-    SECTION("Empty container")
-    {
-        std::vector<int> stones{};
-
-        CAPTURE(stones);
-
-        int const actual{last_stone_weight(std::move(stones))};
-        REQUIRE(actual == 0);
-    }
 
     SECTION("One element; Element is positive non-zero")
     {
@@ -503,4 +484,32 @@ TEST_CASE(
         int const actual{last_stone_weight(std::move(stones))};
         REQUIRE(actual == 1);
     }
+}
+
+TEST_CASE(
+    "Last stone weight (heapified strategy empty container degenerate case)",
+    "[last_stone_weight]"
+)
+{
+    using forfun::last_stone_weight::heapified::last_stone_weight;
+
+    std::vector<int> stones{};
+
+    CAPTURE(stones);
+
+    REQUIRE(last_stone_weight(stones.begin(), stones.end()) == 0);
+}
+
+TEST_CASE(
+    "Last stone weight (priority-queue based empty container degenerate case)",
+    "[last_stone_weight]"
+)
+{
+    using forfun::last_stone_weight::priority_queue_based::last_stone_weight;
+
+    std::vector<int> stones{};
+
+    CAPTURE(stones);
+
+    REQUIRE(last_stone_weight(std::move(stones)) == 0);
 }
