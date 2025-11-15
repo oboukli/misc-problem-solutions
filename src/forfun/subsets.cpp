@@ -30,8 +30,9 @@ auto do_explode_subsets(
         return;
     }
 
-    std::vector<std::iter_value_t<ConstIter>> current_set;
-    current_set.reserve(subset.size() + 1U);
+    std::vector<std::iter_value_t<ConstIter>> current_set{};
+    current_set.reserve(subset.size() + 1UZ);
+
     current_set.assign(subset.cbegin(), subset.cend());
 
     auto const element{*iter};
@@ -48,11 +49,11 @@ auto do_explode_subsets(
 [[nodiscard]] auto explode_subsets(std::vector<int> const& elements)
     -> std::vector<std::vector<int>>
 {
-    std::vector<std::vector<int>> subsets;
+    std::vector<std::vector<int>> subsets{};
+    subsets.reserve(1UZ << elements.size());
 
-    subsets.reserve(elements.size() << 1U);
     std::vector<int> current_subset{};
-    current_subset.reserve(0U);
+    current_subset.reserve(0UZ);
 
     do_explode_subsets(
         current_subset, elements.cbegin(), elements.cend(), subsets
