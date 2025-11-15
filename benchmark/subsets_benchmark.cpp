@@ -18,6 +18,10 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 {
     using namespace forfun;
 
+    using SubsetAllocator = std::vector<int>::allocator_type;
+    using SetAllocator
+        = std::vector<std::vector<int, SubsetAllocator>>::allocator_type;
+
     std::vector const elements{23, 29, 31, 37};
 
     ankerl::nanobench::Bench()
@@ -26,7 +30,8 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(subsets::explode_subsets).c_str(),
+            NAMEOF_RAW(subsets::explode_subsets<SubsetAllocator, SetAllocator>)
+                .c_str(),
             [&elements] noexcept -> void {
                 auto const volatile r{subsets::explode_subsets(elements)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
