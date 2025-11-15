@@ -30,9 +30,13 @@ TEST_CASE("Subsets", "[subsets]")
 
         REQUIRE_THAT(
             actual,
-            Catch::Matchers::SizeIs(1U)
+            Catch::Matchers::SizeIs(1UZ)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+
+        REQUIRE(actual.capacity() == 1UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
     }
 
     SECTION("One element container")
@@ -47,9 +51,14 @@ TEST_CASE("Subsets", "[subsets]")
 
         REQUIRE_THAT(
             actual,
-            Catch::Matchers::SizeIs(2U)
+            Catch::Matchers::SizeIs(2UZ)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+
+        REQUIRE(actual.capacity() == 2UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
+        REQUIRE(actual[1].capacity() == actual[1].size());
     }
 
     SECTION("Two element container")
@@ -64,9 +73,16 @@ TEST_CASE("Subsets", "[subsets]")
 
         REQUIRE_THAT(
             actual,
-            Catch::Matchers::SizeIs(4U)
+            Catch::Matchers::SizeIs(4UZ)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+
+        REQUIRE(actual.capacity() == 4UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
+        REQUIRE(actual[1].capacity() == actual[1].size());
+        REQUIRE(actual[2].capacity() == actual[2].size());
+        REQUIRE(actual[3].capacity() == actual[3].size());
     }
 
     SECTION("Three element container")
@@ -74,7 +90,7 @@ TEST_CASE("Subsets", "[subsets]")
         std::vector const elements{1, 2, 3};
 
         std::vector<std::vector<int>> const expected{
-            {{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}}
+            {{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}
         };
 
         CAPTURE(elements);
@@ -83,9 +99,20 @@ TEST_CASE("Subsets", "[subsets]")
 
         REQUIRE_THAT(
             actual,
-            Catch::Matchers::SizeIs(8U)
+            Catch::Matchers::SizeIs(8UZ)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+
+        REQUIRE(actual.capacity() == 8UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
+        REQUIRE(actual[1].capacity() == actual[1].size());
+        REQUIRE(actual[2].capacity() == actual[2].size());
+        REQUIRE(actual[3].capacity() == actual[3].size());
+        REQUIRE(actual[4].capacity() == actual[4].size());
+        REQUIRE(actual[5].capacity() == actual[5].size());
+        REQUIRE(actual[6].capacity() == actual[6].size());
+        REQUIRE(actual[7].capacity() == actual[7].size());
     }
 
     SECTION("Four element container")
@@ -117,8 +144,28 @@ TEST_CASE("Subsets", "[subsets]")
 
         REQUIRE_THAT(
             actual,
-            Catch::Matchers::SizeIs(16U)
+            Catch::Matchers::SizeIs(16UZ)
                 and Catch::Matchers::UnorderedRangeEquals(expected)
         );
+
+        REQUIRE(actual.capacity() == 16UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
+        REQUIRE(actual[1].capacity() == actual[1].size());
+        REQUIRE(actual[2].capacity() == actual[2].size());
+        REQUIRE(actual[3].capacity() == actual[3].size());
+        REQUIRE(actual[4].capacity() == actual[4].size());
+        REQUIRE(actual[5].capacity() == actual[5].size());
+        REQUIRE(actual[6].capacity() == actual[6].size());
+        REQUIRE(actual[7].capacity() == actual[7].size());
+
+        REQUIRE(actual[8].capacity() == actual[8].size());
+        REQUIRE(actual[9].capacity() == actual[9].size());
+        REQUIRE(actual[10].capacity() == actual[10].size());
+        REQUIRE(actual[11].capacity() == actual[11].size());
+        REQUIRE(actual[12].capacity() == actual[12].size());
+        REQUIRE(actual[13].capacity() == actual[13].size());
+        REQUIRE(actual[14].capacity() == actual[14].size());
+        REQUIRE(actual[15].capacity() == actual[15].size());
     }
 }
