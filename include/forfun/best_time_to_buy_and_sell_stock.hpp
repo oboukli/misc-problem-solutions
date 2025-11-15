@@ -17,16 +17,14 @@ namespace forfun::best_time_to_buy_and_sell_stock {
 
 namespace base {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements (prices), otherwise the behavior of the strategy is
+/// undefined.
 template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    if (iter == last) [[unlikely]]
-    {
-        return 0;
-    }
-
     int max_profit{0};
     auto buyer_iter{iter};
 
@@ -54,16 +52,14 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 
 namespace optimized_l1 {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements (prices), otherwise the behavior of the strategy is
+/// undefined.
 template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    if (iter == last) [[unlikely]]
-    {
-        return 0;
-    }
-
     int max_profit{0};
     auto buyer_price{*iter};
 
@@ -91,16 +87,14 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 
 namespace optimized_l2 {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements (prices), otherwise the behavior of the strategy is
+/// undefined.
 template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
-    if (iter == last) [[unlikely]]
-    {
-        return 0;
-    }
-
     int max_profit{0};
     auto buyer_price{*iter};
 

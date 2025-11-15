@@ -27,15 +27,6 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector<int>::const_iterator>)
 )
 {
-    SECTION("Empty price container")
-    {
-        std::vector<int> const prices{};
-
-        CAPTURE(prices);
-
-        REQUIRE(calc_max_profit(prices.cbegin(), prices.cend()) == 0);
-    }
-
     SECTION("One price")
     {
         std::vector const prices{19};

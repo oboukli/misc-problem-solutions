@@ -27,18 +27,6 @@ TEMPLATE_TEST_CASE_SIG(
         std::vector<int>::iterator>)
 )
 {
-    SECTION("Empty input")
-    {
-        std::vector<int> nums{};
-        static constexpr bool const expected{false};
-
-        CAPTURE(nums);
-
-        auto const actual{contains_duplicate(nums.begin(), nums.end())};
-
-        REQUIRE(actual == expected);
-    }
-
     SECTION("One integer")
     {
         std::vector nums{3};
@@ -198,4 +186,20 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE(actual == expected);
     }
+}
+
+TEST_CASE(
+    "Contains duplicate (empty input degenerate case)", "[contains_duplicate]"
+)
+{
+    using forfun::contains_duplicate::stl::contains_duplicate;
+
+    std::vector<int> nums{};
+    static constexpr bool const expected{false};
+
+    CAPTURE(nums);
+
+    auto const actual{contains_duplicate(nums.begin(), nums.end())};
+
+    REQUIRE(actual == expected);
 }
