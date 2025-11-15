@@ -18,27 +18,6 @@ TEST_CASE("Subsets", "[subsets]")
 {
     using forfun::subsets::explode_subsets;
 
-    SECTION("Empty container")
-    {
-        std::vector<int> const elements{};
-
-        std::vector<std::vector<int>> const expected{{}};
-
-        CAPTURE(elements);
-
-        auto const actual{explode_subsets(elements)};
-
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1UZ)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
-
-        REQUIRE(actual.capacity() == 1UZ);
-
-        REQUIRE(actual.front().capacity() == actual.front().size());
-    }
-
     SECTION("One element container")
     {
         std::vector const elements{17};
@@ -167,5 +146,31 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual[13].capacity() == actual[13].size());
         REQUIRE(actual[14].capacity() == actual[14].size());
         REQUIRE(actual[15].capacity() == actual[15].size());
+    }
+}
+
+TEST_CASE("Subsets (degenerate case)", "[subsets]")
+{
+    using forfun::subsets::explode_subsets;
+
+    SECTION("Empty container")
+    {
+        std::vector<int> const elements{};
+
+        std::vector<std::vector<int>> const expected{{}};
+
+        CAPTURE(elements);
+
+        auto const actual{explode_subsets(elements)};
+
+        REQUIRE_THAT(
+            actual,
+            Catch::Matchers::SizeIs(1UZ)
+                and Catch::Matchers::UnorderedRangeEquals(expected)
+        );
+
+        REQUIRE(actual.capacity() == 1UZ);
+
+        REQUIRE(actual.front().capacity() == actual.front().size());
     }
 }
