@@ -19,6 +19,9 @@ namespace forfun::squares_sorted_array {
 
 namespace detail {
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+///
 /// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
@@ -31,12 +34,18 @@ template <
     calc_squares(Iter iter, Sentinel const last, DestIter dest_iter) noexcept
     -> void
 {
-    for (; iter != last; ++iter, ++dest_iter)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    do
     {
         *dest_iter = (*iter) * (*iter);
-    }
+        ++iter;
+        ++dest_iter;
+    } while (iter != last);
 }
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+///
 /// @note Multiplication result value may overflow the value type of @p
 /// dest_iter.
 template <
@@ -50,14 +59,21 @@ template <
 {
     auto r_iter{std::make_reverse_iterator(last)};
     auto r_last{std::make_reverse_iterator(iter)};
-    for (; r_iter != r_last; ++r_iter, ++dest_iter)
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    do
     {
         *dest_iter = (*r_iter) * (*r_iter);
-    }
+        ++r_iter;
+        ++dest_iter;
+    } while (r_iter != r_last);
 }
 
 } // namespace detail
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+///
 /// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
@@ -67,7 +83,7 @@ template <
 template <
     std::bidirectional_iterator Iter,
     std::bidirectional_iterator DestIter>
-    requires std::signed_integral<std::iter_value_t<Iter>>
+    requires std::integral<std::iter_value_t<Iter>>
     and forfun::common::concepts::
         multipliable_as<std::iter_value_t<Iter>, std::iter_value_t<DestIter>>
 constexpr auto
@@ -76,14 +92,11 @@ squares_sorted(Iter iter, Iter const last, DestIter const dest_iter) noexcept
 {
     using ValueType = std::iter_value_t<Iter>;
 
-    if (iter == last)
-    {
-        return;
-    }
-
     auto upper{last};
     auto dest_upper{std::next(dest_iter, std::distance(iter, last))};
-    while (dest_upper != dest_iter)
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    do
     {
         // It is possible to check, at each iteration, whether the remaining
         // sub-array is all non-negative and handover to calc_squares, or all
@@ -102,14 +115,23 @@ squares_sorted(Iter iter, Iter const last, DestIter const dest_iter) noexcept
             *dest_upper = sq1;
             ++iter;
         }
-    }
+    } while (dest_upper != dest_iter);
 }
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+///
+/// @note The strategy assumes that @p iter and @p last point to a span of
+/// positive elements sorted in non-descending order, otherwise the behavior of
+/// the strategy is undefined.
+///
+/// @note Multiplication result value may overflow the value type of @p
+/// dest_iter.
 template <
     std::input_iterator Iter,
     std::sized_sentinel_for<Iter> Sentinel,
     std::output_iterator<std::iter_value_t<Iter>> DestIter>
-    requires std::unsigned_integral<std::iter_value_t<Iter>>
+    requires std::integral<std::iter_value_t<Iter>>
     and forfun::common::concepts::
         multipliable_as<std::iter_value_t<Iter>, std::iter_value_t<DestIter>>
 constexpr auto squares_sorted(
@@ -119,6 +141,9 @@ constexpr auto squares_sorted(
     detail::calc_squares(iter, last, dest_iter);
 }
 
+/// @note The strategy assumes that @p iter and @p last point to a non-empty
+/// span of elements, otherwise the behavior of the strategy is undefined.
+///
 /// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-descending order, otherwise the behavior of the
 /// strategy is undefined.
@@ -128,17 +153,17 @@ constexpr auto squares_sorted(
 template <
     std::bidirectional_iterator Iter,
     std::bidirectional_iterator DestIter>
-    requires std::signed_integral<std::iter_value_t<Iter>>
+    requires std::integral<std::iter_value_t<Iter>>
     and forfun::common::concepts::
         multipliable_as<std::iter_value_t<Iter>, std::iter_value_t<DestIter>>
 constexpr auto squares_sorted_special(
-    Iter iter, Iter const last, DestIter const dest_iter
+    Iter const iter, Iter const last, DestIter const dest_iter
 ) noexcept -> void
 {
     using ValueType = std::iter_value_t<Iter>;
 
     // Can assume all values are non-negative.
-    if ((iter == last) || (*iter >= ValueType{0}))
+    if (*iter >= ValueType{0})
     {
         detail::calc_squares(iter, last, dest_iter);
 
