@@ -16,7 +16,7 @@
 
 TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 {
-    using namespace forfun;
+    using namespace forfun::subsets;
 
     using SubsetAllocator = std::vector<int>::allocator_type;
     using SetAllocator
@@ -30,10 +30,12 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(subsets::explode_subsets<SubsetAllocator, SetAllocator>)
+            NAMEOF_RAW(
+                recursive::explode_subsets<SubsetAllocator, SetAllocator>
+            )
                 .c_str(),
             [&elements] noexcept -> void {
-                auto const volatile r{subsets::explode_subsets(elements)};
+                auto const volatile r{recursive::explode_subsets(elements)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
