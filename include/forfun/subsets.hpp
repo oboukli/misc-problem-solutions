@@ -7,8 +7,8 @@
 /// Problem sources:
 /// https://leetcode.com/problems/subsets/
 
-#ifndef FORFUN_GRAPH_SUBSETS_HPP_
-#define FORFUN_GRAPH_SUBSETS_HPP_
+#ifndef FORFUN_SUBSETS_HPP_
+#define FORFUN_SUBSETS_HPP_
 
 #include <vector>
 
@@ -19,4 +19,4 @@ namespace forfun::subsets {
 
 } // namespace forfun::subsets
 
-#endif // FORFUN_GRAPH_SUBSETS_HPP_
+#endif // FORFUN_SUBSETS_HPP_

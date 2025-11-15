@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/graph/subsets.hpp"
+#include "forfun/subsets.hpp"
 
 #include <iterator>
 #include <vector>

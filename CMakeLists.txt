@@ -77,6 +77,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sonar.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/squares_sorted_array.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sub_array_sums.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/subsets.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/three_sum.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/top_k_frequent_elements.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/tower_of_hanoi.hpp"
@@ -123,6 +124,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sonar.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/squares_sorted_array.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sub_array_sums.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/subsets.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/three_sum.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/top_k_frequent_elements.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/tower_of_hanoi.cpp"
@@ -198,7 +200,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/breadth_first_search.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/depth_first_search.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/invert_binary_tree.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/subsets.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/vertex.hpp"
 )
 target_sources(
@@ -209,7 +210,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/breadth_first_search.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/depth_first_search.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/invert_binary_tree.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/subsets.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/vertex.cpp"
 )
 get_target_property(forfun_graph_headers forfun_graph HEADER_SET)
@@ -464,7 +464,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/breadth_first_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/depth_first_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/invert_binary_tree_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/subsets_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/group_anagrams_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/house_robber_test.cpp"
@@ -490,6 +489,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/subsets_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/three_sum_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/top_k_frequent_elements_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_test.cpp"
@@ -588,7 +588,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/breadth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/depth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/invert_binary_tree_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/subsets_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/group_anagrams_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/hamming_weight_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/house_robber_benchmark.cpp"
@@ -614,6 +613,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/quicksort_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/squares_sorted_array_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sub_array_sums_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/subsets_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/three_sum_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/top_k_frequent_elements_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/tower_of_hanoi_benchmark.cpp"

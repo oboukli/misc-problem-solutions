@@ -12,7 +12,7 @@
 #include <catch2/matchers/catch_matchers_container_properties.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/graph/subsets.hpp"
+#include "forfun/subsets.hpp"
 
 TEST_CASE("Subsets", "[subsets]")
 {
