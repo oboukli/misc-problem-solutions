@@ -16,7 +16,8 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        }
+        },
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON"
       }
     },
     {
