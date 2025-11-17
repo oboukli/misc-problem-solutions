@@ -51,7 +51,7 @@ auto fuzz_encode_decode_general_case(std::vector<std::string> const& tokens)
 auto ExceptSpecialCase()
 {
     return ::fuzztest::Filter(
-        [](std::vector<std::string> const& tokens) {
+        [](std::vector<std::string> const& tokens) -> bool {
             return (tokens.size() != 1UZ) || (!tokens.front().empty());
         },
         ::fuzztest::Arbitrary<std::vector<std::string>>()
