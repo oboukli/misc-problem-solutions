@@ -39,7 +39,7 @@ TEST_CASE("Valid Sudoku benchmarking", "[benchmark][valid_sudoku]")
 
         .run(
             NAMEOF_RAW(bitwise::is_valid_sudoku<std::uint8_t>).c_str(),
-            [&board]() noexcept {
+            [&board] noexcept -> void {
                 auto const volatile r{bitwise::is_valid_sudoku(board)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -47,7 +47,7 @@ TEST_CASE("Valid Sudoku benchmarking", "[benchmark][valid_sudoku]")
 
         .run(
             NAMEOF_RAW(stl_bitset::is_valid_sudoku<std::uint8_t>).c_str(),
-            [&board]() noexcept {
+            [&board] noexcept -> void {
                 auto const volatile r{stl_bitset::is_valid_sudoku(board)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

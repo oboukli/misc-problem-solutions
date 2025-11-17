@@ -52,7 +52,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(hardened::eval_expression<VecConstIter, VecConstIter>)
                 .c_str(),
-            [&tokens]() {
+            [&tokens] -> void {
                 auto const r{
                     hardened::eval_expression(tokens.cbegin(), tokens.cend())
                 };
@@ -63,7 +63,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(unhardened::eval_expression<VecConstIter, VecConstIter>)
                 .c_str(),
-            [&tokens]() {
+            [&tokens] -> void {
                 auto const r{
                     unhardened::eval_expression(tokens.cbegin(), tokens.cend())
                 };
@@ -76,7 +76,7 @@ TEST_CASE(
                 speed_optimized::eval_expression<VecConstIter, VecConstIter>
             )
                 .c_str(),
-            [&tokens]() noexcept {
+            [&tokens] noexcept -> void {
                 auto const r{speed_optimized::eval_expression(
                     tokens.cbegin(), tokens.cend()
                 )};

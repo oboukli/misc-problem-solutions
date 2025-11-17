@@ -39,12 +39,12 @@ TEST_CASE("Invert binary tree benchmarking", "[benchmark][invert_binary_tree]")
 
         .run(
             NAMEOF_RAW(iterative::invert_binary_tree).c_str(),
-            [&root]() { iterative::invert_binary_tree(root); }
+            [&root] -> void { iterative::invert_binary_tree(root); }
         )
 
         .run(
             NAMEOF_RAW(recursive::invert_binary_tree).c_str(),
-            [&root]() noexcept { recursive::invert_binary_tree(root); }
+            [&root] noexcept -> void { recursive::invert_binary_tree(root); }
         )
 
         ;

@@ -40,7 +40,7 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(brute_forced::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     brute_forced::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -50,7 +50,7 @@ TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(mapped::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() {
+            [&nums] -> void {
                 auto const volatile r{
                     mapped::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -87,7 +87,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(brute_forced::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     brute_forced::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -97,7 +97,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(mapped::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() {
+            [&nums] -> void {
                 auto const volatile r{
                     mapped::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -107,7 +107,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(presorted_binary_searched::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     presorted_binary_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -117,7 +117,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(presorted_brute_searched::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     presorted_brute_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };
@@ -127,7 +127,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
 
         .run(
             NAMEOF_RAW(presorted_linear::two_sum<ConstIter, ConstIter>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     presorted_linear::two_sum(nums.cbegin(), nums.cend(), 3208)
                 };

@@ -42,7 +42,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(sum_each<std::array<int, 64>, std::array<int, 8>>)
                 .c_str(),
-            [&sums]() noexcept {
+            [&sums] noexcept -> void {
                 decltype(numbers)::size_type const volatile sub_size{8U};
                 sum_each(numbers, sums, sub_size);
 

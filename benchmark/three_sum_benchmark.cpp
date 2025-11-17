@@ -40,7 +40,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(set_based::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         set_based::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -50,7 +50,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(two_pointer::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         two_pointer::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -60,7 +60,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(brute_force::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         brute_force::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -70,7 +70,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(set_map_based::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         set_map_based::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -101,7 +101,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(set_based::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         set_based::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -111,7 +111,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 
             .run(
                 NAMEOF_RAW(brute_force::three_sum<CIter, CIter>).c_str(),
-                [&nums] {
+                [&nums] -> void {
                     auto const volatile r{
                         brute_force::three_sum(nums.cbegin(), nums.cend())
                     };
@@ -134,7 +134,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
             .run(
                 NAMEOF_RAW(non_presorted::set_based::three_sum<CIter, CIter>)
                     .c_str(),
-                [] {
+                [] -> void {
                     std::vector const nums{
                         // clang-format off
                         0,   15,  21, 5,   3, 7,  -7,  6,
@@ -154,7 +154,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
             .run(
                 NAMEOF_RAW(presorted::two_pointer::three_sum<CIter, CIter>)
                     .c_str(),
-                [] {
+                [] -> void {
                     std::vector nums{
                         // clang-format off
                         0,   15,  21, 5,   3, 7,  -7,  6,
@@ -176,7 +176,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
             .run(
                 NAMEOF_RAW(non_presorted::brute_force::three_sum<CIter, CIter>)
                     .c_str(),
-                [] {
+                [] -> void {
                     std::vector const nums{
                         // clang-format off
                         0,   15,  21, 5,   3, 7,  -7,  6,
@@ -196,7 +196,7 @@ TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
             .run(
                 NAMEOF_RAW(presorted::set_map_based::three_sum<CIter, CIter>)
                     .c_str(),
-                [] {
+                [] -> void {
                     std::vector nums{
                         // clang-format off
                         0,   15,  21, 5,   3, 7,  -7,  6,

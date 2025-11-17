@@ -24,7 +24,7 @@ TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
 
         .run(
             NAMEOF_RAW(majority_element<std::array<int, 64>>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 static constexpr std::array const elements{
                     5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
                     5, 7, 7, 7, 7, 5, 5, 7, 5, 5, 5, 7, 7, 5, 5, 5,
@@ -33,7 +33,7 @@ TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
                 };
                 using ConstItr = decltype(elements)::const_iterator;
 
-                ConstItr r{majority_element(elements)};
+                ConstItr const r{majority_element(elements)};
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
         )

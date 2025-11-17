@@ -28,7 +28,7 @@ TEST_CASE("Maximum subarray benchmarking", "[benchmark][maximum_subarray]")
 
         .run(
             NAMEOF_RAW(brute_force::max_sum<ConstIter, ConstIter>).c_str(),
-            [&input]() noexcept {
+            [&input] noexcept -> void {
                 auto const volatile r{
                     brute_force::max_sum(input.cbegin(), input.cend())
                 };
@@ -38,7 +38,7 @@ TEST_CASE("Maximum subarray benchmarking", "[benchmark][maximum_subarray]")
 
         .run(
             NAMEOF_RAW(recursive::max_sum<ConstIter, ConstIter>).c_str(),
-            [&input]() noexcept {
+            [&input] noexcept -> void {
                 auto const volatile r{
                     recursive::max_sum(input.cbegin(), input.cend())
                 };
@@ -48,7 +48,7 @@ TEST_CASE("Maximum subarray benchmarking", "[benchmark][maximum_subarray]")
 
         .run(
             NAMEOF_RAW(streaming::max_sum<ConstIter, ConstIter>).c_str(),
-            [&input]() noexcept {
+            [&input] noexcept -> void {
                 auto const volatile r{
                     streaming::max_sum(input.cbegin(), input.cend())
                 };

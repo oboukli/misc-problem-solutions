@@ -33,7 +33,7 @@ TEST_CASE("House robber benchmarking", "[benchmark][house_robber]")
 
         .run(
             NAMEOF_RAW(recursive::rob<ConstIter, ConstIter>).c_str(),
-            [&stashes]() noexcept {
+            [&stashes] noexcept -> void {
                 auto const volatile r{
                     recursive::rob(stashes.cbegin(), stashes.cend())
                 };

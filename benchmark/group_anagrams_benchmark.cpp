@@ -36,7 +36,7 @@ TEST_CASE("Group Anagrams benchmarking", "[benchmark][group_anagrams]")
 
         .run(
             NAMEOF_RAW(group_anagrams<CIter, CIter>).c_str(),
-            [&input]() {
+            [&input] -> void {
                 auto const volatile r{
                     group_anagrams(input.cbegin(), input.cend())
                 };

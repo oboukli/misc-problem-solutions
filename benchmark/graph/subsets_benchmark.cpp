@@ -27,7 +27,7 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
 
         .run(
             NAMEOF_RAW(subsets::explode_subsets).c_str(),
-            [&elements]() noexcept {
+            [&elements] noexcept -> void {
                 auto const volatile r{subsets::explode_subsets(elements)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

@@ -23,7 +23,7 @@ TEST_CASE(
 
         .run(
             "::std::list<int>",
-            []() noexcept {
+            [] -> void {
                 std::list<int> list{};
                 list.push_back(1301);
 
@@ -34,7 +34,7 @@ TEST_CASE(
 
         .run(
             "experimental::container::list",
-            []() noexcept {
+            [] -> void {
                 forfun::experimental::container::list list{};
                 list.push_back(1301);
 

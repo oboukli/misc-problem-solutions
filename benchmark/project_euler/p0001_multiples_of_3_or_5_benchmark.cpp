@@ -26,7 +26,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(find_sum_mult_three_five).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 auto const volatile input{999U};
                 auto const volatile r{find_sum_mult_three_five(input)};
                 ankerl::nanobench::doNotOptimizeAway(&r);

@@ -29,7 +29,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
 
         .run(
             NAMEOF_RAW(sol1::move_zeroes<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
@@ -50,7 +50,7 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
 
         .run(
             NAMEOF_RAW(sol2::move_zeroes<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array nums{
                     0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
                     1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
@@ -69,21 +69,24 @@ TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
             }
         )
 
-        .run(NAMEOF_RAW(stl::move_zeroes<Iter, Iter>).c_str(), []() noexcept {
-            std::array nums{
-                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-                0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
-                1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
-            };
-            static_assert(nums.size() == std::tuple_size_v<ContainerType>);
+        .run(
+            NAMEOF_RAW(stl::move_zeroes<Iter, Iter>).c_str(),
+            [] noexcept -> void {
+                std::array nums{
+                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                    0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0, 1, 0, 3,  12, 0,
+                    1, 0, 3, 12, 0,  1, 0, 3, 12, 0,  1, 0, 3, 12, 1,  0,
+                };
+                static_assert(nums.size() == std::tuple_size_v<ContainerType>);
 
-            stl::move_zeroes(nums.begin(), nums.end());
+                stl::move_zeroes(nums.begin(), nums.end());
 
-            ankerl::nanobench::doNotOptimizeAway(nums);
-        });
+                ankerl::nanobench::doNotOptimizeAway(nums);
+            }
+        );
 }

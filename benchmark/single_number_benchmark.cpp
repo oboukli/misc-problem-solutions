@@ -35,7 +35,7 @@ TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
 
         .run(
             NAMEOF_RAW(functional::get_single<std::vector<int> const&>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{functional::get_single(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -43,7 +43,7 @@ TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
 
         .run(
             NAMEOF_RAW(imperative::get_single<std::vector<int> const&>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{imperative::get_single(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -51,7 +51,7 @@ TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
 
         .run(
             NAMEOF_RAW(::forfun_get_single).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{
                     ::forfun_get_single(nums.data(), nums.size())
                 };

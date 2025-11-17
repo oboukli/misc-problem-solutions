@@ -28,7 +28,7 @@ TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
 
         .run(
             NAMEOF_RAW(recursive::toh<Rod, Monk, std::size_t>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 Rod src{};
                 Rod des{};
                 Rod aux{};
