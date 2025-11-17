@@ -211,9 +211,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             2,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -229,9 +228,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             3,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -247,9 +245,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             4,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -265,9 +262,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             6,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -283,9 +279,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             7,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -303,9 +298,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             10,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -323,9 +317,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             11,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -343,9 +336,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             12,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -363,9 +355,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             16,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -384,9 +375,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             17,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -405,9 +395,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             18,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -426,9 +415,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             21,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -447,9 +435,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             31,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -469,9 +456,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             -15,
             16,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -491,9 +477,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             0,
             2,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -509,9 +494,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             3,
             4,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -527,9 +511,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             5,
             6,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -545,9 +528,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             15,
             16,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -563,9 +545,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             17,
             18,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -581,9 +562,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             std::numeric_limits<int>::min(),
             std::numeric_limits<int>::min() + 1,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -599,9 +579,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             std::numeric_limits<int>::max() - 1,
             std::numeric_limits<int>::max(),
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
@@ -617,9 +596,8 @@ TEST_CASE("Fizz buzz (namespace optimized)", "[fizzbuzz]")
         fizzbuzz(
             1,
             0,
-            [&stream](char const* const buffer, std::streamsize const size) {
-                stream.write(buffer, size);
-            }
+            [&stream](char const* const buffer, std::streamsize const size)
+                -> void { stream.write(buffer, size); }
         );
 
         REQUIRE_THAT(
