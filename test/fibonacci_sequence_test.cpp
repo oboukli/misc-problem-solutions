@@ -18,12 +18,13 @@
 namespace {
 
 constexpr auto const dummy_noexcept_lambda{
-    [](int const n, std::vector<int>& state) noexcept { state.push_back(n); }
+    [](int const n, std::vector<int>& state) noexcept -> void {
+        state.push_back(n);
+    }
 };
 
 constexpr auto const dummy_throwing_lambda{
-    []([[maybe_unused]] int const n, [[maybe_unused]] std::vector<int>& state) {
-    }
+    [](int const, std::vector<int>&) -> void {}
 };
 
 #ifdef __GNUC__
@@ -123,37 +124,46 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
         STATIC_REQUIRE(noexcept_callable<decltype(dummy_noexcept_func)>);
 
         STATIC_REQUIRE(
-            noexcept_callable<decltype([](int, int) noexcept {}), int, int>
+            noexcept_callable<
+                decltype([](int, int) noexcept -> void {}),
+                int,
+                int>
         );
         STATIC_REQUIRE(
-            noexcept_callable<decltype([](char, int) noexcept {}), int, char>
+            noexcept_callable<
+                decltype([](char, int) noexcept -> void {}),
+                int,
+                char>
         );
 
         STATIC_REQUIRE(
             noexcept_callable<
-                decltype([](int, char*) noexcept {}),
+                decltype([](int, char*) noexcept -> void {}),
                 double,
                 char*>
         );
 
         STATIC_REQUIRE(
             noexcept_callable<
-                decltype([](int, std::string_view) noexcept {}),
+                decltype([](int, std::string_view) noexcept -> void {}),
                 int,
                 std::string>
         );
         STATIC_REQUIRE(
             noexcept_callable<
-                decltype([](int, std::string&) noexcept {}),
+                decltype([](int, std::string&) noexcept -> void {}),
                 int,
                 std::string&>
         );
 
-        STATIC_REQUIRE(noexcept_callable<decltype([]() noexcept {})>);
-        STATIC_REQUIRE(noexcept_callable<decltype([](int) noexcept {}), int>);
+        STATIC_REQUIRE(noexcept_callable<decltype([] noexcept -> void {})>);
+        STATIC_REQUIRE(
+            noexcept_callable<decltype([](int) noexcept -> void {}), int>
+        );
         STATIC_REQUIRE(
             noexcept_callable<
-                decltype([](int, char, double, std::string_view) noexcept {}),
+                decltype([](int, char, double, std::string_view) noexcept -> void {
+                }),
                 int,
                 int,
                 int,
@@ -175,14 +185,14 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
                 noexcept_callable<decltype(dummy_throwing_func)>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([](int, int) {}), int, int>
+                noexcept_callable<decltype([](int, int) -> void {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([](int, int) {}), int, int>
+                noexcept_callable<decltype([](int, int) -> void {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
-                    decltype([](int, std::string&) {}),
+                    decltype([](int, std::string&) -> void {}),
                     int,
                     std::string&>
             );
@@ -203,11 +213,14 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
                     std::vector<char>&>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([](int, int&) noexcept {}), int, int>
+                noexcept_callable<
+                    decltype([](int, int&) noexcept -> void {}),
+                    int,
+                    int>
             );
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<
-                    decltype([](char, char&) noexcept {}),
+                    decltype([](char, char&) noexcept -> void {}),
                     int,
                     int&>
             );
@@ -222,13 +235,16 @@ TEST_CASE("Fibonacci sequence (noexcept_callable)", "[fibonacci_sequence]")
                 noexcept_callable<decltype(dummy_noexcept_lambda)>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([]() noexcept {}), int, int>
+                noexcept_callable<decltype([] noexcept -> void {}), int, int>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([](int) noexcept {}), int, int>
+                noexcept_callable<
+                    decltype([](int) noexcept -> void {}),
+                    int,
+                    int>
             );
             STATIC_REQUIRE_FALSE(
-                noexcept_callable<decltype([](int, int) noexcept {})>
+                noexcept_callable<decltype([](int, int) noexcept -> void {})>
             );
         }
     }
