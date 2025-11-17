@@ -28,7 +28,7 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(char_only::is_anagram).c_str(),
-            [s, t]() noexcept {
+            [s, t] noexcept -> void {
                 bool const volatile r{char_only::is_anagram(s, t)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -37,7 +37,7 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(map_based::is_anagram<char>).c_str(),
-            [s, t]() {
+            [s, t] -> void {
                 bool const volatile r{map_based::is_anagram<char>(s, t)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -46,7 +46,7 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(multiset_based::is_anagram<char>).c_str(),
-            [s, t]() {
+            [s, t] -> void {
                 bool const volatile r{multiset_based::is_anagram<char>(s, t)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);

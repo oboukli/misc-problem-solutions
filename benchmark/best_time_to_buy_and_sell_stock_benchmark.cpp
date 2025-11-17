@@ -39,7 +39,7 @@ TEST_CASE(
                     calc_max_profit<Iter, Iter>
             )
                 .c_str(),
-            [&prices]() noexcept {
+            [&prices] noexcept -> void {
                 auto const volatile r{
                     best_time_to_buy_and_sell_stock::base::calc_max_profit(
                         prices.cbegin(), prices.cend()
@@ -55,7 +55,7 @@ TEST_CASE(
                     calc_max_profit<Iter, Iter>
             )
                 .c_str(),
-            [&prices]() noexcept {
+            [&prices] noexcept -> void {
                 auto const volatile r{
                     best_time_to_buy_and_sell_stock::optimized_l1::
                         calc_max_profit(prices.cbegin(), prices.cend())
@@ -70,7 +70,7 @@ TEST_CASE(
                     calc_max_profit<Iter, Iter>
             )
                 .c_str(),
-            [&prices]() noexcept {
+            [&prices] noexcept -> void {
                 auto const volatile r{
                     best_time_to_buy_and_sell_stock::optimized_l2::
                         calc_max_profit(prices.cbegin(), prices.cend())

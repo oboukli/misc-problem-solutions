@@ -30,7 +30,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(counted::longest_consecutive<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector nums{
                     // clang-format off
                     1,  1,   2,   3,   44,  45,  46,  47,
@@ -54,7 +54,7 @@ TEST_CASE(
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector nums{
                     // clang-format off
                     1,  1,   2,   3,   44,  45,  46,  47,
@@ -78,7 +78,7 @@ TEST_CASE(
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector nums{
                     // clang-format off
                     1,  1,   2,   3,   44,  45,  46,  47,
@@ -102,7 +102,7 @@ TEST_CASE(
                     longest_consecutive<Iter, Iter>
             )
                 .c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector nums{
                     // clang-format off
                     1,  1,   2,   3,   44,  45,  46,  47,

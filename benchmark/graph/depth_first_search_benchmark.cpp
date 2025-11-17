@@ -40,7 +40,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(iterative::depth_first_search<char, Visitor>).c_str(),
-            [&adjacency_list]() -> void {
+            [&adjacency_list] -> void {
                 static constexpr char const starting_vertex{'5'};
 
                 vertex_visit_state<char> visit_state{};
@@ -57,7 +57,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(recursive::depth_first_search<char, Visitor>).c_str(),
-            [&adjacency_list]() -> void {
+            [&adjacency_list] -> void {
                 static constexpr char const starting_vertex{'5'};
 
                 vertex_visit_state<char> visit_state{};

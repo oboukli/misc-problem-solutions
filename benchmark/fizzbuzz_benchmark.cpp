@@ -32,18 +32,18 @@ TEST_CASE("Fizz buzz benchmarking", "[benchmark][fizzbuzz]")
 
         .run(
             NAMEOF_RAW(basic::fizzbuzz).c_str(),
-            [&output_stream]() { basic::fizzbuzz(30, output_stream); }
+            [&output_stream] -> void { basic::fizzbuzz(30, output_stream); }
         )
 
         .run(
             NAMEOF_RAW(optimized::fizzbuzz<Func>).c_str(),
-            [&output_stream]() {
+            [&output_stream] -> void {
                 optimized::fizzbuzz(
                     1,
                     31,
                     [&output_stream](
                         char const* const buf, std::streamsize const size
-                    ) { output_stream.write(buf, size); }
+                    ) -> void { output_stream.write(buf, size); }
                 );
             }
         )

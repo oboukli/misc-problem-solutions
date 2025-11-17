@@ -60,7 +60,7 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(delimited::encode<ConstIter, ConstIter, std::ostream>)
                 .c_str(),
-            [&output_stream]() {
+            [&output_stream] -> void {
                 delimited::encode(
                     tokens.cbegin(), tokens.cend(), output_stream
                 );
@@ -105,7 +105,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(delimited::decode<CharT, Traits>).c_str(),
-            []() {
+            [] -> void {
                 auto const volatile r{delimited::decode(encoded)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

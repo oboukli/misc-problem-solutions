@@ -28,7 +28,7 @@ TEST_CASE("Last stone weight benchmarking", "[benchmark][last_stone_weight]")
 
         .run(
             NAMEOF_RAW(naive::last_stone_weight<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector stones{
                     2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,
                     37,  41,  43,  47,  53,  59,  61,  67,  71,  73,  79,
@@ -46,7 +46,7 @@ TEST_CASE("Last stone weight benchmarking", "[benchmark][last_stone_weight]")
 
         .run(
             NAMEOF_RAW(priority_queue_based::last_stone_weight).c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector stones{
                     2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,
                     37,  41,  43,  47,  53,  59,  61,  67,  71,  73,  79,
@@ -64,7 +64,7 @@ TEST_CASE("Last stone weight benchmarking", "[benchmark][last_stone_weight]")
 
         .run(
             NAMEOF_RAW(heapified::last_stone_weight<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector stones{
                     2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,
                     37,  41,  43,  47,  53,  59,  61,  67,  71,  73,  79,
@@ -82,7 +82,7 @@ TEST_CASE("Last stone weight benchmarking", "[benchmark][last_stone_weight]")
 
         .run(
             NAMEOF_RAW(sort_based::last_stone_weight<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] -> void {
                 std::vector stones{
                     2,   3,   5,   7,   11,  13,  17,  19,  23,  29,  31,
                     37,  41,  43,  47,  53,  59,  61,  67,  71,  73,  79,

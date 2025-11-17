@@ -24,7 +24,7 @@ TEST_CASE(
 
         .run(
             "::std::forward_list<int>",
-            []() noexcept {
+            [] -> void {
                 ::std::forward_list<int> forward_list{};
                 forward_list.push_front(1301);
 
@@ -35,7 +35,7 @@ TEST_CASE(
 
         .run(
             "forfun::experimental::container::forward_list<std::integral T>",
-            []() noexcept {
+            [] -> void {
                 forfun::experimental::container::forward_list<int>
                     forward_list{};
                 forward_list.push_front(1301);

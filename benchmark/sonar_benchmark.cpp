@@ -31,7 +31,7 @@ TEST_CASE("Sonar benchmarking", "[benchmark][sonar]")
 
         .run(
             NAMEOF(count_ships).c_str(),
-            [&sonar]() noexcept {
+            [&sonar] noexcept -> void {
                 ankerl::nanobench::doNotOptimizeAway(count_ships(
                     sonar, {.top = 0, .bottom = 5, .left = 2, .right = 7}
                 ));

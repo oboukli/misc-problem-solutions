@@ -27,7 +27,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 
         .run(
             NAMEOF_RAW(quadratic::contains_duplicate<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array const superprimes{
                     // clang-format off
                     3,   5,   11,  17,  31,  41,  59,  67,
@@ -47,7 +47,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 
         .run(
             NAMEOF_RAW(sorted::contains_duplicate<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array superprimes{
                     // clang-format off
                     3,   5,   11,  17,  31,  41,  59,  67,
@@ -67,7 +67,7 @@ TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 
         .run(
             NAMEOF_RAW(stl::contains_duplicate<Iter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array superprimes{
                     // clang-format off
                     3,   5,   11,  17,  31,  41,  59,  67,

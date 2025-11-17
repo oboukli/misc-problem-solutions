@@ -39,7 +39,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(stl_pair::is_balanced).c_str(),
-            [&root]() noexcept {
+            [&root] noexcept -> void {
                 auto const volatile r{stl_pair::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -47,7 +47,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(stl_abs::is_balanced).c_str(),
-            [&root]() noexcept {
+            [&root] noexcept -> void {
                 auto const volatile r{stl_abs::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -55,7 +55,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(stl_minmax::is_balanced).c_str(),
-            [&root]() noexcept {
+            [&root] noexcept -> void {
                 auto const volatile r{stl_minmax::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -63,7 +63,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(raw::is_balanced).c_str(),
-            [&root]() noexcept {
+            [&root] noexcept -> void {
                 auto const volatile r{raw::is_balanced(&root)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

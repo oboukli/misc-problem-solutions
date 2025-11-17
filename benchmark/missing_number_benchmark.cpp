@@ -35,7 +35,7 @@ TEST_CASE("Missing number benchmarking", "[benchmark][missing_number]")
 
         .run(
             NAMEOF_RAW(bitwise::find_missing_number<RangeType>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{bitwise::find_missing_number(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -43,7 +43,7 @@ TEST_CASE("Missing number benchmarking", "[benchmark][missing_number]")
 
         .run(
             NAMEOF_RAW(functional::find_missing_number<RangeType>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{functional::find_missing_number(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -51,7 +51,7 @@ TEST_CASE("Missing number benchmarking", "[benchmark][missing_number]")
 
         .run(
             NAMEOF_RAW(imperative::find_missing_number<RangeType>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{imperative::find_missing_number(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -59,7 +59,7 @@ TEST_CASE("Missing number benchmarking", "[benchmark][missing_number]")
 
         .run(
             NAMEOF_RAW(optimized::find_missing_number<RangeType>).c_str(),
-            [&nums]() noexcept {
+            [&nums] noexcept -> void {
                 auto const volatile r{optimized::find_missing_number(nums)};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

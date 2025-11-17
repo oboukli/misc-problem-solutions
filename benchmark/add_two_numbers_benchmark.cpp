@@ -66,7 +66,7 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
         .run(
             NAMEOF_RAW(::forfun_iterative_add_two_numbers).c_str(),
-            [node_a, node_b, &results_c_iterative]() noexcept {
+            [node_a, node_b, &results_c_iterative] -> void {
                 auto* r{::forfun_iterative_add_two_numbers(node_a, node_b)};
 
                 results_c_iterative.emplace_front(r, &::forfun_free_node_list);
@@ -75,7 +75,7 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
         .run(
             NAMEOF_RAW(::forfun_recursive_add_two_numbers).c_str(),
-            [node_a, node_b, &results_c_recursive]() noexcept {
+            [node_a, node_b, &results_c_recursive] -> void {
                 auto* r{::forfun_recursive_add_two_numbers(node_a, node_b)};
 
                 results_c_recursive.emplace_front(r, &::forfun_free_node_list);
@@ -84,7 +84,7 @@ TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 
         .run(
             NAMEOF_RAW(stl::add_two_numbers).c_str(),
-            [&addend_a, &addend_b, &results_stl]() {
+            [&addend_a, &addend_b, &results_stl] -> void {
                 auto r{stl::add_two_numbers(addend_a, addend_b)};
 
                 results_stl.push_front(std::move(r));

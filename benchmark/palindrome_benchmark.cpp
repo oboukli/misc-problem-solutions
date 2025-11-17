@@ -33,7 +33,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(::forfun_is_palindrome).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const volatile r{::forfun_is_palindrome(
                         palindrome.data(), palindrome.length()
                     )};
@@ -44,7 +44,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::is_palindrome<char>).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const volatile r{
                         functional::is_palindrome(palindrome)
                     };
@@ -55,7 +55,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome<char>).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const volatile r{
                         functional::bloated::is_palindrome(palindrome)
                     };
@@ -66,7 +66,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome<char>).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const volatile r{
                         iterator_based::is_palindrome(palindrome)
                     };
@@ -77,7 +77,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(offset_based::is_palindrome<char>).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const volatile r{offset_based::is_palindrome<char>(
                         palindrome.data(), palindrome.length()
                     )};
@@ -98,7 +98,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(::forfun_is_palindrome_ci).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const r{::forfun_is_palindrome_ci(
                         palindrome.data(), palindrome.length()
                     )};
@@ -109,7 +109,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(functional::bloated::is_palindrome_ci).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const r{
                         functional::bloated::is_palindrome_ci(palindrome)
                     };
@@ -120,7 +120,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(iterator_based::is_palindrome_ci).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const r{iterator_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -129,7 +129,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 
             .run(
                 NAMEOF_RAW(offset_based::is_palindrome_ci).c_str(),
-                []() noexcept {
+                [] noexcept -> void {
                     auto const r{offset_based::is_palindrome_ci(palindrome)};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);

@@ -72,8 +72,8 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "stl::LRUCache",
-                []() {
-                    int val{wrapper<stl::LRUCache>(lrucache_capacity)};
+                [] -> void {
+                    int const val{wrapper<stl::LRUCache>(lrucache_capacity)};
 
                     ankerl::nanobench::doNotOptimizeAway(val);
                 }
@@ -81,8 +81,8 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "naive::LRUCache",
-                []() {
-                    int val{wrapper<naive::LRUCache>(lrucache_capacity)};
+                [] -> void {
+                    int const val{wrapper<naive::LRUCache>(lrucache_capacity)};
 
                     ankerl::nanobench::doNotOptimizeAway(val);
                 }
@@ -104,8 +104,8 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "stl::LRUCache",
-                []() noexcept {
-                    int val{wrapper<stl::LRUCache>(lrucache_capacity)};
+                [] noexcept -> void {
+                    int const val{wrapper<stl::LRUCache>(lrucache_capacity)};
 
                     ankerl::nanobench::doNotOptimizeAway(val);
                 }
@@ -113,8 +113,8 @@ TEST_CASE("LRU cache benchmarking", "[benchmark][lrucache]")
 
             .run(
                 "naive::LRUCache",
-                []() noexcept {
-                    int val{wrapper<naive::LRUCache>(lrucache_capacity)};
+                [] noexcept -> void {
+                    int const val{wrapper<naive::LRUCache>(lrucache_capacity)};
 
                     ankerl::nanobench::doNotOptimizeAway(val);
                 }

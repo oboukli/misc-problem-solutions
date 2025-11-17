@@ -30,7 +30,7 @@ TEST_CASE("hamming_weight benchmarking", "[benchmark][hamming_weight]")
 
         .run(
             NAMEOF_RAW(linear_functional::get_hamming_weight).c_str(),
-            [&num]() noexcept {
+            [&num] noexcept -> void {
                 auto const volatile r{
                     linear_functional::get_hamming_weight(num)
                 };
@@ -40,7 +40,7 @@ TEST_CASE("hamming_weight benchmarking", "[benchmark][hamming_weight]")
 
         .run(
             NAMEOF_RAW(linear_imperative::get_hamming_weight).c_str(),
-            [&num]() noexcept {
+            [&num] noexcept -> void {
                 auto const volatile r{
                     linear_imperative::get_hamming_weight(num)
                 };
@@ -50,7 +50,7 @@ TEST_CASE("hamming_weight benchmarking", "[benchmark][hamming_weight]")
 
         .run(
             NAMEOF_RAW(optimized_imperative::get_hamming_weight).c_str(),
-            [&num]() noexcept {
+            [&num] noexcept -> void {
                 auto const volatile r{
                     optimized_imperative::get_hamming_weight(num)
                 };

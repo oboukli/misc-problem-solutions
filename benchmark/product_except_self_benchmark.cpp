@@ -55,7 +55,7 @@ TEST_CASE(
                 alg1::product_except_self<ConstItr, ConstItr, Iter, Iter>
             )
                 .c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result /*[[indeterminate]]*/;
                 forfun::product_except_self::alg1::product_except_self(
@@ -70,7 +70,7 @@ TEST_CASE(
                 alg2::product_except_self<ConstItr, ConstItr, Iter, Iter>
             )
                 .c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
                 std::array<std::uint64_t, 16> result /*[[indeterminate]]*/;
                 forfun::product_except_self::alg2::product_except_self(

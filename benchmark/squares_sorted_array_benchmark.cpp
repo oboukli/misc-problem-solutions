@@ -56,7 +56,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(squares_sorted<ConstIter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array<int, 256> result_squares{};
                 squares_sorted(
                     input.cbegin(), input.cend(), result_squares.begin()
@@ -68,7 +68,7 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(squares_sorted_special<ConstIter, Iter>).c_str(),
-            []() noexcept {
+            [] noexcept -> void {
                 std::array<int, 256> result_squares{};
                 squares_sorted_special(
                     input.cbegin(), input.cend(), result_squares.begin()

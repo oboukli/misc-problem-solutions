@@ -46,7 +46,7 @@ TEST_CASE("Meeting rooms benchmarking", "[benchmark][meeting_rooms]")
 
         .run(
             NAMEOF_RAW(can_attend<Iter, Iter>).c_str(),
-            [&intervals]() noexcept {
+            [&intervals] noexcept -> void {
                 auto const volatile r{
                     can_attend(intervals.cbegin(), intervals.cend())
                 };
@@ -90,7 +90,7 @@ TEST_CASE("Meeting rooms 2 benchmarking", "[benchmark][meeting_rooms_2]")
 
         .run(
             NAMEOF_RAW(min_chronotopes<Iter, Iter>).c_str(),
-            [&intervals]() noexcept {
+            [&intervals] noexcept -> void {
                 auto const volatile r{
                     min_chronotopes(intervals.cbegin(), intervals.cend())
                 };
