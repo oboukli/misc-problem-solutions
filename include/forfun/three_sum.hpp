@@ -107,7 +107,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     requires std::equality_comparable<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto find(
     Iter iter,
-    Sentinel const last,
+    Sentinel last,
     Iter const iter_a,
     Iter const iter_b,
     std::iter_value_t<Iter> const target
