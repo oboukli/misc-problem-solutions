@@ -309,7 +309,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         );
     }
 
-    SECTION("All graph vertices visited (case 1)")
+    SECTION("All graph vertices visited")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {'1', {'2', '3', '4'}},
@@ -358,7 +358,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         );
     }
 
-    SECTION("All graph vertices visited (case 2)")
+    SECTION("All graph vertices visited (benchmark case)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {'1', {'2', '3', '4'}},
