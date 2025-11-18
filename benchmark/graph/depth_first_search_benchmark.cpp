@@ -39,6 +39,23 @@ TEST_CASE(
         .relative(true)
 
         .run(
+            NAMEOF_RAW(iterative::depth_first_search<char, Visitor>).c_str(),
+            [&adjacency_list]() -> void {
+                static constexpr char const starting_vertex{'5'};
+
+                vertex_visit_state<char> visit_state{};
+
+                iterative::depth_first_search(
+                    adjacency_list,
+                    visit_state,
+                    starting_vertex,
+                    [](char) noexcept -> void {}
+                );
+                ankerl::nanobench::doNotOptimizeAway(visit_state);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(recursive::depth_first_search<char, Visitor>).c_str(),
             [&adjacency_list]() -> void {
                 static constexpr char const starting_vertex{'5'};
