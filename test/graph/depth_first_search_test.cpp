@@ -318,7 +318,7 @@ TEMPLATE_TEST_CASE_SIG(
         );
     }
 
-    SECTION("All graph vertices visited (case 1)")
+    SECTION("All graph vertices visited")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {'1', {'2', '3', '4'}},
@@ -367,7 +367,7 @@ TEMPLATE_TEST_CASE_SIG(
         );
     }
 
-    SECTION("All graph vertices visited (case 2)")
+    SECTION("All graph vertices visited (benchmark case)")
     {
         vertex_adjacency_list<char> const adjacency_list{
             {'1', {'2', '3', '4'}},

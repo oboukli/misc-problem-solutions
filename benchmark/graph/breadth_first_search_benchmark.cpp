@@ -23,15 +23,15 @@ TEST_CASE(
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_visit_state;
 
-    using Visitor = decltype([](int) noexcept -> void {});
+    using Visitor = decltype([](char) noexcept -> void {});
 
-    vertex_adjacency_list<int> const adjacency_list{
-        {{1}, {2, 3, 4}},
-        {{2}, {1}},
-        {{3}, {1}},
-        {{4}, {1, 5}},
-        {{5}, {4, 6}},
-        {{6}, {5}},
+    vertex_adjacency_list<char> const adjacency_list{
+        {'1', {'2', '3', '4'}},
+        {'2', {'1'}},
+        {'3', {'1'}},
+        {'4', {'1', '5'}},
+        {'5', {'4', '6'}},
+        {'6', {'5'}},
     };
 
     ankerl::nanobench::Bench()
@@ -40,17 +40,17 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(recursive::breadth_first_search<int, Visitor>).c_str(),
-            [&adjacency_list]() {
-                static constexpr int const starting_vertex{1};
+            NAMEOF_RAW(recursive::breadth_first_search<char, Visitor>).c_str(),
+            [&adjacency_list]() -> void {
+                static constexpr char const starting_vertex{'5'};
 
-                vertex_visit_state<int> visit_state{};
+                vertex_visit_state<char> visit_state{};
 
                 recursive::breadth_first_search(
                     adjacency_list,
                     visit_state,
                     starting_vertex,
-                    [](int) noexcept -> void {}
+                    [](char) noexcept -> void {}
                 );
                 ankerl::nanobench::doNotOptimizeAway(visit_state);
             }
