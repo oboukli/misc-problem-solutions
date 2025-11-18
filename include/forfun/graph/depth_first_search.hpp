@@ -43,10 +43,9 @@ auto depth_first_search(
         auto const [current_vertex, offset]{stack.top()};
         ++stack.top().second;
 
-        if (auto& state{state_list.find(current_vertex)->second};
-            state == vertex_visit_state::unvisited)
+        if (std::as_const(state_list).find(current_vertex) == state_list.cend())
         {
-            state = vertex_visit_state::visited;
+            state_list.emplace(current_vertex);
             preorder_step(current_vertex);
         }
 
@@ -60,7 +59,7 @@ auto depth_first_search(
         }
 
         auto const& adjacency{*adj_iter};
-        if (state_list.find(adjacency)->second == vertex_visit_state::unvisited)
+        if (std::as_const(state_list).find(adjacency) == state_list.cend())
         {
             stack.emplace(adjacency, 0);
         }
@@ -81,12 +80,12 @@ auto depth_first_search(
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
-    state_list.find(start)->second = vertex_visit_state::visited;
+    state_list.emplace(start);
     preorder_step(start);
 
     for (auto const& adjacency : adjacency_list.find(start)->second)
     {
-        if (state_list.find(adjacency)->second == vertex_visit_state::unvisited)
+        if (std::as_const(state_list).find(adjacency) == state_list.cend())
         {
             depth_first_search(
                 adjacency_list, state_list, adjacency, preorder_step

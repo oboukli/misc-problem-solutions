@@ -465,7 +465,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/depth_first_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/invert_binary_tree_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/subsets_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/vertex_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/group_anagrams_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/house_robber_test.cpp"
