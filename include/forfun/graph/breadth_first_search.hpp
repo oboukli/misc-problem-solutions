@@ -12,6 +12,7 @@
 
 #include <concepts>
 #include <deque>
+#include <utility>
 
 #include "forfun/graph/vertex.hpp"
 
@@ -38,10 +39,9 @@ auto do_breadth_first_search_(
     std::deque<Vertex> to_visit{};
     for (auto const& adjacency : adjacency_list.find(start)->second)
     {
-        if (auto& adj_state = state_list.find(adjacency)->second;
-            adj_state == vertex_visit_state::unvisited)
+        if (std::as_const(state_list).find(adjacency) == state_list.cend())
         {
-            adj_state = vertex_visit_state::visited;
+            state_list.emplace(adjacency);
             step(adjacency);
 
             to_visit.emplace_back(adjacency);
@@ -66,7 +66,7 @@ auto breadth_first_search(
     Visitor step
 ) noexcept(noexcept(step(start))) -> void
 {
-    state_list.find(start)->second = vertex_visit_state::visited;
+    state_list.emplace(start);
     step(start);
 
     detail::do_breadth_first_search_(adjacency_list, state_list, start, step);

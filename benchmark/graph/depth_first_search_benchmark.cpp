@@ -21,7 +21,6 @@ TEST_CASE(
 
     using forfun::graph::vertex_adjacency_list;
     using forfun::graph::vertex_state_list;
-    using forfun::graph::vertex_visit_state;
 
     using Visitor = decltype([](int) noexcept -> void {});
 
@@ -41,18 +40,10 @@ TEST_CASE(
 
         .run(
             NAMEOF_RAW(recursive::depth_first_search<int, Visitor>).c_str(),
-            [&adjacency_list]() noexcept {
+            [&adjacency_list]() {
                 static constexpr int const starting_vertex{1};
 
-                // NOLINTNEXTLINE(misc-const-correctness)
-                vertex_state_list<int> state_list{
-                    {{1}, vertex_visit_state::unvisited},
-                    {{2}, vertex_visit_state::unvisited},
-                    {{3}, vertex_visit_state::unvisited},
-                    {{4}, vertex_visit_state::unvisited},
-                    {{5}, vertex_visit_state::unvisited},
-                    {{6}, vertex_visit_state::unvisited},
-                };
+                vertex_state_list<int> state_list{};
 
                 recursive::depth_first_search(
                     adjacency_list,
