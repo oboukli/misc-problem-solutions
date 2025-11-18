@@ -21,7 +21,7 @@ TEST_CASE(
     using namespace forfun::graph::breadth_first_search;
 
     using forfun::graph::vertex_adjacency_list;
-    using forfun::graph::vertex_state_list;
+    using forfun::graph::vertex_visit_state;
 
     using Visitor = decltype([](int) noexcept -> void {});
 
@@ -44,15 +44,15 @@ TEST_CASE(
             [&adjacency_list]() {
                 static constexpr int const starting_vertex{1};
 
-                vertex_state_list<int> state_list{};
+                vertex_visit_state<int> visit_state{};
 
                 recursive::breadth_first_search(
                     adjacency_list,
-                    state_list,
+                    visit_state,
                     starting_vertex,
                     [](int) noexcept -> void {}
                 );
-                ankerl::nanobench::doNotOptimizeAway(state_list);
+                ankerl::nanobench::doNotOptimizeAway(visit_state);
             }
         )
 

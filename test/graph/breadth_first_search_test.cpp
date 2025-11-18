@@ -39,17 +39,17 @@ private:
 TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
 {
     using forfun::graph::vertex_adjacency_list;
-    using forfun::graph::vertex_state_list;
+    using forfun::graph::vertex_visit_state;
 
     using forfun::graph::breadth_first_search::recursive::breadth_first_search;
 
     SECTION("One-vertex acyclic graph")
     {
         vertex_adjacency_list<char> const adjacency_list{{'a', {}}};
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'a'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 1UZ);
 
@@ -61,16 +61,16 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{'a'};
+        vertex_visit_state<char> const expected_state_list{'a'};
 
         static constexpr std::array const expected_visit_log{'a'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -79,10 +79,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
     SECTION("One-vertex cyclic graph")
     {
         vertex_adjacency_list<char> const adjacency_list{{'a', {'a'}}};
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'a'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 1UZ);
 
@@ -94,16 +94,16 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{'a'};
+        vertex_visit_state<char> const expected_state_list{'a'};
 
         static constexpr std::array const expected_visit_log{'a'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -115,10 +115,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'a', {}},
             {'b', {'a'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'b'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 2UZ);
 
@@ -130,19 +130,19 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
         };
 
         static constexpr std::array const expected_visit_log{'b', 'a'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -154,10 +154,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'a', {'b'}},
             {'b', {'a'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'a'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 2UZ);
 
@@ -169,19 +169,19 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
         };
 
         static constexpr std::array const expected_visit_log{'a', 'b'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -194,10 +194,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'b', {'c'}},
             {'c', {}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'a'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 3UZ);
 
@@ -209,12 +209,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
             'c',
@@ -222,7 +222,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
 
         static constexpr std::array const expected_visit_log{'a', 'b', 'c'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -235,10 +235,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'b', {'c'}},
             {'c', {}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'b'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 3UZ);
 
@@ -250,19 +250,19 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'b',
             'c',
         };
 
         static constexpr std::array const expected_visit_log{'b', 'c'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -275,10 +275,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'b', {'c'}},
             {'c', {'a'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'b'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 3UZ);
 
@@ -290,12 +290,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
             'c',
@@ -303,7 +303,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
 
         static constexpr std::array const expected_visit_log{'b', 'c', 'a'};
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -319,10 +319,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'5', {'4', '6'}},
             {'6', {'5'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'1'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 6UZ);
 
@@ -334,12 +334,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             '1',
             '2',
             '3',
@@ -352,7 +352,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             '1', '2', '3', '4', '5', '6'
         };
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -368,10 +368,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'5', {'4', '6'}},
             {'6', {'5'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'5'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 6UZ);
 
@@ -383,12 +383,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             '1',
             '2',
             '3',
@@ -401,7 +401,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             '5', '4', '6', '1', '2', '3'
         };
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -419,10 +419,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'g', {'e', 'h'}},
             {'h', {'f', 'g'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'c'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 8UZ);
 
@@ -434,12 +434,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
             'c',
@@ -454,7 +454,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             'c', 'a', 'b', 'd', 'e', 'f', 'g', 'h'
         };
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -472,10 +472,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'g', {'e', 'h'}},
             {'h', {'f', 'g'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'h'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 8UZ);
 
@@ -487,12 +487,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
             'c',
@@ -507,7 +507,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             'h', 'f', 'g', 'e', 'd', 'a', 'b', 'c'
         };
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
@@ -525,10 +525,10 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             {'g', {'e', 'h'}},
             {'h', {'f', 'g'}},
         };
-        vertex_state_list<char> state_list{};
+        vertex_visit_state<char> visit_state{};
         static constexpr auto const starting_vertex{'e'};
 
-        state_list.reserve(adjacency_list.size());
+        visit_state.reserve(adjacency_list.size());
 
         CHECK(adjacency_list.size() == 8UZ);
 
@@ -540,12 +540,12 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
         VisitRecorder const visit_recorder(&visit_log);
 
         breadth_first_search(
-            adjacency_list, state_list, starting_vertex, visit_recorder
+            adjacency_list, visit_state, starting_vertex, visit_recorder
         );
 
-        CAPTURE(state_list);
+        CAPTURE(visit_state);
 
-        vertex_state_list<char> const expected_state_list{
+        vertex_visit_state<char> const expected_state_list{
             'a',
             'b',
             'c',
@@ -560,7 +560,7 @@ TEST_CASE("Breadth-first search", "[graph][breadth_first_search]")
             'e', 'd', 'f', 'g', 'a', 'b', 'c', 'h'
         };
 
-        REQUIRE(state_list == expected_state_list);
+        REQUIRE(visit_state == expected_state_list);
         REQUIRE_THAT(
             visit_log, Catch::Matchers::RangeEquals(expected_visit_log)
         );
