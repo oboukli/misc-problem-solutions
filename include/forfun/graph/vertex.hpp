@@ -20,7 +20,7 @@ using vertex_adjacency_list = std::unordered_map<Vertex, std::vector<Vertex>>;
 
 template <typename Vertex>
     requires std::is_trivially_copyable_v<Vertex>
-using vertex_state_list = std::unordered_set<Vertex>;
+using vertex_visit_state = std::unordered_set<Vertex>;
 
 } // namespace forfun::graph
 

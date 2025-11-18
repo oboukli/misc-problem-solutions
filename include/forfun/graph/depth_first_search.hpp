@@ -21,12 +21,12 @@ namespace forfun::graph::depth_first_search {
 
 namespace iterative {
 
-/// @note The function assumes that @p adjacency_list and @p state_list are
+/// @note The function assumes that @p adjacency_list and @p visit_state are
 /// valid and non-empty, otherwise the behavior of the function is undefined.
 template <std::regular Vertex, std::invocable<Vertex> Visitor>
 auto depth_first_search(
     vertex_adjacency_list<Vertex> const& adjacency_list,
-    vertex_state_list<Vertex>& state_list,
+    vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
@@ -43,9 +43,10 @@ auto depth_first_search(
         auto const [current_vertex, offset]{stack.top()};
         ++stack.top().second;
 
-        if (std::as_const(state_list).find(current_vertex) == state_list.cend())
+        if (std::as_const(visit_state).find(current_vertex)
+            == visit_state.cend())
         {
-            state_list.emplace(current_vertex);
+            visit_state.emplace(current_vertex);
             preorder_step(current_vertex);
         }
 
@@ -59,7 +60,7 @@ auto depth_first_search(
         }
 
         auto const& adjacency{*adj_iter};
-        if (std::as_const(state_list).find(adjacency) == state_list.cend())
+        if (std::as_const(visit_state).find(adjacency) == visit_state.cend())
         {
             stack.emplace(adjacency, 0);
         }
@@ -70,25 +71,25 @@ auto depth_first_search(
 
 namespace recursive {
 
-/// @note The function assumes that @p adjacency_list and @p state_list are
+/// @note The function assumes that @p adjacency_list and @p visit_state are
 /// valid and non-empty, otherwise the behavior of the function is undefined.
 template <std::regular Vertex, std::invocable<Vertex> Visitor>
 auto depth_first_search(
     vertex_adjacency_list<Vertex> const& adjacency_list,
-    vertex_state_list<Vertex>& state_list,
+    vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor preorder_step
 ) noexcept(noexcept(preorder_step(start))) -> void
 {
-    state_list.emplace(start);
+    visit_state.emplace(start);
     preorder_step(start);
 
     for (auto const& adjacency : adjacency_list.find(start)->second)
     {
-        if (std::as_const(state_list).find(adjacency) == state_list.cend())
+        if (std::as_const(visit_state).find(adjacency) == visit_state.cend())
         {
             depth_first_search(
-                adjacency_list, state_list, adjacency, preorder_step
+                adjacency_list, visit_state, adjacency, preorder_step
             );
         }
     }
