@@ -34,7 +34,7 @@ auto do_breadth_first_search_(
     vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor step
-) noexcept(noexcept(step(start))) -> void
+) -> void
 {
     std::deque<Vertex> to_visit{};
     for (auto const& adjacency : adjacency_list.find(start)->second)
@@ -64,7 +64,7 @@ auto breadth_first_search(
     vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor step
-) noexcept(noexcept(step(start))) -> void
+) -> void
 {
     visit_state.emplace(start);
     step(start);

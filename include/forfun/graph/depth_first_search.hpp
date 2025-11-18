@@ -29,7 +29,7 @@ auto depth_first_search(
     vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor preorder_step
-) noexcept(noexcept(preorder_step(start))) -> void
+) -> void
 {
     using offset_type = forfun::graph::vertex_adjacency_list<
         Vertex>::mapped_type::difference_type;
@@ -79,7 +79,7 @@ auto depth_first_search(
     vertex_visit_state<Vertex>& visit_state,
     Vertex const start,
     Visitor preorder_step
-) noexcept(noexcept(preorder_step(start))) -> void
+) -> void
 {
     visit_state.emplace(start);
     preorder_step(start);
