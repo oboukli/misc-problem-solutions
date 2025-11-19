@@ -6,11 +6,8 @@ Checks: "
   clang-analyzer-*,
   clang-diagnostic-*,
   cppcoreguidelines-*,
-  -darwin-*,
   google-*,
   hicpp-*,
-  -linuxkernel-*,
-  -llvm-*,
   misc-*,
   modernize-*,
   performance-*,
@@ -45,6 +42,7 @@ CheckOptions:
   bugprone-assert-side-effect.AssertMacros: assert,NSAssert,NSCAssert
   bugprone-assert-side-effect.CheckFunctionCalls: "false"
   bugprone-assert-side-effect.IgnoredFunctions: __builtin_expect
+  bugprone-capturing-this-in-member-variable.BindFunctions: "::std::bind;::boost::bind;::std::bind_front;::std::bind_back;::boost::compat::bind_front;::boost::compat::bind_back"
   bugprone-capturing-this-in-member-variable.FunctionWrapperTypes: "::std::function;::std::move_only_function;::boost::function"
   bugprone-dangling-handle.HandleClasses: "std::basic_string_view;std::experimental::basic_string_view;std::span"
   bugprone-easily-swappable-parameters.IgnoredParameterNames: '"";iterator;Iterator;begin;Begin;end;End;first;First;last;Last;lhs;LHS;rhs;RHS'
@@ -64,6 +62,7 @@ CheckOptions:
   bugprone-implicit-widening-of-multiplication-result.UseCXXStaticCastsInCppSources: "true"
   bugprone-lambda-function-name.IgnoreMacros: "false"
   bugprone-misplaced-widening-cast.CheckImplicitCasts: "false"
+  bugprone-multi-level-implicit-pointer-conversion.EnableInC: "true"
   bugprone-narrowing-conversions.IgnoreConversionFromTypes: ""
   bugprone-narrowing-conversions.PedanticMode: "false"
   bugprone-narrowing-conversions.WarnOnEquivalentBitWidth: "true"
@@ -85,6 +84,7 @@ CheckOptions:
   bugprone-sizeof-expression.WarnOnOffsetDividedBySizeOf: "true"
   bugprone-sizeof-expression.WarnOnSizeOfCompareToConstant: "true"
   bugprone-sizeof-expression.WarnOnSizeOfConstant: "true"
+  bugprone-sizeof-expression.WarnOnSizeOfInLoopTermination: "true"
   bugprone-sizeof-expression.WarnOnSizeOfIntegerExpression: "false"
   bugprone-sizeof-expression.WarnOnSizeOfPointer: "false"
   bugprone-sizeof-expression.WarnOnSizeOfPointerToAggregate: "true"
@@ -109,6 +109,7 @@ CheckOptions:
   bugprone-too-small-loop-variable.MagnitudeBitsUpperLimit: "16"
   bugprone-unchecked-optional-access.IgnoreSmartPointerDereference: "false"
   bugprone-unhandled-self-assignment.WarnOnlyIfThisHasSuspiciousField: "true"
+  bugprone-unintended-char-ostream-output.AllowedTypes: "unsigned char;signed char"
   bugprone-unsafe-functions.CustomFunctions: ""
   bugprone-unsafe-functions.ReportDefaultFunctions: "true"
   bugprone-unsafe-functions.ReportMoreUnsafeFunctions: "true"
@@ -120,6 +121,7 @@ CheckOptions:
   cert-arr39-c.WarnOnOffsetDividedBySizeOf: "true"
   cert-arr39-c.WarnOnSizeOfCompareToConstant: "false"
   cert-arr39-c.WarnOnSizeOfConstant: "false"
+  cert-arr39-c.WarnOnSizeOfInLoopTermination: "true"
   cert-arr39-c.WarnOnSizeOfIntegerExpression: "false"
   cert-arr39-c.WarnOnSizeOfPointer: "false"
   cert-arr39-c.WarnOnSizeOfPointerToAggregate: "false"
@@ -137,7 +139,7 @@ CheckOptions:
   cert-err09-cpp.MaxSize: "18446744073709551615"
   cert-err09-cpp.WarnOnLargeObjects: "false"
   cert-err33-c.AllowCastToVoid: "true"
-  cert-err33-c.CheckedFunctions: "^::aligned_alloc;^::asctime_s;^::at_quick_exit;^::atexit;^::bsearch;^::bsearch_s;^::btowc;^::c16rtomb;^::c32rtomb;^::calloc;^::clock;^::cnd_broadcast;^::cnd_init;^::cnd_signal;^::cnd_timedwait;^::cnd_wait;^::ctime_s;^::fclose;^::fflush;^::fgetc;^::fgetpos;^::fgets;^::fgetwc;^::fopen;^::fopen_s;^::fprintf;^::fprintf_s;^::fputc;^::fputs;^::fputwc;^::fputws;^::fread;^::freopen;^::freopen_s;^::fscanf;^::fscanf_s;^::fseek;^::fsetpos;^::ftell;^::fwprintf;^::fwprintf_s;^::fwrite;^::fwscanf;^::fwscanf_s;^::getc;^::getchar;^::getenv;^::getenv_s;^::gets_s;^::getwc;^::getwchar;^::gmtime;^::gmtime_s;^::localtime;^::localtime_s;^::malloc;^::mbrtoc16;^::mbrtoc32;^::mbsrtowcs;^::mbsrtowcs_s;^::mbstowcs;^::mbstowcs_s;^::memchr;^::mktime;^::mtx_init;^::mtx_lock;^::mtx_timedlock;^::mtx_trylock;^::mtx_unlock;^::printf_s;^::putc;^::putwc;^::raise;^::realloc;^::remove;^::rename;^::scanf;^::scanf_s;^::setlocale;^::setvbuf;^::signal;^::snprintf;^::snprintf_s;^::sprintf;^::sprintf_s;^::sscanf;^::sscanf_s;^::strchr;^::strerror_s;^::strftime;^::strpbrk;^::strrchr;^::strstr;^::strtod;^::strtof;^::strtoimax;^::strtok;^::strtok_s;^::strtol;^::strtold;^::strtoll;^::strtoul;^::strtoull;^::strtoumax;^::strxfrm;^::swprintf;^::swprintf_s;^::swscanf;^::swscanf_s;^::thrd_create;^::thrd_detach;^::thrd_join;^::thrd_sleep;^::time;^::timespec_get;^::tmpfile;^::tmpfile_s;^::tmpnam;^::tmpnam_s;^::tss_create;^::tss_get;^::tss_set;^::ungetc;^::ungetwc;^::vfprintf;^::vfprintf_s;^::vfscanf;^::vfscanf_s;^::vfwprintf;^::vfwprintf_s;^::vfwscanf;^::vfwscanf_s;^::vprintf_s;^::vscanf;^::vscanf_s;^::vsnprintf;^::vsnprintf_s;^::vsprintf;^::vsprintf_s;^::vsscanf;^::vsscanf_s;^::vswprintf;^::vswprintf_s;^::vswscanf;^::vswscanf_s;^::vwprintf_s;^::vwscanf;^::vwscanf_s;^::wcrtomb;^::wcschr;^::wcsftime;^::wcspbrk;^::wcsrchr;^::wcsrtombs;^::wcsrtombs_s;^::wcsstr;^::wcstod;^::wcstof;^::wcstoimax;^::wcstok;^::wcstok_s;^::wcstol;^::wcstold;^::wcstoll;^::wcstombs;^::wcstombs_s;^::wcstoul;^::wcstoull;^::wcstoumax;^::wcsxfrm;^::wctob;^::wctrans;^::wctype;^::wmemchr;^::wprintf_s;^::wscanf;^::wscanf_s"
+  cert-err33-c.CheckedFunctions: "^::aligned_alloc$;^::asctime_s$;^::at_quick_exit$;^::atexit$;^::bsearch$;^::bsearch_s$;^::btowc$;^::c16rtomb$;^::c32rtomb$;^::calloc$;^::clock$;^::cnd_broadcast$;^::cnd_init$;^::cnd_signal$;^::cnd_timedwait$;^::cnd_wait$;^::ctime_s$;^::fclose$;^::fflush$;^::fgetc$;^::fgetpos$;^::fgets$;^::fgetwc$;^::fopen$;^::fopen_s$;^::fprintf$;^::fprintf_s$;^::fputc$;^::fputs$;^::fputwc$;^::fputws$;^::fread$;^::freopen$;^::freopen_s$;^::fscanf$;^::fscanf_s$;^::fseek$;^::fsetpos$;^::ftell$;^::fwprintf$;^::fwprintf_s$;^::fwrite$;^::fwscanf$;^::fwscanf_s$;^::getc$;^::getchar$;^::getenv$;^::getenv_s$;^::gets_s$;^::getwc$;^::getwchar$;^::gmtime$;^::gmtime_s$;^::localtime$;^::localtime_s$;^::malloc$;^::mbrtoc16$;^::mbrtoc32$;^::mbsrtowcs$;^::mbsrtowcs_s$;^::mbstowcs$;^::mbstowcs_s$;^::memchr$;^::mktime$;^::mtx_init$;^::mtx_lock$;^::mtx_timedlock$;^::mtx_trylock$;^::mtx_unlock$;^::printf_s$;^::putc$;^::putwc$;^::raise$;^::realloc$;^::remove$;^::rename$;^::scanf$;^::scanf_s$;^::setlocale$;^::setvbuf$;^::signal$;^::snprintf$;^::snprintf_s$;^::sprintf$;^::sprintf_s$;^::sscanf$;^::sscanf_s$;^::strchr$;^::strerror_s$;^::strftime$;^::strpbrk$;^::strrchr$;^::strstr$;^::strtod$;^::strtof$;^::strtoimax$;^::strtok$;^::strtok_s$;^::strtol$;^::strtold$;^::strtoll$;^::strtoul$;^::strtoull$;^::strtoumax$;^::strxfrm$;^::swprintf$;^::swprintf_s$;^::swscanf$;^::swscanf_s$;^::thrd_create$;^::thrd_detach$;^::thrd_join$;^::thrd_sleep$;^::time$;^::timespec_get$;^::tmpfile$;^::tmpfile_s$;^::tmpnam$;^::tmpnam_s$;^::tss_create$;^::tss_get$;^::tss_set$;^::ungetc$;^::ungetwc$;^::vfprintf$;^::vfprintf_s$;^::vfscanf$;^::vfscanf_s$;^::vfwprintf$;^::vfwprintf_s$;^::vfwscanf$;^::vfwscanf_s$;^::vprintf_s$;^::vscanf$;^::vscanf_s$;^::vsnprintf$;^::vsnprintf_s$;^::vsprintf$;^::vsprintf_s$;^::vsscanf$;^::vsscanf_s$;^::vswprintf$;^::vswprintf_s$;^::vswscanf$;^::vswscanf_s$;^::vwprintf_s$;^::vwscanf$;^::vwscanf_s$;^::wcrtomb$;^::wcschr$;^::wcsftime$;^::wcspbrk$;^::wcsrchr$;^::wcsrtombs$;^::wcsrtombs_s$;^::wcsstr$;^::wcstod$;^::wcstof$;^::wcstoimax$;^::wcstok$;^::wcstok_s$;^::wcstol$;^::wcstold$;^::wcstoll$;^::wcstombs$;^::wcstombs_s$;^::wcstoul$;^::wcstoull$;^::wcstoumax$;^::wcsxfrm$;^::wctob$;^::wctrans$;^::wctype$;^::wmemchr$;^::wprintf_s$;^::wscanf$;^::wscanf_s$"
   cert-err33-c.CheckedReturnTypes: "^::std::error_code$;^::std::error_condition$;^::std::errc$;^::std::expected$;^::boost::system::error_code$"
   cert-err61-cpp.CheckThrowTemporaries: "true"
   cert-err61-cpp.MaxSize: "18446744073709551615"
@@ -162,6 +164,7 @@ CheckOptions:
   cert-str34-c.DiagnoseSignedUnsignedCharComparisons: "false"
   cppcoreguidelines-avoid-c-arrays.AllowStringArrays: "false"
   cppcoreguidelines-avoid-do-while.IgnoreMacros: "false"
+  cppcoreguidelines-avoid-goto.IgnoreMacros: "false"
   cppcoreguidelines-avoid-non-const-global-variables.AllowInternalLinkage: "false"
   cppcoreguidelines-explicit-virtual-functions.AllowOverrideAndFinal: "false"
   cppcoreguidelines-explicit-virtual-functions.FinalSpelling: final
@@ -173,6 +176,7 @@ CheckOptions:
   cppcoreguidelines-macro-usage.AllowedRegexp: "^DEBUG_*"
   cppcoreguidelines-macro-usage.CheckCapsOnly: "false"
   cppcoreguidelines-macro-usage.IgnoreCommandLineMacros: "true"
+  cppcoreguidelines-missing-std-forward.ForwardFunction: "::std::forward"
   cppcoreguidelines-narrowing-conversions.IgnoreConversionFromTypes: ""
   cppcoreguidelines-narrowing-conversions.PedanticMode: "false"
   cppcoreguidelines-narrowing-conversions.WarnOnEquivalentBitWidth: "true"
@@ -197,28 +201,35 @@ CheckOptions:
   cppcoreguidelines-rvalue-reference-param-not-moved.AllowPartialMove: "false"
   cppcoreguidelines-rvalue-reference-param-not-moved.IgnoreNonDeducedTemplateTypes: "false"
   cppcoreguidelines-rvalue-reference-param-not-moved.IgnoreUnnamedParams: "false"
+  cppcoreguidelines-rvalue-reference-param-not-moved.MoveFunction: "::std::move"
   cppcoreguidelines-special-member-functions.AllowImplicitlyDeletedCopyOrMove: "false"
   cppcoreguidelines-special-member-functions.AllowMissingMoveFunctions: "false"
   cppcoreguidelines-special-member-functions.AllowMissingMoveFunctionsWhenCopyIsDeleted: "false"
   cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: "false"
+  cppcoreguidelines-special-member-functions.IgnoreMacros: "true"
   cppcoreguidelines-use-default-member-init.IgnoreMacros: "true"
   cppcoreguidelines-use-default-member-init.UseAssignment: "false"
+  cppcoreguidelines-use-enum-class.IgnoreUnscopedEnumsInClasses: "false"
   google-readability-braces-around-statements.ShortStatementLines: "1"
   google-readability-function-size.BranchThreshold: none
+  google-readability-function-size.CountMemberInitAsStmt: "true"
   google-readability-function-size.LineThreshold: none
   google-readability-function-size.NestingThreshold: none
   google-readability-function-size.ParameterThreshold: none
   google-readability-function-size.StatementThreshold: "800"
   google-readability-function-size.VariableThreshold: none
+  google-readability-namespace-comments.AllowOmittingNamespaceComments: "false"
   google-readability-namespace-comments.ShortNamespaceLines: "10"
   google-readability-namespace-comments.SpacesBeforeComments: "2"
   google-runtime-int.SignedTypePrefix: int
   google-runtime-int.TypeSuffix: ""
   google-runtime-int.UnsignedTypePrefix: uint
   hicpp-avoid-c-arrays.AllowStringArrays: "false"
+  hicpp-avoid-goto.IgnoreMacros: "false"
   hicpp-braces-around-statements.ShortStatementLines: "0"
   hicpp-deprecated-headers.CheckHeaderFile: "false"
   hicpp-function-size.BranchThreshold: none
+  hicpp-function-size.CountMemberInitAsStmt: "true"
   hicpp-function-size.LineThreshold: none
   hicpp-function-size.NestingThreshold: none
   hicpp-function-size.ParameterThreshold: none
@@ -230,6 +241,7 @@ CheckOptions:
   hicpp-move-const-arg.CheckMoveToConstRef: "true"
   hicpp-move-const-arg.CheckTriviallyCopyableMove: "true"
   hicpp-multiway-paths-covered.WarnOnMissingElse: "false"
+  hicpp-named-parameter.InsertPlainNamesInForwardDecls: "false"
   hicpp-no-malloc.Allocations: "::malloc;::calloc"
   hicpp-no-malloc.Deallocations: "::free"
   hicpp-no-malloc.Reallocations: "::realloc"
@@ -238,6 +250,7 @@ CheckOptions:
   hicpp-special-member-functions.AllowMissingMoveFunctions: "false"
   hicpp-special-member-functions.AllowMissingMoveFunctionsWhenCopyIsDeleted: "false"
   hicpp-special-member-functions.AllowSoleDefaultDtor: "false"
+  hicpp-special-member-functions.IgnoreMacros: "true"
   hicpp-uppercase-literal-suffix.IgnoreMacros: "true"
   hicpp-uppercase-literal-suffix.NewSuffixes: ""
   hicpp-use-auto.MinTypeNameLength: "5"
@@ -261,9 +274,6 @@ CheckOptions:
   hicpp-use-override.IgnoreDestructors: "false"
   hicpp-use-override.IgnoreTemplateInstantiations: "false"
   hicpp-use-override.OverrideSpelling: override
-  llvm-else-after-return.WarnOnConditionVariables: "false"
-  llvm-else-after-return.WarnOnUnfixable: "false"
-  llvm-qualified-auto.AddConstToQualified: "false"
   misc-const-correctness.AllowedTypes: ""
   misc-const-correctness.AnalyzePointers: "true"
   misc-const-correctness.AnalyzeReferences: "true"
@@ -279,6 +289,8 @@ CheckOptions:
   misc-header-include-cycle.IgnoredFilesList: ""
   misc-include-cleaner.DeduplicateFindings: "true"
   misc-include-cleaner.IgnoreHeaders: ""
+  misc-include-cleaner.MissingIncludes: "true"
+  misc-include-cleaner.UnusedIncludes: "true"
   misc-throw-by-value-catch-by-reference.CheckThrowTemporaries: "true"
   misc-throw-by-value-catch-by-reference.MaxSize: "18446744073709551615"
   misc-throw-by-value-catch-by-reference.WarnOnLargeObjects: "false"
@@ -351,6 +363,8 @@ CheckOptions:
   modernize-use-override.OverrideSpelling: override
   modernize-use-ranges.IncludeStyle: llvm
   modernize-use-ranges.UseReversePipe: "false"
+  modernize-use-scoped-lock.WarnOnSingleLocks: "true"
+  modernize-use-scoped-lock.WarnOnUsingAndTypedef: "true"
   modernize-use-std-format.FormatHeader: "<format>"
   modernize-use-std-format.IncludeStyle: llvm
   modernize-use-std-format.ReplacementFormatFunction: "std::format"
@@ -365,6 +379,8 @@ CheckOptions:
   modernize-use-std-print.ReplacementPrintFunction: "std::print"
   modernize-use-std-print.ReplacementPrintlnFunction: "std::println"
   modernize-use-std-print.StrictMode: "false"
+  modernize-use-trailing-return-type.TransformFunctions: "true"
+  modernize-use-trailing-return-type.TransformLambdas: all
   modernize-use-transparent-functors.SafeMode: "false"
   modernize-use-using.IgnoreExternC: "false"
   modernize-use-using.IgnoreMacros: "true"
@@ -382,6 +398,7 @@ CheckOptions:
   performance-unnecessary-copy-initialization.AllowedTypes: ""
   performance-unnecessary-copy-initialization.ExcludedContainerTypes: ""
   performance-unnecessary-value-param.AllowedTypes: ""
+  performance-unnecessary-value-param.IgnoreCoroutines: "true"
   performance-unnecessary-value-param.IncludeStyle: llvm
   portability-restrict-system-includes.Includes: "*"
   portability-simd-intrinsics.Std: ""
@@ -399,6 +416,7 @@ CheckOptions:
   readability-enum-initial-value.AllowExplicitSequentialInitialValues: "true"
   readability-enum-initial-value.AllowExplicitZeroFirstInitialValue: "true"
   readability-function-size.BranchThreshold: none
+  readability-function-size.CountMemberInitAsStmt: "true"
   readability-function-size.LineThreshold: none
   readability-function-size.NestingThreshold: none
   readability-function-size.ParameterThreshold: none
@@ -414,9 +432,11 @@ CheckOptions:
   readability-implicit-bool-conversion.UseUpperCaseLiteralSuffix: "false"
   readability-inconsistent-declaration-parameter-name.IgnoreMacros: "true"
   readability-inconsistent-declaration-parameter-name.Strict: "false"
+  readability-named-parameter.InsertPlainNamesInForwardDecls: "false"
   readability-operators-representation.BinaryOperators: ""
   readability-operators-representation.OverloadedOperators: ""
   readability-qualified-auto.AddConstToQualified: "true"
+  readability-qualified-auto.AllowedTypes: ""
   readability-redundant-casting.IgnoreMacros: "true"
   readability-redundant-casting.IgnoreTypeAliases: "false"
   readability-redundant-declaration.IgnoreMacros: "true"
@@ -458,5 +478,5 @@ CheckOptions:
   readability-uppercase-literal-suffix.NewSuffixes: ""
   readability-use-std-min-max.IncludeStyle: llvm
 SystemHeaders: false
----
+...
 
