@@ -13,7 +13,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero argument)",
     "[gcd]",
     (auto gcd, gcd),
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::recursive::gcd_p
 )
 {
     SECTION("The GCD of 0 and 0 is 0")
@@ -26,7 +27,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero and positive argument)",
     "[gcd]",
     (auto gcd, gcd),
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::recursive::gcd_p
 )
 {
     SECTION("The GCD of 0 and 1 is 1")
@@ -78,7 +80,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (positive non-zero argument)",
     "[gcd]",
     (auto gcd, gcd),
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::recursive::gcd_p
 )
 {
     SECTION("The GCD of 1 and 1 is 1")
