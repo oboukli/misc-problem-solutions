@@ -17,7 +17,13 @@ TEST_CASE("Greatest common divisor", "[gcd]")
         REQUIRE(gcd(0, 0) == 0);
     }
 
-    SECTION("The GCD of 1 and 0 is 1")
+    SECTION("The GCD of 0 and 1 is 1")
+    {
+        REQUIRE(gcd(0, 1) == 1);
+        REQUIRE(gcd(1, 0) == 1);
+    }
+
+    SECTION("The GCD of 0 and -1 is 1")
     {
         REQUIRE(gcd(-1, 0) == 1);
         REQUIRE(gcd(0, -1) == 1);
