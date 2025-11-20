@@ -14,7 +14,7 @@
 
 TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
 {
-    using namespace forfun::gcd::euclid::recursive;
+    using namespace forfun::gcd::euclid;
 
     ankerl::nanobench::Bench()
 
@@ -22,11 +22,11 @@ TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
         .relative(true)
 
         .run(
-            NAMEOF(gcd).c_str(),
-            []() noexcept {
-                int const volatile m{1U << 25U};
-                int const volatile n{(1U << 15U) * 59'049};
-                ankerl::nanobench::doNotOptimizeAway(gcd(m, n));
+            NAMEOF_RAW(recursive::gcd).c_str(),
+            [] noexcept -> void {
+                int const volatile a{1U << 25U};
+                int const volatile b{(1U << 15U) * 59'049};
+                ankerl::nanobench::doNotOptimizeAway(recursive::gcd(a, b));
             }
         )
 
