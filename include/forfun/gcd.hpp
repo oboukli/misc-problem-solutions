@@ -16,22 +16,22 @@ namespace forfun::gcd::euclid::recursive {
 
 namespace detail {
 
-[[nodiscard]] constexpr auto gcd_imp(int const m, int const n) noexcept -> int
+[[nodiscard]] constexpr auto gcd_imp(int const a, int const b) noexcept -> int
 {
-    if (n == 0) [[unlikely]]
+    if (b == 0) [[unlikely]]
     {
-        return m;
+        return a;
     }
 
-    return gcd_imp(n, m % n);
+    return gcd_imp(b, a % b);
 }
 
 } // namespace detail
 
-[[nodiscard]] /*constexpr*/ inline auto gcd(int const m, int const n) noexcept
+[[nodiscard]] /*constexpr*/ inline auto gcd(int const a, int const b) noexcept
     -> int
 {
-    return std::abs(detail::gcd_imp(m, n));
+    return std::abs(detail::gcd_imp(a, b));
 }
 
 } // namespace forfun::gcd::euclid::recursive
