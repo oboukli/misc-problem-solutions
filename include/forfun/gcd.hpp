@@ -10,6 +10,7 @@
 #ifndef FORFUN_GCD_HPP_
 #define FORFUN_GCD_HPP_
 
+#include <algorithm>
 #include <cstdlib>
 
 namespace forfun::gcd::euclid {
@@ -54,6 +55,37 @@ namespace recursive {
 }
 
 } // namespace recursive
+
+namespace subtraction_based {
+
+[[nodiscard]] constexpr auto gcd_p(int a, int b) noexcept -> int
+{
+    if (auto const& [min, max]{std::minmax(a, b)}; min == 0)
+    {
+        return max;
+    }
+
+    while (a != b)
+    {
+        if (a > b)
+        {
+            a -= b;
+        }
+        else
+        {
+            b -= a;
+        }
+    }
+
+    return a;
+}
+
+[[nodiscard]] /*constexpr*/ inline auto gcd(int a, int b) noexcept -> int
+{
+    return gcd_p(std::abs(a), std::abs(b));
+}
+
+} // namespace subtraction_based
 
 } // namespace forfun::gcd::euclid
 
