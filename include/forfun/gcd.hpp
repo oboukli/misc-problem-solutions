@@ -12,7 +12,30 @@
 
 #include <cstdlib>
 
-namespace forfun::gcd::euclid::recursive {
+namespace forfun::gcd::euclid {
+
+namespace iterative {
+
+[[nodiscard]] constexpr auto gcd_p(int a, int b) noexcept -> int
+{
+    while (b != 0)
+    {
+        auto const aux{b};
+        b = a % b;
+        a = aux;
+    }
+
+    return a;
+}
+
+[[nodiscard]] /*constexpr*/ inline auto gcd(int a, int b) noexcept -> int
+{
+    return std::abs(gcd_p(a, b));
+}
+
+} // namespace iterative
+
+namespace recursive {
 
 [[nodiscard]] constexpr auto gcd_p(int const a, int const b) noexcept -> int
 {
@@ -30,6 +53,8 @@ namespace forfun::gcd::euclid::recursive {
     return std::abs(gcd_p(a, b));
 }
 
-} // namespace forfun::gcd::euclid::recursive
+} // namespace recursive
+
+} // namespace forfun::gcd::euclid
 
 #endif // FORFUN_GCD_HPP_

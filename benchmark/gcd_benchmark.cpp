@@ -22,6 +22,24 @@ TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
         .relative(true)
 
         .run(
+            NAMEOF_RAW(iterative::gcd).c_str(),
+            [] noexcept -> void {
+                int const volatile a{1U << 25U};
+                int const volatile b{(1U << 15U) * 59'049};
+                ankerl::nanobench::doNotOptimizeAway(iterative::gcd(a, b));
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(iterative::gcd_p).c_str(),
+            [] noexcept -> void {
+                int const volatile a{1U << 25U};
+                int const volatile b{(1U << 15U) * 59'049};
+                ankerl::nanobench::doNotOptimizeAway(iterative::gcd_p(a, b));
+            }
+        )
+
+        .run(
             NAMEOF_RAW(recursive::gcd).c_str(),
             [] noexcept -> void {
                 int const volatile a{1U << 25U};
