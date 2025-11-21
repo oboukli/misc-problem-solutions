@@ -16,7 +16,9 @@ TEMPLATE_TEST_CASE_SIG(
     forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
-    forfun::gcd::euclid::recursive::gcd_p
+    forfun::gcd::euclid::recursive::gcd_p,
+    forfun::gcd::euclid::subtraction_based::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd_p
 )
 {
     SECTION("The GCD of 0 and 0 is 0")
@@ -32,7 +34,9 @@ TEMPLATE_TEST_CASE_SIG(
     forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
-    forfun::gcd::euclid::recursive::gcd_p
+    forfun::gcd::euclid::recursive::gcd_p,
+    forfun::gcd::euclid::subtraction_based::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd_p
 )
 {
     SECTION("The GCD of 0 and 1 is 1")
@@ -59,7 +63,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[gcd]",
     (auto gcd, gcd),
     forfun::gcd::euclid::iterative::gcd,
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd
 )
 {
     SECTION("The GCD of 0 and -1 is 1")
@@ -88,7 +93,9 @@ TEMPLATE_TEST_CASE_SIG(
     forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
-    forfun::gcd::euclid::recursive::gcd_p
+    forfun::gcd::euclid::recursive::gcd_p,
+    forfun::gcd::euclid::subtraction_based::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd_p
 )
 {
     SECTION("The GCD of 1 and 1 is 1")
@@ -128,7 +135,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[gcd]",
     (auto gcd, gcd),
     forfun::gcd::euclid::iterative::gcd,
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd
 )
 {
     SECTION("The GCD of -252 and -105 is 21")
@@ -143,7 +151,8 @@ TEMPLATE_TEST_CASE_SIG(
     "[gcd]",
     (auto gcd, gcd),
     forfun::gcd::euclid::iterative::gcd,
-    forfun::gcd::euclid::recursive::gcd
+    forfun::gcd::euclid::recursive::gcd,
+    forfun::gcd::euclid::subtraction_based::gcd
 )
 {
     SECTION("The GCD of 1 and -1 is 1")
