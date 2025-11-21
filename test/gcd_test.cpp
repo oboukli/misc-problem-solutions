@@ -13,6 +13,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero argument)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
+    forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
     forfun::gcd::euclid::recursive::gcd_p
 )
@@ -27,6 +29,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero and positive argument)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
+    forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
     forfun::gcd::euclid::recursive::gcd_p
 )
@@ -54,6 +58,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero and negative argument)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::recursive::gcd
 )
 {
@@ -80,6 +85,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (positive non-zero argument)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
+    forfun::gcd::euclid::iterative::gcd_p,
     forfun::gcd::euclid::recursive::gcd,
     forfun::gcd::euclid::recursive::gcd_p
 )
@@ -120,6 +127,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (negative non-zero argument)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::recursive::gcd
 )
 {
@@ -134,6 +142,7 @@ TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (mixed negative and positive non-zero arguments)",
     "[gcd]",
     (auto gcd, gcd),
+    forfun::gcd::euclid::iterative::gcd,
     forfun::gcd::euclid::recursive::gcd
 )
 {
