@@ -70,7 +70,7 @@ namespace stl {
 /// https://compiler-explorer.com/z/8PWETEYT8.
 class LRUCache final {
 public:
-    explicit LRUCache(std::size_t capacity) noexcept;
+    explicit LRUCache(std::size_t capacity);
 
     LRUCache(LRUCache const&) = delete;
 
@@ -84,7 +84,7 @@ public:
 
     [[nodiscard]] auto get(std::size_t key) noexcept -> int;
 
-    auto put(std::size_t key, int value) noexcept -> void;
+    auto put(std::size_t key, int value) -> void;
 
 private:
     using cache_item_t = std::pair<std::size_t, int>;

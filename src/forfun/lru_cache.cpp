@@ -92,7 +92,7 @@ auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
 
 namespace stl {
 
-LRUCache::LRUCache(std::size_t const capacity) noexcept : capacity_{capacity}
+LRUCache::LRUCache(std::size_t const capacity) : capacity_{capacity}
 {
     lookup_.reserve(capacity);
 }
@@ -110,7 +110,7 @@ LRUCache::LRUCache(std::size_t const capacity) noexcept : capacity_{capacity}
     return existing_key_iter->second->second;
 }
 
-auto LRUCache::put(std::size_t const key, int const value) noexcept -> void
+auto LRUCache::put(std::size_t const key, int const value) -> void
 {
     assert(size_ <= capacity_);
     assert(size_ == lookup_.size());
