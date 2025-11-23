@@ -162,7 +162,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         ++counts.try_emplace(*iter, 0UZ).first->second;
     }
 
-    auto const comparator = [](auto const& a, auto const& b) noexcept {
+    auto const comparator = [](auto const& a, auto const& b) noexcept -> bool {
         return a.second < b.second;
     };
     using T = std::pair<ValType, std::size_t>;
@@ -265,7 +265,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
     std::sort(
         intermediate.begin(),
         intermediate.end(),
-        [](auto const& a, auto const& b) noexcept {
+        [](auto const& a, auto const& b) noexcept -> bool {
             return a.second > b.second;
         }
     );
@@ -277,7 +277,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
         intermediate.cbegin()
             + static_cast<decltype(intermediate)::difference_type>(k),
         std::back_inserter(result),
-        [](auto const& bucket) noexcept { return bucket.first; }
+        [](auto const& bucket) noexcept -> ValType { return bucket.first; }
     );
 
     return result;
