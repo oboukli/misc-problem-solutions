@@ -37,6 +37,7 @@ auto depth_first_search(
     std::stack<std::pair<Vertex, offset_type>> stack{};
     stack.emplace(start, 0);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
     do
     {
         auto const [current_vertex, offset]{stack.top()};
