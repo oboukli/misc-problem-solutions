@@ -46,8 +46,6 @@ auto escape(OStream& os, Sv const sv) -> void
         switch (sv[i])
         {
         case delimiter_char:
-            os << escape_char;
-            break;
         case escape_char:
             os << escape_char;
             break;
