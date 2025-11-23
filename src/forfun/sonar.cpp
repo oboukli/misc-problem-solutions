@@ -76,12 +76,14 @@ namespace forfun::sonar {
 
 [[nodiscard]] auto sonar::ping(area const area) const noexcept -> bool
 {
-    return std::ranges::any_of(coords_, [&area](coord const& coord) noexcept {
-        return coord.x >= area.top
-            && coord.x <= area.bottom
-            && coord.y >= area.left
-            && coord.y <= area.right;
-    });
+    return std::ranges::any_of(
+        coords_, [&area](coord const& coord) noexcept -> bool {
+            return coord.x >= area.top
+                && coord.x <= area.bottom
+                && coord.y >= area.left
+                && coord.y <= area.right;
+        }
+    );
 }
 
 } // namespace forfun::sonar
