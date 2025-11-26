@@ -23,8 +23,8 @@ namespace forfun::add_two_numbers::stl {
     auto iter_b{addend_b.cbegin()};
     unsigned int column_sum{0U};
 
-    while ((iter_a != addend_a.cend()) || (iter_b != addend_b.cend()))
-        [[likely]]
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    do
     {
         if (iter_a != addend_a.cend()) [[likely]]
         {
@@ -38,9 +38,9 @@ namespace forfun::add_two_numbers::stl {
             column_sum += *iter_b++;
         }
 
-        back_iter = result.insert_after(back_iter, column_sum % 10U);
+        back_iter = result.emplace_after(back_iter, column_sum % 10U);
         column_sum /= 10U;
-    }
+    } while ((iter_a != addend_a.cend()) || (iter_b != addend_b.cend()));
 
     if (column_sum != 0U)
     {
