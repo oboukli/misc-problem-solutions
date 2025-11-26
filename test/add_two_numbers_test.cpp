@@ -158,3 +158,21 @@ TEST_CASE("Add two numbers", "[add_two_numbers]")
         REQUIRE(add_two_numbers(addend_a, addend_b) == expected);
     }
 }
+
+TEST_CASE("Add two numbers (degenerate case)", "[add_two_numbers]")
+{
+    using forfun::add_two_numbers::stl::add_two_numbers;
+
+    SECTION("Empty lists")
+    {
+        std::forward_list<unsigned> const addend_a{};
+
+        std::forward_list<unsigned> const addend_b{};
+
+        std::forward_list const expected{0U};
+
+        CAPTURE(addend_a);
+        CAPTURE(addend_b);
+        REQUIRE(add_two_numbers(addend_a, addend_b) == expected);
+    }
+}
