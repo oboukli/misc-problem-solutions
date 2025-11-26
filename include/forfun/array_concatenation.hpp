@@ -30,19 +30,6 @@ constexpr auto concatenate(
 
 } // namespace functional
 
-namespace functional_minimal {
-
-template <typename T, std::size_t Size>
-constexpr auto concatenate(
-    std::array<T, Size> const& src, std::array<T, 2UZ * Size>& dest
-) noexcept -> void
-{
-    std::copy(src.cbegin(), src.cend(), dest.begin());
-    std::copy(src.cbegin(), src.cend(), dest.begin() + Size);
-}
-
-} // namespace functional_minimal
-
 namespace iterator_based {
 
 template <typename T, std::size_t Size>
@@ -52,8 +39,8 @@ constexpr auto concatenate(
 {
     for (std::size_t i{0UZ}; i < 2UZ; ++i)
     {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto iter{dest.begin() + (Size * i)};
+        auto iter{dest.begin()};
+        std::advance(iter, Size * i);
         for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
         {
             *(iter++) = *src_iter;
@@ -78,8 +65,7 @@ constexpr auto concatenate(
         }
     }
     {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        auto iter{dest.begin() + Size};
+        auto iter{std::next(dest.begin(), Size)};
         for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
         {
             *(iter++) = *src_iter;
@@ -97,8 +83,7 @@ constexpr auto concatenate(
 ) noexcept -> void
 {
     auto dest1_iter{dest.begin()};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-    auto dest2_iter{dest1_iter + Size};
+    auto dest2_iter{std::next(dest.begin(), Size)};
     for (auto src_iter{src.cbegin()}; src_iter != src.cend(); ++src_iter)
     {
         *(dest1_iter++) = *src_iter;
