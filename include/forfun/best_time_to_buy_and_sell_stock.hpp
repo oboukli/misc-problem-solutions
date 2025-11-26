@@ -10,6 +10,7 @@
 #ifndef FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 #define FORFUN_BEST_TIME_TO_BUY_AND_SELL_STOCK_HPP_
 
+#include <algorithm>
 #include <concepts>
 #include <iterator>
 
@@ -26,22 +27,17 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
     int max_profit{0};
+
     auto buyer_iter{iter};
-
-    for (++iter; iter != last; ++iter)
+    while (++iter != last)
     {
-        auto const profit{*iter - *buyer_iter};
-
-        if (profit < 0)
+        if (auto const profit{*iter - *buyer_iter}; profit < 0)
         {
             buyer_iter = iter;
-
-            continue;
         }
-
-        if (profit > max_profit)
+        else
         {
-            max_profit = profit;
+            max_profit = std::max(profit, max_profit);
         }
     }
 
@@ -61,9 +57,9 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
     int max_profit{0};
-    auto buyer_price{*iter};
 
-    for (++iter; iter != last; ++iter)
+    auto buyer_price{*iter};
+    while (++iter != last)
     {
         auto const profit{*iter - buyer_price};
 
@@ -74,10 +70,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
             continue;
         }
 
-        if (profit > max_profit)
-        {
-            max_profit = profit;
-        }
+        max_profit = std::max(profit, max_profit);
     }
 
     return max_profit;
@@ -96,9 +89,9 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
 calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
 {
     int max_profit{0};
-    auto buyer_price{*iter};
 
-    for (++iter; iter != last; ++iter)
+    auto buyer_price{*iter};
+    while (++iter != last)
     {
         if (*iter < buyer_price)
         {
@@ -107,10 +100,7 @@ calc_max_profit(Iter iter, Sentinel const last) noexcept -> int
             continue;
         }
 
-        if (auto const profit{*iter - buyer_price}; profit > max_profit)
-        {
-            max_profit = profit;
-        }
+        max_profit = std::max(*iter - buyer_price, max_profit);
     }
 
     return max_profit;
