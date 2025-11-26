@@ -73,16 +73,6 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(functional_minimal::concatenate<int, 256>).c_str(),
-            [] noexcept -> void {
-                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-                std::array<int, 512> dest /*[[indeterminate]]*/;
-                functional_minimal::concatenate(src, dest);
-                ankerl::nanobench::doNotOptimizeAway(dest);
-            }
-        )
-
-        .run(
             NAMEOF_RAW(iterator_based::concatenate<int, 256>).c_str(),
             [] noexcept -> void {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
