@@ -667,7 +667,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-20
+          Suites: llvm-toolchain-noble-21
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -681,20 +681,20 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-20
-          clang-tools-20
-          libc++-20-dev
-          libc++-20
-          libc++abi-20-dev
+          clang-21
+          clang-tools-21
+          libc++-21-dev
+          libc++-21
+          libc++abi-21-dev
           mono-complete
           ninja-build
           valgrind
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-20 100
+          --install /usr/bin/cc cc /usr/bin/clang-21 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
 
       - name: Check out repository
         uses: actions/checkout@v6
@@ -805,7 +805,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-20
+          Suites: llvm-toolchain-noble-21
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -819,20 +819,20 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-20
-          clang-tools-20
-          libc++-20-dev
-          libc++-20
-          libc++abi-20-dev
+          clang-21
+          clang-tools-21
+          libc++-21-dev
+          libc++-21
+          libc++abi-21-dev
           mono-complete
           ninja-build
           valgrind
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-20 100
+          --install /usr/bin/cc cc /usr/bin/clang-21 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
 
       - name: Check out repository
         uses: actions/checkout@v6
@@ -936,7 +936,7 @@ jobs:
       BINARY_DIR: ${{ github.workspace }}/out/build/clang-sanitizers
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       ASAN_OPTIONS: check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1
-      ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-20
+      ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-21
       UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${{ github.workspace }}/ci/clang_ubsan_supp
     runs-on: ubuntu-24.04
 
@@ -945,7 +945,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-20
+          Suites: llvm-toolchain-noble-21
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -959,19 +959,19 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-20
-          clang-tools-20
-          libc++-20-dev
-          libc++-20
-          libc++abi-20-dev
+          clang-21
+          clang-tools-21
+          libc++-21-dev
+          libc++-21
+          libc++abi-21-dev
           mono-complete
           ninja-build
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-20 100
+          --install /usr/bin/cc cc /usr/bin/clang-21 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
 
       - name: Check out repository
         uses: actions/checkout@v6
