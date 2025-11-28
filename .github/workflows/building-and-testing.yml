@@ -23,12 +23,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -122,12 +122,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -232,12 +232,12 @@ jobs:
           valgrind
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -346,12 +346,12 @@ jobs:
           valgrind
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -456,7 +456,7 @@ jobs:
           -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
@@ -465,7 +465,7 @@ jobs:
           brew install mono
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -565,7 +565,7 @@ jobs:
           -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
@@ -574,7 +574,7 @@ jobs:
           brew install mono
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -697,12 +697,12 @@ jobs:
           --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -835,12 +835,12 @@ jobs:
           --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -974,12 +974,12 @@ jobs:
           --install /usr/bin/c++ c++ /usr/bin/clang++-20 100
 
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
