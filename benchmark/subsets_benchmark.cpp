@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
+#include <format>
 #include <vector>
 
 #include <catch2/catch_test_macros.hpp>
@@ -26,6 +27,12 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
     using ElementDefaultAllocator = std::vector<ElementType>::allocator_type;
     using SubsetDefaultAllocator = std::vector<
         std::vector<ElementType, ElementDefaultAllocator>>::allocator_type;
+    using ElementAllocatorFactory
+        = ElementInPlaceAllocatorFactory<ElementType, num_elements>;
+    using SubsetAllocatorFactory = SubsetInPlaceAllocatorFactory<
+        ElementType,
+        ElementAllocatorFactory::allocator_type,
+        num_elements>;
 
     std::vector const elements{23, 29, 31, 37};
 
@@ -48,6 +55,34 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
             [&elements] -> void {
                 auto const volatile r{recursive::explode_subsets(
                     elements.cbegin(), elements.cend()
+                )};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
+            std::format(
+                "{} preallocated",
+                // clang-format off
+                NAMEOF_RAW(
+                    recursive::explode_subsets<
+                        ConstIter,
+                        ConstIter,
+                        ElementAllocatorFactory,
+                        SubsetAllocatorFactory>
+                )
+                .c_str()
+                // clang-format on
+            ),
+            [&elements] noexcept -> void {
+                SubsetAllocatorFactory const subset_allocator_factory{};
+                ElementAllocatorFactory const element_allocator_factory{};
+
+                auto const volatile r{recursive::explode_subsets(
+                    elements.cbegin(),
+                    elements.cend(),
+                    subset_allocator_factory.allocator(),
+                    element_allocator_factory.allocator()
                 )};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
