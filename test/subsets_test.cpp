@@ -26,7 +26,7 @@ TEST_CASE("Subsets", "[subsets]")
 
         CAPTURE(elements);
 
-        auto const actual{explode_subsets(elements)};
+        auto const actual{explode_subsets(elements.cbegin(), elements.cend())};
 
         REQUIRE_THAT(
             actual,
@@ -48,7 +48,7 @@ TEST_CASE("Subsets", "[subsets]")
 
         CAPTURE(elements);
 
-        auto const actual{explode_subsets(elements)};
+        auto const actual{explode_subsets(elements.cbegin(), elements.cend())};
 
         REQUIRE_THAT(
             actual,
@@ -74,7 +74,7 @@ TEST_CASE("Subsets", "[subsets]")
 
         CAPTURE(elements);
 
-        auto const actual{explode_subsets(elements)};
+        auto const actual{explode_subsets(elements.cbegin(), elements.cend())};
 
         REQUIRE_THAT(
             actual,
@@ -119,7 +119,7 @@ TEST_CASE("Subsets", "[subsets]")
 
         CAPTURE(elements);
 
-        auto const actual{explode_subsets(elements)};
+        auto const actual{explode_subsets(elements.cbegin(), elements.cend())};
 
         REQUIRE_THAT(
             actual,
@@ -161,7 +161,7 @@ TEST_CASE("Subsets (degenerate case)", "[subsets]")
 
         CAPTURE(elements);
 
-        auto const actual{explode_subsets(elements)};
+        auto const actual{explode_subsets(elements.cbegin(), elements.cend())};
 
         REQUIRE_THAT(
             actual,
