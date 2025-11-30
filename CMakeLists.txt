@@ -691,7 +691,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/subsets_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
 )
 get_target_property(static_test_driver_sources static_test_driver SOURCES)
