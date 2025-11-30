@@ -1,0 +1,117 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
+name: Fuzz test driver
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "fuzz/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "fuzz/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  clang_fuzz_build_only:
+    name: Build, and only build, fuzz test driver
+    env:
+      CONFIGURE_PRESET_NAME: generic-single-config
+      BINARY_DIR: ${{ github.workspace }}/out/build/generic-single-config
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Retrieve the LLVM archive signature
+        run: |-
+          echo "Types: deb
+          URIs: http://apt.llvm.org/noble/
+          Suites: llvm-toolchain-noble-21
+          Components: main
+          Signed-By:
+          $(wget --output-document \
+          - https://apt.llvm.org/llvm-snapshot.gpg.key \
+          | sed -e 's/^$/./' -e 's/^/ /')" \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          > /dev/null
+
+      - name: Install tools
+        run: >-
+          sudo apt-get update
+
+          sudo apt-get install
+          clang-21
+          clang-tools-21
+          libc++-21-dev
+          libc++-21
+          libc++abi-21-dev
+          mono-complete
+          ninja-build
+
+          sudo update-alternatives
+          --install /usr/bin/cc cc /usr/bin/clang-21 100
+
+          sudo update-alternatives
+          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v6
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
+
+      - name: Check out FuzzTest
+        uses: actions/checkout@v6
+        with:
+          repository: google/fuzztest
+          path: ${{ github.workspace }}/fuzztest
+          persist-credentials: false
+
+      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
+      - name: Configure CMake
+        run: >-
+          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build
+        run: >-
+          cmake
+          --build '${{ env.BINARY_DIR }}'
+          --parallel
