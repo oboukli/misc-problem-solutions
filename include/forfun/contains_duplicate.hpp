@@ -88,12 +88,14 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 {
     std::sort(iter, last);
 
-    for (auto iter_next{iter}; ++iter_next != last; iter = iter_next)
+    for (auto iter_next{std::next(iter)}; iter_next != last; ++iter_next)
     {
         if (eq(*iter, *iter_next))
         {
             return true;
         }
+
+        iter = iter_next;
     }
 
     return false;
