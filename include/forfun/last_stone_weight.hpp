@@ -32,8 +32,8 @@ last_stone_weight(IterA const first, IterB last) noexcept
     using ValueType = std::iter_value_t<IterA>;
 
     ValueType s1{*first};
-    auto stop{first};
-    for (++stop; stop != last;)
+
+    for (auto stop{std::next(first)}; stop != last;)
     {
         ValueType s2{0};
         auto it_s1{last};
