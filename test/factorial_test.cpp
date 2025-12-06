@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
 #include <cstdint>
 
 #include <catch2/catch_template_test_macros.hpp>
@@ -126,5 +127,8 @@ TEMPLATE_TEST_CASE(
         REQUIRE(forfun::factorial::iterative::factorial(n) == expected);
         REQUIRE(forfun::factorial::recursive::factorial(n) == expected);
         REQUIRE(forfun::factorial::stl_functional::factorial(n) == expected);
+        REQUIRE(
+            static_cast<TestType>(std::tgamma(n + TestType{1})) == expected
+        );
     }
 }

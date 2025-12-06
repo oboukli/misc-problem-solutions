@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
 #include <cstdint>
 
 #include <catch2/catch_test_macros.hpp>
@@ -48,6 +49,16 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
             [] noexcept -> void {
                 auto const volatile n{std::uint64_t{20U}};
                 auto const r{stl_functional::factorial(n)};
+
+                ankerl::nanobench::doNotOptimizeAway(r);
+            }
+        )
+
+        .run(
+            "std::tgamma",
+            [] noexcept -> void {
+                auto const volatile n{std::uint64_t{20 + 1}};
+                auto const r{static_cast<uint64_t>(std::tgamma(n))};
 
                 ankerl::nanobench::doNotOptimizeAway(r);
             }
