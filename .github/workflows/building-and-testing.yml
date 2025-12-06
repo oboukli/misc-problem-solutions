@@ -727,12 +727,12 @@ jobs:
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
+      # WORKAROUND: Append -fno-builtin-std-forward_like for libstdc++ 14 until GCC 14.3
       - name: Configure CMake
         run: >-
-          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+          -DCMAKE_CXX_FLAGS="$(jq --raw-output '.configurePresets.[] | select(.name == "strict-clang") | .cacheVariables.CMAKE_CXX_FLAGS' '${{ github.workspace }}/CMakePresets.json') -fno-builtin-std-forward_like"
 
       - name: Build
         run: >-
@@ -865,12 +865,12 @@ jobs:
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
+      # WORKAROUND: Append -fno-builtin-std-forward_like for libstdc++ 14 until GCC 14.3
       - name: Configure CMake
         run: >-
-          cmake -E env CXXFLAGS="-fno-builtin-std-forward_like"
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+          -DCMAKE_CXX_FLAGS="$(jq --raw-output '.configurePresets.[] | select(.name == "strict-clang") | .cacheVariables.CMAKE_CXX_FLAGS' '${{ github.workspace }}/CMakePresets.json') -fno-builtin-std-forward_like"
 
       - name: Build
         run: >-
