@@ -8,18 +8,18 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/sorting/insertion_sort.hpp"
+#include "forfun/sorting/quicksort.hpp"
 
-TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
+TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 {
-    using forfun::sorting::insertion_sort;
+    using forfun::sorting::quicksort;
 
     SECTION("Empty container")
     {
         std::array<int, 0> test_input{};
         static constexpr std::array<int, 0> const expected_output{};
 
-        insertion_sort(test_input.begin(), test_input.end());
+        quicksort(test_input.begin(), test_input.end());
 
         STATIC_CHECK(test_input.empty());
 
