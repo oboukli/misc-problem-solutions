@@ -1,0 +1,131 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
+name: Code coverage report
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "test/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "test/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  llvm_coverage:
+    name: Build for code coverage profiling
+    env:
+      CONFIGURE_PRESET_NAME: clang-coverage
+      BINARY_DIR: ${{ github.workspace }}/out/build/clang-coverage
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Retrieve the LLVM archive signature
+        run: |-
+          echo "Types: deb
+          URIs: http://apt.llvm.org/noble/
+          Suites: llvm-toolchain-noble-21
+          Components: main
+          Signed-By:
+          $(wget --output-document \
+          - https://apt.llvm.org/llvm-snapshot.gpg.key \
+          | sed -e 's/^$/./' -e 's/^/ /')" \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          > /dev/null
+
+      - name: Install tools
+        run: >-
+          sudo apt-get update
+
+          sudo apt-get install
+          clang-21
+          clang-tools-21
+          libc++-21
+          libc++-21-dev
+          libc++abi-21-dev
+          lld-21
+          llvm-21
+          mono-complete
+          ninja-build
+
+          sudo update-alternatives
+          --install /usr/bin/cc cc /usr/bin/clang-21 100
+
+          sudo update-alternatives
+          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
+
+          sudo update-alternatives
+          --install /usr/bin/ld ld /usr/bin/lld-21 100
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v6
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build
+        run: >-
+          cmake
+          --build '${{ env.BINARY_DIR }}'
+          --parallel
+
+      - name: Run code coverage script
+        env:
+          LLVM_ROOT: /usr/lib/llvm-21
+        run: >-
+          ${{ github.workspace }}/ci/generate_coverage_report.sh
+
+      - name: Upload code coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          compression-level: 8
+          if-no-files-found: error
+          name: ${{ format('coverage-report-html-{0}.gz', github.run_id) }}
+          overwrite: true
+          path: ${{ github.workspace }}/out/coverage/report
+          retention-days: 2
