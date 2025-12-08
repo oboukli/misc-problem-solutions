@@ -154,12 +154,11 @@
         "BUILD_SHARED_LIBS": "OFF",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
         "FORFUN_COMMON_CFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
         "FORFUN_COMMON_CXXFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
         "FORFUN_COMMON_LINK_OPTIONS": "-fcoverage-mapping -fprofile-instr-generate",
