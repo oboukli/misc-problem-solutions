@@ -16,9 +16,7 @@
 namespace {
 
 constexpr auto const record_state{
-    [](int const n, std::vector<int>& state) -> void {
-        state.push_back(n);
-    }
+    [](int const n, std::vector<int>& state) -> void { state.push_back(n); }
 };
 
 using namespace forfun::fibonacci::sequence;
