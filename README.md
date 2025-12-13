@@ -94,6 +94,7 @@ leveraged by this project:
 | Three Sum (3SUM)                 | C++20    | [`include/forfun/three_sum.hpp`](include/forfun/three_sum.hpp)                                                             |
 | Top K Frequent Elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
 | Tower of Hanoi                   | C++20    | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                   |
+| Trapping Rainwater               | C++20    | [`include/forfun/trapping_rainwater.hpp`](include/forfun/trapping_rainwater.hpp)                                           |
 | Trie                             | C++20    | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                       |
 | Two Sum (I, II)                  | C++23    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                 |
 | Two-pass Boyer-Moore Majority    | C++20    | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                               |
