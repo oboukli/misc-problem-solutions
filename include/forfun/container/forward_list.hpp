@@ -59,10 +59,10 @@ public:
 
     auto push_front(T&& value) -> void
     {
-        forward_list_node<T>* const aux{head_};
+        forfun::container::forward_list_node<T>* const aux{head_};
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        head_ = new forward_list_node<T>{std::move(value)};
+        head_ = new forfun::container::forward_list_node<T>{std::move(value)};
 
         head_->next_ = aux;
     }
@@ -73,7 +73,7 @@ public:
     {
         assert(head_ != nullptr);
 
-        forward_list_node<T> const* const aux{head_};
+        forfun::container::forward_list_node<T> const* const aux{head_};
         head_ = head_->next_;
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
@@ -82,9 +82,14 @@ public:
 
     constexpr auto clear() noexcept -> void
     {
-        for (forward_list_node<T> const* node{head_}; node != nullptr;)
+        // clang-format off
+        for (forfun::container::forward_list_node<T> const* node{head_};
+            node != nullptr;)
+        // clang-format on
         {
-            forward_list_node<T> const* const next{node->next_};
+            forfun::container::forward_list_node<T> const* const next{
+                node->next_
+            };
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;
@@ -97,12 +102,12 @@ public:
 
     constexpr auto reverse() noexcept -> void
     {
-        forward_list_node<T>* prev{nullptr};
-        forward_list_node<T>* node{head_};
+        forfun::container::forward_list_node<T>* prev{nullptr};
+        forfun::container::forward_list_node<T>* node{head_};
 
         while (node != nullptr)
         {
-            forward_list_node<T>* next{node->next_};
+            forfun::container::forward_list_node<T>* next{node->next_};
 
             node->next_ = prev;
 
@@ -114,7 +119,7 @@ public:
     }
 
 private:
-    forward_list_node<T>* head_;
+    forfun::container::forward_list_node<T>* head_;
 };
 
 } // namespace forfun::experimental::container

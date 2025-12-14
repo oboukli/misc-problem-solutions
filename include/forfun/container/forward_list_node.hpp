@@ -9,7 +9,7 @@
 
 #include <concepts>
 
-namespace forfun::experimental::container {
+namespace forfun::container {
 
 template <typename T>
     requires std::integral<T>
@@ -41,6 +41,6 @@ struct [[nodiscard]] forward_list_node final {
     auto operator=(forward_list_node&&) noexcept -> forward_list_node& = delete;
 };
 
-} // namespace forfun::experimental::container
+} // namespace forfun::container
 
 #endif // FORFUN_CONTAINER_FORWARD_LIST_NODE_HPP_
