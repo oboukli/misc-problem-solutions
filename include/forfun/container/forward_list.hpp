@@ -44,12 +44,12 @@ public:
 
     [[nodiscard]] constexpr auto front() noexcept -> reference
     {
-        return head_->value;
+        return head_->value_;
     }
 
     [[nodiscard]] constexpr auto front() const noexcept -> const_reference
     {
-        return head_->value;
+        return head_->value_;
     }
 
     [[nodiscard]] constexpr auto empty() const noexcept -> bool
@@ -64,7 +64,7 @@ public:
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         head_ = new internal::forward_list_node<T>{std::move(value)};
 
-        head_->next = aux;
+        head_->next_ = aux;
     }
 
     /// @note The behavior is undefined when popping the front of an empty
@@ -74,7 +74,7 @@ public:
         assert(head_ != nullptr);
 
         internal::forward_list_node<T> const* const aux{head_};
-        head_ = head_->next;
+        head_ = head_->next_;
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete aux;
@@ -87,7 +87,7 @@ public:
             node != nullptr;)
         // clang-format on
         {
-            internal::forward_list_node<T> const* const next{node->next};
+            internal::forward_list_node<T> const* const next{node->next_};
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;
@@ -105,9 +105,9 @@ public:
 
         while (node != nullptr)
         {
-            internal::forward_list_node<T>* next{node->next};
+            internal::forward_list_node<T>* next{node->next_};
 
-            node->next = prev;
+            node->next_ = prev;
 
             prev = node;
             node = next;
