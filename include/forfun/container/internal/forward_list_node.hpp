@@ -13,18 +13,18 @@ namespace forfun::experimental::container::internal {
 
 template <std::integral T>
 struct forward_list_node final {
-    forward_list_node* next{nullptr};
+    forward_list_node* next_{nullptr};
 
-    T value{};
+    T value_{};
 
-    explicit constexpr forward_list_node(T val) noexcept : value{val}
+    explicit constexpr forward_list_node(T value) noexcept : value_{value}
     {
     }
 
     explicit constexpr forward_list_node(
-        T val, forward_list_node* node
+        T value, forward_list_node* node
     ) noexcept :
-        next{node}, value{val}
+        next_{node}, value_{value}
     {
     }
 
