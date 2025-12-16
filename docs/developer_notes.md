@@ -18,13 +18,13 @@ Non-goals include:
 - Supporting C++ standards before C++23
 - Fast compilation
 - Supporting non-latest compiler versions
-- Optimizing for a specific processor or platform
+- Optimizing for a specific platform, or processor architecture
 
 ## Architecture and design
 
 ### Dynamic memory allocation
 
-Code that directly make use of dynamic allocation, i.e. by calling `malloc` and
+Code that directly make use of dynamic allocation, i.e. by invoking `malloc` and
 `new` directly, is isolated into build artifacts postfixed with `_experimental`
 in the name.
 
@@ -40,18 +40,19 @@ functions and methods to achieve the strongest exception safety possible.
 An example can be seen in the
 [`bucket_sort_based::top_frequent`](../include/forfun/top_k_frequent_elements.hpp)
 strategy where a call to `std::sort` is delayed till after the
-potentially-throwing `std::vector` constructor.
+potentially-throwing `std::vector` constructor invocation.
 
 ## Internal checks
 
-The design avoids fail-fast guards as it favors performance and composability.
+The design avoids fail-fast runtime guards in favor of performance and
+composability.
 
 ### Static and shared libraries
 
 All ForFun libraries can be built and linked as static or dynamic (shared), with
-only the `forfun_c_experimental` library being an exception, as it is meant to
-be statically linked. This is because the `forfun_c_experimental` library
-defines, and makes available externally, the `g_forfun_mem` global state
+only the `forfun_c_experimental` library being an exception, as the latter is
+meant to be statically linked. This is because the `forfun_c_experimental`
+library defines, and makes available externally, the `g_forfun_mem` global state
 variable.
 
 ### Thread safety
@@ -68,11 +69,10 @@ utilizing C++23's explicit object parameter, can be seen in
 
 ### Source code charset
 
-All source code in this repository should be encoded in
-UTF-8 without byte order mark (BOM). This is important to guarantee sources
-containing characters outside the
-[standard C++ charset](https://en.cppreference.com/w/cpp/language/charset),
-are compiled correctly. An example is the file `test/palindrome_test.cpp`.
+All source code in this repository should be encoded in UTF-8 without byte order
+mark (BOM). This is important to guarantee sources containing characters outside
+the [standard C++ charset](https://en.cppreference.com/w/cpp/language/charset),
+are compiled correctly. An example being the file `test/palindrome_test.cpp`.
 
 For the MSVC compiler, the command-line option `/source-charset:utf-8`
 should be passed, as seen in the `CMakePresets.json` file.
@@ -82,8 +82,8 @@ should be passed, as seen in the `CMakePresets.json` file.
 The code is written in standards-compliant C90 and C++23 and is known to compile
 with the following compilers.
 
-- Apple Clang 17.0
-- Clang 20.1
+- Apple Clang 26.2
+- Clang 21.1
 - GCC 14.2
 - MSVC 19.43
 
@@ -95,32 +95,39 @@ See also the GitHub Actions CI configuration in
 
 ## Code annotations
 
-The code attempts to use modern C++ attributes where supported, and experiments
-with the [Guidelines Support Library (GSL)](https://github.com/microsoft/GSL).
+The code attempts to use modern C++ attributes where supported, and it
+experiments with the
+[Guidelines Support Library (GSL)](https://github.com/microsoft/GSL).
 
 ## Code style
 
-Opinionated modern C++ style, partially inspired by Prettier, managed with
-EditorConfig, Clang Format, and VS Code extension indent-rainbow.
+The code follows an opinionated modern C++ style, partially inspired by
+Prettier, and managed with EditorConfig, Clang Format,
+and the indent-rainbow VS Code extension.
 
 Some notable style choices:
 
+- Ubiquitous trailing return type declarations
+- Ubiquitous brace-enclosed initialization
 - Type qualifiers (e.g. `const`) on the right
 - Lines restricted to eighty characters
-- Generally avoid alignment. Always indent in multiples of four spaces
+- Indentation in multiples of four spaces (generally avoiding text alignment)
+- Generous use of braces (on their own lines) and parentheses
 - Generous amount of blank lines to separate code blocks
+- Keyword-like forms of logical operators in concept declarations
 
-## Dependencies and dependency management
+## External dependency management
 
 Beside the standard C++ and C libraries, the non-development build targets avoid
 external dependencies. An exception is the `forfun_experimental` target, which
-makes use of the Guidelines Support Library (GSL).
+makes use of the Guidelines Support Library (GSL) and mimalloc.
 
-Almost all external dependencies are managed with vcpkg and its manifest mode.
+Almost all external dependencies are managed with vcpkg in manifest mode.
 The exceptions are Google FuzzTest, and vcpkg itself, which are manually managed
 (cloned) with Git.
 
-A list of vcpkg-managed dependencies can be seen in `vcpkg.json`.
+A list of vcpkg-managed dependencies can be seen in the manifest file
+`vcpkg.json`.
 
 ## Quality assurance
 
@@ -138,13 +145,17 @@ The majority of runtime unit tests are hosted in the `test_driver` executable,
 while the compile-time tests are compiled with the `static_test_driver`
 one.
 
-Compile-time tests are isolated to mitigate their noise in test coverage
-reports.
+The scope of compile-time tests is limited to validating compile-time
+constructs, e.g. C++20 concepts and `constexpr` symbols.
 
-Test expected values should always be immutable and immune to memory overwrites.
+For code coverage instrumentation, non-compile-time tests should be evaluated at
+runtime. Compile-time tests are isolated in own driver to mitigate their noise
+in code coverage reports.
 
-Care should be taken to initialize a test's expected value(s) after call to the
-function, method, or system under test (SUT) to help avoid overflow issues.
+Test expected values should be immutable and immune to memory overwrites. Care
+should be taken to initialize a test's expected value(s) after invoking the
+function, method, or system under test (SUT), to help mitigate test expectations
+being corrupted by, for example, memory overflows.
 
 Unit tests for experimental code (mostly code utilizing manual memory
 management) are hosted in the `test_driver_experimental` executable.
@@ -159,17 +170,32 @@ benchmark_driver '[sorting]'
 ### Code coverage
 
 All code lines and branches are covered with tests, with the coverage percentage
-maintained at 100%.
+target maintained at 100%.
 
 Code coverage reports are generated with
 [Clang Source-based Code Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html).
 
+A script for generating code coverage report with LLVM can be found at
+`ci/generate_coverage_report.sh`. Usage example:
+
+```bash
+LLVM_ROOT='/usr/local/opt/llvm/' ./ci/generate_coverage_report.sh
+```
+
+### Compiler diagnostics
+
+Clang's `implicit-conversion` flag is not enabled due to an issue in
+libstdc++ 14.2.
+
 ### Dynamic analysis
 
 All build targets are built with Clang and Xcode sanitizers, Microsoft STL
-debugging checks, and on Linux, the major targets are tested with Valgrind.
+debugging checks. On Linux, the major targets are tested with Valgrind.
 
-See the CI configuration for more details.
+Clang's UndefinedBehaviorSanitizer runtime findings can be suppressed in
+`ci/clang_ubsan_supp`.
+
+See `CMakePresets.json` and CI configuration for more details.
 
 ### Fuzz tests
 
@@ -189,22 +215,27 @@ Fuzz testing, static analysis with Clang Tidy, and code style checking with
 Clang Format are not enabled on GitHub Actions to avoid over-utilization of CI
 resources.
 
-## Leveraging artificial intelligence
+## Leveraging artificial intelligence (AI)
 
-Some configuration, e.g. that for CMake, may or may not leverage AI tools
+Some configuration, e.g. that for CMake, may or may not leverage LLM tools
 (ChatGPT and GitHub Copilot). However, the solutions themselves are not
 AI-assisted.
 
-In this Git repository, any commit that contain AI-generated code or AI-assisted
-configuration is labeled as AI-assisted in the body of the Git commit message. In
-addition GitHub pull request containing AI-assisted commits are labeled as such.
+In the hosting Git repository, any commit that contain AI-generated code or
+AI-assisted configuration is labeled as AI-assisted in the body of the Git
+commit message. In addition GitHub pull request containing AI-assisted commits
+are labeled as such.
 
 Some code or text in this repository may be reviewed with AI and not marked as
-such if no AI-output is considered in the final work.
+such if no AI-output makes its way to the final work.
 
 Work under the `contrib/` directory may contain AI-generated code.
 
-This document is written by the owner of the repository and is not AI-generated.
+AI/LLM-based sources and tools may be utilized as learning and/or research media
+by the author of this work.
+
+This document is written by the author of the code (owner of the repository).
+This document is not AI-generated.
 
 ## Build artifacts
 
@@ -255,3 +286,12 @@ bool const result{forfun::meeting_rooms::can_attend(
     intervals.cbegin(), intervals.cend()
 )};
 ```
+
+### Subsets
+
+The namespace `forfun::subsets` includes experimental custom allocators that
+significantly improve the performance of the `explode_subsets` function by
+preallocating the memory required for the result vectors.
+
+See the [benchmark code](../benchmark/subsets_benchmark.cpp) and benchmarking
+report for details.
