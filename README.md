@@ -4,11 +4,16 @@ This is a repository of modern coding showcases and solutions to various popular
 programming problems, written in C90, C++17, C++20, and C++23.
 
 For some of the said problems, multiple solutions of varying efficiencies and
-trade-offs are provided, along with benchmarks.
+trade-offs are provided, along with benchmarks, and full test coverage.
 
 All solutions are driven by extensive automated testing, in addition to being
 statically and dynamically analyzed, and compiled under strict rules with the
 latest Clang, GCC, and MSVC compilers.
+
+This work may include code that experiment with non-production-grade techniques
+and/or patterns, e.g. recursion.
+
+See the [developer notes](docs/developer_notes.md) for more information.
 
 ## Technical showcases
 
@@ -45,7 +50,7 @@ leveraged by this project:
 | ---                              | ---      | ---                                                                                                                        |
 | Add Two Numbers                  | C++17    | [`src/forfun/add_two_numbers.cpp`](src/forfun/add_two_numbers.cpp)                                                         |
 | Add Two Numbers (in C)           | C90      | [`src/forfun_c/add_two_numbers.c`](src/forfun_c/add_two_numbers.c)                                                         |
-| Balanced Binary Tree             | C++23    | [`include/forfun/graph/balanced_binary_tree.hpp`](src/forfun/graph/balanced_binary_tree.cpp)                               |
+| Balanced Binary Tree             | C++23    | [`src/forfun/graph/balanced_binary_tree.cpp`](src/forfun/graph/balanced_binary_tree.cpp)                                   |
 | Best Time to Buy And Sell Stock  | C++20    | [`include/forfun/best_time_to_buy_and_sell_stock.hpp`](include/forfun/best_time_to_buy_and_sell_stock.hpp)                 |
 | Binary Search                    | C++20    | [`include/forfun/search/binary_search.hpp`](include/forfun/search/binary_search.hpp)                                       |
 | Breadth-First Search             | C++20    | [`include/forfun/graph/breadth_first_search.hpp`](include/forfun/graph/breadth_first_search.hpp)                           |
@@ -54,7 +59,7 @@ leveraged by this project:
 | Container with Most Water        | C++20    | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                             |
 | Contains Duplicate               | C++20    | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                           |
 | Depth-First Search               | C++20    | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                               |
-| Encode and Decode Strings        | C++20    | [`src/forfun/encode_and_decode_strings.cpp`](include/forfun/encode_and_decode_strings.hpp)                                 |
+| Encode and Decode Strings        | C++20    | [`include/forfun/encode_and_decode_strings.hpp`](include/forfun/encode_and_decode_strings.hpp)                             |
 | Evaluate Reverse Polish Notation | C++23    | [`include/forfun/evaluate_reverse_polish_notation.hpp`](include/forfun/evaluate_reverse_polish_notation.hpp)               |
 | Factorial                        | C++23    | [`include/forfun/factorial.hpp`](include/forfun/factorial.hpp)                                                             |
 | Fibonacci Sequence               | C++20    | [`include/forfun/fibonacci_sequence.hpp`](include/forfun/fibonacci_sequence.hpp)                                           |
@@ -89,7 +94,7 @@ leveraged by this project:
 | Set Matrix Zeroes                | C++20    | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                     |
 | Single Number                    | C++23    | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                     |
 | Squares of a Sorted Array        | C++20    | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                       |
-| Subsets                          | C++20    | [`include/forfun/graph/subsets.hpp`](src/forfun/graph/subsets.cpp)                                                         |
+| Subsets                          | C++20    | [`include/forfun/subsets.hpp`](include/forfun/subsets.hpp)                                                                 |
 | Sums of Subarrays of Length K    | C++20    | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                   |
 | Three Sum (3SUM)                 | C++20    | [`include/forfun/three_sum.hpp`](include/forfun/three_sum.hpp)                                                             |
 | Top K Frequent Elements          | C++23    | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                 |
