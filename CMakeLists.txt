@@ -396,6 +396,7 @@ target_sources(
   FILE_SET HEADERS
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list_cycle.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_const_iterator.hpp"
@@ -407,6 +408,7 @@ target_sources(
 target_sources(
   forfun_experimental
   PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list_cycle.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_const_iterator.cpp"
@@ -534,6 +536,7 @@ target_sources(
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_c_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/test_run_listener.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
@@ -653,6 +656,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/add_two_numbers_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_cycle_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
 )
 get_target_property(
@@ -681,6 +685,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"

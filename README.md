@@ -66,6 +66,7 @@ leveraged by this project:
 | First Missing Positive                                  | C++20    | [`include/forfun/first_missing_positive.hpp`](include/forfun/first_missing_positive.hpp)                                                       |
 | Fizz Buzz                                               | C++20    | [`include/forfun/fizzbuzz.hpp`](include/forfun/fizzbuzz.hpp)                                                                                   |
 | Forward List                                            | C++20    | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                                       |
+| Forward List Cycle                                      | C++20    | [`include/forfun/container/forward_list_cycle.hpp`](include/forfun/container/forward_list_cycle.hpp)                                           |
 | Greatest Common Divisor                                 | C++20    | [`include/forfun/gcd.hpp`](include/forfun/gcd.hpp)                                                                                             |
 | Group Anagrams                                          | C++23    | [`include/forfun/group_anagrams.hpp`](include/forfun/group_anagrams.hpp)                                                                       |
 | Hamming Weight                                          | C++23    | [`include/forfun/hamming_weight.hpp`](include/forfun/hamming_weight.hpp)                                                                       |
