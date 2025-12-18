@@ -15,6 +15,11 @@ extern "C" {
 
 #include <stddef.h>
 
+enum forfun_shim_result {
+    FORFUN_SHIM_OK = 0,
+    FORFUN_SHIM_ERROR = 1
+};
+
 int forfun_shim_enable(void);
 
 void forfun_shim_disable(void);

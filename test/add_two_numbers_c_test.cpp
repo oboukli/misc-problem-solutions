@@ -21,7 +21,8 @@ namespace {
 
 class shim_scoped_guard final {
 public:
-    shim_scoped_guard() noexcept : is_valid_{::forfun_shim_enable() == 0}
+    shim_scoped_guard() noexcept :
+        is_valid_{::forfun_shim_enable() == ::FORFUN_SHIM_OK}
     {
     }
 
