@@ -12,6 +12,7 @@ found in the LICENSE file.
 
 #include <mimalloc.h>
 
+#include "forfun_c/common.h"
 #include "forfun_c/mem/mem.h"
 
 struct forfun_shim_context {
@@ -25,13 +26,13 @@ struct forfun_shim_context {
 static struct forfun_mem g_unshimmed_mem_ = {NULL, NULL};
 static struct forfun_shim_context g_shim_context_
     = {0, 0, (size_t)-1 /* SIZE_MAX in C99 */};
-static int g_shim_is_enabled_ = 0;
+static int g_shim_is_enabled_ = FORFUN_FALSE;
 
 int forfun_shim_enable(void)
 {
     struct forfun_mem mem;
 
-    if (g_shim_is_enabled_ == 1)
+    if (g_shim_is_enabled_ == FORFUN_TRUE)
     {
         /* Error: shim is already initialized. */
         return 1;
@@ -44,7 +45,7 @@ int forfun_shim_enable(void)
 
     forfun_mem_set(mem);
 
-    g_shim_is_enabled_ = 1;
+    g_shim_is_enabled_ = FORFUN_TRUE;
 
     return 0;
 }
@@ -53,7 +54,7 @@ void forfun_shim_disable(void)
 {
     forfun_mem_set(g_unshimmed_mem_);
 
-    g_shim_is_enabled_ = 0;
+    g_shim_is_enabled_ = FORFUN_FALSE;
 }
 
 int forfun_shim_is_enabled(void)

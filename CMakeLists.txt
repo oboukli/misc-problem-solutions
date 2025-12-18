@@ -350,6 +350,7 @@ target_sources(
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/add_two_numbers.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/common.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/container/forward_list.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/mem/mem.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/shim/allocator.h"
@@ -358,6 +359,7 @@ target_sources(
   forfun_c_experimental
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/add_two_numbers.c"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/common.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/container/forward_list.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/mem/mem.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/shim/allocator.c"
