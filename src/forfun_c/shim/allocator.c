@@ -24,8 +24,10 @@ struct forfun_shim_context {
 };
 
 static struct forfun_mem g_unshimmed_mem_ = {NULL, NULL};
+
 static struct forfun_shim_context g_shim_context_
     = {0, 0, (size_t)-1 /* SIZE_MAX in C99 */};
+
 static int g_shim_is_enabled_ = FORFUN_FALSE;
 
 int forfun_shim_enable(void)
