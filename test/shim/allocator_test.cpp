@@ -36,7 +36,7 @@ TEST_CASE("Shim memory allocator", "[shim_allocator]")
         REQUIRE_FALSE(mem_current_state.ff_malloc == &::forfun_shim_malloc);
         REQUIRE_FALSE(mem_current_state.ff_free == &::forfun_shim_free);
 
-        REQUIRE(::forfun_shim_enable() == 0);
+        REQUIRE(::forfun_shim_enable() == ::FORFUN_SHIM_OK);
 
         ::forfun_mem const mem_state_after_shim_enable{::forfun_mem_get()};
 
@@ -53,7 +53,7 @@ TEST_CASE("Shim memory allocator", "[shim_allocator]")
     {
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_FALSE);
 
-        REQUIRE(::forfun_shim_enable() == 0);
+        REQUIRE(::forfun_shim_enable() == ::FORFUN_SHIM_OK);
 
         ::forfun_mem const mem_current_state{::forfun_mem_get()};
 
@@ -78,16 +78,16 @@ TEST_CASE("Shim memory allocator", "[shim_allocator]")
     {
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_FALSE);
 
-        REQUIRE(::forfun_shim_enable() == 0);
+        REQUIRE(::forfun_shim_enable() == ::FORFUN_SHIM_OK);
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_TRUE);
 
-        REQUIRE(::forfun_shim_enable() == 1);
+        REQUIRE(::forfun_shim_enable() == ::FORFUN_SHIM_ERROR);
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_TRUE);
 
         ::forfun_shim_disable();
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_FALSE);
 
-        REQUIRE(::forfun_shim_enable() == 0);
+        REQUIRE(::forfun_shim_enable() == ::FORFUN_SHIM_OK);
         REQUIRE(::forfun_shim_is_enabled() == ::FORFUN_TRUE);
 
         ::forfun_shim_disable();

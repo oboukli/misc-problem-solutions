@@ -35,7 +35,7 @@ int forfun_shim_enable(void)
     if (g_shim_is_enabled_ == FORFUN_TRUE)
     {
         /* Error: shim is already initialized. */
-        return 1;
+        return FORFUN_SHIM_ERROR;
     }
 
     mem.ff_malloc = forfun_shim_malloc;
@@ -47,7 +47,7 @@ int forfun_shim_enable(void)
 
     g_shim_is_enabled_ = FORFUN_TRUE;
 
-    return 0;
+    return FORFUN_SHIM_OK;
 }
 
 void forfun_shim_disable(void)
