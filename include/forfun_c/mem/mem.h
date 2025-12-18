@@ -15,17 +15,17 @@ extern "C" {
 
 #include <stddef.h>
 
-typedef struct forfun_mem {
+struct forfun_mem {
     void* (*ff_malloc)(size_t);
 
     void (*ff_free)(void*);
-} forfun_mem;
+};
 
-extern forfun_mem g_forfun_mem;
+extern struct forfun_mem g_forfun_mem;
 
-void forfun_mem_set(forfun_mem mem);
+void forfun_mem_set(struct forfun_mem mem);
 
-forfun_mem forfun_mem_get(void);
+struct forfun_mem forfun_mem_get(void);
 
 void forfun_mem_reset_to_default(void);
 

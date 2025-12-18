@@ -14,22 +14,22 @@ found in the LICENSE file.
 
 #include "forfun_c/mem/mem.h"
 
-typedef struct forfun_shim_context {
+struct forfun_shim_context {
     size_t shim_malloc_call_count;
 
     size_t shim_free_call_count;
 
     size_t shim_malloc_fail_after;
-} forfun_shim_context;
+};
 
-static forfun_mem g_unshimmed_mem_ = {NULL, NULL};
-static forfun_shim_context g_shim_context_
+static struct forfun_mem g_unshimmed_mem_ = {NULL, NULL};
+static struct forfun_shim_context g_shim_context_
     = {0, 0, (size_t)-1 /* SIZE_MAX in C99 */};
 static int g_shim_is_enabled_ = 0;
 
 int forfun_shim_enable(void)
 {
-    forfun_mem mem;
+    struct forfun_mem mem;
 
     if (g_shim_is_enabled_ == 1)
     {

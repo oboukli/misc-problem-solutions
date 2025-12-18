@@ -10,17 +10,17 @@ found in the LICENSE file.
 
 #include <stdlib.h>
 
-forfun_mem g_forfun_mem;
+struct forfun_mem g_forfun_mem;
 
-void forfun_mem_set(forfun_mem const mem)
+void forfun_mem_set(struct forfun_mem const mem)
 {
     g_forfun_mem.ff_malloc = mem.ff_malloc;
     g_forfun_mem.ff_free = mem.ff_free;
 }
 
-forfun_mem forfun_mem_get(void)
+struct forfun_mem forfun_mem_get(void)
 {
-    forfun_mem mem;
+    struct forfun_mem mem;
     mem.ff_malloc = g_forfun_mem.ff_malloc;
     mem.ff_free = g_forfun_mem.ff_free;
 
