@@ -21,6 +21,7 @@ enum forfun_internal_result_error {
 
 struct forfun_internal_result {
     struct forfun_forward_list_node* node;
+
     int error;
 };
 
