@@ -14,6 +14,11 @@ found in the LICENSE file.
 #include "forfun_c/container/forward_list.h"
 #include "forfun_c/mem/mem.h"
 
+enum forfun_internal_result_error {
+    FORFUN_INTERNAL_RESULT_ERROR_OK = 0,
+    FORFUN_INTERNAL_RESULT_ERROR_ERROR = 1
+};
+
 struct forfun_internal_result {
     struct forfun_forward_list_node* node;
     int error;
@@ -88,7 +93,8 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
     unsigned int const carry
 )
 {
-    struct forfun_internal_result result = {NULL, 0};
+    struct forfun_internal_result result
+        = {NULL, FORFUN_INTERNAL_RESULT_ERROR_ERROR};
     unsigned int sum = carry;
 
     unsigned int const val_a = addend_a == NULL ? 0U : addend_a->value;
@@ -117,28 +123,25 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
         );
         if (aux_node_ptr == NULL)
         {
-            goto error;
+            return result;
         }
 
         aux_node_ptr->value = sum % 10U;
         next_result = forfun_do_add_two_numbers(next_a, next_b, sum / 10U);
-        if (next_result.error == 1)
+        if (next_result.error == FORFUN_INTERNAL_RESULT_ERROR_ERROR)
         {
             assert(g_forfun_mem.ff_free != NULL);
 
             g_forfun_mem.ff_free(aux_node_ptr);
 
-            goto error;
+            return result;
         }
 
         aux_node_ptr->next = next_result.node;
         result.node = aux_node_ptr;
     }
 
-    return result;
-
-error:
-    result.error = 1;
+    result.error = FORFUN_INTERNAL_RESULT_ERROR_OK;
 
     return result;
 }
@@ -151,14 +154,14 @@ struct forfun_forward_list_node* forfun_recursive_add_two_numbers(
     struct forfun_internal_result result;
     result = forfun_do_add_two_numbers(addend_a, addend_b, 0U);
 
-    if (result.error == 1)
+    if (result.error == FORFUN_INTERNAL_RESULT_ERROR_ERROR)
     {
         forfun_free_node_list(result.node);
 
         return NULL;
     }
 
-    assert(result.error == 0);
+    assert(result.error == FORFUN_INTERNAL_RESULT_ERROR_OK);
     assert(result.node != NULL);
 
     return result.node;
