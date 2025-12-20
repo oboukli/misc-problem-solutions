@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <array>
 #include <vector>
 
 #define CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER
