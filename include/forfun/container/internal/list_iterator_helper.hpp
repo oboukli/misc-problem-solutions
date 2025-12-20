@@ -33,14 +33,14 @@ public:
     auto operator=(list_iterator_helper&& other) noexcept
         -> list_iterator_helper& = default;
 
-    auto operator++(this auto&& self) noexcept -> decltype(auto)
+    auto operator++(this auto&& self) noexcept -> Derived&
     {
         self.node_ = self.node_->next_;
 
         return self;
     }
 
-    auto operator++(this auto&& self, int) noexcept -> decltype(auto)
+    auto operator++(this auto&& self, int) noexcept -> Derived
     {
         auto aux{self};
         ++self;
@@ -48,14 +48,14 @@ public:
         return aux;
     }
 
-    auto operator--(this auto&& self) noexcept -> decltype(auto)
+    auto operator--(this auto&& self) noexcept -> Derived&
     {
         self.node_ = self.node_->previous_;
 
         return self;
     }
 
-    auto operator--(this auto&& self, int) noexcept -> decltype(auto)
+    auto operator--(this auto&& self, int) noexcept -> Derived
     {
         auto aux{self};
         self.node_ = self.node_->previous_;
