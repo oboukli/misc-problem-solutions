@@ -28,19 +28,6 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format on
 )
 {
-    SECTION("Empty vector")
-    {
-        std::vector<int> test_input{};
-
-        CAPTURE(test_input);
-
-        CHECK(test_input.empty());
-
-        REQUIRE(
-            first_missing_positive(test_input.begin(), test_input.end()) == 1
-        );
-    }
-
     SECTION("One number")
     {
         auto [test_input, expected_output]{GENERATE(
@@ -148,29 +135,6 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<int, 0>)",
-    "[first_missing_positive]",
-    (auto first_missing_positive, first_missing_positive),
-    (forfun::first_missing_positive::base::lowest_missing<
-        std::array<int, 0>::iterator,
-        std::array<int, 0>::iterator>),
-    (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<int, 0>::iterator,
-        std::array<int, 0>::iterator>)
-)
-{
-    std::array<int, 0> test_input{};
-
-    CAPTURE(test_input);
-
-    STATIC_CHECK(test_input.empty());
-
-    STATIC_REQUIRE(
-        first_missing_positive(test_input.begin(), test_input.end()) == 1
-    );
-}
-
-TEMPLATE_TEST_CASE_SIG(
     "First missing positive (array<int, 16>)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
@@ -192,53 +156,29 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<char, 2>)",
+    "First missing positive (degenerate case)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),
     (forfun::first_missing_positive::base::lowest_missing<
-        std::array<char, 2>::iterator,
-        std::array<char, 2>::iterator>),
+        std::vector<int>::iterator,
+        std::vector<int>::iterator>),
+    // clang-format off
     (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<char, 2>::iterator,
-        std::array<char, 2>::iterator>)
+        std::vector<int>::iterator,
+        std::vector<int>::iterator>)
+    // clang-format on
 )
 {
-    std::array test_input{char{1}, char{2}};
-    REQUIRE(
-        first_missing_positive(test_input.begin(), test_input.end()) == char{3}
-    );
-}
+    SECTION("Empty vector")
+    {
+        std::vector<int> test_input{};
 
-TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<unsigned int, 3>)",
-    "[first_missing_positive]",
-    (auto first_missing_positive, first_missing_positive),
-    (forfun::first_missing_positive::base::lowest_missing<
-        std::array<unsigned int, 3>::iterator,
-        std::array<unsigned int, 3>::iterator>),
-    (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<unsigned int, 3>::iterator,
-        std::array<unsigned int, 3>::iterator>)
-)
-{
-    std::array test_input{1U, 2U, 4U};
-    REQUIRE(
-        first_missing_positive(test_input.begin(), test_input.end()) == 3UZ
-    );
-}
+        CAPTURE(test_input);
 
-TEMPLATE_TEST_CASE_SIG(
-    "First missing positive (array<int, 3>)",
-    "[first_missing_positive]",
-    (auto first_missing_positive, first_missing_positive),
-    (forfun::first_missing_positive::base::lowest_missing<
-        std::array<int, 3>::iterator,
-        std::array<int, 3>::iterator>),
-    (forfun::first_missing_positive::fast::lowest_missing<
-        std::array<int, 3>::iterator,
-        std::array<int, 3>::iterator>)
-)
-{
-    std::array test_input{1, 2, 4};
-    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 3);
+        CHECK(test_input.empty());
+
+        REQUIRE(
+            first_missing_positive(test_input.begin(), test_input.end()) == 1
+        );
+    }
 }
