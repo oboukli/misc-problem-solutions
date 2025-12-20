@@ -7,6 +7,7 @@
 #ifndef FORFUN_CONTAINER_INTERNAL_LIST_ITERATOR_HPP_
 #define FORFUN_CONTAINER_INTERNAL_LIST_ITERATOR_HPP_
 
+#include <cassert>
 #include <iterator>
 
 #include "forfun/container/internal/list_iterator_helper.hpp"
@@ -42,6 +43,8 @@ public:
 
     auto operator*() const noexcept -> reference
     {
+        assert(node_ != nullptr);
+
         return node_->value_;
     }
 };
