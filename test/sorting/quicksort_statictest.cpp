@@ -16,8 +16,9 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 
     SECTION("Empty container")
     {
-        std::array<int, 0> test_input{};
         static constexpr std::array<int, 0> const expected_output{};
+
+        std::array<int, 0> test_input{};
 
         quicksort(test_input.begin(), test_input.end());
 
