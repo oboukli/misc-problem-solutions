@@ -42,14 +42,9 @@ public:
 
     auto operator=(forward_list&&) noexcept -> forward_list& = delete;
 
-    [[nodiscard]] constexpr auto front() noexcept -> reference
+    [[nodiscard]] constexpr auto front(this auto&& self) noexcept -> auto&&
     {
-        return head_->value_;
-    }
-
-    [[nodiscard]] constexpr auto front() const noexcept -> const_reference
-    {
-        return head_->value_;
+        return std::forward_like<decltype(self)>(self.head_->value_);
     }
 
     [[nodiscard]] constexpr auto empty() const noexcept -> bool
