@@ -40,7 +40,7 @@ public:
         return self;
     }
 
-    auto operator++(this auto&& self, int) noexcept -> Derived
+    [[nodiscard]] auto operator++(this auto&& self, int) noexcept -> Derived
     {
         auto aux{self};
         ++self;
@@ -55,7 +55,7 @@ public:
         return self;
     }
 
-    auto operator--(this auto&& self, int) noexcept -> Derived
+    [[nodiscard]] auto operator--(this auto&& self, int) noexcept -> Derived
     {
         auto aux{self};
         self.node_ = self.node_->previous_;
