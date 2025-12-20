@@ -27,8 +27,9 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Empty container")
     {
+        static constexpr std::array<int, 0> const expected_output{};
+
         std::array<int, 0> test_input{};
-        std::array<int, 0> expected_output{};
 
         bubble_sort(test_input.begin(), test_input.end());
 
