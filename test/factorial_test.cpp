@@ -19,11 +19,6 @@ TEMPLATE_TEST_CASE(
     std::int64_t
 )
 {
-    SECTION("Factorial of negative")
-    {
-        // Undefined specification
-    }
-
     SECTION("0! is one")
     {
         static constexpr auto const n{TestType{}};
