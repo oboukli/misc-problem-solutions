@@ -15,10 +15,10 @@ TEST_CASE("Null stream buffer", "[null_streambuf]")
     SECTION("Absorb input")
     {
         forfun::common::io::null_streambuf buffer{};
-        std::ostream os{&buffer};
+        std::ostream output_stream{&buffer};
 
-        os << "Dummy";
+        output_stream << "Dummy";
 
-        REQUIRE(os.good());
+        REQUIRE(output_stream.good());
     }
 }
