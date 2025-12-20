@@ -21,6 +21,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list const some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
     }
 
@@ -28,6 +29,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
 
@@ -43,6 +45,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
 
@@ -65,6 +68,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
 
@@ -94,6 +98,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
 
@@ -134,6 +139,8 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
         some_list.pop_back();
 
         REQUIRE(some_list.empty());
+
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
     }
 
@@ -170,11 +177,13 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
     {
         forfun::experimental::container::list some_list{};
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
 
         some_list.clear();
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
     }
@@ -189,6 +198,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
         some_list.clear();
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
     }
@@ -205,6 +215,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
         some_list.clear();
 
+        // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
         REQUIRE(some_list.empty());
     }
