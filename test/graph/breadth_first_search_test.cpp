@@ -26,9 +26,9 @@ public:
     {
     }
 
-    auto operator()(char const v) const noexcept -> void
+    auto operator()(char const val) const -> void
     {
-        visit_log_->emplace_back(v);
+        visit_log_->emplace_back(val);
     }
 
 private:
