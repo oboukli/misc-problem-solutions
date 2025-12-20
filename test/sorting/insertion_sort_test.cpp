@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <array>
+#include <vector>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -16,8 +16,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Empty container")
     {
-        std::array<int, 0> test_input{};
-        static constexpr std::array<int, 0> const expected_output{};
+        std::vector<int> test_input{};
+        std::vector<int> const expected_output{};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.empty());
@@ -27,8 +27,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("One element")
     {
-        std::array test_input{7};
-        static constexpr std::array const expected_output{7};
+        std::vector test_input{7};
+        std::vector const expected_output{7};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 1UZ);
@@ -38,8 +38,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Two elements")
     {
-        std::array test_input{1, 1};
-        static constexpr std::array const expected_output{1, 1};
+        std::vector test_input{1, 1};
+        std::vector const expected_output{1, 1};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 2UZ);
@@ -49,8 +49,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Three elements")
     {
-        std::array test_input{-6, 3, 11};
-        static constexpr std::array const expected_output{-6, 3, 11};
+        std::vector test_input{-6, 3, 11};
+        std::vector const expected_output{-6, 3, 11};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 3UZ);
@@ -60,10 +60,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Best case")
     {
-        std::array test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        static constexpr std::array const expected_output{
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-        };
+        std::vector test_input{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        std::vector const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 10UZ);
@@ -73,10 +71,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Worst case")
     {
-        std::array test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        static constexpr std::array const expected_output{
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-        };
+        std::vector test_input{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+        std::vector const expected_output{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 10UZ);
@@ -86,10 +82,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Arbitrary test (case 1)")
     {
-        std::array test_input{200, 4, 7, 0, 9, -10, 2};
-        static constexpr std::array const expected_output{
-            -10, 0, 2, 4, 7, 9, 200
-        };
+        std::vector test_input{200, 4, 7, 0, 9, -10, 2};
+        std::vector const expected_output{-10, 0, 2, 4, 7, 9, 200};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7UZ);
@@ -99,8 +93,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Arbitrary test (case 2)")
     {
-        std::array test_input{8, 4, 7, 0, 9, 5, 2};
-        std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::vector test_input{8, 4, 7, 0, 9, 5, 2};
+        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7UZ);
@@ -110,8 +104,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Arbitrary test (case 3)")
     {
-        std::array test_input{8, 4, 7, 0, 9, 5, 2};
-        std::array const expected_output{0, 2, 4, 5, 7, 8, 9};
+        std::vector test_input{8, 4, 7, 0, 9, 5, 2};
+        std::vector const expected_output{0, 2, 4, 5, 7, 8, 9};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7UZ);
@@ -121,8 +115,8 @@ TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 
     SECTION("Negative numbers")
     {
-        std::array test_input{-8, -4, -7, -4, -9, -5, -2};
-        std::array const expected_output{-9, -8, -7, -5, -4, -4, -2};
+        std::vector test_input{-8, -4, -7, -4, -9, -5, -2};
+        std::vector const expected_output{-9, -8, -7, -5, -4, -4, -2};
         insertion_sort(test_input.begin(), test_input.end());
 
         CHECK(test_input.size() == 7UZ);
