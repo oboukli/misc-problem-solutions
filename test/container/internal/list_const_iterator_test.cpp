@@ -248,7 +248,7 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cbegin();
-        iter++;
+        [[maybe_unused]] auto const tmp{iter++};
 
         REQUIRE(*iter == 2017);
     }
@@ -265,8 +265,8 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cbegin();
-        iter++;
-        iter++;
+        auto tmp{iter++};
+        tmp = iter++;
 
         REQUIRE(*iter == 2039);
     }
@@ -284,9 +284,9 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cbegin();
-        iter++;
-        iter++;
-        iter++;
+        auto tmp{iter++};
+        tmp = iter++;
+        tmp = iter++;
 
         REQUIRE(*iter == 2081);
     }
@@ -302,10 +302,10 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cbegin();
-        iter++;
-        iter++;
-        iter++;
-        iter++;
+        auto tmp{iter++};
+        tmp = iter++;
+        tmp = iter++;
+        tmp = iter++;
 
         REQUIRE(iter == some_list.cend());
     }
@@ -420,7 +420,7 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cend();
-        iter--;
+        [[maybe_unused]] auto const tmp{iter--};
 
         REQUIRE(*iter == 2243);
     }
@@ -437,8 +437,8 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cend();
-        iter--;
-        iter--;
+        auto tmp{iter--};
+        tmp = iter--;
 
         REQUIRE(*iter == 2267);
     }
@@ -456,9 +456,9 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cend();
-        iter--;
-        iter--;
-        iter--;
+        auto tmp{iter--};
+        tmp = iter--;
+        tmp = iter--;
 
         REQUIRE(*iter == 2281);
     }
@@ -474,10 +474,10 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cend();
-        iter--;
-        iter--;
-        iter--;
-        iter--;
+        auto tmp{iter--};
+        tmp = iter--;
+        tmp = iter--;
+        tmp = iter--;
 
         REQUIRE(iter == some_list.cbegin());
     }
