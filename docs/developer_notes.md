@@ -129,6 +129,14 @@ The exceptions are Google FuzzTest, and vcpkg itself, which are manually managed
 A list of vcpkg-managed dependencies can be seen in the manifest file
 `vcpkg.json`.
 
+## Performance benchmarking
+
+Basic performance benchmarking is provided. The benchmarks mostly cover one
+complexity case (e.g. worst-case complexity) and are not necessarily
+statistically rigorous.
+
+Benchmark code depends on an independent, free and open-source framework.
+
 ## Quality assurance
 
 ### Type safety and const-correctness
