@@ -27,6 +27,8 @@ TEMPLATE_TEST_CASE_SIG(
     // clang-format off
     (forfun::search::binary_search::iterative::
         find<StdArrayConstIter<0>, StdArrayConstIter<0>, int>),
+    (forfun::search::binary_search::iterative_approach_b::
+        find<StdArrayConstIter<0>, StdArrayConstIter<0>, int>),
     (forfun::search::binary_search::recursive::
         find<StdArrayConstIter<0>, StdArrayConstIter<0>, int>)
     // clang-format on
@@ -47,6 +49,8 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
+        find<StdArrayConstIter<1>, StdArrayConstIter<1>, int>),
+    (forfun::search::binary_search::iterative_approach_b::
         find<StdArrayConstIter<1>, StdArrayConstIter<1>, int>),
     (forfun::search::binary_search::recursive::
         find<StdArrayConstIter<1>, StdArrayConstIter<1>, int>)
@@ -89,6 +93,8 @@ TEMPLATE_TEST_CASE_SIG(
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
+        find<StdArrayConstIter<2>, StdArrayConstIter<2>, int>),
+    (forfun::search::binary_search::iterative_approach_b::
         find<StdArrayConstIter<2>, StdArrayConstIter<2>, int>),
     (forfun::search::binary_search::recursive::
         find<StdArrayConstIter<2>, StdArrayConstIter<2>, int>)

@@ -65,6 +65,60 @@ find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
 
 } // namespace iterative
 
+namespace iterative_approach_b {
+
+/// @note The strategy assumes that @p lhs and @p last point to a span of
+/// elements sorted in non-descending order, otherwise the behavior of the
+/// strategy is undefined.
+template <
+    std::forward_iterator Iter,
+    std::sized_sentinel_for<Iter> Sentinel,
+    std::totally_ordered_with<std::iter_value_t<Iter>> Target>
+    requires std::forward_iterator<Sentinel>
+[[nodiscard]] constexpr auto
+find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
+{
+    using std::advance;
+    using std::distance;
+    using std::greater;
+    using std::less;
+    using std::next;
+
+    using DiffType = std::iter_difference_t<Iter>;
+
+    static constexpr DiffType const two{2};
+
+    auto num_elements{distance(lhs, last)};
+
+    for (Iter rhs{last}; lhs != rhs;)
+    {
+        DiffType const quotient{num_elements / two};
+        DiffType const remainder{num_elements % two};
+        Iter mid{next(lhs, quotient)};
+        if (less{}(target, *mid))
+        {
+            rhs = mid;
+            num_elements = quotient + remainder;
+
+            continue;
+        }
+
+        if (greater{}(target, *mid))
+        {
+            advance(lhs, quotient + remainder);
+            num_elements = quotient;
+
+            continue;
+        }
+
+        return mid;
+    }
+
+    return last;
+}
+
+} // namespace iterative_approach_b
+
 namespace recursive {
 
 namespace detail {
