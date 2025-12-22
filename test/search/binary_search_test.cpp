@@ -114,7 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        CHECK_FALSE(result == records.cend());
+        REQUIRE_FALSE(result == records.cend());
         REQUIRE(*result == 5519);
     }
 
@@ -130,7 +130,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        CHECK_FALSE(result == records.cend());
+        REQUIRE_FALSE(result == records.cend());
         REQUIRE(*result == 5521);
     }
 
@@ -174,7 +174,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        CHECK_FALSE(result == records.cend());
+        REQUIRE_FALSE(result == records.cend());
         REQUIRE(*result == -1);
     }
 
@@ -190,7 +190,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        CHECK_FALSE(result == records.cend());
+        REQUIRE_FALSE(result == records.cend());
         REQUIRE(*result == 1);
     }
 
@@ -206,7 +206,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        CHECK_FALSE(result == records.cend());
+        REQUIRE_FALSE(result == records.cend());
         REQUIRE(*result == 2);
     }
 
@@ -223,6 +223,175 @@ TEMPLATE_TEST_CASE_SIG(
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE(result == records.cend());
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Binary search in odd collection",
+    "[search][binary_search]",
+    (auto find, find),
+    // clang-format off
+    (forfun::search::binary_search::iterative::
+        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>),
+    (forfun::search::binary_search::recursive::
+        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>)
+    // clang-format on
+)
+{
+    SECTION("Odd collection containing the target once")
+    {
+        static constexpr int const target{23};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE_FALSE(result == records.cend());
+        CHECK(result == std::next(records.cbegin(), 8));
+        REQUIRE(*result == 23);
+    }
+
+    SECTION("Odd collection containing the target even times")
+    {
+        static constexpr int const target{17};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 17, 17, 17, 17, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE_FALSE(result == records.cend());
+        CHECK(result == std::next(records.cbegin(), 5));
+        REQUIRE(*result == 17);
+    }
+
+    SECTION("Odd collection containing the target odd times")
+    {
+        static constexpr int const target{239};
+        static constexpr std::array const records{
+            227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE_FALSE(result == records.cend());
+        CHECK(result == std::next(records.cbegin(), 5));
+        REQUIRE(*result == 239);
+    }
+
+    SECTION("Odd collection containing the target at the lower offset")
+    {
+        static constexpr int const target{2};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE_FALSE(result == records.cend());
+        CHECK(result == records.cbegin());
+        REQUIRE(*result == 2);
+    }
+
+    SECTION("Odd collection containing the target at the upper offset")
+    {
+        static constexpr int const target{31};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        auto const result{find(records.cbegin(), records.cend(), target)};
+
+        REQUIRE_FALSE(result == records.cend());
+        CHECK(result == (++records.crbegin()).base());
+        REQUIRE(*result == 31);
+    }
+
+    SECTION("Odd collection not containing the in-range target")
+    {
+        static constexpr int const target{35};
+        static constexpr std::array const records{
+            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
+        };
+        static_assert(records.size() == 11UZ);
+        static_assert(target > records.front());
+        static_assert(target < records.back());
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        REQUIRE(
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
+    }
+
+    SECTION("Odd collection where target is smaller than smallest element")
+    {
+        static constexpr int const target{1};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        REQUIRE(
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
+    }
+
+    SECTION("Odd collection where target is larger than largest element")
+    {
+        static constexpr int const target{41};
+        static constexpr std::array const records{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+        };
+        static_assert(records.size() == 11UZ);
+
+        CAPTURE(records);
+        CAPTURE(target);
+
+        CHECK(std::ranges::is_sorted(records));
+
+        REQUIRE(
+            find(records.cbegin(), records.cend(), target) == records.cend()
+        );
     }
 }
 
@@ -396,24 +565,32 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
-    "Binary search in odd collection",
+    "Binary search in sixty-four-element collection",
     "[search][binary_search]",
     (auto find, find),
     // clang-format off
     (forfun::search::binary_search::iterative::
-        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>),
+        find<StdArrayConstIter<64>, StdArrayConstIter<64>, int>),
     (forfun::search::binary_search::recursive::
-        find<StdArrayConstIter<11>, StdArrayConstIter<11>, int>)
+        find<StdArrayConstIter<64>, StdArrayConstIter<64>, int>)
     // clang-format on
 )
 {
-    SECTION("Odd collection containing the target once")
+    SECTION("Positive search")
     {
-        static constexpr int const target{23};
+        static constexpr int const target{449};
         static constexpr std::array const records{
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
+            // clang-format off
+            101, 103, 107, 109, 113, 127, 131, 137,
+            139, 149, 151, 157, 163, 167, 173, 179,
+            181, 191, 193, 197, 199, 211, 223, 227,
+            229, 233, 239, 241, 251, 257, 263, 269,
+            271, 277, 281, 283, 293, 307, 311, 313,
+            317, 331, 337, 347, 349, 353, 359, 367,
+            373, 379, 383, 389, 397, 401, 409, 419,
+            421, 431, 433, 439, 443, 449, 457, 461,
+            // clang-format on
         };
-        static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -423,17 +600,24 @@ TEMPLATE_TEST_CASE_SIG(
         auto const result{find(records.cbegin(), records.cend(), target)};
 
         REQUIRE_FALSE(result == records.cend());
-        CHECK(result == std::next(records.cbegin(), 8));
-        REQUIRE(*result == 23);
+        REQUIRE(*result == 449);
     }
 
-    SECTION("Odd collection containing the target even times")
+    SECTION("Negative search (benchmark case)")
     {
-        static constexpr int const target{17};
+        static constexpr int const target{52};
         static constexpr std::array const records{
-            2, 3, 5, 7, 11, 17, 17, 17, 17, 29, 31
+            // clang-format off
+            101, 103, 107, 109, 113, 127, 131, 137,
+            139, 149, 151, 157, 163, 167, 173, 179,
+            181, 191, 193, 197, 199, 211, 223, 227,
+            229, 233, 239, 241, 251, 257, 263, 269,
+            271, 277, 281, 283, 293, 307, 311, 313,
+            317, 331, 337, 347, 349, 353, 359, 367,
+            373, 379, 383, 389, 397, 401, 409, 419,
+            421, 431, 433, 439, 443, 449, 457, 461,
+            // clang-format on
         };
-        static_assert(records.size() == 11UZ);
 
         CAPTURE(records);
         CAPTURE(target);
@@ -442,125 +626,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         auto const result{find(records.cbegin(), records.cend(), target)};
 
-        REQUIRE_FALSE(result == records.cend());
-        CHECK(result == std::next(records.cbegin(), 5));
-        REQUIRE(*result == 17);
-    }
-
-    SECTION("Odd collection containing the target odd times")
-    {
-        static constexpr int const target{239};
-        static constexpr std::array const records{
-            227, 229, 233, 239, 239, 239, 257, 263, 269, 271, 277
-        };
-        static_assert(records.size() == 11UZ);
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        auto const result{find(records.cbegin(), records.cend(), target)};
-
-        REQUIRE_FALSE(result == records.cend());
-        CHECK(result == std::next(records.cbegin(), 5));
-        REQUIRE(*result == 239);
-    }
-
-    SECTION("Odd collection containing the target at the lower offset")
-    {
-        static constexpr int const target{2};
-        static constexpr std::array const records{
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
-        };
-        static_assert(records.size() == 11UZ);
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        auto const result{find(records.cbegin(), records.cend(), target)};
-
-        REQUIRE_FALSE(result == records.cend());
-        CHECK(result == records.cbegin());
-        REQUIRE(*result == 2);
-    }
-
-    SECTION("Odd collection containing the target at the upper offset")
-    {
-        static constexpr int const target{31};
-        static constexpr std::array const records{
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
-        };
-        static_assert(records.size() == 11UZ);
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        auto const result{find(records.cbegin(), records.cend(), target)};
-
-        REQUIRE_FALSE(result == records.cend());
-        CHECK(result == (++records.crbegin()).base());
-        REQUIRE(*result == 31);
-    }
-
-    SECTION("Odd collection not containing the in-range target")
-    {
-        static constexpr int const target{35};
-        static constexpr std::array const records{
-            29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71
-        };
-        static_assert(records.size() == 11UZ);
-        static_assert(target > records.front());
-        static_assert(target < records.back());
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend()
-        );
-    }
-
-    SECTION("Odd collection where target is smaller than smallest element")
-    {
-        static constexpr int const target{1};
-        static constexpr std::array const records{
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
-        };
-        static_assert(records.size() == 11UZ);
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend()
-        );
-    }
-
-    SECTION("Odd collection where target is larger than largest element")
-    {
-        static constexpr int const target{41};
-        static constexpr std::array const records{
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31
-        };
-        static_assert(records.size() == 11UZ);
-
-        CAPTURE(records);
-        CAPTURE(target);
-
-        CHECK(std::ranges::is_sorted(records));
-
-        REQUIRE(
-            find(records.cbegin(), records.cend(), target) == records.cend()
-        );
+        REQUIRE(result == records.cend());
     }
 }
 
