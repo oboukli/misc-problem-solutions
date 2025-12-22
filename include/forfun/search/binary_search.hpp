@@ -11,6 +11,7 @@
 #define FORFUN_SEARCH_BINARY_SEARCH_HPP_
 
 #include <concepts>
+#include <functional>
 #include <iterator>
 
 namespace forfun::search::binary_search {
@@ -28,26 +29,35 @@ template <
 [[nodiscard]] constexpr auto
 find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
 {
+    using std::advance;
+    using std::distance;
+    using std::greater;
+    using std::less;
+    using std::next;
+
     using DiffType = std::iter_difference_t<Iter>;
+
+    static constexpr DiffType const two{2};
 
     for (Iter rhs{last}; lhs != rhs;)
     {
-        auto const distance{std::distance(lhs, rhs)};
-        Iter mid{std::next(lhs, distance / DiffType{2})};
-        if (target < *mid)
+        auto const num_elements{distance(lhs, rhs)};
+        Iter mid{next(lhs, num_elements / two)};
+        if (less{}(target, *mid))
         {
             rhs = mid;
+
+            continue;
         }
-        else if (target > *mid)
+
+        if (greater{}(target, *mid))
         {
-            std::advance(
-                lhs, (distance / DiffType{2}) + (distance % DiffType{2})
-            );
+            advance(lhs, (num_elements / two) + (num_elements % two));
+
+            continue;
         }
-        else
-        {
-            return mid;
-        }
+
+        return mid;
     }
 
     return last;
@@ -64,26 +74,33 @@ template <
     std::sized_sentinel_for<Iter> Sentinel,
     std::totally_ordered_with<std::iter_value_t<Iter>> Target>
 [[nodiscard]] constexpr auto
-do_find(Iter const first, Sentinel const last, Target const target) noexcept
-    -> Iter
+do_find(Iter first, Sentinel last, Target const target) noexcept -> Iter
 {
     using DiffType = std::iter_difference_t<Iter>;
 
-    auto const distance{std::distance(first, last)};
-    if (distance < DiffType{1})
+    using std::distance;
+    using std::greater;
+    using std::less;
+    using std::next;
+
+    static constexpr DiffType const one{1};
+    static constexpr DiffType const two{2};
+
+    auto const num_elements{distance(first, last)};
+    if (less{}(num_elements, one))
     {
         return last;
     }
 
-    Iter mid{std::next(first, distance / DiffType{2})};
-    if (target < *mid)
+    Iter mid{next(first, num_elements / two)};
+    if (less{}(target, *mid))
     {
         return do_find(first, mid, target);
     }
 
-    if (target > *mid)
+    if (greater{}(target, *mid))
     {
-        return do_find(std::next(mid), last, target);
+        return do_find(next(mid), last, target);
     }
 
     return mid;
@@ -99,11 +116,12 @@ template <
     std::sized_sentinel_for<Iter> Sentinel,
     std::totally_ordered_with<std::iter_value_t<Iter>> Target>
 [[nodiscard]] constexpr auto
-find(Iter const first, Sentinel const last, Target const target) noexcept
-    -> Iter
+find(Iter first, Sentinel last, Target const target) noexcept -> Iter
 {
-    if (Iter const iter{detail::do_find(first, last, target)};
-        (iter != last) && (*iter == target))
+    using std::equal_to;
+
+    if (Iter iter{detail::do_find(first, last, target)};
+        (iter != last) && equal_to{}(*iter, target))
     {
         return iter;
     }
