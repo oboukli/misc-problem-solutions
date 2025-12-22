@@ -69,6 +69,16 @@ TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
         )
 
         .run(
+            NAMEOF_RAW(iterative_approach_b::find<Iter, Iter, int>).c_str(),
+            [&records] noexcept -> void {
+                Iter const r{iterative_approach_b::find(
+                    records.cbegin(), records.cend(), target
+                )};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
             NAMEOF_RAW(recursive::find<Iter, Iter, int>).c_str(),
             [&records] noexcept -> void {
                 Iter const r{
