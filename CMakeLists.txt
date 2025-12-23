@@ -241,11 +241,13 @@ target_sources(
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/binary_search.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/search_matrix.hpp"
 )
 target_sources(
   forfun_search
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/binary_search.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/search_matrix.cpp"
 )
 get_target_property(forfun_search_headers forfun_search HEADER_SET)
 source_group(
@@ -485,6 +487,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/product_except_self_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/search_matrix_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/set_matrix_zeroes_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sonar_test.cpp"
