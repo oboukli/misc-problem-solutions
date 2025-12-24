@@ -39,11 +39,9 @@ template <
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 auto escape(OStream& os, Sv const sv) -> void
 {
-    using SizeType = std::basic_string_view<CharT, Traits>::size_type;
-
-    for (SizeType i{}; i < sv.size(); ++i)
+    for (auto iter{std::cbegin(sv)}; iter != std::cend(sv); ++iter)
     {
-        switch (sv[i])
+        switch (*iter)
         {
         case delimiter_char:
         case escape_char:
@@ -53,7 +51,7 @@ auto escape(OStream& os, Sv const sv) -> void
             break;
         }
 
-        os << sv[i];
+        os << *iter;
     }
 }
 
@@ -61,18 +59,20 @@ template <typename OS, typename CharT, typename Traits>
     requires std::derived_from<OS, std::basic_ostream<CharT, Traits>>
 auto unescape(OS& os, std::basic_string_view<CharT, Traits> const sv) -> bool
 {
+    using DiffType = decltype(sv)::difference_type;
     using SizeType = decltype(sv)::size_type;
 
     bool pop_next{false};
     std::streamsize chunk_start{};
     SizeType i{};
-    for (; i < sv.size(); ++i)
+    for (; i < std::size(sv); ++i)
     {
-        if ((sv[i] == escape_char) || (sv[i] == delimiter_char))
+        if (auto const c{*std::next(std::cbegin(sv), static_cast<DiffType>(i))};
+            (c == escape_char) || (c == delimiter_char))
         {
             if (pop_next)
             {
-                os << sv[i];
+                os << c;
             }
             else
             {
@@ -81,7 +81,7 @@ auto unescape(OS& os, std::basic_string_view<CharT, Traits> const sv) -> bool
                     static_cast<std::streamsize>(i) - chunk_start
                 );
 
-                if (sv[i] == delimiter_char)
+                if (c == delimiter_char)
                 {
                     return true;
                 }
