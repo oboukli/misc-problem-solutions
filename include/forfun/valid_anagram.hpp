@@ -49,13 +49,15 @@ is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
 
     for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
     {
-        decltype(bucket)::iterator const it{std::next(bucket.begin(), *iter)};
-        if (*it == 0UZ)
+        decltype(bucket)::iterator const bucket_iter{
+            std::next(bucket.begin(), *iter)
+        };
+        if (*bucket_iter == 0UZ)
         {
             return false;
         }
 
-        --(*it);
+        --(*bucket_iter);
     }
 
     return true;

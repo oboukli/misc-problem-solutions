@@ -57,7 +57,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 {
     using ValType = std::iter_value_t<Iter>;
 
-    auto max{last - first};
+    auto max{std::distance(first, last)};
 
     for (auto iter{first}; iter != last; ++iter)
     {
@@ -78,8 +78,8 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     ValType min_num{1};
 
-    auto const endIter{first + max};
-    for (auto iter{first}; iter != endIter; ++iter)
+    auto const end_iter{std::next(first, max)};
+    for (auto iter{first}; iter != end_iter; ++iter)
     {
         if (*iter == min_num)
         {
@@ -102,7 +102,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 {
     using ValType = std::iter_value_t<Iter>;
 
-    auto max{last - first};
+    auto max{std::distance(first, last)};
 
     for (auto iter{first}; iter != last; ++iter)
     {
@@ -125,7 +125,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     for (std::iter_difference_t<Iter> i{}; i < max; ++i)
     {
-        if (first[i] == min_num)
+        if (*std::next(first, i) == min_num)
         {
             ++min_num;
         }
