@@ -39,7 +39,6 @@ public:
         return *this;
     }
 
-#ifdef __cpp_explicit_this_parameter
     auto operator++(this auto&& self) noexcept -> decltype(auto)
     {
         self.node_ = self.node_->next_;
@@ -69,37 +68,6 @@ public:
 
         return aux;
     }
-#else
-    auto operator++() noexcept -> Derived&
-    {
-        node_ = node_->next_;
-
-        return *static_cast<Derived*>(this);
-    }
-
-    auto operator++(int) noexcept -> Derived
-    {
-        auto const aux{*static_cast<Derived*>(this)};
-        ++*this;
-
-        return aux;
-    }
-
-    auto operator--() noexcept -> Derived&
-    {
-        node_ = node_->previous_;
-
-        return *static_cast<Derived*>(this);
-    }
-
-    auto operator--(int) noexcept -> Derived
-    {
-        auto const aux{*static_cast<Derived*>(this)};
-        node_ = node_->previous_;
-
-        return aux;
-    }
-#endif // __cpp_explicit_this_parameter
 
     auto operator==(Derived const& other) const noexcept -> bool
     {
