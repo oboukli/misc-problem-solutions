@@ -19,62 +19,87 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
     using forfun::experimental::container::internal::list_iterator;
     using forfun::experimental::container::internal::list_node;
 
-    SECTION("Default constructor")
+    SECTION("Default constructor (case 1)")
+    {
+        list_iterator iterator1;
+        list_iterator iterator2;
+
+        REQUIRE(iterator1 == iterator2);
+    }
+
+    SECTION("Default constructor (case 2)")
     {
         list_iterator iterator1{};
         list_iterator iterator2{};
 
-        REQUIRE(iterator2 == iterator1);
+        REQUIRE(iterator1 == iterator2);
     }
 
     SECTION("Copy constructor")
     {
         list_node node{1427, nullptr, nullptr};
         list_iterator iterator1{&node};
-        list_iterator iterator2{iterator1};
 
+        list_iterator iterator2(iterator1);
+
+        CHECK(iterator2 == iterator1);
         REQUIRE(*iterator2 == 1427);
-        REQUIRE(iterator2 == iterator1);
+    }
+
+    SECTION("Move constructor")
+    {
+        list_node node{1439, nullptr, nullptr};
+
+        list_iterator const iterator1(list_iterator{&node});
+
+        REQUIRE(*iterator1 == 1439);
     }
 
     SECTION("Copy assignment")
     {
         list_node node1{1429, nullptr, nullptr};
         list_iterator iterator1{&node1};
-
-        list_node node2{1433, nullptr, nullptr};
-        [[maybe_unused]] list_iterator iterator2{&node2};
+        list_iterator iterator2;
 
         iterator2 = iterator1;
 
+        CHECK(iterator2 == iterator1);
         REQUIRE(*iterator2 == 1429);
-        REQUIRE(iterator2 == iterator1);
     }
 
-    SECTION("Move constructor")
+    SECTION("Copy assignment to self")
     {
-        list_node node{1439, nullptr, nullptr};
-        list_iterator iterator1{&node};
-        list_iterator iterator2{std::move(iterator1)};
+        list_node node1{2243, nullptr, nullptr};
+        list_iterator iterator1{&node1};
+        list_iterator const& alias{iterator1};
 
-        REQUIRE(*iterator2 == 1439);
-        // NOLINTNEXTLINE(bugprone-use-after-move,hicpp-invalid-access-moved)
-        REQUIRE_FALSE(iterator2 == iterator1);
+        iterator1 = alias;
+
+        CHECK(*alias == 2243);
+        CHECK(iterator1 == alias);
+        REQUIRE(*iterator1 == 2243);
     }
 
     SECTION("Move assignment")
     {
         list_node node1{1447, nullptr, nullptr};
+        list_iterator iterator1;
+
+        iterator1 = list_iterator{&node1};
+
+        REQUIRE(*iterator1 == 1447);
+    }
+
+    SECTION("Move assignment to self")
+    {
+        list_node node1{2251, nullptr, nullptr};
         list_iterator iterator1{&node1};
+        list_iterator& alias{iterator1};
 
-        list_node node2{1451, nullptr, nullptr};
-        [[maybe_unused]] list_iterator iterator2{&node2};
+        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        iterator1 = std::move(alias);
 
-        iterator2 = std::move(iterator1);
-
-        REQUIRE(*iterator2 == 1447);
-        // NOLINTNEXTLINE(bugprone-use-after-move,hicpp-invalid-access-moved)
-        REQUIRE_FALSE(iterator2 == iterator1);
+        REQUIRE(*iterator1 == 2251);
     }
 
     SECTION("Iterator and sentinel of empty list are equal")
