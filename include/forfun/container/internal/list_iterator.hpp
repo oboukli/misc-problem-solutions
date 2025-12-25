@@ -8,7 +8,6 @@
 #define FORFUN_CONTAINER_INTERNAL_LIST_ITERATOR_HPP_
 
 #include <iterator>
-#include <utility>
 
 #include "forfun/container/internal/list_iterator_helper.hpp"
 #include "forfun/container/internal/list_node.hpp"
@@ -32,22 +31,14 @@ public:
 
     constexpr list_iterator(list_iterator const& other) noexcept = default;
 
-    constexpr list_iterator(list_iterator&& other) noexcept :
-        list_iterator_helper{std::move(other)}
-    {
-    }
+    constexpr list_iterator(list_iterator&& other) noexcept = default;
 
     constexpr ~list_iterator() noexcept = default;
 
     auto operator=(list_iterator const& other) noexcept
         -> list_iterator& = default;
 
-    auto operator=(list_iterator&& other) noexcept -> list_iterator&
-    {
-        node_ = other.node_;
-        other.node_ = nullptr;
-        return *this;
-    }
+    auto operator=(list_iterator&& other) noexcept -> list_iterator& = default;
 
     auto operator*() const noexcept -> reference
     {
