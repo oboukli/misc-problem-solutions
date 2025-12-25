@@ -31,13 +31,7 @@ public:
         -> list_iterator_helper& = default;
 
     auto operator=(list_iterator_helper&& other) noexcept
-        -> list_iterator_helper&
-    {
-        node_ = other.node_;
-        other.node_ = nullptr;
-
-        return *this;
-    }
+        -> list_iterator_helper& = default;
 
     auto operator++(this auto&& self) noexcept -> decltype(auto)
     {
@@ -92,13 +86,11 @@ public:
     }
 
 private:
-    list_node* node_;
+    list_node* node_{};
 
     friend Derived;
 
-    constexpr explicit list_iterator_helper() noexcept : node_{}
-    {
-    }
+    constexpr explicit list_iterator_helper() noexcept = default;
 
     constexpr explicit list_iterator_helper(list_node* const node) noexcept :
         node_{node}
@@ -108,11 +100,8 @@ private:
     constexpr list_iterator_helper(list_iterator_helper const& other) noexcept
         = default;
 
-    constexpr list_iterator_helper(list_iterator_helper&& other) noexcept :
-        node_{other.node_}
-    {
-        other.node_ = nullptr;
-    }
+    constexpr list_iterator_helper(list_iterator_helper&& other) noexcept
+        = default;
 };
 
 } // namespace forfun::experimental::container::internal
