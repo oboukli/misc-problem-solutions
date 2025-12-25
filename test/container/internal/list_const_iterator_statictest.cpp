@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <iterator>
 #include <ranges>
+#include <type_traits>
 
 #if !defined(__cpp_lib_ranges_as_const) || __cpp_lib_ranges_as_const < 202207L
 #include <catch2/catch_message.hpp>
@@ -37,6 +38,27 @@ TEST_CASE(
 
         STATIC_REQUIRE_FALSE(
             std::indirectly_writable<list_const_iterator, int>
+        );
+    }
+
+    SECTION("Copy and move")
+    {
+        using forfun::experimental::container::internal::list_const_iterator;
+
+        STATIC_REQUIRE(
+            std::is_trivially_copy_constructible_v<list_const_iterator>
+        );
+
+        STATIC_REQUIRE(
+            std::is_trivially_move_constructible_v<list_const_iterator>
+        );
+
+        STATIC_REQUIRE(
+            std::is_trivially_copy_assignable_v<list_const_iterator>
+        );
+
+        STATIC_REQUIRE(
+            std::is_trivially_move_assignable_v<list_const_iterator>
         );
     }
 

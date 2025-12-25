@@ -7,6 +7,7 @@
 #include <concepts>
 #include <cstddef>
 #include <iterator>
+#include <type_traits>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -30,6 +31,19 @@ TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
         STATIC_REQUIRE(std::bidirectional_iterator<list_iterator>);
 
         STATIC_REQUIRE(std::indirectly_writable<list_iterator, int>);
+    }
+
+    SECTION("Copy and move")
+    {
+        using forfun::experimental::container::internal::list_iterator;
+
+        STATIC_REQUIRE(std::is_trivially_copy_constructible_v<list_iterator>);
+
+        STATIC_REQUIRE(std::is_trivially_move_constructible_v<list_iterator>);
+
+        STATIC_REQUIRE(std::is_trivially_copy_assignable_v<list_iterator>);
+
+        STATIC_REQUIRE(std::is_trivially_move_assignable_v<list_iterator>);
     }
 
     SECTION("Iterator traits")
