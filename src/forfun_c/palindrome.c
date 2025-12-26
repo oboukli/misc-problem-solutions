@@ -28,7 +28,7 @@ int forfun_is_palindrome(char const* str, size_t const length)
     /* Two insulated and harmless overflows when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
-    for (; str != mid; ++str)
+    while (str != mid)
     {
         if (*str != *str_rhs)
         {
@@ -36,6 +36,7 @@ int forfun_is_palindrome(char const* str, size_t const length)
         }
 
         --str_rhs;
+        ++str;
     }
 
     return 1;
@@ -59,15 +60,15 @@ int forfun_is_palindrome_ci(char const* str, size_t const length)
     /* Two insulated and harmless overflows when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
-    for (; str != mid; ++str)
+    while (str != mid)
     {
-        if (tolower((unsigned char)(*str))
-            != tolower((unsigned char)(*str_rhs)))
+        if (tolower((unsigned char)*str) != tolower((unsigned char)*str_rhs))
         {
             return 0;
         }
 
         --str_rhs;
+        ++str;
     }
 
     return 1;
