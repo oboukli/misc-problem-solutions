@@ -58,6 +58,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::string_view const s{GENERATE(
             ""sv,
+            "X"sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
             "aba"sv,
@@ -118,6 +119,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::basic_string_view<wchar_t> const s{GENERATE(
             L""sv,
+            L"X"sv,
             L"\xb8Y\xb8"sv,
             L"aa"sv,
             L"aba"sv,
@@ -181,6 +183,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::basic_string_view<char32_t> const s{GENERATE(
             U""sv,
+            U"A"sv,
             U"\xb8Y\xb8"sv,
             U"aa"sv,
             U"aba"sv,
@@ -244,6 +247,7 @@ TEMPLATE_TEST_CASE_SIG(
     {
         std::string_view const s{GENERATE(
             ""sv,
+            "X"sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
             "aba"sv,
