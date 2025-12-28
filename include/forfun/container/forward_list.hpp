@@ -14,7 +14,7 @@
 #include <concepts>
 #include <utility>
 
-#include "forfun/container/internal/forward_list_node.hpp"
+#include "forfun/container/forward_list_node.hpp"
 
 namespace forfun::experimental::container {
 
@@ -44,12 +44,12 @@ public:
 
     [[nodiscard]] constexpr auto front() noexcept -> reference
     {
-        return head_->value;
+        return head_->value_;
     }
 
     [[nodiscard]] constexpr auto front() const noexcept -> const_reference
     {
-        return head_->value;
+        return head_->value_;
     }
 
     [[nodiscard]] constexpr auto empty() const noexcept -> bool
@@ -59,12 +59,12 @@ public:
 
     auto push_front(T&& value) -> void
     {
-        internal::forward_list_node<T>* const aux{head_};
+        forward_list_node<T>* const aux{head_};
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        head_ = new internal::forward_list_node<T>{std::move(value)};
+        head_ = new forward_list_node<T>{std::move(value)};
 
-        head_->next = aux;
+        head_->next_ = aux;
     }
 
     /// @note The behavior is undefined when popping the front of an empty
@@ -73,8 +73,8 @@ public:
     {
         assert(head_ != nullptr);
 
-        internal::forward_list_node<T> const* const aux{head_};
-        head_ = head_->next;
+        forward_list_node<T> const* const aux{head_};
+        head_ = head_->next_;
 
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         delete aux;
@@ -82,12 +82,9 @@ public:
 
     constexpr auto clear() noexcept -> void
     {
-        // clang-format off
-        for (internal::forward_list_node<T> const* node{head_};
-            node != nullptr;)
-        // clang-format on
+        for (forward_list_node<T> const* node{head_}; node != nullptr;)
         {
-            internal::forward_list_node<T> const* const next{node->next};
+            forward_list_node<T> const* const next{node->next_};
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             delete node;
@@ -100,14 +97,14 @@ public:
 
     constexpr auto reverse() noexcept -> void
     {
-        internal::forward_list_node<T>* prev{nullptr};
-        internal::forward_list_node<T>* node{head_};
+        forward_list_node<T>* prev{nullptr};
+        forward_list_node<T>* node{head_};
 
         while (node != nullptr)
         {
-            internal::forward_list_node<T>* next{node->next};
+            forward_list_node<T>* next{node->next_};
 
-            node->next = prev;
+            node->next_ = prev;
 
             prev = node;
             node = next;
@@ -117,7 +114,7 @@ public:
     }
 
 private:
-    internal::forward_list_node<T>* head_;
+    forward_list_node<T>* head_;
 };
 
 } // namespace forfun::experimental::container

@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/container/internal/forward_list_node.hpp" // IWYU pragma: keep
+#include "forfun/container/forward_list_node.hpp" // IWYU pragma: keep

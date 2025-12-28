@@ -396,8 +396,8 @@ target_sources(
   FILE_SET HEADERS
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/forward_list_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_const_iterator.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_iterator_helper.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_iterator.hpp"
@@ -407,8 +407,8 @@ target_sources(
 target_sources(
   forfun_experimental
   PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/forward_list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_const_iterator.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_iterator_helper.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_iterator.cpp"
