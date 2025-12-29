@@ -119,7 +119,7 @@ public:
     }
 
 private:
-    forfun::container::forward_list_node<T>* head_;
+    forfun::container::forward_list_node<T>* head_{};
 };
 
 } // namespace forfun::experimental::container
