@@ -39,15 +39,17 @@ public:
     {
     }
 
-    ~list_const_iterator() noexcept = default;
+    constexpr ~list_const_iterator() noexcept = default;
 
-    auto operator=(list_const_iterator const& other) noexcept
+    constexpr auto operator=(list_const_iterator const& other) noexcept
         -> list_const_iterator& = default;
 
-    auto operator=(list_const_iterator&& other) noexcept -> list_const_iterator&
+    constexpr auto operator=(list_const_iterator&& other) noexcept
+        -> list_const_iterator&
     {
         node_ = other.node_;
         other.node_ = nullptr;
+
         return *this;
     }
 

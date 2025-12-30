@@ -34,6 +34,17 @@ public:
     {
     }
 
+    binary_tree_node(binary_tree_node const&) noexcept = default;
+
+    binary_tree_node(binary_tree_node&&) noexcept = default;
+
+    ~binary_tree_node() noexcept = default;
+
+    auto operator=(binary_tree_node const&) noexcept
+        -> binary_tree_node& = default;
+
+    auto operator=(binary_tree_node&&) noexcept -> binary_tree_node& = default;
+
     value_type value_;
 
     binary_tree_node* left_node_;

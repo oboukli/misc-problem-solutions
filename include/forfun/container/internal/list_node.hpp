@@ -13,11 +13,13 @@ class list_node final {
 public:
     using value_type = int;
 
-    list_node* previous_{nullptr};
+    list_node* previous_{};
 
-    list_node* next_{nullptr};
+    list_node* next_{};
 
     value_type value_{};
+
+    explicit constexpr list_node() noexcept = default;
 
     explicit constexpr list_node(
         value_type const value,
@@ -29,15 +31,15 @@ public:
     {
     }
 
-    list_node(list_node const&) = delete;
+    list_node(list_node const&) noexcept = delete;
 
-    auto operator=(list_node const&) -> list_node& = delete;
-
-    list_node(list_node&&) = delete;
-
-    auto operator=(list_node&&) -> list_node& = delete;
+    list_node(list_node&&) noexcept = delete;
 
     constexpr ~list_node() noexcept = default;
+
+    auto operator=(list_node const&) noexcept -> list_node& = delete;
+
+    auto operator=(list_node&&) noexcept -> list_node& = delete;
 };
 
 } // namespace forfun::experimental::container::internal

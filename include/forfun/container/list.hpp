@@ -34,19 +34,15 @@ public:
 
     using const_iterator = internal::list_const_iterator;
 
-    list() : end_{new internal::list_node(int{}, nullptr, nullptr)}
+    explicit list() : end_{new internal::list_node()}
     {
         head_ = end_;
         tail_ = end_;
     }
 
-    constexpr list(list const&) noexcept = delete;
+    list(list const&) = delete;
 
-    auto operator=(list const&) noexcept -> list& = delete;
-
-    constexpr list(list&&) noexcept = delete;
-
-    auto operator=(list&&) noexcept -> list& = delete;
+    list(list&&) noexcept = delete;
 
     ~list() noexcept
     {
@@ -54,6 +50,10 @@ public:
 
         delete end_;
     }
+
+    auto operator=(list const&) -> list& = delete;
+
+    auto operator=(list&&) noexcept -> list& = delete;
 
     [[nodiscard]] constexpr auto size() const noexcept -> size_type
     {
