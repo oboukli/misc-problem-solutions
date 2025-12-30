@@ -29,18 +29,18 @@ public:
 
     constexpr forward_list() noexcept = default;
 
-    forward_list(forward_list const&) = delete;
+    forward_list(forward_list const&) noexcept = delete;
 
-    forward_list(forward_list&&) = delete;
+    forward_list(forward_list&&) noexcept = delete;
 
     constexpr ~forward_list() noexcept
     {
         clear();
     }
 
-    auto operator=(forward_list const&) -> forward_list& = delete;
+    auto operator=(forward_list const&) noexcept -> forward_list& = delete;
 
-    auto operator=(forward_list&&) -> forward_list& = delete;
+    auto operator=(forward_list&&) noexcept -> forward_list& = delete;
 
     [[nodiscard]] constexpr auto front() noexcept -> reference
     {

@@ -41,18 +41,18 @@ public:
 
     sonar(sonar const&) = delete;
 
-    sonar(sonar&& rhs) = delete;
+    sonar(sonar&& other) noexcept = delete;
 
     explicit sonar(std::vector<coord>&& coords) noexcept :
         coords_{std::move(coords)}
     {
     }
 
-    ~sonar() = default;
+    ~sonar() noexcept = default;
 
     auto operator=(sonar const&) -> sonar = delete;
 
-    auto operator=(sonar&&) -> sonar = delete;
+    auto operator=(sonar&&) noexcept -> sonar = delete;
 
     [[nodiscard]] auto ping(area area) const noexcept -> bool;
 

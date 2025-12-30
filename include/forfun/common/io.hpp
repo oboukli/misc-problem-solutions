@@ -17,13 +17,13 @@ public:
 
     null_streambuf(null_streambuf const&) = delete;
 
-    null_streambuf(null_streambuf&&) = delete;
+    null_streambuf(null_streambuf&&) noexcept = delete;
 
-    ~null_streambuf() override = default;
+    ~null_streambuf() noexcept override = default;
 
     auto operator=(null_streambuf const&) -> null_streambuf& = delete;
 
-    auto operator=(null_streambuf&&) -> null_streambuf& = delete;
+    auto operator=(null_streambuf&&) noexcept -> null_streambuf& = delete;
 
 protected:
     [[nodiscard]] auto overflow(int_type c) noexcept -> int_type override;
