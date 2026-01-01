@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.31)
 
 project(
-  ForFun
+  ForFunDsa
 )
 
 add_library(forfun)
@@ -814,4 +814,46 @@ set_target_properties(
     C_STANDARD 90
     C_STANDARD_REQUIRED ON
     LANGUAGE C
+)
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/${CMAKE_PROJECT_NAME}Config.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
+  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
+)
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
+)
+
+install(
+  TARGETS
+    forfun
+    forfun_c
+    forfun_c_experimental
+    forfun_common
+    forfun_experimental
+    forfun_graph
+    forfun_search
+    forfun_sorting
+  EXPORT "${CMAKE_PROJECT_NAME}Targets"
+  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  FILE_SET HEADERS
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+)
+
+install(
+  EXPORT "${CMAKE_PROJECT_NAME}Targets"
+  FILE "${CMAKE_PROJECT_NAME}Targets.cmake"
+  NAMESPACE "${CMAKE_PROJECT_NAME}::"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
+)
+
+install(
+  FILES "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
+  TYPE DOC
 )
