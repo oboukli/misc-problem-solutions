@@ -317,5 +317,21 @@
       "configurePreset": "strict-clang",
       "configuration": "Release"
     }
+  ],
+  "packagePresets": [
+    {
+      "name": "package-clang",
+      "displayName": "Package",
+      "description": "Build with Clang and package",
+      "configurePreset": "strict-clang",
+      "configurations": [
+        "Release"
+      ],
+      "generators": [
+        "TGZ",
+        "ZIP"
+      ],
+      "packageDirectory": "${sourceDir}/out/package/${presetName}"
+    }
   ]
 }
