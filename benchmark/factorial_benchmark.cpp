@@ -27,8 +27,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
         .run(
             NAMEOF_RAW(iterative::factorial<std::uint64_t>).c_str(),
             [] noexcept -> void {
-                std::uint64_t const volatile n{20};
-                auto const r{iterative::factorial(n)};
+                int const volatile n{20};
+                auto const r{iterative::factorial<std::uint64_t>(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -37,8 +37,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
         .run(
             NAMEOF_RAW(recursive::factorial<std::uint64_t>).c_str(),
             [] noexcept -> void {
-                std::uint64_t const volatile n{20};
-                auto const r{recursive::factorial(n)};
+                int const volatile n{20};
+                auto const r{recursive::factorial<std::uint64_t>(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -47,8 +47,8 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
         .run(
             NAMEOF_RAW(stl_functional::factorial<std::uint64_t>).c_str(),
             [] noexcept -> void {
-                std::uint64_t const volatile n{20};
-                auto const r{stl_functional::factorial(n)};
+                int const volatile n{20};
+                auto const r{stl_functional::factorial<std::uint64_t>(n)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -57,10 +57,10 @@ TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
         .run(
             "std::tgamma",
             [] noexcept -> void {
-                std::uint64_t const volatile n{20 + 1};
+                int const volatile n{20 + 1};
                 auto const r{static_cast<uint64_t>(std::tgamma(n))};
 
-                ankerl::nanobench::doNotOptimizeAway(r);
+                ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
