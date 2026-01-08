@@ -15,9 +15,6 @@
 #include <concepts>
 #include <functional>
 #include <ranges>
-#include <type_traits>
-
-#include "forfun/common/concepts.hpp"
 
 namespace forfun::factorial {
 
@@ -27,17 +24,16 @@ namespace iterative {
 /// strategy is undefined.
 ///
 /// @note For large values of @p n, the result may overflow the return type.
-[[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
-    -> decltype(n)
+template <typename Result>
+    requires std::integral<Result>
+[[nodiscard]] constexpr auto factorial(int const n) noexcept -> Result
 {
-    using T = std::remove_const_t<decltype(n)>;
+    assert(n >= 0);
 
-    assert(n >= T{});
-
-    T result{1};
-    for (auto i{n}; i > T{1}; --i)
+    Result result{1};
+    for (int i{n}; i > 1; --i)
     {
-        result *= i;
+        result *= static_cast<Result>(i);
     }
 
     return result;
@@ -49,17 +45,18 @@ namespace recursive {
 
 /// @note Assumes @p n to be non-negative, otherwise the behavior of the
 /// strategy is undefined.
-template <common::concepts::addition_unpromoted T>
-[[nodiscard]] constexpr auto factorial(T const n) noexcept -> T
+template <typename Result>
+    requires std::integral<Result>
+[[nodiscard]] constexpr auto factorial(int const n) noexcept -> Result
 {
-    assert(n >= T{});
+    assert(n >= 0);
 
-    if (n <= T{1}) [[unlikely]]
+    if (n <= 1) [[unlikely]]
     {
-        return T{1};
+        return Result{1};
     }
 
-    return n * factorial(n - T{1});
+    return static_cast<Result>(n) * factorial<Result>(n - 1);
 }
 
 } // namespace recursive
@@ -70,14 +67,16 @@ namespace stl_functional {
 /// strategy is undefined.
 ///
 /// @note For large values of @p n, the result may overflow the return type.
-[[nodiscard]] constexpr auto factorial(std::integral auto const n) noexcept
+template <typename Result>
+    requires std::integral<Result>
+[[nodiscard]] constexpr auto factorial(int const n) noexcept -> Result
 {
-    using T = decltype(n);
-
-    assert(n >= T{});
+    assert(n >= 0);
 
     return std::ranges::fold_left(
-        std::views::iota(T{1}) | std::views::take(n), T{1}, std::multiplies{}
+        std::views::iota(Result{1}) | std::views::take(n),
+        Result{1},
+        std::multiplies<Result>{}
     );
 }
 
