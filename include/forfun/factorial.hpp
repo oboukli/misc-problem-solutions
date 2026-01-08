@@ -41,6 +41,63 @@ template <typename Result>
 
 } // namespace iterative
 
+namespace metaprogramming {
+
+namespace classic {
+
+template <int n, typename Result>
+    requires std::integral<Result>
+struct factorial {
+    static constexpr Result value{n * factorial<n - 1, Result>::value};
+};
+
+template <typename Result>
+    requires std::integral<Result>
+struct factorial<0, Result> {
+    static constexpr Result value{1};
+};
+
+template <int n, typename Result>
+constexpr Result const factorial_v{factorial<n, Result>::value};
+
+} // namespace classic
+
+namespace modern {
+
+using std::multiplies;
+
+template <typename A, typename B, typename Result>
+    requires std::integral<Result>
+struct multiplication {
+    static constexpr Result const value{
+        multiplies<Result>{}(A::value, B::value)
+    };
+};
+
+template <int n, typename Result>
+    requires std::integral<Result>
+struct factorial {
+    // clang-format off
+    static constexpr Result const value{
+        std::conditional_t<
+            n <= 1,
+            std::integral_constant<Result, 1>,
+            multiplication<
+                std::integral_constant<Result, n>,
+                factorial<n - 1, Result>,
+                Result
+            >
+        >::value};
+    // clang-format on
+};
+
+template <int n, typename Result>
+constexpr Result const factorial_v{factorial<n, Result>::value};
+
+} // namespace modern
+
+} // namespace metaprogramming
+
 namespace recursive {
 
 /// @note Assumes @p n to be non-negative, otherwise the behavior of the
