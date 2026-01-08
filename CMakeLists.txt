@@ -702,6 +702,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/factorial_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_statictest.cpp"
