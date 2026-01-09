@@ -276,6 +276,13 @@ as it sorts, i.e, combine sort and search for consecutive duplicates.
 
 The strategy does not implement error detection and error reporting.
 
+### Factorial
+
+A metaprogramming approach utilizing `std::conditional_t` adopts an
+implementation hint from a
+[Stack Overflow answer](https://stackoverflow.com/a/65293037), which
+demonstrates how to use a helper template to delay template instantiation.
+
 ### Integer division ceiling
 
 This experiment demonstrates how good are modern compilers are. The
