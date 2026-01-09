@@ -276,6 +276,13 @@ as it sorts, i.e, combine sort and search for consecutive duplicates.
 
 The strategy does not implement error detection and error reporting.
 
+### Integer division ceiling
+
+This experiment demonstrates how good are modern compilers are. The
+[benchmarks](../benchmark/common/math_benchmark.cpp) of function
+`forfun::common::math::div_ceil` show no performance gains over utilizing casts,
+floating-point division, and `std::ceil`.
+
 ### Meeting Rooms
 
 The strategy of function `forfun::meeting_rooms::can_attend` relies on the input
@@ -310,10 +317,3 @@ preallocating the memory required for the result vectors.
 
 See the [benchmark code](../benchmark/subsets_benchmark.cpp) and benchmarking
 report for details.
-
-### Integer division ceiling
-
-This experiment demonstrates how good are modern compilers are. The
-[benchmarks](../benchmark/common/math_benchmark.cpp) of function
-`forfun::common::math::div_ceil` show no performance gains over utilizing casts,
-floating-point division, and `std::ceil`.
