@@ -74,7 +74,7 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
                 .c_str()
                 // clang-format on
             ),
-            [&elements] noexcept -> void {
+            [&elements] -> void {
                 SubsetAllocatorFactory const subset_allocator_factory{};
                 ElementAllocatorFactory const element_allocator_factory{};
 
