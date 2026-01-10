@@ -35,8 +35,7 @@ public:
 
     ElementInPlaceAllocatorFactory(
         ElementInPlaceAllocatorFactory const&
-    ) noexcept
-        = delete;
+    ) noexcept = delete;
 
     ElementInPlaceAllocatorFactory(ElementInPlaceAllocatorFactory&&) noexcept
         = delete;
