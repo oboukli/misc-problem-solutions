@@ -31,29 +31,29 @@ last_stone_weight(IterA const first, IterB last) noexcept
 {
     using ValueType = std::iter_value_t<IterA>;
 
-    ValueType s1{*first};
+    ValueType stone1{*first};
 
     for (auto stop{std::next(first)}; stop != last;)
     {
-        ValueType s2{};
+        ValueType stone2{};
         auto it_s1{last};
         auto it_s2{last};
 
-        s1 = ValueType{};
+        stone1 = ValueType{};
 
         // Find the heaviest two stones, where s1 is larger than or equal to s2.
         for (auto it{first}; it != last; ++it)
         {
-            if (*it >= s1)
+            if (*it >= stone1)
             {
-                s2 = s1;
-                s1 = *it;
+                stone2 = stone1;
+                stone1 = *it;
                 it_s2 = it_s1;
                 it_s1 = it;
             }
-            else if (*it >= s2)
+            else if (*it >= stone2)
             {
-                s2 = *it;
+                stone2 = *it;
                 it_s2 = it;
             }
         }
@@ -66,10 +66,10 @@ last_stone_weight(IterA const first, IterB last) noexcept
             *it_s2 = *last;
         }
 
-        s1 = *it_s1;
+        stone1 = *it_s1;
     }
 
-    return s1;
+    return stone1;
 }
 
 } // namespace naive
@@ -94,15 +94,15 @@ last_stone_weight(IterA const first, IterB last) noexcept
 
     while (size > DiffType{1})
     {
-        auto s{*first};
+        auto stone{*first};
         std::pop_heap(first, last--);
 
-        s -= *first;
+        stone -= *first;
         std::pop_heap(first, last--);
 
-        if (s != ValueType{})
+        if (stone != ValueType{})
         {
-            *last = s;
+            *last = stone;
             ++last;
             std::push_heap(first, last);
         }
