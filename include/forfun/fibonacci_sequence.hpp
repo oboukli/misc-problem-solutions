@@ -11,14 +11,16 @@
 #define FORFUN_FIBONACCI_SEQUENCE_HPP_
 
 #include <concepts>
+#include <utility>
 
 namespace forfun::fibonacci::sequence {
 
 namespace slow {
 
 template <std::integral T, typename State, std::invocable<T, State&> Func>
-auto fib_seq(T const max, Func func, State& state) noexcept(noexcept(func))
-    -> void
+auto fib_seq(T const max, Func func, State& state) noexcept(
+    noexcept(func(std::declval<T>(), state))
+) -> void
 {
     for (T i{}, j{1}; i <= max;)
     {
@@ -35,8 +37,9 @@ auto fib_seq(T const max, Func func, State& state) noexcept(noexcept(func))
 namespace fast {
 
 template <std::integral T, typename State, std::invocable<T, State&> Func>
-auto fib_seq(T const max, Func func, State& state) noexcept(noexcept(func))
-    -> void
+auto fib_seq(T const max, Func func, State& state) noexcept(
+    noexcept(func(std::declval<T>(), state))
+) -> void
 {
     for (T i{}, j{1}; i <= max;)
     {
@@ -52,8 +55,9 @@ auto fib_seq(T const max, Func func, State& state) noexcept(noexcept(func))
 namespace creel {
 
 template <std::integral T, typename State, std::invocable<T, State&> Func>
-auto fib_seq(T const max, Func func, State& state) noexcept(noexcept(func))
-    -> void
+auto fib_seq(T const max, Func func, State& state) noexcept(
+    noexcept(func(std::declval<T>(), state))
+) -> void
 {
     // Adapted from: https://youtu.be/IZc4Odd3K2Q?t=949
     for (T i{}, j{1}; i <= max;)

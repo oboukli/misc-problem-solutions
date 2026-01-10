@@ -25,6 +25,7 @@
 #include <limits>
 #include <ostream>
 #include <string_view>
+#include <utility>
 
 #ifndef NDEBUG
 #include <system_error>
@@ -43,9 +44,9 @@ namespace optimized {
 /// Values of int up to std::numeric_limits<int>::max() - 1 inclusive are
 /// suppored.
 template <typename BinaryFunc>
-    requires std::invocable<BinaryFunc, char const*, std::streamsize>
+    requires std::invocable<BinaryFunc, char*, std::streamsize>
 auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
-    noexcept(write)
+    noexcept(write(std::declval<char*>(), std::declval<std::streamsize>()))
 ) -> void
 {
     static constexpr int const fizz_divider{3};
