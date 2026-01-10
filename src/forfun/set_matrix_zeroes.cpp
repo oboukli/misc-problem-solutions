@@ -190,49 +190,49 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     bool is_col_zeroed{false};
 
-    for (SizeTypeR r{}; r < matrix_r_size; ++r)
+    for (SizeTypeR row{}; row < matrix_r_size; ++row)
     {
-        assert(matrix[r].size() == matrix_c_size);
+        assert(matrix[row].size() == matrix_c_size);
 
-        for (SizeTypeC c{}; c < matrix_c_size; ++c)
+        for (SizeTypeC col{}; col < matrix_c_size; ++col)
         {
-            if (matrix[r][c] == 0)
+            if (matrix[row][col] == 0)
             {
-                matrix[r][0] = 0;
-                if (c == 0)
+                matrix[row][0] = 0;
+                if (col == 0)
                 {
                     is_col_zeroed = true;
                     continue;
                 }
-                matrix[0][c] = 0;
+                matrix[0][col] = 0;
             }
         }
     }
 
-    for (SizeTypeR r{1}; r < matrix_r_size; ++r)
+    for (SizeTypeR row{1}; row < matrix_r_size; ++row)
     {
-        for (SizeTypeC c{1}; c < matrix_c_size; ++c)
+        for (SizeTypeC col{1}; col < matrix_c_size; ++col)
         {
-            if ((matrix[r][0] == 0) || (matrix[0][c] == 0))
+            if ((matrix[row][0] == 0) || (matrix[0][col] == 0))
             {
-                matrix[r][c] = 0;
+                matrix[row][col] = 0;
             }
         }
     }
 
     if (matrix[0][0] == 0)
     {
-        for (SizeTypeC c{1}; c < matrix_c_size; ++c)
+        for (SizeTypeC col{1}; col < matrix_c_size; ++col)
         {
-            matrix[0][c] = 0;
+            matrix[0][col] = 0;
         }
     }
 
     if (is_col_zeroed)
     {
-        for (SizeTypeR r{}; r < matrix_r_size; ++r)
+        for (SizeTypeR row{}; row < matrix_r_size; ++row)
         {
-            matrix[r][0] = 0;
+            matrix[row][0] = 0;
         }
     }
 }
