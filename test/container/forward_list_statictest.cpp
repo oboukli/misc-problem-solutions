@@ -54,41 +54,36 @@ TEST_CASE("Forward list", "[container][forward_list]")
 
     SECTION("Non-const method front() returns a non-const reference")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        using forward_list = forfun::experimental::container::forward_list<int>;
 
         STATIC_REQUIRE(
             std::same_as<
-                decltype(forward_list.front()),
+                decltype(std::declval<forward_list&>().front()),
                 forfun::experimental::container::forward_list<int>::reference>
         );
     }
 
     SECTION("Method `front() const` returns a reference to const (case 1)")
     {
-        static constexpr forfun::experimental::container::forward_list<
-            int> const forward_list{};
+        using forward_list = forfun::experimental::container::forward_list<int>;
 
         STATIC_REQUIRE(
             std::same_as<
-                decltype(forward_list.front()),
+                decltype(std::declval<forward_list const&>().front()),
                 forfun::experimental::container::forward_list<
                     int>::const_reference>
         );
     }
 
-    SECTION("Method `front() const` returns a reference to const (case 2)")
+    SECTION("Method `front()` on an rvalue returns an rvalue reference")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
-
-        forfun::experimental::container::forward_list<int> const& alias{
-            forward_list
-        };
+        using forward_list = forfun::experimental::container::forward_list<int>;
 
         STATIC_REQUIRE(
             std::same_as<
-                decltype(alias.front()),
+                decltype(std::declval<forward_list&&>().front()),
                 forfun::experimental::container::forward_list<
-                    int>::const_reference>
+                    int>::value_type&&>
         );
     }
 }
