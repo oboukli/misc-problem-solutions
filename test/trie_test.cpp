@@ -81,10 +81,10 @@ TEST_CASE("Trie", "[trie]")
         REQUIRE_FALSE(root.is_terminal);
         REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
-        REQUIRE(root.children[0]->value == 'c');
-        REQUIRE(root.children[0]->is_terminal);
+        REQUIRE(root.children.front()->value == 'c');
+        REQUIRE(root.children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children.size()
+            root.children.front()->children.size()
             == TrieNode<>::children_t::size_type{}
         );
     }
@@ -100,24 +100,33 @@ TEST_CASE("Trie", "[trie]")
         REQUIRE_FALSE(root.is_terminal);
         REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
-        REQUIRE(root.children[0]->value == 'c');
-        REQUIRE_FALSE(root.children[0]->is_terminal);
+        REQUIRE(root.children.front()->value == 'c');
+        REQUIRE_FALSE(root.children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children.size()
+            root.children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[0]->children[0]->value == 'a');
-        REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
+        REQUIRE(root.children.front()->children.front()->value == 'a');
+        REQUIRE_FALSE(root.children.front()->children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
-        REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.front()->value
+            == 't'
+        );
+        REQUIRE(root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->is_terminal);
+        REQUIRE(
+            root.children.front()
+                ->children.front()
+                ->children.front()
+                ->children.size()
             == TrieNode<>::children_t::size_type{}
         );
     }
@@ -135,31 +144,48 @@ TEST_CASE("Trie", "[trie]")
         REQUIRE_FALSE(root.is_terminal);
         REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{1});
 
-        REQUIRE(root.children[0]->value == 'c');
-        REQUIRE_FALSE(root.children[0]->is_terminal);
+        REQUIRE(root.children.front()->value == 'c');
+        REQUIRE_FALSE(root.children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children.size()
+            root.children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[0]->children[0]->value == 'a');
-        REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
+        REQUIRE(root.children.front()->children.front()->value == 'a');
+        REQUIRE_FALSE(root.children.front()->children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.size()
             == TrieNode<>::children_t::size_type{2}
         );
 
-        REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
-        REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.front()->value
+            == 't'
+        );
+        REQUIRE(root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->is_terminal);
+        REQUIRE(
+            root.children.front()
+                ->children.front()
+                ->children.front()
+                ->children.size()
             == TrieNode<>::children_t::size_type{}
         );
 
-        REQUIRE(root.children[0]->children[0]->children[1]->value == 'r');
-        REQUIRE(root.children[0]->children[0]->children[1]->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children[1]->children.size()
+            root.children.front()->children.front()->children.at(1)->value
+            == 'r'
+        );
+        REQUIRE(
+            root.children.front()->children.front()->children.at(1)->is_terminal
+        );
+        REQUIRE(
+            root.children.front()
+                ->children.front()
+                ->children.at(1)
+                ->children.size()
             == TrieNode<>::children_t::size_type{}
         );
 
@@ -168,110 +194,132 @@ TEST_CASE("Trie", "[trie]")
             static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
-            REQUIRE(root.children[0]->value == 'c');
-            REQUIRE_FALSE(root.children[0]->is_terminal);
+            REQUIRE(root.children.front()->value == 'c');
+            REQUIRE_FALSE(root.children.front()->is_terminal);
             REQUIRE(
-                root.children[0]->children.size()
+                root.children.front()->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
-            REQUIRE(root.children[0]->children[0]->value == 'a');
-            REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
+            REQUIRE(root.children.front()->children.front()->value == 'a');
+            REQUIRE_FALSE(root.children.front()->children.front()->is_terminal);
             REQUIRE(
-                root.children[0]->children[0]->children.size()
+                root.children.front()->children.front()->children.size()
                 == TrieNode<>::children_t::size_type{2}
             );
 
-            REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
-            REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
             REQUIRE(
-                root.children[0]->children[0]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1}
+                root.children.front()->children.front()->children.front()->value
+                == 't'
             );
-
+            REQUIRE(root.children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->is_terminal);
             REQUIRE(
-                root.children[0]->children[0]->children[0]->children[0]->value
-                == 'n'
-            );
-            REQUIRE_FALSE(
-                // clang-format off
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->is_terminal
-                // clang-format on
-            );
-            REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->value
+                == 'n'
+            );
+            REQUIRE_FALSE(
+                // clang-format off
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->is_terminal
+                // clang-format on
+            );
+            REQUIRE(
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.size()
+                == TrieNode<>::children_t::size_type{1}
+            );
+
+            REQUIRE(
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->value
                 == 'i'
             );
             REQUIRE_FALSE(
                 // clang-format off
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->is_terminal
                 // clang-format on
             );
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->value
                 == 'p'
             );
-            REQUIRE(root.children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
+            REQUIRE(root.children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
                         ->is_terminal);
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{}
             );
 
-            REQUIRE(root.children[0]->children[0]->children[1]->value == 'r');
-            REQUIRE(root.children[0]->children[0]->children[1]->is_terminal);
             REQUIRE(
-                root.children[0]->children[0]->children[1]->children.size()
+                root.children.front()->children.front()->children.at(1)->value
+                == 'r'
+            );
+            REQUIRE(root.children.front()
+                        ->children.front()
+                        ->children.at(1)
+                        ->is_terminal);
+            REQUIRE(
+                root.children.front()
+                    ->children.front()
+                    ->children.at(1)
+                    ->children.size()
                 == TrieNode<>::children_t::size_type{}
             );
         }
@@ -290,45 +338,62 @@ TEST_CASE("Trie", "[trie]")
         REQUIRE_FALSE(root.is_terminal);
         REQUIRE(root.children.size() == TrieNode<>::children_t::size_type{2});
 
-        REQUIRE(root.children[0]->value == 'c');
-        REQUIRE_FALSE(root.children[0]->is_terminal);
+        REQUIRE(root.children.front()->value == 'c');
+        REQUIRE_FALSE(root.children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children.size()
+            root.children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[0]->children[0]->value == 'a');
-        REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
+        REQUIRE(root.children.front()->children.front()->value == 'a');
+        REQUIRE_FALSE(root.children.front()->children.front()->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
-        REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
         REQUIRE(
-            root.children[0]->children[0]->children[0]->children.size()
+            root.children.front()->children.front()->children.front()->value
+            == 't'
+        );
+        REQUIRE(root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->is_terminal);
+        REQUIRE(
+            root.children.front()
+                ->children.front()
+                ->children.front()
+                ->children.size()
             == TrieNode<>::children_t::size_type{}
         );
 
-        REQUIRE(root.children[1]->value == 'd');
-        REQUIRE_FALSE(root.children[1]->is_terminal);
+        REQUIRE(root.children.at(1)->value == 'd');
+        REQUIRE_FALSE(root.children.at(1)->is_terminal);
         REQUIRE(
-            root.children[1]->children.size()
+            root.children.at(1)->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[1]->children[0]->value == 'o');
-        REQUIRE_FALSE(root.children[1]->children[0]->is_terminal);
+        REQUIRE(root.children.at(1)->children.front()->value == 'o');
+        REQUIRE_FALSE(root.children.at(1)->children.front()->is_terminal);
         REQUIRE(
-            root.children[1]->children[0]->children.size()
+            root.children.at(1)->children.front()->children.size()
             == TrieNode<>::children_t::size_type{1}
         );
 
-        REQUIRE(root.children[1]->children[0]->children[0]->value == 'g');
-        REQUIRE(root.children[1]->children[0]->children[0]->is_terminal);
         REQUIRE(
-            root.children[1]->children[0]->children[0]->children.size()
+            root.children.at(1)->children.front()->children.front()->value
+            == 'g'
+        );
+        REQUIRE(
+            root.children.at(1)->children.front()->children.front()->is_terminal
+        );
+        REQUIRE(
+            root.children.at(1)
+                ->children.front()
+                ->children.front()
+                ->children.size()
             == TrieNode<>::children_t::size_type{}
         );
 
@@ -337,124 +402,146 @@ TEST_CASE("Trie", "[trie]")
             static constexpr std::string_view const prefixed1{"catnip"};
             insert(root, prefixed1);
 
-            REQUIRE(root.children[0]->value == 'c');
-            REQUIRE_FALSE(root.children[0]->is_terminal);
+            REQUIRE(root.children.front()->value == 'c');
+            REQUIRE_FALSE(root.children.front()->is_terminal);
             REQUIRE(
-                root.children[0]->children.size()
+                root.children.front()->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
-            REQUIRE(root.children[0]->children[0]->value == 'a');
-            REQUIRE_FALSE(root.children[0]->children[0]->is_terminal);
+            REQUIRE(root.children.front()->children.front()->value == 'a');
+            REQUIRE_FALSE(root.children.front()->children.front()->is_terminal);
             REQUIRE(
-                root.children[0]->children[0]->children.size()
-                == TrieNode<>::children_t::size_type{1}
-            );
-
-            REQUIRE(root.children[0]->children[0]->children[0]->value == 't');
-            REQUIRE(root.children[0]->children[0]->children[0]->is_terminal);
-            REQUIRE(
-                root.children[0]->children[0]->children[0]->children.size()
+                root.children.front()->children.front()->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
-                root.children[0]->children[0]->children[0]->children[0]->value
-                == 'n'
+                root.children.front()->children.front()->children.front()->value
+                == 't'
             );
-            REQUIRE_FALSE(
-                // clang-format off
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->is_terminal
-                // clang-format on
-            );
+            REQUIRE(root.children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->is_terminal);
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->value
+                == 'n'
+            );
+            REQUIRE_FALSE(
+                // clang-format off
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->is_terminal
+                // clang-format on
+            );
+            REQUIRE(
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.size()
+                == TrieNode<>::children_t::size_type{1}
+            );
+
+            REQUIRE(
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->value
                 == 'i'
             );
             REQUIRE_FALSE(
                 // clang-format off
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->is_terminal
                 // clang-format on
             );
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->value
                 == 'p'
             );
-            REQUIRE(root.children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
-                        ->children[0]
+            REQUIRE(root.children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
+                        ->children.front()
                         ->is_terminal);
             REQUIRE(
-                root.children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
-                    ->children[0]
+                root.children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
+                    ->children.front()
                     ->children.size()
                 == TrieNode<>::children_t::size_type{}
             );
 
-            REQUIRE(root.children[1]->value == 'd');
-            REQUIRE_FALSE(root.children[1]->is_terminal);
+            REQUIRE(root.children.at(1)->value == 'd');
+            REQUIRE_FALSE(root.children.at(1)->is_terminal);
             REQUIRE(
-                root.children[1]->children.size()
+                root.children.at(1)->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
-            REQUIRE(root.children[1]->children[0]->value == 'o');
-            REQUIRE_FALSE(root.children[1]->children[0]->is_terminal);
+            REQUIRE(root.children.at(1)->children.front()->value == 'o');
+            REQUIRE_FALSE(root.children.at(1)->children.front()->is_terminal);
             REQUIRE(
-                root.children[1]->children[0]->children.size()
+                root.children.at(1)->children.front()->children.size()
                 == TrieNode<>::children_t::size_type{1}
             );
 
-            REQUIRE(root.children[1]->children[0]->children[0]->value == 'g');
-            REQUIRE(root.children[1]->children[0]->children[0]->is_terminal);
             REQUIRE(
-                root.children[1]->children[0]->children[0]->children.size()
+                root.children.at(1)->children.front()->children.front()->value
+                == 'g'
+            );
+            REQUIRE(root.children.at(1)
+                        ->children.front()
+                        ->children.front()
+                        ->is_terminal);
+            REQUIRE(
+                root.children.at(1)
+                    ->children.front()
+                    ->children.front()
+                    ->children.size()
                 == TrieNode<>::children_t::size_type{}
             );
         }

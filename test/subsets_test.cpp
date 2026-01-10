@@ -37,7 +37,7 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 2UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
     }
 
     SECTION("One element container with in-place allocator")
@@ -77,7 +77,7 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 2UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
     }
 
     SECTION("Two element container")
@@ -99,9 +99,9 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 4UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
-        REQUIRE(actual[2].capacity() == actual[2].size());
-        REQUIRE(actual[3].capacity() == actual[3].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
+        REQUIRE(actual.at(2).capacity() == actual.at(2).size());
+        REQUIRE(actual.at(3).capacity() == actual.at(3).size());
     }
 
     SECTION("Three element container")
@@ -125,13 +125,13 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 8UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
-        REQUIRE(actual[2].capacity() == actual[2].size());
-        REQUIRE(actual[3].capacity() == actual[3].size());
-        REQUIRE(actual[4].capacity() == actual[4].size());
-        REQUIRE(actual[5].capacity() == actual[5].size());
-        REQUIRE(actual[6].capacity() == actual[6].size());
-        REQUIRE(actual[7].capacity() == actual[7].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
+        REQUIRE(actual.at(2).capacity() == actual.at(2).size());
+        REQUIRE(actual.at(3).capacity() == actual.at(3).size());
+        REQUIRE(actual.at(4).capacity() == actual.at(4).size());
+        REQUIRE(actual.at(5).capacity() == actual.at(5).size());
+        REQUIRE(actual.at(6).capacity() == actual.at(6).size());
+        REQUIRE(actual.at(7).capacity() == actual.at(7).size());
     }
 
     SECTION("Four element container (benchmark case 1)")
@@ -170,22 +170,22 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 16UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
-        REQUIRE(actual[2].capacity() == actual[2].size());
-        REQUIRE(actual[3].capacity() == actual[3].size());
-        REQUIRE(actual[4].capacity() == actual[4].size());
-        REQUIRE(actual[5].capacity() == actual[5].size());
-        REQUIRE(actual[6].capacity() == actual[6].size());
-        REQUIRE(actual[7].capacity() == actual[7].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
+        REQUIRE(actual.at(2).capacity() == actual.at(2).size());
+        REQUIRE(actual.at(3).capacity() == actual.at(3).size());
+        REQUIRE(actual.at(4).capacity() == actual.at(4).size());
+        REQUIRE(actual.at(5).capacity() == actual.at(5).size());
+        REQUIRE(actual.at(6).capacity() == actual.at(6).size());
+        REQUIRE(actual.at(7).capacity() == actual.at(7).size());
 
-        REQUIRE(actual[8].capacity() == actual[8].size());
-        REQUIRE(actual[9].capacity() == actual[9].size());
-        REQUIRE(actual[10].capacity() == actual[10].size());
-        REQUIRE(actual[11].capacity() == actual[11].size());
-        REQUIRE(actual[12].capacity() == actual[12].size());
-        REQUIRE(actual[13].capacity() == actual[13].size());
-        REQUIRE(actual[14].capacity() == actual[14].size());
-        REQUIRE(actual[15].capacity() == actual[15].size());
+        REQUIRE(actual.at(8).capacity() == actual.at(8).size());
+        REQUIRE(actual.at(9).capacity() == actual.at(9).size());
+        REQUIRE(actual.at(10).capacity() == actual.at(10).size());
+        REQUIRE(actual.at(11).capacity() == actual.at(11).size());
+        REQUIRE(actual.at(12).capacity() == actual.at(12).size());
+        REQUIRE(actual.at(13).capacity() == actual.at(13).size());
+        REQUIRE(actual.at(14).capacity() == actual.at(14).size());
+        REQUIRE(actual.at(15).capacity() == actual.at(15).size());
     }
 
     SECTION("Four element container with in-place allocator (benchmark case 2)")
@@ -242,22 +242,22 @@ TEST_CASE("Subsets", "[subsets]")
         REQUIRE(actual.capacity() == 16UZ);
 
         REQUIRE(actual.front().capacity() == actual.front().size());
-        REQUIRE(actual[1].capacity() == actual[1].size());
-        REQUIRE(actual[2].capacity() == actual[2].size());
-        REQUIRE(actual[3].capacity() == actual[3].size());
-        REQUIRE(actual[4].capacity() == actual[4].size());
-        REQUIRE(actual[5].capacity() == actual[5].size());
-        REQUIRE(actual[6].capacity() == actual[6].size());
-        REQUIRE(actual[7].capacity() == actual[7].size());
+        REQUIRE(actual.at(1).capacity() == actual.at(1).size());
+        REQUIRE(actual.at(2).capacity() == actual.at(2).size());
+        REQUIRE(actual.at(3).capacity() == actual.at(3).size());
+        REQUIRE(actual.at(4).capacity() == actual.at(4).size());
+        REQUIRE(actual.at(5).capacity() == actual.at(5).size());
+        REQUIRE(actual.at(6).capacity() == actual.at(6).size());
+        REQUIRE(actual.at(7).capacity() == actual.at(7).size());
 
-        REQUIRE(actual[8].capacity() == actual[8].size());
-        REQUIRE(actual[9].capacity() == actual[9].size());
-        REQUIRE(actual[10].capacity() == actual[10].size());
-        REQUIRE(actual[11].capacity() == actual[11].size());
-        REQUIRE(actual[12].capacity() == actual[12].size());
-        REQUIRE(actual[13].capacity() == actual[13].size());
-        REQUIRE(actual[14].capacity() == actual[14].size());
-        REQUIRE(actual[15].capacity() == actual[15].size());
+        REQUIRE(actual.at(8).capacity() == actual.at(8).size());
+        REQUIRE(actual.at(9).capacity() == actual.at(9).size());
+        REQUIRE(actual.at(10).capacity() == actual.at(10).size());
+        REQUIRE(actual.at(11).capacity() == actual.at(11).size());
+        REQUIRE(actual.at(12).capacity() == actual.at(12).size());
+        REQUIRE(actual.at(13).capacity() == actual.at(13).size());
+        REQUIRE(actual.at(14).capacity() == actual.at(14).size());
+        REQUIRE(actual.at(15).capacity() == actual.at(15).size());
     }
 }
 

@@ -172,7 +172,7 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         std::ostringstream ss{};
 
         CHECK(
-            tokens.front()[0]
+            tokens.front().front()
             == forfun::encode_and_decode_strings::delimited::escape_char
         );
 
@@ -326,8 +326,8 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
             // clang-format on
         };
         static_assert(tokens.size() == 2UZ);
-        static_assert(tokens[0].size() == 256UZ);
-        static_assert(tokens[1].size() == 256UZ);
+        static_assert(tokens.front().size() == 256UZ);
+        static_assert(tokens.at(1).size() == 256UZ);
 
         std::ostringstream ss{};
 
@@ -479,7 +479,7 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
     {
         static constexpr std::string_view const encoded{"~~"};
         static_assert(
-            encoded[0]
+            encoded.front()
             == forfun::encode_and_decode_strings::delimited::escape_char
         );
 
@@ -492,7 +492,7 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
     {
         static constexpr std::string_view const encoded{" "};
         static_assert(
-            encoded[0]
+            encoded.front()
             == forfun::encode_and_decode_strings::delimited::delimiter_char
         );
 
