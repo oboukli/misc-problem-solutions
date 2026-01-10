@@ -82,6 +82,7 @@ public:
         );
     }
 
+protected:
     [[nodiscard]] auto describe() const -> std::string override
     {
         return description_;

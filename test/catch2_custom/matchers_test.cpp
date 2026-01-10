@@ -81,7 +81,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
         auto const matcher{UnorderedNestedRangeEquals(expected)};
 
         REQUIRE(
-            matcher.describe()
+            matcher.toString()
             == "unordered elements are { { 127, 227, 131 }, { 109, 239, 113 } }"
         );
 
@@ -91,7 +91,7 @@ TEST_CASE("UnorderedNestedRangeEquals", "[matchers]")
         REQUIRE_FALSE(matcher.match(actual));
 
         REQUIRE(
-            matcher.describe()
+            matcher.toString()
             == "unordered elements are { { 127, 227, 131 }, { 109, 239, 113 } }"
         );
     }
