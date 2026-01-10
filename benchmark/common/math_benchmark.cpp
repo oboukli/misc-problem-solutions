@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <cmath>
+#include <limits>
 
 #include <catch2/catch_test_macros.hpp>
 
