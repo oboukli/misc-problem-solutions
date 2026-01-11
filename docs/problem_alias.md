@@ -19,6 +19,7 @@ Names and titles follow those of STL and Wikipedia.
 | Factorial                         |
 | Forward List                      |
 | Greatest Common Divisor           |
+| Integer division ceiling          |
 | List Bidirectional Iterator       |
 | Primality Test                    |
 | Tower of Hanoi                    |

@@ -164,12 +164,14 @@ target_sources(
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/math.hpp"
 )
 target_sources(
   forfun_common
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/concepts.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/io.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/math.cpp"
 )
 get_target_property(forfun_common_headers forfun_common HEADER_SET)
 source_group(
@@ -457,6 +459,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/best_time_to_buy_and_sell_stock_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/io_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container_with_most_water_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/encode_and_decode_strings_test.cpp"
@@ -585,6 +588,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/array_concatenation_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/best_time_to_buy_and_sell_stock_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/common/math_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container_with_most_water_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/contains_duplicate_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/encode_and_decode_strings_benchmark.cpp"
@@ -691,6 +695,7 @@ target_sources(
   static_test_driver
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
