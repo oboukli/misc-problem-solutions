@@ -1,14 +1,14 @@
 # Solutions in C and C++ to Miscellaneous Programming Problems
 
 This is a repository of modern coding showcases and solutions to various popular
-programming problems, written in C90, C++17, C++20, and C++23.
+programming problems, written in C89/C90, C++17, C++20, and C++23.
 
 For some of the said problems, multiple solutions of varying efficiencies and
 trade-offs are provided, along with benchmarks, and full test coverage.
 
 All solutions are driven by extensive automated testing, in addition to being
 statically and dynamically analyzed, and compiled under strict rules with the
-latest Clang, GCC, and MSVC compilers.
+latest Clang, GCC, MSVC, and Apple Clang compilers.
 
 This work may include code that experiment with non-production-grade techniques
 and/or patterns, e.g. recursion.
@@ -27,6 +27,7 @@ leveraged by this project:
 - Const correctness is applied where applicable, except for fields
 - Functional programming
 - Generic programming
+- Metaprogramming
 - Strict standard conformance and strict compilation rules
 - Static analysis with Clang Tidy and Microsoft C++ Code Analysis
 - Dynamic analysis
