@@ -19,20 +19,20 @@ namespace {
 
 template <typename Func, Func func, typename BasicStringView>
 [[nodiscard]] constexpr auto
-adapt_func_is_palindrome(BasicStringView&& s) noexcept -> bool
+adapt_func_is_palindrome(BasicStringView&& view) noexcept -> bool
 {
-    if constexpr (std::is_invocable_r_v<bool, decltype(func), decltype(s)>)
+    if constexpr (std::is_invocable_r_v<bool, decltype(func), decltype(view)>)
     {
-        return func(std::forward<decltype(s)>(s));
+        return func(std::forward<decltype(view)>(view));
     }
     // clang-format off
     else if constexpr (std::is_invocable_r_v<
-        bool, decltype(func), decltype(s.data()), decltype(s.length())>)
+        bool, decltype(func), decltype(view.data()), decltype(view.length())>)
     // clang-format on
     {
         return func(
-            std::forward<decltype(s.data())>(s.data()),
-            std::forward<decltype(s.length())>(s.length())
+            std::forward<decltype(view.data())>(view.data()),
+            std::forward<decltype(view.length())>(view.length())
         );
     }
 }
