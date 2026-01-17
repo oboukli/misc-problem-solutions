@@ -8,10 +8,10 @@
 
 namespace forfun::common::io {
 
-[[nodiscard]] auto null_streambuf::overflow(int_type const c) noexcept
+[[nodiscard]] auto null_streambuf::overflow(int_type const chr) noexcept
     -> int_type
 {
-    return traits_type::not_eof(c);
+    return traits_type::not_eof(chr);
 }
 
 } // namespace forfun::common::io

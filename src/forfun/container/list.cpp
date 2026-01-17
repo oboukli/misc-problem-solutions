@@ -37,21 +37,21 @@ namespace forfun::experimental::container {
 auto list::push_back(value_type const value) -> void
 {
     ++size_;
-    gsl::owner<internal::list_node*> const n{
+    gsl::owner<internal::list_node*> const node{
         new internal::list_node(value, tail_, end_)
     };
 
     if (head_ == end_) [[unlikely]]
     {
-        head_ = n;
+        head_ = node;
     }
     else
     {
-        tail_->next_ = n;
+        tail_->next_ = node;
     }
 
-    tail_ = n;
-    end_->previous_ = n;
+    tail_ = node;
+    end_->previous_ = node;
 }
 
 /// @note The behavior is undefined when popping the back of an empty
