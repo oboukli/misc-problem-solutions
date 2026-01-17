@@ -190,6 +190,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
 
     bool is_col_zeroed{false};
 
+    // NOLINTBEGIN(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
     for (SizeTypeR row{}; row < matrix_r_size; ++row)
     {
         assert(matrix[row].size() == matrix_c_size);
@@ -235,6 +236,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
             matrix[row][0] = 0;
         }
     }
+    // NOLINTEND(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
 }
 
 } // namespace offset_based
