@@ -443,6 +443,11 @@ forfun_common_target_compile_options(forfun_experimental)
 
 find_package(Catch2 3 REQUIRED)
 
+target_compile_definitions(
+  test_driver
+  PRIVATE
+  CATCH_CONFIG_NO_COUNTER
+)
 target_sources(
   test_driver
   PRIVATE
@@ -539,6 +544,11 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(test_driver)
 
+target_compile_definitions(
+  test_driver_experimental
+  PRIVATE
+  CATCH_CONFIG_NO_COUNTER
+)
 target_sources(
   test_driver_experimental
   PRIVATE
@@ -582,6 +592,11 @@ catch_discover_tests(test_driver_experimental)
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
 
+target_compile_definitions(
+  benchmark_driver
+  PRIVATE
+  CATCH_CONFIG_NO_COUNTER
+)
 target_sources(
   benchmark_driver
   PRIVATE
@@ -660,6 +675,11 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(benchmark_driver)
 
+target_compile_definitions(
+  benchmark_driver_experimental
+  PRIVATE
+  CATCH_CONFIG_NO_COUNTER
+)
 target_sources(
   benchmark_driver_experimental
   PRIVATE
@@ -691,6 +711,11 @@ target_link_libraries(
 )
 forfun_common_target_compile_options(benchmark_driver_experimental)
 
+target_compile_definitions(
+  static_test_driver
+  PRIVATE
+  CATCH_CONFIG_NO_COUNTER
+)
 target_sources(
   static_test_driver
   PRIVATE
