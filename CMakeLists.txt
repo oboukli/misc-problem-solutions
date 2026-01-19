@@ -8,6 +8,9 @@ cmake_minimum_required(VERSION 3.31)
 
 project(
   ForFunDsa
+  LANGUAGES
+    C
+    CXX
 )
 
 add_library(forfun)
