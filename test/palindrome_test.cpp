@@ -4,8 +4,8 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <concepts>
 #include <string_view>
-#include <utility>
 
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_template_test_macros.hpp>
@@ -17,23 +17,30 @@
 
 namespace {
 
-template <typename Func, Func func, typename BasicStringView>
+template <typename Predicate, typename BasicStringView>
+// clang-format off
+    requires std::predicate<Predicate, BasicStringView>
+    or std::predicate<
+        Predicate,
+        typename BasicStringView::const_pointer,
+        typename BasicStringView::size_type>
+// clang-format on
 [[nodiscard]] constexpr auto
-adapt_func_is_palindrome(BasicStringView&& view) noexcept -> bool
+palindrome_predicate_adapter(Predicate func, BasicStringView view) noexcept(
+    std::is_nothrow_invocable_v<Predicate, BasicStringView>
+    or std::is_nothrow_invocable_v<
+        Predicate,
+        typename BasicStringView::const_pointer,
+        typename BasicStringView::size_type>
+) -> bool
 {
-    if constexpr (std::is_invocable_r_v<bool, decltype(func), decltype(view)>)
+    if constexpr (std::predicate<Predicate, BasicStringView>)
     {
-        return func(std::forward<decltype(view)>(view));
+        return func(view);
     }
-    // clang-format off
-    else if constexpr (std::is_invocable_r_v<
-        bool, decltype(func), decltype(view.data()), decltype(view.length())>)
-    // clang-format on
+    else
     {
-        return func(
-            std::forward<decltype(view.data())>(view.data()),
-            std::forward<decltype(view.length())>(view.length())
-        );
+        return func(view.data(), view.length());
     }
 }
 
@@ -73,11 +80,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 
     SECTION("Negative")
@@ -97,11 +100,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE_FALSE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 }
 
@@ -136,11 +135,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 
     SECTION("Negative")
@@ -161,11 +156,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE_FALSE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 }
 
@@ -200,11 +191,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 
     SECTION("Negative")
@@ -225,11 +212,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome),
-                func_is_palindrome>(s)
-        );
+        REQUIRE_FALSE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
 }
 
@@ -266,11 +249,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome_ci),
-                func_is_palindrome_ci>(s)
-        );
+        REQUIRE(palindrome_predicate_adapter(func_is_palindrome_ci, s));
     }
 
     SECTION("Negative")
@@ -287,10 +266,6 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(s);
 
-        REQUIRE_FALSE(
-            adapt_func_is_palindrome<
-                decltype(func_is_palindrome_ci),
-                func_is_palindrome_ci>(s)
-        );
+        REQUIRE_FALSE(palindrome_predicate_adapter(func_is_palindrome_ci, s));
     }
 }
