@@ -2,8 +2,12 @@
 Checks: "
   -bugprone-unused-return-value,
   -cert-err33-c,
+  -cppcoreguidelines-avoid-magic-numbers,
   -google-build-using-namespace,
+  -readability-magic-numbers,
   "
+CheckOptions:
+  readability-identifier-length.IgnoredVariableNames: "^[abfnprstx][0-9]*$"
 InheritParentConfig: true
----
+...
 
