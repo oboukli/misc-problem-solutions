@@ -82,10 +82,10 @@ should be passed, as seen in the `CMakePresets.json` file.
 The code is written in standards-compliant C90 and C++23 and is known to compile
 with the following compilers.
 
-- Apple Clang 26.2
-- Clang 21.1
-- GCC 14.2
-- MSVC 19.43
+- AppleClang 17.0.0
+- Clang 21.1.8
+- GCC 14.2.0
+- MSVC 19.50
 
 The code passes most recommended compiler diagnostic options. Compiler options
 are configured by means of CMake presets in `CMakePresets.json`.
