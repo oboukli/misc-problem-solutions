@@ -1,8 +1,14 @@
 ---
 Checks: "
+  -cppcoreguidelines-avoid-magic-numbers,
   -google-build-using-namespace,
   -google-explicit-constructor,
+  -readability-function-cognitive-complexity,
+  -readability-magic-numbers,
   "
+CheckOptions:
+  readability-identifier-length.IgnoredParameterNames: "^[abn]|os$"
+  readability-identifier-length.IgnoredVariableNames: "^[abceknstv][0-9]*$"
 InheritParentConfig: true
----
+...
 
