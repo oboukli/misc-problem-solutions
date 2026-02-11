@@ -306,7 +306,6 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
     SECTION("Escape (benchmark case)")
     {
         static constexpr std::array const tokens{
-            // clang-format off
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"
@@ -323,7 +322,6 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"
             "abcd    ~~~~efghabcd    ~~~~efgh"sv,
-            // clang-format on
         };
         static_assert(tokens.size() == 2UZ);
         static_assert(tokens.front().size() == 256UZ);
@@ -338,7 +336,6 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
         REQUIRE(stream.view().size() == 769UZ);
         REQUIRE(
             stream.view() ==
-            // clang-format off
             "abcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~"
             "~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ "
             "~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efgh"
@@ -352,7 +349,6 @@ TEST_CASE("Encode strings", "[encode_and_decode_strings]")
             "~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~"
             " ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efg"
             "h"sv
-            // clang-format on
         );
     }
 }
@@ -593,7 +589,6 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
     SECTION("Unescape (benchmark case)")
     {
         std::string_view const encoded{
-            // clang-format off
             "abcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~"
             "~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ "
             "~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efgh"
@@ -607,7 +602,6 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
             "~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~"
             " ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efg"
             "h"
-            // clang-format on
         };
 
         CAPTURE(encoded);
@@ -615,7 +609,6 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
         REQUIRE(
             decode(encoded)
             == std::vector<std::string>{
-                // clang-format off
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh"
@@ -632,7 +625,6 @@ TEST_CASE("Decode strings", "[encode_and_decode_strings]")
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh"
                 "abcd    ~~~~efghabcd    ~~~~efgh",
-                // clang-format on
             }
         );
     }

@@ -29,7 +29,6 @@ TEST_CASE(
     std::ostream output_stream{&buffer};
 
     static constexpr std::array const tokens{
-        // clang-format off
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"
@@ -46,7 +45,6 @@ TEST_CASE(
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"
         "abcd    ~~~~efghabcd    ~~~~efgh"sv,
-        // clang-format on
     };
     static_assert(tokens.size() == 2UZ);
     static_assert(tokens[0].size() == 256UZ);
@@ -80,7 +78,6 @@ TEST_CASE(
     using Traits = std::string_view::traits_type;
 
     static constexpr std::string_view const encoded{
-        // clang-format off
         "abcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~"
         "~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ "
         "~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efgh"
@@ -94,7 +91,6 @@ TEST_CASE(
         "~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~"
         " ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efghabcd~ ~ ~ ~ ~~~~~~~~efg"
         "h"
-        // clang-format on
     };
     static_assert(encoded.size() == 769UZ);
 

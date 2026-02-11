@@ -48,12 +48,7 @@ auto ArbitraryOperand() -> ::fuzztest::Domain<std::int64_t>
 auto ArbitraryOperandAndOperation() -> ::fuzztest::Domain<OperandOperationPair>
 {
     return ::fuzztest::Map(
-        [](
-            // clang-format off
-            int operand,
-            char operation
-            // clang-format on
-        ) -> OperandOperationPair {
+        [](int operand, char operation) -> OperandOperationPair {
             OperandOperationPair p{std::make_pair(operand, operation)};
             return p;
         },

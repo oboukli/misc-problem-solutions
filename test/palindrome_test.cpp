@@ -49,7 +49,6 @@ using std::string_view_literals::operator""sv;
 } // namespace
 
 TEMPLATE_TEST_CASE_SIG(
-    // clang-format off
     "Case-sensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
@@ -58,7 +57,6 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::bloated::is_palindrome<char>,
     &forfun::palindrome::iterator_based::is_palindrome<char>,
     &forfun::palindrome::offset_based::is_palindrome<char>
-    // clang-format on
 )
 {
     SECTION("Positive")
