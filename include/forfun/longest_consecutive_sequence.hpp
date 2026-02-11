@@ -140,12 +140,12 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
     std::size_t top_streak{1};
     std::size_t streak{1};
 
-    // clang-format off
-    for (auto iter_a{lookup_set.cbegin()},
+    for (
+        auto iter_a{lookup_set.cbegin()},
         iter_b{std::next(lookup_set.cbegin())};
         iter_b != lookup_set.cend();
-        ++iter_a, ++iter_b)
-    // clang-format on
+        ++iter_a, ++iter_b
+    )
     {
         if (ValueType{(*iter_a) + 1} == *iter_b)
         {

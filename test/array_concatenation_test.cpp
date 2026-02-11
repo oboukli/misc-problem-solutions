@@ -114,10 +114,7 @@ TEMPLATE_TEST_CASE_SIG(
     (auto concatenate, concatenate),
     (forfun::array_concatenation::functional::concatenate<int, 256>),
     (forfun::array_concatenation::iterator_based::concatenate<int, 256>),
-    // clang-format off
-    (forfun::array_concatenation::iterator_based_double::
-        concatenate<int, 256>),
-    // clang-format on
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 256>),
     (forfun::array_concatenation::iterator_unfolded::concatenate<int, 256>),
     (forfun::array_concatenation::nested_loops::concatenate<int, 256>),
     (forfun::array_concatenation::semi_unfolded::concatenate<int, 256>)

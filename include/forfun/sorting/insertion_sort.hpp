@@ -24,10 +24,10 @@ constexpr auto insertion_sort(Iter const first, Sentinel const last) noexcept
     {
         for (Iter it_i{std::next(first)}; it_i != last; ++it_i)
         {
-            // clang-format off
-            for (Iter it_j{it_i};
-                it_j != first && (*it_j < *std::prev(it_j)); --it_j)
-            // clang-format on
+            for (
+                Iter it_j{it_i}; it_j != first && (*it_j < *std::prev(it_j));
+                --it_j
+            )
             {
                 std::iter_swap(it_j, std::prev(it_j));
             }

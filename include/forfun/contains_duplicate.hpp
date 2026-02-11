@@ -62,10 +62,7 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
-// clang-format off
-    requires std::forward_iterator<Iter>
-    and std::sentinel_for<Sentinel, Iter>
-// clang-format on
+    requires std::forward_iterator<Iter> and std::sentinel_for<Sentinel, Iter>
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(
@@ -118,10 +115,8 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
-// clang-format off
     requires std::random_access_iterator<Iter>
     and std::sentinel_for<Sentinel, Iter>
-// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(
@@ -163,10 +158,8 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
 }
 
 template <typename Iter, typename Sentinel>
-// clang-format off
     requires std::random_access_iterator<Iter>
     and std::sentinel_for<Sentinel, Iter>
-// clang-format on
 [[nodiscard]] constexpr auto
 contains_duplicate(Iter const first, Sentinel const last) noexcept(
     noexcept(std::declval<std::equal_to<>>()(

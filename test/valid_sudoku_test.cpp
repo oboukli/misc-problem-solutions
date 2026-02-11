@@ -30,7 +30,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Wikipedia example (valid benchmark case)")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -40,7 +39,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE(is_valid_sudoku(board));
@@ -49,7 +47,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Empty Sudoku")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -59,7 +56,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // clang-format on
         }};
 
         REQUIRE(is_valid_sudoku(board));
@@ -68,7 +64,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("All invalid Sudoku board")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
@@ -78,7 +73,6 @@ TEMPLATE_TEST_CASE_SIG(
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
             {3, 3, 3, 3, 3, 3, 3, 3, 3},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -87,7 +81,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid row")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -97,7 +90,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -106,7 +98,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid column")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 0, 0, 0, 7, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -116,7 +107,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 7, 5}, // Repeated 7 in column.
             {0, 0, 0, 0, 8, 0, 0, 0, 0},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -125,7 +115,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid block")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -135,7 +124,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 2, 5}, // Repeated 2 in block.
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -144,7 +132,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid column and row")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -154,7 +141,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 9, 0, 0, 8, 0, 0, 7, 9}, // Repeated 9 in column and row.
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -163,7 +149,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid column and block")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 5, 0, 0, 0},
             {0, 0, 0, 0, 5, 0, 0, 0, 0},
@@ -173,7 +158,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 5, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -182,7 +166,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid row and block")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -192,7 +175,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -201,7 +183,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Invalid column, row, and block")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {0, 0, 0, 0, 0, 0, 0, 0, 9},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -211,7 +192,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 9, 0},
             {9, 0, 0, 0, 0, 0, 0, 0, 9},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -220,7 +200,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("LeetCode valid case")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0},
@@ -230,7 +209,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE(is_valid_sudoku(board));
@@ -239,7 +217,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("LeetCode invalid case")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {8, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 6, 0}, // Repeated 8 in block.
@@ -249,7 +226,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 6, 0, 0, 0, 0, 2, 8, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));
@@ -258,7 +234,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("NeetCode valid case")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
             {0, 9, 8, 0, 0, 0, 0, 0, 3},
@@ -268,7 +243,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 0, 0, 2, 0, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 8},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE(is_valid_sudoku(board));
@@ -277,7 +251,6 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("NeetCode invalid case")
     {
         static constexpr SudokuBoard<CellType> const board{{
-            // clang-format off
             {1, 2, 0, 0, 3, 0, 0, 0, 0},
             {4, 0, 0, 5, 0, 0, 0, 0, 0},
             {0, 9, 1, 0, 0, 0, 0, 0, 3}, // Repeated 1 in block.
@@ -287,7 +260,6 @@ TEMPLATE_TEST_CASE_SIG(
             {0, 0, 0, 0, 0, 0, 2, 0, 0},
             {0, 0, 0, 4, 1, 9, 0, 0, 8},
             {0, 0, 0, 0, 8, 0, 0, 7, 9},
-            // clang-format on
         }};
 
         REQUIRE_FALSE(is_valid_sudoku(board));

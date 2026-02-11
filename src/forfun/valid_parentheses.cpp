@@ -45,7 +45,7 @@ namespace ascii_optimized {
     for (ConstIter iter{view.cbegin()}; iter != view.cend(); ++iter)
     {
         if (char8_t const chr{*iter};
-            (chr & char8_t{0b00000011}) == char8_t{0b00000001})
+            (chr & char8_t{0B00000011}) == char8_t{0B00000001})
         {
             if (expected.empty() || (expected.back() != chr))
             {

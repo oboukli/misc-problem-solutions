@@ -77,10 +77,10 @@ public:
 
     constexpr auto clear() noexcept -> void
     {
-        // clang-format off
-        for (forfun::container::forward_list_node<T> const* node{head_};
-            node != nullptr;)
-        // clang-format on
+        for (
+            forfun::container::forward_list_node<T> const* node{head_};
+            node != nullptr;
+        )
         {
             forfun::container::forward_list_node<T> const* const next{
                 node->next_

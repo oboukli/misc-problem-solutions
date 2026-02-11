@@ -33,7 +33,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Eighty-five in decimal has four ones in binary")
     {
-        static constexpr std::size_t const n{0b01010101};
+        static constexpr std::size_t const n{0B01010101};
         static_assert(n == 85UZ);
 
         REQUIRE(get_hamming_weight(n) == 4UZ);

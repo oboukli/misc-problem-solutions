@@ -71,14 +71,18 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
                 result.emplace_back(std::array{*iter, val_j, val_k});
                 ++iter_j;
                 --iter_k;
-                while ((std::distance(iter_j, iter_k) > DiffType{})
-                       && (std::equal_to{}(val_j, *iter_j)))
+                while (
+                    (std::distance(iter_j, iter_k) > DiffType{})
+                    && std::equal_to{}(val_j, *iter_j)
+                )
                 {
                     ++iter_j;
                 }
 
-                while ((std::distance(iter_j, iter_k) > DiffType{})
-                       && (std::equal_to{}(val_k, *iter_k)))
+                while (
+                    (std::distance(iter_j, iter_k) > DiffType{})
+                    && std::equal_to{}(val_k, *iter_k)
+                )
                 {
                     --iter_k;
                 }
@@ -166,11 +170,11 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     // We do not utilize std::prev because it does not work with
     // std::forward_iterator.
-    // clang-format off
-    for (auto iter_a{first};
+    for (
+        auto iter_a{first};
         iter_a != std::next(first, std::distance(first, last) - 1);
-        ++iter_a)
-    // clang-format on
+        ++iter_a
+    )
     {
         if (std::greater{}(*iter_a, ValueType{}))
         {

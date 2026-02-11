@@ -53,10 +53,7 @@ auto set_zeroes(std::vector<std::vector<int>>& matrix) noexcept -> void
     for (auto row{matrix.begin()}; row != matrix.end(); ++row)
     {
         DiffC col_offset{1};
-        // clang-format off
-        for (auto col{row->begin() + col_offset}; col != row->end();
-            ++col)
-        // clang-format on
+        for (auto col{row->begin() + col_offset}; col != row->end(); ++col)
         {
             if (*(first_element_iter + col_offset) == 0)
             {
