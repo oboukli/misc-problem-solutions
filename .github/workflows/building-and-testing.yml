@@ -445,7 +445,7 @@ jobs:
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-      XCODE_RELEASE: "26.2"
+      XCODE_RELEASE: "26.3"
 
     runs-on: macos-26
 
@@ -554,7 +554,7 @@ jobs:
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-      XCODE_RELEASE: "26.2"
+      XCODE_RELEASE: "26.3"
 
     runs-on: macos-26
 
