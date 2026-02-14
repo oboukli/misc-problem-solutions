@@ -150,9 +150,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             continue;
         case '/':
             assert(operand_b != 0);
-#if __has_cpp_attribute(assume)
             [[assume(operand_b != 0)]];
-#endif // __has_cpp_attribute(assume)
             accumulator /= operand_b;
             continue;
         default:
@@ -219,9 +217,7 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
             continue;
         case '/':
             assert(operand_b != 0);
-#if __has_cpp_attribute(assume)
             [[assume(operand_b != 0)]];
-#endif // __has_cpp_attribute(assume)
             accumulator /= operand_b;
             continue;
         default:
