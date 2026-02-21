@@ -54,9 +54,9 @@
     },
     {
       "name": "visual-studio",
-      "displayName": "Visual Studio 17 2022",
-      "description": "Build with Visual Studio 17 2022",
-      "generator": "Visual Studio 17 2022",
+      "displayName": "Visual Studio 2026",
+      "description": "Build with Visual Studio 2026 (version 18)",
+      "generator": "Visual Studio 18 2026",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
