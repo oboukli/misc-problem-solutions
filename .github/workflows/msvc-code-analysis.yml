@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   analyze:
     env:
-      BUILD: ${{ github.workspace }}\out\build\visual-studio
+      BUILD: ${{ github.workspace }}\out\build\visual-studio-17
       CONFIG: Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     permissions:
@@ -58,7 +58,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_CONFIGURE_PRESET_NAME: visual-studio
+          CMAKE_CONFIGURE_PRESET_NAME: visual-studio-17
         run: >-
           cmake
           --preset '${{ env.CMAKE_CONFIGURE_PRESET_NAME }}'
