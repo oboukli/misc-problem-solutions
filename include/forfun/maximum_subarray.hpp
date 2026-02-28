@@ -18,17 +18,22 @@
 
 namespace forfun::maximum_subarray {
 
-template <std::integral T>
+template <typename T>
+    requires std::integral<T>
 using PromotedValueType = decltype(std::declval<T>() + std::declval<T>());
 
 namespace brute_force {
 
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 max_sum(Iter const first, Sentinel const last) noexcept
     -> PromotedValueType<std::iter_value_t<Iter>>
 {
+    using std::numeric_limits;
+
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
     if (first == last) [[unlikely]]
@@ -36,7 +41,7 @@ max_sum(Iter const first, Sentinel const last) noexcept
         return T{};
     }
 
-    T max_sum{std::numeric_limits<T>::min()};
+    T max_sum{numeric_limits<T>::min()};
     for (auto iter_i{first}; iter_i != last; ++iter_i)
     {
         T sum{};
@@ -59,32 +64,40 @@ namespace recursive {
 
 namespace detail {
 
-template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::input_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum_internal(
     Iter iter,
     Sentinel const last,
     PromotedValueType<std::iter_value_t<Iter>> sum
 ) noexcept -> PromotedValueType<std::iter_value_t<Iter>>
 {
+    using std::max;
+
     if (iter == last) [[unlikely]]
     {
         return sum;
     }
 
-    PromotedValueType<std::iter_value_t<Iter>> const n{*iter};
-    sum = std::max(n, n + sum);
+    PromotedValueType<std::iter_value_t<Iter>> const num{*iter};
+    sum = max(num, num + sum);
 
-    return std::max(sum, max_sum_internal(++iter, last, sum));
+    return max(sum, max_sum_internal(++iter, last, sum));
 }
 
 } // namespace detail
 
-template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::input_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum(Iter iter, Sentinel const last) noexcept
     -> PromotedValueType<std::iter_value_t<Iter>>
 {
+    using std::min;
+
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
     if (iter == last) [[unlikely]]
@@ -92,18 +105,23 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
         return T{};
     }
 
-    return detail::max_sum_internal(iter, last, std::min(T{}, *iter));
+    return detail::max_sum_internal(iter, last, min(T{}, *iter));
 }
 
 } // namespace recursive
 
 namespace streaming {
 
-template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::input_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum(Iter iter, Sentinel const last) noexcept
     -> PromotedValueType<std::iter_value_t<Iter>>
 {
+    using std::max;
+    using std::min;
+
     using T = PromotedValueType<std::iter_value_t<Iter>>;
 
     if (iter == last) [[unlikely]]
@@ -111,12 +129,12 @@ template <std::input_iterator Iter, std::sentinel_for<Iter> Sentinel>
         return T{};
     }
 
-    T sum{std::min(T{}, *iter)};
+    T sum{min(T{}, *iter)};
     T max_sum{sum};
     for (; iter != last; ++iter)
     {
-        T const n{*iter};
-        sum = std::max(n, n + sum);
+        T const num{*iter};
+        sum = max(num, num + sum);
 
         if (sum > max_sum)
         {

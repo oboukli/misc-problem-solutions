@@ -19,23 +19,27 @@ template <typename Elements>
 [[nodiscard]] constexpr auto majority_element(Elements const& elements) noexcept
     -> Elements::const_iterator
 {
+    using std::cbegin;
+    using std::cend;
+    using std::size;
+
     using ElementType = Elements::value_type;
     using SizeType = Elements::size_type;
     using Iter = Elements::const_iterator;
 
-    SizeType const size{elements.size()};
+    SizeType const elements_size{size(elements)};
 
-    if (size < SizeType{3})
+    if (elements_size < SizeType{3})
     {
-        return elements.cend();
+        return cend(elements);
     }
 
-    SizeType threshold{(size / SizeType{2}) + SizeType{1}};
-    SizeType count{};
+    SizeType threshold{(elements_size / SizeType{2}) + SizeType{1}};
+    SizeType count{0};
     ElementType majority_elm{} /*[[indeterminate]]*/;
     Iter majority_iter{} /*[[indeterminate]]*/;
 
-    for (Iter iter{elements.cbegin()}; iter != elements.cend(); ++iter)
+    for (Iter iter{cbegin(elements)}; iter != cend(elements); ++iter)
     {
         if (count == SizeType{})
         {
@@ -57,7 +61,7 @@ template <typename Elements>
         }
     }
 
-    for (auto iter{elements.cbegin()}; iter != elements.cend(); ++iter)
+    for (auto iter{cbegin(elements)}; iter != cend(elements); ++iter)
     {
         if (*iter == majority_elm)
         {
@@ -70,7 +74,7 @@ template <typename Elements>
         }
     }
 
-    return elements.cend();
+    return cend(elements);
 }
 
 } // namespace forfun::majority_element

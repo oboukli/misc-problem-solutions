@@ -71,6 +71,8 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
     ))
 ) -> bool
 {
+    using std::equal_to;
+
     return contains_duplicate(first, last, std::equal_to{});
 }
 
@@ -97,9 +99,12 @@ contains_duplicate(Iter iter, Sentinel const last, BinaryPredicate eq) noexcept(
     ))
 ) -> bool
 {
-    std::sort(iter, last);
+    using std::next;
+    using std::sort;
 
-    for (auto iter_next{std::next(iter)}; iter_next != last; ++iter_next)
+    sort(iter, last);
+
+    for (auto iter_next{next(iter)}; iter_next != last; ++iter_next)
     {
         if (eq(*iter, *iter_next))
         {
@@ -125,6 +130,8 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
     ))
 ) -> bool
 {
+    using std::equal_to;
+
     return contains_duplicate(first, last, std::equal_to{});
 }
 
@@ -152,9 +159,12 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
     // clang-format on
     -> bool
 {
-    std::sort(first, last);
+    using std::adjacent_find;
+    using std::sort;
 
-    return std::adjacent_find(first, last, eq) != last;
+    sort(first, last);
+
+    return adjacent_find(first, last, eq) != last;
 }
 
 template <typename Iter, typename Sentinel>
@@ -168,7 +178,9 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
     ))
 ) -> bool
 {
-    return contains_duplicate(first, last, std::equal_to{});
+    using std::equal_to;
+
+    return contains_duplicate(first, last, equal_to{});
 }
 
 } // namespace adjacent_find_based
@@ -190,10 +202,11 @@ contains_duplicate(Iter const first, Sentinel const last, BinaryPredicate eq)
 {
     using std::distance;
     using std::hash;
+    using std::unordered_set;
 
     using ValueType = std::iter_value_t<Iter>;
 
-    std::unordered_set<ValueType, hash<ValueType>, BinaryPredicate> tracker(
+    unordered_set<ValueType, hash<ValueType>, BinaryPredicate> tracker(
         static_cast<std::size_t>(distance(first, last)), hash<ValueType>{}, eq
     );
 
@@ -219,6 +232,8 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
     ))
 ) -> bool
 {
+    using std::equal_to;
+
     return contains_duplicate(first, last, std::equal_to{});
 }
 

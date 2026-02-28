@@ -16,13 +16,20 @@
 
 namespace forfun::house_robber::recursive {
 
-template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::same_as<int, std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::same_as<int, std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto rob(Iter const first, Sentinel const last) noexcept
+    -> int
 {
+    using std::distance;
+    using std::max;
+    using std::next;
+
     using DiffType = std::iter_difference_t<Iter>;
 
-    auto const size{std::distance(first, last)};
+    auto const size{distance(first, last)};
     if (size == DiffType{}) [[unlikely]]
     {
         return 0;
@@ -35,12 +42,12 @@ template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 
     if (size == DiffType{2}) [[unlikely]]
     {
-        return std::max(*first, *(std::next(first)));
+        return max(*first, *(next(first)));
     }
 
-    return std::max(
-        (*first) + rob(std::next(first, DiffType{2}), last),
-        *(std::next(first)) + rob(std::next(first, DiffType{3}), last)
+    return max(
+        (*first) + rob(next(first, DiffType{2}), last),
+        *(next(first)) + rob(next(first, DiffType{3}), last)
     );
 }
 

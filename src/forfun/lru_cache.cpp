@@ -112,6 +112,8 @@ LRUCache::LRUCache(std::size_t const capacity) : capacity_{capacity}
 
 auto LRUCache::put(std::size_t const key, int const value) -> void
 {
+    using std::prev;
+
     assert(size_ <= capacity_);
     assert(size_ == lookup_.size());
     assert(size_ == cache_.size());
@@ -145,7 +147,7 @@ auto LRUCache::put(std::size_t const key, int const value) -> void
     assert(num_elements_removed == 1UZ);
     cache_.splice(cache_.end(), cache_, cache_.begin());
     [[maybe_unused]] auto const replacement_key_insert_result{
-        lookup_.insert({key, std::prev(cache_.end())})
+        lookup_.insert({key, prev(cache_.end())})
     };
     assert(replacement_key_insert_result.second);
     cache_.back().first = key;

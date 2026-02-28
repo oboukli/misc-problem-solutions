@@ -26,18 +26,22 @@ namespace forfun::first_missing_positive {
 
 namespace detail {
 
-template <std::contiguous_iterator Iter>
-    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+    and std::sortable<Iter>
+    and std::integral<std::iter_value_t<Iter>>
 constexpr auto quasi_sort(Iter const first, Iter const src) noexcept -> void
 {
+    using std::max;
+
     using ValType = std::iter_value_t<Iter>;
 
-    if (auto const n{*src}; n > ValType{})
+    if (auto const num{*src}; num > ValType{})
     {
-        auto const dest{first + std::max<ValType>(ValType{}, n - ValType{1})};
-        if (auto const aux{*dest}; aux != n)
+        auto const dest{first + max<ValType>(ValType{}, num - ValType{1})};
+        if (auto const aux{*dest}; aux != num)
         {
-            *dest = n;
+            *dest = num;
             *src = aux;
 
             quasi_sort(first, src);
@@ -49,15 +53,21 @@ constexpr auto quasi_sort(Iter const first, Iter const src) noexcept -> void
 
 namespace base {
 
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sortable<Iter>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 lowest_missing(Iter const first, Sentinel const last) noexcept
     -> std::iter_value_t<Iter>
 {
+    using std::distance;
+    using std::next;
+
     using ValType = std::iter_value_t<Iter>;
 
-    auto max{std::distance(first, last)};
+    auto max{distance(first, last)};
 
     for (auto iter{first}; iter != last; ++iter)
     {
@@ -78,7 +88,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     ValType min_num{1};
 
-    auto const end_iter{std::next(first, max)};
+    auto const end_iter{next(first, max)};
     for (auto iter{first}; iter != end_iter; ++iter)
     {
         if (*iter == min_num)
@@ -94,15 +104,21 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
 namespace fast {
 
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::sortable<Iter> and std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sortable<Iter>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 lowest_missing(Iter const first, Sentinel const last) noexcept
     -> std::iter_value_t<Iter>
 {
+    using std::distance;
+    using std::next;
+
     using ValType = std::iter_value_t<Iter>;
 
-    auto max{std::distance(first, last)};
+    auto max{distance(first, last)};
 
     for (auto iter{first}; iter != last; ++iter)
     {
@@ -125,7 +141,7 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 
     for (std::iter_difference_t<Iter> i{}; i < max; ++i)
     {
-        if (*std::next(first, i) == min_num)
+        if (*next(first, i) == min_num)
         {
             ++min_num;
         }

@@ -37,34 +37,42 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
 [[nodiscard]] constexpr auto three_sum(IterA iter, IterB const last)
     -> std::vector<std::array<std::iter_value_t<IterA>, 3>>
 {
+    using std::distance;
+    using std::equal_to;
+    using std::greater;
+    using std::less;
+    using std::minus;
+    using std::next;
+    using std::plus;
+
     using DiffType = std::iter_difference_t<IterA>;
     using ValueType = std::iter_value_t<IterA>;
 
     std::vector<std::array<ValueType, 3>> result{};
 
-    auto const last_i{std::next(iter, std::distance(iter, last) - 2)};
+    auto const last_i{next(iter, distance(iter, last) - 2)};
     for (auto prev_i{last}; iter != last_i; ++iter)
     {
-        if (std::greater{}(*iter, ValueType{}))
+        if (greater{}(*iter, ValueType{}))
         {
             break;
         }
 
-        if ((prev_i != last) && (std::equal_to{}(*prev_i, *iter)))
+        if ((prev_i != last) && (equal_to{}(*prev_i, *iter)))
         {
             continue;
         }
 
         prev_i = iter;
 
-        auto const target{std::minus{}(ValueType{}, *iter)};
-        auto iter_j{std::next(iter)};
+        auto const target{minus{}(ValueType{}, *iter)};
+        auto iter_j{next(iter)};
         auto iter_k{last};
         --iter_k;
-        while (std::distance(iter_j, iter_k) > DiffType{})
+        while (distance(iter_j, iter_k) > DiffType{})
         {
-            if (auto const addend{std::plus{}(*iter_j, *iter_k)};
-                std::equal_to{}(target, addend))
+            if (auto const addend{plus{}(*iter_j, *iter_k)};
+                equal_to{}(target, addend))
             {
                 auto const val_j{*iter_j};
                 auto const val_k{*iter_k};
@@ -72,22 +80,22 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
                 ++iter_j;
                 --iter_k;
                 while (
-                    (std::distance(iter_j, iter_k) > DiffType{})
-                    && std::equal_to{}(val_j, *iter_j)
+                    (distance(iter_j, iter_k) > DiffType{})
+                    && equal_to{}(val_j, *iter_j)
                 )
                 {
                     ++iter_j;
                 }
 
                 while (
-                    (std::distance(iter_j, iter_k) > DiffType{})
-                    && std::equal_to{}(val_k, *iter_k)
+                    (distance(iter_j, iter_k) > DiffType{})
+                    && equal_to{}(val_k, *iter_k)
                 )
                 {
                     --iter_k;
                 }
             }
-            else if (std::less{}(target, addend))
+            else if (less{}(target, addend))
             {
                 --iter_k;
             }
@@ -117,12 +125,15 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     std::iter_value_t<Iter> const target
 ) -> Iter
 {
-    // std::lower_bound can be written once, but we leave it to the compiler to
+    using std::lower_bound;
+    using std::not_equal_to;
+
+    // lower_bound can be written once, but we leave it to the compiler to
     // optimize it.
-    iter = std::lower_bound(iter, last, target);
-    for (; iter != last; iter = std::lower_bound(++iter, last, target))
+    iter = lower_bound(iter, last, target);
+    for (; iter != last; iter = lower_bound(++iter, last, target))
     {
-        if (std::not_equal_to{}(*iter, target))
+        if (not_equal_to{}(*iter, target))
         {
             return last;
         }
@@ -136,16 +147,19 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
     return last;
 }
 
-template <std::totally_ordered T>
+template <typename T>
+    requires std::totally_ordered<T>
 constexpr auto resort(T const a, T const b, T const c) noexcept
     -> std::array<T, 3>
 {
-    if (std::less{}(c, a))
+    using std::less;
+
+    if (less{}(c, a))
     {
         return {c, a, b};
     }
 
-    if (std::less{}(b, c))
+    if (less{}(b, c))
     {
         return {a, b, c};
     }
@@ -158,65 +172,73 @@ constexpr auto resort(T const a, T const b, T const c) noexcept
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements that are sorted in non-descending order. Otherwise, the
 /// behavior of the strategy is undefined.
-template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::totally_ordered<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>
 {
+    using std::distance;
+    using std::equal_to;
+    using std::greater;
+    using std::minus;
+    using std::next;
+    using std::plus;
+
     using ValueType = std::iter_value_t<Iter>;
 
     std::vector<std::array<ValueType, 3>> result{};
-    std::map<ValueType, std::set<ValueType>> m{};
+    std::map<ValueType, std::set<ValueType>> sets_map{};
 
-    // We do not utilize std::prev because it does not work with
+    // We do not utilize prev because it does not work with
     // std::forward_iterator.
     for (
-        auto iter_a{first};
-        iter_a != std::next(first, std::distance(first, last) - 1);
+        auto iter_a{first}; iter_a != next(first, distance(first, last) - 1);
         ++iter_a
     )
     {
-        if (std::greater{}(*iter_a, ValueType{}))
+        if (greater{}(*iter_a, ValueType{}))
         {
             break;
         }
 
         if (iter_a != first
-            && std::equal_to{}(
-                *iter_a, *std::next(first, std::distance(first, iter_a) - 1)
-            ))
+            && equal_to{}(*iter_a, *next(first, distance(first, iter_a) - 1)))
         {
             continue;
         }
 
-        for (auto iter_b{std::next(iter_a)}; iter_b != last; ++iter_b)
+        for (auto iter_b{next(iter_a)}; iter_b != last; ++iter_b)
         {
-            if (iter_b != std::next(iter_a)
-                && std::equal_to{}(
-                    *iter_b,
-                    *std::next(iter_a, std::distance(iter_a, iter_b) - 1)
+            if (iter_b != next(iter_a)
+                && equal_to{}(
+                    *iter_b, *next(iter_a, distance(iter_a, iter_b) - 1)
                 ))
             {
                 continue;
             }
 
             ValueType const target{
-                std::minus{}(ValueType{}, std::plus{}(*iter_a, *iter_b))
+                minus{}(ValueType{}, plus{}(*iter_a, *iter_b))
             };
 
             if (auto const iter_c
                 = detail::find(first, last, iter_a, iter_b, target);
                 iter_c != last)
             {
-                auto const a{detail::resort(*iter_a, *iter_b, *iter_c)};
+                auto const triplet{detail::resort(*iter_a, *iter_b, *iter_c)};
                 auto const iter_map_entry{
-                    m.emplace(a.front(), std::initializer_list<ValueType>{})
+                    sets_map
+                        .emplace(
+                            triplet.front(), std::initializer_list<ValueType>{}
+                        )
                         .first
                 };
 
-                if (iter_map_entry->second.insert(a[1]).second)
+                if (iter_map_entry->second.insert(triplet[1]).second)
                 {
-                    result.emplace_back(a);
+                    result.emplace_back(triplet);
                 }
             }
         }
@@ -233,18 +255,21 @@ namespace non_presorted {
 
 namespace detail {
 
-template <std::totally_ordered T>
+template <typename T>
+    requires std::totally_ordered<T>
 constexpr auto make_sorted_array(T const a, T const b, T const c) noexcept
     -> std::array<T, 3>
 {
-    if (std::less{}(a, b))
+    using std::less;
+
+    if (less{}(a, b))
     {
-        if (std::less{}(b, c))
+        if (less{}(b, c))
         {
             return {a, b, c};
         }
 
-        if (std::less{}(a, c))
+        if (less{}(a, c))
         {
             return {a, c, b};
         }
@@ -252,12 +277,12 @@ constexpr auto make_sorted_array(T const a, T const b, T const c) noexcept
         return {c, a, b};
     }
 
-    if (std::less{}(a, c))
+    if (less{}(a, c))
     {
         return {b, a, c};
     }
 
-    if (std::less{}(b, c))
+    if (less{}(b, c))
     {
         return {b, c, a};
     }
@@ -271,39 +296,44 @@ namespace brute_force {
 
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::totally_ordered<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>
 {
+    using std::distance;
+    using std::equal_to;
+    using std::find;
+    using std::next;
+    using std::plus;
+
     using ValueType = std::iter_value_t<Iter>;
     using MapType = std::vector<std::pair<ValueType, ValueType>>;
 
     std::vector<std::array<ValueType, 3>> result{};
 
     MapType pair_map{};
-    pair_map.reserve(
-        static_cast<MapType::size_type>(std::distance(first, last))
-    );
+    pair_map.reserve(static_cast<MapType::size_type>(distance(first, last)));
 
-    // We do not utilize std::prev so it is enough to satisfy
-    // std::forward_iterator.
-    auto const last_i{std::next(first, std::distance(first, last) - 2)};
-    auto const last_j{std::next(first, std::distance(first, last) - 1)};
+    // We do not utilize prev so it is enough to satisfy std::forward_iterator.
+    auto const last_i{next(first, distance(first, last) - 2)};
+    auto const last_j{next(first, distance(first, last) - 1)};
     for (auto iter_i{first}; iter_i != last_i; ++iter_i)
     {
-        for (auto iter_j{std::next(iter_i)}; iter_j != last_j; ++iter_j)
+        for (auto iter_j{next(iter_i)}; iter_j != last_j; ++iter_j)
         {
-            auto const a{std::plus{}(*iter_i, *iter_j)};
-            for (auto iter_k{std::next(iter_j)}; iter_k != last; ++iter_k)
+            auto const two_sum{plus{}(*iter_i, *iter_j)};
+            for (auto iter_k{next(iter_j)}; iter_k != last; ++iter_k)
             {
-                if (std::equal_to{}(std::plus{}(a, *iter_k), ValueType{}))
+                if (equal_to{}(plus{}(two_sum, *iter_k), ValueType{}))
                 {
                     auto const tri{
                         detail::make_sorted_array(*iter_i, *iter_j, *iter_k)
                     };
 
-                    if (std::find(
+                    if (find(
                             pair_map.cbegin(),
                             pair_map.cend(),
                             std::pair{tri.front(), tri[1UZ]}
@@ -328,27 +358,34 @@ namespace set_based {
 
 /// @note The strategy assumes that @p first and @p last point to a non-empty
 /// span of elements, otherwise the behavior of the strategy is undefined.
-template <std::forward_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
-    requires std::totally_ordered<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>
 {
+    using std::distance;
+    using std::equal_to;
+    using std::minus;
+    using std::next;
+
     using ValueType = std::iter_value_t<Iter>;
 
     std::set<std::array<ValueType, 3>> unique_prefixes{};
-    auto const last_i{std::next(first, std::distance(first, last) - 2)};
+    auto const last_i{next(first, distance(first, last) - 2)};
     for (auto iter_i{first}; iter_i != last_i; ++iter_i)
     {
-        auto const minuend{std::minus{}(ValueType{}, *iter_i)};
+        auto const minuend{minus{}(ValueType{}, *iter_i)};
 
-        auto const last_j{std::next(first, std::distance(first, last) - 1)};
-        for (auto iter_j{std::next(iter_i)}; iter_j != last_j; ++iter_j)
+        auto const last_j{next(first, distance(first, last) - 1)};
+        for (auto iter_j{next(iter_i)}; iter_j != last_j; ++iter_j)
         {
-            auto const target{std::minus{}(minuend, *iter_j)};
+            auto const target{minus{}(minuend, *iter_j)};
 
-            for (auto iter_k{std::next(iter_j)}; iter_k != last; ++iter_k)
+            for (auto iter_k{next(iter_j)}; iter_k != last; ++iter_k)
             {
-                if (std::equal_to{}(*iter_k, target))
+                if (equal_to{}(*iter_k, target))
                 {
                     unique_prefixes.emplace(
                         detail::make_sorted_array(*iter_i, *iter_j, *iter_k)

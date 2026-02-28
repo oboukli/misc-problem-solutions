@@ -14,17 +14,21 @@
 #include <bitset>
 #include <concepts>
 #include <cstddef>
+#include <functional>
 
 namespace forfun::valid_sudoku {
 
-template <std::integral CellType>
+template <typename CellType>
+    requires std::integral<CellType>
 using SudokuBoard = std::array<std::array<CellType, 9>, 9>;
 
 namespace bitwise {
 
 namespace detail {
 
-[[nodiscard]] constexpr auto tick_out(auto const cell, auto& set) noexcept
+template <typename Cell>
+    requires std::unsigned_integral<Cell>
+[[nodiscard]] constexpr auto tick_out(Cell const cell, auto& set) noexcept
     -> bool
 {
     if (cell != decltype(cell){})
@@ -46,16 +50,18 @@ template <typename CellType>
 [[nodiscard]] constexpr auto
 is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
+    using std::size;
+
     using SetType = unsigned int;
 
     std::array<SetType, 9> rows{};
     std::array<SetType, 9> boxes{};
 
-    for (std::size_t i{}; i < board.size(); ++i)
+    for (std::size_t i{}; i < size(board); ++i)
     {
         SetType col{};
 
-        for (std::size_t j{}; j < board.size(); ++j)
+        for (std::size_t j{}; j < size(board); ++j)
         {
             // NOLINTBEGIN(cppcoreguidelines-pro-bounds-constant-array-index)
             if (detail::tick_out(board[i][j], col))
@@ -69,7 +75,8 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
             }
 
             if (detail::tick_out(
-                    board[(3 * (i / 3)) + (j / 3)][(3 * (i % 3)) + (j % 3)],
+                    board[(3UZ * (i / 3UZ)) + (j / 3UZ)]
+                         [(3UZ * (i % 3UZ)) + (j % 3UZ)],
                     boxes[i]
                 ))
             {
@@ -88,7 +95,9 @@ namespace stl_bitset {
 
 namespace detail {
 
-[[nodiscard]] constexpr auto tick_out(auto const cell, auto& set) noexcept
+template <typename Cell>
+    requires std::unsigned_integral<Cell>
+[[nodiscard]] constexpr auto tick_out(Cell const cell, auto& set) noexcept
     -> bool
 {
     if (cell != decltype(cell){})
@@ -110,16 +119,21 @@ template <typename CellType>
 [[nodiscard]] constexpr auto
 is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
 {
+    using std::divides;
+    using std::modulus;
+    using std::multiplies;
+    using std::plus;
+
     using SetType = std::bitset<9>;
 
     std::array<SetType, 9> rows{};
     std::array<SetType, 9> boxes{};
 
-    for (std::size_t i{}; i < board.size(); ++i)
+    for (std::size_t i{}; i < size(board); ++i)
     {
         SetType col{};
 
-        for (std::size_t j{}; j < board.size(); ++j)
+        for (std::size_t j{}; j < size(board); ++j)
         {
             // NOLINTBEGIN(cppcoreguidelines-pro-bounds-constant-array-index)
             if (detail::tick_out(board[i][j], col))
@@ -132,10 +146,22 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 return false;
             }
 
-            if (detail::tick_out(
-                    board[(3 * (i / 3)) + (j / 3)][(3 * (i % 3)) + (j % 3)],
+            if (
+                // clang-format off
+                detail::tick_out(
+                    board
+                        [plus{}(
+                            multiplies{}(3UZ, divides{}(i, 3UZ)),
+                            divides{}(j, 3UZ)
+                        )]
+                        [plus{}(
+                            multiplies{}(3UZ, modulus{}(i, 3UZ)),
+                            modulus{}(j, 3UZ)
+                        )],
                     boxes[i]
-                ))
+                )
+                // clang-format on
+            )
             {
                 return false;
             }

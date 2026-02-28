@@ -30,11 +30,16 @@ constexpr auto sum_each(
     Nums const& nums, Sums& sums, typename Nums::size_type const sub_size
 ) noexcept -> void
 {
+    using std::begin;
+    using std::cbegin;
+    using std::cend;
+    using std::size;
+
     using SizeType = Sums::size_type;
     using ValueType = Sums::value_type;
     using DiffType = Nums::difference_type;
 
-    auto const sums_size{sums.size()};
+    auto const sums_size{size(sums)};
 
     if (sums_size == SizeType{}) [[unlikely]]
     {
@@ -42,8 +47,8 @@ constexpr auto sum_each(
     }
 
     ValueType sub_sum{};
-    auto nums_it{nums.cbegin()};
-    auto const nums_size{nums.size()};
+    auto nums_it{cbegin(nums)};
+    auto const nums_size{size(nums)};
 
     // Calculate result for the first output element.
     auto const nums_bound{std::min(sub_size, nums_size)};
@@ -52,7 +57,7 @@ constexpr auto sum_each(
         sub_sum += *nums_it;
         ++nums_it;
     }
-    auto sums_it{sums.begin()};
+    auto sums_it{begin(sums)};
     *sums_it = sub_sum;
 
     // Stop if no more than one sum element is possible.
@@ -62,7 +67,7 @@ constexpr auto sum_each(
     }
 
     // Slide the window and update sum.
-    nums_it = nums.cbegin();
+    nums_it = cbegin(nums);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
     auto slider_last{nums_it + static_cast<DiffType>(sub_size)};

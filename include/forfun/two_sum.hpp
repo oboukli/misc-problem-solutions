@@ -28,19 +28,25 @@ namespace forfun::two_sum {
 
 namespace brute_forced {
 
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
 ) noexcept -> std::array<Iter, 2>
 {
+    using std::equal_to;
+    using std::minus;
+    using std::next;
+
     for (; iter != last; ++iter)
     {
-        auto const addend{std::minus{}(target, *iter)};
+        auto const addend{minus{}(target, *iter)};
 
-        for (auto iter_j{std::next(iter)}; iter_j != last; ++iter_j)
+        for (auto iter_j{next(iter)}; iter_j != last; ++iter_j)
         {
-            if (std::equal_to{}(*iter_j, addend))
+            if (equal_to{}(*iter_j, addend))
             {
                 return {iter, iter_j};
             }
@@ -56,17 +62,21 @@ namespace mapped {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
 /// span of elements.
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
 two_sum(Iter iter, Sentinel const last, std::iter_value_t<Iter> const target)
     -> std::array<Iter, 2>
 {
+    using std::minus;
+
     std::map<std::iter_value_t<Iter>, Iter> lookup_map{};
     lookup_map.emplace(*iter, iter);
     while (++iter != last)
     {
-        auto const addend{std::minus{}(target, *iter)};
+        auto const addend{minus{}(target, *iter)};
 
         if (auto const iter_found{lookup_map.find(addend)};
             iter_found != lookup_map.cend())
@@ -87,17 +97,23 @@ namespace presorted_binary_searched {
 /// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-decreasing order, and that the span has exactly one
 /// solution.
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
 ) noexcept -> std::array<Iter, 2>
 {
+    using std::lower_bound;
+    using std::minus;
+    using std::next;
+
     for (; iter != last; ++iter)
     {
-        auto const addend{std::minus{}(target, *iter)};
+        auto const addend{minus{}(target, *iter)};
 
-        if (auto const iter_j{std::lower_bound(std::next(iter), last, addend)};
+        if (auto const iter_j{lower_bound(next(iter), last, addend)};
             iter_j != last)
         {
             return {iter, iter_j};
@@ -114,19 +130,25 @@ namespace presorted_brute_searched {
 /// @note The strategy assumes that @p iter and @p last point to a span of
 /// elements sorted in non-decreasing order, and that the span has exactly one
 /// solution.
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
-    requires std::integral<std::iter_value_t<Iter>>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter>
+    and std::sentinel_for<Iter, Sentinel>
+    and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
 ) noexcept -> std::array<Iter, 2>
 {
+    using std::equal_to;
+    using std::minus;
+    using std::next;
+
     for (; iter != last; ++iter)
     {
-        auto const addend{std::minus{}(target, *iter)};
+        auto const addend{minus{}(target, *iter)};
 
-        for (auto iter_j{std::next(iter)}; iter_j != last; ++iter_j)
+        for (auto iter_j{next(iter)}; iter_j != last; ++iter_j)
         {
-            if (std::equal_to{}(*iter_j, addend))
+            if (equal_to{}(*iter_j, addend))
             {
                 return {iter, iter_j};
             }
@@ -143,16 +165,22 @@ namespace presorted_linear {
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
 /// span of elements sorted in non-decreasing order, and that the span has
 /// exactly one solution.
-template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
-    requires std::integral<std::iter_value_t<IterA>>
+template <typename IterA, typename IterB>
+    requires std::forward_iterator<IterA>
+    and std::bidirectional_iterator<IterB>
+    and std::integral<std::iter_value_t<IterA>>
 [[nodiscard]] constexpr auto two_sum(
     IterA iter_a, IterB iter_b, std::iter_value_t<IterA> const target
 ) noexcept -> std::array<IterA, 2>
 {
+    using std::equal_to;
+    using std::less;
+    using std::plus;
+
     --iter_b;
-    while (not std::equal_to{}(target, std::plus{}(*iter_a, *iter_b)))
+    while (not equal_to{}(target, plus{}(*iter_a, *iter_b)))
     {
-        if (std::less{}(target, std::plus{}(*iter_a, *iter_b)))
+        if (less{}(target, plus{}(*iter_a, *iter_b)))
         {
             --iter_b;
         }
