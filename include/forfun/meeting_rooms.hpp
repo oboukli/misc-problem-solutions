@@ -36,17 +36,20 @@ auto operator<<(std::ostream& os, interval intrvl) -> std::ostream&;
 /// @note Iterator arguments must be of a container of `interval` elements,
 /// where the elements are sorted by the `start` field in non-descending order;
 /// Otherwise the behavior of the strategy is undefined.
-template <std::forward_iterator Iter>
-    requires std::same_as<std::iter_value_t<Iter>, interval>
+template <typename Iter>
+    requires std::forward_iterator<Iter>
+    and std::same_as<std::iter_value_t<Iter>, interval>
 [[nodiscard]] auto constexpr can_attend(
     Iter iter, std::sentinel_for<Iter> auto const last
 ) noexcept -> bool
 {
+    using std::next;
+
     if (iter != last) [[likely]]
     {
-        while (std::next(iter) != last)
+        while (next(iter) != last)
         {
-            if (is_conflicting(*iter, *std::next(iter)))
+            if (is_conflicting(*iter, *next(iter)))
             {
                 return false;
             }
@@ -61,17 +64,20 @@ template <std::forward_iterator Iter>
 /// @note Iterator arguments must be of a container of `interval` elements,
 /// where the elements are sorted by the `start` field in non-descending order;
 /// Otherwise the behavior of the strategy is undefined.
-template <std::input_or_output_iterator Iter>
-    requires std::same_as<std::iter_value_t<Iter>, interval>
+template <typename Iter>
+    requires std::input_or_output_iterator<Iter>
+    and std::same_as<std::iter_value_t<Iter>, interval>
 [[nodiscard]] auto constexpr min_chronotopes(
     Iter iter, std::sentinel_for<Iter> auto const last
 ) noexcept -> std::size_t
 {
+    using std::next;
+
     std::size_t chronotopes{1};
 
-    while (std::next(iter) != last) [[likely]]
+    while (next(iter) != last) [[likely]]
     {
-        if (is_conflicting(*iter, *std::next(iter)))
+        if (is_conflicting(*iter, *next(iter)))
         {
             ++chronotopes;
         }

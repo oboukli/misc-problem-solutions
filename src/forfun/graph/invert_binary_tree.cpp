@@ -17,6 +17,8 @@ namespace iterative {
 
 auto invert_binary_tree(binary_tree_node& root) -> void
 {
+    using std::swap;
+
     std::deque<binary_tree_node*> tracker{};
 
     tracker.push_back(&root);
@@ -26,7 +28,7 @@ auto invert_binary_tree(binary_tree_node& root) -> void
         binary_tree_node* node{tracker.front()};
         tracker.pop_front();
 
-        std::swap(node->left_node_, node->right_node_);
+        swap(node->left_node_, node->right_node_);
 
         if (node->left_node_ != nullptr)
         {
@@ -46,7 +48,9 @@ namespace recursive {
 
 auto invert_binary_tree(binary_tree_node& root) noexcept -> void
 {
-    std::swap(root.left_node_, root.right_node_);
+    using std::swap;
+
+    swap(root.left_node_, root.right_node_);
 
     if (root.left_node_ != nullptr)
     {
