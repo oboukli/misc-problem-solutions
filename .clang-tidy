@@ -49,7 +49,7 @@ CheckOptions:
   bugprone-argument-comment.StrictMode: "0"
   bugprone-assert-side-effect.AssertMacros: assert,NSAssert,NSCAssert
   bugprone-assert-side-effect.CheckFunctionCalls: "false"
-  bugprone-assert-side-effect.IgnoredFunctions: "__builtin_expect"
+  bugprone-assert-side-effect.IgnoredFunctions: __builtin_expect
   bugprone-capturing-this-in-member-variable.BindFunctions: "::std::bind;::boost::bind;::std::bind_front;::std::bind_back;::boost::compat::bind_front;::boost::compat::bind_back"
   bugprone-capturing-this-in-member-variable.FunctionWrapperTypes: "::std::function;::std::move_only_function;::boost::function"
   bugprone-chained-comparison.IgnoreMacros: "false"
@@ -193,7 +193,7 @@ CheckOptions:
   cppcoreguidelines-avoid-magic-numbers.IgnoreTypeAliases: "false"
   cppcoreguidelines-avoid-magic-numbers.IgnoreUserDefinedLiterals: "false"
   cppcoreguidelines-avoid-magic-numbers.IgnoredFloatingPointValues: "1.0;100.0;"
-  cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: "1;2;3;4;10;"
+  cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: "1;2;3;4;9;10;"
   cppcoreguidelines-avoid-non-const-global-variables.AllowInternalLinkage: "false"
   cppcoreguidelines-explicit-virtual-functions.AllowOverrideAndFinal: "false"
   cppcoreguidelines-explicit-virtual-functions.FinalSpelling: final
@@ -488,7 +488,7 @@ CheckOptions:
   readability-function-size.VariableThreshold: none
   readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
   readability-identifier-length.IgnoredLoopCounterNames: "^[ijk_]$"
-  readability-identifier-length.IgnoredParameterNames: "^[n]|os$"
+  readability-identifier-length.IgnoredParameterNames: "^[abcn]|os$"
   readability-identifier-length.IgnoredVariableNames: "^[i]$"
   readability-identifier-length.MinimumExceptionNameLength: "2"
   readability-identifier-length.MinimumLoopCounterNameLength: "2"
@@ -510,7 +510,7 @@ CheckOptions:
   readability-magic-numbers.IgnoreTypeAliases: "false"
   readability-magic-numbers.IgnoreUserDefinedLiterals: "false"
   readability-magic-numbers.IgnoredFloatingPointValues: "1.0;100.0;"
-  readability-magic-numbers.IgnoredIntegerValues: "1;2;3;4;10;"
+  readability-magic-numbers.IgnoredIntegerValues: "1;2;3;4;9;10;"
   readability-named-parameter.InsertPlainNamesInForwardDecls: "false"
   readability-operators-representation.BinaryOperators: ""
   readability-operators-representation.OverloadedOperators: ""
@@ -533,7 +533,7 @@ CheckOptions:
   readability-static-accessed-through-instance.NameSpecifierNestingThreshold: "3"
   readability-string-compare.StringLikeClasses: "::std::basic_string;::std::basic_string_view"
   readability-suspicious-call-argument.Abbreviation: "true"
-  readability-suspicious-call-argument.Abbreviations: "lst=list;arr=array;num=number;ptr=pointer;i=index;vec=vector;cpy=copy;src=source;dest=destination;val=value;idx=index;wdth=width;nr=number;elem=element;ln=line;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;str=string;addr=address;attr=attribute;col=column;cnt=count;ref=reference"
+  readability-suspicious-call-argument.Abbreviations: "str=string;lst=list;arr=array;num=number;ptr=pointer;i=index;ln=line;cpy=copy;src=source;dest=destination;val=value;idx=index;vec=vector;wdth=width;nr=number;elem=element;srv=server;pos=position;cl=client;stmt=statement;len=length;buf=buffer;dist=distancedst=distance;hght=height;var=variable;addr=address;col=column;attr=attribute;cnt=count;ref=reference"
   readability-suspicious-call-argument.Dice: "true"
   readability-suspicious-call-argument.DiceDissimilarBelow: "60"
   readability-suspicious-call-argument.DiceSimilarAbove: "70"
