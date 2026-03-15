@@ -35,7 +35,7 @@ TEMPLATE_TEST_CASE_SIG(
     "[container_with_most_water]",
     (auto calc_max_area, calc_max_area),
     (forfun::container_with_most_water::brute::calc_max_area<CIter, CIter>),
-    (forfun::container_with_most_water::enhanced::calc_max_area<CIter, CIter>)
+    forfun::container_with_most_water::enhanced::calc_max_area<CIter>
 )
 {
     SECTION("No area possible (one element degenerate case)")
