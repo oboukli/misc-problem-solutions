@@ -44,7 +44,7 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(enhanced::calc_max_area<CIter, CIter>).c_str(),
+            NAMEOF_RAW(enhanced::calc_max_area<CIter>).c_str(),
             [&input] noexcept -> void {
                 auto const volatile r{
                     enhanced::calc_max_area(input.cbegin(), input.cend())

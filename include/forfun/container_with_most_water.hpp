@@ -11,27 +11,34 @@
 #define FORFUN_CONTAINER_WITH_MOST_WATER_HPP_
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 
 namespace forfun::container_with_most_water {
 
 namespace brute {
 
-template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+    requires std::forward_iterator<Iter> and std::sentinel_for<Iter, Sentinel>
 [[nodiscard]] constexpr auto
 calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
 {
+    using std::max;
+    using std::min;
+    using std::multiplies;
+    using std::next;
+
     int max_area{};
 
     for (; iter_a != last; ++iter_a)
     {
         int width{1};
-        for (auto iter_b{std::next(iter_a)}; iter_b != last; ++iter_b, ++width)
+        for (auto iter_b{next(iter_a)}; iter_b != last; ++iter_b, ++width)
         {
-            int const height{std::min(*iter_a, *iter_b)};
-            int const area{height * width};
+            int const height{min(*iter_a, *iter_b)};
+            int const area{multiplies{}(height, width)};
 
-            max_area = std::max(area, max_area);
+            max_area = max(area, max_area);
         }
     }
 
@@ -42,23 +49,30 @@ calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
 
 namespace enhanced {
 
-template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
-[[nodiscard]] constexpr auto calc_max_area(IterA iter_a, IterB iter_b) noexcept
+template <typename Iter>
+    requires std::contiguous_iterator<Iter>
+[[nodiscard]] constexpr auto calc_max_area(Iter iter_a, Iter iter_b) noexcept
     -> int
 {
+    using std::distance;
+    using std::less;
+    using std::max;
+    using std::min;
+    using std::multiplies;
+
     int max_area{};
 
     --iter_b;
-    int width{static_cast<int>(std::distance(iter_a, iter_b))};
+    int width{static_cast<int>(distance(iter_a, iter_b))};
 
     while (iter_a != iter_b)
     {
-        int const height{std::min(*iter_a, *iter_b)};
-        int const area{height * width};
+        int const height{min(*iter_a, *iter_b)};
+        int const area{multiplies{}(height, width)};
 
-        max_area = std::max(area, max_area);
+        max_area = max(area, max_area);
 
-        if (*iter_a < *iter_b)
+        if (less{}(*iter_a, *iter_b))
         {
             ++iter_a;
         }
