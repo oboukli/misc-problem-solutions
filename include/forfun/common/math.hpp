@@ -11,12 +11,14 @@
 
 namespace forfun::common::math {
 
+namespace alternative {
+
 /// @note This functions offers no performance improvement over utilizing
 /// floating-point division along with \c std::ceil. For more information, refer
 /// to the developer notes.
 ///
 /// @note Both of @p a and @p b must be non-zero and positive.
-[[nodiscard]] constexpr auto div_ceil(int const a, int const b) -> int
+[[nodiscard]] constexpr auto div_ceil(int const a, int const b) noexcept -> int
 {
     assert(a != 0);
     assert(b != 0);
@@ -24,6 +26,14 @@ namespace forfun::common::math {
     // Source: https://stackoverflow.com/a/2745086
     return 1 + ((a - 1) / b);
 }
+
+} // namespace alternative
+
+namespace core {
+
+[[nodiscard]] /*constexpr*/ auto div_ceil(int a, int b) noexcept -> int;
+
+} // namespace core
 
 } // namespace forfun::common::math
 

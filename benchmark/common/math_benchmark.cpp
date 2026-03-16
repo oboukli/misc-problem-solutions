@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cmath>
 #include <limits>
 
 #include <catch2/catch_test_macros.hpp>
@@ -17,7 +16,7 @@
 
 TEST_CASE("Integer division ceiling benchmarking", "[benchmark][math]")
 {
-    using namespace forfun::common;
+    using namespace forfun::common::math;
 
     ankerl::nanobench::Bench()
 
@@ -25,20 +24,20 @@ TEST_CASE("Integer division ceiling benchmarking", "[benchmark][math]")
         .relative(true)
 
         .run(
-            "::std::ceil(double)",
+            NAMEOF_RAW(alternative::div_ceil).c_str(),
             [] noexcept -> void {
-                auto const volatile r{static_cast<int>(std::ceil(
-                    double{std::numeric_limits<int>::max()}
-                    / double{std::numeric_limits<int>::max() - 1}
-                ))};
+                auto const volatile r{alternative::div_ceil(
+                    std::numeric_limits<int>::max(),
+                    std::numeric_limits<int>::max() - 1
+                )};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(math::div_ceil).c_str(),
+            NAMEOF_RAW(core::div_ceil).c_str(),
             [] noexcept -> void {
-                auto const volatile r{math::div_ceil(
+                auto const volatile r{core::div_ceil(
                     std::numeric_limits<int>::max(),
                     std::numeric_limits<int>::max() - 1
                 )};
