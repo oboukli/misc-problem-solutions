@@ -75,6 +75,7 @@ leveraged by this project:
 | Insertion Sort                                                     | [`include/forfun/sorting/insertion_sort.hpp`](include/forfun/sorting/insertion_sort.hpp)                                                       |
 | Integer division ceiling                                           | [`include/forfun/common/math.hpp`](include/forfun/common/math.hpp)                                                                             |
 | Invert Binary Tree                                                 | [`src/forfun/graph/invert_binary_tree.cpp`](src/forfun/graph/invert_binary_tree.cpp)                                                           |
+| Koko Eating Bananas                                                | [`include/forfun/search/koko_eating_bananas.hpp`](include/forfun/search/koko_eating_bananas.hpp)                                               |
 | Last Stone Weight                                                  | [`include/forfun/last_stone_weight.hpp`](include/forfun/last_stone_weight.hpp)                                                                 |
 | Least Recently Used (LRU) Cache                                    | [`src/forfun/lru_cache.cpp`](src/forfun/lru_cache.cpp)                                                                                         |
 | Linked List                                                        | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                                       |

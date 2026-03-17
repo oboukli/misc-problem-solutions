@@ -45,6 +45,7 @@ Names and titles follow those of STL and Wikipedia.
 | Hamming Weight                    | 191. Number of 1 Bits                    |
 | House Robber                      | 198. House Robber                        |
 | Invert Binary Tree                | 226. Invert Binary Tree                  |
+| Koko Eating Bananas               | 875. Koko Eating Bananas                 |
 | Last Stone Weight                 | 1046. Last Stone Weight                  |
 | Least Recently Used (LRU) Cache   | 146. LRU Cache                           |
 | Linked List                       | 707. Design Linked List                  |
