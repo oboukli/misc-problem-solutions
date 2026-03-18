@@ -13,13 +13,13 @@
 namespace forfun::common::concepts {
 
 template <typename T>
-concept addition_unpromoted = requires(T v) {
-    { v + v } -> std::same_as<T>;
+concept addition_unpromoted = requires(T addend) {
+    { addend + addend } -> std::same_as<T>;
 };
 
-template <typename T, typename U>
-concept multipliable_as = requires(T v) {
-    { v * v } -> std::same_as<U>;
+template <typename Factor, typename Product>
+concept multipliable_as = requires(Factor factor) {
+    { factor * factor } -> std::same_as<Product>;
 };
 
 // clang-format off
