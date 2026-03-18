@@ -85,6 +85,7 @@ TEST_CASE("Concept multipliable_as", "[common]")
         STATIC_REQUIRE(multipliable_as<char, int>);
         STATIC_REQUIRE(multipliable_as<short, int>);
         STATIC_REQUIRE(multipliable_as<unsigned int, unsigned int>);
+        STATIC_REQUIRE(multipliable_as<float, float>);
 
         STATIC_REQUIRE(multipliable_as<std::int32_t, std::int32_t>);
         STATIC_REQUIRE(multipliable_as<std::uint32_t, std::uint32_t>);
@@ -98,8 +99,14 @@ TEST_CASE("Concept multipliable_as", "[common]")
     SECTION("Negative")
     {
         STATIC_REQUIRE_FALSE(multipliable_as<int, char>);
+        STATIC_REQUIRE_FALSE(multipliable_as<std::int32_t, std::int16_t>);
+        STATIC_REQUIRE_FALSE(multipliable_as<std::int64_t, std::int32_t>);
+        STATIC_REQUIRE_FALSE(multipliable_as<double, float>);
+        STATIC_REQUIRE_FALSE(multipliable_as<int, float>);
+        STATIC_REQUIRE_FALSE(multipliable_as<float, double>);
 
         STATIC_REQUIRE_FALSE(multipliable_as<std::int32_t, short>);
+        STATIC_REQUIRE_FALSE(multipliable_as<std::int32_t, std::int64_t>);
         STATIC_REQUIRE_FALSE(multipliable_as<std::uint32_t, unsigned short>);
         STATIC_REQUIRE_FALSE(multipliable_as<int, std::int8_t>);
         STATIC_REQUIRE_FALSE(multipliable_as<int, std::uint8_t>);

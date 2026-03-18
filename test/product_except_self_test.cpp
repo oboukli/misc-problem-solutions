@@ -19,7 +19,7 @@
 using IntVecIter = std::vector<int>::iterator;
 using IntVecConstIter = std::vector<int>::const_iterator;
 using FloatVecConstIter = std::vector<float>::const_iterator;
-using DoubleVecIter = std::vector<double>::iterator;
+using FloatVecIter = std::vector<float>::iterator;
 using IntArr3ConstIter = std::array<int, 3>::const_iterator;
 using IntArr3Iter = std::array<int, 3>::iterator;
 using U64ArrConstIter = std::array<std::uint64_t, 16>::const_iterator;
@@ -96,7 +96,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual(3U);
+        std::vector<int> actual(3UZ);
 
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
@@ -112,7 +112,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         CAPTURE(nums);
 
-        std::vector<int> actual(4U);
+        std::vector<int> actual(4UZ);
 
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
@@ -129,23 +129,23 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::product_except_self::alg1::product_except_self<
         FloatVecConstIter,
         FloatVecConstIter,
-        DoubleVecIter,
-        DoubleVecIter>),
+        FloatVecIter,
+        FloatVecIter>),
     (forfun::product_except_self::alg2::product_except_self<
         FloatVecConstIter,
         FloatVecConstIter,
-        DoubleVecIter,
-        DoubleVecIter>)
+        FloatVecIter,
+        FloatVecIter>)
 )
 {
-    SECTION("Input is of four floats, output type is of four doubles")
+    SECTION("Input is of four floats, output type is of four floats")
     {
         std::vector const nums{1.0F, 2.0F, 3.0F, 4.0F};
-        std::vector const expected{24.0, 12.0, 8.0, 6.0};
+        std::vector const expected{24.0F, 12.0F, 8.0F, 6.0F};
 
         CAPTURE(nums);
 
-        std::vector<double> actual(4U);
+        std::vector<float> actual(4UZ);
 
         product_except_self(
             nums.cbegin(), nums.cend(), actual.begin(), actual.end()
@@ -222,7 +222,7 @@ TEMPLATE_TEST_CASE_SIG(
             std::uint64_t{13},
             std::uint64_t{14},
             std::uint64_t{15},
-            std::uint64_t{},
+            std::uint64_t{0},
         };
 
         static_assert(nums.size() == 16UZ);
@@ -255,31 +255,5 @@ TEMPLATE_TEST_CASE_SIG(
         );
 
         REQUIRE_THAT(actual, Catch::Matchers::RangeEquals(expected));
-    }
-}
-
-TEST_CASE("Product except self (concepts)", "[product_except_self]")
-{
-    SECTION("Concept product_computable")
-    {
-        using forfun::product_except_self::concepts::product_computable;
-
-        struct Dummy final {};
-
-        STATIC_REQUIRE(product_computable<short, int>);
-        STATIC_REQUIRE(product_computable<int, int>);
-        STATIC_REQUIRE(product_computable<std::int32_t, std::int64_t>);
-        STATIC_REQUIRE(product_computable<std::int64_t, std::int64_t>);
-        STATIC_REQUIRE(product_computable<int, float>);
-        STATIC_REQUIRE(product_computable<float, float>);
-        STATIC_REQUIRE(product_computable<float, double>);
-
-        STATIC_REQUIRE(product_computable<bool, bool>);
-        STATIC_REQUIRE(product_computable<std::int32_t, std::int16_t>);
-        STATIC_REQUIRE(product_computable<std::int64_t, std::int32_t>);
-        STATIC_REQUIRE(product_computable<double, float>);
-
-        STATIC_REQUIRE_FALSE(product_computable<Dummy, int>);
-        STATIC_REQUIRE_FALSE(product_computable<Dummy, Dummy>);
     }
 }

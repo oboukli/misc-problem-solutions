@@ -23,49 +23,54 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
         REQUIRE(actual == 0U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 1 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 1")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(1U)
-        };
+        unsigned int const volatile test_input{1U};
+        CAPTURE(test_input);
 
-        STATIC_REQUIRE(actual == 0U);
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 0U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 3 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 3")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(3U)
-        };
+        unsigned int const volatile test_input{3U};
+        CAPTURE(test_input);
 
-        STATIC_REQUIRE(actual == 3U);
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 3U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 4 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 4")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(4U)
-        };
+        unsigned int const volatile test_input{4U};
+        CAPTURE(test_input);
 
-        STATIC_REQUIRE(actual == 3U);
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 3U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 6 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 6")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(6U)
-        };
+        unsigned int const volatile test_input{6U};
+        CAPTURE(test_input);
 
-        STATIC_REQUIRE(actual == 14U);
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 14U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 10 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 10")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(10U)
-        };
+        unsigned int const volatile test_input{10U};
+        CAPTURE(test_input);
 
-        STATIC_REQUIRE(actual == 33U);
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
+
+        REQUIRE(actual == 33U);
     }
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 11")
@@ -88,20 +93,20 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
         REQUIRE(actual == 2'318U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 999 (static)")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 999")
     {
-        static_assert(sizeof(unsigned int) >= 4U);
+        unsigned int const volatile test_input{999U};
+        CAPTURE(test_input);
+        static_assert(sizeof(unsigned int) >= 4UZ);
 
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(999U)
-        };
+        unsigned int const actual{find_sum_mult_three_five(test_input)};
 
-        STATIC_REQUIRE(actual == 233'168U);
+        REQUIRE(actual == 233'168U);
     }
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 999")
     {
-        static_assert(sizeof(unsigned int) >= 4U);
+        static_assert(sizeof(unsigned int) >= 4UZ);
 
         unsigned int const volatile test_input{999};
         CAPTURE(test_input);
@@ -116,7 +121,7 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
         "safe limit"
     )
     {
-        static_assert(sizeof(unsigned int) >= 4U);
+        static_assert(sizeof(unsigned int) >= 4UZ);
 
         unsigned int const volatile test_input{89'738};
         CAPTURE(test_input);

@@ -726,6 +726,7 @@ target_compile_definitions(
 target_sources(
   static_test_driver
   PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
@@ -742,9 +743,11 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/trapping_rainwater_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
 )

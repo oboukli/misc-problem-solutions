@@ -24,8 +24,10 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::array_concatenation::semi_unfolded::concatenate<int, 0>)
 )
 {
-    static constexpr std::array<int, 0> const src{};
     static constexpr std::array<int, 0> const expected{};
+
+    std::array<int, 0> const src{};
+
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
     std::array<int, 0> dest /*[[indeterminate]]*/;
 
@@ -33,7 +35,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     concatenate(src, dest);
 
-    STATIC_REQUIRE(dest == expected);
+    REQUIRE(dest == expected);
 }
 
 TEMPLATE_TEST_CASE_SIG(
