@@ -413,6 +413,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_iterator.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/list.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/min_stack.hpp"
 )
 target_sources(
   forfun_experimental
@@ -425,6 +426,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_iterator.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/list.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/min_stack.cpp"
 )
 get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
 source_group(
@@ -562,6 +564,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/min_stack_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/shim/allocator_test.cpp"
 )
@@ -691,6 +694,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_cycle_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/min_stack_benchmark.cpp"
 )
 get_target_property(
   benchmark_driver_experimental_sources
