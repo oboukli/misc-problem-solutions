@@ -168,6 +168,21 @@
       }
     },
     {
+      "name": "header-check",
+      "displayName": "Header check",
+      "description": "Interface header set verification",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "CMAKE_VERIFY_INTERFACE_HEADER_SETS": "ON"
+      }
+    },
+    {
       "name": "clang-coverage",
       "displayName": "Coverage with LLVM",
       "description": "Build with Clang and enable code coverage",
