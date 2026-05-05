@@ -1,23 +1,8 @@
----
-Checks: "
-  clang-diagnostic-*,
-  clang-analyzer-*,
+Checks: >-
   *,
-  -abseil-*,
-  -altera-*,
-  -android-*,
-  -boost-*,
-  -concurrency-*,
-  -darwin-*,
-  -fuchsia-*,
-  -linuxkernel-*,
-  -llvm-*,
-  -llvmlibc-*,
-  -mpi-*,
-  -objc-*,
-  -openmp-*,
-  -zircon-*,
   cert-*,
+  clang-analyzer-*,
+  clang-diagnostic-*,
   cppcoreguidelines-*,
   google-*,
   hicpp-*,
@@ -26,9 +11,22 @@ Checks: "
   performance-*,
   portability-*,
   readability-*,
+  -abseil-*,
+  -altera-*,
+  -android-*,
+  -boost-*,
+  -concurrency-*,
+  -darwin-*,
+  -fuchsia-*,
   -google-readability-todo,
+  -linuxkernel-*,
+  -llvm-*,
+  -llvmlibc-*,
   -misc-no-recursion,
-  "
+  -mpi-*,
+  -objc-*,
+  -openmp-*,
+  -zircon-*,
 WarningsAsErrors: "*"
 HeaderFileExtensions:
   - hpp
@@ -559,5 +557,3 @@ CheckOptions:
   readability-uppercase-literal-suffix.NewSuffixes: ""
   readability-use-std-min-max.IncludeStyle: llvm
 SystemHeaders: false
-...
-
