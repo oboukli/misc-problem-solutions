@@ -82,8 +82,8 @@ should be passed, as seen in the `CMakePresets.json` file.
 The code is written in standards-compliant C90 and C++23 and is known to compile
 with the following compilers.
 
-- AppleClang 17.0.0
-- Clang 21.1.8
+- AppleClang 21.0.0
+- Clang 22.1.6
 - GCC 14.2.0
 - MSVC 19.50
 
