@@ -39,7 +39,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-21
+          Suites: llvm-toolchain-noble-22
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -53,24 +53,24 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-21
-          clang-tools-21
-          libc++-21
-          libc++-21-dev
-          libc++abi-21-dev
-          lld-21
-          llvm-21
+          clang-22
+          clang-tools-22
+          libc++-22
+          libc++-22-dev
+          libc++abi-22-dev
+          lld-22
+          llvm-22
           mono-complete
           ninja-build
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-21 100
+          --install /usr/bin/cc cc /usr/bin/clang-22 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-21 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
 
           sudo update-alternatives
-          --install /usr/bin/ld ld /usr/bin/lld-21 100
+          --install /usr/bin/ld ld /usr/bin/lld-22 100
 
       - name: Check out repository
         uses: actions/checkout@v6
@@ -118,7 +118,7 @@ jobs:
 
       - name: Run code coverage script
         env:
-          LLVM_ROOT: /usr/lib/llvm-21
+          LLVM_ROOT: /usr/lib/llvm-22
         run: >-
           bash ${{ github.workspace }}/ci/generate_coverage_report.sh
 
