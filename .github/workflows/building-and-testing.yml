@@ -97,6 +97,14 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
+      - name: Run test driver of lock-free concurrency library
+        run: >-
+          .\test_driver_concurrency_lf.exe
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
       - name: Run benchmarks
         run: >-
           .\benchmark_driver.exe
@@ -191,6 +199,14 @@ jobs:
           MIMALLOC_VERBOSE: 1
         run: >-
           .\test_driver_experimental.exe
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of lock-free concurrency library
+        run: >-
+          .\test_driver_concurrency_lf.exe
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
@@ -295,7 +311,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run and instrument test driver of experimental library
+      - name: Check test driver of experimental library with Valgrind Memcheck
         env:
           MIMALLOC_SHOW_ERRORS: 1
           MIMALLOC_SHOW_STATS: 1
@@ -313,6 +329,26 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
+      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+        run: >-
+          /usr/bin/valgrind
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run concurrency library test driver
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
@@ -323,6 +359,13 @@ jobs:
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
@@ -412,7 +455,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run and instrument test driver of experimental library
+      - name: Check test driver of experimental library with Valgrind Memcheck
         env:
           MIMALLOC_SHOW_ERRORS: 1
           MIMALLOC_SHOW_STATS: 1
@@ -425,6 +468,27 @@ jobs:
           --leak-check=full
           --show-leak-kinds=all
           ./test_driver_experimental
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+        run: >-
+          /usr/bin/valgrind
+          --error-exitcode=1
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run concurrency library test driver
+        run: >-
+          ./test_driver_concurrency_lf
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
@@ -444,10 +508,18 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-  apple_clang_debug_aarch64_macos:
-    name: Build (Apple Clang Debug AArch64 macOS)
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+  apple_clang_asan_ubsan_debug_aarch64_macos:
+    name: Build (Apple Clang ASan UBSan Debug AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
+      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
@@ -517,7 +589,7 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run static test driver
         run: >-
@@ -525,7 +597,7 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run test driver of experimental library
         env:
@@ -537,26 +609,166 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of lock-free concurrency library
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+  apple_clang_tsan_debug_aarch64_macos:
+    name: Build (Apple Clang TSan Debug AArch64 macOS)
+    env:
+      CONFIGURE_PRESET_NAME: xcode
+      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Debug
+      BUILD_DIR: ${{ github.workspace }}/out/build/xcode
+      BUILD_CONFIGURATION: Debug
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
+      XCODE_RELEASE: "26.5"
+
+    runs-on: macos-26
+
+    steps:
+      - name: Set default Xcode release
+        run: >-
+          sudo xcode-select
+          -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install tools
+        run: >-
+          brew install mono
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v6
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build with sanitizers
+        run: >-
+          cmake
+          --build '${{ env.BUILD_DIR }}'
+          --config '${{ env.BUILD_CONFIGURATION }}'
+          --parallel
+          --
+          -enableThreadSanitizer YES
+
+      - name: Run test driver
+        run: >-
+          ./test_driver
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run static test driver
+        run: >-
+          ./static_test_driver
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of experimental library
+        env:
+          MIMALLOC_SHOW_ERRORS: 1
+          MIMALLOC_SHOW_STATS: 1
+          MIMALLOC_VERBOSE: 1
+        run: >-
+          ./test_driver_experimental
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of lock-free concurrency library
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks
+        run: >-
+          ./benchmark_driver
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of experimental library
+        run: >-
+          ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
 
   apple_clang_release_aarch64_macos:
     name: Build (Apple Clang Release AArch64 macOS)
     env:
       CONFIGURE_PRESET_NAME: xcode
+      BINARY_DIR: ${{ github.workspace }}/out/build/xcode/Release
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
@@ -623,7 +835,7 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run static test driver
         run: >-
@@ -631,7 +843,7 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run test driver of experimental library
         env:
@@ -643,21 +855,36 @@ jobs:
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run test driver of lock-free concurrency library
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
 
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
           --durations yes
           --reporter console::out=-::colour-mode=ansi
-        working-directory: ${{ env.BUILD_DIR }}/${{ env.BUILD_CONFIGURATION }}
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
 
   clang_debug_x86_64_linux:
     name: Build (Clang Debug x86-64 Linux)
@@ -768,7 +995,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run and instrument test driver of experimental library
+      - name: Check test driver of experimental library with Valgrind Memcheck
         env:
           MIMALLOC_SHOW_ERRORS: 1
           MIMALLOC_SHOW_STATS: 1
@@ -786,6 +1013,27 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
+      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+        run: >-
+          /usr/bin/valgrind
+          --error-exitcode=1
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run concurrency library test driver
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
@@ -796,6 +1044,13 @@ jobs:
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
@@ -909,7 +1164,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run and instrument test driver of experimental library
+      - name: Check test driver of experimental library with Valgrind Memcheck
         env:
           MIMALLOC_SHOW_ERRORS: 1
           MIMALLOC_SHOW_STATS: 1
@@ -921,6 +1176,27 @@ jobs:
           --leak-check=full
           --show-leak-kinds=all
           ./test_driver_experimental
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+        run: >-
+          /usr/bin/valgrind
+          --error-exitcode=1
+          --tool=memcheck
+          --leak-check=full
+          --show-leak-kinds=all
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run concurrency library test driver
+        run: >-
+          ./test_driver_concurrency_lf
           --order rand
           --reporter console::out=-::colour-mode=ansi
           --success
@@ -940,11 +1216,11 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-  clang_sanitizers:
+  clang_asan_ubsan:
     name: Build (Clang AddressSanitizer and UndefinedBehaviorSanitizer)
     env:
-      CONFIGURE_PRESET_NAME: clang-sanitizers
-      BINARY_DIR: ${{ github.workspace }}/out/build/clang-sanitizers
+      CONFIGURE_PRESET_NAME: clang-asan-ubsan
+      BINARY_DIR: ${{ github.workspace }}/out/build/clang-asan-ubsan
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       ASAN_OPTIONS: check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1
       ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
@@ -1051,6 +1327,14 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
+      - name: Run and instrument test driver of lock-free concurrency library
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+          --success
+        working-directory: ${{ env.BINARY_DIR }}
+
       - name: Run benchmarks
         run: >-
           ./benchmark_driver
@@ -1060,5 +1344,105 @@ jobs:
       - name: Run benchmarks of experimental library
         run: >-
           ./benchmark_driver_experimental
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+  clang_thread_sanitizers:
+    name: Build (Clang ThreadSanitizer)
+    env:
+      CONFIGURE_PRESET_NAME: clang-tsan
+      BINARY_DIR: ${{ github.workspace }}/out/build/clang-tsan
+      TSAN_OPTIONS: enable_adaptive_delay=1:adaptive_delay_aggressiveness=50
+      VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Retrieve the LLVM archive signature
+        run: |-
+          echo "Types: deb
+          URIs: http://apt.llvm.org/noble/
+          Suites: llvm-toolchain-noble-22
+          Components: main
+          Signed-By:
+          $(wget --output-document \
+          - https://apt.llvm.org/llvm-snapshot.gpg.key \
+          | sed -e 's/^$/./' -e 's/^/ /')" \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          > /dev/null
+
+      - name: Install tools
+        run: >-
+          sudo apt-get update
+
+          sudo apt-get install
+          clang-22
+          clang-tools-22
+          libc++-22-dev
+          libc++-22
+          libc++abi-22-dev
+          mono-complete
+          ninja-build
+
+          sudo update-alternatives
+          --install /usr/bin/cc cc /usr/bin/clang-22 100
+
+          sudo update-alternatives
+          --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
+
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check out vcpkg
+        uses: actions/checkout@v6
+        with:
+          repository: microsoft/vcpkg
+          path: ${{ github.workspace }}/vcpkg
+          persist-credentials: false
+
+      - name: Bootstrap vcpkg
+        run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh -disableMetrics
+
+      - name: Add NuGet sources
+        env:
+          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        run: >-
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          sources add
+          -source "${{ env.FEED_URL }}"
+          -storepasswordincleartext
+          -name "GitHubPackages"
+          -username "${{ github.repository_owner }}"
+          -password "${{ secrets.GITHUB_TOKEN }}"
+
+          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          setapikey "${{ secrets.GITHUB_TOKEN }}"
+          -source "${{ env.FEED_URL }}"
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+
+      - name: Build
+        run: >-
+          cmake
+          --build '${{ env.BINARY_DIR }}'
+          --parallel
+          --target
+          test_driver_concurrency_lf
+          benchmark_driver_concurrency_lf
+
+      - name: Run and instrument of concurrency test driver
+        run: >-
+          ./test_driver_concurrency_lf
+          --order rand
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free concurrency library
+        run: >-
+          ./benchmark_driver_concurrency_lf
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
