@@ -277,6 +277,7 @@ jobs:
       - name: Run and instrument test driver
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -301,6 +302,8 @@ jobs:
           MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
+          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -391,6 +394,7 @@ jobs:
       - name: Run and instrument test driver
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -415,6 +419,8 @@ jobs:
           MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
+          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -744,6 +750,7 @@ jobs:
       - name: Run and instrument test driver
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -768,6 +775,8 @@ jobs:
           MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
+          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -882,6 +891,7 @@ jobs:
       - name: Run and instrument test driver
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -906,6 +916,7 @@ jobs:
           MIMALLOC_VERBOSE: 1
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
