@@ -12,17 +12,18 @@ Names and titles follow those of STL and Wikipedia.
 
 ### Algorithms, data structures, and patterns
 
-| Name                              |
-| ---                               |
-| Breadth-First Search              |
-| Depth-First Search                |
-| Factorial                         |
-| Forward List                      |
-| Greatest Common Divisor           |
-| Integer division ceiling          |
-| List Bidirectional Iterator       |
-| Primality Test                    |
-| Tower of Hanoi                    |
+| Name                                                 |
+| ---                                                  |
+| Breadth-First Search                                 |
+| Depth-First Search                                   |
+| Factorial                                            |
+| Forward List                                         |
+| Greatest Common Divisor                              |
+| Integer division ceiling                             |
+| List Bidirectional Iterator                          |
+| Primality Test                                       |
+| Tower of Hanoi                                       |
+| Wait-free (lock-free) SPSC append-only bounded queue |
 
 ### LeetCode problems
 

@@ -57,7 +57,19 @@ variable.
 
 ### Thread safety
 
-The code is not guaranteed to be thread-safe.
+Data structures in the `forfun_concurrency_lf` library are designed
+to be thread-safe within certain documented constraints. The library specializes
+in lock-free concurrency models, implemented on C++ atomic types and operations.
+
+The thread error detector tool Helgrind might report possible data races
+in the `forfun_concurrency_lf` library, as Helgrind intercepts POSIX threading
+primitives, which `forfun_concurrency_lf` might not use. There is no evidence
+the said data races are true positives.
+
+The `forfun_c_experimental` is, by design, thread-unsafe.
+
+The remaining `forfun` libraries are not, necessarily, designed
+to be thread-safe.
 
 ### Curiously recurring template pattern
 
@@ -247,21 +259,24 @@ This document is not AI-generated.
 
 ## Build artifacts
 
-| Artifact                      | Type                               |
-| ---                           | ---                                |
-| forfun                        | C++23 (static or shared) library   |
-| forfun_graph                  | C++23 (static or shared) library   |
-| forfun_search                 | C++23 (static or shared) library   |
-| forfun_sorting                | C++23 (static or shared) library   |
-| forfun_experimental           | C++23 (static or shared) library   |
-| forfun_c                      | C90 (static or shared) library     |
-| forfun_c_experimental         | C90 static library                 |
-| test_driver                   | Executable Catch2 host             |
-| test_driver_experimental      | Executable Catch2 host             |
-| static_test_driver            | Executable Catch2 host             |
-| benchmark_driver              | Executable Catch2 host             |
-| benchmark_driver_experimental | Executable Catch2 host             |
-| fuzzing_driver                | Executable FuzzTest host           |
+| Artifact                        | Type                               |
+| ---                             | ---                                |
+| forfun                          | C++23 (static or shared) library   |
+| forfun_concurrency_lf           | C++23 (static or shared) library   |
+| forfun_graph                    | C++23 (static or shared) library   |
+| forfun_search                   | C++23 (static or shared) library   |
+| forfun_sorting                  | C++23 (static or shared) library   |
+| forfun_experimental             | C++23 (static or shared) library   |
+| forfun_c                        | C90 (static or shared) library     |
+| forfun_c_experimental           | C90 static library                 |
+| test_driver                     | Executable Catch2 host             |
+| test_driver_concurrency_lf      | Executable Catch2 host             |
+| test_driver_experimental        | Executable Catch2 host             |
+| static_test_driver              | Executable Catch2 host             |
+| benchmark_driver                | Executable Catch2 host             |
+| benchmark_driver_concurrency_lf | Executable Catch2 host             |
+| benchmark_driver_experimental   | Executable Catch2 host             |
+| fuzzing_driver                  | Executable FuzzTest host           |
 
 ## Problem-specific notes
 

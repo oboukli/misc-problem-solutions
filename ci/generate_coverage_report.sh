@@ -12,6 +12,7 @@ IGNORE_FILENAME_REGEX="${IGNORE_FILENAME_REGEX:-benchmark|fuzz|test[\/\\].+}"
 
 DRIVERS=(
   'test_driver'
+  'test_driver_concurrency_lf'
   'test_driver_experimental'
 )
 

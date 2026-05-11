@@ -7,3 +7,6 @@
 // See https://github.com/martinus/nanobench
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h> // IWYU pragma: keep
+
+// Shared translation unit. May be compiled and linked by multiple executable
+// build targets.

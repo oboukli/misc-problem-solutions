@@ -248,8 +248,8 @@
       }
     },
     {
-      "name": "clang-sanitizers",
-      "displayName": "Clang sanitizers",
+      "name": "clang-asan-ubsan",
+      "displayName": "Clang ASan and UBSan",
       "description": "Build with Clang's AddressSanitizer and UndefinedBehaviorSanitizer",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
@@ -261,6 +261,29 @@
         "CMAKE_C_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
         "CMAKE_CXX_FLAGS": "-D_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION -fno-builtin-std-forward_like -fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
         "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -flto -fvisibility=default -fno-sanitize-recover=all",
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        }
+      }
+    },
+    {
+      "name": "clang-tsan",
+      "displayName": "Clang TSan",
+      "description": "Build with Clang's ThreadSanitizer",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
+        "CMAKE_C_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer -fno-sanitize-recover=all -fPIE",
+        "CMAKE_CXX_FLAGS": "-fno-builtin-std-forward_like -fsanitize=thread -fPIE -fno-omit-frame-pointer -fno-sanitize-recover=all",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=thread -pie -flto -fno-omit-frame-pointer -fno-sanitize-recover=all -fvisibility=default",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
