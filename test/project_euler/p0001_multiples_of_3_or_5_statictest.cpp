@@ -16,7 +16,9 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
     {
         static constexpr unsigned int const test_input{0U};
 
-        unsigned int const actual{find_sum_mult_three_five(test_input)};
+        static constexpr unsigned int const actual{
+            find_sum_mult_three_five(test_input)
+        };
 
         STATIC_REQUIRE(actual == 0U);
     }
