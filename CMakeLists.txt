@@ -886,11 +886,15 @@ target_link_libraries(
 forfun_common_target_compile_options(static_test_driver)
 
 if(FORFUN_BUILD_FUZZING_DRIVER)
-  enable_testing()
+  include(FetchContent)
 
-  include(GoogleTest)
+  FetchContent_Declare(
+    google_fuzztest
+    GIT_REPOSITORY https://github.com/google/fuzztest.git
+    GIT_TAG b73724d4866c22d9b64c152a2d7ac22c7ca94168 # 2026-02-19
+  )
 
-  add_subdirectory(fuzztest)
+  FetchContent_MakeAvailable(google_fuzztest)
 
   fuzztest_setup_fuzzing_flags()
 
@@ -933,6 +937,8 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     PRIVATE GTest::gtest
   )
   link_fuzztest(fuzzing_driver)
+
+  include(GoogleTest)
   gtest_discover_tests(fuzzing_driver)
 endif()
 
