@@ -96,13 +96,6 @@ jobs:
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      - name: Check out FuzzTest
-        uses: actions/checkout@v6
-        with:
-          repository: google/fuzztest
-          path: ${{ github.workspace }}/fuzztest
-          persist-credentials: false
-
       # WORKAROUND: Add -fno-builtin-std-forward_like for GCC 14 until GCC 14.3
       - name: Configure CMake
         run: >-
