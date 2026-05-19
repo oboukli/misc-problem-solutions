@@ -486,7 +486,7 @@ CheckOptions:
   readability-function-size.VariableThreshold: none
   readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
   readability-identifier-length.IgnoredLoopCounterNames: "^[ijk_]$"
-  readability-identifier-length.IgnoredParameterNames: "^[abcn]|os$"
+  readability-identifier-length.IgnoredParameterNames: "^[abcns]|os$"
   readability-identifier-length.IgnoredVariableNames: "^[i]$"
   readability-identifier-length.MinimumExceptionNameLength: "2"
   readability-identifier-length.MinimumLoopCounterNameLength: "2"

@@ -21,7 +21,12 @@ found in the LICENSE file.
     apply_to = function \
 )
 #endif /* __clang__ */
-int forfun_is_palindrome(char const* str, size_t const length)
+
+/**
+ * @note Assumes single-byte character encoded strings. Undefined behavior for
+ * multi-byte character encodings.
+ */
+int forfun_s1_is_palindrome(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
@@ -41,6 +46,7 @@ int forfun_is_palindrome(char const* str, size_t const length)
 
     return 1;
 }
+
 #ifdef __clang__
 #pragma clang attribute pop
 #endif /* __clang__ */
@@ -53,7 +59,44 @@ int forfun_is_palindrome(char const* str, size_t const length)
     apply_to = function \
 )
 #endif /* __clang__ */
-int forfun_is_palindrome_ci(char const* str, size_t const length)
+
+/**
+ * @note Assumes single-byte character encoded strings. Undefined behavior for
+ * multi-byte character encodings.
+ */
+int forfun_s2_is_palindrome(char const* str, size_t const length)
+{
+    /* Two insulated and harmless overflows when length is zero. */
+    char const* str_rhs = str + (length - 1U);
+
+    while (str < str_rhs)
+    {
+        if (*str != *str_rhs)
+        {
+            return 0;
+        }
+
+        --str_rhs;
+        ++str;
+    }
+
+    return 1;
+}
+
+#ifdef __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
+
+#ifdef __clang__
+#pragma clang attribute push( \
+    __attribute__(( \
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
+    )), \
+    apply_to = function \
+)
+#endif /* __clang__ */
+
+int forfun_s1_is_palindrome_ci(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
@@ -73,6 +116,38 @@ int forfun_is_palindrome_ci(char const* str, size_t const length)
 
     return 1;
 }
+
+#ifdef __clang__
+#pragma clang attribute pop
+#endif /* __clang__ */
+
+#ifdef __clang__
+#pragma clang attribute push( \
+    __attribute__(( \
+        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
+    )), \
+    apply_to = function \
+)
+#endif /* __clang__ */
+int forfun_s2_is_palindrome_ci(char const* str, size_t const length)
+{
+    /* Two insulated and harmless overflows when length is zero. */
+    char const* str_rhs = str + (length - 1U);
+
+    while (str < str_rhs)
+    {
+        if (tolower((unsigned char)*str) != tolower((unsigned char)*str_rhs))
+        {
+            return 0;
+        }
+
+        --str_rhs;
+        ++str;
+    }
+
+    return 1;
+}
+
 #ifdef __clang__
 #pragma clang attribute pop
 #endif /* __clang__ */
