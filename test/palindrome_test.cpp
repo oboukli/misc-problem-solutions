@@ -52,11 +52,13 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
-    &::forfun_is_palindrome,
+    &::forfun_s1_is_palindrome,
+    &::forfun_s2_is_palindrome,
     &forfun::palindrome::functional::is_palindrome<char>,
-    &forfun::palindrome::functional::bloated::is_palindrome<char>,
     &forfun::palindrome::iterator_based::is_palindrome<char>,
-    &forfun::palindrome::offset_based::is_palindrome<char>
+    &forfun::palindrome::offset_based::is_palindrome<char>,
+    &forfun::palindrome::pointer_based::is_palindrome<char>,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome<char>
 )
 {
     SECTION("Positive")
@@ -64,9 +66,14 @@ TEMPLATE_TEST_CASE_SIG(
         std::string_view const s{GENERATE(
             ""sv,
             "X"sv,
+            "x"sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
+            "AA"sv,
             "aba"sv,
+            "aBa"sv,
+            "AbA"sv,
+            "ABA"sv,
             "a b a"sv,
             "101"sv,
             "tattarrattat"sv,
@@ -93,7 +100,13 @@ TEMPLATE_TEST_CASE_SIG(
             "Malayalam"sv,
             "Xyz 8 zYX"sv,
             "Step on no pets"sv,
-            "12/20/2021"sv
+            "12/20/2021"sv,
+            "xo"sv,
+            "ox"sv,
+            "Xo"sv,
+            "xO"sv,
+            "xxxxxxxoxxxxxxxx"sv,
+            "xxxxxxxxoxxxxxxx"sv
         )};
 
         CAPTURE(s);
@@ -107,17 +120,21 @@ TEMPLATE_TEST_CASE_SIG(
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
     &forfun::palindrome::functional::is_palindrome<wchar_t>,
-    &forfun::palindrome::functional::bloated::is_palindrome<wchar_t>,
     &forfun::palindrome::iterator_based::is_palindrome<wchar_t>,
-    &forfun::palindrome::offset_based::is_palindrome<wchar_t>
+    &forfun::palindrome::offset_based::is_palindrome<wchar_t>,
+    &forfun::palindrome::pointer_based::is_palindrome<wchar_t>,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome<wchar_t>
 )
 {
     SECTION("Positive")
     {
         std::basic_string_view<wchar_t> const s{GENERATE(
+            L"ß"sv,
+            L"ßß"sv,
             L""sv,
             L"X"sv,
             L"\xb8Y\xb8"sv,
+            L"aa"sv,
             L"aa"sv,
             L"aba"sv,
             L"a b a"sv,
@@ -163,9 +180,10 @@ TEMPLATE_TEST_CASE_SIG(
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
     &forfun::palindrome::functional::is_palindrome<char32_t>,
-    &forfun::palindrome::functional::bloated::is_palindrome<char32_t>,
     &forfun::palindrome::iterator_based::is_palindrome<char32_t>,
-    &forfun::palindrome::offset_based::is_palindrome<char32_t>
+    &forfun::palindrome::offset_based::is_palindrome<char32_t>,
+    &forfun::palindrome::pointer_based::is_palindrome<char32_t>,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome<char32_t>
 )
 {
     SECTION("Positive")
@@ -218,10 +236,13 @@ TEMPLATE_TEST_CASE_SIG(
     "Case-insensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome_ci, func_is_palindrome_ci),
-    &::forfun_is_palindrome_ci,
-    &forfun::palindrome::functional::bloated::is_palindrome_ci,
+    &::forfun_s1_is_palindrome_ci,
+    &::forfun_s2_is_palindrome_ci,
+    &forfun::palindrome::functional::is_palindrome_ci,
     &forfun::palindrome::iterator_based::is_palindrome_ci,
-    &forfun::palindrome::offset_based::is_palindrome_ci
+    &forfun::palindrome::offset_based::is_palindrome_ci,
+    &forfun::palindrome::pointer_based::is_palindrome_ci,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome_ci
 )
 {
     SECTION("Positive")
@@ -229,9 +250,15 @@ TEMPLATE_TEST_CASE_SIG(
         std::string_view const s{GENERATE(
             ""sv,
             "X"sv,
+            "x"sv,
             "\xb8Y\xb8"sv,
             "aa"sv,
             "aba"sv,
+            "Aba"sv,
+            "abA"sv,
+            "aBa"sv,
+            "AbA"sv,
+            "ABA"sv,
             "a b a"sv,
             "101"sv,
             "Malayalam"sv,
@@ -242,7 +269,12 @@ TEMPLATE_TEST_CASE_SIG(
             "tattarratTat"sv,
             "Aab4'{x{'4BaA"sv,
             "Step on no pets"sv,
-            "19/9/91"sv
+            "19/9/91"sv,
+            "xxxxOOOOxxxx"sv,
+            "xxxxOooOxxxx"sv,
+            "xxxxOoOOxxxx"sv,
+            "xxxxOOoOxxxx"sv,
+            "abcdeedcba"sv
         )};
 
         CAPTURE(s);
@@ -255,11 +287,17 @@ TEMPLATE_TEST_CASE_SIG(
         std::string_view const s{GENERATE(
             "Dummy"sv,
             "dummy"sv,
+            "dummY"sv,
             "42"sv,
             "12/20/2021"sv,
             "Step on no pets!"sv,
             " 010"sv,
-            "Cat"sv
+            "Cat"sv,
+            "xxxxxxxoxxxxxxxx"sv,
+            "xxxxxxxxoxxxxxxx"sv,
+            "xxxxxxxxXoxxxxxx"sv,
+            "xxxxxxxxxOxxxxxx"sv,
+            "xxxxxxxxXOxxxxxx"sv
         )};
 
         CAPTURE(s);
