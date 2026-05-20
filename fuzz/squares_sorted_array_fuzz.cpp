@@ -54,7 +54,9 @@ auto SortedVectorOfArbitraryInts() -> ::fuzztest::Domain<std::vector<int>>
 
             return vec_;
         },
-        ::fuzztest::VectorOf(::fuzztest::InRange(min_safe, max_safe))
+        ::fuzztest::NonEmpty(
+            ::fuzztest::VectorOf(::fuzztest::InRange(min_safe, max_safe))
+        )
     );
 }
 

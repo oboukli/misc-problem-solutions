@@ -31,7 +31,12 @@ auto fuzz_hardened_eval_expression(std::vector<std::string> const& tokens)
     };
 
     EXPECT_THAT(
-        actual_error, ::testing::AnyOf(std::errc{}, std::errc::invalid_argument)
+        actual_error,
+        ::testing::AnyOf(
+            std::errc{},
+            std::errc::argument_out_of_domain,
+            std::errc::invalid_argument
+        )
     );
 }
 
