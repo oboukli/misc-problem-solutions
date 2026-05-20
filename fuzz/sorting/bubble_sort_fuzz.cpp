@@ -31,6 +31,12 @@ auto fuzz_stl_bubble_sort(std::vector<int> input) -> void
 
 } // namespace
 
-FUZZ_TEST(sorting_bubble_sort, fuzz_plain_bubble_sort);
+FUZZ_TEST(sorting_bubble_sort, fuzz_plain_bubble_sort)
+    .WithDomains(
+        ::fuzztest::NonEmpty(::fuzztest::Arbitrary<std::vector<int>>())
+    );
 
-FUZZ_TEST(sorting_bubble_sort, fuzz_stl_bubble_sort);
+FUZZ_TEST(sorting_bubble_sort, fuzz_stl_bubble_sort)
+    .WithDomains(
+        ::fuzztest::NonEmpty(::fuzztest::Arbitrary<std::vector<int>>())
+    );

@@ -24,4 +24,7 @@ auto fuzz_insertion_sort(std::vector<int> input) -> void
 
 } // namespace
 
-FUZZ_TEST(sorting_insertion_sort, fuzz_insertion_sort);
+FUZZ_TEST(sorting_insertion_sort, fuzz_insertion_sort)
+    .WithDomains(
+        ::fuzztest::NonEmpty(::fuzztest::Arbitrary<std::vector<int>>())
+    );
