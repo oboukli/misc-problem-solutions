@@ -203,6 +203,7 @@ target_sources(
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/balanced_binary_tree.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_diameter.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/breadth_first_search.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/depth_first_search.hpp"
@@ -213,6 +214,7 @@ target_sources(
   forfun_graph
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/balanced_binary_tree.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/binary_tree_diameter.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/binary_tree_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/breadth_first_search.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/depth_first_search.cpp"
@@ -483,6 +485,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/fizzbuzz_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/gcd_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/balanced_binary_tree_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_diameter_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/breadth_first_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/depth_first_search_test.cpp"
@@ -624,6 +627,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/fizzbuzz_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/gcd_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/balanced_binary_tree_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/binary_tree_diameter_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/breadth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/depth_first_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/invert_binary_tree_benchmark.cpp"
