@@ -7,7 +7,7 @@
 Six-node tree.
 
 ```mermaid
-flowchart TB
+graph TB
     id1((1)) --- id2((2))
     id1      --- id3((3))
     id1      --- id4((4))
@@ -22,7 +22,7 @@ flowchart TB
 Eight-node graph with a cycle.
 
 ```mermaid
-flowchart TB
+graph TB
     id1((a)) --- id2((b))
     id1      --- id3((c))
     id1      --- id4((d))
@@ -42,7 +42,7 @@ flowchart TB
 Balanced twelve-node binary tree.
 
 ```mermaid
-flowchart TB
+graph TB
     id1((a)) --- id2((b))
     id1      --- id3((c))
 
@@ -64,7 +64,7 @@ flowchart TB
 Unbalanced twelve-node binary tree.
 
 ```mermaid
-flowchart TB
+graph TB
     id1((a)) --- id2((b))
     id1      --- id3((c))
 
@@ -87,7 +87,7 @@ flowchart TB
 Twelve-node binary tree, unbalanced on the left side.
 
 ```mermaid
-flowchart TB
+graph TB
   id1((a)) --- id2((b))
   id1      --- id3((c))
 
@@ -102,4 +102,44 @@ flowchart TB
   id6      --- id9((j))
   id7      --- id10((k))
   id7      --- id11((l))
+```
+
+### Graph 6
+
+Nineteen-node binary tree, unbalanced on the left side.
+
+Width: 10
+
+```mermaid
+graph TB
+  id1((a)) ---> id2((b))
+  id1      ---> id3((c))
+
+  id2      ---> id4((d))
+  id2      ---> id5((e))
+
+  id3      ---> id6((f))
+  id3      ---> id7((g))
+
+  id4      ---> id8((h))
+
+  id5      ---> id9((i))
+
+  id6      ---> id10((j))
+  id6      ---> id11((k))
+
+  id7      ---> id12((l))
+  id7      ---> id13((m))
+
+  id8      ---> id14((n))
+
+  id9      ---> id15((o))
+
+  id14     ---> id16((p))
+
+  id15     ---> id17((q))
+
+  id16     ---> id18((r))
+
+  id17     ---> id19((s))
 ```
