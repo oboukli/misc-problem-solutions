@@ -86,6 +86,7 @@ leveraged by this project:
 | Maximum Subarray                                                   | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                                                   |
 | Meeting Rooms (I, II)                                              | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                                         |
 | Min Stack                                                          | [`include/forfun/min_stack.hpp`](include/forfun/min_stack.hpp)                                                                                 |
+| Minimum in Rotated Sorted Array                                    | [`include/forfun/search/minimum_rotated_element.hpp`](include/forfun/search/minimum_rotated_element.hpp)                                       |
 | Missing Number                                                     | [`include/forfun/missing_number.hpp`](include/forfun/missing_number.hpp)                                                                       |
 | Move Zeroes                                                        | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                                             |
 | Multiples of Three or Five                                         | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp)                     |

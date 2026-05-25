@@ -289,6 +289,7 @@ target_sources(
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/binary_search.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/koko_eating_bananas.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/minimum_rotated_element.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/search_matrix.hpp"
 )
 target_sources(
@@ -296,6 +297,7 @@ target_sources(
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/binary_search.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/koko_eating_bananas.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/minimum_rotated_element.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/search_matrix.cpp"
 )
 get_target_property(forfun_search_headers forfun_search HEADER_SET)
@@ -548,6 +550,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/koko_eating_bananas_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/minimum_rotated_element_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/search_matrix_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/set_matrix_zeroes_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_test.cpp"
@@ -720,6 +723,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/project_euler/p0001_multiples_of_3_or_5_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/binary_search_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/koko_eating_bananas_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/minimum_rotated_element_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/search_matrix_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/set_matrix_zeroes_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/single_number_benchmark.cpp"
@@ -857,6 +861,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/koko_eating_bananas_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/minimum_rotated_element_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_statictest.cpp"
@@ -906,6 +911,7 @@ if(FORFUN_BUILD_FUZZING_DRIVER)
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/encode_and_decode_strings_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/evaluate_reverse_polish_notation_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/search/binary_search_fuzz.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/search/minimum_rotated_element_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/bubble_sort_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/insertion_sort_fuzz.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/quicksort_fuzz.cpp"
