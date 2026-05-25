@@ -56,6 +56,7 @@ Names and titles follow those of STL and Wikipedia.
 | Meeting Rooms                     | 252. Meeting Rooms                       |
 | Meeting Rooms II                  | 253. Meeting Rooms II                    |
 | Min Stack                         | 155. Min Stack                           |
+| Minimum in Rotated Sorted Array   | 153. Find Minimum in Rotated Sorted Array|
 | Missing Number                    | 268. Missing Number                      |
 | Move Zeroes                       | 283. Move Zeroes                         |
 | Nth Fibonacci Number              | 509. Fibonacci Number                    |
