@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <iterator>
+#include <tuple>
 #include <utility>
 
 #include <catch2/catch_test_macros.hpp>
@@ -248,7 +249,7 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cbegin();
-        [[maybe_unused]] auto const tmp{iter++};
+        std::ignore = iter++;
 
         REQUIRE(*iter == 2017);
     }
@@ -420,7 +421,7 @@ TEST_CASE(
 
         forfun::experimental::container::internal::list_const_iterator iter
             = some_list.cend();
-        [[maybe_unused]] auto const tmp{iter--};
+        std::ignore = iter--;
 
         REQUIRE(*iter == 2243);
     }

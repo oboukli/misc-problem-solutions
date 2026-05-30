@@ -30,7 +30,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::string_view, std::string_view>({
                 {""sv, ""sv},
                 {"cat"sv, "cat"sv},
@@ -75,7 +75,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Negative")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::string_view, std::string_view>({
                 {"car"sv, "cat"sv},
                 {"tiger"sv, "lion"sv},
@@ -113,7 +113,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::u8string_view, std::u8string_view>({
                 {u8""sv, u8""sv},
                 {u8"cat"sv, u8"cat"sv},
@@ -160,7 +160,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Negative")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::u8string_view, std::u8string_view>({
                 {u8"car"sv, u8"cat"sv},
                 {u8"tiger"sv, u8"lion"sv},
@@ -198,7 +198,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::u32string_view, std::u32string_view>({
                 {U""sv, U""sv},
                 {U"cat"sv, U"cat"sv},
@@ -245,7 +245,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Negative")
     {
-        auto [s, t]{GENERATE(
+        auto const [s, t]{GENERATE(
             table<std::u32string_view, std::u32string_view>({
                 {U"car"sv, U"cat"sv},
                 {U"tiger"sv, U"lion"sv},

@@ -181,8 +181,7 @@ TEST_CASE("LRU cache concepts", "[lru_cache]")
         {
         }
 
-        [[maybe_unused]] [[nodiscard]] auto
-        get(std::size_t /*unused*/) const noexcept -> int
+        [[nodiscard]] auto get(std::size_t /*unused*/) const noexcept -> int
         {
             return value_;
         }

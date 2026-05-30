@@ -34,13 +34,16 @@ palindrome_predicate_adapter(Predicate func, BasicStringView view) noexcept(
         typename BasicStringView::size_type>
 ) -> bool
 {
+    using std::data;
+    using std::size;
+
     if constexpr (std::predicate<Predicate, BasicStringView>)
     {
         return func(view);
     }
     else
     {
-        return func(view.data(), view.length());
+        return func(data(view), size(view));
     }
 }
 
