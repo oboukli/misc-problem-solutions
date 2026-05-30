@@ -31,7 +31,8 @@ namespace {
     );
 }
 
-void fuzz_iterative(std::pair<std::vector<int>, int> const& haystack_n_needle)
+auto fuzz_iterative(std::pair<std::vector<int>, int> const& haystack_n_needle)
+    -> void
 {
     auto result{forfun::search::binary_search::iterative::find(
         haystack_n_needle.first.cbegin(),
@@ -54,7 +55,8 @@ void fuzz_iterative(std::pair<std::vector<int>, int> const& haystack_n_needle)
     ASSERT_EQ(*result, haystack_n_needle.second);
 }
 
-void fuzz_recursive(std::pair<std::vector<int>, int> const& haystack_n_needle)
+auto fuzz_recursive(std::pair<std::vector<int>, int> const& haystack_n_needle)
+    -> void
 {
     auto result{forfun::search::binary_search::recursive::find(
         haystack_n_needle.first.cbegin(),

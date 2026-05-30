@@ -48,7 +48,7 @@ auto fuzz_encode_decode_general_case(std::vector<std::string> const& tokens)
     ASSERT_EQ(decoded, tokens);
 }
 
-auto ExceptSpecialCase()
+auto ExceptSpecialCase() -> ::fuzztest::Domain<std::vector<std::string>>
 {
     return ::fuzztest::Filter(
         [](std::vector<std::string> const& tokens) -> bool {
