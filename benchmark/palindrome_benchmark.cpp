@@ -19,6 +19,9 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 {
     using namespace forfun::palindrome;
 
+    using std::data;
+    using std::size;
+
     static constexpr std::string_view const palindrome{
         "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
         "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
@@ -35,7 +38,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(::forfun_s1_is_palindrome).c_str(),
                 [] noexcept -> void {
                     auto const volatile r{::forfun_s1_is_palindrome(
-                        palindrome.data(), palindrome.length()
+                        data(palindrome), size(palindrome)
                     )};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -46,7 +49,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(::forfun_s2_is_palindrome).c_str(),
                 [] noexcept -> void {
                     auto const volatile r{::forfun_s2_is_palindrome(
-                        palindrome.data(), palindrome.length()
+                        data(palindrome), size(palindrome)
                     )};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -79,7 +82,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(offset_based::is_palindrome<char>).c_str(),
                 [] noexcept -> void {
                     auto const volatile r{offset_based::is_palindrome<char>(
-                        palindrome.data(), palindrome.size()
+                        data(palindrome), size(palindrome)
                     )};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -122,7 +125,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(::forfun_s1_is_palindrome_ci).c_str(),
                 [] noexcept -> void {
                     auto const r{::forfun_s1_is_palindrome_ci(
-                        palindrome.data(), palindrome.length()
+                        data(palindrome), size(palindrome)
                     )};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -133,7 +136,7 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
                 NAMEOF_RAW(::forfun_s2_is_palindrome_ci).c_str(),
                 [] noexcept -> void {
                     auto const r{::forfun_s2_is_palindrome_ci(
-                        palindrome.data(), palindrome.length()
+                        data(palindrome), size(palindrome)
                     )};
 
                     ankerl::nanobench::doNotOptimizeAway(&r);

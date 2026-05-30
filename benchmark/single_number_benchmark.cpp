@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <iterator>
 #include <vector>
 
 #include <catch2/catch_test_macros.hpp>
@@ -18,6 +19,9 @@
 TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
 {
     using namespace forfun::single_number;
+
+    using std::data;
+    using std::size;
 
     std::vector const nums{
         // clang-format off
@@ -53,7 +57,7 @@ TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
             NAMEOF_RAW(::forfun_get_single).c_str(),
             [&nums] noexcept -> void {
                 auto const volatile r{
-                    ::forfun_get_single(nums.data(), nums.size())
+                    ::forfun_get_single(data(nums), size(nums))
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
