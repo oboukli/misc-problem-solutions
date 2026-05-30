@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <iterator>
+#include <tuple>
 #include <utility>
 
 #include <catch2/catch_test_macros.hpp>
@@ -258,7 +259,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
         forfun::experimental::container::internal::list_iterator iter
             = some_list.begin();
-        [[maybe_unused]] auto const tmp{iter++};
+        std::ignore = iter++;
 
         REQUIRE(*iter == 1459);
     }
@@ -425,7 +426,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
         forfun::experimental::container::internal::list_iterator iter
             = some_list.end();
-        [[maybe_unused]] auto const tmp{iter--};
+        std::ignore = iter--;
 
         REQUIRE(*iter == 1667);
     }
@@ -506,7 +507,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
         forfun::experimental::container::internal::list_iterator iter
             = some_list.end();
-        [[maybe_unused]] auto const tmp{--iter};
+        std::ignore = --iter;
 
         REQUIRE(*iter-- == 1787);
     }
