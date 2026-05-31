@@ -1,0 +1,59 @@
+{
+  "name": "ForFunDsaDevContainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "llvm-vs-code-extensions.lldb-dap",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cmake-tools"
+      ],
+      "settings": {
+        "clangd.arguments": [
+          "--compile-commands-dir=${workspaceFolder}/out/build/"
+        ],
+        "cmake.copyCompileCommands": "${workspaceFolder}/out/build/compile_commands.json",
+        "cmake.debugConfig": {
+          "environment": [
+            {
+              "name": "ASAN_OPTIONS",
+              "value": "check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1"
+            },
+            {
+              "name": "ASAN_SYMBOLIZER_PATH",
+              "value": "/usr/bin/llvm-symbolizer"
+            },
+            {
+              "name": "UBSAN_OPTIONS",
+              "value": "halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${workspaceFolder}/ci/clang_ubsan_supp"
+            },
+            {
+              "name": "MIMALLOC_SHOW_ERRORS",
+              "value": "1"
+            },
+            {
+              "name": "MIMALLOC_SHOW_STATS",
+              "value": "1"
+            },
+            {
+              "name": "MIMALLOC_VERBOSE",
+              "value": "0"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainer-community/devcontainer-features/ninja-build.org:1": {},
+    "ghcr.io/devcontainer-community/devcontainer-features/valgrind.org:1": {},
+    "ghcr.io/devcontainers-community/features/llvm": {},
+    "ghcr.io/devcontainers-extra/features/cmake:1": {},
+    "ghcr.io/ttyrho/devcontainer-features/gcc:1": {
+      "installCPlusPlus": true
+    }
+  }
+}
