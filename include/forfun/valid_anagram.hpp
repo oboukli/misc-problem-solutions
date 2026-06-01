@@ -15,10 +15,11 @@
 #include <concepts>
 #include <cstddef>
 #include <iterator>
-#include <limits>
 #include <map>
 #include <set>
 #include <string_view>
+
+#include "forfun/common/limits.hpp"
 
 namespace forfun::valid_anagram {
 
@@ -36,9 +37,7 @@ is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
 
     std::array<
         std::size_t,
-        2U << static_cast<std::size_t>(
-            std::numeric_limits<std::string_view::value_type>::digits
-        )>
+        forfun::common::limits::domain_size<std::string_view::value_type>()>
         bucket{};
     static_assert(bucket.size() == 256UZ);
 
