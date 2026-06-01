@@ -172,6 +172,7 @@ target_sources(
   FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/limits.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/math.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/type_traits.hpp"
 )
@@ -180,6 +181,7 @@ target_sources(
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/concepts.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/io.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/limits.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/math.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/type_traits.cpp"
 )
@@ -848,6 +850,7 @@ target_sources(
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/limits_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/type_traits_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_statictest.cpp"
