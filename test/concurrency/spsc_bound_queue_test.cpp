@@ -195,6 +195,86 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         REQUIRE(consumable_span.back() == 733);
     }
 
+    SECTION("Reset call on empty queue")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+
+        queue.reset_unsafe();
+
+        REQUIRE(queue.empty_unsafe());
+    }
+
+    SECTION("Reset call on non-empty non-full queue")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        queue.emplace_back(1);
+        queue.emplace_back(2);
+        queue.emplace_back(3);
+
+        queue.reset_unsafe();
+
+        REQUIRE(queue.empty_unsafe());
+    }
+
+    SECTION("Reset call on full queue")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        queue.emplace_back(1);
+        queue.emplace_back(2);
+        queue.emplace_back(3);
+        queue.emplace_back(4);
+        queue.emplace_back(5);
+        queue.emplace_back(6);
+        queue.emplace_back(7);
+        queue.emplace_back(8);
+
+        queue.reset_unsafe();
+
+        REQUIRE(queue.empty_unsafe());
+    }
+
+    SECTION("Fill, reset, refill, and read queue")
+    {
+        using ValueType = int;
+
+        static constexpr std::size_t const queue_capacity{8};
+
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        queue.emplace_back(10);
+        queue.emplace_back(20);
+        queue.emplace_back(30);
+        queue.emplace_back(40);
+        queue.emplace_back(50);
+        queue.emplace_back(60);
+        queue.emplace_back(70);
+        queue.emplace_back(80);
+
+        queue.reset_unsafe();
+
+        REQUIRE(queue.empty_unsafe());
+
+        queue.emplace_back(1);
+        queue.emplace_back(2);
+        queue.emplace_back(3);
+        queue.emplace_back(4);
+        queue.emplace_back(5);
+        queue.emplace_back(6);
+        queue.emplace_back(7);
+        queue.emplace_back(8);
+
+        REQUIRE_FALSE(queue.empty_unsafe());
+
+        REQUIRE(queue.to_span().size() == queue_capacity);
+
+        REQUIRE(
+            std::ranges::equal(
+                queue.to_span(),
+                std::views::iota(ValueType{1})
+                    | std::views::take(queue.to_span().size())
+            )
+        );
+    }
+
     SECTION("Destructor call on empty queue")
     {
         {
