@@ -131,20 +131,9 @@ public:
 
     spsc_bound_queue(spsc_bound_queue&&) = delete;
 
-    constexpr ~spsc_bound_queue() noexcept(noexcept(detail::destroy_n(
-        std::declval<typename raw_queue_type::pointer>(), capacity_
-    )))
+    constexpr ~spsc_bound_queue() noexcept(noexcept(reset_storage()))
     {
-        using std::data;
-
-        if (write_cursor_cached_ == cursor_type{0})
-        {
-            return;
-        }
-
-        assert(write_cursor_cached_ <= static_cast<cursor_type>(capacity_));
-
-        detail::destroy_n(data(raw_queue_), write_cursor_cached_);
+        reset_storage();
     }
 
     auto operator=(spsc_bound_queue const&) -> spsc_bound_queue& = delete;
@@ -161,7 +150,7 @@ public:
         using std::atomic_load_explicit;
 
         return atomic_load_explicit(&write_cursor_, std::memory_order_relaxed)
-            == cursor_type{0};
+            == cursor_type{};
     }
 
     /// @note Undefined behavior when pushing to a full container.
@@ -189,6 +178,13 @@ public:
         );
 
         return *ptr_emplaced;
+    }
+
+    auto reset_unsafe() noexcept(noexcept(reset_storage())) -> void
+    {
+        reset_storage();
+
+        reset_indices();
     }
 
     [[nodiscard]] auto to_span() noexcept -> span_type
@@ -245,7 +241,7 @@ private:
 #pragma warning(pop) // C4324
 #endif // _MSC_VER
 
-    cursor_type write_cursor_cached_{0};
+    cursor_type write_cursor_cached_{};
 
     static_assert(
         std::hardware_destructive_interference_size >= sizeof(cursor_type)
@@ -259,6 +255,26 @@ private:
         std::byte,
         std::hardware_destructive_interference_size - sizeof(cursor_type)>
         end_of_object_padding_ /*[[indeterminate]]*/;
+
+    auto reset_indices() noexcept
+    {
+        write_cursor_cached_ = {};
+
+        atomic_store_explicit(
+            &write_cursor_, cursor_type{}, std::memory_order_release
+        );
+    }
+
+    constexpr auto reset_storage() noexcept(noexcept(detail::destroy_n(
+        std::declval<typename raw_queue_type::pointer>(), capacity_
+    ))) -> void
+    {
+        using std::data;
+
+        assert(write_cursor_cached_ <= static_cast<cursor_type>(capacity_));
+
+        detail::destroy_n(data(raw_queue_), write_cursor_cached_);
+    }
 };
 
 } // namespace forfun::concurrency::wait_free
