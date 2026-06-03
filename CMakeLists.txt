@@ -15,9 +15,9 @@ project(
 
 add_library(forfun)
 add_library(forfun_common)
-add_library(forfun_concurrency_lf)
 add_library(forfun_experimental)
 add_library(forfun_graph)
+add_library(forfun_lock_free)
 add_library(forfun_search)
 add_library(forfun_sorting)
 
@@ -27,12 +27,12 @@ add_library(forfun_c)
 add_library(forfun_c_experimental STATIC)
 
 add_executable(test_driver)
-add_executable(test_driver_concurrency_lf)
+add_executable(test_driver_lock_free)
 add_executable(test_driver_experimental)
 add_executable(static_test_driver)
 
 add_executable(benchmark_driver)
-add_executable(benchmark_driver_concurrency_lf)
+add_executable(benchmark_driver_lock_free)
 add_executable(benchmark_driver_experimental)
 
 include(cmake/CompileOptions.cmake)
@@ -198,13 +198,13 @@ source_group(
 forfun_common_target_compile_options(forfun_common)
 
 target_include_directories(
-  forfun_concurrency_lf
+  forfun_lock_free
   INTERFACE
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
     "$<INSTALL_INTERFACE:include>"
 )
 target_sources(
-  forfun_concurrency_lf
+  forfun_lock_free
   PUBLIC
   FILE_SET HEADERS
   BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
@@ -212,26 +212,26 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/concurrency/spsc_bound_queue.hpp"
 )
 target_sources(
-  forfun_concurrency_lf
+  forfun_lock_free
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/concurrency/spsc_bound_queue.cpp"
 )
 
 get_target_property(
-  forfun_concurrency_lf_headers
-  forfun_concurrency_lf
+  forfun_lock_free_headers
+  forfun_lock_free
   HEADER_SET
 )
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/concurrency/"
   PREFIX "Header files"
-  FILES ${forfun_concurrency_lf_headers}
+  FILES ${forfun_lock_free_headers}
 )
-get_target_property(forfun_concurrency_lf_sources forfun_concurrency_lf SOURCES)
+get_target_property(forfun_lock_free_sources forfun_lock_free SOURCES)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/concurrency"
   PREFIX "Source files"
-  FILES ${forfun_concurrency_lf_sources}
+  FILES ${forfun_lock_free_sources}
 )
 
 target_include_directories(
@@ -604,34 +604,34 @@ target_link_libraries(
 forfun_common_target_compile_options(test_driver)
 
 target_compile_definitions(
-  test_driver_concurrency_lf
+  test_driver_lock_free
   PRIVATE
   CATCH_CONFIG_NO_COUNTER
 )
 target_sources(
-  test_driver_concurrency_lf
+  test_driver_lock_free
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_test.cpp"
 )
 get_target_property(
-  test_driver_concurrency_lf_sources
-  test_driver_concurrency_lf
+  test_driver_lock_free_sources
+  test_driver_lock_free
   SOURCES
 )
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/"
   PREFIX "Source files"
-  FILES ${test_driver_concurrency_lf_sources}
+  FILES ${test_driver_lock_free_sources}
 )
 target_link_libraries(
-  test_driver_concurrency_lf
+  test_driver_lock_free
   PRIVATE Catch2::Catch2WithMain
 )
 target_link_libraries(
-  test_driver_concurrency_lf
-  PRIVATE forfun_concurrency_lf
+  test_driver_lock_free
+  PRIVATE forfun_lock_free
 )
-forfun_common_target_compile_options(test_driver_concurrency_lf)
+forfun_common_target_compile_options(test_driver_lock_free)
 
 target_compile_definitions(
   test_driver_experimental
@@ -678,7 +678,7 @@ include(CTest)
 include(Catch)
 catch_discover_tests(test_driver)
 catch_discover_tests(test_driver_experimental)
-catch_discover_tests(test_driver_concurrency_lf)
+catch_discover_tests(test_driver_lock_free)
 
 find_package(nameof CONFIG REQUIRED)
 find_package(nanobench CONFIG REQUIRED)
@@ -771,35 +771,35 @@ target_link_libraries(
 forfun_common_target_compile_options(benchmark_driver)
 
 target_compile_definitions(
-  benchmark_driver_concurrency_lf
+  benchmark_driver_lock_free
   PRIVATE
   CATCH_CONFIG_NO_COUNTER
 )
 target_sources(
-  benchmark_driver_concurrency_lf
+  benchmark_driver_lock_free
   PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/concurrency/spsc_bound_queue_benchmark.cpp"
 )
 get_target_property(
-  benchmark_driver_concurrency_lf_sources
-  benchmark_driver_concurrency_lf
+  benchmark_driver_lock_free_sources
+  benchmark_driver_lock_free
   SOURCES
 )
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
   PREFIX "Source files"
-  FILES ${benchmark_driver_concurrency_lf_sources}
+  FILES ${benchmark_driver_lock_free_sources}
 )
 target_link_libraries(
-  benchmark_driver_concurrency_lf
+  benchmark_driver_lock_free
   PRIVATE Catch2::Catch2WithMain
 )
 target_link_libraries(
-  benchmark_driver_concurrency_lf
-  PRIVATE forfun_concurrency_lf
+  benchmark_driver_lock_free
+  PRIVATE forfun_lock_free
 )
-forfun_common_target_compile_options(benchmark_driver_concurrency_lf)
+forfun_common_target_compile_options(benchmark_driver_lock_free)
 
 target_compile_definitions(
   benchmark_driver_experimental
@@ -953,7 +953,7 @@ endif()
 
 set_target_properties(
   forfun
-  forfun_concurrency_lf
+  forfun_lock_free
   forfun_common
   forfun_experimental
   forfun_graph
@@ -968,11 +968,11 @@ set_target_properties(
 
 set_target_properties(
   benchmark_driver
-  benchmark_driver_concurrency_lf
+  benchmark_driver_lock_free
   benchmark_driver_experimental
   static_test_driver
   test_driver
-  test_driver_concurrency_lf
+  test_driver_lock_free
   test_driver_experimental
   PROPERTIES
     CXX_EXTENSIONS OFF
@@ -1010,7 +1010,7 @@ install(
     forfun_c
     forfun_c_experimental
     forfun_common
-    forfun_concurrency_lf
+    forfun_lock_free
     forfun_experimental
     forfun_graph
     forfun_search
