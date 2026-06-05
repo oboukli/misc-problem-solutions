@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   analyze:
     env:
-      BUILD: ${{ github.workspace }}\out\build\visual-studio-17
+      BUILD: ${{ github.workspace }}\out\build\visual-studio-18
       CONFIG: Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     permissions:
@@ -22,7 +22,7 @@ jobs:
       packages: write
       security-events: write
     name: Analyze
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
 
     steps:
       - name: Check out repository
@@ -58,7 +58,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_CONFIGURE_PRESET_NAME: visual-studio-17
+          CMAKE_CONFIGURE_PRESET_NAME: visual-studio-18
         run: >-
           cmake
           --preset '${{ env.CMAKE_CONFIGURE_PRESET_NAME }}'
