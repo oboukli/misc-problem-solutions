@@ -171,6 +171,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/math.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/type_traits.hpp"
 )
 target_sources(
   forfun_common
@@ -178,6 +179,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/concepts.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/io.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/math.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/type_traits.cpp"
 )
 get_target_property(forfun_common_headers forfun_common HEADER_SET)
 source_group(
@@ -843,6 +845,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/type_traits_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_statictest.cpp"
