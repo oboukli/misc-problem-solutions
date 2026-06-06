@@ -63,6 +63,7 @@ Names and titles follow those of STL and Wikipedia.
 | Number of Ships in a Rectangle    | 1233. Number of Ships in a Rectangle     |
 | Palindrome                        | 125. Valid Palindrome                    |
 | Palindromic Number                | 9. Palindrome Number                     |
+| Permutation in String             | 567. Permutation in String               |
 | Product of Array Except Self      | 238. Product of Array Except Self        |
 | Reverse Forward List              | 206. Reverse Linked List                 |
 | Search Matrix                     | 74. Search a 2D Matrix                   |
