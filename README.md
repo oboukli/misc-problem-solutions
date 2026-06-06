@@ -95,6 +95,7 @@ leveraged by this project:
 | Palindrome                                                         | [`include/forfun/palindrome.hpp`](include/forfun/palindrome.hpp)                                                                               |
 | Palindrome (in C)                                                  | [`src/forfun_c/palindrome.c`](src/forfun_c/palindrome.c)                                                                                       |
 | Palindromic Number                                                 | [`src/forfun/palindromic_number.cpp`](src/forfun/palindromic_number.cpp)                                                                       |
+| Permutation in String                                              | [`include/forfun/permutation_in_string.hpp`](include/forfun/permutation_in_string.hpp)                                                         |
 | Primality Test                                                     | [`include/forfun/primality.hpp`](include/forfun/primality.hpp)                                                                                 |
 | Product of Array Except Self                                       | [`include/forfun/product_except_self.hpp`](include/forfun/product_except_self.hpp)                                                             |
 | Quicksort                                                          | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                                                 |
