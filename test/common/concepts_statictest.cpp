@@ -187,3 +187,44 @@ TEST_CASE("Concept noexcept_callable", "[common]")
         }
     }
 }
+
+TEST_CASE("Concept standard_char_type", "[common]")
+{
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(forfun::common::concepts::standard_char_type<char>);
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::standard_char_type<signed char>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::standard_char_type<unsigned char>
+        );
+
+        STATIC_REQUIRE(forfun::common::concepts::standard_char_type<wchar_t>);
+
+        STATIC_REQUIRE(forfun::common::concepts::standard_char_type<char8_t>);
+
+        STATIC_REQUIRE(forfun::common::concepts::standard_char_type<char16_t>);
+
+        STATIC_REQUIRE(forfun::common::concepts::standard_char_type<char32_t>);
+    }
+
+    SECTION("Negative")
+    {
+        STATIC_REQUIRE_FALSE(forfun::common::concepts::standard_char_type<int>);
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::standard_char_type<bool>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::standard_char_type<float>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::standard_char_type<Dummy>
+        );
+    }
+}

@@ -10,12 +10,25 @@
 #include <concepts>
 #include <utility>
 
+#include "type_traits.hpp"
+
 namespace forfun::common::concepts {
 
 template <typename T>
 concept addition_unpromoted = requires(T addend) {
     { addend + addend } -> std::same_as<T>;
 };
+
+template <typename T>
+concept standard_char_type = forfun::common::type_traits::type_is_one_of_v<
+    T,
+    char,
+    signed char,
+    unsigned char,
+    wchar_t,
+    char8_t,
+    char16_t,
+    char32_t>;
 
 template <typename Factor, typename Product>
 concept multipliable_as = requires(Factor factor) {
