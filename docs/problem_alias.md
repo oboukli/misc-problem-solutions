@@ -8,22 +8,34 @@ vectors.
 
 Names and titles follow those of STL and Wikipedia.
 
+Some problems may have been, partially or completely renamed; for example,
+"Search a 2D Matrix" is renamed to "Search Matrix".
+
+Input runtime constraints are generally not enforced. Notable examples include
+empty input containers not being supported, while wider value ranges might be.
+In general, there is no constraint on value range (e.g. of an `int`) other than
+that of the holding data type itself.
+
+The differences might have compatibility and performance implications. It is not
+a goal of this work to pass external tests or to compete against external
+benchmarks.
+
 ## List of problems
 
 ### Algorithms, data structures, and patterns
 
-| Name                                                 |
-| ---                                                  |
-| Breadth-First Search                                 |
-| Depth-First Search                                   |
-| Factorial                                            |
-| Forward List                                         |
-| Greatest Common Divisor                              |
-| Integer division ceiling                             |
-| List Bidirectional Iterator                          |
-| Primality Test                                       |
-| Tower of Hanoi                                       |
-| Wait-free (lock-free) SPSC append-only bounded queue |
+| Name                                                                         |
+| ---                                                                          |
+| Breadth-First Search                                                         |
+| Depth-First Search                                                           |
+| Factorial                                                                    |
+| Forward List                                                                 |
+| Greatest Common Divisor                                                      |
+| Integer division ceiling                                                     |
+| List Bidirectional Iterator                                                  |
+| Primality Test                                                               |
+| Tower of Hanoi                                                               |
+| Wait-free (lock-free) SPSC append-only bounded queue                         |
 
 ### LeetCode problems
 
@@ -71,7 +83,7 @@ Names and titles follow those of STL and Wikipedia.
 | Single Number                     | 136. Single Number                       |
 | Squares of a Sorted Array         | 977. Squares of a Sorted Array           |
 | Subsets                           | 78. Subsets                              |
-| Sums of Subarrays of Length K     | (TBC)                                    |
+| Sums of Subarrays of Length K     | 2461. Maximum Sum of Distinct Subarrays With Length K |
 | Three Sum (3SUM)                  | 15. 3Sum                                 |
 | Top K Frequent Elements           | 347. Top K Frequent Elements             |
 | Trapping Rainwater                | 42. Trapping Rain Water                  |
