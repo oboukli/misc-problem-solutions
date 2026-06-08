@@ -20,7 +20,7 @@ See the [developer notes](docs/developer_notes.md) for more information.
 The following is a partial list of standards, practices, paradigms, and tools
 leveraged by this project:
 
-- C (standard C90) and C++ (standard C++17, C++20, and C++23)
+- C (standard C90) and C++ (standard C++23)
 - The C and C++ standard libraries
 - Strongly-typed approach, leveraging C++ templates and C++20 concepts
 - Exception safety-aware design
@@ -32,7 +32,7 @@ leveraged by this project:
 - Static analysis with Clang Tidy and Microsoft C++ Code Analysis
 - Dynamic analysis
 - LLVM-based sanitizer tools
-- Target property-based CMake configuration
+- Target property-based (modern) CMake configuration
 - Clean Git history and configuration
 - Extensive testing using Catch2, FuzzTest, GTest, and CTest
 - Development dependency management using vcpkg
@@ -85,13 +85,13 @@ leveraged by this project:
 | Longest Consecutive Sequence                                       | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                                           |
 | Maximum Subarray                                                   | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                                                   |
 | Meeting Rooms (I, II)                                              | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                                         |
-| Min Stack                                                          | [`include/forfun/min_stack.hpp`](include/forfun/min_stack.hpp)                                                                                 |
+| Min Stack                                                          | [`include/forfun/container/min_stack.hpp`](include/forfun/container/min_stack.hpp)                                                             |
 | Minimum in Rotated Sorted Array                                    | [`include/forfun/search/minimum_rotated_element.hpp`](include/forfun/search/minimum_rotated_element.hpp)                                       |
 | Missing Number                                                     | [`include/forfun/missing_number.hpp`](include/forfun/missing_number.hpp)                                                                       |
 | Move Zeroes                                                        | [`include/forfun/move_zeroes.hpp`](include/forfun/move_zeroes.hpp)                                                                             |
 | Multiples of Three or Five                                         | [`include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp`](include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp)                     |
 | Nth Fibonacci Number                                               | [`include/forfun/fibonacci.hpp`](include/forfun/fibonacci.hpp)                                                                                 |
-| Number of Ships in a Rectangle                                     | [`src/forfun/sonar.cpp`](src/forfun/sonar.cpp)                                                                                                 |
+| Number of Ships in a Rectangle                                     | [`include/forfun/sonar.hpp`](include/forfun/sonar.hpp)                                                                                         |
 | Palindrome                                                         | [`include/forfun/palindrome.hpp`](include/forfun/palindrome.hpp)                                                                               |
 | Palindrome (in C)                                                  | [`src/forfun_c/palindrome.c`](src/forfun_c/palindrome.c)                                                                                       |
 | Palindromic Number                                                 | [`src/forfun/palindromic_number.cpp`](src/forfun/palindromic_number.cpp)                                                                       |
@@ -100,7 +100,7 @@ leveraged by this project:
 | Product of Array Except Self                                       | [`include/forfun/product_except_self.hpp`](include/forfun/product_except_self.hpp)                                                             |
 | Quicksort                                                          | [`include/forfun/sorting/quicksort.hpp`](include/forfun/sorting/quicksort.hpp)                                                                 |
 | Reverse Forward List                                               | [`include/forfun/container/forward_list.hpp`](include/forfun/container/forward_list.hpp)                                                       |
-| Search matrix                                                      | [`include/forfun/search_matrix.hpp`](include/forfun/search_matrix.hpp)                                                                         |
+| Search matrix                                                      | [`src/forfun/search/search_matrix.cpp`](src/forfun/search/search_matrix.cpp)                                                                   |
 | Set Matrix Zeroes                                                  | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                                         |
 | Single Number                                                      | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                                         |
 | Squares of a Sorted Array                                          | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                                           |
@@ -116,7 +116,7 @@ leveraged by this project:
 | Valid Anagram                                                      | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                                         |
 | Valid Parentheses                                                  | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                                         |
 | Valid Sudoku                                                       | [`include/forfun/valid_sudoku.hpp`](include/forfun/valid_sudoku.hpp)                                                                           |
-| Wait-free (lock-free) SPSC append-only bounded queue               | [`include/forfun/concurrency/spsc_bound_queue.hpp`](include/forfun/concurrency/spsc_bound_queue.hpp)                                         |
+| Wait-free (lock-free) SPSC append-only bounded queue               | [`include/forfun/concurrency/spsc_bound_queue.hpp`](include/forfun/concurrency/spsc_bound_queue.hpp)                                           |
 
 ## Disclaimer
 
