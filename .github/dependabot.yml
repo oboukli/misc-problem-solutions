@@ -1,0 +1,22 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
+version: 2
+
+updates:
+  - package-ecosystem: devcontainers
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore: "
+
+  - package-ecosystem: vcpkg
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "chore: "
