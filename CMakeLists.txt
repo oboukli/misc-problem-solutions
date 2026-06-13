@@ -510,6 +510,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/list.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/min_stack.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/trie.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/runtime/allocator_config.hpp"
 )
 target_sources(
   forfun_experimental
@@ -524,6 +525,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/list.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/min_stack.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/trie.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/runtime/allocator_config.cpp"
 )
 get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
 source_group(
@@ -540,6 +542,7 @@ source_group(
 target_link_libraries(
   forfun_experimental
   PRIVATE Microsoft.GSL::GSL
+  PRIVATE mimalloc
 )
 forfun_common_target_compile_options(forfun_experimental)
 
@@ -701,6 +704,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/min_stack_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/trie_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/runtime/allocator_config.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/shim/allocator_test.cpp"
 )
 get_target_property(
@@ -870,6 +874,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/min_stack_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/trie_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/runtime_config.cpp"
 )
 get_target_property(
   benchmark_driver_experimental_sources
@@ -884,6 +889,7 @@ source_group(
 target_link_libraries(
   benchmark_driver_experimental
   PRIVATE Catch2::Catch2WithMain
+  PRIVATE mimalloc
 )
 target_link_libraries(
   benchmark_driver_experimental

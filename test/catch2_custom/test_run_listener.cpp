@@ -7,8 +7,6 @@
 #include <cstdio>
 
 #include <mimalloc.h>
-// Override the C++ new and delete operations.
-#include <mimalloc-new-delete.h> // IWYU pragma: keep
 
 #include <catch2/catch_test_run_info.hpp>
 #include <catch2/interfaces/catch_interfaces_reporter.hpp>
