@@ -8,6 +8,7 @@ found in the LICENSE file.
 
 #include "forfun_c/mem/mem.h"
 
+#include <assert.h>
 #include <stdlib.h>
 
 struct forfun_mem g_forfun_mem;
@@ -21,6 +22,7 @@ void forfun_mem_set(struct forfun_mem const mem)
 struct forfun_mem forfun_mem_get(void)
 {
     struct forfun_mem mem;
+
     mem.ff_malloc = g_forfun_mem.ff_malloc;
     mem.ff_free = g_forfun_mem.ff_free;
 

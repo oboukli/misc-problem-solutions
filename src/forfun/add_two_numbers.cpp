@@ -29,12 +29,14 @@ namespace forfun::add_two_numbers::stl {
         if (iter_a != addend_a.cend()) [[likely]]
         {
             assert(*iter_a <= 9U);
+
             column_sum += *iter_a++;
         }
 
         if (iter_b != addend_b.cend()) [[likely]]
         {
             assert(*iter_b <= 9U);
+
             column_sum += *iter_b++;
         }
 
