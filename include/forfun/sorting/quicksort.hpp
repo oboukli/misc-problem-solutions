@@ -33,7 +33,7 @@ template <typename IterA, typename IterB>
     auto const pivot{*first};
     for (auto it_j{--last}; it_j != it_i;)
     {
-        if (less{}(*it_j, pivot))
+        if (less<>{}(*it_j, pivot))
         {
             iter_swap(++it_i, it_j);
         }
@@ -61,7 +61,7 @@ constexpr auto quicksort(IterA const first, IterB const last) noexcept -> void
 
     using DiffType = std::iter_difference_t<IterA>;
 
-    if (less{}(distance(first, last), DiffType{2}))
+    if (less<>{}(distance(first, last), DiffType{2}))
     {
         return;
     }

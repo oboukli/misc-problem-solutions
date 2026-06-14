@@ -150,13 +150,13 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 // clang-format off
                 detail::tick_out(
                     board
-                        [plus{}(
-                            multiplies{}(3UZ, divides{}(i, 3UZ)),
-                            divides{}(j, 3UZ)
+                        [plus<>{}(
+                            multiplies<>{}(3UZ, divides<>{}(i, 3UZ)),
+                            divides<>{}(j, 3UZ)
                         )]
-                        [plus{}(
-                            multiplies{}(3UZ, modulus{}(i, 3UZ)),
-                            modulus{}(j, 3UZ)
+                        [plus<>{}(
+                            multiplies<>{}(3UZ, modulus<>{}(i, 3UZ)),
+                            modulus<>{}(j, 3UZ)
                         )],
                     boxes[i]
                 )

@@ -42,11 +42,11 @@ template <typename Iter, typename Sentinel>
 
     for (; iter != last; ++iter)
     {
-        auto const addend{minus{}(target, *iter)};
+        auto const addend{minus<>{}(target, *iter)};
 
         for (auto iter_j{next(iter)}; iter_j != last; ++iter_j)
         {
-            if (equal_to{}(*iter_j, addend))
+            if (equal_to<>{}(*iter_j, addend))
             {
                 return {iter, iter_j};
             }
@@ -76,7 +76,7 @@ two_sum(Iter iter, Sentinel const last, std::iter_value_t<Iter> const target)
     lookup_map.emplace(*iter, iter);
     while (++iter != last)
     {
-        auto const addend{minus{}(target, *iter)};
+        auto const addend{minus<>{}(target, *iter)};
 
         if (auto const iter_found{lookup_map.find(addend)};
             iter_found != lookup_map.cend())
@@ -111,7 +111,7 @@ template <typename Iter, typename Sentinel>
 
     for (; iter != last; ++iter)
     {
-        auto const addend{minus{}(target, *iter)};
+        auto const addend{minus<>{}(target, *iter)};
 
         if (auto const iter_j{lower_bound(next(iter), last, addend)};
             iter_j != last)
@@ -144,11 +144,11 @@ template <typename Iter, typename Sentinel>
 
     for (; iter != last; ++iter)
     {
-        auto const addend{minus{}(target, *iter)};
+        auto const addend{minus<>{}(target, *iter)};
 
         for (auto iter_j{next(iter)}; iter_j != last; ++iter_j)
         {
-            if (equal_to{}(*iter_j, addend))
+            if (equal_to<>{}(*iter_j, addend))
             {
                 return {iter, iter_j};
             }
@@ -178,9 +178,9 @@ template <typename IterA, typename IterB>
     using std::plus;
 
     --iter_b;
-    while (not equal_to{}(target, plus{}(*iter_a, *iter_b)))
+    while (not equal_to<>{}(target, plus<>{}(*iter_a, *iter_b)))
     {
-        if (less{}(target, plus{}(*iter_a, *iter_b)))
+        if (less<>{}(target, plus<>{}(*iter_a, *iter_b)))
         {
             --iter_b;
         }

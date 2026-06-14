@@ -39,7 +39,7 @@ template <typename Iter, typename Sentinel>
     {
         auto const mid{next(first, distance(first, rhs) / 2)};
 
-        if (less{}(*mid, *rhs))
+        if (less<>{}(*mid, *rhs))
         {
             rhs = mid;
         }
@@ -71,13 +71,13 @@ template <typename Iter, typename Sentinel>
     using std::next;
     using std::prev;
 
-    if (auto rhs{prev(last)}; less{}(*rhs, *first))
+    if (auto rhs{prev(last)}; less<>{}(*rhs, *first))
     {
         auto const mid{next(first, distance(first, last) / 2)};
 
         first = find_min(first, mid);
         rhs = find_min(mid, last);
-        if (less{}(*rhs, *first))
+        if (less<>{}(*rhs, *first))
         {
             return rhs;
         }

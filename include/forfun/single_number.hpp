@@ -44,10 +44,12 @@ template <std::ranges::input_range Range>
 [[nodiscard]] constexpr auto get_single(Range&& nums) noexcept
     -> std::ranges::range_value_t<Range>
 {
+    using std::bit_xor;
+
     return std::ranges::fold_left(
         std::forward<Range>(nums),
         std::ranges::range_value_t<Range>{},
-        std::bit_xor{}
+        bit_xor<>{}
     );
 }
 

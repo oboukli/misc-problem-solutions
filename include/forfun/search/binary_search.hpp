@@ -43,14 +43,14 @@ find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
     {
         auto const num_elements{distance(lhs, rhs)};
         Iter mid{next(lhs, num_elements / two)};
-        if (less{}(target, *mid))
+        if (less<>{}(target, *mid))
         {
             rhs = mid;
 
             continue;
         }
 
-        if (greater{}(target, *mid))
+        if (greater<>{}(target, *mid))
         {
             advance(lhs, (num_elements / two) + (num_elements % two));
 
@@ -95,7 +95,7 @@ find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
         DiffType const quotient{num_elements / two};
         DiffType const remainder{num_elements % two};
         Iter mid{next(lhs, quotient)};
-        if (less{}(target, *mid))
+        if (less<>{}(target, *mid))
         {
             rhs = mid;
             num_elements = quotient + remainder;
@@ -103,7 +103,7 @@ find(Iter lhs, Sentinel const last, Target const target) noexcept -> Iter
             continue;
         }
 
-        if (greater{}(target, *mid))
+        if (greater<>{}(target, *mid))
         {
             advance(lhs, quotient + remainder);
             num_elements = quotient;
@@ -141,18 +141,18 @@ do_find(Iter first, Sentinel last, Target const target) noexcept -> Iter
     static constexpr DiffType const two{2};
 
     auto const num_elements{distance(first, last)};
-    if (less{}(num_elements, one))
+    if (less<>{}(num_elements, one))
     {
         return last;
     }
 
     Iter mid{next(first, num_elements / two)};
-    if (less{}(target, *mid))
+    if (less<>{}(target, *mid))
     {
         return do_find(first, mid, target);
     }
 
-    if (greater{}(target, *mid))
+    if (greater<>{}(target, *mid))
     {
         return do_find(next(mid), last, target);
     }
@@ -175,7 +175,7 @@ find(Iter first, Sentinel last, Target const target) noexcept -> Iter
     using std::equal_to;
 
     if (Iter iter{detail::do_find(first, last, target)};
-        (iter != last) && equal_to{}(*iter, target))
+        (iter != last) && equal_to<>{}(*iter, target))
     {
         return iter;
     }

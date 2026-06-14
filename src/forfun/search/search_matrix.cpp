@@ -43,8 +43,8 @@ auto find(
         auto const aux{num_rows};
         auto const row_iter{next(top_iter, aux / two)};
 
-        if (less{}(target, row_iter->back())
-            and less{}(target, row_iter->front()))
+        if (less<>{}(target, row_iter->back())
+            and less<>{}(target, row_iter->front()))
         {
             btm_iter = row_iter;
             num_rows = (aux / two) + (aux % two);
@@ -52,8 +52,8 @@ auto find(
             continue;
         }
 
-        if (greater{}(target, row_iter->front())
-            and greater{}(target, row_iter->back()))
+        if (greater<>{}(target, row_iter->front())
+            and greater<>{}(target, row_iter->back()))
         {
             advance(top_iter, (aux / two) + (aux % two));
             num_rows = aux / two;
@@ -103,16 +103,16 @@ auto find(
         auto const num_rows{distance(top_iter, btm_iter)};
         auto const row_iter{next(top_iter, num_rows / two)};
 
-        if (less{}(target, row_iter->back())
-            and less{}(target, row_iter->front()))
+        if (less<>{}(target, row_iter->back())
+            and less<>{}(target, row_iter->front()))
         {
             btm_iter = row_iter;
 
             continue;
         }
 
-        if (greater{}(target, row_iter->front())
-            and greater{}(target, row_iter->back()))
+        if (greater<>{}(target, row_iter->front())
+            and greater<>{}(target, row_iter->back()))
         {
             advance(top_iter, (num_rows / two) + (num_rows % two));
 

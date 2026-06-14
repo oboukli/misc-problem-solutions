@@ -65,10 +65,10 @@ public:
 
         return any_of(
             coords_, [&area](coord const& coord) constexpr noexcept -> bool {
-                return greater_equal{}(coord.x, area.top)
-                    and less_equal{}(coord.x, area.bottom)
-                    and greater_equal{}(coord.y, area.left)
-                    and less_equal{}(coord.y, area.right);
+                return greater_equal<>{}(coord.x, area.top)
+                    and less_equal<>{}(coord.x, area.bottom)
+                    and greater_equal<>{}(coord.y, area.left)
+                    and less_equal<>{}(coord.y, area.right);
             }
         );
     }
