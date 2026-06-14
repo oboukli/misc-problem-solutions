@@ -46,11 +46,11 @@ template <typename Iter>
 
     while (lhs_iter != rhs_iter)
     {
-        if (less{}(max_left, max_right))
+        if (less<>{}(max_left, max_right))
         {
             ValueType const elevation{*(++lhs_iter)};
 
-            total_capacity += max(minus{}(max_left, elevation), {});
+            total_capacity += max(minus<>{}(max_left, elevation), {});
 
             max_left = max(max_left, elevation);
         }
@@ -58,7 +58,7 @@ template <typename Iter>
         {
             ValueType const elevation{*(--rhs_iter)};
 
-            total_capacity += max(minus{}(max_right, elevation), {});
+            total_capacity += max(minus<>{}(max_right, elevation), {});
 
             max_right = max(elevation, max_right);
         }

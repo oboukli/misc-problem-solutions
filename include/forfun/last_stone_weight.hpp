@@ -136,11 +136,13 @@ template <std::contiguous_iterator IterA, std::bidirectional_iterator IterB>
 last_stone_weight(IterA const first, IterB last) noexcept
     -> std::iter_value_t<IterA>
 {
+    using std::greater;
+
     auto second{std::next(first)};
 
     while (second != last)
     {
-        std::sort(first, last, std::greater{});
+        std::sort(first, last, greater<>{});
 
         *first -= *second;
         *second = *--last;

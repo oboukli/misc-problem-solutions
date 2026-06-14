@@ -308,6 +308,8 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 top_frequent(Iter iter, Sentinel const last, std::size_t const k)
     -> std::vector<std::iter_value_t<Iter>>
 {
+    using std::ranges::greater;
+
     using ValType = std::iter_value_t<Iter>;
 
     std::unordered_map<ValType, std::size_t> counts;
@@ -323,9 +325,7 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
     };
 
     std::ranges::sort(
-        intermediate,
-        std::ranges::greater{},
-        &std::pair<ValType, std::size_t>::second
+        intermediate, greater{}, &std::pair<ValType, std::size_t>::second
     );
 
     return intermediate

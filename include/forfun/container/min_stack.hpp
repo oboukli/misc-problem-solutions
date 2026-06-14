@@ -178,7 +178,7 @@ public:
         *next_iter_ = value;
         ++next_iter_;
 
-        if ((min_iter_ == begin(mins_)) || less{}(value, *prev(min_iter_)))
+        if ((min_iter_ == begin(mins_)) || less<>{}(value, *prev(min_iter_)))
             [[unlikely]]
         {
             *min_iter_ = value;

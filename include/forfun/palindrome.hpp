@@ -99,7 +99,7 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     using std::next;
     using std::size;
 
-    if (less{}(size(s), SizeType{2})) [[unlikely]]
+    if (less<>{}(size(s), SizeType{2})) [[unlikely]]
     {
         return true;
     }
@@ -136,7 +136,7 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
     using std::next;
     using std::size;
 
-    if (less{}(size(s), SizeType{2})) [[unlikely]]
+    if (less<>{}(size(s), SizeType{2})) [[unlikely]]
     {
         return true;
     }

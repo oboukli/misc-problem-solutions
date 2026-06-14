@@ -74,7 +74,7 @@ auto bubble_sort(IterA const first, IterB last) noexcept -> void
         is_unsorted = false;
         for (IterA it_i{first}; it_i != last; ++it_i)
         {
-            if (greater{}(*it_i, *next(it_i)))
+            if (greater<>{}(*it_i, *next(it_i)))
             {
                 iter_swap(it_i, next(it_i));
                 is_unsorted = true;

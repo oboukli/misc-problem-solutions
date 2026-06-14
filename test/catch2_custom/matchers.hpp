@@ -101,8 +101,8 @@ template <
     typename InnerLess = std::less<>>
 constexpr auto UnorderedNestedRangeEquals(
     RangeOfRange&& expected,
-    OuterEquality&& outer_equal_to = std::equal_to{},
-    InnerLess&& inner_less = std::less{}
+    OuterEquality&& outer_equal_to = std::equal_to<>{},
+    InnerLess&& inner_less = std::less<>{}
 ) -> UnorderedNestedRangeEqualsMatcher<RangeOfRange, OuterEquality, InnerLess>
 {
     return UnorderedNestedRangeEqualsMatcher<

@@ -73,7 +73,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 {
     using std::equal_to;
 
-    return contains_duplicate(first, last, std::equal_to{});
+    return contains_duplicate(first, last, equal_to<>{});
 }
 
 } // namespace quadratic
@@ -132,7 +132,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 {
     using std::equal_to;
 
-    return contains_duplicate(first, last, std::equal_to{});
+    return contains_duplicate(first, last, std::equal_to<>{});
 }
 
 } // namespace sorted
@@ -180,7 +180,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 {
     using std::equal_to;
 
-    return contains_duplicate(first, last, equal_to{});
+    return contains_duplicate(first, last, equal_to<>{});
 }
 
 } // namespace adjacent_find_based
@@ -234,7 +234,7 @@ contains_duplicate(Iter const first, Sentinel const last) noexcept(
 {
     using std::equal_to;
 
-    return contains_duplicate(first, last, std::equal_to{});
+    return contains_duplicate(first, last, std::equal_to<>{});
 }
 
 } // namespace unordered_set_based

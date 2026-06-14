@@ -31,7 +31,8 @@ auto insertion_sort(Iter const first, Sentinel const last) noexcept -> void
     for (Iter it_i{next(first)}; it_i != last; ++it_i)
     {
         for (
-            Iter it_j{it_i}; it_j != first && less{}(*it_j, *prev(it_j)); --it_j
+            Iter it_j{it_i}; it_j != first && less<>{}(*it_j, *prev(it_j));
+            --it_j
         )
         {
             iter_swap(it_j, prev(it_j));

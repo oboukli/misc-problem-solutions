@@ -174,10 +174,10 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
-    std::unique_ptr const evaluation_stack{
+    auto const evaluation_stack{
         // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
         std::make_unique_for_overwrite<int[]>(
-            static_cast<std::size_t>(last - iter) + 1U
+            static_cast<std::size_t>(last - iter) + 1UZ
         )
     };
 

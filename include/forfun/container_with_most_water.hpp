@@ -36,7 +36,7 @@ calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
         for (auto iter_b{next(iter_a)}; iter_b != last; ++iter_b, ++width)
         {
             int const height{min(*iter_a, *iter_b)};
-            int const area{multiplies{}(height, width)};
+            int const area{multiplies<>{}(height, width)};
 
             max_area = max(area, max_area);
         }
@@ -68,11 +68,11 @@ template <typename Iter>
     while (iter_a != iter_b)
     {
         int const height{min(*iter_a, *iter_b)};
-        int const area{multiplies{}(height, width)};
+        int const area{multiplies<>{}(height, width)};
 
         max_area = max(area, max_area);
 
-        if (less{}(*iter_a, *iter_b))
+        if (less<>{}(*iter_a, *iter_b))
         {
             ++iter_a;
         }

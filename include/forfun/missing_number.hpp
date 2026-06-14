@@ -48,13 +48,13 @@ template <std::ranges::input_range Range>
 [[nodiscard]] constexpr auto find_missing_number(Range&& range) noexcept
     -> std::ranges::range_value_t<Range>
 {
+    using std::minus;
+
     auto const n{std::ranges::size(range)};
 
     auto sum{static_cast<std::ranges::range_value_t<Range>>(((n * n) + n) / 2)};
 
-    return std::ranges::fold_left(
-        std::forward<Range>(range), sum, std::minus{}
-    );
+    return std::ranges::fold_left(std::forward<Range>(range), sum, minus<>{});
 }
 
 } // namespace functional
