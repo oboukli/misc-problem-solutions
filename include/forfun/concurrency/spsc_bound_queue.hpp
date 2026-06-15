@@ -34,6 +34,11 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
 #pragma GCC diagnostic ignored "-Wcast-align"
 #endif // defined(__GNUC__) && !defined(__clang__)
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif // __clang__
+
     assert(
         reinterpret_cast<std::uintptr_t>(
             reinterpret_cast<Pointer>(buffer) + offset
@@ -43,6 +48,10 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     return reinterpret_cast<Pointer>(buffer) + offset;
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
 
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
@@ -196,10 +205,19 @@ public:
             atomic_load_explicit(&write_cursor_, std::memory_order_acquire)
         };
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage-in-container"
+#endif // __clang__
+
         return span_type(
             detail::get_ptr_to_obj<pointer>(data(raw_queue_)),
             static_cast<size_type>(cursor_snapshot)
         );
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
     }
 
     [[nodiscard]] static consteval auto capacity() noexcept -> size_type
