@@ -34,8 +34,7 @@ struct dummy_aggregate {
     int d;
     // NOLINTEND(misc-non-private-member-variables-in-classes)
 
-    auto operator<=>(dummy_aggregate const&) const -> std::strong_ordering
-        = default;
+    auto operator==(dummy_aggregate const&) const -> bool = default;
 };
 
 } // namespace
