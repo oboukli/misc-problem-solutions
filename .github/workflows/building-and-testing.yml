@@ -1,3 +1,9 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
 name: Building and testing
 
 on:
@@ -18,17 +24,23 @@ jobs:
       CONFIGURE_PRESET_NAME: windows-x64
       BUILD_PRESET_NAME: windows-x64-debug
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: windows-2025-vs2026
+    strategy:
+      matrix:
+        os:
+          - windows-2025-vs2026
+          - windows-11-vs2026-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -38,17 +50,10 @@ jobs:
         run: ${{ github.workspace }}\vcpkg\bootstrap-vcpkg.bat -disableMetrics
 
       - name: Add NuGet sources
-        env:
-          DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          dotnet nuget add source "${{ env.FEED_URL }}"
-          --name GitHubPackages
-          --username "${{ github.repository_owner }}"
-          --password "${{ secrets.GITHUB_TOKEN }}"
-          --store-password-in-clear-text
-
-          dotnet nuget update source GitHubPackages
+          dotnet nuget add source
+          "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --name 'GitHubPackages'
           --username "${{ github.repository_owner }}"
           --password "${{ secrets.GITHUB_TOKEN }}"
           --store-password-in-clear-text
@@ -97,7 +102,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run test driver of lock-free concurrency library
+      - name: Run test driver of lock-free library
         run: >-
           .\test_driver_lock_free.exe
           --order rand
@@ -115,6 +120,13 @@ jobs:
       - name: Run benchmarks of experimental library
         run: >-
           .\benchmark_driver_experimental.exe
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free library
+        run: >-
+          .\benchmark_driver_lock_free.exe
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
@@ -125,17 +137,23 @@ jobs:
       CONFIGURE_PRESET_NAME: windows-x64
       BUILD_PRESET_NAME: windows-x64-release
       BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: windows-2025-vs2026
+    strategy:
+      matrix:
+        os:
+          - windows-2025-vs2026
+          - windows-11-vs2026-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -145,17 +163,10 @@ jobs:
         run: ${{ github.workspace }}\vcpkg\bootstrap-vcpkg.bat -disableMetrics
 
       - name: Add NuGet sources
-        env:
-          DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          dotnet nuget add source "${{ env.FEED_URL }}"
-          --name GitHubPackages
-          --username "${{ github.repository_owner }}"
-          --password "${{ secrets.GITHUB_TOKEN }}"
-          --store-password-in-clear-text
-
-          dotnet nuget update source GitHubPackages
+          dotnet nuget add source
+          "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --name 'GitHubPackages'
           --username "${{ github.repository_owner }}"
           --password "${{ secrets.GITHUB_TOKEN }}"
           --store-password-in-clear-text
@@ -204,7 +215,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run test driver of lock-free concurrency library
+      - name: Run test driver of lock-free library
         run: >-
           .\test_driver_lock_free.exe
           --order rand
@@ -222,6 +233,13 @@ jobs:
       - name: Run benchmarks of experimental library
         run: >-
           .\benchmark_driver_experimental.exe
+          --durations yes
+          --reporter console::out=-::colour-mode=ansi
+        working-directory: ${{ env.BINARY_DIR }}
+
+      - name: Run benchmarks of lock-free library
+        run: >-
+          .\benchmark_driver_lock_free.exe
           --durations yes
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
@@ -235,7 +253,13 @@ jobs:
       BUILD_PRESET_NAME: strict-gcc-debug
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+          - ubuntu-24.04
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Install tools
@@ -243,17 +267,18 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           mono-complete
-          ninja-build
           valgrind
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -266,20 +291,26 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -329,7 +360,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+      - name: Check test driver of lock-free library with Valgrind Memcheck
         run: >-
           /usr/bin/valgrind
           --tool=memcheck
@@ -341,7 +372,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run concurrency library test driver
+      - name: Run lock-free library test driver
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -363,7 +394,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -379,7 +410,12 @@ jobs:
       BUILD_PRESET_NAME: strict-gcc-release
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Install tools
@@ -387,17 +423,18 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           mono-complete
-          ninja-build
           valgrind
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -410,20 +447,26 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -473,7 +516,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+      - name: Check test driver of lock-free library with Valgrind Memcheck
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
@@ -486,7 +529,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run concurrency library test driver
+      - name: Run lock-free library test driver
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -508,7 +551,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -534,16 +577,17 @@ jobs:
           -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Install tools
         run: >-
-          brew install mono
+          brew install
+          mono
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -556,15 +600,19 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
@@ -611,7 +659,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run test driver of lock-free concurrency library
+      - name: Run test driver of lock-free library
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -633,7 +681,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -659,16 +707,17 @@ jobs:
           -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Install tools
         run: >-
-          brew install mono
+          brew install
+          mono
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -681,15 +730,19 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
@@ -735,7 +788,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run test driver of lock-free concurrency library
+      - name: Run test driver of lock-free library
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -757,7 +810,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -783,16 +836,17 @@ jobs:
           -switch '/Applications/Xcode_${{ env.XCODE_RELEASE }}.app'
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Install tools
         run: >-
-          brew install mono
+          brew install
+          mono
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -805,15 +859,19 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
@@ -857,7 +915,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run test driver of lock-free concurrency library
+      - name: Run test driver of lock-free library
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -879,7 +937,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -893,20 +951,25 @@ jobs:
       BUILD_PRESET_NAME: strict-clang-debug
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Retrieve the LLVM archive signature
         run: |-
           echo "Types: deb
-          URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-22
+          URIs: http://apt.llvm.org/resolute/
+          Suites: llvm-toolchain-resolute-22
           Components: main
           Signed-By:
           $(wget --output-document \
           - https://apt.llvm.org/llvm-snapshot.gpg.key \
           | sed -e 's/^$/./' -e 's/^/ /')" \
-          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-resolute.sources \
           > /dev/null
 
       - name: Install tools
@@ -914,13 +977,15 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           clang-22
           clang-tools-22
-          libc++-22-dev
           libc++-22
+          libc++-22-dev
           libc++abi-22-dev
+          lld-22
           mono-complete
-          ninja-build
           valgrind
 
           sudo update-alternatives
@@ -929,13 +994,16 @@ jobs:
           sudo update-alternatives
           --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
 
+          sudo update-alternatives
+          --install /usr/bin/ld ld /usr/bin/lld-22 100
+
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -948,24 +1016,28 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Append -fno-builtin-std-forward_like for libstdc++ 14 until GCC 14.3
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
-          -DCMAKE_CXX_FLAGS="$(jq --raw-output '.configurePresets.[] | select(.name == "strict-clang") | .cacheVariables.CMAKE_CXX_FLAGS' '${{ github.workspace }}/CMakePresets.json') -fno-builtin-std-forward_like"
 
       - name: Build
         run: >-
@@ -1013,7 +1085,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+      - name: Check test driver of lock-free library with Valgrind Memcheck
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
@@ -1026,7 +1098,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run concurrency library test driver
+      - name: Run lock-free library test driver
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -1048,7 +1120,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --durations yes
@@ -1062,20 +1134,25 @@ jobs:
       BUILD_PRESET_NAME: strict-clang-release
       BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Retrieve the LLVM archive signature
         run: |-
           echo "Types: deb
-          URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-22
+          URIs: http://apt.llvm.org/resolute/
+          Suites: llvm-toolchain-resolute-22
           Components: main
           Signed-By:
           $(wget --output-document \
           - https://apt.llvm.org/llvm-snapshot.gpg.key \
           | sed -e 's/^$/./' -e 's/^/ /')" \
-          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-resolute.sources \
           > /dev/null
 
       - name: Install tools
@@ -1083,13 +1160,15 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           clang-22
           clang-tools-22
-          libc++-22-dev
           libc++-22
+          libc++-22-dev
           libc++abi-22-dev
+          lld-22
           mono-complete
-          ninja-build
           valgrind
 
           sudo update-alternatives
@@ -1098,13 +1177,16 @@ jobs:
           sudo update-alternatives
           --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
 
+          sudo update-alternatives
+          --install /usr/bin/ld ld /usr/bin/lld-22 100
+
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -1117,24 +1199,28 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Append -fno-builtin-std-forward_like for libstdc++ 14 until GCC 14.3
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
-          -DCMAKE_CXX_FLAGS="$(jq --raw-output '.configurePresets.[] | select(.name == "strict-clang") | .cacheVariables.CMAKE_CXX_FLAGS' '${{ github.workspace }}/CMakePresets.json') -fno-builtin-std-forward_like"
 
       - name: Build
         run: >-
@@ -1181,7 +1267,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Check test driver of lock-free concurrency library with Valgrind Memcheck
+      - name: Check test driver of lock-free library with Valgrind Memcheck
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
@@ -1194,7 +1280,7 @@ jobs:
           --success
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run concurrency library test driver
+      - name: Run lock-free library test driver
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -1225,20 +1311,25 @@ jobs:
       ASAN_OPTIONS: check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1
       ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
       UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${{ github.workspace }}/ci/clang_ubsan_supp
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Retrieve the LLVM archive signature
         run: |-
           echo "Types: deb
-          URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-22
+          URIs: http://apt.llvm.org/resolute/
+          Suites: llvm-toolchain-resolute-22
           Components: main
           Signed-By:
           $(wget --output-document \
           - https://apt.llvm.org/llvm-snapshot.gpg.key \
           | sed -e 's/^$/./' -e 's/^/ /')" \
-          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-resolute.sources \
           > /dev/null
 
       - name: Install tools
@@ -1246,13 +1337,15 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           clang-22
           clang-tools-22
-          libc++-22-dev
           libc++-22
+          libc++-22-dev
           libc++abi-22-dev
+          lld-22
           mono-complete
-          ninja-build
 
           sudo update-alternatives
           --install /usr/bin/cc cc /usr/bin/clang-22 100
@@ -1260,13 +1353,16 @@ jobs:
           sudo update-alternatives
           --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
 
+          sudo update-alternatives
+          --install /usr/bin/ld ld /usr/bin/lld-22 100
+
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -1279,20 +1375,26 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -1327,7 +1429,7 @@ jobs:
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run and instrument test driver of lock-free concurrency library
+      - name: Run and instrument test driver of lock-free library
         run: >-
           ./test_driver_lock_free
           --order rand
@@ -1354,20 +1456,25 @@ jobs:
       BINARY_DIR: ${{ github.workspace }}/out/build/clang-tsan
       TSAN_OPTIONS: enable_adaptive_delay=1:adaptive_delay_aggressiveness=50
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os:
+          - ubuntu-26.04
+          - ubuntu-26.04-arm
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Retrieve the LLVM archive signature
         run: |-
           echo "Types: deb
-          URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-22
+          URIs: http://apt.llvm.org/resolute/
+          Suites: llvm-toolchain-resolute-22
           Components: main
           Signed-By:
           $(wget --output-document \
           - https://apt.llvm.org/llvm-snapshot.gpg.key \
           | sed -e 's/^$/./' -e 's/^/ /')" \
-          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-resolute.sources \
           > /dev/null
 
       - name: Install tools
@@ -1375,13 +1482,15 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
+          --assume-yes
+          --no-install-recommends
           clang-22
           clang-tools-22
-          libc++-22-dev
           libc++-22
+          libc++-22-dev
           libc++abi-22-dev
+          lld-22
           mono-complete
-          ninja-build
 
           sudo update-alternatives
           --install /usr/bin/cc cc /usr/bin/clang-22 100
@@ -1389,13 +1498,16 @@ jobs:
           sudo update-alternatives
           --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
 
+          sudo update-alternatives
+          --install /usr/bin/ld ld /usr/bin/lld-22 100
+
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -1408,20 +1520,26 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
       - name: Configure CMake
         run: >-
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
 
@@ -1434,14 +1552,14 @@ jobs:
           test_driver_lock_free
           benchmark_driver_lock_free
 
-      - name: Run and instrument of concurrency test driver
+      - name: Run and instrument of lock-free test driver
         run: >-
           ./test_driver_lock_free
           --order rand
           --reporter console::out=-::colour-mode=ansi
         working-directory: ${{ env.BINARY_DIR }}
 
-      - name: Run benchmarks of lock-free concurrency library
+      - name: Run benchmarks of lock-free library
         run: >-
           ./benchmark_driver_lock_free
           --reporter console::out=-::colour-mode=ansi

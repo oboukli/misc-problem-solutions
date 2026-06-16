@@ -1,3 +1,9 @@
+# Copyright (c) Omar Boukli-Hacene. All rights reserved.
+# Distributed under an MIT-style license that can be
+# found in the LICENSE file.
+
+# SPDX-License-Identifier: MIT
+
 name: Microsoft C++ Code Analysis
 
 on:
@@ -26,12 +32,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}\vcpkg
@@ -79,7 +85,7 @@ jobs:
           sarif_file: ${{ steps.run-analysis.outputs.sarif }}
 
       - name: Upload SARIF as an Artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: sarif-file
           path: ${{ steps.run-analysis.outputs.sarif }}

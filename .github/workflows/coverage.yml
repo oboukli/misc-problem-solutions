@@ -32,20 +32,20 @@ jobs:
       CONFIGURE_PRESET_NAME: clang-coverage
       BINARY_DIR: ${{ github.workspace }}/out/build/clang-coverage
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Retrieve the LLVM archive signature
         run: |-
           echo "Types: deb
-          URIs: http://apt.llvm.org/noble/
-          Suites: llvm-toolchain-noble-22
+          URIs: http://apt.llvm.org/resolute/
+          Suites: llvm-toolchain-resolute-22
           Components: main
           Signed-By:
           $(wget --output-document \
           - https://apt.llvm.org/llvm-snapshot.gpg.key \
           | sed -e 's/^$/./' -e 's/^/ /')" \
-          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-noble.sources \
+          | sudo tee /etc/apt/sources.list.d/llvm-toolchain-resolute.sources \
           > /dev/null
 
       - name: Install tools
@@ -60,8 +60,8 @@ jobs:
           libc++abi-22-dev
           lld-22
           llvm-22
+          lld-22
           mono-complete
-          ninja-build
 
           sudo update-alternatives
           --install /usr/bin/cc cc /usr/bin/clang-22 100
@@ -73,12 +73,12 @@ jobs:
           --install /usr/bin/ld ld /usr/bin/lld-22 100
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Check out vcpkg
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: microsoft/vcpkg
           path: ${{ github.workspace }}/vcpkg
@@ -91,24 +91,26 @@ jobs:
         env:
           FEED_URL: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         run: >-
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          unset VCPKG_FORCE_SYSTEM_BINARIES
+
+          NUGET="$(./vcpkg/vcpkg fetch nuget | tail -n 1)"
+
+          mono "${NUGET}"
           sources add
           -source "${{ env.FEED_URL }}"
           -storepasswordincleartext
-          -name "GitHubPackages"
+          -name 'GitHubPackages'
           -username "${{ github.repository_owner }}"
           -password "${{ secrets.GITHUB_TOKEN }}"
 
-          mono `${{ github.workspace }}/vcpkg/vcpkg fetch nuget | tail -n 1`
+          mono "${NUGET}"
           setapikey "${{ secrets.GITHUB_TOKEN }}"
           -source "${{ env.FEED_URL }}"
 
-      # WORKAROUND: Append -fno-builtin-std-forward_like for libstdc++ 14 until GCC 14.3
       - name: Configure CMake
         run: >-
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
-          -DCMAKE_CXX_FLAGS="$(jq --raw-output '.configurePresets.[] | select(.name == "strict-clang") | .cacheVariables.CMAKE_CXX_FLAGS' '${{ github.workspace }}/CMakePresets.json') -fno-builtin-std-forward_like"
 
       - name: Build
         run: >-
@@ -123,7 +125,7 @@ jobs:
           bash ${{ github.workspace }}/ci/generate_coverage_report.sh
 
       - name: Upload code coverage artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           compression-level: 8
           if-no-files-found: error
