@@ -20,7 +20,7 @@ TEMPLATE_TEST_CASE_SIG(
     forfun::graph::balanced_binary_tree::stl_pair::is_balanced
 )
 {
-    using forfun::graph::balanced_binary_tree::binary_tree_node;
+    using forfun::graph::binary_tree_node;
 
     SECTION("Empty graph")
     {

@@ -11,8 +11,6 @@
 
 namespace forfun::graph::balanced_binary_tree {
 
-using graph::binary_tree_node;
-
 namespace raw {
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* root) noexcept -> bool;
