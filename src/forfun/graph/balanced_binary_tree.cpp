@@ -11,11 +11,18 @@
 #include <cstdlib>
 #include <utility>
 
+#include "forfun/graph/binary_tree_node.hpp"
+
 namespace forfun::graph::balanced_binary_tree {
 
 namespace raw {
 
 namespace {
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnrvo"
+#endif // __clang__
 
 auto measure_depth_internal(binary_tree_node const* const root) noexcept
     -> std::ptrdiff_t
@@ -63,6 +70,10 @@ auto measure_depth_internal(binary_tree_node const* const root) noexcept
     return ++max;
 }
 
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
+
 } // namespace
 
 [[nodiscard]] auto is_balanced(binary_tree_node const* const root) noexcept
@@ -76,6 +87,11 @@ auto measure_depth_internal(binary_tree_node const* const root) noexcept
 namespace stl_abs {
 
 namespace {
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnrvo"
+#endif // __clang__
 
 auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
@@ -105,11 +121,15 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     )};
     if (diff > decltype(diff){1})
     {
-        return {diff, true};
+        return {{}, true};
     }
 
     return {std::max(left.first, right.first) + 1UZ, false};
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
 
 } // namespace
 
@@ -124,6 +144,11 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 namespace stl_minmax {
 
 namespace {
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnrvo"
+#endif // __clang__
 
 auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
@@ -151,11 +176,15 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 
     if (std::size_t const diff{max - min}; diff > 1UZ)
     {
-        return {diff, true};
+        return {{}, true};
     }
 
     return {max + 1UZ, false};
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
 
 } // namespace
 
@@ -170,6 +199,11 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 namespace stl_pair {
 
 namespace {
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnrvo"
+#endif // __clang__
 
 auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     -> std::pair<std::size_t, bool>
@@ -193,7 +227,7 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
     }
 
     // clang-format off
-    auto diff{
+    auto const diff{
         left.first > right.first
         ? left.first - right.first
         : right.first - left.first
@@ -202,11 +236,15 @@ auto is_unbalanced_internal(binary_tree_node const* const root) noexcept
 
     if (diff > 1UZ)
     {
-        return {diff, true};
+        return {{}, true};
     }
 
     return {std::max(left.first, right.first) + 1UZ, false};
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
 
 } // namespace
 

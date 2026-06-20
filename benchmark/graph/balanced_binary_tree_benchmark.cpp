@@ -11,12 +11,15 @@
 #include <nameof.hpp>
 
 #include "forfun/graph/balanced_binary_tree.hpp"
+#include "forfun/graph/binary_tree_node.hpp"
 
 TEST_CASE(
     "Balanced binary tree benchmarking", "[benchmark][balanced_binary_tree]"
 )
 {
     using namespace forfun::graph::balanced_binary_tree;
+
+    using forfun::graph::binary_tree_node;
 
     // As seen in graph 4 in graph docs.
     binary_tree_node h_r_r_l_{12};
