@@ -44,7 +44,7 @@ CheckOptions:
   bugprone-argument-comment.CommentStringLiterals: "0"
   bugprone-argument-comment.CommentUserDefinedLiterals: "0"
   bugprone-argument-comment.IgnoreSingleArgument: "0"
-  bugprone-argument-comment.StrictMode: "0"
+  bugprone-argument-comment.StrictMode: "true"
   bugprone-assert-side-effect.AssertMacros: assert,NSAssert,NSCAssert
   bugprone-assert-side-effect.CheckFunctionCalls: "false"
   bugprone-assert-side-effect.IgnoredFunctions: __builtin_expect
@@ -110,7 +110,7 @@ CheckOptions:
   bugprone-string-constructor.StringNames: "::std::basic_string;::std::basic_string_view"
   bugprone-string-constructor.WarnOnLargeLength: "true"
   bugprone-stringview-nullptr.IncludeStyle: llvm
-  bugprone-suspicious-enum-usage.StrictMode: "false"
+  bugprone-suspicious-enum-usage.StrictMode: "true"
   bugprone-suspicious-missing-comma.MaxConcatenatedTokens: "5"
   bugprone-suspicious-missing-comma.RatioThreshold: "0.200000"
   bugprone-suspicious-missing-comma.SizeThreshold: "5"
@@ -122,7 +122,7 @@ CheckOptions:
   bugprone-tagged-union-member-count.CountingEnumPrefixes: ""
   bugprone-tagged-union-member-count.CountingEnumSuffixes: count
   bugprone-tagged-union-member-count.EnableCountingEnumHeuristic: "true"
-  bugprone-tagged-union-member-count.StrictMode: "false"
+  bugprone-tagged-union-member-count.StrictMode: "true"
   bugprone-too-small-loop-variable.MagnitudeBitsUpperLimit: "16"
   bugprone-unchecked-optional-access.IgnoreSmartPointerDereference: "false"
   bugprone-unchecked-optional-access.IgnoreValueCalls: "false"
@@ -226,7 +226,7 @@ CheckOptions:
   cppcoreguidelines-pro-bounds-constant-array-index.GslHeader: ""
   cppcoreguidelines-pro-bounds-constant-array-index.IncludeStyle: llvm
   cppcoreguidelines-pro-bounds-pointer-arithmetic.AllowIncrementDecrementOperators: "false"
-  cppcoreguidelines-pro-type-const-cast.StrictMode: "false"
+  cppcoreguidelines-pro-type-const-cast.StrictMode: "true"
   cppcoreguidelines-pro-type-member-init.IgnoreArrays: "false"
   cppcoreguidelines-pro-type-member-init.UseAssignment: "false"
   cppcoreguidelines-pro-type-static-cast-downcast.StrictMode: "true"
@@ -351,7 +351,7 @@ CheckOptions:
   misc-throw-by-value-catch-by-reference.WarnOnLargeObject: "false"
   misc-uniqueptr-reset-release.IncludeStyle: llvm
   misc-unused-parameters.IgnoreVirtual: "false"
-  misc-unused-parameters.StrictMode: "false"
+  misc-unused-parameters.StrictMode: "true"
   misc-use-internal-linkage.AnalyzeFunctions: "true"
   misc-use-internal-linkage.AnalyzeTypes: "true"
   misc-use-internal-linkage.AnalyzeVariables: "true"
@@ -427,7 +427,7 @@ CheckOptions:
   modernize-use-std-format.IncludeStyle: llvm
   modernize-use-std-format.ReplacementFormatFunction: "std::format"
   modernize-use-std-format.StrFormatLikeFunctions: "absl::StrFormat"
-  modernize-use-std-format.StrictMode: "false"
+  modernize-use-std-format.StrictMode: "true"
   modernize-use-std-numbers.DiffThreshold: "0.001"
   modernize-use-std-numbers.IncludeStyle: llvm
   modernize-use-std-print.FprintfLikeFunctions: "::fprintf;absl::FPrintF"
@@ -436,7 +436,7 @@ CheckOptions:
   modernize-use-std-print.PrintfLikeFunctions: "::printf;absl::PrintF"
   modernize-use-std-print.ReplacementPrintFunction: "std::print"
   modernize-use-std-print.ReplacementPrintlnFunction: "std::println"
-  modernize-use-std-print.StrictMode: "false"
+  modernize-use-std-print.StrictMode: "true"
   modernize-use-trailing-return-type.TransformFunctions: "true"
   modernize-use-trailing-return-type.TransformLambdas: all
   modernize-use-transparent-functors.SafeMode: "false"
@@ -446,7 +446,7 @@ CheckOptions:
   performance-faster-string-find.StringLikeClasses: "::std::basic_string;::std::basic_string_view"
   performance-for-range-copy.AllowedTypes: ""
   performance-for-range-copy.WarnOnAllAutoCopies: "false"
-  performance-inefficient-string-concatenation.StrictMode: "false"
+  performance-inefficient-string-concatenation.StrictMode: "true"
   performance-inefficient-vector-operation.EnableProto: "false"
   performance-inefficient-vector-operation.VectorLikeClasses: "::std::vector"
   performance-move-const-arg.CheckMoveToConstRef: "true"
