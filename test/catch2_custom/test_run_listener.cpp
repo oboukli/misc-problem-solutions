@@ -4,7 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <iostream>
+#include <cstdio>
 
 #include <mimalloc.h>
 // Override the C++ new and delete operations.
@@ -20,7 +20,20 @@ extern "C" ::mi_output_fun output_handler;
 extern "C" auto output_handler(char const* const msg, void* const /*arg*/)
     -> void
 {
-    std::cout << msg;
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage-in-libc-call"
+#endif // __clang__
+
+    int const res{std::fputs(msg, stdout)};
+    if (res == EOF)
+    {
+        std::perror("Output handler failed");
+    }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
 }
 
 namespace {
@@ -29,8 +42,9 @@ class TestRunListener final : public Catch::EventListenerBase {
 public:
     using EventListenerBase::EventListenerBase;
 
-    void
-    testRunStarting(Catch::TestRunInfo const& /*testRunInfo*/) noexcept override
+    void testRunStarting(
+        Catch::TestRunInfo const& /* unused */
+    ) noexcept override
     {
         ::mi_register_output(&output_handler, nullptr);
     }
