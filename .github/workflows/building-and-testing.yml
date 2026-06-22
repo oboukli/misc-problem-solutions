@@ -313,6 +313,8 @@ jobs:
 
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+          -DMI_GUARDED=ON
+          -DMI_TRACK_VALGRIND=ON
 
       - name: Build
         run: >-
@@ -1038,6 +1040,8 @@ jobs:
 
           cmake
           --preset '${{ env.CONFIGURE_PRESET_NAME }}'
+          -DMI_GUARDED=ON
+          -DMI_TRACK_VALGRIND=ON
 
       - name: Build
         run: >-
