@@ -243,7 +243,8 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        }
+        },
+        "MI_TRACK_ASAN": "ON"
       }
     },
     {
