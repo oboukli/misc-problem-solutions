@@ -999,6 +999,8 @@ set_target_properties(
     LANGUAGE C
 )
 
+include(cmake/CodeFormat.cmake)
+
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
