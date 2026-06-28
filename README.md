@@ -60,6 +60,7 @@ leveraged by this project:
 | Concatenation of Array                                             | [`include/forfun/array_concatenation.hpp`](include/forfun/array_concatenation.hpp)                                                             |
 | Container with Most Water                                          | [`include/forfun/container_with_most_water.hpp`](include/forfun/container_with_most_water.hpp)                                                 |
 | Contains Duplicate                                                 | [`include/forfun/contains_duplicate.hpp`](include/forfun/contains_duplicate.hpp)                                                               |
+| Daily Temperatures                                                 | [`include/forfun/daily_temperatures.hpp`](include/forfun/daily_temperatures.hpp)                                                               |
 | Depth-First Search                                                 | [`include/forfun/graph/depth_first_search.hpp`](include/forfun/graph/depth_first_search.hpp)                                                   |
 | Diameter of Binary Tree                                            | [`include/forfun/graph/binary_tree_diameter.hpp`](include/forfun/graph/binary_tree_diameter.hpp)                                               |
 | Encode and Decode Strings                                          | [`include/forfun/encode_and_decode_strings.hpp`](include/forfun/encode_and_decode_strings.hpp)                                                 |
