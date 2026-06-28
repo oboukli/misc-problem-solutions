@@ -48,6 +48,7 @@ benchmarks.
 | Concatenation of Array            | 1929. Concatenation of Array             |
 | Container with Most Water         | 11. Container With Most Water            |
 | Contains Duplicate                | 217. Contains Duplicate                  |
+| Daily Temperatures                | 739. Daily Temperatures                  |
 | Diameter of Binary Tree           | 543. Diameter of Binary Tree             |
 | Encode and Decode Strings         | 271. Encode and Decode Strings           |
 | Evaluate Reverse Polish Notation  | 150. Evaluate Reverse Polish Notation    |
