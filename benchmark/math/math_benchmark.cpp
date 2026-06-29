@@ -12,11 +12,11 @@
 
 #include <nameof.hpp>
 
-#include "forfun/common/math.hpp"
+#include "forfun/math/math.hpp"
 
 TEST_CASE("Integer division ceiling benchmarking", "[benchmark][math]")
 {
-    using namespace forfun::common::math;
+    using namespace forfun::math;
 
     ankerl::nanobench::Bench()
 

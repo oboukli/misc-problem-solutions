@@ -14,7 +14,7 @@
 #include <concepts>
 #include <iterator>
 
-#include "forfun/common/math.hpp"
+#include "forfun/math/math.hpp"
 
 namespace forfun::search::koko_eating_bananas {
 
@@ -46,7 +46,7 @@ template <typename Iter, typename Sentinel>
 
         for (auto iter{first}; iter != last; ++iter)
         {
-            time += forfun::common::math::alternative::div_ceil(*iter, speed);
+            time += forfun::math::alternative::div_ceil(*iter, speed);
         }
 
         if (time <= duration)
