@@ -4,12 +4,12 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/common/math.hpp"
+#include "forfun/math/math.hpp"
 
 #include <cassert>
 #include <cmath>
 
-namespace forfun::common::math::core {
+namespace forfun::math::core {
 
 [[nodiscard]] auto div_ceil(int const a, int const b) noexcept -> int
 {
@@ -24,4 +24,4 @@ namespace forfun::common::math::core {
     );
 }
 
-} // namespace forfun::common::math::core
+} // namespace forfun::math::core

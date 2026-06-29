@@ -9,7 +9,7 @@
 
 #include <cassert>
 
-namespace forfun::common::math {
+namespace forfun::math {
 
 namespace alternative {
 
@@ -35,6 +35,6 @@ namespace core {
 
 } // namespace core
 
-} // namespace forfun::common::math
+} // namespace forfun::math
 
 #endif // FORFUN_COMMON_MATH_HPP_

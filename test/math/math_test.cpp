@@ -9,14 +9,14 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common/math.hpp"
+#include "forfun/math/math.hpp"
 
 TEMPLATE_TEST_CASE_SIG(
     "Integer division ceiling",
     "[math]",
     (auto div_ceil, div_ceil),
-    forfun::common::math::alternative::div_ceil,
-    forfun::common::math::core::div_ceil
+    forfun::math::alternative::div_ceil,
+    forfun::math::core::div_ceil
 )
 {
     REQUIRE(div_ceil(1, 1) == 1);

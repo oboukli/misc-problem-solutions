@@ -18,6 +18,7 @@ add_library(forfun_common)
 add_library(forfun_experimental)
 add_library(forfun_graph)
 add_library(forfun_lock_free)
+add_library(forfun_math)
 add_library(forfun_search)
 add_library(forfun_sorting)
 
@@ -175,7 +176,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/limits.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/math.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/type_traits.hpp"
 )
 target_sources(
@@ -184,7 +184,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/concepts.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/io.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/limits.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/math.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/type_traits.cpp"
 )
 get_target_property(forfun_common_headers forfun_common HEADER_SET)
@@ -237,6 +236,44 @@ source_group(
   PREFIX "Source files"
   FILES ${forfun_lock_free_sources}
 )
+
+target_include_directories(
+  forfun_math
+  INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<INSTALL_INTERFACE:include>"
+)
+target_sources(
+  forfun_math
+  PUBLIC
+  FILE_SET HEADERS
+  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/math/math.hpp"
+)
+target_sources(
+  forfun_math
+  PRIVATE
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/math/math.cpp"
+)
+
+get_target_property(
+  forfun_math_headers
+  forfun_math
+  HEADER_SET
+)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/math/"
+  PREFIX "Header files"
+  FILES ${forfun_math_headers}
+)
+get_target_property(forfun_math_sources forfun_math SOURCES)
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/math"
+  PREFIX "Source files"
+  FILES ${forfun_math_sources}
+)
+forfun_common_target_compile_options(forfun_math)
 
 target_include_directories(
   forfun_graph
@@ -319,6 +356,10 @@ source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/"
   PREFIX "Source files"
   FILES ${forfun_search_sources}
+)
+target_link_libraries(
+  forfun_search
+  PRIVATE forfun_math
 )
 forfun_common_target_compile_options(forfun_search)
 
@@ -523,7 +564,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/best_time_to_buy_and_sell_stock_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/io_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container_with_most_water_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/daily_temperatures_test.cpp"
@@ -548,6 +588,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/longest_consecutive_sequence_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/lru_cache_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/meeting_rooms_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_test.cpp"
@@ -603,6 +644,7 @@ target_link_libraries(
   PRIVATE forfun_c
   PRIVATE forfun_common
   PRIVATE forfun_graph
+  PRIVATE forfun_math
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
@@ -699,7 +741,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/array_concatenation_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/best_time_to_buy_and_sell_stock_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/common/math_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container_with_most_water_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/contains_duplicate_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/daily_temperatures_benchmark.cpp"
@@ -723,6 +764,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/longest_consecutive_sequence_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/lru_cache_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/majority_element_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/math/math_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/maximum_subarray_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/meeting_rooms_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/missing_number_benchmark.cpp"
@@ -771,6 +813,7 @@ target_link_libraries(
   PRIVATE forfun_c
   PRIVATE forfun_common
   PRIVATE forfun_graph
+  PRIVATE forfun_math
   PRIVATE forfun_search
   PRIVATE forfun_sorting
 )
@@ -855,7 +898,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/limits_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/math_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/type_traits_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
@@ -965,6 +1008,7 @@ set_target_properties(
   forfun_common
   forfun_experimental
   forfun_graph
+  forfun_math
   forfun_search
   forfun_sorting
   PROPERTIES
@@ -1023,6 +1067,7 @@ install(
     forfun_lock_free
     forfun_experimental
     forfun_graph
+    forfun_math
     forfun_search
     forfun_sorting
   EXPORT "${CMAKE_PROJECT_NAME}Targets"
