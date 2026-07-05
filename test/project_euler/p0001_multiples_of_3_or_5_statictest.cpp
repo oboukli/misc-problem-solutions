@@ -4,20 +4,27 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
 
-TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
+TEMPLATE_TEST_CASE_SIG(
+    "Multiples of three or five",
+    "[p0001_multiples_of_3_or_5]",
+    (auto sum_mult_three_five, sum_mult_three_five),
+    forfun::project_euler::multiples_of_3_or_5::implementation_1::
+        sum_mult_three_five,
+    forfun::project_euler::multiples_of_3_or_5::implementation_2::
+        sum_mult_three_five
+)
 {
-    using forfun::project_euler::multiples_of_3_or_5::find_sum_mult_three_five;
-
     SECTION("Find the sum of all the multiples of 3 or 5 up to 0")
     {
         static constexpr unsigned int const test_input{0U};
 
         static constexpr unsigned int const actual{
-            find_sum_mult_three_five(test_input)
+            sum_mult_three_five(test_input)
         };
 
         STATIC_REQUIRE(actual == 0U);
@@ -25,27 +32,21 @@ TEST_CASE("Multiples of three or five", "[multiples_of_3_or_5]")
 
     SECTION("Find the sum of all the multiples of 3 or 5 up to 1")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(1U)
-        };
+        static constexpr unsigned int const actual{sum_mult_three_five(1U)};
 
         STATIC_REQUIRE(actual == 0U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 3")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 3 inclusive")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(3U)
-        };
+        static constexpr unsigned int const actual{sum_mult_three_five(3U)};
 
         STATIC_REQUIRE(actual == 3U);
     }
 
-    SECTION("Find the sum of all the multiples of 3 or 5 up to 10")
+    SECTION("Find the sum of all the multiples of 3 or 5 up to 10 inclusive")
     {
-        static constexpr unsigned int const actual{
-            find_sum_mult_three_five(10U)
-        };
+        static constexpr unsigned int const actual{sum_mult_three_five(10U)};
 
         STATIC_REQUIRE(actual == 33U);
     }

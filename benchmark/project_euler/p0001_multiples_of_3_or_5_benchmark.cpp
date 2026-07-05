@@ -25,10 +25,23 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(find_sum_mult_three_five).c_str(),
+            NAMEOF_RAW(implementation_1::sum_mult_three_five).c_str(),
             [] noexcept -> void {
                 auto const volatile input{999U};
-                auto const volatile r{find_sum_mult_three_five(input)};
+                auto const volatile r{
+                    implementation_1::sum_mult_three_five(input)
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(implementation_2::sum_mult_three_five).c_str(),
+            [] noexcept -> void {
+                auto const volatile input{999U};
+                auto const volatile r{
+                    implementation_2::sum_mult_three_five(input)
+                };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )

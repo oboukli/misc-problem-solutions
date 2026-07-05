@@ -18,32 +18,36 @@
 
 namespace forfun::project_euler::multiples_of_3_or_5 {
 
+namespace implementation_1 {
+
 namespace detail {
 
-/// Calculate the doubled sum of all multiples of q up to n.
+/// Calculates the doubled sum of all multiples of q up to inclusive_max.
 ///
-/// Calculate, using a closed-form expression, the 2x value, avoiding premature
+/// Calculates, using a closed-form expression, the 2x value, avoiding premature
 /// division by two operation.
 ///
-/// @param q Base whose multiples to be calculated
-/// @param n Upper inclusive limit
+/// @param divisor Base whose multiples to be calculated
+/// @param inclusive_max Upper inclusive limit
 /// @return Result
 #if defined(__GNUC__) or defined(__clang__) // The following guard breaks MSVC.
 #if __has_cpp_attribute(gnu::const)
 [[gnu::const]]
 #endif // __has_cpp_attribute(gnu::const)
 #endif // defined(__GNUC__) or defined(__clang__)
-[[nodiscard]] constexpr auto
-sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
+[[nodiscard]] constexpr auto sum_mult_2x(
+    unsigned int const divisor, unsigned int const inclusive_max
+) noexcept -> unsigned int
 {
-    return (n / q) * (q + n - (n % q));
+    return (inclusive_max / divisor)
+        * (divisor + inclusive_max - (inclusive_max % divisor));
 }
 
 } // namespace detail
 
-/// Find the sum of all the multiples of 3 or 5 up to n.
+/// Calculates the sum of all the multiples of 3 or 5 up to inclusive_max.
 ///
-/// @param n Upper inclusive limit
+/// @param inclusive_max Upper inclusive limit
 /// @return Result
 #if __has_cpp_attribute(gnu::flatten)
 [[gnu::flatten]]
@@ -52,12 +56,68 @@ sum_mult_2x(unsigned int const q, unsigned int const n) noexcept -> unsigned int
 [[msvc::forceinline_calls]]
 #endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
-find_sum_mult_three_five(unsigned int const n) noexcept -> unsigned int
+sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
 {
     using detail::sum_mult_2x;
 
-    return (sum_mult_2x(3U, n) + sum_mult_2x(5U, n) - sum_mult_2x(15U, n)) / 2U;
+    return (sum_mult_2x(3U, inclusive_max)
+            + sum_mult_2x(5U, inclusive_max)
+            - sum_mult_2x(15U, inclusive_max))
+        / 2U;
 }
+
+} // namespace implementation_1
+
+namespace implementation_2 {
+
+namespace detail {
+
+/// Calculates the doubled sum of all multiples of q up to inclusive_max.
+///
+/// Calculates, using a closed-form expression, the 2x value, avoiding premature
+/// division by two operation.
+///
+/// @param divisor Base whose multiples to be calculated
+/// @param inclusive_max Upper inclusive limit
+/// @return Result
+#if defined(__GNUC__) or defined(__clang__) // The following guard breaks MSVC.
+#if __has_cpp_attribute(gnu::const)
+[[gnu::const]]
+#endif // __has_cpp_attribute(gnu::const)
+#endif // defined(__GNUC__) or defined(__clang__)
+[[nodiscard]] constexpr auto sum_mult_2x(
+    unsigned int const divisor, unsigned int const inclusive_max
+) noexcept -> unsigned int
+{
+    return divisor
+        * (inclusive_max / divisor)
+        * ((inclusive_max / divisor) + 1);
+}
+
+} // namespace detail
+
+/// Calculates the sum of all the multiples of 3 or 5 up to inclusive_max.
+///
+/// @param inclusive_max Upper inclusive limit
+/// @return Result
+#if __has_cpp_attribute(gnu::flatten)
+[[gnu::flatten]]
+#endif // __has_cpp_attribute(gnu::flatten)
+#if __has_cpp_attribute(msvc::forceinline_calls)
+[[msvc::forceinline_calls]]
+#endif // __has_cpp_attribute(msvc::forceinline_calls)
+[[nodiscard]] constexpr auto
+sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
+{
+    using detail::sum_mult_2x;
+
+    return (sum_mult_2x(3U, inclusive_max)
+            + sum_mult_2x(5U, inclusive_max)
+            - sum_mult_2x(15U, inclusive_max))
+        / 2U;
+}
+
+} // namespace implementation_2
 
 } // namespace forfun::project_euler::multiples_of_3_or_5
 
