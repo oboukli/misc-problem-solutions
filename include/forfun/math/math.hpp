@@ -8,6 +8,8 @@
 #define FORFUN_COMMON_MATH_HPP_
 
 #include <cassert>
+#include <cstddef>
+#include <utility>
 
 namespace forfun::math {
 
@@ -34,6 +36,45 @@ namespace core {
 [[nodiscard]] /*constexpr*/ auto div_ceil(int a, int b) noexcept -> int;
 
 } // namespace core
+
+namespace lookup {
+
+/// Compact lookup table for Catalan numbers by index \p n
+/// @pre The index @p n must be greater or equal to one, and less than or equal
+/// to eight.
+template <typename ReturnType = std::size_t>
+[[nodiscard]] constexpr auto catalan(int const n) -> ReturnType
+{
+    assert((n >= 1) && (n <= 8));
+
+    // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+    switch (n)
+    {
+    case 1:
+        return 1;
+    case 2:
+        return 2;
+    case 3:
+        return 5;
+    case 4:
+        return 14;
+    case 5:
+        return 42;
+    case 6:
+        return 132;
+    case 7:
+        return 429;
+    case 8:
+        return 1'430;
+    default:
+        break;
+    }
+    // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+
+    std::unreachable();
+}
+
+} // namespace lookup
 
 } // namespace forfun::math
 
