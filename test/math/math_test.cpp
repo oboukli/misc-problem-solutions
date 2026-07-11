@@ -42,6 +42,25 @@ TEMPLATE_TEST_CASE_SIG(
         )
         == 2
     );
+}
 
-    REQUIRE(div_ceil(3, 1) == 3);
+TEST_CASE("Catalan number", "[math]")
+{
+    using forfun::math::lookup::catalan;
+
+    REQUIRE(catalan(1) == 1UZ);
+
+    REQUIRE(catalan(2) == 2UZ);
+
+    REQUIRE(catalan(3) == 5UZ);
+
+    REQUIRE(catalan(4) == 14UZ);
+
+    REQUIRE(catalan(5) == 42UZ);
+
+    REQUIRE(catalan(6) == 132UZ);
+
+    REQUIRE(catalan(7) == 429UZ);
+
+    REQUIRE(catalan(8) == 1430UZ);
 }

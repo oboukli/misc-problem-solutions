@@ -16,3 +16,8 @@ TEST_CASE("Integer division ceiling", "[math]")
 
     STATIC_REQUIRE(forfun::math::alternative::div_ceil(3, 2) == 2);
 }
+
+TEST_CASE("Catalan number", "[math]")
+{
+    STATIC_REQUIRE(forfun::math::lookup::catalan(5) == 42UZ);
+}
