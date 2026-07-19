@@ -53,7 +53,7 @@ namespace detail {
 [[gnu::flatten]]
 #endif // __has_cpp_attribute(gnu::flatten)
 #if __has_cpp_attribute(msvc::forceinline_calls)
-[[msvc::forceinline_calls]]
+[[msvc::forceinline]]
 #endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
 sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
@@ -104,7 +104,7 @@ namespace detail {
 [[gnu::flatten]]
 #endif // __has_cpp_attribute(gnu::flatten)
 #if __has_cpp_attribute(msvc::forceinline_calls)
-[[msvc::forceinline_calls]]
+[[msvc::forceinline]]
 #endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
 sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
