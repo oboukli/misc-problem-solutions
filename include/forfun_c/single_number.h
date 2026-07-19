@@ -20,7 +20,9 @@ extern "C" {
 
 #include <stddef.h>
 
-int forfun_get_single(int const* nums, size_t nums_size);
+int forfun_s1_get_single(int const* nums, size_t nums_size);
+
+int forfun_s2_get_single(int const* nums, size_t nums_size);
 
 #ifdef __cplusplus
 } /* extern "C" */

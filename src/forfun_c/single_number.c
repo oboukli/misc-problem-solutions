@@ -10,14 +10,48 @@ found in the LICENSE file.
 
 #include <stddef.h>
 
-int forfun_get_single(int const* nums, size_t nums_size)
+int forfun_s1_get_single(int const* const nums, size_t const nums_size)
+{
+    unsigned int result = 0U;
+
+    size_t i;
+
+    for (i = 0; i < nums_size; ++i)
+    {
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif /* __clang__ */
+
+        result ^= (unsigned int)nums[i];
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif /* __clang__ */
+    }
+
+    return (int)result;
+}
+
+int forfun_s2_get_single(int const* nums, size_t nums_size)
 {
     unsigned int result = 0U;
 
     while (nums_size)
     {
         result ^= (unsigned int)*nums;
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif /* __clang__ */
+
         ++nums;
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif /* __clang__ */
+
         --nums_size;
     }
 

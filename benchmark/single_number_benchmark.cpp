@@ -54,10 +54,20 @@ TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
         )
 
         .run(
-            NAMEOF_RAW(::forfun_get_single).c_str(),
+            NAMEOF_RAW(::forfun_s1_get_single).c_str(),
             [&nums] noexcept -> void {
                 auto const volatile r{
-                    ::forfun_get_single(data(nums), size(nums))
+                    ::forfun_s1_get_single(data(nums), size(nums))
+                };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
+
+        .run(
+            NAMEOF_RAW(::forfun_s2_get_single).c_str(),
+            [&nums] noexcept -> void {
+                auto const volatile r{
+                    ::forfun_s2_get_single(data(nums), size(nums))
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
