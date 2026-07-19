@@ -19,14 +19,14 @@ namespace {
 auto fuzz_encode_decode_empty_element_special_case() -> void
 {
     std::vector<std::string> const tokens{{""}};
-    std::ostringstream ss{};
+    std::ostringstream stream{};
 
     forfun::encode_and_decode_strings::delimited::encode(
-        tokens.cbegin(), tokens.cend(), ss
+        tokens.cbegin(), tokens.cend(), stream
     );
 
     auto const decoded{
-        forfun::encode_and_decode_strings::delimited::decode(ss.view())
+        forfun::encode_and_decode_strings::delimited::decode(stream.view())
     };
 
     ASSERT_EQ(decoded, std::vector<std::string>{});
@@ -35,14 +35,14 @@ auto fuzz_encode_decode_empty_element_special_case() -> void
 auto fuzz_encode_decode_general_case(std::vector<std::string> const& tokens)
     -> void
 {
-    std::ostringstream ss{};
+    std::ostringstream stream{};
 
     forfun::encode_and_decode_strings::delimited::encode(
-        tokens.cbegin(), tokens.cend(), ss
+        tokens.cbegin(), tokens.cend(), stream
     );
 
     auto const decoded{
-        forfun::encode_and_decode_strings::delimited::decode(ss.view())
+        forfun::encode_and_decode_strings::delimited::decode(stream.view())
     };
 
     ASSERT_EQ(decoded, tokens);
