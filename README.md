@@ -104,6 +104,7 @@ leveraged by this project:
 | Search matrix                                                      | [`src/forfun/search/search_matrix.cpp`](src/forfun/search/search_matrix.cpp)                                                                   |
 | Set Matrix Zeroes                                                  | [`src/forfun/set_matrix_zeroes.cpp`](src/forfun/set_matrix_zeroes.cpp)                                                                         |
 | Single Number                                                      | [`include/forfun/single_number.hpp`](include/forfun/single_number.hpp)                                                                         |
+| Single Number (in C90)                                             | [`src/forfun_c/single_number.c`](src/forfun_c/single_number.c)                                                                                 |
 | Squares of a Sorted Array                                          | [`include/forfun/squares_sorted_array.hpp`](include/forfun/squares_sorted_array.hpp)                                                           |
 | Subsets                                                            | [`include/forfun/subsets.hpp`](include/forfun/subsets.hpp)                                                                                     |
 | Sums of Subarrays of Length K                                      | [`include/forfun/sub_array_sums.hpp`](include/forfun/sub_array_sums.hpp)                                                                       |

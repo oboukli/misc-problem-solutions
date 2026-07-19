@@ -18,15 +18,21 @@
 
 namespace {
 
-template <std::ranges::contiguous_range Range>
-    requires std::ranges::sized_range<Range>
+template <typename ForFunCGetSingleFuncType>
+concept forfun_get_single_func
+    = std::regular_invocable<ForFunCGetSingleFuncType, int const*, size_t>;
+
+template <auto ForFunCGetSingleFunc, typename Range>
+    requires forfun_get_single_func<decltype(ForFunCGetSingleFunc)>
+    and std::ranges::contiguous_range<Range>
+    and std::ranges::sized_range<Range>
     and std::same_as<int, std::ranges::range_value_t<Range>>
 [[nodiscard]] auto adapt_forfun_c_get_single(Range&& nums) noexcept
     -> std::ranges::range_value_t<Range>
 {
     Range const& nums_{std::forward<Range>(nums)};
 
-    return ::forfun_get_single(
+    return ForFunCGetSingleFunc(
         std::ranges::cdata(nums_), std::ranges::size(nums_)
     );
 }
@@ -37,7 +43,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Single number",
     "[single_number]",
     (auto get_single, get_single),
-    adapt_forfun_c_get_single<std::vector<int> const&>,
+    (adapt_forfun_c_get_single<
+        ::forfun_s1_get_single,
+        std::vector<int> const&>),
+    (adapt_forfun_c_get_single<
+        ::forfun_s2_get_single,
+        std::vector<int> const&>),
     forfun::single_number::functional::get_single<std::vector<int> const&>,
     forfun::single_number::imperative::get_single<std::vector<int> const&>
 )
@@ -147,7 +158,8 @@ TEMPLATE_TEST_CASE_SIG(
     "Single number (empty container degenerate case)",
     "[single_number]",
     (auto get_single, get_single),
-    adapt_forfun_c_get_single<std::vector<int> const&>,
+    (adapt_forfun_c_get_single<::forfun_s1_get_single, std::vector<int> const&>),
+    (adapt_forfun_c_get_single<::forfun_s2_get_single, std::vector<int> const&>),
     forfun::single_number::functional::get_single<std::vector<int> const&>,
     forfun::single_number::imperative::get_single<std::vector<int> const&>
 )
