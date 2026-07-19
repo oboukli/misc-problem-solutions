@@ -14,6 +14,11 @@ found in the LICENSE file.
 /* Adhere to C89/C90, for the fun of it. */
 
 #ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif /* __clang__ */
+
+#ifdef __clang__
 #pragma clang attribute push( \
     __attribute__(( \
         no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
@@ -150,4 +155,8 @@ int forfun_s2_is_palindrome_ci(char const* str, size_t const length)
 
 #ifdef __clang__
 #pragma clang attribute pop
+#endif /* __clang__ */
+
+#ifdef __clang__
+#pragma clang diagnostic pop
 #endif /* __clang__ */
