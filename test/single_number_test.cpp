@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <concepts>
+#include <cstddef>
 #include <limits>
 #include <ranges>
 #include <utility>
@@ -20,7 +21,7 @@ namespace {
 
 template <typename ForFunCGetSingleFuncType>
 concept forfun_get_single_func
-    = std::regular_invocable<ForFunCGetSingleFuncType, int const*, size_t>;
+    = std::regular_invocable<ForFunCGetSingleFuncType, int const*, std::size_t>;
 
 template <auto ForFunCGetSingleFunc, typename Range>
     requires forfun_get_single_func<decltype(ForFunCGetSingleFunc)>

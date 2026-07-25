@@ -19,7 +19,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{76};
         std::array<int, 1> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 1>
             scratch /*[[indeterminate]]*/;
         std::array const expected{0};
@@ -40,7 +40,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{16, 14};
         std::array<int, 2> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 2>
             scratch /*[[indeterminate]]*/;
         std::array const expected{0, 0};
@@ -61,7 +61,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{12, 15};
         std::array<int, 2> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 2>
             scratch /*[[indeterminate]]*/;
         std::array const expected{1, 0};
@@ -82,7 +82,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{14, 14, 14};
         std::array<int, 3> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 3>
             scratch /*[[indeterminate]]*/;
         std::array const expected{0, 0, 0};
@@ -103,7 +103,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{15, 13, 16};
         std::array<int, 3> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 3>
             scratch /*[[indeterminate]]*/;
         std::array const expected{2, 1, 0};
@@ -124,7 +124,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{14, 14, 14, 14};
         std::array<int, 4> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 4>
             scratch /*[[indeterminate]]*/;
         std::array const expected{0, 0, 0, 0};
@@ -145,7 +145,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{14, 13, 12, 15};
         std::array<int, 4> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 4>
             scratch /*[[indeterminate]]*/;
         std::array const expected{3, 2, 1, 0};
@@ -166,7 +166,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{17, 13, 15, 16, 20};
         std::array<int, 5> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 5>
             scratch /*[[indeterminate]]*/;
         std::array const expected{4, 1, 1, 1, 0};
@@ -191,7 +191,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
         };
         static_assert(temperatures.size() == 32);
         std::array<int, 32> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 32>
             scratch /*[[indeterminate]]*/;
         std::array const expected{
@@ -216,7 +216,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{73, 74, 75, 71, 69, 72, 76, 73};
         std::array<int, 8> day_counts{};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 8>
             scratch /*[[indeterminate]]*/;
         std::array const expected{1, 1, 4, 2, 1, 1, 0, 0};
@@ -237,7 +237,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{30, 40, 50, 60};
         std::array<int, 4> day_counts{0};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 4>
             scratch /*[[indeterminate]]*/;
         std::array const expected{1, 1, 1, 0};
@@ -258,7 +258,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{30, 60, 90};
         std::array<int, 3> day_counts{0};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 3>
             scratch /*[[indeterminate]]*/;
         std::array const expected{1, 1, 0};
@@ -279,7 +279,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{30, 38, 30, 36, 35, 40, 28};
         std::array<int, 7> day_counts{0};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 7>
             scratch /*[[indeterminate]]*/;
         std::array const expected{1, 4, 1, 2, 1, 0, 0};
@@ -300,7 +300,7 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     {
         std::array const temperatures{22, 21, 20};
         std::array<int, 3> day_counts{0};
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
         std::array<decltype(temperatures)::difference_type, 3>
             scratch /*[[indeterminate]]*/;
         std::array const expected{0, 0, 0};

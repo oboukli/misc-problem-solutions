@@ -44,8 +44,8 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
                 return (actual.size() == 3UZ)
                     && (actual.size() == expected.size())
                     && (actual.front() == expected.front())
-                    && (actual[1] == expected[1])
-                    && (actual[2] == expected[2]);
+                    && (actual.at(1) == expected.at(1))
+                    && (actual.at(2) == expected.at(2));
             }()
         };
 

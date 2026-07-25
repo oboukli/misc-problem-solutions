@@ -30,7 +30,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::string_view, std::string_view>({
                 {""sv, ""sv},
                 {"cat"sv, "cat"sv},
@@ -67,15 +67,15 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE(is_anagram(s, t));
+        REQUIRE(is_anagram(str_a, str_b));
     }
 
     SECTION("Negative")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::string_view, std::string_view>({
                 {"car"sv, "cat"sv},
                 {"tiger"sv, "lion"sv},
@@ -96,10 +96,10 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE_FALSE(is_anagram(s, t));
+        REQUIRE_FALSE(is_anagram(str_a, str_b));
     }
 }
 
@@ -113,7 +113,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::u8string_view, std::u8string_view>({
                 {u8""sv, u8""sv},
                 {u8"cat"sv, u8"cat"sv},
@@ -152,15 +152,15 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE(is_anagram(s, t));
+        REQUIRE(is_anagram(str_a, str_b));
     }
 
     SECTION("Negative")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::u8string_view, std::u8string_view>({
                 {u8"car"sv, u8"cat"sv},
                 {u8"tiger"sv, u8"lion"sv},
@@ -181,10 +181,10 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE_FALSE(is_anagram(s, t));
+        REQUIRE_FALSE(is_anagram(str_a, str_b));
     }
 }
 
@@ -198,7 +198,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Positive")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::u32string_view, std::u32string_view>({
                 {U""sv, U""sv},
                 {U"cat"sv, U"cat"sv},
@@ -237,15 +237,15 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE(is_anagram(s, t));
+        REQUIRE(is_anagram(str_a, str_b));
     }
 
     SECTION("Negative")
     {
-        auto const [s, t]{GENERATE(
+        auto const [str_a, str_b]{GENERATE(
             table<std::u32string_view, std::u32string_view>({
                 {U"car"sv, U"cat"sv},
                 {U"tiger"sv, U"lion"sv},
@@ -266,9 +266,9 @@ TEMPLATE_TEST_CASE_SIG(
             })
         )};
 
-        CAPTURE(s);
-        CAPTURE(t);
+        CAPTURE(str_a);
+        CAPTURE(str_b);
 
-        REQUIRE_FALSE(is_anagram(s, t));
+        REQUIRE_FALSE(is_anagram(str_a, str_b));
     }
 }

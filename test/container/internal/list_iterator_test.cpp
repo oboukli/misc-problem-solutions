@@ -97,7 +97,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
         list_iterator iterator1{&node1};
         list_iterator& alias{iterator1};
 
-        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        // NOLINTNEXTLINE(performance-move-const-arg)
         iterator1 = std::move(alias);
 
         REQUIRE(*iterator1 == 2251);
