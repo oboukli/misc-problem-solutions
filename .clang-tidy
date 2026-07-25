@@ -1,16 +1,6 @@
 ---
 Checks: >-
   *,
-  cert-*,
-  clang-analyzer-*,
-  clang-diagnostic-*,
-  cppcoreguidelines-*,
-  google-*,
-  misc-*,
-  modernize-*,
-  performance-*,
-  portability-*,
-  readability-*,
   -abseil-*,
   -altera-*,
   -android-*,
@@ -29,11 +19,12 @@ Checks: >-
   -zircon-*,
 WarningsAsErrors: "*"
 HeaderFileExtensions:
+  - h
   - hpp
 ImplementationFileExtensions:
+  - c
   - cpp
 HeaderFilterRegex: ""
-ExcludeHeaderFilterRegex: '\.h'
 FormatStyle: file
 CheckOptions:
   bugprone-argument-comment.CommentAnonymousInitLists: "0"
