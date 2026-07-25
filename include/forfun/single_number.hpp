@@ -28,7 +28,6 @@ template <std::ranges::input_range Range>
 
     for (auto const n : std::forward<Range>(nums))
     {
-        // NOLINTNEXTLINE(hicpp-signed-bitwise)
         result ^= n;
     }
 

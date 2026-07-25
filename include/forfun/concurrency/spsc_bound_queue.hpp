@@ -107,7 +107,7 @@ auto constexpr destroy_n(std::byte* const buffer, Size n) noexcept(noexcept(
 /// @note Internal storage and padding area might not be (zero-)initialized.
 template <typename T, std::size_t Capacity>
     requires std::destructible<T>
-// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 class spsc_bound_queue final {
 private:
     using pointer = T*;

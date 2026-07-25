@@ -26,11 +26,12 @@ namespace forfun::valid_anagram {
 namespace char_only {
 
 [[nodiscard]] constexpr auto
-is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
+is_anagram(std::string_view const str_a, std::string_view const str_b) noexcept
+    -> bool
 {
     using Iter = std::string_view::const_iterator;
 
-    if (s.length() != t.length())
+    if (str_a.length() != str_b.length())
     {
         return false;
     }
@@ -39,14 +40,15 @@ is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
         std::size_t,
         forfun::common::limits::domain_size<std::string_view::value_type>()>
         bucket{};
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
     static_assert(bucket.size() == 256UZ);
 
-    for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
     {
         ++(*std::next(bucket.begin(), *iter));
     }
 
-    for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
+    for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
         decltype(bucket)::iterator const bucket_iter{
             std::next(bucket.begin(), *iter)
@@ -67,25 +69,25 @@ is_anagram(std::string_view const s, std::string_view const t) noexcept -> bool
 namespace map_based {
 
 template <std::integral CharT>
-[[nodiscard]] auto
-is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
-    -> bool
+[[nodiscard]] auto is_anagram(
+    std::basic_string_view<CharT> str_a, std::basic_string_view<CharT> str_b
+) -> bool
 {
     using Iter = std::basic_string_view<CharT>::const_iterator;
 
-    if (s.length() != t.length())
+    if (str_a.length() != str_b.length())
     {
         return false;
     }
 
     std::map<CharT, std::size_t> bucket{};
 
-    for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
+    for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
     {
         ++bucket[*iter];
     }
 
-    for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
+    for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
         if (bucket[*iter] == 0UZ)
         {
@@ -103,34 +105,34 @@ is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
 namespace multiset_based {
 
 template <std::integral CharT>
-[[nodiscard]] auto
-is_anagram(std::basic_string_view<CharT> s, std::basic_string_view<CharT> t)
-    -> bool
+[[nodiscard]] auto is_anagram(
+    std::basic_string_view<CharT> str_a, std::basic_string_view<CharT> str_b
+) -> bool
 {
     using Iter = std::basic_string_view<CharT>::const_iterator;
 
-    if (s.length() != t.length())
+    if (str_a.length() != str_b.length())
     {
         return false;
     }
 
     std::multiset<CharT> bucket{};
 
-    if constexpr (requires { bucket.insert_range(s); })
+    if constexpr (requires { bucket.insert_range(str_a); })
     {
-        bucket.insert_range(s);
+        bucket.insert_range(str_a);
     }
     else
     {
-        for (Iter iter{s.cbegin()}; iter != s.cend(); ++iter)
+        for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
         {
             bucket.emplace(*iter);
         }
     }
 
-    for (Iter iter{t.cbegin()}; iter != t.cend(); ++iter)
+    for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
-        if (auto const nh{bucket.extract(*iter)}; nh.empty())
+        if (auto const aux{bucket.extract(*iter)}; aux.empty())
         {
             return false;
         }

@@ -35,8 +35,8 @@ template <std::unsigned_integral UInteger>
         return false;
     }
 
-    UInteger const r{static_cast<UInteger>(std::sqrt(n))};
-    for (UInteger i{3}; i <= r; ++i)
+    UInteger const root{static_cast<UInteger>(std::sqrt(n))};
+    for (UInteger i{3}; i <= root; ++i)
     {
         if (((i & UInteger{1}) != UInteger{}) && ((n % i) == UInteger{}))
         {

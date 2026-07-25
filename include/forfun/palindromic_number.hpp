@@ -22,15 +22,15 @@ namespace fast {
 {
     using T = std::remove_const_t<decltype(n)>;
 
-    T nn{};
-    auto d{n};
-    while (d > T{})
+    T reversed{};
+    auto remaining{n};
+    while (remaining > T{})
     {
-        nn = static_cast<T>((nn * T{10}) + (d % T{10}));
-        d /= T{10};
+        reversed = static_cast<T>((reversed * T{10}) + (remaining % T{10}));
+        remaining /= T{10};
     }
 
-    return n == nn;
+    return n == reversed;
 }
 
 } // namespace fast

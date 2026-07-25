@@ -62,7 +62,7 @@ public:
     auto put(std::size_t key, int value) noexcept -> void;
 
 private:
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays)
     std::unique_ptr<CacheItem[]> cache_;
 
     std::size_t capacity_{};

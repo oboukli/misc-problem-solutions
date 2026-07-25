@@ -49,7 +49,7 @@ auto insert(trie_node& root, std::string_view word) -> void;
 [[nodiscard]] auto
 starts_with(trie_node const& root, std::string_view word) noexcept -> bool;
 
-auto clear(trie_node& root) noexcept -> void;
+auto clear(trie_node& root) -> void;
 
 } // namespace forfun::container::trie
 

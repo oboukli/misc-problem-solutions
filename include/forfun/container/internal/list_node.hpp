@@ -13,11 +13,15 @@ class list_node final {
 public:
     using value_type = int;
 
+    // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
+
     list_node* previous_{};
 
     list_node* next_{};
 
     value_type value_{};
+
+    // NOLINTEND(misc-non-private-member-variables-in-classes)
 
     explicit constexpr list_node() noexcept = default;
 
