@@ -26,7 +26,7 @@ max_line_length = 80
 spelling_language = en-US
 trim_trailing_whitespace = true
 
-[*.{cff,json,yml},.clang-{format,tidy},memcheck.supp]
+[{*.{cff,json,yml},.clang{-format,.-tidy,d},memcheck.supp}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
@@ -35,7 +35,7 @@ insert_final_newline = true
 spelling_language = en-US
 trim_trailing_whitespace = true
 
-[*.{cmake,cmake.in},CMakeLists.txt]
+[{*.{cmake,cmake.in},CMakeLists.txt}]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
@@ -44,7 +44,7 @@ insert_final_newline = true
 spelling_language = en-US
 trim_trailing_whitespace = true
 
-[.editorconfig,.git*,CODEOWNERS]
+[{.editorconfig,.git*,CODEOWNERS}]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
