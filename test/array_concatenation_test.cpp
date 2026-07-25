@@ -28,7 +28,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     std::array<int, 0> const src{};
 
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 0> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
@@ -52,7 +52,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     static constexpr std::array const src{17};
     static constexpr std::array const expected{17, 17};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 2> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
@@ -76,7 +76,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     static constexpr std::array const src{19, 23, 29};
     static constexpr std::array const expected{19, 23, 29, 19, 23, 29};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 6> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
@@ -100,7 +100,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     static constexpr std::array const src{31, 37, 41, 43};
     static constexpr std::array const expected{31, 37, 41, 43, 31, 37, 41, 43};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 8> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);
@@ -227,7 +227,7 @@ TEMPLATE_TEST_CASE_SIG(
         1579, 1583, 1597, 1601, 1607, 1609, 1613, 1619,
         // clang-format on
     };
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 512> dest /*[[indeterminate]]*/;
 
     CAPTURE(src);

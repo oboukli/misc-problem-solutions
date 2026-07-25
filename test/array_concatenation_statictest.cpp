@@ -25,7 +25,7 @@ TEMPLATE_TEST_CASE_SIG(
 {
     static constexpr std::array<int, 0> const src{};
     static constexpr std::array<int, 0> const expected{};
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     std::array<int, 0> dest /*[[indeterminate]]*/;
 
     concatenate(src, dest);
@@ -48,7 +48,7 @@ TEMPLATE_TEST_CASE_SIG(
     static constexpr auto actual{
         [] [[nodiscard]] consteval noexcept -> std::array<int, 6> {
             static constexpr std::array const src{19, 23, 29};
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
             std::array<int, 6> dest /*[[indeterminate]]*/;
 
             concatenate(src, dest);

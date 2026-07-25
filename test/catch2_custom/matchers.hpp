@@ -82,13 +82,12 @@ public:
         );
     }
 
-protected:
+private:
     [[nodiscard]] auto describe() const -> std::string override
     {
         return description_;
     }
 
-private:
     std::remove_cvref_t<TargetRangeOfRangeLike> expected_;
     std::remove_cvref_t<OuterEquality> outer_equal_to_;
     std::remove_cvref_t<InnerLess> inner_less_;

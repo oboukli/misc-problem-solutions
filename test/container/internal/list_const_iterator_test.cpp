@@ -98,7 +98,7 @@ TEST_CASE(
         list_const_iterator iterator1{&node1};
         list_const_iterator& alias{iterator1};
 
-        // NOLINTNEXTLINE(hicpp-move-const-arg,performance-move-const-arg)
+        // NOLINTNEXTLINE(performance-move-const-arg)
         iterator1 = std::move(alias);
 
         REQUIRE(*iterator1 == 2383);

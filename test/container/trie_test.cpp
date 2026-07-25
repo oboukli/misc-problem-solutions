@@ -57,11 +57,11 @@ TEST_CASE("Trie", "[trie]")
 
         insert(root, word);
 
-        REQUIRE(root.children_['c' - trie_node::first_char] != nullptr);
+        REQUIRE(root.children_.at('c' - trie_node::first_char) != nullptr);
 
         REQUIRE_FALSE(root.is_terminal_);
 
-        REQUIRE(root.children_['c' - trie_node::first_char]->is_terminal_);
+        REQUIRE(root.children_.at('c' - trie_node::first_char)->is_terminal_);
 
         REQUIRE(starts_with(root, "c"sv));
 

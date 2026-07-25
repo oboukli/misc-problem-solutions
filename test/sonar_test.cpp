@@ -11,7 +11,7 @@
 
 TEST_CASE("Sonar", "[sonar]")
 {
-    using forfun::sonar::area;
+    using area_type = forfun::sonar::area;
     using forfun::sonar::coord;
     using forfun::sonar::sonar;
 
@@ -19,8 +19,8 @@ TEST_CASE("Sonar", "[sonar]")
     {
         sonar const some_sonar{{{.x = 0, .y = 0}}};
 
-        auto const [a, expected_num_ships]{GENERATE(
-            table<area, int>({
+        auto const [area, expected_num_ships]{GENERATE(
+            table<area_type, int>({
                 {{0, 0, 0, 0}, 1},
                 {{0, 0, 1, 3}, 0},
                 {{0, 5, 0, 7}, 1},
@@ -28,7 +28,7 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(some_sonar, a)};
+        int const num_ships{count_ships(some_sonar, area)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
@@ -42,8 +42,8 @@ TEST_CASE("Sonar", "[sonar]")
             {.x = 5, .y = 2},
         }};
 
-        auto const [a, expected_num_ships]{GENERATE(
-            table<area, int>({
+        auto const [area, expected_num_ships]{GENERATE(
+            table<area_type, int>({
                 {{0, 0, 7, 7}, 1},
                 {{0, 5, 1, 5}, 3},
                 {{0, 5, 2, 7}, 5}, // Benchmark case
@@ -51,7 +51,7 @@ TEST_CASE("Sonar", "[sonar]")
             })
         )};
 
-        int const num_ships{count_ships(some_sonar, a)};
+        int const num_ships{count_ships(some_sonar, area)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
@@ -65,15 +65,15 @@ TEST_CASE("Sonar", "[sonar]")
             {.x = 5, .y = 5},
         }};
 
-        auto const [a, expected_num_ships]{GENERATE(
-            table<area, int>({
+        auto const [area, expected_num_ships]{GENERATE(
+            table<area_type, int>({
                 {{1, 1, 1, 1}, 1},
                 {{1, 2, 1, 2}, 2},
                 {{1, 5, 1, 5}, 5},
             })
         )};
 
-        int const num_ships{count_ships(some_sonar, a)};
+        int const num_ships{count_ships(some_sonar, area)};
         REQUIRE(num_ships == expected_num_ships);
     }
 
