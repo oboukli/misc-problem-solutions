@@ -18,8 +18,8 @@ namespace forfun::product_except_self {
 namespace concepts {
 
 template <typename Factor, typename Product>
-concept product_computable = requires(Factor f, Product p) {
-    { f * f } -> std::convertible_to<Product>;
+concept product_computable = requires(Factor factor) {
+    { factor * factor } -> std::convertible_to<Product>;
 };
 
 } // namespace concepts

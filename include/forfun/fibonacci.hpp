@@ -20,8 +20,9 @@ template <common::concepts::addition_unpromoted T>
 [[nodiscard]] constexpr auto fib(T const n) noexcept -> T
 {
     T a{};
+    T b{1};
 
-    for (T i{}, b{1}; i < n; ++i)
+    for (T i{}; i < n; ++i)
     {
         T const c{a + b};
         a = b;

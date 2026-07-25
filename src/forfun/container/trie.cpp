@@ -4,7 +4,10 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <cassert>
+#include <cstddef>
 #include <memory>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -35,13 +38,13 @@ search_impl(trie_node const* node_ptr, std::string_view const word) noexcept
     {
         auto const prefix{*iter};
 
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,cppcoreguidelines-pro-bounds-constant-array-index)
         if (node_ptr->children_[to_index(prefix)] == nullptr)
         {
             return nullptr;
         }
 
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,cppcoreguidelines-pro-bounds-constant-array-index)
         node_ptr = node_ptr->children_[to_index(prefix)].get();
     }
 
@@ -56,7 +59,7 @@ auto insert(trie_node& root, std::string_view const word) -> void
 
     for (auto iter{word.cbegin()}; iter != word.cend(); ++iter)
     {
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,cppcoreguidelines-pro-bounds-constant-array-index)
         auto& child{node_ptr->children_[to_index(*iter)]};
 
         if (child == nullptr)
@@ -86,7 +89,7 @@ starts_with(trie_node const& root, std::string_view const word) noexcept -> bool
 
 /// Experimental utility to mitigate @p std::unique_ptr<trie_node> recursive
 /// destructor calls.
-auto clear(trie_node& root) noexcept -> void
+auto clear(trie_node& root) -> void
 {
     static constexpr std::size_t const initial_stack_size{128};
 

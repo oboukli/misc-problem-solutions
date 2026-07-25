@@ -58,7 +58,7 @@ template <std::forward_iterator IterA, std::bidirectional_iterator IterB>
             break;
         }
 
-        if ((prev_i != last) && (equal_to<>{}(*prev_i, *iter)))
+        if ((prev_i != last) && equal_to<>{}(*prev_i, *iter))
         {
             continue;
         }

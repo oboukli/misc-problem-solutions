@@ -69,6 +69,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 return false;
             }
 
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
             if (detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
@@ -77,6 +78,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
             if (detail::tick_out(
                     board[(3UZ * (i / 3UZ)) + (j / 3UZ)]
                          [(3UZ * (i % 3UZ)) + (j % 3UZ)],
+                    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
                     boxes[i]
                 ))
             {
@@ -141,6 +143,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                 return false;
             }
 
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
             if (detail::tick_out(board[j][i], rows[i]))
             {
                 return false;
@@ -158,6 +161,7 @@ is_valid_sudoku(SudokuBoard<CellType> const& board) noexcept -> bool
                             multiplies<>{}(3UZ, modulus<>{}(i, 3UZ)),
                             modulus<>{}(j, 3UZ)
                         )],
+                    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
                     boxes[i]
                 )
                 // clang-format on

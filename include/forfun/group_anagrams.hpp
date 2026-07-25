@@ -21,11 +21,12 @@ namespace forfun::group_anagrams {
 
 namespace detail {
 
+constexpr std::size_t const alphabet_size{26};
 constexpr std::string::value_type const first_char{'a'};
 constexpr std::string::value_type const last_char{'z'};
 
 static_assert(
-    (last_char - first_char) == 25,
+    ((last_char - first_char) + 1UZ) == alphabet_size,
     "Basic assumption about the compile-time character encoding standard must "
     "hold"
 );
@@ -68,7 +69,7 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
             std::size_t i{};
             for (; i < detail::bucket_size; ++i)
             {
-                // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,cppcoreguidelines-pro-bounds-constant-array-index)
                 if (bucket[i] != buckets[bucket_idx][i])
                 {
                     break;
@@ -77,7 +78,9 @@ template <std::forward_iterator Iter, std::sentinel_for<Iter> Sentinel>
 
             if (i == detail::bucket_size)
             {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
                 result[bucket_idx].emplace_back(*iter);
+
                 break;
             }
         }

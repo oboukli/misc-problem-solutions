@@ -45,11 +45,15 @@ public:
 
     auto operator=(binary_tree_node&&) noexcept -> binary_tree_node& = default;
 
+    // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
+
     value_type value_;
 
     binary_tree_node* left_node_;
 
     binary_tree_node* right_node_;
+
+    // NOLINTEND(misc-non-private-member-variables-in-classes)
 };
 
 } // namespace forfun::graph

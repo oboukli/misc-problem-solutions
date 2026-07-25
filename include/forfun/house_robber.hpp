@@ -42,12 +42,12 @@ template <typename Iter, typename Sentinel>
 
     if (size == DiffType{2}) [[unlikely]]
     {
-        return max(*first, *(next(first)));
+        return max(*first, *next(first));
     }
 
     return max(
         (*first) + rob(next(first, DiffType{2}), last),
-        *(next(first)) + rob(next(first, DiffType{3}), last)
+        (*next(first)) + rob(next(first, DiffType{3}), last)
     );
 }
 
