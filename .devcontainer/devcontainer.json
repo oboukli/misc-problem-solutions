@@ -6,6 +6,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "DavidAnson.vscode-markdownlint",
         "EditorConfig.EditorConfig",
         "llvm-vs-code-extensions.lldb-dap",
         "llvm-vs-code-extensions.vscode-clangd",
@@ -13,9 +14,9 @@
       ],
       "settings": {
         "clangd.arguments": [
-          "--compile-commands-dir=${workspaceFolder}/out/build/"
+          "--compile-commands-dir=/out/"
         ],
-        "cmake.copyCompileCommands": "${workspaceFolder}/out/build/compile_commands.json",
+        "cmake.copyCompileCommands": "/out/compile_commands.json",
         "cmake.debugConfig": {
           "environment": [
             {
@@ -47,13 +48,30 @@
       }
     }
   },
+  "containerEnv": {
+    "BUILD_DIR": "/out",
+    "CC": "/usr/bin/clang",
+    "CXX": "/usr/bin/clang++",
+    "VCPKG_DEFAULT_BINARY_CACHE": "/out/vcpkg-cache"
+  },
+  "remoteEnv": {
+    "BUILD_DIR": "/out",
+    "CC": "/usr/bin/clang",
+    "CXX": "/usr/bin/clang++",
+    "VCPKG_DEFAULT_BINARY_CACHE": "/out/vcpkg-cache"
+  },
   "features": {
     "ghcr.io/devcontainer-community/devcontainer-features/ninja-build.org:1": {},
     "ghcr.io/devcontainer-community/devcontainer-features/valgrind.org:1": {},
     "ghcr.io/devcontainers-community/features/llvm": {},
     "ghcr.io/devcontainers-extra/features/cmake:1": {},
+    "ghcr.io/msclock/features/vcpkg:1": {},
     "ghcr.io/ttyrho/devcontainer-features/gcc:1": {
       "installCPlusPlus": true
     }
-  }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-out,target=/out,type=volume"
+  ],
+  "postCreateCommand": "sudo mkdir -p /out/vcpkg-cache && sudo chown -R $(whoami):$(whoami) /out"
 }

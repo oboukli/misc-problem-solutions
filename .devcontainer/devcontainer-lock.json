@@ -20,6 +20,11 @@
       "resolved": "ghcr.io/devcontainers-extra/features/cmake@sha256:86e25502f6b1213a68d88e4e55c969eba0b5016b9666d216ab65f5047808bc90",
       "integrity": "sha256:86e25502f6b1213a68d88e4e55c969eba0b5016b9666d216ab65f5047808bc90"
     },
+    "ghcr.io/msclock/features/vcpkg:1": {
+      "version": "1.3.6",
+      "resolved": "ghcr.io/msclock/features/vcpkg@sha256:2d4ef3842b3ba67f68a9ed4624ac1f29df85b66142c2d1a1dba4fb76782134d2",
+      "integrity": "sha256:2d4ef3842b3ba67f68a9ed4624ac1f29df85b66142c2d1a1dba4fb76782134d2"
+    },
     "ghcr.io/ttyrho/devcontainer-features/gcc:1": {
       "version": "1.1.0",
       "resolved": "ghcr.io/ttyrho/devcontainer-features/gcc@sha256:1c53354851f143fa2c1c57293f7e68de88ca406081d19dc1008c0e3e74951817",
