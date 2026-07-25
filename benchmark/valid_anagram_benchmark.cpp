@@ -18,8 +18,8 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 {
     using namespace forfun::valid_anagram;
 
-    std::string_view const s{"anagram"};
-    std::string_view const t{"nagaram"};
+    std::string_view const str_a{"anagram"};
+    std::string_view const str_b{"nagaram"};
 
     ankerl::nanobench::Bench()
 
@@ -28,8 +28,8 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(char_only::is_anagram).c_str(),
-            [s, t] noexcept -> void {
-                bool const volatile r{char_only::is_anagram(s, t)};
+            [str_a, str_b] noexcept -> void {
+                bool const volatile r{char_only::is_anagram(str_a, str_b)};
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -37,8 +37,10 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(map_based::is_anagram<char>).c_str(),
-            [s, t] -> void {
-                bool const volatile r{map_based::is_anagram<char>(s, t)};
+            [str_a, str_b] -> void {
+                bool const volatile r{
+                    map_based::is_anagram<char>(str_a, str_b)
+                };
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
@@ -46,8 +48,10 @@ TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 
         .run(
             NAMEOF_RAW(multiset_based::is_anagram<char>).c_str(),
-            [s, t] -> void {
-                bool const volatile r{multiset_based::is_anagram<char>(s, t)};
+            [str_a, str_b] -> void {
+                bool const volatile r{
+                    multiset_based::is_anagram<char>(str_a, str_b)
+                };
 
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

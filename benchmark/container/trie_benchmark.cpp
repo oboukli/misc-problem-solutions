@@ -5,13 +5,13 @@
 // SPDX-License-Identifier: MIT
 
 #include <string_view>
+#include <utility>
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
-#include <utility>
+
+#include <nanobench.h>
 
 #include "forfun/container/trie.hpp"
 
