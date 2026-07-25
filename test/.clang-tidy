@@ -5,6 +5,7 @@ Checks: >-
   -readability-function-cognitive-complexity,
   -readability-magic-numbers,
 CheckOptions:
+  readability-identifier-length.IgnoredBindingNames: "^[abc_]$"
   readability-identifier-length.IgnoredParameterNames: "^[abn]|os$"
   readability-identifier-length.IgnoredVariableNames: "^[abceknstv][0-9]*$"
 InheritParentConfig: true
