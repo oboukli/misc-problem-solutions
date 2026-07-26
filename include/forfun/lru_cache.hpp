@@ -1,3 +1,9 @@
+// Copyright (c) Omar Boukli-Hacene. All rights reserved.
+// Distributed under an MIT-style license that can be
+// found in the LICENSE file.
+
+// SPDX-License-Identifier: MIT
+
 /// Problem sources:
 /// - https://simontoth.substack.com/p/daily-bite-of-c-lru-cache
 /// - https://leetcode.com/problems/lru-cache/
