@@ -11,6 +11,7 @@
 #define FORFUN_SORTING_INSERTION_SORT_HPP
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 
 namespace forfun::sorting {
