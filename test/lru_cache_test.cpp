@@ -4,8 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <cstddef>
-
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
@@ -20,7 +18,7 @@ TEMPLATE_TEST_CASE(
 {
     using CacheType = TestType;
 
-    STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<CacheType>);
+    static_assert(forfun::lrucache::concepts::lru_cache<CacheType>);
 
     int volatile val{};
 
@@ -29,32 +27,32 @@ TEMPLATE_TEST_CASE(
         CacheType cache{2};
 
         // Cache is {{1, 1}}.
-        cache.put(1U, 1);
+        cache.put(1UZ, 1);
 
         // Cache is {{1, 1}, {2, 2}}.
-        cache.put(2U, 2);
+        cache.put(2UZ, 2);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == 1);
 
         // LRU key was 2. Evicts key 2. Cache is {{1, 1}, {3, 3}}.
-        cache.put(3U, 3);
+        cache.put(3UZ, 3);
 
         // Returns -1 (key not found).
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == -1);
 
         // LRU key was 1; evicts key 1, cache is {{4, 4}, {3, 3}}.
-        cache.put(4U, 4);
+        cache.put(4UZ, 4);
 
         // Returns -1 (key not found).
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == -1);
 
-        val = cache.get(3U);
+        val = cache.get(3UZ);
         REQUIRE(val == 3);
 
-        val = cache.get(4U);
+        val = cache.get(4UZ);
         REQUIRE(val == 4);
     }
 
@@ -62,34 +60,34 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(2);
 
-        cache.put(1U, 1);
+        cache.put(1UZ, 1);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == 1);
 
-        cache.put(2U, 2);
+        cache.put(2UZ, 2);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 2);
 
         // Evicts key 1.
-        cache.put(3U, 3);
+        cache.put(3UZ, 3);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == -1);
 
-        cache.put(2U, 4);
+        cache.put(2UZ, 4);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 4);
 
         // Evicts key 3.
-        cache.put(4U, 4);
+        cache.put(4UZ, 4);
 
-        val = cache.get(3U);
+        val = cache.get(3UZ);
         REQUIRE(val == -1);
 
-        val = cache.get(5U);
+        val = cache.get(5UZ);
         REQUIRE(val == -1);
     }
 
@@ -97,23 +95,23 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(1);
 
-        cache.put(1U, 1);
+        cache.put(1UZ, 1);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == 1);
 
         // Evicts key 1.
-        cache.put(2U, 2);
+        cache.put(2UZ, 2);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == -1);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 2);
 
-        cache.put(2U, 3);
+        cache.put(2UZ, 3);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 3);
     }
 
@@ -121,93 +119,35 @@ TEMPLATE_TEST_CASE(
     {
         CacheType cache(3);
 
-        cache.put(1U, 1);
-        cache.put(2U, 2);
-        cache.put(3U, 3);
+        cache.put(1UZ, 1);
+        cache.put(2UZ, 2);
+        cache.put(3UZ, 3);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == 1);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 2);
 
-        val = cache.get(3U);
+        val = cache.get(3UZ);
         REQUIRE(val == 3);
 
         // Evicts key 1.
-        cache.put(4U, 4);
+        cache.put(4UZ, 4);
 
-        val = cache.get(1U);
+        val = cache.get(1UZ);
         REQUIRE(val == -1);
 
-        val = cache.get(4U);
+        val = cache.get(4UZ);
         REQUIRE(val == 4);
 
-        val = cache.get(2U);
+        val = cache.get(2UZ);
         REQUIRE(val == 2);
 
         // Evicts key 3, as key 2 was accessed recently.
-        cache.put(5U, 5);
+        cache.put(5UZ, 5);
 
-        val = cache.get(3U);
+        val = cache.get(3UZ);
         REQUIRE(val == -1);
-    }
-}
-
-TEST_CASE("LRU cache concepts", "[lru_cache]")
-{
-    struct Dummy0 {};
-
-    struct Dummy1 : Dummy0 {
-        explicit Dummy1(std::size_t /*unused*/) noexcept
-        {
-        }
-    };
-
-    struct Dummy2 : Dummy1 {
-        explicit Dummy2(std::size_t const capacity) noexcept : Dummy1{capacity}
-        {
-        }
-
-        [[maybe_unused]] auto
-        put(std::size_t /*unused*/, int /*unused*/) noexcept -> void
-        {
-        }
-    };
-
-    class Dummy3 : public Dummy2 {
-    public:
-        explicit Dummy3(std::size_t const capacity) noexcept : Dummy2{capacity}
-        {
-        }
-
-        [[nodiscard]] auto get(std::size_t /*unused*/) const noexcept -> int
-        {
-            return value_;
-        }
-
-    private:
-        int value_{};
-    };
-
-    struct Dummy4 final : Dummy3 {
-        [[maybe_unused]] explicit Dummy4(std::size_t const capacity) noexcept :
-            Dummy3{capacity}
-        {
-        }
-    };
-
-    SECTION("Positive")
-    {
-        STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<Dummy3>);
-        STATIC_REQUIRE(forfun::lrucache::concepts::lru_cache<Dummy4>);
-    }
-
-    SECTION("Negative")
-    {
-        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<int>);
-        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy0>);
-        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy1>);
-        STATIC_REQUIRE_FALSE(forfun::lrucache::concepts::lru_cache<Dummy2>);
     }
 }

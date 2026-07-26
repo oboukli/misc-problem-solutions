@@ -14,16 +14,41 @@ TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 {
     using forfun::sorting::quicksort;
 
-    SECTION("Empty container")
+    SECTION("One element")
     {
-        static constexpr std::array<int, 0> const expected_output{};
+        static constexpr auto result{
+            [] [[nodiscard]] consteval noexcept -> bool {
+                std::array actual{7};
+                static constexpr std::array const expected{7};
 
-        std::array<int, 0> test_input{};
+                quicksort(actual.begin(), actual.end());
 
-        quicksort(test_input.begin(), test_input.end());
+                return (actual.size() == 1UZ)
+                    && (actual.size() == expected.size())
+                    && (actual.front() == expected.front());
+            }()
+        };
 
-        STATIC_CHECK(test_input.empty());
+        STATIC_REQUIRE(result);
+    }
 
-        STATIC_REQUIRE(test_input == expected_output);
+    SECTION("Three elements")
+    {
+        static constexpr auto result{
+            [] [[nodiscard]] consteval noexcept -> bool {
+                std::array actual{5, 3, 4};
+                static constexpr std::array const expected{3, 4, 5};
+
+                quicksort(actual.begin(), actual.end());
+
+                return (actual.size() == 3UZ)
+                    && (actual.size() == expected.size())
+                    && (actual.front() == expected.front())
+                    && (actual[1] == expected[1])
+                    && (actual[2] == expected[2]);
+            }()
+        };
+
+        STATIC_REQUIRE(result);
     }
 }

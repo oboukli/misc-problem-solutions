@@ -306,6 +306,27 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
+    "Two sum (unsolvable degenerate case)",
+    "[two_sum]",
+    (auto two_sum, two_sum),
+    (forfun::two_sum::brute_forced::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::mapped::two_sum<ConstIter, ConstIter>),
+    (forfun::two_sum::presorted_brute_searched::two_sum<ConstIter, ConstIter>)
+)
+{
+    static constexpr int const target{2};
+    std::vector const nums{5, 11, 17};
+    std::array const expected{nums.cend(), nums.cend()};
+
+    CAPTURE(nums);
+    CAPTURE(target);
+
+    auto const actual{two_sum(nums.cbegin(), nums.cend(), target)};
+
+    REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+}
+
+TEMPLATE_TEST_CASE_SIG(
     "Two sum (miscellaneous degenerate cases)",
     "[two_sum]",
     (auto two_sum, two_sum),
