@@ -22,7 +22,7 @@ namespace forfun::search::koko_eating_bananas {
 /// span of elements, otherwise the behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::same_as<std::iter_value_t<Iter>, int>
 [[nodiscard]] constexpr auto min_eating_speed(
     Iter const first, Sentinel const last, int const duration

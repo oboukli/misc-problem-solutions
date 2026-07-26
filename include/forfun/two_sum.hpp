@@ -30,7 +30,7 @@ namespace brute_forced {
 
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
@@ -64,7 +64,7 @@ namespace mapped {
 /// span of elements.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] auto
 two_sum(Iter iter, Sentinel const last, std::iter_value_t<Iter> const target)
@@ -99,7 +99,7 @@ namespace presorted_binary_searched {
 /// solution.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target
@@ -132,7 +132,7 @@ namespace presorted_brute_searched {
 /// solution.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto two_sum(
     Iter iter, Sentinel const last, std::iter_value_t<Iter> const target

@@ -174,7 +174,7 @@ constexpr auto resort(T const a, T const b, T const c) noexcept
 /// behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>
@@ -298,7 +298,7 @@ namespace brute_force {
 /// span of elements, otherwise the behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>
@@ -360,7 +360,7 @@ namespace set_based {
 /// span of elements, otherwise the behavior of the strategy is undefined.
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto three_sum(Iter const first, Sentinel const last)
     -> std::vector<std::array<std::iter_value_t<Iter>, 3>>

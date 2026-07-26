@@ -26,7 +26,7 @@ namespace brute_force {
 
 template <typename Iter, typename Sentinel>
     requires std::forward_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
 max_sum(Iter const first, Sentinel const last) noexcept
@@ -66,7 +66,7 @@ namespace detail {
 
 template <typename Iter, typename Sentinel>
     requires std::input_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum_internal(
     Iter iter,
@@ -91,7 +91,7 @@ template <typename Iter, typename Sentinel>
 
 template <typename Iter, typename Sentinel>
     requires std::input_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum(Iter iter, Sentinel const last) noexcept
     -> PromotedValueType<std::iter_value_t<Iter>>
@@ -114,7 +114,7 @@ namespace streaming {
 
 template <typename Iter, typename Sentinel>
     requires std::input_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto max_sum(Iter iter, Sentinel const last) noexcept
     -> PromotedValueType<std::iter_value_t<Iter>>

@@ -55,7 +55,7 @@ namespace base {
 
 template <typename Iter, typename Sentinel>
     requires std::contiguous_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::sortable<Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto
@@ -106,7 +106,7 @@ namespace fast {
 
 template <typename Iter, typename Sentinel>
     requires std::contiguous_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::sortable<Iter>
     and std::integral<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto

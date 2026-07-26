@@ -20,7 +20,7 @@ namespace forfun::sorting {
 template <typename Iter, typename Sentinel>
     requires std::sortable<Iter>
     and std::bidirectional_iterator<Iter>
-    and std::sentinel_for<Iter, Sentinel>
+    and std::sentinel_for<Sentinel, Iter>
 auto insertion_sort(Iter const first, Sentinel const last) noexcept -> void
 {
     using std::iter_swap;
