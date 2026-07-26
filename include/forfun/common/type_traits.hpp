@@ -11,6 +11,12 @@
 
 namespace forfun::common::type_traits {
 
+template <typename S, typename R>
+using conditional_const_t = std::conditional_t<
+    std::is_const_v<std::remove_reference_t<S>>,
+    std::add_const_t<R>,
+    R>;
+
 template <typename T>
 using reference_conditional_const_t = std::conditional_t<
     std::is_const_v<std::remove_reference_t<T>>,
