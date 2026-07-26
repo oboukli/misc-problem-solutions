@@ -274,7 +274,7 @@ private:
         std::hardware_destructive_interference_size - sizeof(cursor_type)>
         end_of_object_padding_ /*[[indeterminate]]*/;
 
-    auto reset_indices() noexcept
+    auto reset_indices() noexcept -> void
     {
         write_cursor_cached_ = {};
 
