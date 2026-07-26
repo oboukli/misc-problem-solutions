@@ -218,7 +218,7 @@ NamespaceIndentation: None
 NumericLiteralCase:
   ExponentLetter: Upper
   HexDigit: Upper
-  Prefix: Upper
+  Prefix: Lower
   Suffix: Upper
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
