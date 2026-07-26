@@ -9,9 +9,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/evaluate_reverse_polish_notation.hpp"
 

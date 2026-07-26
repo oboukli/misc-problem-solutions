@@ -6,9 +6,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
 

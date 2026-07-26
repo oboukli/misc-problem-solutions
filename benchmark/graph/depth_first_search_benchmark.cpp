@@ -6,9 +6,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/graph/depth_first_search.hpp"
 #include "forfun/graph/vertex.hpp"

@@ -6,9 +6,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/graph/binary_tree_node.hpp"
 #include "forfun/graph/invert_binary_tree.hpp"
