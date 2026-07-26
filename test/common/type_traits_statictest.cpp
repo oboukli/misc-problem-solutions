@@ -44,6 +44,47 @@ TEST_CASE("Trait type_is_one_of_v", "[type_traits]")
     }
 }
 
+TEST_CASE("Trait conditional_const_t", "[type_traits]")
+{
+    SECTION("Should be const")
+    {
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::
+                    conditional_const_t<char const, int>,
+                int const>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::
+                    conditional_const_t<char const&, int>,
+                int const>
+        );
+    }
+
+    SECTION("Should not be const")
+    {
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::conditional_const_t<char, int>,
+                int>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::conditional_const_t<char&, int>,
+                int>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::conditional_const_t<char&&, int>,
+                int>
+        );
+    }
+}
+
 TEST_CASE("Trait reference_conditional_const_t", "[type_traits]")
 {
     using T = std::array<int, 0>;

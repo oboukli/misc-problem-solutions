@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <iterator>
 
+#include "forfun/common/type_traits.hpp"
 #include "forfun/container/internal/list_node.hpp"
 
 namespace forfun::experimental::container::internal {
@@ -40,7 +41,8 @@ public:
         return self;
     }
 
-    [[nodiscard]] auto operator++(this auto&& self, int) noexcept -> Derived
+    [[nodiscard]] auto operator++(this auto&& self, int) noexcept -> forfun::
+        common::type_traits::conditional_const_t<decltype(self), Derived>
     {
         auto aux{self};
         ++self;
@@ -55,7 +57,8 @@ public:
         return self;
     }
 
-    [[nodiscard]] auto operator--(this auto&& self, int) noexcept -> Derived
+    [[nodiscard]] auto operator--(this auto&& self, int) noexcept -> forfun::
+        common::type_traits::conditional_const_t<decltype(self), Derived>
     {
         auto aux{self};
         self.node_ = self.node_->previous_;
