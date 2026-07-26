@@ -47,8 +47,8 @@ TEST_CASE(
         "abcd    ~~~~efghabcd    ~~~~efgh"sv,
     };
     static_assert(tokens.size() == 2UZ);
-    static_assert(tokens[0].size() == 256UZ);
-    static_assert(tokens[1].size() == 256UZ);
+    static_assert(tokens.at(0).size() == 256UZ);
+    static_assert(tokens.at(1).size() == 256UZ);
 
     ankerl::nanobench::Bench()
 
