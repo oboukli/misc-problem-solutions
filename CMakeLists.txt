@@ -910,6 +910,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/daily_temperatures_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/factorial_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/first_missing_positive_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_statictest.cpp"
@@ -917,6 +918,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/permutation_in_string_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/product_except_self_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/search/koko_eating_bananas_statictest.cpp"
@@ -924,6 +926,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/trapping_rainwater_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
 )

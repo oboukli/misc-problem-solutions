@@ -15,28 +15,26 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 {
     SECTION("Two disks")
     {
-        static constexpr auto result{
-            [] [[nodiscard]] consteval noexcept -> bool {
-                static constexpr std::size_t const num_disks{2};
+        constexpr auto result{[] [[nodiscard]] consteval noexcept -> bool {
+            constexpr std::size_t const num_disks{2};
 
-                int src_rod{2};
-                int des_rod{};
-                int aux_rod{};
+            int src_rod{2};
+            int des_rod{};
+            int aux_rod{};
 
-                forfun::tower_of_hanoi::recursive::toh(
-                    src_rod,
-                    des_rod,
-                    aux_rod,
-                    [](int& src, int& des) consteval noexcept -> void {
-                        --src;
-                        ++des;
-                    },
-                    num_disks
-                );
+            forfun::tower_of_hanoi::recursive::toh(
+                src_rod,
+                des_rod,
+                aux_rod,
+                [](int& src, int& des) noexcept -> void {
+                    --src;
+                    ++des;
+                },
+                num_disks
+            );
 
-                return (src_rod == 0) && (des_rod == 2) && (aux_rod == 0);
-            }()
-        };
+            return (src_rod == 0) && (des_rod == 2) && (aux_rod == 0);
+        }()};
 
         STATIC_REQUIRE(result);
     }
