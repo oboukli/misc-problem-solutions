@@ -32,3 +32,32 @@ TEMPLATE_TEST_CASE_SIG(
 
     STATIC_REQUIRE(dest == expected);
 }
+
+TEMPLATE_TEST_CASE_SIG(
+    "Concatenate three-element array",
+    "[array_concatenation]",
+    (auto concatenate, concatenate),
+    (forfun::array_concatenation::functional::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_based::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_based_double::concatenate<int, 3>),
+    (forfun::array_concatenation::iterator_unfolded::concatenate<int, 3>),
+    (forfun::array_concatenation::nested_loops::concatenate<int, 3>),
+    (forfun::array_concatenation::semi_unfolded::concatenate<int, 3>)
+)
+{
+    static constexpr auto actual{
+        [] [[nodiscard]] consteval noexcept -> std::array<int, 6> {
+            static constexpr std::array const src{19, 23, 29};
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+            std::array<int, 6> dest /*[[indeterminate]]*/;
+
+            concatenate(src, dest);
+
+            return dest;
+        }()
+    };
+
+    static constexpr std::array const expected{19, 23, 29, 19, 23, 29};
+
+    STATIC_REQUIRE(actual == expected);
+}

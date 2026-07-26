@@ -16,6 +16,8 @@
 
 #include "forfun/product_except_self.hpp"
 
+namespace {
+
 using IntVecIter = std::vector<int>::iterator;
 using IntVecConstIter = std::vector<int>::const_iterator;
 using FloatVecConstIter = std::vector<float>::const_iterator;
@@ -24,6 +26,8 @@ using IntArr3ConstIter = std::array<int, 3>::const_iterator;
 using IntArr3Iter = std::array<int, 3>::iterator;
 using U64ArrConstIter = std::array<std::uint64_t, 16>::const_iterator;
 using U64ArrIter = std::array<std::uint64_t, 16>::iterator;
+
+} // namespace
 
 TEMPLATE_TEST_CASE_SIG(
     "Product of array except self (std::vector<int>)",

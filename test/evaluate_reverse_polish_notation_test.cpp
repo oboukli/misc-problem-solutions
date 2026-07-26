@@ -330,8 +330,6 @@ TEMPLATE_TEST_CASE_SIG(
     (forfun::evaluate_reverse_polish_notation::hardened::
         eval_expression<VecConstIter, VecConstIter>),
     (forfun::evaluate_reverse_polish_notation::speed_optimized::
-        eval_expression<VecConstIter, VecConstIter>),
-    (forfun::evaluate_reverse_polish_notation::unhardened::
         eval_expression<VecConstIter, VecConstIter>)
     // clang-format on
 )

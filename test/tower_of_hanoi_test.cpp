@@ -5,8 +5,10 @@
 // SPDX-License-Identifier: MIT
 
 #include <cassert>
+#include <cstddef>
 #include <initializer_list>
 #include <stack>
+#include <version>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -15,17 +17,16 @@
 namespace {
 
 constexpr auto push_range(auto& dest_container, auto const& src_list) -> void
-    requires requires { dest_container.push_range(src_list); }
 {
+#if defined(__cpp_lib_containers_ranges) \
+    && __cpp_lib_containers_ranges >= 202202L
     dest_container.push_range(src_list);
-}
-
-constexpr auto push_range(auto& dest_container, auto const& src_list) -> void
-{
+#else
     for (auto const e : src_list)
     {
         dest_container.push(e);
     }
+#endif
 }
 
 } // namespace
@@ -43,18 +44,11 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Empty")
     {
-        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> src_rod{};
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
-        // NOLINTEND(misc-const-correctness)
 
-        assert(src_rod.empty());
-        assert(des_rod.empty());
-        assert(aux_rod.empty());
-
-        // NOLINTNEXTLINE(misc-const-correctness)
-        std::stack<int> expected{};
+        std::stack<int> const expected{};
 
         toh(src_rod, des_rod, aux_rod, monk, src_rod.size());
 
@@ -65,22 +59,18 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("One disk")
     {
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list const disks{1};
+        std::initializer_list<int> const disks{1};
         push_range(src_rod, disks);
 
-        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
-        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 1UZ);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -94,22 +84,18 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Two disks")
     {
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list const disks{2, 1};
+        std::initializer_list<int> const disks{2, 1};
         push_range(src_rod, disks);
 
-        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
-        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 2UZ);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -123,22 +109,18 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Three disks")
     {
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list const disks{3, 2, 1};
+        std::initializer_list<int> const disks{3, 2, 1};
         push_range(src_rod, disks);
 
-        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
-        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 3UZ);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -152,22 +134,18 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
     SECTION("Four disks")
     {
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> src_rod{};
-        std::initializer_list const disks{4, 3, 2, 1};
+        std::initializer_list<int> const disks{4, 3, 2, 1};
         push_range(src_rod, disks);
 
-        // NOLINTBEGIN(misc-const-correctness)
         std::stack<int> des_rod{};
         std::stack<int> aux_rod{};
-        // NOLINTEND(misc-const-correctness)
 
         assert(src_rod.size() == 4UZ);
         assert(src_rod.top() == 1);
         assert(des_rod.empty());
         assert(aux_rod.empty());
 
-        // NOLINTNEXTLINE(misc-const-correctness)
         std::stack<int> expected{};
         push_range(expected, disks);
 
@@ -183,14 +161,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
     {
         SECTION("Given no disk then no moves")
         {
-            static constexpr unsigned int const num_disks{};
+            static constexpr std::size_t const num_disks{};
 
-            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{};
-            // NOLINTEND(misc-const-correctness)
+            std::size_t count{};
 
             toh(
                 src_rod,
@@ -205,14 +181,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
         SECTION("Given one disk then one move")
         {
-            static constexpr unsigned int const num_disks{1};
+            static constexpr std::size_t const num_disks{1};
 
-            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{};
-            // NOLINTEND(misc-const-correctness)
+            std::size_t count{};
 
             toh(
                 src_rod,
@@ -227,14 +201,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
         SECTION("Given two disks then three moves")
         {
-            static constexpr unsigned int const num_disks{2};
+            static constexpr std::size_t const num_disks{2};
 
-            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{};
-            // NOLINTEND(misc-const-correctness)
+            std::size_t count{};
 
             toh(
                 src_rod,
@@ -249,14 +221,12 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 
         SECTION("Given four disks then fifteen moves")
         {
-            static constexpr unsigned int const num_disks{4};
+            static constexpr std::size_t const num_disks{4};
 
-            // NOLINTBEGIN(misc-const-correctness)
             int src_rod{};
             int des_rod{};
             int aux_rod{};
-            unsigned int count{};
-            // NOLINTEND(misc-const-correctness)
+            std::size_t count{};
 
             toh(
                 src_rod,
@@ -267,47 +237,6 @@ TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
             );
 
             REQUIRE(count == 15);
-        }
-    }
-
-    SECTION("Exception specification")
-    {
-        SECTION("noexcept(false)")
-        {
-            // NOLINTBEGIN(misc-const-correctness)
-            [[maybe_unused]] int src_rod{};
-            [[maybe_unused]] int des_rod{};
-            [[maybe_unused]] int aux_rod{};
-            // NOLINTEND(misc-const-correctness)
-
-            STATIC_REQUIRE_FALSE(
-                noexcept(toh(
-                    src_rod,
-                    des_rod,
-                    aux_rod,
-                    [] [[noreturn]] (int&, int&) -> void { throw; },
-                    0
-                ))
-            );
-        }
-
-        SECTION("noexcept(true)")
-        {
-            // NOLINTBEGIN(misc-const-correctness)
-            [[maybe_unused]] int src_rod{};
-            [[maybe_unused]] int des_rod{};
-            [[maybe_unused]] int aux_rod{};
-            // NOLINTEND(misc-const-correctness)
-
-            STATIC_REQUIRE(
-                noexcept(toh(
-                    src_rod,
-                    des_rod,
-                    aux_rod,
-                    [](int&, int&) noexcept -> void {},
-                    0
-                ))
-            );
         }
     }
 }

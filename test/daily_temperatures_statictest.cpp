@@ -31,5 +31,6 @@ TEST_CASE("Daily temperatures", "[daily_temperatures]")
     }()};
 
     STATIC_REQUIRE(std::same_as<bool const, decltype(result)>);
+
     STATIC_REQUIRE(result);
 }

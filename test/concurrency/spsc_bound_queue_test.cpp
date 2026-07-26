@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <array>
 #include <chrono>
-#include <compare>
 #include <cstddef>
 #include <functional>
 #include <ranges>

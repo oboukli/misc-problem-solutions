@@ -326,7 +326,7 @@ concept template_specialization
 struct Dummy final {};
 
 struct AddableDummy final {
-    explicit(false) AddableDummy(auto const /*unused*/)
+    [[maybe_unused]] explicit(false) AddableDummy(auto const /*unused*/)
     {
     }
 
