@@ -26,7 +26,9 @@ namespace forfun::evaluate_reverse_polish_notation {
 
 namespace hardened {
 
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Sentinel, Iter>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
@@ -105,7 +107,9 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 namespace unhardened {
 
 /// @note Calculation may overflow without notice or error.
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Sentinel, Iter>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
@@ -170,7 +174,9 @@ template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
 namespace speed_optimized {
 
 /// @note Calculation may overflow without notice or error.
-template <std::contiguous_iterator Iter, std::sized_sentinel_for<Iter> Sentinel>
+template <typename Iter, typename Sentinel>
+    requires std::contiguous_iterator<Iter>
+    and std::sized_sentinel_for<Sentinel, Iter>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {

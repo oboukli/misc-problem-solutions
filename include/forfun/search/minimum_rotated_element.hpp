@@ -23,7 +23,7 @@ namespace iterative {
 /// is undefined.
 template <typename Iter, typename Sentinel>
     requires std::bidirectional_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto find_min(Iter first, Sentinel const last) noexcept
     -> Iter
@@ -61,7 +61,7 @@ namespace recursive {
 /// is undefined.
 template <typename Iter, typename Sentinel>
     requires std::bidirectional_iterator<Iter>
-    and std::sized_sentinel_for<Iter, Sentinel>
+    and std::sized_sentinel_for<Sentinel, Iter>
     and std::totally_ordered<std::iter_value_t<Iter>>
 [[nodiscard]] constexpr auto find_min(Iter first, Sentinel const last) noexcept
     -> Iter

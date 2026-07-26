@@ -19,7 +19,7 @@ namespace forfun::container_with_most_water {
 namespace brute {
 
 template <typename Iter, typename Sentinel>
-    requires std::forward_iterator<Iter> and std::sentinel_for<Iter, Sentinel>
+    requires std::forward_iterator<Iter> and std::sentinel_for<Sentinel, Iter>
 [[nodiscard]] constexpr auto
 calc_max_area(Iter iter_a, Sentinel const last) noexcept -> int
 {
