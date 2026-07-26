@@ -8,9 +8,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/best_time_to_buy_and_sell_stock.hpp"
 

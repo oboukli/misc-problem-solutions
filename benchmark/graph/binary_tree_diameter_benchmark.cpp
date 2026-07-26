@@ -6,9 +6,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <nanobench.h>
-
 #include <nameof.hpp>
+
+#include <nanobench.h>
 
 #include "forfun/graph/binary_tree_diameter.hpp"
 #include "forfun/graph/binary_tree_node.hpp"
