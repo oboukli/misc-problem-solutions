@@ -13,61 +13,70 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 max_line_length = 80
+spelling_language = en-US
 trim_trailing_whitespace = true
 
 [{*.md,LICENSE}]
 charset = utf-8
 end_of_line = lf
-indent_size = 4
+indent_size = 2
 indent_style = space
 insert_final_newline = true
 max_line_length = 80
+spelling_language = en-US
 trim_trailing_whitespace = true
 
-[{*.{cff,json,yml},.clang-{format,tidy}}]
+[*.{cff,json,yml},.clang-{format,tidy},memcheck.supp]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
 insert_final_newline = true
+spelling_language = en-US
 trim_trailing_whitespace = true
 
-[{.editorconfig,.git*,CODEOWNERS}]
-charset = utf-8
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
-
-[{CMakeLists.txt,*.cmake}]
+[*.{cmake,cmake.in},CMakeLists.txt]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
 insert_final_newline = true
+spelling_language = en-US
 trim_trailing_whitespace = true
 
-[*.{cmd}]
+[.editorconfig,.git*,CODEOWNERS]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+spelling_language = en-US
+trim_trailing_whitespace = true
+
+[*.cmd]
 charset = utf-8
 end_of_line = crlf
 indent_size = 2
 indent_style = space
 insert_final_newline = true
 max_line_length = 80
+spelling_language = en-US
 trim_trailing_whitespace = true
 
-[*.{sh}]
+[*.sh]
 charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
 insert_final_newline = true
 max_line_length = 80
+spelling_language = en-US
 trim_trailing_whitespace = true
 
-[{memcheck.supp}]
+[*.py]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
+indent_size = 4
 indent_style = space
 insert_final_newline = true
+max_line_length = 80
+spelling_language = en-US
 trim_trailing_whitespace = true
