@@ -111,7 +111,7 @@ leveraged by this project:
 | Top K Frequent Elements                                            | [`include/forfun/top_k_frequent_elements.hpp`](include/forfun/top_k_frequent_elements.hpp)                                                     |
 | Tower of Hanoi                                                     | [`include/forfun/tower_of_hanoi.hpp`](include/forfun/tower_of_hanoi.hpp)                                                                       |
 | Trapping Rainwater                                                 | [`include/forfun/trapping_rainwater.hpp`](include/forfun/trapping_rainwater.hpp)                                                               |
-| Trie                                                               | [`include/forfun/trie.hpp`](include/forfun/trie.hpp)                                                                                           |
+| Trie                                                               | [`src/forfun/container/trie.cpp`](src/forfun/container/trie.cpp)                                                                               |
 | Two Sum (I, II)                                                    | [`include/forfun/two_sum.hpp`](include/forfun/two_sum.hpp)                                                                                     |
 | Two-pass Boyer-Moore Majority                                      | [`include/forfun/majority_element.hpp`](include/forfun/majority_element.hpp)                                                                   |
 | Valid Anagram                                                      | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                                         |

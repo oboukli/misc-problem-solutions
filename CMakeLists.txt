@@ -91,7 +91,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/top_k_frequent_elements.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/tower_of_hanoi.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/trapping_rainwater.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/trie.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/two_sum.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/valid_anagram.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/valid_parentheses.hpp"
@@ -141,7 +140,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/top_k_frequent_elements.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/tower_of_hanoi.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/trapping_rainwater.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/trie.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/two_sum.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_anagram.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_parentheses.cpp"
@@ -509,6 +507,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/list.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/min_stack.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/trie.hpp"
 )
 target_sources(
   forfun_experimental
@@ -522,6 +521,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/list.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/min_stack.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/trie.cpp"
 )
 get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
 source_group(
@@ -616,7 +616,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/top_k_frequent_elements_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/trapping_rainwater_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/trie_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_anagram_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_parentheses_test.cpp"
@@ -696,6 +695,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/min_stack_test.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/trie_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/shim/allocator_test.cpp"
 )
@@ -864,6 +864,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_cycle_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/min_stack_benchmark.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/trie_benchmark.cpp"
 )
 get_target_property(
   benchmark_driver_experimental_sources
@@ -898,7 +899,6 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/limits_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/common/type_traits_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
@@ -906,6 +906,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/trie_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/daily_temperatures_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/factorial_statictest.cpp"
@@ -914,6 +915,7 @@ target_sources(
   "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_statictest.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_statictest.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
