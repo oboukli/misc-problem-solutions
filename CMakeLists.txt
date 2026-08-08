@@ -1041,10 +1041,18 @@ set_target_properties(
 
 set_target_properties(
   forfun_c
-  forfun_c_experimental
   PROPERTIES
     C_EXTENSIONS OFF
     C_STANDARD 90
+    C_STANDARD_REQUIRED ON
+    LANGUAGE C
+)
+
+set_target_properties(
+  forfun_c_experimental
+  PROPERTIES
+    C_EXTENSIONS OFF
+    C_STANDARD 99
     C_STANDARD_REQUIRED ON
     LANGUAGE C
 )
