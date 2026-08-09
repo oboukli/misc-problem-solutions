@@ -24,6 +24,14 @@ TEST_CASE(
     using ContainerType = std::array<int, 16>;
     using Iter = ContainerType::iterator;
 
+    static constexpr std::array const nums{
+        61, 11, 8,  43, 29, 37, 29, 43, 11, 61, 29, 7,  8,  61, 7,  11,
+        17, 13, 3,  29, 43, 29, 8,  8,  43, 29, 53, 19, 11, 23, 61, 7,
+        43, 31, 43, 7,  11, 43, 43, 8,  59, 5,  8,  7,  17, 43, 7,  3,
+        29, 2,  7,  11, 43, 43, 7,  8,  47, 53, 43, 29, 7,  7,  41, 43,
+    };
+    static_assert(nums.size() == 64UZ);
+
     ankerl::nanobench::Bench()
 
         .title("Top K frequent elements")
@@ -32,10 +40,6 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(bucket_sort_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
-                std::array nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
-                };
-
                 auto const volatile r{bucket_sort_based::top_frequent(
                     nums.begin(), nums.end(), 3U
                 )};
@@ -47,10 +51,6 @@ TEST_CASE(
             NAMEOF_RAW(bucket_sort_based_functional::top_frequent<Iter, Iter>)
                 .c_str(),
             [] -> void {
-                std::array nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
-                };
-
                 auto const volatile r{
                     bucket_sort_based_functional::top_frequent(
                         nums.begin(), nums.end(), 3U
@@ -63,10 +63,6 @@ TEST_CASE(
         .run(
             NAMEOF_RAW(priority_queue_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
-                static constexpr std::array const nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
-                };
-
                 auto const volatile r{priority_queue_based::top_frequent(
                     nums.cbegin(), nums.cend(), 3U
                 )};
@@ -80,10 +76,6 @@ TEST_CASE(
             )
                 .c_str(),
             [] -> void {
-                static constexpr std::array const nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
-                };
-
                 auto const volatile r{
                     priority_queue_based_functional::top_frequent(
                         nums.cbegin(), nums.cend(), 3U
@@ -94,13 +86,20 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(unordered_map_based::top_frequent<Iter, Iter>).c_str(),
+            NAMEOF_RAW(sort_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
-                static constexpr std::array const nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
+                auto const volatile r{
+                    sort_based::top_frequent(nums.cbegin(), nums.cend(), 3U)
                 };
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
 
-                auto const volatile r{unordered_map_based::top_frequent(
+        .run(
+            NAMEOF_RAW(sort_based_functional_1::top_frequent<Iter, Iter>)
+                .c_str(),
+            [] -> void {
+                auto const volatile r{sort_based_functional_1::top_frequent(
                     nums.cbegin(), nums.cend(), 3U
                 )};
                 ankerl::nanobench::doNotOptimizeAway(&r);
@@ -108,17 +107,21 @@ TEST_CASE(
         )
 
         .run(
-            NAMEOF_RAW(unordered_map_based_functional::top_frequent<Iter, Iter>)
+            NAMEOF_RAW(sort_based_functional_2::top_frequent<Iter, Iter>)
                 .c_str(),
             [] -> void {
-                static constexpr std::array const nums{
-                    5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
-                };
+                auto const volatile r{sort_based_functional_2::top_frequent(
+                    nums.cbegin(), nums.cend(), 3U
+                )};
+                ankerl::nanobench::doNotOptimizeAway(&r);
+            }
+        )
 
+        .run(
+            NAMEOF_RAW(max_heap_based::top_frequent<Iter, Iter>).c_str(),
+            [] -> void {
                 auto const volatile r{
-                    unordered_map_based_functional::top_frequent(
-                        nums.cbegin(), nums.cend(), 3U
-                    )
+                    max_heap_based::top_frequent(nums.cbegin(), nums.cend(), 3U)
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }

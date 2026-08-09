@@ -22,10 +22,12 @@ TEMPLATE_TEST_CASE_SIG(
     "[top_k_frequent_elements]",
     (auto top_frequent, top_frequent),
     // clang-format off
+    (forfun::top_k_frequent_elements::max_heap_based::
+        top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::bucket_sort_based::
-        top_frequent<std::vector<int>::iterator, std::vector<int>::iterator>),
+        top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::bucket_sort_based_functional::
-        top_frequent<std::vector<int>::iterator, std::vector<int>::iterator>),
+        top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
@@ -33,10 +35,14 @@ TEMPLATE_TEST_CASE_SIG(
         top_frequent<
             std::vector<int>::const_iterator,
             std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::unordered_map_based::top_frequent<
+    (forfun::top_k_frequent_elements::sort_based::top_frequent<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::unordered_map_based_functional::
+    (forfun::top_k_frequent_elements::sort_based_functional_1::
+        top_frequent<
+            std::vector<int>::const_iterator,
+            std::vector<int>::const_iterator>),
+    (forfun::top_k_frequent_elements::sort_based_functional_2::
         top_frequent<
             std::vector<int>::const_iterator,
             std::vector<int>::const_iterator>)
@@ -45,46 +51,46 @@ TEMPLATE_TEST_CASE_SIG(
 {
     SECTION("Top zero of one element")
     {
-        std::vector nums{5};
+        std::vector const nums{5};
         static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
     }
 
     SECTION("Top zero of two elements")
     {
-        std::vector nums{11, 13};
+        std::vector const nums{11, 13};
         static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
     }
 
     SECTION("Top zero of three elements")
     {
-        std::vector nums{11, 13, 17};
+        std::vector const nums{11, 13, 17};
         static constexpr std::size_t const k{};
 
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::IsEmpty());
     }
 
     SECTION("Top one of one element")
     {
-        std::vector nums{7};
+        std::vector const nums{7};
         static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{7};
@@ -92,44 +98,40 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1U)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top one of two elements")
     {
-        std::vector nums{11, 13};
+        std::vector const nums{11, 13};
         static constexpr std::size_t const k{1};
 
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::SizeIs(1U));
     }
 
     SECTION("Top one of three elements")
     {
-        std::vector nums{11, 13, 17};
+        std::vector const nums{11, 13, 17};
         static constexpr std::size_t const k{1};
 
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::SizeIs(1U));
     }
 
     SECTION("Top one of three identical elements")
     {
-        std::vector nums{19, 19, 19};
+        std::vector const nums{19, 19, 19};
         static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{19};
@@ -137,18 +139,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1U)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top one of four identical elements")
     {
-        std::vector nums{19, 19, 19, 19};
+        std::vector const nums{19, 19, 19, 19};
         static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{19};
@@ -156,18 +154,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1U)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top three of six elements")
     {
-        std::vector nums{23, 43, 31, 43, 23, 43};
+        std::vector const nums{23, 43, 31, 43, 23, 43};
         static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{43, 31, 23};
@@ -175,14 +169,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top three of three unique elements")
     {
-        std::vector nums{23, 31, 43};
+        std::vector const nums{23, 31, 43};
         static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{23, 31, 43};
@@ -190,14 +184,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top four of four unique elements")
     {
-        std::vector nums{19, 23, 31, 43};
+        std::vector const nums{19, 23, 31, 43};
         static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{19, 23, 31, 43};
@@ -205,14 +199,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Signed integers")
     {
-        std::vector nums{5, -9, -8, -9, 42, 42, -8, -8, 42, 42};
+        std::vector const nums{5, -9, -8, -9, 42, 42, -8, -8, 42, 42};
         static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{42, -8};
@@ -220,14 +214,16 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
-    SECTION("Top two of seventeen elements (benchmark case)")
+    SECTION("Top two of seventeen elements")
     {
-        std::vector nums{5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2};
+        std::vector const nums{
+            5, 3, 3, 8, 8, 8, 11, 11, 11, 11, 7, 7, 7, 7, 7, 2, 2
+        };
         static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{7, 11};
@@ -235,14 +231,35 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
+
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
+    }
+
+    SECTION("Top six of sixty-four elements (benchmark case)")
+    {
+        std::vector const nums{
+            61, 11, 8,  43, 29, 37, 29, 43, 11, 61, 29, 7,  8,  61, 7,  11,
+            17, 13, 3,  29, 43, 29, 8,  8,  43, 29, 53, 19, 11, 23, 61, 7,
+            43, 31, 43, 7,  11, 43, 43, 8,  59, 5,  8,  7,  17, 43, 7,  3,
+            29, 2,  7,  11, 43, 43, 7,  8,  47, 53, 43, 29, 7,  7,  41, 43,
+        };
+
+        static constexpr std::size_t const k{6};
+
+        static constexpr std::array const expected{7, 8, 11, 29, 43, 61};
+
+        CAPTURE(nums);
+        CAPTURE(k);
+
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("LeetCode test case 1")
     {
-        std::vector nums{1, 1, 1, 2, 2, 3};
+        std::vector const nums{1, 1, 1, 2, 2, 3};
         static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{1, 2};
@@ -250,14 +267,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("LeetCode test case 2")
     {
-        std::vector nums{1};
+        std::vector const nums{1};
         static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{1};
@@ -265,14 +282,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("NeetCode test case 1")
     {
-        std::vector nums{1, 2, 2, 3, 3, 3};
+        std::vector const nums{1, 2, 2, 3, 3, 3};
         static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{2, 3};
@@ -280,14 +297,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("NeetCode test case 2")
     {
-        std::vector nums{7, 7};
+        std::vector const nums{7, 7};
         static constexpr std::size_t const k{1};
 
         static constexpr std::array const expected{7};
@@ -295,14 +312,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("GeeksforGeeks test case 1")
     {
-        std::vector nums{3, 1, 4, 4, 5, 2, 6, 1};
+        std::vector const nums{3, 1, 4, 4, 5, 2, 6, 1};
         static constexpr std::size_t const k{2};
 
         static constexpr std::array const expected{1, 4};
@@ -310,14 +327,14 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("GeeksforGeeks test case 2")
     {
-        std::vector nums{7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
+        std::vector const nums{7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
         static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{5, 7, 11};
@@ -325,20 +342,22 @@ TEMPLATE_TEST_CASE_SIG(
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 }
 
-TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
+TEST_CASE(
+    "Top K frequent elements (degenerate cases)", "[top_k_frequent_elements]"
+)
 {
-    using forfun::top_k_frequent_elements::unordered_map_based_functional::
+    using forfun::top_k_frequent_elements::sort_based_functional_1::
         top_frequent;
 
     SECTION("Top three of three identical elements")
     {
-        std::vector nums{19, 19, 19};
+        std::vector const nums{19, 19, 19};
         static constexpr std::size_t const k{3};
 
         static constexpr std::array const expected{19};
@@ -346,18 +365,14 @@ TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1U)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 
     SECTION("Top four of four identical elements")
     {
-        std::vector nums{23, 23, 23, 23};
+        std::vector const nums{23, 23, 23, 23};
         static constexpr std::size_t const k{4};
 
         static constexpr std::array const expected{23};
@@ -365,12 +380,8 @@ TEST_CASE("Top K frequent elements invalid", "[top_k_frequent_elements]")
         CAPTURE(nums);
         CAPTURE(k);
 
-        std::vector const actual{top_frequent(nums.begin(), nums.end(), k)};
+        std::vector const actual{top_frequent(nums.cbegin(), nums.cend(), k)};
 
-        REQUIRE_THAT(
-            actual,
-            Catch::Matchers::SizeIs(1U)
-                and Catch::Matchers::UnorderedRangeEquals(expected)
-        );
+        REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 }
