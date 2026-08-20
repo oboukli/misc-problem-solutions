@@ -65,7 +65,7 @@
     "ghcr.io/devcontainer-community/devcontainer-features/valgrind.org:1": {},
     "ghcr.io/devcontainers-community/features/llvm": {},
     "ghcr.io/devcontainers-extra/features/cmake:1": {},
-    "ghcr.io/msclock/features/vcpkg:1": {},
+    "ghcr.io/msclock/features/vcpkg:2": {},
     "ghcr.io/ttyrho/devcontainer-features/gcc:1": {
       "installCPlusPlus": true
     }
