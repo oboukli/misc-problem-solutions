@@ -110,10 +110,20 @@ int forfun_s1_is_palindrome_ci(char const* str, size_t const length)
 
     while (str != mid)
     {
+
+#if defined(__clang__) && defined(__GLIBC__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif /* defined(__clang__) && defined(__GLIBC__) */
+
         if (tolower((unsigned char)*str) != tolower((unsigned char)*str_rhs))
         {
             return 0;
         }
+
+#if defined(__clang__) && defined(__GLIBC__)
+#pragma clang diagnostic pop
+#endif /* defined(__clang__) && defined(__GLIBC__) */
 
         --str_rhs;
         ++str;
@@ -141,10 +151,20 @@ int forfun_s2_is_palindrome_ci(char const* str, size_t const length)
 
     while (str < str_rhs)
     {
+
+#if defined(__clang__) && defined(__GLIBC__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif /* defined(__clang__) && defined(__GLIBC__) */
+
         if (tolower((unsigned char)*str) != tolower((unsigned char)*str_rhs))
         {
             return 0;
         }
+
+#if defined(__clang__) && defined(__GLIBC__)
+#pragma clang diagnostic pop
+#endif /* defined(__clang__) && defined(__GLIBC__) */
 
         --str_rhs;
         ++str;
