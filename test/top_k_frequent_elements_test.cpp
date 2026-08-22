@@ -17,35 +17,47 @@
 
 #include "forfun/top_k_frequent_elements.hpp"
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
+// clang-format off
+#define FORFUN_TOP_K_FREQUENT_ELEMENTS_MODERN \
+    (forfun::top_k_frequent_elements::bucket_sort_based_functional:: \
+        top_frequent< \
+            std::vector<int>::const_iterator, \
+            std::vector<int>::const_iterator>), \
+        (forfun::top_k_frequent_elements::priority_queue_based_functional:: \
+            top_frequent< \
+                std::vector<int>::const_iterator, \
+                std::vector<int>::const_iterator>), \
+        (forfun::top_k_frequent_elements::sort_based_functional_1:: \
+            top_frequent< \
+                std::vector<int>::const_iterator, \
+                std::vector<int>::const_iterator>), \
+        (forfun::top_k_frequent_elements::sort_based_functional_2:: \
+            top_frequent< \
+                std::vector<int>::const_iterator, \
+                std::vector<int>::const_iterator>),
+#else
+#define FORFUN_TOP_K_FREQUENT_ELEMENTS_MODERN
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+// clang-format on
+
 TEMPLATE_TEST_CASE_SIG(
     "Top K frequent elements",
     "[top_k_frequent_elements]",
     (auto top_frequent, top_frequent),
+    FORFUN_TOP_K_FREQUENT_ELEMENTS_MODERN
     // clang-format off
-    (forfun::top_k_frequent_elements::max_heap_based::
-        top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::bucket_sort_based::
         top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::bucket_sort_based_functional::
+    (forfun::top_k_frequent_elements::max_heap_based::
         top_frequent<std::vector<int>::const_iterator, std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::priority_queue_based::top_frequent<
         std::vector<int>::const_iterator,
         std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::priority_queue_based_functional::
-        top_frequent<
-            std::vector<int>::const_iterator,
-            std::vector<int>::const_iterator>),
     (forfun::top_k_frequent_elements::sort_based::top_frequent<
         std::vector<int>::const_iterator,
-        std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::sort_based_functional_1::
-        top_frequent<
-            std::vector<int>::const_iterator,
-            std::vector<int>::const_iterator>),
-    (forfun::top_k_frequent_elements::sort_based_functional_2::
-        top_frequent<
-            std::vector<int>::const_iterator,
-            std::vector<int>::const_iterator>)
+        std::vector<int>::const_iterator>)
     // clang-format on
 )
 {
@@ -348,6 +360,8 @@ TEMPLATE_TEST_CASE_SIG(
     }
 }
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
 TEST_CASE(
     "Top K frequent elements (degenerate cases)", "[top_k_frequent_elements]"
 )
@@ -385,3 +399,5 @@ TEST_CASE(
         REQUIRE_THAT(actual, Catch::Matchers::UnorderedRangeEquals(expected));
     }
 }
+
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425

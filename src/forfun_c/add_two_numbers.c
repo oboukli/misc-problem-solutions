@@ -19,11 +19,20 @@ enum forfun_internal_result_error {
     FORFUN_INTERNAL_RESULT_ERROR_ERROR = 1
 };
 
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpadded"
+#endif /* defined(__GNUC__) || defined(__clang__) */
+
 struct forfun_internal_result {
     struct forfun_forward_list_node* node;
 
     int error;
 };
+
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif /* defined(__GNUC__) || defined(__clang__) */
 
 static struct forfun_internal_result forfun_do_add_two_numbers(
     struct forfun_forward_list_node const* addend_a,
@@ -113,6 +122,7 @@ static struct forfun_internal_result forfun_do_add_two_numbers(
     if ((carry != 0U) || (addend_a != NULL) || (addend_b != NULL))
     {
         /* Assigned and checked before use. */
+        /* NOLINTNEXTLINE(cppcoreguidelines-init-variables) */
         struct forfun_forward_list_node* aux_node_ptr;
 
         struct forfun_internal_result next_result;
