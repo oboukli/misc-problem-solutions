@@ -30,11 +30,11 @@ namespace detail {
 /// @param divisor Base whose multiples to be calculated
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if defined(__GNUC__) or defined(__clang__) // The following guard breaks MSVC.
+#if defined(__GNUC__) || defined(__clang__) // The following guard breaks MSVC.
 #if __has_cpp_attribute(gnu::const)
 [[gnu::const]]
 #endif // __has_cpp_attribute(gnu::const)
-#endif // defined(__GNUC__) or defined(__clang__)
+#endif // defined(__GNUC__) || defined(__clang__)
 [[nodiscard]] constexpr auto sum_mult_2x(
     unsigned int const divisor, unsigned int const inclusive_max
 ) noexcept -> unsigned int
@@ -80,11 +80,11 @@ namespace detail {
 /// @param divisor Base whose multiples to be calculated
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if defined(__GNUC__) or defined(__clang__) // The following guard breaks MSVC.
+#if defined(__GNUC__) || defined(__clang__) // The following guard breaks MSVC.
 #if __has_cpp_attribute(gnu::const)
 [[gnu::const]]
 #endif // __has_cpp_attribute(gnu::const)
-#endif // defined(__GNUC__) or defined(__clang__)
+#endif // defined(__GNUC__) || defined(__clang__)
 [[nodiscard]] constexpr auto sum_mult_2x(
     unsigned int const divisor, unsigned int const inclusive_max
 ) noexcept -> unsigned int

@@ -47,6 +47,8 @@ TEST_CASE(
             }
         )
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
         .run(
             NAMEOF_RAW(bucket_sort_based_functional::top_frequent<Iter, Iter>)
                 .c_str(),
@@ -60,6 +62,8 @@ TEST_CASE(
             }
         )
 
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
         .run(
             NAMEOF_RAW(priority_queue_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
@@ -69,6 +73,8 @@ TEST_CASE(
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
+
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
         .run(
             NAMEOF_RAW(
@@ -85,6 +91,8 @@ TEST_CASE(
             }
         )
 
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
         .run(
             NAMEOF_RAW(sort_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
@@ -94,6 +102,8 @@ TEST_CASE(
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
+
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
         .run(
             NAMEOF_RAW(sort_based_functional_1::top_frequent<Iter, Iter>)
@@ -106,6 +116,10 @@ TEST_CASE(
             }
         )
 
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
         .run(
             NAMEOF_RAW(sort_based_functional_2::top_frequent<Iter, Iter>)
                 .c_str(),
@@ -117,6 +131,10 @@ TEST_CASE(
             }
         )
 
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
         .run(
             NAMEOF_RAW(max_heap_based::top_frequent<Iter, Iter>).c_str(),
             [] -> void {
@@ -126,6 +144,8 @@ TEST_CASE(
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
+
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
         ;
 }

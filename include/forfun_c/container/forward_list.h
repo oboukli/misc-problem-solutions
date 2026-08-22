@@ -13,11 +13,20 @@ found in the LICENSE file.
 extern "C" {
 #endif /* __cplusplus */
 
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpadded"
+#endif /* defined(__GNUC__) || defined(__clang__) */
+
 struct forfun_forward_list_node {
     struct forfun_forward_list_node* next;
 
     unsigned int value;
 };
+
+#if defined(__GNUC__) || defined(__clang__)
+#pragma GCC diagnostic pop
+#endif /* defined(__GNUC__) || defined(__clang__) */
 
 void forfun_free_node_list(struct forfun_forward_list_node* node_ptr);
 

@@ -92,6 +92,8 @@ template <typename Iter, typename Sentinel>
 
 } // namespace bucket_sort_based
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
 namespace bucket_sort_based_functional {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
@@ -138,6 +140,8 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 }
 
 } // namespace bucket_sort_based_functional
+
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
 namespace max_heap_based {
 
@@ -259,6 +263,8 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 
 } // namespace priority_queue_based
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
 namespace priority_queue_based_functional {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
@@ -324,6 +330,8 @@ template <typename Iter, typename Sentinel>
 
 } // namespace priority_queue_based_functional
 
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
 namespace sort_based {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
@@ -382,6 +390,8 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 
 } // namespace sort_based
 
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
 namespace sort_based_functional_1 {
 
 /// @note The strategy assumes that @p iter and @p last point to a non-empty
@@ -427,6 +437,10 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 }
 
 } // namespace sort_based_functional_1
+
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
+
+#if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
 namespace sort_based_functional_2 {
 
@@ -488,6 +502,8 @@ top_frequent(Iter iter, Sentinel const last, std::size_t const k)
 }
 
 } // namespace sort_based_functional_2
+
+#endif // !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 
 } // namespace forfun::top_k_frequent_elements
 
