@@ -84,6 +84,7 @@ leveraged by this project:
 | Linked List                                                        | [`include/forfun/container/list.hpp`](include/forfun/container/list.hpp)                                                                       |
 | List Bidirectional Iterator                                        | [`include/forfun/container/internal/list_iterator.hpp`](include/forfun/container/internal/list_iterator.hpp)                                   |
 | Longest Consecutive Sequence                                       | [`include/forfun/longest_consecutive_sequence.hpp`](include/forfun/longest_consecutive_sequence.hpp)                                           |
+| Longest Substring without Repeating Characters                     | [`include/forfun/sequence/longest_non_repeating_substring.hpp`](include/forfun/sequence/longest_non_repeating_substring.hpp)                   |
 | Maximum Subarray                                                   | [`include/forfun/maximum_subarray.hpp`](include/forfun/maximum_subarray.hpp)                                                                   |
 | Meeting Rooms (I, II)                                              | [`include/forfun/meeting_rooms.hpp`](include/forfun/meeting_rooms.hpp)                                                                         |
 | Min Stack                                                          | [`include/forfun/container/min_stack.hpp`](include/forfun/container/min_stack.hpp)                                                             |

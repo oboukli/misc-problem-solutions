@@ -65,6 +65,7 @@ benchmarks.
 | Least Recently Used (LRU) Cache   | 146. LRU Cache                           |
 | Linked List                       | 707. Design Linked List                  |
 | Longest Consecutive Sequence      | 128. Longest Consecutive Sequence        |
+| Longest Substring without Repeating Characters | 3. Longest Substring Without Repeating Characters |
 | Maximum Subarray                  | 53. Maximum Subarray                     |
 | Meeting Rooms                     | 252. Meeting Rooms                       |
 | Meeting Rooms II                  | 253. Meeting Rooms II                    |
