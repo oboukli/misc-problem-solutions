@@ -228,8 +228,8 @@ MainIncludeChar: Quote
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
 NumericLiteralCase:
-  ExponentLetter: Upper
-  HexDigit: Upper
+  ExponentLetter: Lower
+  HexDigit: Lower
   Prefix: Lower
   Suffix: Upper
 ObjCBinPackProtocolList: Auto
