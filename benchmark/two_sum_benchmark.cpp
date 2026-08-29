@@ -75,7 +75,7 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
         179, 181, 191, 193, 197, 199, 211,  223,
         227, 229, 233, 239, 241, 251, 257,  263,
         269, 271, 277, 281, 283, 293, 1601, 1607,
-        // clang format on
+        // clang-format on
     };
 
     using ConstIter = decltype(nums)::const_iterator;
@@ -106,21 +106,23 @@ TEST_CASE("Two sum II (presorted) benchmarking", "[benchmark][two_sum]")
         )
 
         .run(
-            NAMEOF_RAW(presorted_binary_searched::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(presorted_binary_searched::two_sum<ConstIter, ConstIter>)
+                .c_str(),
             [&nums] noexcept -> void {
-                auto const volatile r{
-                    presorted_binary_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
-                };
+                auto const volatile r{presorted_binary_searched::two_sum(
+                    nums.cbegin(), nums.cend(), 3208
+                )};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(presorted_brute_searched::two_sum<ConstIter, ConstIter>).c_str(),
+            NAMEOF_RAW(presorted_brute_searched::two_sum<ConstIter, ConstIter>)
+                .c_str(),
             [&nums] noexcept -> void {
-                auto const volatile r{
-                    presorted_brute_searched::two_sum(nums.cbegin(), nums.cend(), 3208)
-                };
+                auto const volatile r{presorted_brute_searched::two_sum(
+                    nums.cbegin(), nums.cend(), 3208
+                )};
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )

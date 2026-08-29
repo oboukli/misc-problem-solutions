@@ -36,11 +36,10 @@ TEST_CASE("Daily temperatures benchmarking", "[benchmark][daily_temperatures]")
         .relative(true)
 
         .run(
-            // clang-format off
             NAMEOF_RAW(
                 daily_temperatures<ConstIter, ConstIter, OutIter, ScratchIter>
-            ).c_str(),
-            // clang-format on
+            )
+                .c_str(),
             [&temperatures, &day_counts, &scratch] noexcept -> void {
                 daily_temperatures(
                     std::cbegin(temperatures),

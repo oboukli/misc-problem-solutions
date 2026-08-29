@@ -37,23 +37,18 @@ TEST_CASE(
                     47, 47,  47,  48,  7,   8,   9,   10,
                     11, 173, 179, 181, 191, 193, 197, 199,
                     22, 23,  24,  211, 283, 293, 307, 311,
-                    // clang format on
+                    // clang-format on
                 };
 
                 auto const volatile r{
-                    counted::
-                        longest_consecutive(nums.begin(), nums.end())
+                    counted::longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(
-                measured::
-                    longest_consecutive<Iter, Iter>
-            )
-                .c_str(),
+            NAMEOF_RAW(measured::longest_consecutive<Iter, Iter>).c_str(),
             [] -> void {
                 std::vector nums{
                     // clang-format off
@@ -61,23 +56,18 @@ TEST_CASE(
                     47, 47,  47,  48,  7,   8,   9,   10,
                     11, 173, 179, 181, 191, 193, 197, 199,
                     22, 23,  24,  211, 283, 293, 307, 311,
-                    // clang format on
+                    // clang-format on
                 };
 
                 auto const volatile r{
-                    measured::
-                        longest_consecutive(nums.begin(), nums.end())
+                    measured::longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(
-                set_scanning::
-                    longest_consecutive<Iter, Iter>
-            )
-                .c_str(),
+            NAMEOF_RAW(set_scanning::longest_consecutive<Iter, Iter>).c_str(),
             [] -> void {
                 std::vector nums{
                     // clang-format off
@@ -85,23 +75,18 @@ TEST_CASE(
                     47, 47,  47,  48,  7,   8,   9,   10,
                     11, 173, 179, 181, 191, 193, 197, 199,
                     22, 23,  24,  211, 283, 293, 307, 311,
-                    // clang format on
+                    // clang-format on
                 };
 
                 auto const volatile r{
-                    set_scanning::
-                        longest_consecutive(nums.begin(), nums.end())
+                    set_scanning::longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
         )
 
         .run(
-            NAMEOF_RAW(
-                set_sliding::
-                    longest_consecutive<Iter, Iter>
-            )
-                .c_str(),
+            NAMEOF_RAW(set_sliding::longest_consecutive<Iter, Iter>).c_str(),
             [] -> void {
                 std::vector nums{
                     // clang-format off
@@ -109,12 +94,11 @@ TEST_CASE(
                     47, 47,  47,  48,  7,   8,   9,   10,
                     11, 173, 179, 181, 191, 193, 197, 199,
                     22, 23,  24,  211, 283, 293, 307, 311,
-                    // clang format on
+                    // clang-format on
                 };
 
                 auto const volatile r{
-                    set_sliding::
-                        longest_consecutive(nums.begin(), nums.end())
+                    set_sliding::longest_consecutive(nums.begin(), nums.end())
                 };
                 ankerl::nanobench::doNotOptimizeAway(&r);
             }
