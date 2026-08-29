@@ -10,6 +10,7 @@ AlignConsecutiveAssignments:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveBitFields:
   Enabled: false
@@ -18,6 +19,7 @@ AlignConsecutiveBitFields:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveDeclarations:
   Enabled: false
@@ -26,6 +28,7 @@ AlignConsecutiveDeclarations:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveMacros:
   Enabled: false
@@ -34,6 +37,7 @@ AlignConsecutiveMacros:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveShortCaseStatements:
   Enabled: false
@@ -48,6 +52,7 @@ AlignConsecutiveTableGenBreakingDAGArgColons:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveTableGenCondOperatorColons:
   Enabled: false
@@ -56,6 +61,7 @@ AlignConsecutiveTableGenCondOperatorColons:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignConsecutiveTableGenDefinitionColons:
   Enabled: false
@@ -64,6 +70,7 @@ AlignConsecutiveTableGenDefinitionColons:
   AlignCompound: false
   AlignFunctionDeclarations: false
   AlignFunctionPointers: false
+  EnumAssignments: false
   PadOperators: false
 AlignEscapedNewlines: DontAlign
 AlignOperands: DontAlign
@@ -80,18 +87,20 @@ AllowShortCaseExpressionOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortCompoundRequirementOnASingleLine: true
 AllowShortEnumsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine:
+  Empty: false
+  Inline: false
+  Other: false
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: false
 AllowShortNamespacesOnASingleLine: false
+AllowShortRecordOnASingleLine: EmptyAndAttached
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
 AttributeMacros:
   - __capability
-BinPackArguments: false
 BinPackLongBracedList: true
-BinPackParameters: OnePerLine
 BitFieldColonSpacing: Both
 BracedInitializerIndentWidth: -1
 BraceWrapping:
@@ -132,10 +141,13 @@ BreakBeforeCloseBracketSwitch: true
 BreakBeforeConceptDeclarations: Always
 BreakBeforeBraces: Custom
 BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeReturnType: None
 BreakBeforeTemplateCloser: false
 BreakBeforeTernaryOperators: true
-BreakBinaryOperations: RespectPrecedence
+BreakBinaryOperations:
+  Default: RespectPrecedence
 BreakConstructorInitializers: AfterColon
+BreakFunctionDeclarationParameters: false
 BreakFunctionDefinitionParameters: false
 BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
@@ -180,7 +192,7 @@ IndentCaseBlocks: false
 IndentCaseLabels: false
 IndentExportBlock: true
 IndentExternBlock: AfterExternBlock
-IndentGotoLabels: true
+IndentGotoLabels: OuterIndent
 IndentPPDirectives: None
 IndentRequiresClause: true
 IndentWidth: 4
@@ -223,10 +235,17 @@ NumericLiteralCase:
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
 ObjCBreakBeforeNestedBlockParam: true
+ObjCSpaceAfterMethodDeclarationPrefix: true
 ObjCSpaceAfterProperty: false
 ObjCSpaceBeforeProtocolList: true
 OneLineFormatOffRegex: ""
+PackArguments:
+  BinPack: OnePerLine
+  BreakAfter: 0
 PackConstructorInitializers: NextLine
+PackParameters:
+  BinPack: OnePerLine
+  BreakAfter: 0
 PenaltyBreakAssignment: 2
 PenaltyBreakBeforeFirstCallParameter: 19
 PenaltyBreakBeforeMemberAccess: 150
@@ -268,6 +287,7 @@ SpaceBeforeAssignmentOperators: true
 SpaceBeforeCaseColon: false
 SpaceBeforeCpp11BracedList: false
 SpaceBeforeCtorInitializerColon: true
+SpaceBeforeEnumUnderlyingTypeColon: true
 SpaceBeforeInheritanceColon: true
 SpaceBeforeJsonColon: false
 SpaceBeforeParens: ControlStatements
@@ -318,4 +338,3 @@ WhitespaceSensitiveMacros:
   - STRINGIZE
 WrapNamespaceBodyWithEmptyLines: Always
 ...
-
