@@ -159,8 +159,12 @@ TEMPLATE_TEST_CASE_SIG(
     "Single number (empty container degenerate case)",
     "[single_number]",
     (auto get_single, get_single),
-    (adapt_forfun_c_get_single<::forfun_s1_get_single, std::vector<int> const&>),
-    (adapt_forfun_c_get_single<::forfun_s2_get_single, std::vector<int> const&>),
+    (adapt_forfun_c_get_single<
+        ::forfun_s1_get_single,
+        std::vector<int> const&>),
+    (adapt_forfun_c_get_single<
+        ::forfun_s2_get_single,
+        std::vector<int> const&>),
     forfun::single_number::functional::get_single<std::vector<int> const&>,
     forfun::single_number::imperative::get_single<std::vector<int> const&>
 )

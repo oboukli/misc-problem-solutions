@@ -42,7 +42,6 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
         .relative(true)
 
         .run(
-            // clang-format off
             NAMEOF_RAW(
                 recursive::explode_subsets<
                     ConstIter,
@@ -50,8 +49,7 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
                     ElementDefaultAllocator,
                     SubsetDefaultAllocator>
             )
-            .c_str(),
-            // clang-format on
+                .c_str(),
             [&elements] -> void {
                 auto const volatile r{recursive::explode_subsets(
                     elements.cbegin(), elements.cend()
@@ -63,7 +61,6 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
         .run(
             std::format(
                 "{} preallocated",
-                // clang-format off
                 NAMEOF_RAW(
                     recursive::explode_subsets<
                         ConstIter,
@@ -71,8 +68,7 @@ TEST_CASE("Subsets benchmarking", "[benchmark][subsets]")
                         ElementAllocatorFactory,
                         SubsetAllocatorFactory>
                 )
-                .c_str()
-                // clang-format on
+                    .c_str()
             ),
             [&elements] -> void {
                 SubsetAllocatorFactory const subset_allocator_factory{};
