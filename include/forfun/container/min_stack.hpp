@@ -14,21 +14,22 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
-#include <type_traits>
+
+#include "forfun/common/type_traits.hpp"
 
 namespace forfun::container::min_stack {
 
 namespace cache_friendly {
 
-struct stack_element {
+struct [[nodiscard]] stack_element final {
     using value_type = int;
 
-    int val;
+    value_type val;
 
-    int min;
+    value_type min;
 };
 
-/// Array-based fixed capacity stack
+/// Array-based fixed-capacity stack
 class min_stack final {
     static constexpr std::size_t const capacity_{64};
 
@@ -48,32 +49,30 @@ public:
 
     using value_type = internal_container_type::value_type::value_type;
 
-    [[nodiscard]] auto empty() const noexcept -> bool
+    [[nodiscard]] constexpr auto empty() const noexcept -> bool
     {
         using std::cbegin;
 
         return cbegin(items_) == next_iter_;
     }
 
-    /// @warning undefined behavior for empty stack.
-    [[nodiscard]] auto min(this auto&& self) noexcept -> std::conditional_t<
-        std::is_const_v<std::remove_reference_t<decltype(self)>>,
-        const_reference,
-        reference>
+    /// @note If the container is empty, the behavior is undefined.
+    [[nodiscard]] constexpr auto min(this auto&& self) noexcept -> forfun::
+        common::type_traits::forward_like_t<decltype(self), value_type>
     {
         using std::prev;
 
         return prev(self.next_iter_)->min;
     }
 
-    /// @warning undefined behavior for empty stack.
-    auto pop() noexcept -> void
+    /// @note If the container is empty, the behavior is undefined.
+    constexpr auto pop() noexcept -> void
     {
         --next_iter_;
     }
 
-    /// @warning undefined behavior for full stack.
-    auto push(value_type const& value) noexcept -> void
+    /// @note If the container is full, the behavior is undefined.
+    constexpr auto push(value_type const& value) noexcept -> void
     {
         using std::begin;
         using std::min;
@@ -94,7 +93,7 @@ public:
         ++next_iter_;
     }
 
-    [[nodiscard]] auto size() const noexcept -> size_type
+    [[nodiscard]] constexpr auto size() const noexcept -> size_type
     {
         using std::cbegin;
         using std::distance;
@@ -104,11 +103,9 @@ public:
         ));
     }
 
-    /// @warning undefined behavior for empty stack.
-    [[nodiscard]] auto top(this auto&& self) noexcept -> std::conditional_t<
-        std::is_const_v<std::remove_reference_t<decltype(self)>>,
-        const_reference,
-        reference>
+    /// @note If the container is empty, the behavior is undefined.
+    [[nodiscard]] auto top(this auto&& self) noexcept -> forfun::common::
+        type_traits::forward_like_t<decltype(self), value_type>
     {
         using std::prev;
 
@@ -120,7 +117,7 @@ public:
 
 namespace double_buffered {
 
-/// Array-based fixed capacity stack
+/// Array-based fixed-capacity stack
 class min_stack final {
     static constexpr std::size_t const capacity_{64};
 
@@ -143,33 +140,31 @@ public:
 
     using value_type = internal_container_type::value_type;
 
-    [[nodiscard]] auto empty() const noexcept -> bool
+    [[nodiscard]] constexpr auto empty() const noexcept -> bool
     {
         using std::cbegin;
 
         return cbegin(items_) == next_iter_;
     }
 
-    /// @warning undefined behavior for empty stack.
-    [[nodiscard]] auto min(this auto&& self) noexcept -> std::conditional_t<
-        std::is_const_v<std::remove_reference_t<decltype(self)>>,
-        const_reference,
-        reference>
+    /// @note If the container is empty, the behavior is undefined.
+    [[nodiscard]] constexpr auto min(this auto&& self) noexcept -> forfun::
+        common::type_traits::forward_like_t<decltype(self), value_type>
     {
         using std::prev;
 
         return *prev(self.min_iter_);
     }
 
-    /// @warning undefined behavior for empty stack.
-    auto pop() noexcept -> void
+    /// @note If the container is empty, the behavior is undefined.
+    constexpr auto pop() noexcept -> void
     {
         --min_iter_;
         --next_iter_;
     }
 
-    /// @warning undefined behavior for full stack.
-    auto push(value_type const& value) noexcept -> void
+    /// @note If the container is full, the behavior is undefined.
+    constexpr auto push(value_type const& value) noexcept -> void
     {
         using std::begin;
         using std::less;
@@ -191,7 +186,7 @@ public:
         ++min_iter_;
     }
 
-    [[nodiscard]] auto size() const noexcept -> size_type
+    [[nodiscard]] constexpr auto size() const noexcept -> size_type
     {
         using std::cbegin;
         using std::distance;
@@ -201,11 +196,9 @@ public:
         ));
     }
 
-    /// @warning undefined behavior for empty stack.
-    [[nodiscard]] auto top(this auto&& self) noexcept -> std::conditional_t<
-        std::is_const_v<std::remove_reference_t<decltype(self)>>,
-        const_reference,
-        reference>
+    /// @note If the container is empty, the behavior is undefined.
+    [[nodiscard]] auto top(this auto&& self) noexcept -> forfun::common::
+        type_traits::forward_like_t<decltype(self), value_type>
     {
         using std::prev;
 

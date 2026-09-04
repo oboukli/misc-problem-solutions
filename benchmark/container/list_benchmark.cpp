@@ -33,9 +33,9 @@ TEST_CASE(
         )
 
         .run(
-            "experimental::container::list",
+            "container::list",
             [] -> void {
-                forfun::experimental::container::list list{};
+                forfun::container::list list{};
                 list.push_back(1301);
 
                 auto const r{list.back()};

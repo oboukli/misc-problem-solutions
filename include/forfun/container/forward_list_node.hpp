@@ -14,18 +14,20 @@ namespace forfun::container {
 template <typename T>
     requires std::integral<T>
 struct [[nodiscard]] forward_list_node final {
-    forward_list_node* next_{};
+    // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
 
     T value_{};
+
+    forward_list_node* next_{};
+
+    // NOLINTEND(misc-non-private-member-variables-in-classes)
 
     explicit constexpr forward_list_node(T value) noexcept : value_{value}
     {
     }
 
-    explicit constexpr forward_list_node(
-        T value, forward_list_node* node
-    ) noexcept :
-        next_{node}, value_{value}
+    constexpr forward_list_node(T value, forward_list_node* node) noexcept :
+        value_{value}, next_{node}
     {
     }
 
@@ -33,7 +35,7 @@ struct [[nodiscard]] forward_list_node final {
 
     forward_list_node(forward_list_node&&) noexcept = delete;
 
-    ~forward_list_node() noexcept = default;
+    constexpr ~forward_list_node() noexcept = default;
 
     auto operator=(forward_list_node const&) noexcept
         -> forward_list_node& = delete;

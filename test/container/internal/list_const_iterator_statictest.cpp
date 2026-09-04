@@ -23,15 +23,16 @@ TEST_CASE(
     "Linked list iterator traits", "[container][list][list_const_iterator]"
 )
 {
+    // clang-format off
     static_assert(
         std::same_as<
-            forfun::experimental::container::internal::list_const_iterator,
-            forfun::experimental::container::list::const_iterator>
-    );
+            forfun::container::internal::list_const_iterator,
+            forfun::container::list::const_iterator>);
+    // clang-format on
 
-    SECTION("Const iterator")
+    SECTION("Iterator concepts")
     {
-        using forfun::experimental::container::internal::list_const_iterator;
+        using forfun::container::internal::list_const_iterator;
 
         STATIC_REQUIRE(std::bidirectional_iterator<list_const_iterator>);
 
@@ -42,7 +43,7 @@ TEST_CASE(
 
     SECTION("Copy and move")
     {
-        using forfun::experimental::container::internal::list_const_iterator;
+        using forfun::container::internal::list_const_iterator;
 
         STATIC_REQUIRE(
             std::is_trivially_copy_constructible_v<list_const_iterator>
@@ -61,9 +62,9 @@ TEST_CASE(
         );
     }
 
-    SECTION("Const iterator traits")
+    SECTION("Traits")
     {
-        using forfun::experimental::container::internal::list_const_iterator;
+        using forfun::container::internal::list_const_iterator;
 
         STATIC_REQUIRE(
             std::same_as<
@@ -73,24 +74,20 @@ TEST_CASE(
 
         STATIC_REQUIRE(
             std::same_as<
-                std::iterator_traits<list_const_iterator>::iterator_concept,
-                std::bidirectional_iterator_tag>
-        );
-
-        STATIC_REQUIRE(
-            std::same_as<
                 std::iterator_traits<list_const_iterator>::pointer,
-                list_const_iterator>
+                std::add_pointer_t<std::add_const_t<int>>>
         );
 
         STATIC_REQUIRE(
             std::same_as<
                 std::iterator_traits<list_const_iterator>::reference,
-                std::iterator_traits<list_const_iterator>::const_reference>
+                std::add_lvalue_reference_t<std::add_const_t<int>>>
         );
 
         STATIC_REQUIRE(
-            std::same_as<std::iter_reference_t<list_const_iterator>, int const&>
+            std::same_as<
+                std::iter_reference_t<list_const_iterator>,
+                std::add_lvalue_reference_t<std::add_const_t<int>>>
         );
 
         STATIC_REQUIRE_FALSE(
@@ -102,14 +99,14 @@ TEST_CASE(
         STATIC_REQUIRE(
             std::same_as<
                 std::iter_common_reference_t<list_const_iterator>,
-                int const&>
+                std::add_lvalue_reference_t<std::add_const_t<int>>>
         );
 
 #if defined(__cpp_lib_ranges_as_const) && __cpp_lib_ranges_as_const >= 202207L
         STATIC_REQUIRE(
             std::same_as<
                 std::iter_const_reference_t<list_const_iterator>,
-                int const&>
+                std::add_lvalue_reference_t<std::add_const_t<int>>>
         );
 
         STATIC_REQUIRE(
@@ -132,7 +129,19 @@ TEST_CASE(
         );
 
         STATIC_REQUIRE(
+            std::same_as<
+                std::iterator_traits<list_const_iterator>::difference_type,
+                std::ptrdiff_t>
+        );
+
+        STATIC_REQUIRE(
             std::same_as<std::iter_value_t<list_const_iterator>, int>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                std::iterator_traits<list_const_iterator>::value_type,
+                int>
         );
 
         STATIC_REQUIRE_FALSE(

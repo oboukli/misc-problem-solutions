@@ -14,21 +14,21 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
     {
         // Intentionally non-const and not default-initialized.
         // NOLINTNEXTLINE(misc-const-correctness)
-        forfun::experimental::container::forward_list<int> forward_list;
+        forfun::container::forward_list<int> forward_list;
 
         REQUIRE(forward_list.empty());
     }
 
     SECTION("Forward list is initially empty (case 2)")
     {
-        forfun::experimental::container::forward_list<int> const forward_list{};
+        forfun::container::forward_list<int> const forward_list{};
 
         REQUIRE(forward_list.empty());
     }
 
     SECTION("Push front one element (benchmark case)")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
@@ -40,7 +40,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Push front two elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
@@ -57,7 +57,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Push front three elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
@@ -77,7 +77,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Push front four elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
@@ -102,7 +102,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of one element")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
         forward_list.push_front(1381);
 
         forward_list.pop_front();
@@ -112,7 +112,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of two elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
         forward_list.push_front(1399);
         forward_list.push_front(1409);
 
@@ -124,7 +124,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of three elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
         forward_list.push_front(1399);
         forward_list.push_front(1409);
         forward_list.push_front(1423);
@@ -137,7 +137,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Clear empty list")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.clear();
 
@@ -146,7 +146,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Clear list of one")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
         forward_list.push_front(5);
 
         REQUIRE_FALSE(forward_list.empty());
@@ -158,7 +158,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Clear list of three")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
         forward_list.push_front(5);
         forward_list.push_front(7);
         forward_list.push_front(11);
@@ -172,7 +172,7 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Method front() returns a reference")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
@@ -187,15 +187,13 @@ TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 
     SECTION("Method front() const returns a reference to const")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         REQUIRE(forward_list.empty());
 
         forward_list.push_front(1397);
 
-        forfun::experimental::container::forward_list<int> const& alias{
-            forward_list
-        };
+        forfun::container::forward_list<int> const& alias{forward_list};
 
         REQUIRE(alias.front() == 1397);
 
@@ -210,18 +208,18 @@ TEST_CASE(
     "[container][forward_list][dynamic_allocation][reverse_forward_list]"
 )
 {
-    SECTION("Forward list is initially empty")
+    SECTION("Reverse empty list")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.reverse();
 
         REQUIRE(forward_list.empty());
     }
 
-    SECTION("Push front one element (benchmark case)")
+    SECTION("Reverse list of one element")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.push_front(1301);
 
@@ -231,20 +229,19 @@ TEST_CASE(
         REQUIRE_FALSE(forward_list.empty());
     }
 
-    SECTION("Push front two elements")
+    SECTION("Reverse list of two elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.push_front(1303);
         forward_list.push_front(1307);
 
         forward_list.reverse();
-        REQUIRE(forward_list.front() == 1303);
     }
 
-    SECTION("Push front three elements")
+    SECTION("Reverse list of three elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.push_front(1319);
         forward_list.push_front(1321);
@@ -253,21 +250,45 @@ TEST_CASE(
         forward_list.reverse();
 
         REQUIRE(forward_list.front() == 1319);
-        REQUIRE_FALSE(forward_list.empty());
     }
 
-    SECTION("Push front four elements")
+    SECTION("Reverse list of four elements")
     {
-        forfun::experimental::container::forward_list<int> forward_list{};
+        forfun::container::forward_list<int> forward_list{};
 
         forward_list.push_front(1361);
         forward_list.push_front(1021);
         forward_list.push_front(1367);
-        forward_list.push_front(1373000);
+        forward_list.push_front(1373);
 
         forward_list.reverse();
 
         REQUIRE(forward_list.front() == 1361);
-        REQUIRE_FALSE(forward_list.empty());
+    }
+
+    SECTION("Reverse list of sixteen elements (benchmark case)")
+    {
+        forfun::container::forward_list<int> forward_list{};
+
+        forward_list.push_front(1381);
+        forward_list.push_front(1399);
+        forward_list.push_front(1409);
+        forward_list.push_front(1423);
+        forward_list.push_front(1427);
+        forward_list.push_front(1429);
+        forward_list.push_front(1433);
+        forward_list.push_front(1439);
+        forward_list.push_front(1447);
+        forward_list.push_front(1451);
+        forward_list.push_front(1453);
+        forward_list.push_front(1459);
+        forward_list.push_front(1471);
+        forward_list.push_front(1481);
+        forward_list.push_front(1483);
+        forward_list.push_front(1487);
+
+        forward_list.reverse();
+
+        REQUIRE(forward_list.front() == 1381);
     }
 }

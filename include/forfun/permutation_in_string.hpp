@@ -51,9 +51,8 @@ public:
     }
 
     [[nodiscard]] constexpr auto
-    get_score(this auto&& self, char_type const chr) noexcept
-        -> forfun::common::type_traits::reference_conditional_const_t<
-            decltype(self)>
+    get_score(this auto&& self, char_type const chr) noexcept -> forfun::
+        common::type_traits::forward_like_t<decltype(self), score_type>
     {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,cppcoreguidelines-pro-bounds-constant-array-index)
         return self.container_[to_index(chr)];
@@ -145,7 +144,7 @@ using Bucket = ScoringBucket<Char, charset_size, first_char>;
     {
         size_type streak{};
 
-        auto bundle{haystack.substr(i, needle_size)};
+        auto const bundle{haystack.substr(i, needle_size)};
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
         bundle_bucket.add_one(haystack[(i + needle_size) - size_type{1}]);
@@ -197,7 +196,7 @@ namespace experimental {
     {
         size_type streak{};
 
-        auto bundle{haystack.substr(i, needle_size)};
+        auto const bundle{haystack.substr(i, needle_size)};
         detail::Bucket const bundle_bucket(bundle);
 
         for (auto const chr : bundle)

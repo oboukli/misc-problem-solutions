@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <iterator>
 #include <tuple>
 #include <utility>
 
@@ -16,9 +15,9 @@
 
 TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
 {
-    using forfun::experimental::container::list;
-    using forfun::experimental::container::internal::list_iterator;
-    using forfun::experimental::container::internal::list_node;
+    using forfun::container::list;
+    using forfun::container::internal::list_iterator;
+    using forfun::container::internal::list_node;
 
     SECTION("Default constructor (case 1)")
     {
@@ -51,7 +50,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
     {
         list_node node{1439, nullptr, nullptr};
 
-        list_iterator const iterator1(list_iterator{&node});
+        list_iterator const iterator1{list_iterator{&node}};
 
         REQUIRE(*iterator1 == 1439);
     }
@@ -181,7 +180,7 @@ TEST_CASE("Linked list iterator", "[container][list][list_iterator]")
 
 TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 {
-    using forfun::experimental::container::list;
+    using forfun::container::list;
 
     SECTION("Increment iterator once")
     {
@@ -190,8 +189,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1091);
         some_list.push_back(1093);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         ++iter;
 
         REQUIRE(*iter == 1093);
@@ -205,8 +203,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1117);
         some_list.push_back(1123);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         ++iter;
         ++iter;
 
@@ -222,8 +219,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1181);
         some_list.push_back(1187);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         ++iter;
         ++iter;
         ++iter;
@@ -240,8 +236,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1231);
         some_list.push_back(1237);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         ++iter;
         ++iter;
         ++iter;
@@ -257,8 +252,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1453);
         some_list.push_back(1459);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         std::ignore = iter++;
 
         REQUIRE(*iter == 1459);
@@ -272,8 +266,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1481);
         some_list.push_back(1483);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         auto tmp{iter++};
         tmp = iter++;
 
@@ -289,8 +282,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1493);
         some_list.push_back(1499);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         auto tmp{iter++};
         tmp = iter++;
         tmp = iter++;
@@ -307,8 +299,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1531);
         some_list.push_back(1543);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
         auto tmp{iter++};
         tmp = iter++;
         tmp = iter++;
@@ -324,8 +315,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1549);
         some_list.push_back(1553);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
 
         REQUIRE(iter++ == some_list.begin());
         REQUIRE_FALSE(iter == some_list.begin());
@@ -339,8 +329,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1559);
         some_list.push_back(1567);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
+        forfun::container::internal::list_iterator iter{some_list.begin()};
 
         REQUIRE(*iter == 1559);
         REQUIRE(*iter++ == 1559);
@@ -350,7 +339,7 @@ TEST_CASE("Increment linked list iterator", "[container][list][list_iterator]")
 
 TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 {
-    using forfun::experimental::container::list;
+    using forfun::container::list;
 
     SECTION("Decrement iterator once from end")
     {
@@ -358,8 +347,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
         some_list.push_back(1579);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         --iter;
 
         REQUIRE(*iter == 1579);
@@ -372,8 +360,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1597);
         some_list.push_back(1601);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         --iter;
         --iter;
 
@@ -389,8 +376,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1613);
         some_list.push_back(1619);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         --iter;
         --iter;
         --iter;
@@ -407,8 +393,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1637);
         some_list.push_back(1657);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         --iter;
         --iter;
         --iter;
@@ -424,8 +409,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1663);
         some_list.push_back(1667);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         std::ignore = iter--;
 
         REQUIRE(*iter == 1667);
@@ -439,8 +423,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1693);
         some_list.push_back(1697);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         auto tmp{iter--};
         tmp = iter--;
 
@@ -456,8 +439,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1721);
         some_list.push_back(1723);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         auto tmp{iter--};
         tmp = iter--;
         tmp = iter--;
@@ -474,8 +456,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1747);
         some_list.push_back(1753);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         auto tmp{iter--};
         tmp = iter--;
         tmp = iter--;
@@ -490,8 +471,7 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
 
         some_list.push_back(1759);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
 
         REQUIRE(iter-- == some_list.end());
         REQUIRE_FALSE(iter == some_list.end());
@@ -505,79 +485,9 @@ TEST_CASE("Decrement linked list iterator", "[container][list][list_iterator]")
         some_list.push_back(1783);
         some_list.push_back(1787);
 
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
+        forfun::container::internal::list_iterator iter = some_list.end();
         std::ignore = --iter;
 
         REQUIRE(*iter-- == 1787);
-    }
-}
-
-TEST_CASE("Linked list iterator sentinel", "[container][list][list_iterator]")
-{
-    using forfun::experimental::container::list;
-
-    SECTION("Iterator at beginning of empty list")
-    {
-        list const some_list{};
-
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
-
-        REQUIRE(iter == std::default_sentinel);
-        REQUIRE_FALSE(iter != std::default_sentinel);
-    }
-
-    SECTION("Iterator at beginning of non-empty list")
-    {
-        list some_list{};
-
-        some_list.push_back(1571);
-
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
-
-        REQUIRE_FALSE(iter == std::default_sentinel);
-        REQUIRE(iter != std::default_sentinel);
-    }
-
-    SECTION("Iterator at end of list")
-    {
-        list const some_list{};
-
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.end();
-
-        REQUIRE(iter == std::default_sentinel);
-        REQUIRE_FALSE(iter != std::default_sentinel);
-    }
-
-    SECTION("Incremented iterator to end of non-empty list")
-    {
-        list some_list{};
-
-        some_list.push_back(1583);
-
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
-        ++iter;
-
-        REQUIRE(iter == std::default_sentinel);
-        REQUIRE_FALSE(iter != std::default_sentinel);
-    }
-
-    SECTION("Incremented iterator to non-end of non-empty list")
-    {
-        list some_list{};
-
-        some_list.push_back(1789);
-        some_list.push_back(1801);
-
-        forfun::experimental::container::internal::list_iterator iter
-            = some_list.begin();
-        ++iter;
-
-        REQUIRE_FALSE(iter == std::default_sentinel);
-        REQUIRE(iter != std::default_sentinel);
     }
 }

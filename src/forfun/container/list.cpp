@@ -12,27 +12,7 @@
 
 #include "forfun/container/internal/list_node.hpp"
 
-namespace forfun::experimental::container {
-
-[[nodiscard]] auto list::begin() const noexcept -> iterator
-{
-    return iterator(head_);
-}
-
-[[nodiscard]] auto list::end() const noexcept -> iterator
-{
-    return iterator(end_);
-}
-
-[[nodiscard]] auto list::cbegin() const noexcept -> const_iterator
-{
-    return const_iterator(head_);
-}
-
-[[nodiscard]] auto list::cend() const noexcept -> const_iterator
-{
-    return const_iterator(end_);
-}
+namespace forfun::container {
 
 auto list::push_back(value_type const value) -> void
 {
@@ -104,4 +84,4 @@ auto list::clear() noexcept -> void
     tail_ = end_;
 }
 
-} // namespace forfun::experimental::container
+} // namespace forfun::container
