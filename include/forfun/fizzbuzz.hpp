@@ -49,6 +49,9 @@ auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
     noexcept(write(std::declval<char*>(), std::declval<std::streamsize>()))
 ) -> void
 {
+    using std::data;
+    using std::size;
+
     static constexpr int const fizz_divider{3};
     static constexpr int const buzz_divider{5};
     static constexpr std::string_view const fizz{"Fizz"};
@@ -60,14 +63,14 @@ auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
 
         if ((start % fizz_divider) == 0)
         {
-            write(fizz.data(), fizz.size());
+            write(data(fizz), size(fizz));
 
             is_numeric = false;
         }
 
         if ((start % buzz_divider) == 0)
         {
-            write(buzz.data(), buzz.size());
+            write(data(buzz), size(buzz));
         }
         else if (is_numeric) [[likely]]
         {
@@ -76,17 +79,17 @@ auto fizzbuzz(int start, int const last, BinaryFunc write) noexcept(
             static constexpr std::size_t const buffer_size{
                 std::numeric_limits<decltype(start)>::digits10 + 2
             };
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
             std::array<char, buffer_size> buffer /*[[indeterminate]]*/;
 
             auto const [ptr, ec]{
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-                std::to_chars(buffer.data(), buffer.data() + buffer_size, start)
+                std::to_chars(data(buffer), data(buffer) + buffer_size, start)
             };
 
             assert(ec == std::errc{});
 
-            write(buffer.data(), ptr - buffer.data());
+            write(data(buffer), ptr - data(buffer));
         }
     }
 }
