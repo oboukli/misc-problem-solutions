@@ -10,34 +10,27 @@
 #ifndef FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 #define FORFUN_PRODUCT_EXCEPT_SELF_HPP_
 
-#include <concepts>
 #include <iterator>
+
+#include "common/concepts.hpp"
 
 namespace forfun::product_except_self {
 
-namespace concepts {
-
-template <typename Factor, typename Product>
-concept product_computable = requires(Factor factor) {
-    { factor * factor } -> std::convertible_to<Product>;
-};
-
-} // namespace concepts
-
 namespace alg1 {
-
-using concepts::product_computable;
 
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <
-    std::contiguous_iterator InIter,
-    std::sentinel_for<InIter> InIterSentinel,
-    std::contiguous_iterator OutIter,
-    std::sentinel_for<OutIter> OutIterSentinel>
-    requires product_computable<
-        std::iter_value_t<InIter>,
-        std::iter_value_t<OutIter>>
+    typename InIter,
+    typename InIterSentinel,
+    typename OutIter,
+    typename OutIterSentinel>
+    requires std::contiguous_iterator<InIter>
+    and std::sentinel_for<InIterSentinel, InIter>
+    and std::contiguous_iterator<OutIter>
+    and std::sentinel_for<OutIterSentinel, OutIter>
+    and forfun::common::concepts::
+        multipliable_as<std::iter_value_t<InIter>, std::iter_value_t<OutIter>>
 constexpr auto product_except_self(
     InIter const first,
     InIterSentinel const last,
@@ -45,23 +38,31 @@ constexpr auto product_except_self(
     OutIterSentinel const products_last
 ) noexcept -> void
 {
-    using ValType = std::iter_value_t<OutIter>;
+    using std::distance;
+    using std::next;
 
-    for (auto it_prd{products_first}; it_prd != products_last; ++it_prd)
+    using ValueType = std::iter_value_t<OutIter>;
+
+    static constexpr ValueType const one{1};
+
+    for (
+        auto product_iter{products_first}; product_iter != products_last;
+        ++product_iter
+    )
     {
-        *it_prd = ValType{1};
+        *product_iter = one;
 
-        auto it_input{first + (it_prd - products_first)};
-
+        auto in_iter{next(first, distance(products_first, product_iter))};
         auto cnt{first};
+
         while (++cnt != last)
         {
-            ++it_input;
-            if (it_input == last)
+            ++in_iter;
+            if (in_iter == last)
             {
-                it_input = first;
+                in_iter = first;
             }
-            *it_prd *= static_cast<ValType>(*it_input);
+            *product_iter *= static_cast<ValueType>(*in_iter);
         }
     }
 }
@@ -70,41 +71,46 @@ constexpr auto product_except_self(
 
 namespace alg2 {
 
-using concepts::product_computable;
-
 /// @note Input factors may result in too large a product that overflows the
 /// output type.
 template <
-    std::contiguous_iterator InIter,
-    std::sentinel_for<InIter> InIterSentinel,
-    std::contiguous_iterator OutIter,
-    std::sized_sentinel_for<OutIter> OutIterSentinel>
-    requires product_computable<
-        std::iter_value_t<InIter>,
-        std::iter_value_t<OutIter>>
+    typename InIter,
+    typename InIterSentinel,
+    typename OutIter,
+    typename OutIterSentinel>
+    requires std::contiguous_iterator<InIter>
+    and std::sentinel_for<InIterSentinel, InIter>
+    and std::contiguous_iterator<OutIter>
+    and std::sentinel_for<OutIterSentinel, OutIter>
+    and forfun::common::concepts::
+        multipliable_as<std::iter_value_t<InIter>, std::iter_value_t<OutIter>>
 constexpr auto product_except_self(
     InIter const first,
-    InIterSentinel const last,
+    InIterSentinel const /*unused*/,
     OutIter const products_iter,
     OutIterSentinel const products_last
 ) noexcept -> void
 {
-    using ValType = std::iter_value_t<OutIter>;
+    using std::distance;
+    using std::next;
+
+    using ValueType = std::iter_value_t<OutIter>;
     using DiffType = std::iter_difference_t<InIter>;
 
-    if (first == last) [[unlikely]]
-    {
-        return;
-    }
+    static constexpr ValueType const one{1};
 
     auto const length{products_last - products_iter};
-    for (auto it_prd{products_iter}; it_prd != products_last; ++it_prd)
+    for (
+        auto product_iter{products_iter}; product_iter != products_last;
+        ++product_iter
+    )
     {
-        *it_prd = ValType{1};
-        auto const idx_prd{it_prd - products_iter};
+        *product_iter = one;
+        auto const idx_prd{distance(products_iter, product_iter)};
         for (auto j{DiffType{1}}; j < length; ++j)
         {
-            *it_prd *= static_cast<ValType>(first[(idx_prd + j) % length]);
+            *product_iter
+                *= static_cast<ValueType>(*next(first, (idx_prd + j) % length));
         }
     }
 }
