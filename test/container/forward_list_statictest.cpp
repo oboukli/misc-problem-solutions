@@ -15,8 +15,8 @@ TEST_CASE("Forward list", "[container][forward_list]")
 {
     SECTION("Forward list is initially empty")
     {
-        static constexpr forfun::experimental::container::forward_list<
-            int> const forward_list{};
+        static constexpr forfun::container::forward_list<int> const
+            forward_list{};
 
         STATIC_REQUIRE(forward_list.empty());
     }
@@ -24,15 +24,12 @@ TEST_CASE("Forward list", "[container][forward_list]")
     SECTION("Validate reference type")
     {
         STATIC_REQUIRE(
-            std::same_as<
-                forfun::experimental::container::forward_list<char>::reference,
-                char&>
+            std::
+                same_as<forfun::container::forward_list<char>::reference, char&>
         );
 
         STATIC_REQUIRE(
-            std::same_as<
-                forfun::experimental::container::forward_list<int>::reference,
-                int&>
+            std::same_as<forfun::container::forward_list<int>::reference, int&>
         );
     }
 
@@ -40,39 +37,36 @@ TEST_CASE("Forward list", "[container][forward_list]")
     {
         STATIC_REQUIRE(
             std::same_as<
-                forfun::experimental::container::forward_list<
-                    char>::const_reference,
+                forfun::container::forward_list<char>::const_reference,
                 char const&>
         );
 
         STATIC_REQUIRE(
             std::same_as<
-                forfun::experimental::container::forward_list<
-                    int>::const_reference,
+                forfun::container::forward_list<int>::const_reference,
                 int const&>
         );
     }
 
     SECTION("Non-const method front() returns a non-const reference")
     {
-        using forward_list = forfun::experimental::container::forward_list<int>;
+        using forward_list = forfun::container::forward_list<int>;
 
         STATIC_REQUIRE(
             std::same_as<
                 decltype(std::declval<forward_list&>().front()),
-                forfun::experimental::container::forward_list<int>::reference>
+                forfun::container::forward_list<int>::reference>
         );
     }
 
     SECTION("Method `front() const` returns a reference to const")
     {
-        using forward_list = forfun::experimental::container::forward_list<int>;
+        using forward_list = forfun::container::forward_list<int>;
 
         STATIC_REQUIRE(
             std::same_as<
                 decltype(std::declval<forward_list const&>().front()),
-                forfun::experimental::container::forward_list<
-                    int>::const_reference>
+                forfun::container::forward_list<int>::const_reference>
         );
     }
 }

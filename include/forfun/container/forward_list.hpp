@@ -12,39 +12,49 @@
 
 #include <cassert>
 #include <concepts>
+#include <type_traits>
 #include <utility>
 
+#include <gsl/pointers>
+
+#include "forfun/common/type_traits.hpp"
 #include "forfun/container/forward_list_node.hpp"
 
-namespace forfun::experimental::container {
+namespace forfun::container {
 
-template <std::integral T>
+template <typename T>
+    requires std::integral<T>
 class forward_list final {
 public:
     using value_type = T;
 
-    using reference = value_type&;
+    using reference = std::add_lvalue_reference_t<value_type>;
 
-    using const_reference = value_type const&;
+    using const_reference
+        = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
     constexpr forward_list() noexcept = default;
 
-    forward_list(forward_list const&) noexcept = delete;
+    forward_list(forward_list const&) = delete;
 
-    forward_list(forward_list&&) noexcept = delete;
+    forward_list(forward_list&&) = delete;
 
     constexpr ~forward_list() noexcept
     {
         clear();
     }
 
-    auto operator=(forward_list const&) noexcept -> forward_list& = delete;
+    auto operator=(forward_list const&) -> forward_list& = delete;
 
-    auto operator=(forward_list&&) noexcept -> forward_list& = delete;
+    auto operator=(forward_list&&) -> forward_list& = delete;
 
-    [[nodiscard]] constexpr auto front(this auto&& self) noexcept -> auto&&
+    [[nodiscard]] constexpr auto front(this auto& self) noexcept
+        -> forfun::common::type_traits::
+            reference_conditional_const_t<decltype(self), value_type>
     {
-        return std::forward_like<decltype(self)>(self.head_->value_);
+        assert(self.head_ != nullptr);
+
+        return self.head_->value_;
     }
 
     [[nodiscard]] constexpr auto empty() const noexcept -> bool
@@ -54,12 +64,11 @@ public:
 
     auto push_front(T&& value) -> void
     {
-        forfun::container::forward_list_node<T>* const aux{head_};
+        auto* node_ptr{
+            new forfun::container::forward_list_node<T>(std::move(value))
+        };
 
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        head_ = new forfun::container::forward_list_node<T>{std::move(value)};
-
-        head_->next_ = aux;
+        node_ptr->next_ = std::exchange(head_, node_ptr);
     }
 
     /// @note The behavior is undefined when popping the front of an empty
@@ -68,55 +77,45 @@ public:
     {
         assert(head_ != nullptr);
 
-        forfun::container::forward_list_node<T> const* const aux{head_};
-        head_ = head_->next_;
-
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        delete aux;
+        delete std::exchange(head_, head_->next_);
     }
 
     constexpr auto clear() noexcept -> void
     {
-        for (
-            forfun::container::forward_list_node<T> const* node{head_};
-            node != nullptr;
-        )
+        while (head_ != nullptr)
         {
-            forfun::container::forward_list_node<T> const* const next{
-                node->next_
-            };
+            forfun::container::forward_list_node<T>* const next{head_->next_};
+
+            delete head_;
 
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-            delete node;
-
-            node = next;
+            head_ = next;
         }
-
-        head_ = nullptr;
     }
 
     constexpr auto reverse() noexcept -> void
     {
         forfun::container::forward_list_node<T>* prev{nullptr};
-        forfun::container::forward_list_node<T>* node{head_};
 
-        while (node != nullptr)
+        while (head_ != nullptr)
         {
-            forfun::container::forward_list_node<T>* next{node->next_};
+            forfun::container::forward_list_node<T>* next{head_->next_};
 
-            node->next_ = prev;
+            head_->next_ = prev;
 
-            prev = node;
-            node = next;
+            prev = head_;
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+            head_ = next;
         }
 
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         head_ = prev;
     }
 
 private:
-    forfun::container::forward_list_node<T>* head_{};
+    gsl::owner<forfun::container::forward_list_node<T>*> head_{};
 };
 
-} // namespace forfun::experimental::container
+} // namespace forfun::container
 
 #endif // FORFUN_CONTAINER_FORWARD_LIST_HPP_

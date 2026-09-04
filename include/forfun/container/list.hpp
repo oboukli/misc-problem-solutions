@@ -10,15 +10,18 @@
 #ifndef FORFUN_CONTAINER_LIST_HPP_
 #define FORFUN_CONTAINER_LIST_HPP_
 
+#include <cassert>
 #include <cstddef>
+#include <type_traits>
 
 #include <gsl/pointers>
 
+#include "forfun/common/type_traits.hpp"
 #include "forfun/container/internal/list_const_iterator.hpp"
 #include "forfun/container/internal/list_iterator.hpp"
 #include "forfun/container/internal/list_node.hpp"
 
-namespace forfun::experimental::container {
+namespace forfun::container {
 
 class list final {
 public:
@@ -26,9 +29,10 @@ public:
 
     using size_type = std::size_t;
 
-    using reference = value_type&;
+    using reference = std::add_lvalue_reference_t<value_type>;
 
-    using const_reference = value_type const&;
+    using const_reference
+        = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
     using iterator = internal::list_iterator;
 
@@ -42,7 +46,7 @@ public:
 
     list(list const&) = delete;
 
-    list(list&&) noexcept = delete;
+    list(list&&) = delete;
 
     ~list() noexcept
     {
@@ -65,19 +69,20 @@ public:
         return size_ == size_type{};
     }
 
-    [[nodiscard]] auto front() noexcept -> reference
+    [[nodiscard]] auto front(this auto& self) noexcept -> forfun::common::
+        type_traits::reference_conditional_const_t<decltype(self), value_type>
     {
-        return head_->value_;
+        assert(self.head_ != nullptr);
+
+        return self.head_->value_;
     }
 
-    [[nodiscard]] auto front() const noexcept -> const_reference
+    [[nodiscard]] auto back(this auto& self) noexcept -> forfun::common::
+        type_traits::reference_conditional_const_t<decltype(self), value_type>
     {
-        return head_->value_;
-    }
+        assert(self.tail_ != nullptr);
 
-    [[nodiscard]] auto back() const noexcept -> value_type
-    {
-        return tail_->value_;
+        return self.tail_->value_;
     }
 
     auto push_back(value_type value) -> void;
@@ -86,21 +91,44 @@ public:
 
     auto clear() noexcept -> void;
 
-    [[nodiscard]] auto begin() const noexcept -> iterator;
+    [[nodiscard]] auto begin(this auto&& self) noexcept -> forfun::common::
+        type_traits::if_const_t<decltype(self), const_iterator, iterator>
+    {
+        using IteratorType = forfun::common::type_traits::
+            if_const_t<decltype(self), const_iterator, iterator>;
 
-    [[nodiscard]] auto end() const noexcept -> iterator;
+        return IteratorType{self.head_};
+    }
 
-    [[nodiscard]] auto cbegin() const noexcept -> const_iterator;
+    [[nodiscard]] auto end(this auto&& self) noexcept -> forfun::common::
+        type_traits::if_const_t<decltype(self), const_iterator, iterator>
+    {
+        using IteratorType = forfun::common::type_traits::
+            if_const_t<decltype(self), const_iterator, iterator>;
 
-    [[nodiscard]] auto cend() const noexcept -> const_iterator;
+        return IteratorType{self.end_};
+    }
+
+    [[nodiscard]] auto cbegin(this auto&& self) noexcept -> const_iterator
+    {
+        return const_iterator{self.head_};
+    }
+
+    [[nodiscard]] auto cend(this auto&& self) noexcept -> const_iterator
+    {
+        return const_iterator{self.end_};
+    }
 
 private:
     internal::list_node* head_;
+
     internal::list_node* tail_;
+
     gsl::owner<internal::list_node*> end_;
+
     size_type size_{};
 };
 
-} // namespace forfun::experimental::container
+} // namespace forfun::container
 
 #endif // FORFUN_CONTAINER_LIST_HPP_

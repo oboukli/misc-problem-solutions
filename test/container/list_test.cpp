@@ -12,14 +12,14 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 {
     SECTION("List is initially empty")
     {
-        forfun::experimental::container::list const some_list{};
+        forfun::container::list const some_list{};
 
         REQUIRE(some_list.empty());
     }
 
     SECTION("List's initial size is zero")
     {
-        forfun::experimental::container::list const some_list{};
+        forfun::container::list const some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -27,7 +27,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Push back one element (benchmark case)")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -43,7 +43,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Push back two elements")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -66,7 +66,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Push back three elements")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -96,7 +96,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Push back four elements")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -133,7 +133,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of one element")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
         some_list.push_back(1381);
 
         some_list.pop_back();
@@ -146,7 +146,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of two elements")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
         some_list.push_back(1399);
         some_list.push_back(1409);
 
@@ -160,7 +160,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Pop back one element out of list of three elements")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
         some_list.push_back(1399);
         some_list.push_back(1409);
         some_list.push_back(1423);
@@ -175,7 +175,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Clear empty list")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         // NOLINTNEXTLINE(readability-container-size-empty)
         REQUIRE(some_list.size() == 0UZ);
@@ -190,7 +190,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Clear list of one")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
         some_list.push_back(5);
 
         REQUIRE(some_list.size() == 1UZ);
@@ -205,7 +205,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Clear list of three")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
         some_list.push_back(5);
         some_list.push_back(7);
         some_list.push_back(11);
@@ -222,7 +222,7 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Method front() returns a reference")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         REQUIRE(some_list.empty());
 
@@ -237,13 +237,13 @@ TEST_CASE("Linked list", "[container][list][dynamic_allocation]")
 
     SECTION("Method front() const returns a reference to const")
     {
-        forfun::experimental::container::list some_list{};
+        forfun::container::list some_list{};
 
         REQUIRE(some_list.empty());
 
         some_list.push_back(1337);
 
-        forfun::experimental::container::list const& alias{some_list};
+        forfun::container::list const& alias{some_list};
 
         REQUIRE(alias.front() == 1337);
 

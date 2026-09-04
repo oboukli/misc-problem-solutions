@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/container/internal/list_iterator_helper.hpp" // IWYU pragma: keep
+#include "forfun/container/internal/list_bidirectional_iterator_helper.hpp" // IWYU pragma: keep

@@ -8,25 +8,31 @@
 #define FORFUN_CONTAINER_INTERNAL_LIST_ITERATOR_HPP_
 
 #include <cassert>
-#include <iterator>
+#include <type_traits>
 
-#include "forfun/container/internal/list_iterator_helper.hpp"
+#include "forfun/container/internal/list_bidirectional_iterator_helper.hpp"
 #include "forfun/container/internal/list_node.hpp"
 
-namespace forfun::experimental::container::internal {
+namespace forfun::container::internal {
 
-class list_iterator final : public list_iterator_helper<list_iterator> {
+class list_iterator final
+    : public list_bidirectional_iterator_helper<list_iterator> {
 public:
     using value_type = int;
 
-    using reference = value_type&;
+    using pointer = std::add_pointer_t<value_type>;
 
-    using const_reference = value_type const&;
+    using const_pointer = std::add_pointer_t<std::add_const<value_type>>;
 
-    constexpr explicit list_iterator() noexcept = default;
+    using reference = std::add_lvalue_reference_t<value_type>;
+
+    using const_reference
+        = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
+
+    constexpr list_iterator() noexcept = default;
 
     constexpr explicit list_iterator(list_node* const node) noexcept :
-        list_iterator_helper{node}
+        list_bidirectional_iterator_helper{node}
     {
     }
 
@@ -34,46 +40,29 @@ public:
 
     constexpr list_iterator(list_iterator&& other) noexcept = default;
 
-    constexpr ~list_iterator() noexcept = default;
+    ~list_iterator() noexcept = default;
 
-    auto operator=(list_iterator const& other) noexcept
+    constexpr auto operator=(list_iterator const& other) noexcept
         -> list_iterator& = default;
 
-    auto operator=(list_iterator&& other) noexcept -> list_iterator& = default;
+    constexpr auto operator=(list_iterator&& other) noexcept
+        -> list_iterator& = default;
 
-    auto operator*() const noexcept -> reference
+    constexpr auto operator*() const noexcept -> reference
     {
         assert(node_ != nullptr);
 
         return node_->value_;
     }
+
+    constexpr auto operator->() const noexcept -> pointer
+    {
+        assert(node_ != nullptr);
+
+        return &node_->value_;
+    }
 };
 
-} // namespace forfun::experimental::container::internal
-
-template <>
-struct std::iterator_traits<
-    forfun::experimental::container::internal::list_iterator> {
-    using const_reference = forfun::experimental::container::internal::
-        list_iterator::const_reference;
-
-    using difference_type = forfun::experimental::container::internal::
-        list_iterator::difference_type;
-
-    using iterator_category = forfun::experimental::container::internal::
-        list_iterator::iterator_category;
-
-    using iterator_concept = forfun::experimental::container::internal::
-        list_iterator::iterator_concept;
-
-    using pointer
-        = forfun::experimental::container::internal::list_iterator::pointer;
-
-    using reference
-        = forfun::experimental::container::internal::list_iterator::reference;
-
-    using value_type
-        = forfun::experimental::container::internal::list_iterator::value_type;
-};
+} // namespace forfun::container::internal
 
 #endif // FORFUN_CONTAINER_INTERNAL_LIST_ITERATOR_HPP_
