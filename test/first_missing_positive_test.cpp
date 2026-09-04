@@ -156,6 +156,43 @@ TEMPLATE_TEST_CASE_SIG(
 }
 
 TEMPLATE_TEST_CASE_SIG(
+    "First missing positive (benchmark case)",
+    "[first_missing_positive]",
+    (auto first_missing_positive, first_missing_positive),
+    (forfun::first_missing_positive::base::lowest_missing<
+        std::array<int, 128>::iterator,
+        std::array<int, 128>::iterator>),
+    (forfun::first_missing_positive::fast::lowest_missing<
+        std::array<int, 128>::iterator,
+        std::array<int, 128>::iterator>)
+)
+{
+    std::array test_input{
+        // clang-format off
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        9, 8, 7, 6, 5, 4, 3, 2, 1, -1,
+        0, 0, 0, 0, 0, 0, 0, 0,
+        // clang-format on
+    };
+
+    CAPTURE(test_input);
+
+    CHECK(test_input.size() == 128UZ);
+
+    REQUIRE(first_missing_positive(test_input.begin(), test_input.end()) == 10);
+}
+
+TEMPLATE_TEST_CASE_SIG(
     "First missing positive (degenerate case)",
     "[first_missing_positive]",
     (auto first_missing_positive, first_missing_positive),

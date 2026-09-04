@@ -24,6 +24,8 @@
 
 namespace forfun::first_missing_positive {
 
+// NOLINTBEGIN(performance-unnecessary-value-param)
+
 namespace detail {
 
 template <typename Iter>
@@ -151,6 +153,8 @@ lowest_missing(Iter const first, Sentinel const last) noexcept
 }
 
 } // namespace fast
+
+// NOLINTEND(performance-unnecessary-value-param)
 
 } // namespace forfun::first_missing_positive
 
