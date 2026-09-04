@@ -25,7 +25,7 @@ namespace detail {
 
 template <typename ScoredCharType, std::size_t Size, ScoredCharType Alpha>
     requires forfun::common::concepts::standard_char_type<ScoredCharType>
-class ScoringBucket final {
+class character_frequency_table final {
 public:
     static constexpr std::size_t const capacity{Size};
 
@@ -43,7 +43,7 @@ public:
 
     using const_reference = container_type::const_reference;
 
-    explicit constexpr ScoringBucket(
+    explicit constexpr character_frequency_table(
         std::basic_string_view<char_type> const s
     ) noexcept
     {
@@ -115,7 +115,8 @@ static_assert(first_char == char{97});
 static_assert('z' == char{122});
 // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
 
-using Bucket = ScoringBucket<Char, charset_size, first_char>;
+using FrequencyTable
+    = character_frequency_table<Char, charset_size, first_char>;
 
 } // namespace detail
 
@@ -135,9 +136,11 @@ using Bucket = ScoringBucket<Char, charset_size, first_char>;
     assert(not std::empty(haystack));
     assert(size(haystack) >= needle_size);
 
-    detail::Bucket const needle_bucket(needle);
+    detail::FrequencyTable const needle_frequency_table(needle);
 
-    detail::Bucket bundle_bucket(haystack.substr(0, needle_size - 1));
+    detail::FrequencyTable bundle_frequency_table(
+        haystack.substr(0, needle_size - 1)
+    );
 
     size_type const padded_end{(size(haystack) + 1) - needle_size};
     for (size_type i{}; i < padded_end; ++i)
@@ -146,15 +149,18 @@ using Bucket = ScoringBucket<Char, charset_size, first_char>;
 
         auto const bundle{haystack.substr(i, needle_size)};
 
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
-        bundle_bucket.add_one(haystack[(i + needle_size) - size_type{1}]);
+        bundle_frequency_table.add_one(
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
+            haystack[(i + needle_size) - size_type{1}]
+        );
 
         for (auto const chr : bundle)
         {
-            if (needle_bucket.get_score(chr) != bundle_bucket.get_score(chr))
+            if (needle_frequency_table.get_score(chr)
+                != bundle_frequency_table.get_score(chr))
             {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
-                bundle_bucket.substract_one(haystack[i]);
+                bundle_frequency_table.substract_one(haystack[i]);
                 break;
             }
 
@@ -188,7 +194,7 @@ namespace experimental {
     assert(not std::empty(haystack));
     assert(size(haystack) >= needle_size);
 
-    detail::Bucket const needle_bucket(needle);
+    detail::FrequencyTable const needle_frequency_table(needle);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-avoid-unchecked-container-access)
     size_type const padded_end{(size(haystack) + size_type{1}) - needle_size};
@@ -197,11 +203,12 @@ namespace experimental {
         size_type streak{};
 
         auto const bundle{haystack.substr(i, needle_size)};
-        detail::Bucket const bundle_bucket(bundle);
+        detail::FrequencyTable const bundle_frequency_table(bundle);
 
         for (auto const chr : bundle)
         {
-            if (needle_bucket.get_score(chr) != bundle_bucket.get_score(chr))
+            if (needle_frequency_table.get_score(chr)
+                != bundle_frequency_table.get_score(chr))
             {
                 break;
             }
