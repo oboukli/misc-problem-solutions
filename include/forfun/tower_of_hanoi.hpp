@@ -14,20 +14,24 @@
 
 namespace forfun::tower_of_hanoi::recursive {
 
-template <typename Rod, std::invocable<Rod&, Rod&> Monk>
+/// @note Time complexity: \f$O(2^n)\f$
+/// @note Space complexity: \f$O(n)\f$
+template <typename Rod, typename Monk, typename CountType>
+    requires std::invocable<Monk, Rod&, Rod&> and std::integral<CountType>
 constexpr auto toh(
-    Rod& src, Rod& des, Rod& aux, Monk monk, std::integral auto num_moves
+    Rod& src, Rod& des, Rod& aux, Monk monk, CountType num_disks
 ) noexcept(noexcept(monk(src, des))) -> void
 {
-    if (num_moves == decltype(num_moves){}) [[unlikely]]
+    if (num_disks == CountType{}) [[unlikely]]
     {
         return;
     }
 
-    --num_moves;
-    toh(src, aux, des, monk, num_moves);
+    --num_disks;
+
+    toh(src, aux, des, monk, num_disks);
     monk(src, des);
-    toh(aux, des, src, monk, num_moves);
+    toh(aux, des, src, monk, num_disks);
 }
 
 } // namespace forfun::tower_of_hanoi::recursive
