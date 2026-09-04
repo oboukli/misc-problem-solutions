@@ -54,13 +54,6 @@ public:
 
         return node_->value_;
     }
-
-    constexpr auto operator->() const noexcept -> pointer
-    {
-        assert(node_ != nullptr);
-
-        return &node_->value_;
-    }
 };
 
 } // namespace forfun::container::internal
