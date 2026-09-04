@@ -39,26 +39,27 @@ is_anagram(std::string_view const str_a, std::string_view const str_b) noexcept
     std::array<
         std::size_t,
         forfun::common::limits::domain_size<std::string_view::value_type>()>
-        bucket{};
+        buckets{};
+
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-    static_assert(bucket.size() == 256UZ);
+    static_assert(buckets.size() == 256UZ);
 
     for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
     {
-        ++(*std::next(bucket.begin(), *iter));
+        ++(*std::next(buckets.begin(), *iter));
     }
 
     for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
-        decltype(bucket)::iterator const bucket_iter{
-            std::next(bucket.begin(), *iter)
+        decltype(buckets)::iterator const buckets_iter{
+            std::next(buckets.begin(), *iter)
         };
-        if (*bucket_iter == 0UZ)
+        if (*buckets_iter == 0UZ)
         {
             return false;
         }
 
-        --(*bucket_iter);
+        --(*buckets_iter);
     }
 
     return true;
@@ -80,21 +81,21 @@ template <std::integral CharT>
         return false;
     }
 
-    std::map<CharT, std::size_t> bucket{};
+    std::map<CharT, std::size_t> buckets{};
 
     for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
     {
-        ++bucket[*iter];
+        ++buckets[*iter];
     }
 
     for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
-        if (bucket[*iter] == 0UZ)
+        if (buckets[*iter] == 0UZ)
         {
             return false;
         }
 
-        --bucket[*iter];
+        --buckets[*iter];
     }
 
     return true;
@@ -116,23 +117,23 @@ template <std::integral CharT>
         return false;
     }
 
-    std::multiset<CharT> bucket{};
+    std::multiset<CharT> buckets{};
 
-    if constexpr (requires { bucket.insert_range(str_a); })
+    if constexpr (requires { buckets.insert_range(str_a); })
     {
-        bucket.insert_range(str_a);
+        buckets.insert_range(str_a);
     }
     else
     {
         for (Iter iter{str_a.cbegin()}; iter != str_a.cend(); ++iter)
         {
-            bucket.emplace(*iter);
+            buckets.emplace(*iter);
         }
     }
 
     for (Iter iter{str_b.cbegin()}; iter != str_b.cend(); ++iter)
     {
-        if (auto const aux{bucket.extract(*iter)}; aux.empty())
+        if (auto const aux{buckets.extract(*iter)}; aux.empty())
         {
             return false;
         }
