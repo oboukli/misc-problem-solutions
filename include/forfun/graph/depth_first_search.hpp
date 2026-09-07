@@ -51,6 +51,12 @@ auto depth_first_search(
         }
 
         auto const& adjacencies{adjacency_list.find(current_vertex)->second};
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnull-dereference"
+#endif // defined(__GNUC__) && !defined(__clang__)
+
         auto const adj_iter{std::next(adjacencies.cbegin(), offset)};
         if (adj_iter == adjacencies.cend())
         {
@@ -58,6 +64,10 @@ auto depth_first_search(
 
             continue;
         }
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif // defined(__GNUC__) && !defined(__clang__)
 
         auto const& adjacency{*adj_iter};
         if (std::as_const(visit_state).find(adjacency) == visit_state.cend())
@@ -84,6 +94,11 @@ auto depth_first_search(
     visit_state.emplace(start);
     preorder_step(start);
 
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnull-dereference"
+#endif // defined(__GNUC__) && !defined(__clang__)
+
     for (auto const& adjacency : adjacency_list.find(start)->second)
     {
         if (std::as_const(visit_state).find(adjacency) == visit_state.cend())
@@ -93,6 +108,10 @@ auto depth_first_search(
             );
         }
     }
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif // defined(__GNUC__) && !defined(__clang__)
 }
 
 } // namespace recursive
