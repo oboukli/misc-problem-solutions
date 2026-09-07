@@ -37,6 +37,12 @@ auto do_breadth_first_search_(
 ) -> void
 {
     std::deque<Vertex> to_visit{};
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnull-dereference"
+#endif // defined(__GNUC__) && !defined(__clang__)
+
     for (auto const& adjacency : adjacency_list.find(start)->second)
     {
         if (std::as_const(visit_state).find(adjacency) == visit_state.cend())
@@ -47,6 +53,10 @@ auto do_breadth_first_search_(
             to_visit.emplace_back(adjacency);
         }
     }
+
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic pop
+#endif // defined(__GNUC__) && !defined(__clang__)
 
     for (auto const vertex : to_visit)
     {

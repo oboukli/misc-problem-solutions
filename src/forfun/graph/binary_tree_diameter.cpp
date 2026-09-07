@@ -7,6 +7,7 @@
 #include "forfun/graph/binary_tree_diameter.hpp"
 
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
 #include <stack>
 #include <unordered_map>
@@ -30,12 +31,24 @@ using Pointer = binary_tree_node const*;
     std::unordered_map<Pointer, std::size_t> const& tracker, Pointer const node
 ) noexcept -> std::size_t
 {
-    if (node == nullptr) [[unlikely]]
+    if (node == nullptr)
     {
         return 0UZ;
     }
 
-    return tracker.find(node)->second;
+    auto const found_node_iter{tracker.find(node)};
+
+    [[maybe_unused]] auto const node_is_found{
+        found_node_iter != tracker.cend()
+    };
+
+    assert(node_is_found);
+
+#if __has_cpp_attribute(assume)
+    [[assume(node_is_found)]];
+#endif // __has_cpp_attribute(assume)
+
+    return found_node_iter->second;
 }
 
 } // namespace
