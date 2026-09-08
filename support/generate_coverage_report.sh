@@ -24,7 +24,7 @@ EXECUTABLE_ARGS=(
   '--verbosity' 'quiet'
 )
 
-PATH_PREFIX="${PATH_PREFIX:-$(pwd)/out/build/clang-coverage}"
+PATH_PREFIX="${PATH_PREFIX:-$(pwd)/out/build/code-coverage}"
 
 REPORT_DIR="${REPORT_DIR:-$(pwd)/out/coverage/report}"
 PROFDATA_DIR="${PROFDATA_DIR:-$(pwd)/out/coverage/profdata}"

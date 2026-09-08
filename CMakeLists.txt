@@ -6,1104 +6,306 @@
 
 cmake_minimum_required(VERSION 3.31)
 
+include(cmake/Features.cmake)
+
 project(
   ForFunDsa
+  VERSION 0.1.0
   LANGUAGES
     C
     CXX
 )
 
-add_library(forfun)
 add_library(forfun_common)
+add_library(forfun_core)
 add_library(forfun_experimental)
 add_library(forfun_graph)
 add_library(forfun_lock_free)
 add_library(forfun_math)
 add_library(forfun_search)
+add_library(forfun_sequence)
 add_library(forfun_sorting)
 
-add_library(forfun_c)
+# C library
+add_library(forfun_core_c)
 
-# Defines and exports global thread-unsafe state.
-add_library(forfun_c_experimental STATIC)
+# Thread-unsafe C library
+add_library(forfun_experimental_c STATIC)
 
-add_executable(test_driver)
-add_executable(test_driver_lock_free)
-add_executable(test_driver_experimental)
-add_executable(static_test_driver)
-
-add_executable(benchmark_driver)
-add_executable(benchmark_driver_lock_free)
-add_executable(benchmark_driver_experimental)
-
-include(cmake/CompileOptions.cmake)
-
-target_include_directories(
-  forfun
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/add_two_numbers.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/array_concatenation.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/best_time_to_buy_and_sell_stock.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container_with_most_water.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/contains_duplicate.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/daily_temperatures.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/encode_and_decode_strings.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/evaluate_reverse_polish_notation.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/factorial.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/fibonacci_sequence.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/fibonacci.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/first_missing_positive.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/fizzbuzz.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/gcd.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/group_anagrams.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/hamming_weight.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/house_robber.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/last_stone_weight.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/longest_consecutive_sequence.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/lru_cache.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/majority_element.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/maximum_subarray.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/meeting_rooms.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/missing_number.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/move_zeroes.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/palindrome.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/palindromic_number.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/permutation_in_string.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/primality.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/product_except_self.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sequence/longest_non_repeating_substring.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/set_matrix_zeroes.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/single_number.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sonar.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/squares_sorted_array.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sub_array_sums.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/subsets.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/three_sum.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/top_k_frequent_elements.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/tower_of_hanoi.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/trapping_rainwater.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/two_sum.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/valid_anagram.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/valid_parentheses.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/valid_sudoku.hpp"
-)
-target_sources(
-  forfun
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/add_two_numbers.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/array_concatenation.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/best_time_to_buy_and_sell_stock.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container_with_most_water.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/contains_duplicate.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/daily_temperatures.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/encode_and_decode_strings.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/evaluate_reverse_polish_notation.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/factorial.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/fibonacci_sequence.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/fibonacci.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/first_missing_positive.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/fizzbuzz.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/gcd.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/group_anagrams.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/hamming_weight.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/house_robber.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/last_stone_weight.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/longest_consecutive_sequence.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/lru_cache.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/majority_element.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/maximum_subarray.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/meeting_rooms.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/missing_number.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/move_zeroes.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/palindrome.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/palindromic_number.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/permutation_in_string.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/primality.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/product_except_self.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/project_euler/p0001_multiples_of_3_or_5.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sequence/longest_non_repeating_substring.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/set_matrix_zeroes.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/single_number.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sonar.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/squares_sorted_array.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sub_array_sums.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/subsets.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/three_sum.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/top_k_frequent_elements.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/tower_of_hanoi.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/trapping_rainwater.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/two_sum.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_anagram.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_parentheses.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/valid_sudoku.cpp"
-)
-get_target_property(forfun_headers forfun HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/"
-  PREFIX "Header files"
-  FILES ${forfun_headers}
-)
-get_target_property(forfun_sources forfun SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
-  PREFIX "Source files"
-  FILES ${forfun_sources}
-)
-forfun_common_target_compile_options(forfun)
-
-target_include_directories(
-  forfun_common
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_common
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/concepts.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/io.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/limits.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/type_traits.hpp"
-)
-target_sources(
-  forfun_common
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/concepts.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/io.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/limits.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/type_traits.cpp"
-)
-get_target_property(forfun_common_headers forfun_common HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/common/"
-  PREFIX "Header files"
-  FILES ${forfun_common_headers}
-)
-get_target_property(forfun_common_sources forfun_common SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/common/"
-  PREFIX "Source files"
-  FILES ${forfun_common_sources}
-)
-forfun_common_target_compile_options(forfun_common)
-
-target_include_directories(
-  forfun_lock_free
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_lock_free
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/concurrency/spsc_bound_queue.hpp"
-)
-target_sources(
-  forfun_lock_free
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/concurrency/spsc_bound_queue.cpp"
-)
-
-get_target_property(
-  forfun_lock_free_headers
-  forfun_lock_free
-  HEADER_SET
-)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/concurrency/"
-  PREFIX "Header files"
-  FILES ${forfun_lock_free_headers}
-)
-get_target_property(forfun_lock_free_sources forfun_lock_free SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/concurrency"
-  PREFIX "Source files"
-  FILES ${forfun_lock_free_sources}
-)
-
-target_include_directories(
-  forfun_math
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_math
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/math/math.hpp"
-)
-target_sources(
-  forfun_math
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/math/math.cpp"
-)
-
-get_target_property(
-  forfun_math_headers
-  forfun_math
-  HEADER_SET
-)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/math/"
-  PREFIX "Header files"
-  FILES ${forfun_math_headers}
-)
-get_target_property(forfun_math_sources forfun_math SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/math"
-  PREFIX "Source files"
-  FILES ${forfun_math_sources}
-)
-forfun_common_target_compile_options(forfun_math)
-
-target_include_directories(
-  forfun_graph
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_graph
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/balanced_binary_tree.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_diameter.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/binary_tree_node.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/breadth_first_search.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/depth_first_search.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/invert_binary_tree.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/vertex.hpp"
-)
-target_sources(
-  forfun_graph
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/balanced_binary_tree.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/binary_tree_diameter.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/binary_tree_node.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/breadth_first_search.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/depth_first_search.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/invert_binary_tree.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/vertex.cpp"
-)
-get_target_property(forfun_graph_headers forfun_graph HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/graph/"
-  PREFIX "Header files"
-  FILES ${forfun_graph_headers}
-)
-get_target_property(forfun_graph_sources forfun_graph SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/graph/"
-  PREFIX "Source files"
-  FILES ${forfun_graph_sources}
-)
-forfun_common_target_compile_options(forfun_graph)
-
-target_include_directories(
-  forfun_search
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_search
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/binary_search.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/koko_eating_bananas.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/minimum_rotated_element.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/search_matrix.hpp"
-)
-target_sources(
-  forfun_search
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/binary_search.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/koko_eating_bananas.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/minimum_rotated_element.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/search_matrix.cpp"
-)
-get_target_property(forfun_search_headers forfun_search HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/search/"
-  PREFIX "Header files"
-  FILES ${forfun_search_headers}
-)
-get_target_property(forfun_search_sources forfun_search SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/search/"
-  PREFIX "Source files"
-  FILES ${forfun_search_sources}
-)
-target_link_libraries(
-  forfun_search
-  PRIVATE forfun_math
-)
-forfun_common_target_compile_options(forfun_search)
-
-target_include_directories(
-  forfun_sorting
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_sorting
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/bubble_sort.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/insertion_sort.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/quicksort.hpp"
-)
-target_sources(
-  forfun_sorting
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/bubble_sort.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/insertion_sort.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/quicksort.cpp"
-)
-get_target_property(forfun_sorting_headers forfun_sorting HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/sorting/"
-  PREFIX "Header files"
-  FILES ${forfun_sorting_headers}
-)
-get_target_property(forfun_sorting_sources forfun_sorting SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/sorting/"
-  PREFIX "Source files"
-  FILES ${forfun_sorting_sources}
-)
-forfun_common_target_compile_options(forfun_sorting)
-
-target_include_directories(
-  forfun_c
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_c
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/palindrome.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/single_number.h"
-)
-target_sources(
-  forfun_c
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/palindrome.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/single_number.c"
-)
-get_target_property(forfun_c_headers forfun_c HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
-  PREFIX "Header files"
-  FILES ${forfun_c_headers}
-)
-get_target_property(forfun_c_sources forfun_c SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/"
-  PREFIX "Source files"
-  FILES ${forfun_c_sources}
-)
-forfun_common_target_compile_options(forfun_c)
-
-find_package(mimalloc CONFIG REQUIRED)
-
-target_include_directories(
-  forfun_c_experimental
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_c_experimental
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/add_two_numbers.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/common.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/container/forward_list.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/mem/mem.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/shim/allocator.h"
-)
-target_sources(
-  forfun_c_experimental
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/add_two_numbers.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/common.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/container/forward_list.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/mem/mem.c"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/shim/allocator.c"
-)
-get_target_property(
-  forfun_c_experimental_headers
-  forfun_c_experimental
-  HEADER_SET
-)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun_c/"
-  PREFIX "Header files"
-  FILES ${forfun_c_experimental_headers}
-)
-get_target_property(forfun_c_experimental_sources forfun_c_experimental SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun_c/"
-  PREFIX "Source files"
-  FILES ${forfun_c_experimental_sources}
-)
-target_link_libraries(
-  forfun_c_experimental
-  PRIVATE mimalloc
-)
-forfun_common_target_compile_options(forfun_c_experimental)
+include(cmake/TargetHelpers.cmake)
 
 find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(mimalloc CONFIG REQUIRED)
 
-target_include_directories(
-  forfun_experimental
-  INTERFACE
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-    "$<INSTALL_INTERFACE:include>"
-)
-target_sources(
-  forfun_experimental
-  PUBLIC
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list_cycle.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list_node.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/forward_list.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_bidirectional_iterator_helper.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_const_iterator.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_iterator.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/internal/list_node.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/list.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/min_stack.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/container/trie.hpp"
-)
-target_sources(
-  forfun_experimental
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list_cycle.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list_node.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/forward_list.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_const_iterator.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_bidirectional_iterator_helper.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_iterator.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/internal/list_node.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/list.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/min_stack.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/container/trie.cpp"
-)
-get_target_property(forfun_experimental_headers forfun_experimental HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/include/forfun/"
-  PREFIX "Header files"
-  FILES ${forfun_experimental_headers}
-)
-get_target_property(forfun_experimental_sources forfun_experimental SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/src/forfun/"
-  PREFIX "Source files"
-  FILES ${forfun_experimental_sources}
-)
-target_link_libraries(
-  forfun_experimental
-  PRIVATE Microsoft.GSL::GSL
-)
-forfun_common_target_compile_options(forfun_experimental)
-
-find_package(Catch2 3 REQUIRED)
-
-target_compile_definitions(
-  test_driver
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  test_driver
-  PRIVATE
-  FILE_SET HEADERS
-  BASE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/test"
-  FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers.hpp"
-)
-target_sources(
-  test_driver
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/best_time_to_buy_and_sell_stock_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/matchers.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/io_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container_with_most_water_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/daily_temperatures_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/encode_and_decode_strings_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/evaluate_reverse_polish_notation_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/factorial_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_sequence_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/first_missing_positive_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/fizzbuzz_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/gcd_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/balanced_binary_tree_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_diameter_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/breadth_first_search_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/depth_first_search_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/invert_binary_tree_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/group_anagrams_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/house_robber_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/last_stone_weight_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/longest_consecutive_sequence_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/lru_cache_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/meeting_rooms_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/move_zeroes_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/palindrome_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/permutation_in_string_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/primality_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/product_except_self_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/koko_eating_bananas_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/minimum_rotated_element_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/search_matrix_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sequence/longest_non_repeating_substring_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/set_matrix_zeroes_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sonar_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/bubble_sort_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/insertion_sort_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/squares_sorted_array_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/subsets_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/three_sum_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/top_k_frequent_elements_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/trapping_rainwater_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_anagram_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_parentheses_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/valid_sudoku_test.cpp"
-)
-get_target_property(test_driver_headers test_driver HEADER_SET)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
-  PREFIX "Header files"
-  FILES ${test_driver_headers}
-)
-get_target_property(test_driver_sources test_driver SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
-  PREFIX "Source files"
-  FILES ${test_driver_sources}
-)
-target_link_libraries(
-  test_driver
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  test_driver
-  PRIVATE forfun
-  PRIVATE forfun_c
-  PRIVATE forfun_common
-  PRIVATE forfun_graph
-  PRIVATE forfun_math
-  PRIVATE forfun_search
-  PRIVATE forfun_sorting
-)
-forfun_common_target_compile_options(test_driver)
-
-target_compile_definitions(
-  test_driver_lock_free
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  test_driver_lock_free
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_test.cpp"
-)
-get_target_property(
-  test_driver_lock_free_sources
-  test_driver_lock_free
+forfun_target_config(
+  forfun_common
+  HEADERS
+    "forfun/common/concepts.hpp"
+    "forfun/common/io.hpp"
+    "forfun/common/limits.hpp"
+    "forfun/common/type_traits.hpp"
   SOURCES
+    "forfun/common/concepts.cpp"
+    "forfun/common/io.cpp"
+    "forfun/common/limits.cpp"
+    "forfun/common/type_traits.cpp"
 )
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/"
-  PREFIX "Source files"
-  FILES ${test_driver_lock_free_sources}
-)
-target_link_libraries(
-  test_driver_lock_free
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  test_driver_lock_free
-  PRIVATE forfun_lock_free
-)
-forfun_common_target_compile_options(test_driver_lock_free)
 
-target_compile_definitions(
-  test_driver_experimental
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  test_driver_experimental
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/add_two_numbers_c_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/catch2_custom/test_run_listener.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/min_stack_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/trie_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/mem/mem_test.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/shim/allocator_test.cpp"
-)
-get_target_property(
-  test_driver_experimental_sources
-  test_driver_experimental
+forfun_target_config(
+  forfun_core
+  HEADERS
+    "forfun/add_two_numbers.hpp"
+    "forfun/array_concatenation.hpp"
+    "forfun/best_time_to_buy_and_sell_stock.hpp"
+    "forfun/container_with_most_water.hpp"
+    "forfun/contains_duplicate.hpp"
+    "forfun/daily_temperatures.hpp"
+    "forfun/encode_and_decode_strings.hpp"
+    "forfun/evaluate_reverse_polish_notation.hpp"
+    "forfun/factorial.hpp"
+    "forfun/fibonacci_sequence.hpp"
+    "forfun/fibonacci.hpp"
+    "forfun/first_missing_positive.hpp"
+    "forfun/fizzbuzz.hpp"
+    "forfun/gcd.hpp"
+    "forfun/group_anagrams.hpp"
+    "forfun/hamming_weight.hpp"
+    "forfun/house_robber.hpp"
+    "forfun/last_stone_weight.hpp"
+    "forfun/longest_consecutive_sequence.hpp"
+    "forfun/lru_cache.hpp"
+    "forfun/majority_element.hpp"
+    "forfun/maximum_subarray.hpp"
+    "forfun/meeting_rooms.hpp"
+    "forfun/missing_number.hpp"
+    "forfun/move_zeroes.hpp"
+    "forfun/palindrome.hpp"
+    "forfun/palindromic_number.hpp"
+    "forfun/permutation_in_string.hpp"
+    "forfun/primality.hpp"
+    "forfun/product_except_self.hpp"
+    "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
+    "forfun/set_matrix_zeroes.hpp"
+    "forfun/single_number.hpp"
+    "forfun/sonar.hpp"
+    "forfun/squares_sorted_array.hpp"
+    "forfun/sub_array_sums.hpp"
+    "forfun/subsets.hpp"
+    "forfun/three_sum.hpp"
+    "forfun/top_k_frequent_elements.hpp"
+    "forfun/tower_of_hanoi.hpp"
+    "forfun/trapping_rainwater.hpp"
+    "forfun/two_sum.hpp"
+    "forfun/valid_anagram.hpp"
+    "forfun/valid_parentheses.hpp"
+    "forfun/valid_sudoku.hpp"
   SOURCES
+    "forfun/add_two_numbers.cpp"
+    "forfun/array_concatenation.cpp"
+    "forfun/best_time_to_buy_and_sell_stock.cpp"
+    "forfun/container_with_most_water.cpp"
+    "forfun/contains_duplicate.cpp"
+    "forfun/daily_temperatures.cpp"
+    "forfun/encode_and_decode_strings.cpp"
+    "forfun/evaluate_reverse_polish_notation.cpp"
+    "forfun/factorial.cpp"
+    "forfun/fibonacci_sequence.cpp"
+    "forfun/fibonacci.cpp"
+    "forfun/first_missing_positive.cpp"
+    "forfun/fizzbuzz.cpp"
+    "forfun/gcd.cpp"
+    "forfun/group_anagrams.cpp"
+    "forfun/hamming_weight.cpp"
+    "forfun/house_robber.cpp"
+    "forfun/last_stone_weight.cpp"
+    "forfun/longest_consecutive_sequence.cpp"
+    "forfun/lru_cache.cpp"
+    "forfun/majority_element.cpp"
+    "forfun/maximum_subarray.cpp"
+    "forfun/meeting_rooms.cpp"
+    "forfun/missing_number.cpp"
+    "forfun/move_zeroes.cpp"
+    "forfun/palindrome.cpp"
+    "forfun/palindromic_number.cpp"
+    "forfun/permutation_in_string.cpp"
+    "forfun/primality.cpp"
+    "forfun/product_except_self.cpp"
+    "forfun/project_euler/p0001_multiples_of_3_or_5.cpp"
+    "forfun/set_matrix_zeroes.cpp"
+    "forfun/single_number.cpp"
+    "forfun/sonar.cpp"
+    "forfun/squares_sorted_array.cpp"
+    "forfun/sub_array_sums.cpp"
+    "forfun/subsets.cpp"
+    "forfun/three_sum.cpp"
+    "forfun/top_k_frequent_elements.cpp"
+    "forfun/tower_of_hanoi.cpp"
+    "forfun/trapping_rainwater.cpp"
+    "forfun/two_sum.cpp"
+    "forfun/valid_anagram.cpp"
+    "forfun/valid_parentheses.cpp"
+    "forfun/valid_sudoku.cpp"
 )
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
-  PREFIX "Source files"
-  FILES ${test_driver_experimental_sources}
-)
-target_link_libraries(
-  test_driver_experimental
-  PRIVATE Catch2::Catch2WithMain
-  PRIVATE mimalloc
-)
-target_link_libraries(
-  test_driver_experimental
-  PRIVATE forfun_c_experimental
-  PRIVATE forfun_experimental
-)
-forfun_common_target_compile_options(test_driver_experimental)
 
-include(CTest)
-include(Catch)
-catch_discover_tests(test_driver)
-catch_discover_tests(test_driver_experimental)
-catch_discover_tests(test_driver_lock_free)
-
-find_package(nameof CONFIG REQUIRED)
-find_package(nanobench CONFIG REQUIRED)
-
-target_compile_definitions(
-  benchmark_driver
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  benchmark_driver
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/array_concatenation_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/best_time_to_buy_and_sell_stock_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container_with_most_water_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/contains_duplicate_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/daily_temperatures_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/encode_and_decode_strings_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/evaluate_reverse_polish_notation_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/factorial_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/fibonacci_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/fibonacci_sequence_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/first_missing_positive_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/fizzbuzz_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/gcd_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/balanced_binary_tree_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/binary_tree_diameter_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/breadth_first_search_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/depth_first_search_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/graph/invert_binary_tree_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/group_anagrams_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/hamming_weight_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/house_robber_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/last_stone_weight_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/longest_consecutive_sequence_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/lru_cache_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/majority_element_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/math/math_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/maximum_subarray_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/meeting_rooms_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/missing_number_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/move_zeroes_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/palindrome_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/palindromic_number_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/permutation_in_string_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/primality_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/product_except_self_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/project_euler/p0001_multiples_of_3_or_5_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/binary_search_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/koko_eating_bananas_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/minimum_rotated_element_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/search/search_matrix_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sequence/longest_non_repeating_substring_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/set_matrix_zeroes_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/single_number_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sonar_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/bubble_sort_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/insertion_sort_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sorting/quicksort_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/squares_sorted_array_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/sub_array_sums_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/subsets_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/three_sum_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/top_k_frequent_elements_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/tower_of_hanoi_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/trapping_rainwater_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/two_sum_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/valid_anagram_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/valid_parentheses_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/valid_sudoku_benchmark.cpp"
-)
-get_target_property(benchmark_driver_sources benchmark_driver SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
-  PREFIX "Source files"
-  FILES ${benchmark_driver_sources}
-)
-target_link_libraries(
-  benchmark_driver
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  benchmark_driver
-  PRIVATE forfun
-  PRIVATE forfun_c
-  PRIVATE forfun_common
-  PRIVATE forfun_graph
-  PRIVATE forfun_math
-  PRIVATE forfun_search
-  PRIVATE forfun_sorting
-)
-forfun_common_target_compile_options(benchmark_driver)
-
-target_compile_definitions(
-  benchmark_driver_lock_free
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  benchmark_driver_lock_free
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/concurrency/spsc_bound_queue_benchmark.cpp"
-)
-get_target_property(
-  benchmark_driver_lock_free_sources
-  benchmark_driver_lock_free
+forfun_target_config(
+  forfun_experimental
+  HEADERS
+    "forfun/container/forward_list_cycle.hpp"
+    "forfun/container/forward_list_node.hpp"
+    "forfun/container/forward_list.hpp"
+    "forfun/container/internal/list_bidirectional_iterator_helper.hpp"
+    "forfun/container/internal/list_const_iterator.hpp"
+    "forfun/container/internal/list_iterator.hpp"
+    "forfun/container/internal/list_node.hpp"
+    "forfun/container/list.hpp"
+    "forfun/container/min_stack.hpp"
+    "forfun/container/trie.hpp"
   SOURCES
-)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
-  PREFIX "Source files"
-  FILES ${benchmark_driver_lock_free_sources}
+    "forfun/container/forward_list_cycle.cpp"
+    "forfun/container/forward_list_node.cpp"
+    "forfun/container/forward_list.cpp"
+    "forfun/container/internal/list_bidirectional_iterator_helper.cpp"
+    "forfun/container/internal/list_const_iterator.cpp"
+    "forfun/container/internal/list_iterator.cpp"
+    "forfun/container/internal/list_node.cpp"
+    "forfun/container/list.cpp"
+    "forfun/container/min_stack.cpp"
+    "forfun/container/trie.cpp"
 )
 target_link_libraries(
-  benchmark_driver_lock_free
-  PRIVATE Catch2::Catch2WithMain
+  forfun_experimental
+  PRIVATE
+    Microsoft.GSL::GSL
 )
-target_link_libraries(
-  benchmark_driver_lock_free
-  PRIVATE forfun_lock_free
-)
-forfun_common_target_compile_options(benchmark_driver_lock_free)
 
-target_compile_definitions(
-  benchmark_driver_experimental
-  PRIVATE
-  CATCH_CONFIG_NO_COUNTER
-)
-target_sources(
-  benchmark_driver_experimental
-  PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/add_two_numbers_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/forward_list_cycle_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/list_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/min_stack_benchmark.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/container/trie_benchmark.cpp"
-)
-get_target_property(
-  benchmark_driver_experimental_sources
-  benchmark_driver_experimental
+forfun_target_config(
+  forfun_graph
+  HEADERS
+    "forfun/graph/balanced_binary_tree.hpp"
+    "forfun/graph/binary_tree_diameter.hpp"
+    "forfun/graph/binary_tree_node.hpp"
+    "forfun/graph/breadth_first_search.hpp"
+    "forfun/graph/depth_first_search.hpp"
+    "forfun/graph/invert_binary_tree.hpp"
+    "forfun/graph/vertex.hpp"
   SOURCES
+    "forfun/graph/balanced_binary_tree.cpp"
+    "forfun/graph/binary_tree_diameter.cpp"
+    "forfun/graph/binary_tree_node.cpp"
+    "forfun/graph/breadth_first_search.cpp"
+    "forfun/graph/depth_first_search.cpp"
+    "forfun/graph/invert_binary_tree.cpp"
+    "forfun/graph/vertex.cpp"
 )
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/"
-  PREFIX "Source files"
-  FILES ${benchmark_driver_experimental_sources}
-)
-target_link_libraries(
-  benchmark_driver_experimental
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  benchmark_driver_experimental
-  PRIVATE forfun
-  PRIVATE forfun_experimental
-  PRIVATE forfun_c_experimental
-)
-forfun_common_target_compile_options(benchmark_driver_experimental)
 
-target_compile_definitions(
-  static_test_driver
+forfun_target_config(
+  forfun_lock_free
+  HEADERS
+    "forfun/concurrency/spsc_bound_queue.hpp"
+  SOURCES
+    "forfun/concurrency/spsc_bound_queue.cpp"
+)
+
+forfun_target_config(
+  forfun_math
+  HEADERS
+    "forfun/math/math.hpp"
+  SOURCES
+    "forfun/math/math.cpp"
+)
+
+forfun_target_config(
+  forfun_search
+  HEADERS
+    "forfun/search/binary_search.hpp"
+    "forfun/search/koko_eating_bananas.hpp"
+    "forfun/search/minimum_rotated_element.hpp"
+    "forfun/search/search_matrix.hpp"
+  SOURCES
+    "forfun/search/binary_search.cpp"
+    "forfun/search/koko_eating_bananas.cpp"
+    "forfun/search/minimum_rotated_element.cpp"
+    "forfun/search/search_matrix.cpp"
+)
+target_link_libraries(
+  forfun_search
   PRIVATE
-  CATCH_CONFIG_NO_COUNTER
+    forfun_math
 )
-target_sources(
-  static_test_driver
+
+forfun_target_config(
+  forfun_sequence
+  HEADERS
+    "forfun/sequence/longest_non_repeating_substring.hpp"
+  SOURCES
+    "forfun/sequence/longest_non_repeating_substring.cpp"
+)
+
+forfun_target_config(
+  forfun_sorting
+  HEADERS
+    "forfun/sorting/bubble_sort.hpp"
+    "forfun/sorting/insertion_sort.hpp"
+    "forfun/sorting/quicksort.hpp"
+  SOURCES
+    "forfun/sorting/bubble_sort.cpp"
+    "forfun/sorting/insertion_sort.cpp"
+    "forfun/sorting/quicksort.cpp"
+)
+
+forfun_target_config(
+  forfun_core_c
+  HEADERS
+    "forfun_c/palindrome.h"
+    "forfun_c/single_number.h"
+  SOURCES
+    "forfun_c/palindrome.c"
+    "forfun_c/single_number.c"
+)
+
+forfun_target_config(
+  forfun_experimental_c
+  HEADERS
+    "forfun_c/add_two_numbers.h"
+    "forfun_c/common.h"
+    "forfun_c/container/forward_list.h"
+    "forfun_c/mem/mem.h"
+    "forfun_c/shim/allocator.h"
+  SOURCES
+    "forfun_c/add_two_numbers.c"
+    "forfun_c/common.c"
+    "forfun_c/container/forward_list.c"
+    "forfun_c/mem/mem.c"
+    "forfun_c/shim/allocator.c"
+)
+target_link_libraries(
+  forfun_experimental_c
   PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/array_concatenation_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/concepts_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/limits_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/common/type_traits_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/concurrency/spsc_bound_queue_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_cycle_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/forward_list_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_const_iterator_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/internal/list_iterator_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/list_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/container/trie_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/contains_duplicate_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/daily_temperatures_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/factorial_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/fibonacci_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/first_missing_positive_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/graph/binary_tree_node_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/hamming_weight_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/majority_element_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/math/math_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/maximum_subarray_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/missing_number_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/palindromic_number_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/permutation_in_string_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/product_except_self_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/project_euler/p0001_multiples_of_3_or_5_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/binary_search_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/koko_eating_bananas_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/search/minimum_rotated_element_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sequence/longest_non_repeating_substring_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/single_number_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sorting/quicksort_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/sub_array_sums_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/tower_of_hanoi_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/trapping_rainwater_statictest.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/test/two_sum_statictest.cpp"
+    mimalloc
 )
-get_target_property(static_test_driver_sources static_test_driver SOURCES)
-source_group(
-  TREE "${CMAKE_CURRENT_SOURCE_DIR}/test/"
-  PREFIX "Source files"
-  FILES ${static_test_driver_sources}
+# C99 is required only for including mimalloc headers.
+set_target_properties(
+  forfun_experimental_c
+  PROPERTIES
+    C_STANDARD 99
 )
-target_link_libraries(
-  static_test_driver
-  PRIVATE Catch2::Catch2WithMain
-)
-target_link_libraries(
-  static_test_driver
-  PRIVATE forfun
-  PRIVATE forfun_common
-)
-forfun_common_target_compile_options(static_test_driver)
 
-if(FORFUN_BUILD_FUZZING_DRIVER)
-  include(FetchContent)
-
-  FetchContent_Declare(
-    google_fuzztest
-    GIT_REPOSITORY https://github.com/google/fuzztest.git
-    GIT_TAG b73724d4866c22d9b64c152a2d7ac22c7ca94168 # 2026-02-19
-  )
-
-  FetchContent_MakeAvailable(google_fuzztest)
-
-  fuzztest_setup_fuzzing_flags()
-
-  add_executable(
-    fuzzing_driver
-  )
-  set_target_properties(
-    fuzzing_driver
-    PROPERTIES
-      CXX_EXTENSIONS OFF
-      CXX_STANDARD 23
-      CXX_STANDARD_REQUIRED ON
-      LANGUAGE CXX
-  )
-  target_sources(
-    fuzzing_driver
-    PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/encode_and_decode_strings_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/evaluate_reverse_polish_notation_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/permutation_in_string_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/search/binary_search_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/search/minimum_rotated_element_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/bubble_sort_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/insertion_sort_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/sorting/quicksort_fuzz.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/squares_sorted_array_fuzz.cpp"
-  )
-  get_target_property(fuzzing_driver_sources fuzzing_driver SOURCES)
-  source_group(
-    TREE "${CMAKE_CURRENT_SOURCE_DIR}/fuzz/"
-    PREFIX "Source files"
-    FILES ${fuzzing_driver_sources}
-  )
-  target_link_libraries(
-    fuzzing_driver
-    PRIVATE forfun
-  )
-  target_link_libraries(
-    fuzzing_driver
-    PRIVATE GTest::gmock
-    PRIVATE GTest::gtest
-  )
-  link_fuzztest(fuzzing_driver)
-
-  include(GoogleTest)
-  gtest_discover_tests(fuzzing_driver)
+if(FORFUN_BUILD_BENCHMARK_TARGETS)
+  include(cmake/BenchmarkTargets.cmake)
 endif()
 
-set_target_properties(
-  forfun
-  forfun_lock_free
-  forfun_common
-  forfun_experimental
-  forfun_graph
-  forfun_math
-  forfun_search
-  forfun_sorting
-  PROPERTIES
-    CXX_EXTENSIONS OFF
-    CXX_STANDARD 23
-    CXX_STANDARD_REQUIRED ON
-    LANGUAGE CXX
-)
+if(FORFUN_BUILD_CUSTOM_TARGETS)
+  include(cmake/CodeFormat.cmake)
+endif()
 
-set_target_properties(
-  benchmark_driver
-  benchmark_driver_lock_free
-  benchmark_driver_experimental
-  static_test_driver
-  test_driver
-  test_driver_lock_free
-  test_driver_experimental
-  PROPERTIES
-    CXX_EXTENSIONS OFF
-    CXX_STANDARD 23
-    CXX_STANDARD_REQUIRED ON
-    LANGUAGE CXX
-)
+if(FORFUN_BUILD_FUZZ_TARGETS)
+  include(cmake/FuzzTargets.cmake)
+endif()
 
-set_target_properties(
-  forfun_c
-  PROPERTIES
-    C_EXTENSIONS OFF
-    C_STANDARD 90
-    C_STANDARD_REQUIRED ON
-    LANGUAGE C
-)
+if(FORFUN_BUILD_TEST_TARGETS)
+  include(cmake/TestTargets.cmake)
+endif()
 
-set_target_properties(
-  forfun_c_experimental
-  PROPERTIES
-    C_EXTENSIONS OFF
-    C_STANDARD 99
-    C_STANDARD_REQUIRED ON
-    LANGUAGE C
-)
-
-include(cmake/CodeFormat.cmake)
-
-include(GNUInstallDirs)
-include(CMakePackageConfigHelpers)
-
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/cmake/${CMAKE_PROJECT_NAME}Config.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
-)
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}Config.cmake"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
-)
-
-install(
-  TARGETS
-    forfun
-    forfun_c
-    forfun_c_experimental
-    forfun_common
-    forfun_lock_free
-    forfun_experimental
-    forfun_graph
-    forfun_math
-    forfun_search
-    forfun_sorting
-  EXPORT "${CMAKE_PROJECT_NAME}Targets"
-  ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-  FILE_SET HEADERS
-  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-  RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-)
-
-install(
-  EXPORT "${CMAKE_PROJECT_NAME}Targets"
-  FILE "${CMAKE_PROJECT_NAME}Targets.cmake"
-  NAMESPACE "${CMAKE_PROJECT_NAME}::"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${CMAKE_PROJECT_NAME}"
-)
-
-install(
-  FILES "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
-  TYPE DOC
-)
+if(FORFUN_CONFIGURE_INSTALLATION)
+  include(cmake/Install.cmake)
+endif()

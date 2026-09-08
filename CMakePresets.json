@@ -1,55 +1,26 @@
 {
-  "version": 6,
+  "version": 10,
   "configurePresets": [
     {
       "name": "generic",
       "displayName": "Generic",
-      "description": "Generic build with Ninja Multi-Config and vcpkg",
+      "description": "Generic multi-configuration",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "ON",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON"
-      }
-    },
-    {
-      "name": "windows-x64",
-      "displayName": "Windows (x64)",
-      "description": "Build with MSVC for x64 Windows",
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "architecture": {
-        "value": "x64",
-        "strategy": "external"
-      },
-      "cacheVariables": {
-        "BUILD_SHARED_LIBS": "ON",
-        "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe",
-        "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
-        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON",
-        "CMAKE_C_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
-        "CMAKE_CXX_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /EHsc /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:checkGwOdr /Zc:enumTypes /Zc:inline /Zc:preprocessor /Zc:templateScope /Zc:throwingNew"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
+        "FORFUN_FEATURE_BENCHMARKS": "ON",
+        "FORFUN_FEATURE_TESTS": "ON",
+        "FORFUN_FEATURE_FUZZ_TESTS": "OFF",
+        "FORFUN_FEATURE_SUPPORT": "ON"
       }
     },
     {
@@ -67,8 +38,11 @@
           "type": "FILEPATH"
         },
         "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON",
-        "CMAKE_C_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus",
-        "CMAKE_CXX_FLAGS": "/D \"_UNICODE\" /D \"UNICODE\" /EHsc /permissive- /source-charset:utf-8 /W4 /Zc:__cplusplus /Zc:checkGwOdr /Zc:enumTypes /Zc:inline /Zc:preprocessor /Zc:templateScope /Zc:throwingNew"
+        "FORFUN_ENABLE_STRICT_COMPILATION": "ON",
+        "FORFUN_FEATURE_BENCHMARKS": "ON",
+        "FORFUN_FEATURE_TESTS": "ON",
+        "FORFUN_FEATURE_FUZZ_TESTS": "OFF",
+        "FORFUN_FEATURE_SUPPORT": "ON"
       },
       "condition": {
         "type": "equals",
@@ -93,7 +67,12 @@
           "value": "${sourceDir}/vendor/XcodeWarnings/XcodeWarnings.xcconfig",
           "type": "FILEPATH"
         },
-        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
+        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION",
+        "FORFUN_ENABLE_STRICT_COMPILATION": "ON",
+        "FORFUN_FEATURE_BENCHMARKS": "ON",
+        "FORFUN_FEATURE_TESTS": "ON",
+        "FORFUN_FEATURE_FUZZ_TESTS": "OFF",
+        "FORFUN_FEATURE_SUPPORT": "ON"
       },
       "condition": {
         "type": "equals",
@@ -102,29 +81,9 @@
       }
     },
     {
-      "name": "strict-gcc",
-      "displayName": "Strict GCC options",
-      "description": "Build with GCC and enable most GCC diagnostics",
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "BUILD_SHARED_LIBS": "ON",
-        "CMAKE_C_FLAGS": "-pedantic -Wall -Wextra -Walloc-zero -Wcast-align=strict -Wcast-qual -Wconversion -Wdate-time -Wdisabled-optimization -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wformat=2 -Wformat-overflow=2 -Wformat-truncation=2 -Wimplicit-fallthrough=5 -Winit-self -Wlogical-op -Wmisleading-indentation -Wmissing-declarations -Wmissing-noreturn -Wmissing-prototypes -Wmultichar -Wnested-externs -Wnonnull -Wnull-dereference -Wold-style-definition -Wopenacc-parallelism -Wpacked -Wpacked-bitfield-compat -Wpointer-arith -Wredundant-decls -Wreturn-type -Wsequence-point -Wshadow=global -Wshift-negative-value -Wsign-conversion -Wstrict-overflow=5 -Wstrict-prototypes -Wswitch -Wswitch-enum -Wtrampolines -Wundef -Wunused -Wunused-macros -Wunused-parameter -Wunused-variable -Wvla -Wwrite-strings -Wunsafe-loop-optimizations -fstack-protector-strong -fstrict-flex-arrays -fanalyzer",
-        "CMAKE_CXX_FLAGS": "-pedantic -Wall -Wextra -Wcast-align=strict -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wdangling-pointer -Wdangling-reference -Wdate-time -Wdelete-non-virtual-dtor -Wdeprecated-copy -Wdeprecated-enum-enum-conversion -Wdeprecated-enum-float-conversion -Wdouble-promotion -Wduplicated-branches -Wduplicated-cond -Wformat=2 -Wimplicit-fallthrough=5 -Winaccessible-base -Winherited-variadic-ctor -Winit-list-lifetime -Winit-self -Winvalid-constexpr -Winvalid-offsetof -Wlogical-op -Wmisleading-indentation -Wmismatched-new-delete -Wmismatched-tags -Wmissing-declarations -Wmissing-noreturn -Wmissing-requires -Wmultichar -Wnarrowing -Wnon-template-friend -Wnon-virtual-dtor -Wnull-dereference -Wold-style-cast -Woverlength-strings -Woverloaded-virtual -Wpacked -Wpacked-bitfield-compat -Wrange-loop-construct -Wredundant-decls -Wredundant-move -Wredundant-tags -Wreorder -Wself-move -Wshadow=global -Wshift-negative-value -Wsign-conversion -Wsign-promo -Wsized-deallocation -Wstack-protector -Wstrict-null-sentinel -Wstrict-overflow=2 -Wunused -Wunused-macros -Wuseless-cast -Wvariadic-macros -Wvector-operation-performance -Wvexing-parse -Wvirtual-move-assign -Wvla -Wwrite-strings -Wzero-as-null-pointer-constant -Walloc-zero -Wunsafe-loop-optimizations",
-        "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        }
-      }
-    },
-    {
-      "name": "strict-clang",
-      "displayName": "Strict Clang options",
-      "description": "Build with Clang and enable most Clang diagnostics",
+      "name": "strict-compilation",
+      "displayName": "Strict compilation",
+      "description": "Enable most compiler diagnostics and build all but fuzz targets",
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
@@ -138,9 +97,12 @@
           "type": "FILEPATH"
         },
         "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": "ON",
-        "CMAKE_C_FLAGS": "-pedantic -Wall -Warray-bounds-pointer-arithmetic -Warray-parameter -Watomic-implicit-seq-cst -Wbitfield-enum-conversion -Wbitwise-op-parentheses -Wbool-conversion -Wcast-align -Wcast-qual -Wcomplex-component-init -Wconditional-uninitialized -Wconversion -Wcovered-switch-default -Wdeprecated -Wdouble-promotion -Wextra -Wfloat-equal -Wformat=2 -Wframe-address -Wimplicit-fallthrough -Wimplicit-float-conversion -Wimplicit-int-conversion -Wimplicit-int-float-conversion -Winit-self -Winline -Winvalid-offsetof -Wliteral-conversion -Wliteral-range -Wlogical-op-parentheses -Wmisleading-indentation -Wmissing-braces -Wmissing-declarations -Wmissing-include-dirs -Wmissing-noreturn -Wmissing-prototypes -Wnull-dereference -Wnull-pointer-arithmetic -Wold-style-cast -Wpacked -Wpacked-non-pod -Wparentheses -Wpointer-arith -Wredundant-parens -Wshadow-all -Wsign-compare -Wsign-conversion -Wsometimes-uninitialized -Wstack-protector -Wstrict-overflow=5 -Wswitch-default -Wswitch-enum -Wtautological-compare -Wtautological-constant-in-range-compare -Wunaligned-access -Wundef -Wuninitialized -Wunreachable-code -Wunreachable-code-aggressive -Wunsequenced -Wunused -Wunused-macros -Wunused-parameter -Wunused-variable",
-        "CMAKE_CXX_FLAGS": "-pedantic -Wall -Warray-bounds-pointer-arithmetic -Warray-parameter -Watomic-implicit-seq-cst -Wbitfield-enum-conversion -Wbitwise-op-parentheses -Wbool-conversion -Wbool-operation -Wcast-align -Wcast-function-type -Wcast-qual -Wcomplex-component-init -Wconditional-uninitialized -Wconversion -Wcovered-switch-default -Wdelete-non-virtual-dtor -Wdeprecated -Wdouble-promotion -Wdynamic-exception-spec -Wexit-time-destructors -Wextra -Wfloat-equal -Wfor-loop-analysis -Wformat=2 -Wframe-address -Wglobal-constructors -Wimplicit-fallthrough -Wimplicit-float-conversion -Wimplicit-int-conversion -Wimplicit-int-float-conversion -Winit-self -Winline -Winvalid-offsetof -Wliteral-conversion -Wliteral-range -Wlogical-op-parentheses -Wloop-analysis -Wmethod-signatures -Wmisleading-indentation -Wmissing-braces -Wmissing-declarations -Wmissing-include-dirs -Wmissing-noreturn -Wmissing-prototypes -Wmove -Wnarrowing -Wnon-virtual-dtor -Wnull-dereference -Wnull-pointer-arithmetic -Wold-style-cast -Woverloaded-virtual -Wpacked -Wpacked-non-pod -Wparentheses -Wpointer-arith -Wrange-loop-analysis -Wredundant-move -Wredundant-parens -Wself-assign -Wself-move -Wshadow-all -Wsign-compare -Wsign-conversion -Wsometimes-uninitialized -Wstack-protector -Wstrict-overflow=5 -Wstrict-selector-match -Wsuggest-destructor-override -Wsuggest-override -Wswitch-default -Wswitch-enum -Wtautological-compare -Wtautological-constant-in-range-compare -Wthread-safety -Wthread-safety-beta -Wunaligned-access -Wundef -Wuninitialized -Wunreachable-code -Wunreachable-code-aggressive -Wunsequenced -Wunused -Wunused-macros -Wunused-parameter -Wunused-variable -Wweak-vtables -Wzero-as-null-pointer-constant",
-        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
+        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION",
+        "FORFUN_ENABLE_STRICT_COMPILATION": "ON",
+        "FORFUN_FEATURE_BENCHMARKS": "ON",
+        "FORFUN_FEATURE_TESTS": "ON",
+        "FORFUN_FEATURE_FUZZ_TESTS": "OFF",
+        "FORFUN_FEATURE_SUPPORT": "ON"
       }
     },
     {
@@ -159,14 +121,15 @@
       }
     },
     {
-      "name": "clang-coverage",
-      "displayName": "Coverage with LLVM",
-      "description": "Build with Clang and enable code coverage",
+      "name": "code-coverage",
+      "displayName": "Code coverage",
+      "description": "",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
@@ -174,44 +137,22 @@
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "FORFUN_COMMON_CFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
-        "FORFUN_COMMON_CXXFLAGS": "-fcoverage-mapping -fprofile-instr-generate",
-        "FORFUN_COMMON_LINK_OPTIONS": "-fcoverage-mapping -fprofile-instr-generate",
-        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION"
+        "FORFUN_BUILD_BENCHMARK_TARGETS": "OFF",
+        "FORFUN_CONFIGURE_CODE_COVERAGE": "ON",
+        "FORFUN_CONFIGURE_INSTALLATION": "OFF"
       }
     },
     {
-      "name": "gcc-coverage",
-      "displayName": "Coverage with GCC",
-      "description": "Build with GCC and enable code coverage",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "BUILD_SHARED_LIBS": "OFF",
-        "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
-        "FORFUN_COMMON_DEFINITIONS": "NDEBUG",
-        "FORFUN_COMMON_CFLAGS": "--coverage",
-        "FORFUN_COMMON_CXXFLAGS": "--coverage",
-        "FORFUN_COMMON_LINK_OPTIONS": "--coverage"
-      }
-    },
-    {
-      "name": "generic-single-config",
-      "displayName": "Generic single configuration",
-      "description": "Release all targets with debug information",
+      "name": "fuzzing",
+      "displayName": "Fuzzing",
+      "description": "Release build targets with fuzzing configuration",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "ANTLR_BUILD_CPP_TESTS": "OFF",
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
@@ -219,7 +160,10 @@
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "FORFUN_BUILD_FUZZING_DRIVER": "ON",
+        "FORFUN_BUILD_TEST_TARGETS": "OFF",
+        "FORFUN_BUILD_BENCHMARK_TARGETS": "OFF",
+        "FORFUN_BUILD_FUZZ_TARGETS": "ON",
+        "FORFUN_CONFIGURE_INSTALLATION": "OFF",
         "FUZZTEST_FUZZING_MODE": "ON"
       }
     },
@@ -232,11 +176,9 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
-        "CMAKE_C_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
-        "CMAKE_CXX_FLAGS": "-D_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION -fno-builtin-std-forward_like -fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -fno-sanitize-recover=all",
-        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=undefined,float-divide-by-zero,local-bounds,vptr,nullability -fsanitize=address -fsanitize-address-use-after-return=always -fno-omit-frame-pointer -flto -fvisibility=default -fno-sanitize-recover=all",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
@@ -244,7 +186,18 @@
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "MI_TRACK_ASAN": "ON"
+        "COMPILE_DEFINITIONS": "_LIBCPP_ABI_FIX_CITYHASH_IMPLEMENTATION",
+        "FORFUN_ASAN_UBSAN_BUILD": "ON",
+        "FORFUN_BUILD_BENCHMARK_TARGETS": "OFF",
+        "FORFUN_CONFIGURE_INSTALLATION": "OFF"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux"
+        ]
       }
     },
     {
@@ -256,18 +209,27 @@
       "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "OFF",
+        "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O1 -g -DNDEBUG",
-        "CMAKE_C_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer -fno-sanitize-recover=all -fPIE",
-        "CMAKE_CXX_FLAGS": "-fno-builtin-std-forward_like -fsanitize=thread -fPIE -fno-omit-frame-pointer -fno-sanitize-recover=all",
-        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=thread -pie -flto -fno-omit-frame-pointer -fno-sanitize-recover=all -fvisibility=default",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        }
+        },
+        "FORFUN_BUILD_BENCHMARK_TARGETS": "OFF",
+        "FORFUN_CONFIGURE_INSTALLATION": "OFF",
+        "FORFUN_TSAN_BUILD": "ON"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux"
+        ]
       }
     }
   ],
@@ -294,78 +256,25 @@
       "configuration": "Release"
     },
     {
-      "name": "windows-x64-debug",
-      "displayName": "Windows x64 Debug",
-      "description": "Windows x64 Debug build",
-      "configurePreset": "windows-x64",
+      "name": "strict-compilation-debug",
+      "displayName": "Debug",
+      "description": "Debug build with compiler diagnostics",
+      "configurePreset": "strict-compilation",
       "configuration": "Debug"
     },
     {
-      "name": "windows-x64-relwithdebinfo",
-      "displayName": "Windows x64 RelWithDebInfo",
-      "description": "Windows x64 RelWithDebInfo build",
-      "configurePreset": "windows-x64",
+      "name": "strict-compilation-relwithdebinfo",
+      "displayName": "RelWithDebInfo",
+      "description": "RelWithDebInfo build with compiler diagnostics",
+      "configurePreset": "strict-compilation",
       "configuration": "RelWithDebInfo"
     },
     {
-      "name": "windows-x64-release",
-      "displayName": "Windows x64 Release",
-      "description": "Windows x64 Release build",
-      "configurePreset": "windows-x64",
+      "name": "strict-compilation-release",
+      "displayName": "Release",
+      "description": "Release build with compiler diagnostics",
+      "configurePreset": "strict-compilation",
       "configuration": "Release"
-    },
-    {
-      "name": "strict-gcc-debug",
-      "displayName": "GCC Debug",
-      "description": "Debug build with GCC diagnostics",
-      "configurePreset": "strict-gcc",
-      "configuration": "Debug"
-    },
-    {
-      "name": "strict-gcc-relwithdebinfo",
-      "displayName": "GCC RelWithDebInfo",
-      "description": "RelWithDebInfo build with GCC diagnostics",
-      "configurePreset": "strict-gcc",
-      "configuration": "RelWithDebInfo"
-    },
-    {
-      "name": "strict-gcc-release",
-      "displayName": "GCC release",
-      "description": "Release build with GCC diagnostics",
-      "configurePreset": "strict-gcc",
-      "configuration": "Release"
-    },
-    {
-      "name": "strict-clang-debug",
-      "displayName": "Clang Debug",
-      "description": "Debug build with Clang diagnostics",
-      "configurePreset": "strict-clang",
-      "configuration": "Debug"
-    },
-    {
-      "name": "strict-clang-relwithdebinfo",
-      "displayName": "Clang RelWithDebInfo",
-      "description": "RelWithDebInfo build with Clang diagnostics",
-      "configurePreset": "strict-clang",
-      "configuration": "RelWithDebInfo"
-    },
-    {
-      "name": "strict-clang-release",
-      "displayName": "Clang Release",
-      "description": "Release build with Clang diagnostics",
-      "configurePreset": "strict-clang",
-      "configuration": "Release"
-    }
-  ],
-  "packagePresets": [
-    {
-      "name": "package-clang",
-      "displayName": "Package",
-      "description": "Build with Clang and package",
-      "configurePreset": "strict-clang",
-      "configurations": ["Release"],
-      "generators": ["TGZ", "ZIP"],
-      "packageDirectory": "${sourceDir}/out/package/${presetName}"
     }
   ]
 }
