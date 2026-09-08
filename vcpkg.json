@@ -1,10 +1,25 @@
 {
   "dependencies": [
-    "catch2",
-    "gtest",
     "mimalloc",
-    "ms-gsl",
-    "nameof",
-    "nanobench"
-  ]
+    "ms-gsl"
+  ],
+  "features": {
+    "tests": {
+      "description": "",
+      "dependencies": [
+        "catch2"
+      ]
+    },
+    "benchmarks": {
+      "description": "",
+      "dependencies": [
+        "catch2",
+        "nameof",
+        "nanobench"
+      ]
+    },
+    "fuzz-tests": {
+      "description": ""
+    }
+  }
 }

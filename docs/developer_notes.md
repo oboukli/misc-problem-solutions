@@ -225,10 +225,10 @@ Code coverage reports are generated with
 [Clang Source-based Code Coverage](https://clang.llvm.org/docs/SourceBasedCodeCoverage.html).
 
 A script for generating code coverage report with LLVM can be found at
-`ci/generate_coverage_report.sh`. Usage example:
+`support/generate_coverage_report.sh`. Usage example:
 
 ```bash
-LLVM_ROOT='/usr/local/opt/llvm/' ./ci/generate_coverage_report.sh
+LLVM_ROOT='/usr/local/opt/llvm/' ./support/generate_coverage_report.sh
 ```
 
 ### Compiler diagnostics
@@ -242,7 +242,7 @@ All build targets are built with Clang and Xcode sanitizers, Microsoft STL
 debugging checks. On Linux, the major targets are tested with Valgrind.
 
 Clang's UndefinedBehaviorSanitizer runtime findings can be suppressed in
-`ci/clang_ubsan_supp`.
+`support/clang/ubsan_supp`.
 
 See `CMakePresets.json` and CI configuration for more details.
 
