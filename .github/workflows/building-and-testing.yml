@@ -19,11 +19,13 @@ permissions:
 
 jobs:
   msvc_debug_x86_64_windows:
-    name: Build (MSVC Debug x86-64 Windows)
+    name: Build (MSVC Debug on Windows)
     env:
-      CONFIGURE_PRESET_NAME: windows-x64
-      BUILD_PRESET_NAME: windows-x64-debug
-      BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Debug
+      CC: cl.exe
+      CXX: cl.exe
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-debug
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Debug
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
@@ -60,13 +62,13 @@ jobs:
 
       - name: Configure CMake
         run: |-
-          call "${{ github.workspace }}\ci\setup_msvc.cmd"
+          call "${{ github.workspace }}\support\msvc\setup_msvc.cmd"
           cmake --preset ${{ env.CONFIGURE_PRESET_NAME }}
         shell: cmd
 
       - name: Build
         run: >-
-          call "${{ github.workspace }}\ci\setup_msvc.cmd"
+          call "${{ github.workspace }}\support\msvc\setup_msvc.cmd"
 
           cmake
           --build
@@ -132,11 +134,13 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
   msvc_release_x86_64_windows:
-    name: Build (MSVC Release x86-64 Windows)
+    name: Build (MSVC Release on Windows)
     env:
-      CONFIGURE_PRESET_NAME: windows-x64
-      BUILD_PRESET_NAME: windows-x64-release
-      BINARY_DIR: ${{ github.workspace }}\out\build\windows-x64\Release
+      CC: cl.exe
+      CXX: cl.exe
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-release
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Release
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
@@ -173,13 +177,13 @@ jobs:
 
       - name: Configure CMake
         run: |-
-          call "${{ github.workspace }}\ci\setup_msvc.cmd"
+          call "${{ github.workspace }}\support\setup_msvc.cmd"
           cmake --preset ${{ env.CONFIGURE_PRESET_NAME }}
         shell: cmd
 
       - name: Build
         run: >-
-          call "${{ github.workspace }}\ci\setup_msvc.cmd"
+          call "${{ github.workspace }}\support\setup_msvc.cmd"
 
           cmake
           --build
@@ -245,13 +249,13 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
   gcc_debug_x86_64_linux:
-    name: Build (GCC Debug x86-64 Linux)
+    name: Build (GCC Debug Linux)
     env:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
-      CONFIGURE_PRESET_NAME: strict-gcc
-      BUILD_PRESET_NAME: strict-gcc-debug
-      BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Debug
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-debug
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
       matrix:
@@ -352,7 +356,7 @@ jobs:
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
-          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
+          --suppressions='${{ github.workspace }}/support/valgrind/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -404,13 +408,13 @@ jobs:
         working-directory: ${{ env.BINARY_DIR }}
 
   gcc_release_x86_64_linux:
-    name: Build (GCC Release x86-64 Linux)
+    name: Build (GCC Release Linux)
     env:
       CC: /usr/bin/gcc-14
       CXX: /usr/bin/g++-14
-      CONFIGURE_PRESET_NAME: strict-gcc
-      BUILD_PRESET_NAME: strict-gcc-release
-      BINARY_DIR: ${{ github.workspace }}/out/build/strict-gcc/Release
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-release
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
       matrix:
@@ -508,7 +512,7 @@ jobs:
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
-          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
+          --suppressions='${{ github.workspace }}/support/valgrind/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -827,7 +831,7 @@ jobs:
       BUILD_DIR: ${{ github.workspace }}/out/build/xcode
       BUILD_CONFIGURATION: Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
-      XCODE_RELEASE: "26.5"
+      XCODE_RELEASE: "26.6"
 
     runs-on: macos-26
 
@@ -949,9 +953,9 @@ jobs:
   clang_debug_x86_64_linux:
     name: Build (Clang Debug x86-64 Linux)
     env:
-      CONFIGURE_PRESET_NAME: strict-clang
-      BUILD_PRESET_NAME: strict-clang-debug
-      BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Debug
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-debug
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Debug
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
       matrix:
@@ -1079,7 +1083,7 @@ jobs:
         run: >-
           /usr/bin/valgrind
           --error-exitcode=1
-          --suppressions='${{ github.workspace }}/ci/valgrind_supp/memcheck.supp'
+          --suppressions='${{ github.workspace }}/support/valgrind/memcheck.supp'
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
@@ -1134,9 +1138,9 @@ jobs:
   clang_release_x86_64_linux:
     name: Build (Clang Release x86-64 Linux)
     env:
-      CONFIGURE_PRESET_NAME: strict-clang
-      BUILD_PRESET_NAME: strict-clang-release
-      BINARY_DIR: ${{ github.workspace }}/out/build/strict-clang/Release
+      CONFIGURE_PRESET_NAME: strict-compilation
+      BUILD_PRESET_NAME: strict-compilation-release
+      BINARY_DIR: ${{ github.workspace }}/out/build/strict-compilation/Release
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     strategy:
       matrix:
@@ -1314,7 +1318,7 @@ jobs:
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
       ASAN_OPTIONS: check_initialization_order=1:detect_stack_use_after_return=1:detect_leaks=1
       ASAN_SYMBOLIZER_PATH: /usr/bin/llvm-symbolizer-22
-      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${{ github.workspace }}/ci/clang_ubsan_supp
+      UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1:report_error_type=1:suppressions=${{ github.workspace }}/support/clang/ubsan_supp
     strategy:
       matrix:
         os:
