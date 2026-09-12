@@ -27,8 +27,8 @@ jobs:
   clang_fuzz_build_only:
     name: Build, and only build, fuzz test driver
     env:
-      CONFIGURE_PRESET_NAME: generic-single-config
-      BINARY_DIR: ${{ github.workspace }}/out/build/generic-single-config
+      CONFIGURE_PRESET_NAME: fuzzing
+      BINARY_DIR: ${{ github.workspace }}/out/build/fuzzing
       VCPKG_BINARY_SOURCES: clear;nuget,GitHubPackages,readwrite
     runs-on: ubuntu-26.04
 

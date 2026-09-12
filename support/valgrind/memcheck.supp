@@ -1,0 +1,48 @@
+{
+  clang_debug_x86_64_linux_mimalloc
+  Memcheck:Cond
+  fun:_Z11_mi_strnlenPKcm
+  fun:_Z11_mi_strnstrPcmPKc
+  fun:_ZL15unix_detect_thpv
+  fun:_Z17_mi_prim_mem_initP18mi_os_mem_config_s
+  fun:_Z11_mi_os_initv
+  fun:_ZL20mi_process_init_oncev
+  fun:mi_process_init
+  fun:_Z21_mi_auto_process_initv
+  fun:_ZL17mi_process_attachv
+  fun:call_init
+  fun:__libc_start_main@@GLIBC_2.34
+  fun:(below main)
+}
+
+{
+  gcc_release_x86_64_linux_mimalloc
+  Memcheck:Cond
+  fun:_Z11_mi_strnstrPcmPKc
+  fun:_Z17_mi_prim_mem_initP18mi_os_mem_config_s
+  fun:mi_process_init.part.0
+  fun:mi_thread_init
+  fun:_Z18_mi_malloc_genericP10mi_theap_smmPm
+  fun:mi_new
+  fun:_GLOBAL__sub_I__ZdlPv
+  fun:call_init
+  fun:__libc_start_main@@GLIBC_2.34
+  fun:(below main)
+}
+
+{
+  clang_debug_x86_64_linux_mimalloc
+  Memcheck:Cond
+  fun:_Z11_mi_strnlenPKcm
+  fun:_Z11_mi_strnstrPcmPKc
+  fun:_ZL15unix_detect_thpv
+  fun:_Z17_mi_prim_mem_initP18mi_os_mem_config_s
+  fun:_Z11_mi_os_initv
+  fun:_ZL20mi_process_init_oncev
+  fun:mi_process_init
+  fun:_Z21_mi_auto_process_initv
+  fun:_ZL17mi_process_attachv
+  fun:call_init
+  fun:__libc_start_main@@GLIBC_2.34
+  fun:(below main)
+}
