@@ -4,7 +4,7 @@
 
 # SPDX-License-Identifier: MIT
 
-FROM mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04
+FROM mcr.microsoft.com/devcontainers/cpp:ubuntu26.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -17,8 +17,8 @@ apt-get install \
   --assume-yes \
   --quiet \
   doxygen \
-  g++-14 \
-  gcc-14
+  g++-16 \
+  gcc-16
 
 apt-get clean --assume-yes
 
@@ -29,5 +29,8 @@ rm -rf /var/lib/apt/lists/*
 
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
 update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-16 160
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-16 160
 
 EOT
