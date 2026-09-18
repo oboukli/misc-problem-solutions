@@ -90,10 +90,23 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             )
 
             .run(
-                NAMEOF_RAW(pointer_based::is_palindrome<char>).c_str(),
+                NAMEOF_RAW(pointer_based_variant_1::is_palindrome<char>)
+                    .c_str(),
                 [] noexcept -> void {
                     auto const volatile r{
-                        pointer_based::is_palindrome<char>(palindrome)
+                        pointer_based_variant_1::is_palindrome<char>(palindrome)
+                    };
+
+                    ankerl::nanobench::doNotOptimizeAway(&r);
+                }
+            )
+
+            .run(
+                NAMEOF_RAW(pointer_based_variant_2::is_palindrome<char>)
+                    .c_str(),
+                [] noexcept -> void {
+                    auto const volatile r{
+                        pointer_based_variant_2::is_palindrome<char>(palindrome)
                     };
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
@@ -171,9 +184,22 @@ TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
             )
 
             .run(
-                NAMEOF_RAW(pointer_based::is_palindrome_ci).c_str(),
+                NAMEOF_RAW(pointer_based_variant_1::is_palindrome_ci).c_str(),
                 [] noexcept -> void {
-                    auto const r{pointer_based::is_palindrome_ci(palindrome)};
+                    auto const r{
+                        pointer_based_variant_1::is_palindrome_ci(palindrome)
+                    };
+
+                    ankerl::nanobench::doNotOptimizeAway(&r);
+                }
+            )
+
+            .run(
+                NAMEOF_RAW(pointer_based_variant_2::is_palindrome_ci).c_str(),
+                [] noexcept -> void {
+                    auto const r{
+                        pointer_based_variant_2::is_palindrome_ci(palindrome)
+                    };
 
                     ankerl::nanobench::doNotOptimizeAway(&r);
                 }
