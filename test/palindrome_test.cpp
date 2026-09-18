@@ -52,6 +52,20 @@ using std::string_view_literals::operator""sv;
 } // namespace
 
 TEMPLATE_TEST_CASE_SIG(
+    "Case-sensitive palindrome check (empty string case)",
+    "[palindrome]",
+    (auto func_is_palindrome, func_is_palindrome),
+    &forfun::palindrome::functional::is_palindrome<char>,
+    &forfun::palindrome::iterator_based::is_palindrome<char>,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome<char>
+)
+{
+    std::string_view const s{};
+
+    REQUIRE(palindrome_predicate_adapter(func_is_palindrome, s));
+}
+
+TEMPLATE_TEST_CASE_SIG(
     "Case-sensitive palindrome check",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
@@ -60,14 +74,14 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::is_palindrome<char>,
     &forfun::palindrome::iterator_based::is_palindrome<char>,
     &forfun::palindrome::offset_based::is_palindrome<char>,
-    &forfun::palindrome::pointer_based::is_palindrome<char>,
+    &forfun::palindrome::pointer_based_variant_1::is_palindrome<char>,
+    &forfun::palindrome::pointer_based_variant_2::is_palindrome<char>,
     &forfun::palindrome::reverse_iterator_based::is_palindrome<char>
 )
 {
     SECTION("Positive")
     {
         std::string_view const s{GENERATE(
-            ""sv,
             "X"sv,
             "x"sv,
             "\xb8Y\xb8"sv,
@@ -127,16 +141,16 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::is_palindrome<wchar_t>,
     &forfun::palindrome::iterator_based::is_palindrome<wchar_t>,
     &forfun::palindrome::offset_based::is_palindrome<wchar_t>,
-    &forfun::palindrome::pointer_based::is_palindrome<wchar_t>,
+    &forfun::palindrome::pointer_based_variant_1::is_palindrome<wchar_t>,
+    &forfun::palindrome::pointer_based_variant_2::is_palindrome<wchar_t>,
     &forfun::palindrome::reverse_iterator_based::is_palindrome<wchar_t>
 )
 {
     SECTION("Positive")
     {
         std::basic_string_view<wchar_t> const s{GENERATE(
-            L"ß"sv,
-            L"ßß"sv,
-            L""sv,
+            L"\u00df"sv,
+            L"\u00df\u00df"sv,
             L"X"sv,
             L"\xb8Y\xb8"sv,
             L"aa"sv,
@@ -148,8 +162,8 @@ TEMPLATE_TEST_CASE_SIG(
             L"ABBA"sv,
             L"Xyz 8 zyX"sv,
             L"step on no pets"sv,
-            L"باب"sv, // Door, in Arabic
-            L"亞細亞"sv, // Asia, in Chinese
+            L"\u0628\u0627\u0628"sv, // Door, in Arabic
+            L"\u4e9e\u7d30\u4e9e"sv, // Asia, in Chinese
             L"19/9/91"sv
         )};
 
@@ -170,7 +184,7 @@ TEMPLATE_TEST_CASE_SIG(
             L"Malayalam"sv,
             L"Xyz 8 zYX"sv,
             L"Step on no pets"sv,
-            L"قطة"sv, // Cat, in Arabic
+            L"\u0642\u0637\u0629"sv, // Cat, in Arabic
             L"12/20/2021"sv
         )};
 
@@ -187,14 +201,14 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::is_palindrome<char32_t>,
     &forfun::palindrome::iterator_based::is_palindrome<char32_t>,
     &forfun::palindrome::offset_based::is_palindrome<char32_t>,
-    &forfun::palindrome::pointer_based::is_palindrome<char32_t>,
+    &forfun::palindrome::pointer_based_variant_1::is_palindrome<char32_t>,
+    &forfun::palindrome::pointer_based_variant_2::is_palindrome<char32_t>,
     &forfun::palindrome::reverse_iterator_based::is_palindrome<char32_t>
 )
 {
     SECTION("Positive")
     {
         std::basic_string_view<char32_t> const s{GENERATE(
-            U""sv,
             U"A"sv,
             U"\xb8Y\xb8"sv,
             U"aa"sv,
@@ -205,8 +219,8 @@ TEMPLATE_TEST_CASE_SIG(
             U"ABBA"sv,
             U"Xyz 8 zyX"sv,
             U"step on no pets"sv,
-            U"باب"sv, // Door, in Arabic
-            U"亞細亞"sv, // Asia, in Chinese
+            U"\u0628\u0627\u0628"sv, // Door, in Arabic
+            U"\u4e9e\u7d30\u4e9e"sv, // Asia, in Chinese
             U"19/9/91"sv
         )};
 
@@ -227,7 +241,7 @@ TEMPLATE_TEST_CASE_SIG(
             U"Malayalam"sv,
             U"Xyz 8 zYX"sv,
             U"Step on no pets"sv,
-            U"قطة"sv, // Cat, in Arabic
+            U"\u0642\u0637\u0629"sv, // Cat, in Arabic
             U"12/20/2021"sv
         )};
 
@@ -235,6 +249,20 @@ TEMPLATE_TEST_CASE_SIG(
 
         REQUIRE_FALSE(palindrome_predicate_adapter(func_is_palindrome, s));
     }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "Case-insensitive palindrome check (empty string case)",
+    "[palindrome]",
+    (auto func_is_palindrome_ci, func_is_palindrome_ci),
+    &forfun::palindrome::functional::is_palindrome_ci,
+    &forfun::palindrome::iterator_based::is_palindrome_ci,
+    &forfun::palindrome::reverse_iterator_based::is_palindrome_ci
+)
+{
+    std::string_view const s{};
+
+    REQUIRE(palindrome_predicate_adapter(func_is_palindrome_ci, s));
 }
 
 TEMPLATE_TEST_CASE_SIG(
@@ -246,14 +274,14 @@ TEMPLATE_TEST_CASE_SIG(
     &forfun::palindrome::functional::is_palindrome_ci,
     &forfun::palindrome::iterator_based::is_palindrome_ci,
     &forfun::palindrome::offset_based::is_palindrome_ci,
-    &forfun::palindrome::pointer_based::is_palindrome_ci,
+    &forfun::palindrome::pointer_based_variant_1::is_palindrome_ci,
+    &forfun::palindrome::pointer_based_variant_2::is_palindrome_ci,
     &forfun::palindrome::reverse_iterator_based::is_palindrome_ci
 )
 {
     SECTION("Positive")
     {
         std::string_view const s{GENERATE(
-            ""sv,
             "X"sv,
             "x"sv,
             "\xb8Y\xb8"sv,

@@ -165,12 +165,15 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
 
 namespace offset_based {
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif // __clang__
+
+/// @note Undefined behavior when length is zero.
 /// @note Assumes single-byte character encoded strings. Undefined behavior for
 /// multi-byte character encodings.
 template <std::integral CharT>
-#if __has_cpp_attribute(clang::no_sanitize)
-[[clang::no_sanitize("unsigned-integer-overflow")]]
-#endif // __has_cpp_attribute(clang::no_sanitize)
 [[nodiscard]]
 constexpr auto is_palindrome(
     typename std::basic_string_view<CharT>::const_pointer const s,
@@ -192,10 +195,8 @@ constexpr auto is_palindrome(
 
     return true;
 }
-#if __has_cpp_attribute(clang::no_sanitize)
-[[clang::no_sanitize("unsigned-integer-overflow")]]
-#endif // __has_cpp_attribute(clang::no_sanitize)
 
+/// @note Undefined behavior when length is zero.
 /// @note Assumes single-byte character encoded strings. Undefined behavior for
 /// multi-byte character encodings.
 [[nodiscard]]
@@ -222,10 +223,20 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
     return true;
 }
 
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
+
 } // namespace offset_based
 
-namespace pointer_based {
+namespace pointer_based_variant_1 {
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif // __clang__
+
+/// @note Undefined behavior when length is zero.
 /// @note Assumes single-byte character encoded strings. Undefined behavior for
 /// multi-byte character encodings.
 template <std::integral CharT>
@@ -262,6 +273,7 @@ constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
     return true;
 }
 
+/// @note Undefined behavior when length is zero.
 /// @note Assumes single-byte character encoded strings. Undefined behavior for
 /// multi-byte character encodings.
 [[nodiscard]]
@@ -297,7 +309,88 @@ inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
     return true;
 }
 
-} // namespace pointer_based
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
+
+} // namespace pointer_based_variant_1
+
+namespace pointer_based_variant_2 {
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
+#endif // __clang__
+
+/// @note Undefined behavior when length is zero.
+/// @note Assumes single-byte character encoded strings. Undefined behavior for
+/// multi-byte character encodings.
+template <std::integral CharT>
+    requires std::contiguous_iterator<
+        typename std::basic_string_view<CharT>::const_iterator>
+[[nodiscard]]
+constexpr auto is_palindrome(std::basic_string_view<CharT> const s) noexcept
+    -> bool
+{
+    using DiffType = std::basic_string_view<CharT>::difference_type;
+    using SizeType = std::basic_string_view<CharT>::size_type;
+
+    using std::data;
+    using std::size;
+
+    auto const* upper{data(s) + static_cast<DiffType>(size(s) - SizeType{1})};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    for (auto const* lower{data(s)}; lower < upper; ++lower)
+    {
+        if ((*lower) != (*upper))
+        {
+            return false;
+        }
+
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        --upper;
+    }
+
+    return true;
+}
+
+/// @note Undefined behavior when length is zero.
+/// @note Assumes single-byte character encoded strings. Undefined behavior for
+/// multi-byte character encodings.
+[[nodiscard]]
+inline auto is_palindrome_ci(std::string_view const s) noexcept -> bool
+{
+    using DiffType = std::string_view::difference_type;
+    using SizeType = std::string_view::size_type;
+
+    using std::data;
+    using std::size;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    auto const* upper{data(s) + static_cast<DiffType>(size(s) - SizeType{1})};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    for (auto const* lower{data(s)}; lower < upper; ++lower)
+    {
+        if (std::tolower(static_cast<unsigned char>(*lower))
+            != std::tolower(static_cast<unsigned char>(*upper)))
+        {
+            return false;
+        }
+
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        --upper;
+    }
+
+    return true;
+}
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
+
+} // namespace pointer_based_variant_2
 
 namespace reverse_iterator_based {
 

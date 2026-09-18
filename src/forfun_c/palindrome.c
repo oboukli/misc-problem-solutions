@@ -18,16 +18,8 @@ found in the LICENSE file.
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #endif /* __clang__ */
 
-#ifdef __clang__
-#pragma clang attribute push( \
-    __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
-    )), \
-    apply_to = function \
-)
-#endif /* __clang__ */
-
 /**
+ * @note Undefined behavior when length is zero.
  * @note Assumes single-byte character encoded strings. Undefined behavior for
  * multi-byte character encodings.
  */
@@ -35,7 +27,7 @@ int forfun_s1_is_palindrome(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
-    /* Two insulated and harmless overflows when length is zero. */
+    /* Undefined behavior when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
     while (str != mid)
@@ -52,26 +44,14 @@ int forfun_s1_is_palindrome(char const* str, size_t const length)
     return 1;
 }
 
-#ifdef __clang__
-#pragma clang attribute pop
-#endif /* __clang__ */
-
-#ifdef __clang__
-#pragma clang attribute push( \
-    __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
-    )), \
-    apply_to = function \
-)
-#endif /* __clang__ */
-
 /**
+ * @note Undefined behavior when length is zero.
  * @note Assumes single-byte character encoded strings. Undefined behavior for
  * multi-byte character encodings.
  */
 int forfun_s2_is_palindrome(char const* str, size_t const length)
 {
-    /* Two insulated and harmless overflows when length is zero. */
+    /* Undefined behavior when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
     while (str < str_rhs)
@@ -88,24 +68,16 @@ int forfun_s2_is_palindrome(char const* str, size_t const length)
     return 1;
 }
 
-#ifdef __clang__
-#pragma clang attribute pop
-#endif /* __clang__ */
-
-#ifdef __clang__
-#pragma clang attribute push( \
-    __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
-    )), \
-    apply_to = function \
-)
-#endif /* __clang__ */
-
+/**
+ * @note Undefined behavior when length is zero.
+ * @note Assumes single-byte character encoded strings. Undefined behavior for
+ * multi-byte character encodings.
+ */
 int forfun_s1_is_palindrome_ci(char const* str, size_t const length)
 {
     char const* const mid = str + (length / 2U);
 
-    /* Two insulated and harmless overflows when length is zero. */
+    /* Undefined behavior when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
     while (str != mid)
@@ -132,21 +104,14 @@ int forfun_s1_is_palindrome_ci(char const* str, size_t const length)
     return 1;
 }
 
-#ifdef __clang__
-#pragma clang attribute pop
-#endif /* __clang__ */
-
-#ifdef __clang__
-#pragma clang attribute push( \
-    __attribute__(( \
-        no_sanitize("pointer-overflow", "unsigned-integer-overflow") \
-    )), \
-    apply_to = function \
-)
-#endif /* __clang__ */
+/**
+ * @note Undefined behavior when length is zero.
+ * @note Assumes single-byte character encoded strings. Undefined behavior for
+ * multi-byte character encodings.
+ */
 int forfun_s2_is_palindrome_ci(char const* str, size_t const length)
 {
-    /* Two insulated and harmless overflows when length is zero. */
+    /* Undefined behavior when length is zero. */
     char const* str_rhs = str + (length - 1U);
 
     while (str < str_rhs)
@@ -172,10 +137,6 @@ int forfun_s2_is_palindrome_ci(char const* str, size_t const length)
 
     return 1;
 }
-
-#ifdef __clang__
-#pragma clang attribute pop
-#endif /* __clang__ */
 
 #ifdef __clang__
 #pragma clang diagnostic pop
