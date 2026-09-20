@@ -44,9 +44,15 @@ TEMPLATE_TEST_CASE_SIG(
     );
 }
 
-TEST_CASE("Catalan number", "[math]")
+TEMPLATE_TEST_CASE_SIG(
+    "Catalan number",
+    "[math]",
+    (auto catalan, catalan),
+    forfun::math::core::catalan<>,
+    forfun::math::lookup::catalan<>
+)
 {
-    using forfun::math::lookup::catalan;
+    REQUIRE(catalan(0) == 1UZ);
 
     REQUIRE(catalan(1) == 1UZ);
 
@@ -63,4 +69,6 @@ TEST_CASE("Catalan number", "[math]")
     REQUIRE(catalan(7) == 429UZ);
 
     REQUIRE(catalan(8) == 1430UZ);
+
+    REQUIRE(catalan(9) == 4862UZ);
 }
