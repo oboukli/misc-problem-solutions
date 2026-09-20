@@ -4,6 +4,7 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
 #include "forfun/math/math.hpp"
@@ -17,7 +18,13 @@ TEST_CASE("Integer division ceiling", "[math]")
     STATIC_REQUIRE(forfun::math::alternative::div_ceil(3, 2) == 2);
 }
 
-TEST_CASE("Catalan number", "[math]")
+TEMPLATE_TEST_CASE_SIG(
+    "Catalan number",
+    "[math]",
+    (auto catalan, catalan),
+    forfun::math::core::catalan<>,
+    forfun::math::lookup::catalan<>
+)
 {
-    STATIC_REQUIRE(forfun::math::lookup::catalan(5) == 42UZ);
+    STATIC_REQUIRE(catalan(5) == 42UZ);
 }

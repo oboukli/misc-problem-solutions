@@ -33,6 +33,22 @@ namespace alternative {
 
 namespace core {
 
+template <typename ReturnType = std::size_t>
+[[nodiscard]] constexpr auto catalan(int const n) noexcept -> ReturnType
+{
+    ReturnType c{1};
+
+    for (unsigned int i{0}; std::cmp_less(i, n); ++i)
+    {
+        c = c
+            * ReturnType{2}
+            * ((ReturnType{2} * i) + ReturnType{1})
+            / (i + ReturnType{2});
+    }
+
+    return c;
+}
+
 [[nodiscard]] /*constexpr*/ auto div_ceil(int a, int b) noexcept -> int;
 
 } // namespace core
@@ -43,35 +59,39 @@ namespace lookup {
 /// @pre The index @p n must be greater or equal to one, and less than or equal
 /// to eight.
 template <typename ReturnType = std::size_t>
-[[nodiscard]] constexpr auto catalan(int const n) -> ReturnType
+[[nodiscard]] constexpr auto catalan(int const n) noexcept -> ReturnType
 {
-    assert((n >= 1) && (n <= 8));
-
     // NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
     switch (n)
     {
-    case 1:
-        return 1;
     case 2:
         return 2;
+
     case 3:
         return 5;
+
     case 4:
         return 14;
+
     case 5:
         return 42;
+
     case 6:
         return 132;
+
     case 7:
         return 429;
+
     case 8:
         return 1'430;
+
     default:
-        break;
+        [[unlikely]]
+        {
+            return core::catalan<ReturnType>(n);
+        }
     }
     // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-
-    std::unreachable();
 }
 
 } // namespace lookup
