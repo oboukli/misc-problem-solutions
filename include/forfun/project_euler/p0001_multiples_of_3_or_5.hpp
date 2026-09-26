@@ -27,14 +27,9 @@ namespace detail {
 /// Calculates, using a closed-form expression, the 2x value, avoiding premature
 /// division by two operation.
 ///
-/// @param divisor Base whose multiples to be calculated
+/// @param divisor Base whose multiples are to be calculated
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if defined(__GNUC__) || defined(__clang__) // The following guard breaks MSVC.
-#if __has_cpp_attribute(gnu::const)
-[[gnu::const]]
-#endif // __has_cpp_attribute(gnu::const)
-#endif // defined(__GNUC__) || defined(__clang__)
 [[nodiscard]] constexpr auto sum_mult_2x(
     unsigned int const divisor, unsigned int const inclusive_max
 ) noexcept -> unsigned int
@@ -49,12 +44,6 @@ namespace detail {
 ///
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if __has_cpp_attribute(gnu::flatten)
-[[gnu::flatten]]
-#endif // __has_cpp_attribute(gnu::flatten)
-#if __has_cpp_attribute(msvc::forceinline_calls)
-[[msvc::forceinline]]
-#endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
 sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
 {
@@ -77,14 +66,9 @@ namespace detail {
 /// Calculates, using a closed-form expression, the 2x value, avoiding premature
 /// division by two operation.
 ///
-/// @param divisor Base whose multiples to be calculated
+/// @param divisor Base whose multiples are to be calculated
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if defined(__GNUC__) || defined(__clang__) // The following guard breaks MSVC.
-#if __has_cpp_attribute(gnu::const)
-[[gnu::const]]
-#endif // __has_cpp_attribute(gnu::const)
-#endif // defined(__GNUC__) || defined(__clang__)
 [[nodiscard]] constexpr auto sum_mult_2x(
     unsigned int const divisor, unsigned int const inclusive_max
 ) noexcept -> unsigned int
@@ -100,12 +84,6 @@ namespace detail {
 ///
 /// @param inclusive_max Upper inclusive limit
 /// @return Result
-#if __has_cpp_attribute(gnu::flatten)
-[[gnu::flatten]]
-#endif // __has_cpp_attribute(gnu::flatten)
-#if __has_cpp_attribute(msvc::forceinline_calls)
-[[msvc::forceinline]]
-#endif // __has_cpp_attribute(msvc::forceinline_calls)
 [[nodiscard]] constexpr auto
 sum_mult_three_five(unsigned int const inclusive_max) noexcept -> unsigned int
 {
