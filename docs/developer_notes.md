@@ -231,11 +231,6 @@ A script for generating code coverage report with LLVM can be found at
 LLVM_ROOT='/usr/local/opt/llvm/' ./support/generate_coverage_report.sh
 ```
 
-### Compiler diagnostics
-
-Clang's `implicit-conversion` flag is not enabled due to an issue in
-libstdc++ 14.2.
-
 ### Dynamic analysis
 
 All build targets are built with Clang and Xcode sanitizers, Microsoft STL
@@ -335,8 +330,8 @@ demonstrates how to use a helper template to delay template instantiation.
 ### Integer division ceiling
 
 This experiment demonstrates how good are modern compilers are. The
-[benchmarks](../benchmark/common/math_benchmark.cpp) of function
-`forfun::common::math::div_ceil` show no performance gains over utilizing casts,
+[benchmarks](../benchmark/math/math_benchmark.cpp) of function
+`forfun::math::div_ceil` show no performance gains over utilizing casts,
 floating-point division, and `std::ceil`.
 
 ### Meeting Rooms
@@ -373,3 +368,13 @@ preallocating the memory required for the result vectors.
 
 See the [benchmark code](../benchmark/subsets_benchmark.cpp) and benchmarking
 report for details.
+
+## Known issues
+
+- Clang's `implicit-conversion` sanitizer option is not enabled due to an issue
+with libstdc++ (including version 14.2.) and due to Clang suppressions failing
+to suppress the findings.
+
+- Xcode (version 26.5 at the time of this writing) seems to inject legacy
+include directory configuration causing `-Wmissing-include-dirs` to flag the
+issue.
