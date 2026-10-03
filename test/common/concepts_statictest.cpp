@@ -4,8 +4,10 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <array>
 #include <cstddef>
 #include <cstdint>
+#include <span>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -225,6 +227,75 @@ TEST_CASE("Concept standard_char_type", "[common]")
 
         STATIC_REQUIRE_FALSE(
             forfun::common::concepts::standard_char_type<Dummy>
+        );
+    }
+}
+
+TEST_CASE("Concept same_as_string_view", "[common]")
+{
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::string>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::string_view>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::wstring>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::wstring_view>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u8string>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u8string_view>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u16string>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u16string_view>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u32string>
+        );
+
+        STATIC_REQUIRE(
+            forfun::common::concepts::same_as_string_view<std::u32string_view>
+        );
+    }
+
+    SECTION("Negative")
+    {
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::same_as_string_view<int>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::same_as_string_view<char const*>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::same_as_string_view<std::span<int, {}>>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::same_as_string_view<std::vector<char>>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::same_as_string_view<std::array<char, {}>>
         );
     }
 }
