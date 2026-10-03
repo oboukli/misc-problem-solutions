@@ -4,7 +4,10 @@
 
 // SPDX-License-Identifier: MIT
 
+#include <bit>
 #include <concepts>
+#include <cstddef>
+#include <span>
 #include <type_traits>
 #include <utility>
 
@@ -66,18 +69,40 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         );
     }
 
-    SECTION("Capacity")
+    SECTION("Capacity must be a power of two")
     {
-        STATIC_REQUIRE(
-            forfun::concurrency::wait_free::spsc_bound_queue<int, 8>::capacity()
-            == 8UZ
-        );
+        using queue_type
+            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+
+        STATIC_REQUIRE(std::has_single_bit(queue_type::capacity()));
+    }
+
+    SECTION("Capacity is as requested")
+    {
+        using queue_type
+            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+
+        STATIC_REQUIRE(queue_type::capacity() == 8UZ);
+    }
+
+    SECTION("Type aliases")
+    {
+        using queue_type
+            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+
+        STATIC_REQUIRE(std::same_as<queue_type::size_type, std::size_t>);
+
+        STATIC_REQUIRE(std::same_as<queue_type::value_type, int>);
+
+        STATIC_REQUIRE(std::same_as<queue_type::reference, int&>);
     }
 
     SECTION("To span")
     {
         using queue_type
             = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+
+        STATIC_REQUIRE(std::same_as<queue_type::span_type, std::span<int>>);
 
         STATIC_REQUIRE(
             std::same_as<
