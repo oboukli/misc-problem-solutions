@@ -260,6 +260,41 @@ TEST_CASE("Trie", "[trie]")
         REQUIRE(search(root, "algorithm"sv));
     }
 
+    SECTION("Search returns false for an empty trie")
+    {
+        trie_node root{};
+
+        REQUIRE_FALSE(search(root, ""sv));
+
+        REQUIRE_FALSE(search(root, "a"sv));
+    }
+
+    SECTION("Search returns false for a non-terminal prefix")
+    {
+        static constexpr std::string_view const word{"cat"};
+
+        trie_node root{};
+
+        insert(root, word);
+
+        REQUIRE_FALSE(search(root, "c"sv));
+
+        REQUIRE_FALSE(search(root, "ca"sv));
+    }
+
+    SECTION("Search returns false for a missing word")
+    {
+        static constexpr std::string_view const word{"cat"};
+
+        trie_node root{};
+
+        insert(root, word);
+
+        REQUIRE_FALSE(search(root, "car"sv));
+
+        REQUIRE_FALSE(search(root, "dog"sv));
+    }
+
     SECTION("Clear empty trie")
     {
         trie_node root{};
