@@ -8,12 +8,12 @@
 #include <array>
 #include <chrono>
 #include <cstddef>
-#include <functional>
 #include <ranges>
 #include <thread>
 #include <type_traits>
 #include <vector>
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
@@ -38,40 +38,46 @@ struct dummy_aggregate {
 
 } // namespace
 
-TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif // __clang__
+
+TEMPLATE_TEST_CASE_SIG(
+    "Wait-free SPSC append-only bounded queue",
+    "[spsc_bound_queue]",
+    ((typename Type, std::size_t Size), Type, Size),
+    (int, 4UZ),
+    (int, 8UZ),
+    (int, 16UZ)
+)
 {
     SECTION("Initial span is empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         REQUIRE(queue.to_span().empty());
     }
 
     SECTION("Initially empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> const queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
+            queue{};
 
         REQUIRE(queue.empty_unsafe());
     }
 
-    SECTION("Capacity")
+    SECTION("Capacity is as requested")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 16> const queue{};
-
-        REQUIRE(queue.capacity() == 16UZ);
-    }
-
-    SECTION("Queue of std::byte")
-    {
-        forfun::concurrency::wait_free::spsc_bound_queue<std::byte, 16> const
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
             queue{};
 
-        REQUIRE(queue.capacity() == 16UZ);
+        REQUIRE(queue.capacity() == Size);
     }
 
     SECTION("Emplace affects empty state")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 2> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         queue.emplace_back(677);
 
@@ -84,7 +90,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Emplace affects span size")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 4> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         queue.emplace_back(691);
 
@@ -105,7 +111,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Emplace affects span back")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 4> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         queue.emplace_back(-2);
 
@@ -130,7 +136,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Emplace returns reference to emplaced element")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 4> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         decltype(auto) ref_to_emplaced{queue.emplace_back(225149)};
 
@@ -149,7 +155,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     {
         using ValueType = int;
 
-        static constexpr std::size_t const queue_capacity{8};
+        constexpr std::size_t const queue_capacity{8};
 
         forfun::concurrency::wait_free::
             spsc_bound_queue<ValueType, queue_capacity>
@@ -179,7 +185,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("To span")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         queue.emplace_back(727);
         queue.emplace_back(733);
@@ -195,7 +201,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Reset call on empty queue")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
 
         queue.reset_unsafe();
 
@@ -204,7 +210,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Reset call on non-empty non-full queue")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
         queue.emplace_back(1);
         queue.emplace_back(2);
         queue.emplace_back(3);
@@ -212,6 +218,96 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         queue.reset_unsafe();
 
         REQUIRE(queue.empty_unsafe());
+    }
+
+    SECTION("Destructor call on empty queue")
+    {
+        {
+            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
+                queue{};
+        }
+
+        SUCCEED();
+    }
+
+    SECTION("Destructor call on non-empty queue")
+    {
+        {
+            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size>
+                queue{};
+            queue.emplace_back(1);
+        }
+
+        SUCCEED();
+    }
+
+    SECTION("Destructor call on non-empty non-full queue")
+    {
+        {
+            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size>
+                queue{};
+            queue.emplace_back(1);
+            queue.emplace_back(2);
+            queue.emplace_back(3);
+        }
+
+        SUCCEED();
+    }
+}
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif // __clang__
+
+TEST_CASE(
+    "Wait-free SPSC append-only bounded queue (miscellaneous)",
+    "[spsc_bound_queue]"
+)
+{
+    SECTION("Initial span is empty")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> queue{};
+
+        REQUIRE(queue.to_span().empty());
+    }
+
+    SECTION("Initially empty")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> const queue{};
+
+        REQUIRE(queue.empty_unsafe());
+    }
+
+    SECTION("Capacity is as requested")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> const queue{};
+
+        REQUIRE(queue.capacity() == 1UZ);
+    }
+
+    SECTION("Single-slot queue resets cleanly and refills")
+    {
+        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> queue{};
+
+        queue.emplace_back(11);
+
+        REQUIRE(queue.to_span().size() == 1UZ);
+
+        REQUIRE(queue.to_span().front() == 11);
+
+        queue.reset_unsafe();
+
+        REQUIRE(queue.empty_unsafe());
+
+        REQUIRE(queue.to_span().empty());
+
+        queue.emplace_back(17);
+
+        REQUIRE(queue.to_span().size() == 1UZ);
+
+        REQUIRE(queue.to_span().front() == 17);
+
+        REQUIRE(queue.to_span().back() == 17);
     }
 
     SECTION("Reset call on full queue")
@@ -235,7 +331,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     {
         using ValueType = int;
 
-        static constexpr std::size_t const queue_capacity{8};
+        constexpr std::size_t const queue_capacity{8};
 
         forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
         queue.emplace_back(10);
@@ -273,28 +369,6 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         );
     }
 
-    SECTION("Destructor call on empty queue")
-    {
-        {
-            forfun::concurrency::wait_free::spsc_bound_queue<int, 8> const
-                queue{};
-        }
-
-        SUCCEED();
-    }
-
-    SECTION("Destructor call on non-empty non-full queue")
-    {
-        {
-            forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
-            queue.emplace_back(1);
-            queue.emplace_back(2);
-            queue.emplace_back(3);
-        }
-
-        SUCCEED();
-    }
-
     SECTION("Destructor call on full queue")
     {
         {
@@ -312,11 +386,12 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         SUCCEED();
     }
 
-    SECTION("Nondeterministic one producer and one consumer of int values")
+    SECTION(
+        "Nondeterministic one producer and one consumer of int values "
+        "(immediate write)"
+    )
     {
-        using std::equal_to;
-
-        static constexpr std::size_t const queue_size{8};
+        constexpr std::size_t const queue_size{8};
 
         static constexpr auto const expected
             = {208739, 208759, 208787, 208799, 208807, 208837, 208843, 208877};
@@ -376,11 +451,10 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     }
 
     SECTION(
-        "Nondeterministic one producer and one consumer of aggregate values"
+        "Nondeterministic one producer and one consumer of aggregate values "
+        "(immediate write)"
     )
     {
-        using std::equal_to;
-
         static constexpr std::size_t const queue_size{8};
 
         using ValueType = dummy_aggregate;
@@ -447,12 +521,14 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
         REQUIRE_THAT(consumer_bag, Catch::Matchers::RangeEquals(expected));
     }
 
-    SECTION("Nondeterministic one producer and one consumer of int values")
+    SECTION(
+        "Nondeterministic one producer and one consumer of int values (delayed "
+        "producer)"
+    )
     {
         using std::chrono::operator""ms;
-        using std::equal_to;
 
-        static constexpr std::size_t const queue_size{8};
+        constexpr std::size_t const queue_size{8};
 
         static constexpr auto const expected
             = {208739, 208759, 208787, 208799, 208807, 208837, 208843, 208877};
@@ -516,11 +592,11 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     }
 
     SECTION(
-        "Nondeterministic one producer and one consumer of aggregate values"
+        "Nondeterministic one producer and one consumer of aggregate values "
+        "(delayed producer)"
     )
     {
         using std::chrono::operator""ms;
-        using std::equal_to;
 
         static constexpr std::size_t const queue_size{8};
 
@@ -594,7 +670,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Benchmark case")
     {
-        static constexpr std::size_t const capacity{16};
+        constexpr std::size_t const capacity{16};
 
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int volatile val /*[[indeterminate]]*/;
