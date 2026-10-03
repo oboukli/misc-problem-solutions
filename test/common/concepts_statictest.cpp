@@ -135,17 +135,28 @@ TEST_CASE("Concept noexcept_callable", "[common]")
     SECTION("Positive")
     {
         STATIC_REQUIRE(noexcept_callable<auto() noexcept -> void>);
+
         STATIC_REQUIRE(noexcept_callable<auto(int) noexcept -> void, int>);
+
         STATIC_REQUIRE(
             noexcept_callable<auto(int, int) noexcept -> void, int, int>
         );
+
         STATIC_REQUIRE(
             noexcept_callable<auto(int, char*) noexcept -> void, double, char*>
         );
+
         STATIC_REQUIRE(
             noexcept_callable<
                 auto(int, std::string_view) noexcept -> void,
                 int,
+                std::string>
+        );
+
+        STATIC_REQUIRE(
+            noexcept_callable<
+                auto(int&, std::string_view) noexcept -> void,
+                int&,
                 std::string>
         );
     }
@@ -165,11 +176,17 @@ TEST_CASE("Concept noexcept_callable", "[common]")
                     std::string,
                     std::vector<char>&>
             );
+
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<auto(int, int&) noexcept -> void, int, int>
             );
+
             STATIC_REQUIRE_FALSE(
                 noexcept_callable<auto(char, char&) noexcept -> void, int, int&>
+            );
+
+            STATIC_REQUIRE_FALSE(
+                noexcept_callable<auto(int&) noexcept -> void, int>
             );
         }
 
@@ -223,6 +240,10 @@ TEST_CASE("Concept standard_char_type", "[common]")
 
         STATIC_REQUIRE_FALSE(
             forfun::common::concepts::standard_char_type<float>
+        );
+
+        STATIC_REQUIRE_FALSE(
+            forfun::common::concepts::standard_char_type<std::byte>
         );
 
         STATIC_REQUIRE_FALSE(
