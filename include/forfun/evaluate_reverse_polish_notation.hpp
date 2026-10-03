@@ -13,7 +13,6 @@
 #include <cassert>
 #include <charconv>
 #include <cmath>
-#include <concepts>
 #include <cstddef>
 #include <iterator>
 #include <limits>
@@ -22,6 +21,8 @@
 #include <system_error>
 #include <utility>
 #include <vector>
+
+#include "forfun/common/concepts.hpp"
 
 namespace forfun::evaluate_reverse_polish_notation {
 
@@ -37,7 +38,7 @@ namespace hardened {
 template <typename Iter, typename Sentinel>
     requires std::contiguous_iterator<Iter>
     and std::sized_sentinel_for<Sentinel, Iter>
-    and std::same_as<std::iter_value_t<Iter>, std::string_view>
+    and forfun::common::concepts::same_as_string_view<std::iter_value_t<Iter>>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
@@ -139,7 +140,7 @@ namespace unhardened {
 template <typename Iter, typename Sentinel>
     requires std::contiguous_iterator<Iter>
     and std::sized_sentinel_for<Sentinel, Iter>
-    and std::same_as<std::iter_value_t<Iter>, std::string_view>
+    and forfun::common::concepts::same_as_string_view<std::iter_value_t<Iter>>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
@@ -229,7 +230,7 @@ namespace speed_optimized {
 template <typename Iter, typename Sentinel>
     requires std::contiguous_iterator<Iter>
     and std::sized_sentinel_for<Sentinel, Iter>
-    and std::same_as<std::iter_value_t<Iter>, std::string_view>
+    and forfun::common::concepts::same_as_string_view<std::iter_value_t<Iter>>
 [[nodiscard]] auto eval_expression(Iter iter, Sentinel const last)
     -> std::pair<int, std::errc>
 {
