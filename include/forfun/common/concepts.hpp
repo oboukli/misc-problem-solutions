@@ -8,6 +8,7 @@
 #define FORFUN_COMMON_CONCEPTS_HPP_
 
 #include <concepts>
+#include <type_traits>
 #include <utility>
 
 #include "type_traits.hpp"
@@ -42,6 +43,18 @@ concept noexcept_callable
     and requires(Func&& func, Args&&... args) {
         requires noexcept(func(std::forward<Args>(args)...));
     };
+// clang-format on
+
+// clang-format off
+template <typename String>
+concept same_as_string_view = requires(String s) {
+    s.data();
+    requires std::is_pointer_v<decltype(s.data())>
+        and standard_char_type<
+            std::remove_cv_t<std::remove_pointer_t<decltype(s.data())>>>;
+
+    { s.length() } -> std::integral;
+};
 // clang-format on
 
 } // namespace forfun::common::concepts
