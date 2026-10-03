@@ -52,7 +52,7 @@ using std::string_view_literals::operator""sv;
 } // namespace
 
 TEMPLATE_TEST_CASE_SIG(
-    "Case-sensitive palindrome check (empty string case)",
+    "Case-sensitive palindrome check (empty string degenerate case)",
     "[palindrome]",
     (auto func_is_palindrome, func_is_palindrome),
     &forfun::palindrome::functional::is_palindrome<char>,
