@@ -216,6 +216,8 @@ as `--help` option. This means that tests can be filtered by tags. For example:
 benchmark_driver '[sorting]'
 ```
 
+A known issue is that some test captions do not describe the intended outcome.
+
 ### Code coverage
 
 All code lines and branches are covered with tests, with the coverage percentage
@@ -285,13 +287,16 @@ This document is not AI-generated.
 
 | Artifact                        | Type                               |
 | ---                             | ---                                |
-| forfun                          | C++23 (static or shared) library   |
-| forfun_c                        | C90 (static or shared) library     |
-| forfun_c_experimental           | C90 static library                 |
+| forfun_common                   | C++23 (static or shared) library   |
+| forfun_core                     | C++23 (static or shared) library   |
+| forfun_core_c                   | C90 (static or shared) library     |
 | forfun_experimental             | C++23 (static or shared) library   |
+| forfun_experimental_c           | C99 static library                 |
 | forfun_graph                    | C++23 (static or shared) library   |
 | forfun_lock_free                | C++23 (static or shared) library   |
+| forfun_math                     | C++23 (static or shared) library   |
 | forfun_search                   | C++23 (static or shared) library   |
+| forfun_sequence                 | C++23 (static or shared) library   |
 | forfun_sorting                  | C++23 (static or shared) library   |
 
 ### Development build artifacts
