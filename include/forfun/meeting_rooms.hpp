@@ -26,9 +26,8 @@ struct interval final {
 
 auto operator<<(std::ostream& os, interval intrvl) -> std::ostream&;
 
-[[nodiscard]] auto constexpr is_conflicting(
-    interval const a, interval const b
-) noexcept -> bool
+[[nodiscard]] constexpr auto
+is_conflicting(interval const a, interval const b) noexcept -> bool
 {
     return a.end > b.start;
 }
@@ -39,9 +38,8 @@ auto operator<<(std::ostream& os, interval intrvl) -> std::ostream&;
 template <typename Iter>
     requires std::forward_iterator<Iter>
     and std::same_as<std::iter_value_t<Iter>, interval>
-[[nodiscard]] auto constexpr can_attend(
-    Iter iter, std::sentinel_for<Iter> auto const last
-) noexcept -> bool
+[[nodiscard]] constexpr auto
+can_attend(Iter iter, std::sentinel_for<Iter> auto const last) noexcept -> bool
 {
     using std::next;
 
@@ -67,9 +65,9 @@ template <typename Iter>
 template <typename Iter>
     requires std::input_or_output_iterator<Iter>
     and std::same_as<std::iter_value_t<Iter>, interval>
-[[nodiscard]] auto constexpr min_chronotopes(
-    Iter iter, std::sentinel_for<Iter> auto const last
-) noexcept -> std::size_t
+[[nodiscard]] constexpr auto
+min_chronotopes(Iter iter, std::sentinel_for<Iter> auto const last) noexcept
+    -> std::size_t
 {
     using std::next;
 
