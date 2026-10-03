@@ -86,12 +86,11 @@ template <typename ReturnType = std::size_t>
         return 1'430;
 
     default:
-        [[unlikely]]
-        {
-            return core::catalan<ReturnType>(n);
-        }
+        [[unlikely]] break;
     }
     // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+
+    return core::catalan<ReturnType>(n);
 }
 
 } // namespace lookup
