@@ -39,6 +39,7 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #endif // __clang__
 
+    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
     assert(
         reinterpret_cast<std::uintptr_t>(
             reinterpret_cast<Pointer>(buffer) + offset
@@ -46,8 +47,8 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
         == 0UZ
     );
 
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     return reinterpret_cast<Pointer>(buffer) + offset;
+    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
 
 #ifdef __clang__
 #pragma clang diagnostic pop
@@ -107,7 +108,7 @@ auto constexpr destroy_n(std::byte* const buffer, Size n) noexcept(noexcept(
 /// @note Internal storage and padding area might not be (zero-)initialized.
 template <typename T, std::size_t Capacity>
     requires std::destructible<T>
-// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
 class spsc_bound_queue final {
 private:
     using pointer = T*;
@@ -130,6 +131,7 @@ public:
 #pragma warning(disable : 26495)
 #endif // _MSC_VER
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
     spsc_bound_queue() = default;
 
 #ifdef _MSC_VER
@@ -172,7 +174,7 @@ public:
 
         static_assert(capacity_ != 0UZ);
 
-        assert(write_cursor_cached_ < static_cast<cursor_type>(capacity_));
+        assert(std::cmp_less(write_cursor_cached_, capacity_));
 
         auto* const ptr_emplaced{std::construct_at(
             detail::get_ptr_to_obj<pointer>(
@@ -289,7 +291,7 @@ private:
     {
         using std::data;
 
-        assert(write_cursor_cached_ <= static_cast<cursor_type>(capacity_));
+        assert(std::cmp_less_equal(write_cursor_cached_, capacity_));
 
         detail::destroy_n(data(raw_queue_), write_cursor_cached_);
     }
