@@ -15,6 +15,7 @@ function(forfun_clang_properties target)
         -pedantic
         -Weverything
         -Wall
+        -Wextra
         -Walloca
         -Warray-bounds
         -Warray-bounds-pointer-arithmetic
@@ -32,15 +33,17 @@ function(forfun_clang_properties target)
         -Wdate-time
         -Wdeclaration-after-statement
         -Wdeprecated
+        -Wdisabled-macro-expansion
+        -Wdocumentation
         -Wdouble-promotion
         -Wempty-body
-        -Wextra
         -Wextra-semi
         -Wfloat-equal
         -Wformat-signedness
         -Wformat=2
         -Wframe-address
         -Wgnu
+        -Wimplicit
         -Wimplicit-fallthrough
         -Wimplicit-function-declaration
         -Wimplicit-int
@@ -62,6 +65,8 @@ function(forfun_clang_properties target)
         -Wparentheses
         -Wpointer-arith
         -Wredundant-parens
+        -Wreserved-identifier
+        -Wreturn-type
         -Wshadow-all
         -Wsign-compare
         -Wsign-conversion
@@ -88,9 +93,10 @@ function(forfun_clang_properties target)
       $<$<COMPILE_LANGUAGE:CXX>:
         -fsafe-buffer-usage-suggestions
         -pedantic
+        -Wall
+        -Wextra
         -Wabstract-vbase-init
         -Waddress-of-temporary
-        -Wall
         -Walloca
         -Wanon-enum-enum-conversion
         -Wargument-outside-range
@@ -113,11 +119,12 @@ function(forfun_clang_properties target)
         -Wdate-time
         -Wdelete-non-virtual-dtor
         -Wdeprecated
+        -Wdisabled-macro-expansion
+        -Wdocumentation
         -Wdouble-promotion
         -Wdynamic-exception-spec
         -Wempty-body
         -Wexit-time-destructors
-        -Wextra
         -Wextra-semi
         -Wfloat-equal
         -Wfor-loop-analysis
@@ -126,6 +133,7 @@ function(forfun_clang_properties target)
         -Wframe-address
         -Wglobal-constructors
         -Wgnu
+        -Wimplicit
         -Wimplicit-fallthrough
         -Wimplicit-float-conversion
         -Wimplicit-int-conversion
@@ -158,6 +166,8 @@ function(forfun_clang_properties target)
         -Wrange-loop-analysis
         -Wredundant-move
         -Wredundant-parens
+        -Wreserved-identifier
+        -Wreturn-type
         -Wself-assign
         -Wself-move
         -Wshadow-all
