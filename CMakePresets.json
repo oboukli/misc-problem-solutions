@@ -12,11 +12,13 @@
         "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COLOR_DIAGNOSTICS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
+        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
+        "FORFUN_ENABLE_STRICT_COMPILATION": "OFF",
         "FORFUN_FEATURE_BENCHMARKS": "ON",
         "FORFUN_FEATURE_TESTS": "ON",
         "FORFUN_FEATURE_FUZZ_TESTS": "OFF",
@@ -89,8 +91,8 @@
       "cacheVariables": {
         "BUILD_SHARED_LIBS": "ON",
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
@@ -131,6 +133,8 @@
         "CMAKE_COMPILE_WARNING_AS_ERROR": "ON",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O0 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O0 -DNDEBUG",
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
