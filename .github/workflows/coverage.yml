@@ -10,15 +10,15 @@ on:
   pull_request:
     branches:
       - main
-    # paths:
-    #   - "src/**"
-    #   - "test/**"
+    paths:
+      - "src/**"
+      - "test/**"
   push:
     branches:
       - main
-    # paths:
-    #   - "src/**"
-    #   - "test/**"
+    paths:
+      - "src/**"
+      - "test/**"
   workflow_dispatch:
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
         run: |-
           echo "Types: deb
           URIs: http://apt.llvm.org/resolute/
-          Suites: llvm-toolchain-resolute-22
+          Suites: llvm-toolchain-resolute-23
           Components: main
           Signed-By:
           $(wget --output-document \
@@ -53,23 +53,23 @@ jobs:
           sudo apt-get update
 
           sudo apt-get install
-          clang-22
-          clang-tools-22
-          libc++-22
-          libc++-22-dev
-          libc++abi-22-dev
-          lld-22
-          llvm-22
+          clang-23
+          clang-tools-23
+          libc++-23
+          libc++-23-dev
+          libc++abi-23-dev
+          lld-23
+          llvm-23
           mono-complete
 
           sudo update-alternatives
-          --install /usr/bin/cc cc /usr/bin/clang-22 100
+          --install /usr/bin/cc cc /usr/bin/clang-23 100
 
           sudo update-alternatives
-          --install /usr/bin/c++ c++ /usr/bin/clang++-22 100
+          --install /usr/bin/c++ c++ /usr/bin/clang++-23 100
 
           sudo update-alternatives
-          --install /usr/bin/ld ld /usr/bin/lld-22 100
+          --install /usr/bin/ld ld /usr/bin/lld-23 100
 
       - name: Check out repository
         uses: actions/checkout@v7
@@ -119,16 +119,15 @@ jobs:
 
       - name: Run code coverage script
         env:
-          LLVM_ROOT: /usr/lib/llvm-22
+          LLVM_ROOT: /usr/lib/llvm-23
         run: >-
           bash ${{ github.workspace }}/support/generate_coverage_report.sh
 
-      - name: Upload code coverage artifact
+      - name: Upload HTML coverage reports as artifact
         uses: actions/upload-artifact@v7
         with:
           compression-level: 8
           if-no-files-found: error
           name: ${{ format('coverage-report-html-{0}', github.run_id) }}
-          overwrite: true
           path: ${{ github.workspace }}/out/coverage/report
           retention-days: 2
