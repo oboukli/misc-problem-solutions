@@ -82,7 +82,6 @@ MV=/usr/bin/mv
 
 "${MKDIR}" -p "${REPORT_DIR}" "${PROFDATA_DIR}" "$(dirname "${COVERAGE_FILE}")"
 
-index=1
 for driver in "${DRIVERS[@]}";
 do
   DRIVER_PROFRAW="$(profraw_file "${driver}")"
@@ -117,6 +116,7 @@ do
     --show-branches=count \
     --show-mcdc \
     --show-expansions \
+    --show-instantiations \
     --show-instantiation-summary \
     --show-line-counts-or-regions \
     --use-color \
@@ -125,15 +125,12 @@ do
     --Xdemangler=--types \
     "${DRIVER_BINARY}"
 
-  REPORT_FILE="$(
-    printf '%s/index_%02d.html' "${REPORT_DIR}" "${index}"
-  )"
+  REPORT_FILE="${REPORT_DIR}/${driver}.html"
 
   "${MV}" \
     "${REPORT_DIR}/index.html" \
     "${REPORT_FILE}"
 
-  ((index++))
 done
 
 COMBINED_PROFDATA="$(profdata_file combined)"
