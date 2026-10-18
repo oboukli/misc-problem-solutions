@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/container/forward_list_cycle.hpp"
-#include "forfun/container/forward_list_node.hpp"
+#include <forfun/container/forward_list_cycle.hpp>
+#include <forfun/container/forward_list_node.hpp>
 
 TEST_CASE("Forward list cycle benchmarking", "[benchmark][forward_list_cycle]")
 {

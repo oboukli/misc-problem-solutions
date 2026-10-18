@@ -13,7 +13,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include "forfun/evaluate_reverse_polish_notation.hpp"
+#include <forfun/evaluate_reverse_polish_notation.hpp>
 
 namespace {
 

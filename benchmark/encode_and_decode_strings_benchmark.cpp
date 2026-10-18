@@ -14,8 +14,9 @@
 
 #include <nanobench.h>
 
-#include "forfun/common/io.hpp"
-#include "forfun/encode_and_decode_strings.hpp"
+#include <forfun/common/io.hpp>
+
+#include <forfun/encode_and_decode_strings.hpp>
 
 TEST_CASE(
     "Encode strings benchmarking", "[benchmark][encode_and_decode_strings]"

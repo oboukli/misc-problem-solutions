@@ -13,7 +13,7 @@
 #include <concepts>
 #include <iterator>
 
-#include "forfun/common/concepts.hpp"
+#include <forfun/common/concepts.hpp>
 
 namespace forfun::squares_sorted_array {
 

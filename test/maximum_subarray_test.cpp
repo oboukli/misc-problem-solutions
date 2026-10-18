@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/maximum_subarray.hpp"
+#include <forfun/maximum_subarray.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Maximum subarray",

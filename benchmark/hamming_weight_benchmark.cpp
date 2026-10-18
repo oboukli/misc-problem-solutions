@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/hamming_weight.hpp"
+#include <forfun/hamming_weight.hpp>
 
 TEST_CASE("hamming_weight benchmarking", "[benchmark][hamming_weight]")
 {

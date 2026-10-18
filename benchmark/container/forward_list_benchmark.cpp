@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/container/forward_list.hpp"
+#include <forfun/container/forward_list.hpp>
 
 TEST_CASE(
     "Forward list benchmarking",

@@ -11,7 +11,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/sub_array_sums.hpp"
+#include <forfun/sub_array_sums.hpp>
 
 namespace {
 

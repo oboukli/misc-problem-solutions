@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/valid_anagram.hpp"
+#include <forfun/valid_anagram.hpp>
 
 TEST_CASE("Valid anagram benchmarking", "[benchmark][valid_anagram]")
 {

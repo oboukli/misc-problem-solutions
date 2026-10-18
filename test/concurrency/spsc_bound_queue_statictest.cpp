@@ -13,7 +13,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/concurrency/spsc_bound_queue.hpp"
+#include <forfun/concurrency/spsc_bound_queue.hpp>
 
 namespace {
 

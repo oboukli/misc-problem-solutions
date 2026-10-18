@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/sorting/insertion_sort.hpp"
+#include <forfun/sorting/insertion_sort.hpp>
 
 TEST_CASE("Insertion sort benchmarking", "[benchmark][sorting][insertion_sort]")
 {

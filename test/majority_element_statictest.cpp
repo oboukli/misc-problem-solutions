@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/majority_element.hpp"
+#include <forfun/majority_element.hpp>
 
 TEST_CASE("Majority element", "[majority_element]")
 {

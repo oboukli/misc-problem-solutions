@@ -14,7 +14,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/squares_sorted_array.hpp"
+#include <forfun/squares_sorted_array.hpp>
 
 namespace {
 

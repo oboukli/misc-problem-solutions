@@ -12,7 +12,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include "forfun/first_missing_positive.hpp"
+#include <forfun/first_missing_positive.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "First missing positive (vector<int>)",

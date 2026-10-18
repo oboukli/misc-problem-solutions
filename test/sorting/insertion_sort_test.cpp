@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/sorting/insertion_sort.hpp"
+#include <forfun/sorting/insertion_sort.hpp>
 
 TEST_CASE("Insertion sort", "[sorting][insertion_sort]")
 {

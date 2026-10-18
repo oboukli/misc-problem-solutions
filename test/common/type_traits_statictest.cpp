@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common/type_traits.hpp"
+#include <forfun/common/type_traits.hpp>
 
 TEST_CASE("Trait conditional_const_t", "[type_traits]")
 {

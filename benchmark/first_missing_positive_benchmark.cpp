@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/first_missing_positive.hpp"
+#include <forfun/first_missing_positive.hpp>
 
 TEST_CASE(
     "Lowest missing positive integer benchmarking",

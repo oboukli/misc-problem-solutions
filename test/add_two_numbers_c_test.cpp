@@ -10,11 +10,11 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun_c/mem/mem.h"
-#include "forfun_c/shim/allocator.h"
+#include <forfun_c/mem/mem.h>
+#include <forfun_c/shim/allocator.h>
 
-#include "forfun_c/add_two_numbers.h"
-#include "forfun_c/container/forward_list.h"
+#include <forfun_c/add_two_numbers.h>
+#include <forfun_c/container/forward_list.h>
 
 namespace {
 

@@ -12,8 +12,9 @@
 
 #include <nanobench.h>
 
-#include "forfun/common/concepts.hpp"
-#include "forfun/fibonacci_sequence.hpp"
+#include <forfun/common/concepts.hpp>
+
+#include <forfun/fibonacci_sequence.hpp>
 
 namespace {
 

@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/valid_parentheses.hpp"
+#include <forfun/valid_parentheses.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Valid parentheses",

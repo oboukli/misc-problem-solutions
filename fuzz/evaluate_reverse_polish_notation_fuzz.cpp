@@ -14,7 +14,7 @@
 
 #include <gmock/gmock.h>
 
-#include "forfun/evaluate_reverse_polish_notation.hpp"
+#include <forfun/evaluate_reverse_polish_notation.hpp>
 
 namespace {
 

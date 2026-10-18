@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/sorting/insertion_sort.hpp"
+#include <forfun/sorting/insertion_sort.hpp>
 
 namespace {
 

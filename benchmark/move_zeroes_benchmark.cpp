@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/move_zeroes.hpp"
+#include <forfun/move_zeroes.hpp>
 
 TEST_CASE("Move zeroes benchmarking", "[benchmark][move_zeroes]")
 {

@@ -13,7 +13,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/set_matrix_zeroes.hpp"
+#include <forfun/set_matrix_zeroes.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Set matrix zeros",

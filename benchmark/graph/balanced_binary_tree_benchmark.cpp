@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/graph/balanced_binary_tree.hpp"
-#include "forfun/graph/binary_tree_node.hpp"
+#include <forfun/graph/balanced_binary_tree.hpp>
+#include <forfun/graph/binary_tree_node.hpp>
 
 TEST_CASE(
     "Balanced binary tree benchmarking", "[benchmark][balanced_binary_tree]"

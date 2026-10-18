@@ -13,8 +13,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/single_number.hpp"
-#include "forfun_c/single_number.h"
+#include <forfun/single_number.hpp>
+#include <forfun_c/single_number.h>
 
 TEST_CASE("Single number benchmarking", "[benchmark][single_number]")
 {

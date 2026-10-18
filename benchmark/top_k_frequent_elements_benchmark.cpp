@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/top_k_frequent_elements.hpp"
+#include <forfun/top_k_frequent_elements.hpp>
 
 TEST_CASE(
     "Top K frequent elements benchmarking",

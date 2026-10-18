@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/sorting/quicksort.hpp"
+#include <forfun/sorting/quicksort.hpp>
 
 TEST_CASE("Quicksort benchmarking", "[benchmark][sorting][quicksort]")
 {

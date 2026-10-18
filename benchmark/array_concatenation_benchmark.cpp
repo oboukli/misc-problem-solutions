@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/array_concatenation.hpp"
+#include <forfun/array_concatenation.hpp>
 
 TEST_CASE(
     "array_concatenation benchmarking", "[benchmark][array_concatenation]"

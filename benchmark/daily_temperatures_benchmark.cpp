@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/daily_temperatures.hpp"
+#include <forfun/daily_temperatures.hpp>
 
 TEST_CASE("Daily temperatures benchmarking", "[benchmark][daily_temperatures]")
 {

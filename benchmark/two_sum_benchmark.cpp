@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/two_sum.hpp"
+#include <forfun/two_sum.hpp>
 
 TEST_CASE("Two sum benchmarking", "[benchmark][two_sum]")
 {

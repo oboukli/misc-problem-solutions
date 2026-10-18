@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/fibonacci.hpp"
+#include <forfun/fibonacci.hpp>
 
 TEST_CASE("Fibonacci number benchmarking", "[benchmark][fibonacci]")
 {

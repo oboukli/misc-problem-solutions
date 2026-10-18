@@ -9,7 +9,7 @@
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/add_two_numbers.hpp"
+#include <forfun/add_two_numbers.hpp>
 
 TEST_CASE("Add two numbers", "[add_two_numbers]")
 {

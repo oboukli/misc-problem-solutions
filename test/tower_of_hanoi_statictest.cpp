@@ -9,7 +9,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/tower_of_hanoi.hpp"
+#include <forfun/tower_of_hanoi.hpp>
 
 TEST_CASE("Tower of Hanoi", "[tower_of_hanoi]")
 {

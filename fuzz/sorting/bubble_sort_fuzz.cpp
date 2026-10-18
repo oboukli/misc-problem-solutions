@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/sorting/bubble_sort.hpp"
+#include <forfun/sorting/bubble_sort.hpp>
 
 namespace {
 

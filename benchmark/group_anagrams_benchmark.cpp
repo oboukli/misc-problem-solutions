@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/group_anagrams.hpp"
+#include <forfun/group_anagrams.hpp>
 
 TEST_CASE("Group Anagrams benchmarking", "[benchmark][group_anagrams]")
 {

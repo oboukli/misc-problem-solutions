@@ -10,7 +10,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/container/min_stack.hpp"
+#include <forfun/container/min_stack.hpp>
 
 TEST_CASE("Min stack benchmarking", "[benchmark][min_stack]")
 {

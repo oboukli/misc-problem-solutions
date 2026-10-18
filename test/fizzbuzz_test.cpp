@@ -13,7 +13,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
-#include "forfun/fizzbuzz.hpp"
+#include <forfun/fizzbuzz.hpp>
 
 TEST_CASE("Fizz buzz (namespace basic)", "[fizzbuzz]")
 {

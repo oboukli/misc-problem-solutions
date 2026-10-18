@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/graph/depth_first_search.hpp"
-#include "forfun/graph/vertex.hpp"
+#include <forfun/graph/depth_first_search.hpp>
+#include <forfun/graph/vertex.hpp>
 
 TEST_CASE(
     "Depth-first search benchmarking", "[benchmark][graph][depth_first_search]"

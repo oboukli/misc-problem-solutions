@@ -15,7 +15,7 @@
 
 #include <absl/random/bit_gen_ref.h>
 
-#include "forfun/permutation_in_string.hpp"
+#include <forfun/permutation_in_string.hpp>
 
 namespace {
 

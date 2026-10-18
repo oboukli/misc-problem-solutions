@@ -13,7 +13,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/sub_array_sums.hpp"
+#include <forfun/sub_array_sums.hpp>
 
 TEST_CASE("Sums of subarrays of length k", "[sub_array_sums]")
 {

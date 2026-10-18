@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/longest_consecutive_sequence.hpp"
+#include <forfun/longest_consecutive_sequence.hpp>
 
 TEST_CASE(
     "Longest consecutive sequence benchmarking",

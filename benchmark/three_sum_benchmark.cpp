@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/three_sum.hpp"
+#include <forfun/three_sum.hpp>
 
 TEST_CASE("Three sum benchmarking", "[benchmark][three_sum]")
 {

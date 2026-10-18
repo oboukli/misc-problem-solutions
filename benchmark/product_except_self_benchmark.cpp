@@ -14,7 +14,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/product_except_self.hpp"
+#include <forfun/product_except_self.hpp>
 
 TEST_CASE(
     "Product of array except self benchmarking",

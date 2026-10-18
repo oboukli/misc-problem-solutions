@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/graph/binary_tree_diameter.hpp"
-#include "forfun/graph/binary_tree_node.hpp"
+#include <forfun/graph/binary_tree_diameter.hpp>
+#include <forfun/graph/binary_tree_node.hpp>
 
 TEST_CASE(
     "Diameter of binary tree benchmarking", "[benchmark][binary_tree_diameter]"

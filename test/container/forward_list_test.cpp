@@ -6,7 +6,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/container/forward_list.hpp"
+#include <forfun/container/forward_list.hpp>
 
 TEST_CASE("Forward list", "[container][forward_list][dynamic_allocation]")
 {

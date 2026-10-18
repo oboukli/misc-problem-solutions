@@ -14,7 +14,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/two_sum.hpp"
+#include <forfun/two_sum.hpp>
 
 namespace {
 

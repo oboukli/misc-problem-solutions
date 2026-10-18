@@ -9,7 +9,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/container/trie.hpp"
+#include <forfun/container/trie.hpp>
 
 TEST_CASE("Trie", "[trie]")
 {

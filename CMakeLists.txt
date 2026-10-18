@@ -146,6 +146,11 @@ forfun_target_config(
     "forfun/valid_parentheses.cpp"
     "forfun/valid_sudoku.cpp"
 )
+target_link_libraries(
+  forfun_core
+  PRIVATE
+    forfun_common
+)
 
 forfun_target_config(
   forfun_experimental
@@ -173,6 +178,11 @@ forfun_target_config(
     "forfun/container/min_stack.cpp"
     "forfun/container/trie.cpp"
     "forfun/runtime/allocator_config.cpp"
+)
+target_link_libraries(
+  forfun_experimental
+  PRIVATE
+    forfun_common
 )
 target_link_libraries(
   forfun_experimental

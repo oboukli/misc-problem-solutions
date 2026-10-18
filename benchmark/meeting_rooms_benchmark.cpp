@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/meeting_rooms.hpp"
+#include <forfun/meeting_rooms.hpp>
 
 TEST_CASE("Meeting rooms benchmarking", "[benchmark][meeting_rooms]")
 {

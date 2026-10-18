@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/sequence/longest_non_repeating_substring.hpp"
+#include <forfun/sequence/longest_non_repeating_substring.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Longest substring without repeating characters",

@@ -14,11 +14,11 @@
 
 #include <nanobench.h>
 
-#include "forfun/add_two_numbers.hpp"
+#include <forfun/add_two_numbers.hpp>
 
-#include "forfun_c/add_two_numbers.h"
-#include "forfun_c/container/forward_list.h"
-#include "forfun_c/mem/mem.h"
+#include <forfun_c/add_two_numbers.h>
+#include <forfun_c/container/forward_list.h>
+#include <forfun_c/mem/mem.h>
 
 TEST_CASE("Add two numbers benchmarking", "[benchmark][add_two_numbers]")
 {

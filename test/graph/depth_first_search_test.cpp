@@ -15,8 +15,8 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/graph/depth_first_search.hpp"
-#include "forfun/graph/vertex.hpp"
+#include <forfun/graph/depth_first_search.hpp>
+#include <forfun/graph/vertex.hpp>
 
 namespace {
 

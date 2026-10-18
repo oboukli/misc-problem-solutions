@@ -22,7 +22,7 @@
 #include <utility>
 #include <vector>
 
-#include "forfun/common/concepts.hpp"
+#include <forfun/common/concepts.hpp>
 
 namespace forfun::evaluate_reverse_polish_notation {
 

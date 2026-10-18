@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/evaluate_reverse_polish_notation.hpp"
+#include <forfun/evaluate_reverse_polish_notation.hpp>
 
 TEST_CASE(
     "Evaluate reverse polish notation benchmarking",

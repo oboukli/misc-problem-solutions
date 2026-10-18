@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/search/search_matrix.hpp"
+#include <forfun/search/search_matrix.hpp>
 
 TEST_CASE("Search matrix benchmarking", "[benchmark][search_matrix]")
 {

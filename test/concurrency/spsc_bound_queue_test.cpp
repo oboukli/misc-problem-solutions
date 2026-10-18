@@ -18,7 +18,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/concurrency/spsc_bound_queue.hpp"
+#include <forfun/concurrency/spsc_bound_queue.hpp>
 
 namespace {
 

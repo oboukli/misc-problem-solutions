@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/encode_and_decode_strings.hpp"
+#include <forfun/encode_and_decode_strings.hpp>
 
 namespace {
 

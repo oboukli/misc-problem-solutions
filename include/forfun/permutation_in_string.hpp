@@ -16,8 +16,8 @@
 #include <iterator>
 #include <string_view>
 
-#include "forfun/common/concepts.hpp"
-#include "forfun/common/type_traits.hpp"
+#include <forfun/common/concepts.hpp>
+#include <forfun/common/type_traits.hpp>
 
 namespace forfun::permutation_in_string {
 

@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/trapping_rainwater.hpp"
+#include <forfun/trapping_rainwater.hpp>
 
 TEST_CASE("Trapping Rainwater", "[trapping_rainwater]")
 {
