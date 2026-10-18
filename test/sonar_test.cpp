@@ -7,7 +7,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include "forfun/sonar.hpp"
+#include <forfun/sonar.hpp>
 
 TEST_CASE("Sonar", "[sonar]")
 {

@@ -10,7 +10,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
+#include <forfun/project_euler/p0001_multiples_of_3_or_5.hpp>
 
 TEST_CASE(
     "Multiples of three or five benchmarking",

@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/factorial.hpp"
+#include <forfun/factorial.hpp>
 
 TEST_CASE("Factorial benchmarking", "[benchmark][factorial]")
 {

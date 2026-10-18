@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common/io.hpp"
+#include <forfun/common/io.hpp>
 
 TEST_CASE("Null stream buffer", "[null_streambuf]")
 {

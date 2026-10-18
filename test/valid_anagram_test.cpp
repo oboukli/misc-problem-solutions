@@ -11,7 +11,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include "forfun/valid_anagram.hpp"
+#include <forfun/valid_anagram.hpp>
 
 namespace {
 

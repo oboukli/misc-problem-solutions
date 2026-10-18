@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/sorting/quicksort.hpp"
+#include <forfun/sorting/quicksort.hpp>
 
 namespace {
 

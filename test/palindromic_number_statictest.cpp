@@ -6,7 +6,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/palindromic_number.hpp"
+#include <forfun/palindromic_number.hpp>
 
 TEST_CASE("Palindromic number (static)", "[palindromic_number]")
 {

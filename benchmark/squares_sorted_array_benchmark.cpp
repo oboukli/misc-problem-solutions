@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/squares_sorted_array.hpp"
+#include <forfun/squares_sorted_array.hpp>
 
 TEST_CASE(
     "Squares of a sorted array benchmarking",

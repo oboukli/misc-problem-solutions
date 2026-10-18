@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common/limits.hpp"
+#include <forfun/common/limits.hpp>
 
 TEST_CASE("Domain size", "[limits]")
 {

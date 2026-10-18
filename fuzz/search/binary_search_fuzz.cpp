@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/search/binary_search.hpp"
+#include <forfun/search/binary_search.hpp>
 
 namespace {
 

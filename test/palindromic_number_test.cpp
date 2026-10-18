@@ -11,7 +11,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 
-#include "forfun/palindromic_number.hpp"
+#include <forfun/palindromic_number.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Palindromic number",

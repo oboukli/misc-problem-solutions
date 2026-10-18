@@ -10,7 +10,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/gcd.hpp"
+#include <forfun/gcd.hpp>
 
 TEST_CASE("Greatest common divisor benchmarking", "[benchmark][gcd]")
 {

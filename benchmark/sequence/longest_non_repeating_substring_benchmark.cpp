@@ -12,7 +12,7 @@
 
 #include <nameof.hpp>
 
-#include "forfun/sequence/longest_non_repeating_substring.hpp"
+#include <forfun/sequence/longest_non_repeating_substring.hpp>
 
 TEST_CASE(
     "longest_non_repeating_substring benchmarking",

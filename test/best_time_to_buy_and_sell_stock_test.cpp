@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/best_time_to_buy_and_sell_stock.hpp"
+#include <forfun/best_time_to_buy_and_sell_stock.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Best time to buy and sell stock",

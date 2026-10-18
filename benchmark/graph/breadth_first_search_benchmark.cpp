@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/graph/breadth_first_search.hpp"
-#include "forfun/graph/vertex.hpp"
+#include <forfun/graph/breadth_first_search.hpp>
+#include <forfun/graph/vertex.hpp>
 
 TEST_CASE(
     "Breadth-first search benchmarking",

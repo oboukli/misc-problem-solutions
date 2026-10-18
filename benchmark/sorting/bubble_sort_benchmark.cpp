@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/sorting/bubble_sort.hpp"
+#include <forfun/sorting/bubble_sort.hpp>
 
 TEST_CASE("Bubble sort benchmarking", "[benchmark][sorting][bubble_sort]")
 {

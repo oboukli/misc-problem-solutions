@@ -13,7 +13,7 @@
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/encode_and_decode_strings.hpp"
+#include <forfun/encode_and_decode_strings.hpp>
 
 TEST_CASE("Encode strings", "[encode_and_decode_strings]")
 {

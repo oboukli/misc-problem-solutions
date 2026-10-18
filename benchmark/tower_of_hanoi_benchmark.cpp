@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/tower_of_hanoi.hpp"
+#include <forfun/tower_of_hanoi.hpp>
 
 TEST_CASE("Tower of Hanoi benchmarking", "[benchmark][tower_of_hanoi]")
 {

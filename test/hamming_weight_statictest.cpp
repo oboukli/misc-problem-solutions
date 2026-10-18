@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/hamming_weight.hpp"
+#include <forfun/hamming_weight.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Humming weight",

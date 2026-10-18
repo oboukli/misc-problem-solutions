@@ -12,8 +12,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/palindrome.hpp"
-#include "forfun_c/palindrome.h"
+#include <forfun/palindrome.hpp>
+#include <forfun_c/palindrome.h>
 
 TEST_CASE("Palindrome benchmarking", "[benchmark][palindrome]")
 {

@@ -16,7 +16,8 @@
 
 #include <gsl/pointers>
 
-#include "forfun/common/type_traits.hpp"
+#include <forfun/common/type_traits.hpp>
+
 #include "forfun/container/internal/list_const_iterator.hpp"
 #include "forfun/container/internal/list_iterator.hpp"
 #include "forfun/container/internal/list_node.hpp"

@@ -13,8 +13,9 @@
 
 #include <nanobench.h>
 
-#include "forfun/common/io.hpp"
-#include "forfun/fizzbuzz.hpp"
+#include <forfun/common/io.hpp>
+
+#include <forfun/fizzbuzz.hpp>
 
 TEST_CASE("Fizz buzz benchmarking", "[benchmark][fizzbuzz]")
 {

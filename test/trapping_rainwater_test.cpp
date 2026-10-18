@@ -11,7 +11,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-#include "forfun/trapping_rainwater.hpp"
+#include <forfun/trapping_rainwater.hpp>
 
 TEST_CASE("Trapping Rainwater", "[trapping_rainwater]")
 {

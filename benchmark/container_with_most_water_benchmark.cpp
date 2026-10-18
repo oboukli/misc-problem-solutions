@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/container_with_most_water.hpp"
+#include <forfun/container_with_most_water.hpp>
 
 TEST_CASE(
     "Container with most water benchmarking",

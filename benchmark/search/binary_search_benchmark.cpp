@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/search/binary_search.hpp"
+#include <forfun/search/binary_search.hpp>
 
 TEST_CASE("Binary search benchmarking", "[benchmark][search][binary_search]")
 {

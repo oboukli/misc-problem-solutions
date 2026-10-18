@@ -7,7 +7,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/math/math.hpp"
+#include <forfun/math/math.hpp>
 
 TEST_CASE("Integer division ceiling", "[math]")
 {

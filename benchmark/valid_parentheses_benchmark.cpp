@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/valid_parentheses.hpp"
+#include <forfun/valid_parentheses.hpp>
 
 TEST_CASE("Valid parentheses benchmarking", "[benchmark][valid_parentheses]")
 {

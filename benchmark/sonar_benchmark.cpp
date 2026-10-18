@@ -10,7 +10,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/sonar.hpp"
+#include <forfun/sonar.hpp>
 
 TEST_CASE("Sonar benchmarking", "[benchmark][sonar]")
 {

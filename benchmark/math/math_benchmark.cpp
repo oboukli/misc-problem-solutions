@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/math/math.hpp"
+#include <forfun/math/math.hpp>
 
 TEST_CASE("Integer division ceiling benchmarking", "[benchmark][math]")
 {

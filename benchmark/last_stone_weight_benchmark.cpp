@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/last_stone_weight.hpp"
+#include <forfun/last_stone_weight.hpp>
 
 TEST_CASE("Last stone weight benchmarking", "[benchmark][last_stone_weight]")
 {

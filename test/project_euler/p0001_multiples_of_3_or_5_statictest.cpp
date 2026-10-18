@@ -7,7 +7,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/project_euler/p0001_multiples_of_3_or_5.hpp"
+#include <forfun/project_euler/p0001_multiples_of_3_or_5.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Multiples of three or five",

@@ -7,8 +7,8 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/graph/balanced_binary_tree.hpp"
-#include "forfun/graph/binary_tree_node.hpp"
+#include <forfun/graph/balanced_binary_tree.hpp>
+#include <forfun/graph/binary_tree_node.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Balanced binary tree",

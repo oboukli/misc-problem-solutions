@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/search/koko_eating_bananas.hpp"
+#include <forfun/search/koko_eating_bananas.hpp>
 
 TEST_CASE(
     "Koko eating bananas benchmarking", "[benchmark][koko_eating_bananas]"

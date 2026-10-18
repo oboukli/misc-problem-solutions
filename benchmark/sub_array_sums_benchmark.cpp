@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/sub_array_sums.hpp"
+#include <forfun/sub_array_sums.hpp>
 
 TEST_CASE(
     "Sum of all subarrays of size K benchmarking", "[benchmark][sub_array_sums]"

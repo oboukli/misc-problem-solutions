@@ -13,7 +13,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/container/trie.hpp"
+#include <forfun/container/trie.hpp>
 
 TEST_CASE("Trie benchmarking", "[benchmark][trie]")
 {

@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/valid_sudoku.hpp"
+#include <forfun/valid_sudoku.hpp>
 
 TEST_CASE("Valid Sudoku benchmarking", "[benchmark][valid_sudoku]")
 {

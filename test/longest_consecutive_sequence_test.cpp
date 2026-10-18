@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/longest_consecutive_sequence.hpp"
+#include <forfun/longest_consecutive_sequence.hpp>
 
 namespace {
 

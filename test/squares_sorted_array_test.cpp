@@ -14,7 +14,7 @@
 #include <catch2/matchers/catch_matchers.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/squares_sorted_array.hpp"
+#include <forfun/squares_sorted_array.hpp>
 
 namespace {
 

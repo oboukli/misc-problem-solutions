@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/search/minimum_rotated_element.hpp"
+#include <forfun/search/minimum_rotated_element.hpp>
 
 TEST_CASE(
     "Find minimum in rotated sorted array benchmarking",

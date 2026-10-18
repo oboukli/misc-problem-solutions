@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/set_matrix_zeroes.hpp"
+#include <forfun/set_matrix_zeroes.hpp>
 
 TEST_CASE(
     "Set matrix zeros benchmarking", "[benchmark][matrix][set_matrix_zeroes]"

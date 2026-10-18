@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/concurrency/spsc_bound_queue.hpp"
+#include <forfun/concurrency/spsc_bound_queue.hpp>
 
 TEST_CASE(
     "Wait-free SPSC append-only bounded queue benchmarking",

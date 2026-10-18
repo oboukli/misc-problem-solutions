@@ -9,7 +9,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/daily_temperatures.hpp"
+#include <forfun/daily_temperatures.hpp>
 
 TEST_CASE("Daily temperatures", "[daily_temperatures]")
 {

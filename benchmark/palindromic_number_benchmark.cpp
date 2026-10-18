@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/palindromic_number.hpp"
+#include <forfun/palindromic_number.hpp>
 
 TEST_CASE("Palindromic number benchmarking", "[benchmark][palindromic_number]")
 {

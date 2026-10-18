@@ -10,8 +10,8 @@
 
 #include <nanobench.h>
 
-#include "forfun/graph/binary_tree_node.hpp"
-#include "forfun/graph/invert_binary_tree.hpp"
+#include <forfun/graph/binary_tree_node.hpp>
+#include <forfun/graph/invert_binary_tree.hpp>
 
 TEST_CASE("Invert binary tree benchmarking", "[benchmark][invert_binary_tree]")
 {

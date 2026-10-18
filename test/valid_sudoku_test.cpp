@@ -9,7 +9,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/valid_sudoku.hpp"
+#include <forfun/valid_sudoku.hpp>
 
 namespace {
 

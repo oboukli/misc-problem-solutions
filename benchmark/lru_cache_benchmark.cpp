@@ -11,7 +11,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/lru_cache.hpp"
+#include <forfun/lru_cache.hpp>
 
 namespace {
 

@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/contains_duplicate.hpp"
+#include <forfun/contains_duplicate.hpp>
 
 TEST_CASE("Contains duplicate benchmarking", "[benchmark][contains_duplicate]")
 {

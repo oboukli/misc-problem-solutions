@@ -14,8 +14,8 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/single_number.hpp"
-#include "forfun_c/single_number.h"
+#include <forfun/single_number.hpp>
+#include <forfun_c/single_number.h>
 
 namespace {
 

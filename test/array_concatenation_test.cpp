@@ -10,7 +10,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/array_concatenation.hpp"
+#include <forfun/array_concatenation.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Concatenate empty array",

@@ -7,7 +7,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/gcd.hpp"
+#include <forfun/gcd.hpp>
 
 TEMPLATE_TEST_CASE_SIG(
     "Greatest common divisor (zero argument)",

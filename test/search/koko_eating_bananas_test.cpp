@@ -9,7 +9,7 @@
 #include <catch2/catch_message.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/search/koko_eating_bananas.hpp"
+#include <forfun/search/koko_eating_bananas.hpp>
 
 TEST_CASE("Koko eating bananas", "[koko_eating_bananas]")
 {

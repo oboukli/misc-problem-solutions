@@ -17,7 +17,8 @@
 
 #include <gsl/pointers>
 
-#include "forfun/common/type_traits.hpp"
+#include <forfun/common/type_traits.hpp>
+
 #include "forfun/container/forward_list_node.hpp"
 
 namespace forfun::container {

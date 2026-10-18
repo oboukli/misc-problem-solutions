@@ -13,7 +13,7 @@
 
 #include <gtest/gtest.h>
 
-#include "forfun/search/minimum_rotated_element.hpp"
+#include <forfun/search/minimum_rotated_element.hpp>
 
 namespace {
 

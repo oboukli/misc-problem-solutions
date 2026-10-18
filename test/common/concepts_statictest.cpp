@@ -14,7 +14,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/common/concepts.hpp"
+#include <forfun/common/concepts.hpp>
 
 namespace {
 

@@ -16,8 +16,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/container/internal/list_iterator.hpp"
-#include "forfun/container/list.hpp"
+#include <forfun/container/internal/list_iterator.hpp>
+#include <forfun/container/list.hpp>
 
 TEST_CASE("Linked list iterator traits", "[container][list][list_iterator]")
 {

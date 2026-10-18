@@ -8,7 +8,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/sorting/quicksort.hpp"
+#include <forfun/sorting/quicksort.hpp>
 
 TEST_CASE("Quicksort sort", "[sorting][quicksort]")
 {

@@ -14,7 +14,7 @@
 
 #include "catch2_custom/matchers.hpp"
 
-#include "forfun/three_sum.hpp"
+#include <forfun/three_sum.hpp>
 
 namespace {
 

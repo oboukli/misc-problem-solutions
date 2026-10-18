@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/trapping_rainwater.hpp"
+#include <forfun/trapping_rainwater.hpp>
 
 TEST_CASE("Trapping rainwater benchmarking", "[benchmark][trapping_rainwater]")
 {

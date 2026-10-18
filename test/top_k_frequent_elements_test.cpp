@@ -15,7 +15,7 @@
 #include <catch2/matchers/catch_matchers_container_properties.hpp>
 #include <catch2/matchers/catch_matchers_range_equals.hpp>
 
-#include "forfun/top_k_frequent_elements.hpp"
+#include <forfun/top_k_frequent_elements.hpp>
 
 #if !defined(__GLIBCXX__) || __GLIBCXX__ >= 20250425
 

@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/permutation_in_string.hpp"
+#include <forfun/permutation_in_string.hpp>
 
 TEST_CASE(
     "Permutation in string benchmarking", "[benchmark][permutation_in_string]"

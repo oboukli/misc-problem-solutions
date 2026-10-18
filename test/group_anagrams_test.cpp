@@ -14,7 +14,7 @@
 
 #include "catch2_custom/matchers.hpp"
 
-#include "forfun/group_anagrams.hpp"
+#include <forfun/group_anagrams.hpp>
 
 TEST_CASE("Group anagrams", "[group_anagrams]")
 {

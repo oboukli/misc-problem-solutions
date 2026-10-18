@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/maximum_subarray.hpp"
+#include <forfun/maximum_subarray.hpp>
 
 TEST_CASE("Maximum subarray benchmarking", "[benchmark][maximum_subarray]")
 {

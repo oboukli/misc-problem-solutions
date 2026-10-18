@@ -6,7 +6,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun/graph/binary_tree_node.hpp"
+#include <forfun/graph/binary_tree_node.hpp>
 
 TEST_CASE("Binary tree node", "[binary_tree_node_static]")
 {

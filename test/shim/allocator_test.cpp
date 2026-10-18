@@ -11,9 +11,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include "forfun_c/common.h"
-#include "forfun_c/mem/mem.h"
-#include "forfun_c/shim/allocator.h"
+#include <forfun_c/common.h>
+#include <forfun_c/mem/mem.h>
+#include <forfun_c/shim/allocator.h>
 
 TEST_CASE("Shim memory allocator", "[shim_allocator]")
 {

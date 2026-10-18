@@ -12,7 +12,7 @@
 
 #include <nanobench.h>
 
-#include "forfun/majority_element.hpp"
+#include <forfun/majority_element.hpp>
 
 TEST_CASE("Boyer-Moore majority benchmarking", "[benchmark][majority_element]")
 {

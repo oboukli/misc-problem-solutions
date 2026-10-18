@@ -15,7 +15,7 @@
 #include <functional>
 #include <iterator>
 
-#include "forfun/common/type_traits.hpp"
+#include <forfun/common/type_traits.hpp>
 
 namespace forfun::container::min_stack {
 
