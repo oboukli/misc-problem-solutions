@@ -15,6 +15,7 @@ on:
       - main
 
 permissions:
+  contents: read
   packages: write
 
 jobs:
@@ -369,6 +370,7 @@ jobs:
       - name: Check test driver of lock-free library with Valgrind Memcheck
         run: >-
           /usr/bin/valgrind
+          --error-exitcode=1
           --tool=memcheck
           --leak-check=full
           --show-leak-kinds=all
