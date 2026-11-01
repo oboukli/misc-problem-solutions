@@ -5,10 +5,25 @@
 // SPDX-License-Identifier: MIT
 
 #include <concepts>
+#include <functional>
 
 #include <catch2/catch_test_macros.hpp>
 
 #include <forfun/common/type_traits.hpp>
+
+namespace {
+
+struct dummy_incomplete;
+
+struct dummy_non_default_constructable final {
+    explicit dummy_non_default_constructable(int);
+};
+
+struct dummy_int_wrapper final {
+    using type = int;
+};
+
+} // namespace
 
 TEST_CASE("Trait conditional_const_t", "[type_traits]")
 {
@@ -259,6 +274,80 @@ TEST_CASE("Trait type_is_one_of_v", "[type_traits]")
         STATIC_REQUIRE_FALSE(
             forfun::common::type_traits::
                 type_is_one_of_v<double, char, float, int>
+        );
+    }
+}
+
+TEST_CASE("Trait unwrap_type_t", "[type_traits]")
+{
+    SECTION("Positive")
+    {
+        STATIC_REQUIRE(
+            std::same_as<int, forfun::common::type_traits::unwrap_type_t<int>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                int const,
+                forfun::common::type_traits::unwrap_type_t<int const>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<int*, forfun::common::type_traits::unwrap_type_t<int*>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<int&, forfun::common::type_traits::unwrap_type_t<int&>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                forfun::common::type_traits::unwrap_type_t<int&&>,
+                int&&>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                dummy_incomplete,
+                forfun::common::type_traits::unwrap_type_t<dummy_incomplete>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                dummy_non_default_constructable,
+                forfun::common::type_traits::unwrap_type_t<
+                    dummy_non_default_constructable>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                int,
+                forfun::common::type_traits::unwrap_type_t<dummy_int_wrapper>>
+        );
+
+        STATIC_REQUIRE(
+            std::same_as<
+                int,
+                forfun::common::type_traits::unwrap_type_t<
+                    std::reference_wrapper<int>>>
+        );
+
+        STATIC_REQUIRE(
+            // NOLINTBEGIN(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
+            std::same_as<
+                int[2],
+                forfun::common::type_traits::unwrap_type_t<int[2]>>
+            // NOLINTEND(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
+
+        );
+    }
+
+    SECTION("Negative")
+    {
+        STATIC_REQUIRE_FALSE(
+            std::same_as<
+                int,
+                forfun::common::type_traits::unwrap_type_t<int const>>
         );
     }
 }

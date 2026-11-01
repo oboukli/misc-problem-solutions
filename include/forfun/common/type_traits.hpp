@@ -37,6 +37,11 @@ template <typename T, typename... Ts>
 constexpr bool const type_is_one_of_v
     = std::disjunction_v<std::is_same<T, Ts>...>;
 
+template <typename T>
+using unwrap_type_t = std::conditional_t<requires {
+    typename T::type;
+}, T, std::type_identity<T>>::type;
+
 } // namespace forfun::common::type_traits
 
 #endif // FORFUN_COMMON_TYPE_TRAITS_HPP_
