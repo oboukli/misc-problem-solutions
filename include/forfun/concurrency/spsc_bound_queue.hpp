@@ -62,7 +62,7 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 /// Features:
 /// - Wait-free (lock-free) concurrency model
 /// - First in, first out (FIFO) order semantics
-/// - Multi-pass reads via \c std::span
+/// - Multi-pass reads via @c std::span
 /// - Bounded, fixed-capacity, and non-circular
 /// - Inline storage with no dynamic allocation
 /// - Append-only; elements are deconstructed when the queue is deconstructed.
@@ -75,9 +75,8 @@ template <typename T, std::size_t Capacity>
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
 class spsc_bound_queue final {
 private:
-    using pointer = T*;
-
-    using raw_queue_type = std::array<std::byte, Capacity * sizeof(T)>;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
+    using raw_queue_type = std::byte[Capacity * sizeof(T)];
 
 public:
     using size_type = std::size_t;
@@ -107,7 +106,7 @@ public:
     spsc_bound_queue(spsc_bound_queue&&) = delete;
 
     ~spsc_bound_queue()
-        requires(std::is_trivially_destructible_v<value_type>)
+        requires std::is_trivially_destructible_v<value_type>
     = default;
 
     ~spsc_bound_queue()
@@ -124,7 +123,6 @@ public:
     /// comparision is undefined behavior.
     auto operator<=>(spsc_bound_queue const&) const = delete;
 
-    /// @note Not thread-safe.
     [[nodiscard]] auto empty_unsafe() const noexcept -> bool
     {
         using std::atomic_load_explicit;
@@ -137,9 +135,7 @@ public:
     template <typename... Args>
     auto emplace_back(Args&&... args) noexcept -> reference
     {
-        using std::atomic_fetch_add_explicit;
-        using std::atomic_load_explicit;
-        using std::data;
+        using std::atomic_store_explicit;
 
         static_assert(capacity_ != 0UZ);
 
@@ -147,7 +143,7 @@ public:
 
         auto* const ptr_emplaced{std::construct_at(
             detail::get_ptr_to_obj<value_type>(
-                data(raw_queue_), write_cursor_cached_
+                std::data(raw_queue_), write_cursor_cached_
             ),
             std::forward<Args>(args)...
         )};
@@ -176,7 +172,6 @@ public:
     [[nodiscard]] auto to_span() noexcept -> span_type
     {
         using std::atomic_load_explicit;
-        using std::data;
 
         auto const cursor_snapshot{
             atomic_load_explicit(&write_cursor_, std::memory_order_acquire)
@@ -211,10 +206,8 @@ private:
 
     static_assert(std::atomic<cursor_type>::is_always_lock_free);
 
-    alignas(T) raw_queue_type raw_queue_
-        /*[[indeterminate]]*/;
+    alignas(T) raw_queue_type raw_queue_;
 
-    static_assert(std::same_as<typename raw_queue_type::size_type, size_type>);
     static_assert(std::same_as<typename span_type::size_type, size_type>);
 
 #if defined(__GNUC__) && !defined(__clang__)
