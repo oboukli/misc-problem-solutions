@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <chrono>
 #include <cstddef>
 #include <ranges>
@@ -34,6 +35,101 @@ struct dummy_aggregate {
     // NOLINTEND(misc-non-private-member-variables-in-classes)
 
     auto operator==(dummy_aggregate const&) const -> bool = default;
+};
+
+struct dummy_with_tracked_destructor final {
+private:
+    static inline std::atomic<std::size_t> alive_instances_{};
+
+    static inline std::atomic<std::size_t> destructor_calls_{};
+
+    int dummy_value_;
+
+public:
+    static auto reset_destructor_call_counter() noexcept -> void
+    {
+        std::atomic_store_explicit(
+            &destructor_calls_, 0UZ, std::memory_order_relaxed
+        );
+    }
+
+    [[nodiscard]] static auto alive_instances() noexcept -> std::size_t
+    {
+        return std::atomic_load_explicit(
+            &alive_instances_, std::memory_order_relaxed
+        );
+    }
+
+    [[nodiscard]] static auto destructor_calls() noexcept -> std::size_t
+    {
+        return std::atomic_load_explicit(
+            &destructor_calls_, std::memory_order_relaxed
+        );
+    }
+
+    explicit dummy_with_tracked_destructor(int dummy_value) noexcept :
+        dummy_value_{dummy_value}
+    {
+        std::atomic_fetch_add_explicit(
+            &alive_instances_, 1UZ, std::memory_order_relaxed
+        );
+    }
+
+    dummy_with_tracked_destructor(dummy_with_tracked_destructor const&) noexcept
+        = default;
+
+    dummy_with_tracked_destructor(dummy_with_tracked_destructor&&) noexcept
+        = default;
+
+    ~dummy_with_tracked_destructor()
+    {
+        std::atomic_fetch_sub_explicit(
+            &alive_instances_, 1UZ, std::memory_order_relaxed
+        );
+
+        std::atomic_fetch_add_explicit(
+            &destructor_calls_, 1UZ, std::memory_order_relaxed
+        );
+    }
+
+    auto operator=(dummy_with_tracked_destructor const&) noexcept
+        -> dummy_with_tracked_destructor& = default;
+
+    auto operator=(dummy_with_tracked_destructor&&) noexcept
+        -> dummy_with_tracked_destructor& = default;
+
+    [[nodiscard]] auto get_value() const noexcept -> int
+    {
+        return dummy_value_;
+    }
+};
+
+static_assert(
+    std::is_nothrow_constructible_v<dummy_with_tracked_destructor, int>
+);
+
+class destructor_call_counter_guard final {
+public:
+    destructor_call_counter_guard() noexcept
+    {
+        dummy_with_tracked_destructor::reset_destructor_call_counter();
+    }
+
+    destructor_call_counter_guard(destructor_call_counter_guard const&)
+        = delete;
+
+    destructor_call_counter_guard(destructor_call_counter_guard&&) = delete;
+
+    ~destructor_call_counter_guard()
+    {
+        dummy_with_tracked_destructor::reset_destructor_call_counter();
+    }
+
+    auto operator=(destructor_call_counter_guard const&)
+        -> destructor_call_counter_guard& = delete;
+
+    auto operator=(destructor_call_counter_guard&&)
+        -> destructor_call_counter_guard& = delete;
 };
 
 } // namespace
@@ -384,6 +480,69 @@ TEST_CASE(
         }
 
         SUCCEED();
+    }
+
+    SECTION("Reset destroys queued non-trivial objects")
+    {
+        destructor_call_counter_guard const guard;
+        {
+            forfun::concurrency::wait_free::
+                spsc_bound_queue<dummy_with_tracked_destructor, 4>
+                    queue{};
+
+            queue.emplace_back(584141);
+            queue.emplace_back(604171);
+            queue.emplace_back(971767);
+
+            REQUIRE_FALSE(queue.empty_unsafe());
+
+            REQUIRE(dummy_with_tracked_destructor::alive_instances() == 3UZ);
+
+            REQUIRE(queue.to_span().size() == 3UZ);
+
+            REQUIRE(queue.to_span().front().get_value() == 584141);
+
+            REQUIRE(dummy_with_tracked_destructor::destructor_calls() == 0UZ);
+
+            queue.reset_unsafe();
+
+            REQUIRE(queue.empty_unsafe());
+
+            REQUIRE(dummy_with_tracked_destructor::alive_instances() == 0UZ);
+        }
+
+        REQUIRE(dummy_with_tracked_destructor::destructor_calls() == 3UZ);
+
+        REQUIRE(dummy_with_tracked_destructor::alive_instances() == 0UZ);
+    }
+
+    SECTION("Destructor destroys buffered non-trivial objects")
+    {
+        destructor_call_counter_guard const guard;
+        {
+            forfun::concurrency::wait_free::
+                spsc_bound_queue<dummy_with_tracked_destructor, 4>
+                    queue{};
+
+            queue.emplace_back(1062599);
+            queue.emplace_back(1282529);
+
+            REQUIRE_FALSE(queue.empty_unsafe());
+
+            REQUIRE(dummy_with_tracked_destructor::alive_instances() == 2UZ);
+
+            REQUIRE(queue.to_span().size() == 2UZ);
+
+            REQUIRE(queue.to_span().front().get_value() == 1062599);
+
+            REQUIRE(dummy_with_tracked_destructor::destructor_calls() == 0UZ);
+
+            REQUIRE(dummy_with_tracked_destructor::alive_instances() == 2UZ);
+        }
+
+        REQUIRE(dummy_with_tracked_destructor::destructor_calls() == 2UZ);
+
+        REQUIRE(dummy_with_tracked_destructor::alive_instances() == 0UZ);
     }
 
     SECTION(
