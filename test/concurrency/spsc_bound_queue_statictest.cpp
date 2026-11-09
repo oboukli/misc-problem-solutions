@@ -6,6 +6,7 @@
 
 #include <concepts>
 #include <cstddef>
+#include <new>
 #include <span>
 #include <type_traits>
 #include <utility>
@@ -20,25 +21,35 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     {
         STATIC_REQUIRE_FALSE(
             std::has_unique_object_representations_v<
-                forfun::concurrency::wait_free::spsc_bound_queue<char, 8>>
+                forfun::concurrency::wait_free::spsc_bound_queue<
+                    char,
+                    8,
+                    std::hardware_destructive_interference_size>>
         );
 
         STATIC_REQUIRE_FALSE(
             std::has_unique_object_representations_v<
-                forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
+                forfun::concurrency::wait_free::spsc_bound_queue<
+                    int,
+                    8,
+                    std::hardware_destructive_interference_size>>
         );
     }
 
     SECTION("Construction and initialization")
     {
         STATIC_REQUIRE_FALSE(
-            std::copyable<
-                forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
+            std::copyable<forfun::concurrency::wait_free::spsc_bound_queue<
+                int,
+                8,
+                std::hardware_destructive_interference_size>>
         );
 
         STATIC_REQUIRE_FALSE(
-            std::movable<
-                forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
+            std::movable<forfun::concurrency::wait_free::spsc_bound_queue<
+                int,
+                8,
+                std::hardware_destructive_interference_size>>
         );
     }
 
@@ -46,22 +57,29 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     {
         STATIC_REQUIRE_FALSE(
             std::equality_comparable<
-                forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
+                forfun::concurrency::wait_free::spsc_bound_queue<
+                    int,
+                    8,
+                    std::hardware_destructive_interference_size>>
         );
     }
 
     SECTION("Capacity is as requested")
     {
-        using queue_type
-            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            8,
+            std::hardware_destructive_interference_size>;
 
         STATIC_REQUIRE(queue_type::capacity() == 8UZ);
     }
 
     SECTION("Type aliases")
     {
-        using queue_type
-            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            8,
+            std::hardware_destructive_interference_size>;
 
         STATIC_REQUIRE(std::same_as<queue_type::size_type, std::size_t>);
 
@@ -72,8 +90,10 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("To span")
     {
-        using queue_type
-            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
+        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            8,
+            std::hardware_destructive_interference_size>;
 
         STATIC_REQUIRE(std::same_as<queue_type::span_type, std::span<int>>);
 
