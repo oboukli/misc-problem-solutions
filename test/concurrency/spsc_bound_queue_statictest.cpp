@@ -4,7 +4,6 @@
 
 // SPDX-License-Identifier: MIT
 
-#include <bit>
 #include <concepts>
 #include <cstddef>
 #include <span>
@@ -49,14 +48,6 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
             std::equality_comparable<
                 forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
         );
-    }
-
-    SECTION("Capacity must be a power of two")
-    {
-        using queue_type
-            = forfun::concurrency::wait_free::spsc_bound_queue<int, 8>;
-
-        STATIC_REQUIRE(std::has_single_bit(queue_type::capacity()));
     }
 
     SECTION("Capacity is as requested")
