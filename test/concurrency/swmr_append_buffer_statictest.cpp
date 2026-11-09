@@ -13,15 +13,15 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <forfun/concurrency/spsc_bound_queue.hpp>
+#include <forfun/concurrency/swmr_append_buffer.hpp>
 
-TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
+TEST_CASE("Wait-free SWMR append buffer", "[swmr_append_buffer]")
 {
     SECTION("Object representations is not unique")
     {
         STATIC_REQUIRE_FALSE(
             std::has_unique_object_representations_v<
-                forfun::concurrency::wait_free::spsc_bound_queue<
+                forfun::concurrency::wait_free::swmr_append_buffer<
                     char,
                     8,
                     std::hardware_destructive_interference_size>>
@@ -29,7 +29,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
         STATIC_REQUIRE_FALSE(
             std::has_unique_object_representations_v<
-                forfun::concurrency::wait_free::spsc_bound_queue<
+                forfun::concurrency::wait_free::swmr_append_buffer<
                     int,
                     8,
                     std::hardware_destructive_interference_size>>
@@ -39,14 +39,14 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     SECTION("Construction and initialization")
     {
         STATIC_REQUIRE_FALSE(
-            std::copyable<forfun::concurrency::wait_free::spsc_bound_queue<
+            std::copyable<forfun::concurrency::wait_free::swmr_append_buffer<
                 int,
                 8,
                 std::hardware_destructive_interference_size>>
         );
 
         STATIC_REQUIRE_FALSE(
-            std::movable<forfun::concurrency::wait_free::spsc_bound_queue<
+            std::movable<forfun::concurrency::wait_free::swmr_append_buffer<
                 int,
                 8,
                 std::hardware_destructive_interference_size>>
@@ -57,7 +57,7 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
     {
         STATIC_REQUIRE_FALSE(
             std::equality_comparable<
-                forfun::concurrency::wait_free::spsc_bound_queue<
+                forfun::concurrency::wait_free::swmr_append_buffer<
                     int,
                     8,
                     std::hardware_destructive_interference_size>>
@@ -66,41 +66,41 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 
     SECTION("Capacity is as requested")
     {
-        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+        using buffer_type = forfun::concurrency::wait_free::swmr_append_buffer<
             int,
             8,
             std::hardware_destructive_interference_size>;
 
-        STATIC_REQUIRE(queue_type::capacity() == 8UZ);
+        STATIC_REQUIRE(buffer_type::capacity() == 8UZ);
     }
 
     SECTION("Type aliases")
     {
-        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+        using buffer_type = forfun::concurrency::wait_free::swmr_append_buffer<
             int,
             8,
             std::hardware_destructive_interference_size>;
 
-        STATIC_REQUIRE(std::same_as<queue_type::size_type, std::size_t>);
+        STATIC_REQUIRE(std::same_as<buffer_type::size_type, std::size_t>);
 
-        STATIC_REQUIRE(std::same_as<queue_type::value_type, int>);
+        STATIC_REQUIRE(std::same_as<buffer_type::value_type, int>);
 
-        STATIC_REQUIRE(std::same_as<queue_type::reference, int&>);
+        STATIC_REQUIRE(std::same_as<buffer_type::reference, int&>);
     }
 
     SECTION("To span")
     {
-        using queue_type = forfun::concurrency::wait_free::spsc_bound_queue<
+        using buffer_type = forfun::concurrency::wait_free::swmr_append_buffer<
             int,
             8,
             std::hardware_destructive_interference_size>;
 
-        STATIC_REQUIRE(std::same_as<queue_type::span_type, std::span<int>>);
+        STATIC_REQUIRE(std::same_as<buffer_type::span_type, std::span<int>>);
 
         STATIC_REQUIRE(
             std::same_as<
-                queue_type::span_type,
-                decltype(std::declval<queue_type>().to_span())>
+                buffer_type::span_type,
+                decltype(std::declval<buffer_type>().to_span())>
         );
     }
 }

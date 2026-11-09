@@ -13,12 +13,9 @@
 
 #include <nanobench.h>
 
-#include <forfun/concurrency/spsc_bound_queue.hpp>
+#include <forfun/concurrency/swmr_append_buffer.hpp>
 
-TEST_CASE(
-    "Wait-free SPSC append-only bounded queue benchmarking",
-    "[benchmark][spsc_bound_queue]"
-)
+TEST_CASE("SWMR append buffer benchmarking", "[benchmark][swmr_append_buffer]")
 {
     using namespace forfun::concurrency;
 
@@ -26,12 +23,12 @@ TEST_CASE(
 
     ankerl::nanobench::Bench()
 
-        .title("Wait-free SPSC append-only bounded queue")
+        .title("SWMR append buffer")
         .relative(true)
 
         .run(
             NAMEOF_RAW(
-                wait_free::spsc_bound_queue<
+                wait_free::swmr_append_buffer<
                     int,
                     capacity,
                     std::hardware_destructive_interference_size>{}
@@ -41,7 +38,7 @@ TEST_CASE(
                 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
                 int volatile val /*[[indeterminate]]*/;
 
-                wait_free::spsc_bound_queue<
+                wait_free::swmr_append_buffer<
                     int,
                     capacity,
                     std::hardware_destructive_interference_size>

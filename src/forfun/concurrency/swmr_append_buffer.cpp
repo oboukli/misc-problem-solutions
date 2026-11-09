@@ -4,4 +4,4 @@
 
 // SPDX-License-Identifier: MIT
 
-#include "forfun/concurrency/spsc_bound_queue.hpp" // IWYU pragma: keep
+#include "forfun/concurrency/swmr_append_buffer.hpp" // IWYU pragma: keep
