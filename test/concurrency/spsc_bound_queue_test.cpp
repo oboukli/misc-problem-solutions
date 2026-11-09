@@ -9,6 +9,7 @@
 #include <atomic>
 #include <chrono>
 #include <cstddef>
+#include <new>
 #include <ranges>
 #include <thread>
 #include <type_traits>
@@ -148,32 +149,35 @@ TEMPLATE_TEST_CASE_SIG(
     (int, 16UZ)
 )
 {
+    using buffer_type = forfun::concurrency::wait_free::spsc_bound_queue<
+        Type,
+        Size,
+        std::hardware_destructive_interference_size>;
+
     SECTION("Initial span is empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         REQUIRE(queue.to_span().empty());
     }
 
     SECTION("Initially empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
-            queue{};
+        buffer_type const queue{};
 
         REQUIRE(queue.empty());
     }
 
     SECTION("Capacity is as requested")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
-            queue{};
+        buffer_type const queue{};
 
         REQUIRE(queue.capacity() == Size);
     }
 
     SECTION("Emplace affects empty state")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         queue.emplace_back(677);
 
@@ -186,7 +190,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Emplace affects span size")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         queue.emplace_back(691);
 
@@ -207,7 +211,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Emplace affects span back")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         queue.emplace_back(-2);
 
@@ -232,7 +236,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Emplace returns reference to emplaced element")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         decltype(auto) ref_to_emplaced{queue.emplace_back(225149)};
 
@@ -249,39 +253,31 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Emplace till full then read all")
     {
-        using ValueType = int;
+        buffer_type buffer{};
 
-        constexpr std::size_t const queue_capacity{8};
-
-        forfun::concurrency::wait_free::
-            spsc_bound_queue<ValueType, queue_capacity>
-                queue{};
-
-        for (
-            ValueType const n :
-            std::views::iota(ValueType{1}) | std::views::take(queue_capacity)
-        )
+        for (Type const n : std::views::iota(Type{1}) | std::views::take(Size))
         {
-            auto const& ref{queue.emplace_back(n)};
+            auto const& ref{buffer.emplace_back(n)};
+
             REQUIRE(ref == n);
         }
 
-        REQUIRE_FALSE(queue.empty());
+        REQUIRE_FALSE(buffer.empty());
 
-        REQUIRE(queue.to_span().size() == queue_capacity);
+        REQUIRE(buffer.to_span().size() == Size);
 
         REQUIRE(
             std::ranges::equal(
-                queue.to_span(),
-                std::views::iota(ValueType{1})
-                    | std::views::take(queue.to_span().size())
+                buffer.to_span(),
+                std::views::iota(Type{1})
+                    | std::views::take(buffer.to_span().size())
             )
         );
     }
 
     SECTION("To span")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         queue.emplace_back(727);
         queue.emplace_back(733);
@@ -297,7 +293,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Reset call on empty queue")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
 
         queue.reset_unsafe();
 
@@ -306,7 +302,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Reset call on non-empty non-full queue")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> queue{};
+        buffer_type queue{};
         queue.emplace_back(1);
         queue.emplace_back(2);
         queue.emplace_back(3);
@@ -319,8 +315,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Destructor call on empty queue")
     {
         {
-            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
-                queue{};
+            buffer_type const queue{};
         }
 
         SUCCEED();
@@ -329,8 +324,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Destructor call on non-empty queue")
     {
         {
-            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size>
-                queue{};
+            buffer_type queue{};
             queue.emplace_back(1);
         }
 
@@ -340,8 +334,7 @@ TEMPLATE_TEST_CASE_SIG(
     SECTION("Destructor call on non-empty non-full queue")
     {
         {
-            forfun::concurrency::wait_free::spsc_bound_queue<Type, Size>
-                queue{};
+            buffer_type queue{};
             queue.emplace_back(1);
             queue.emplace_back(2);
             queue.emplace_back(3);
@@ -362,28 +355,42 @@ TEST_CASE(
 {
     SECTION("Initial span is empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            1,
+            std::hardware_destructive_interference_size>
+            queue{};
 
         REQUIRE(queue.to_span().empty());
     }
 
     SECTION("Initially empty")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> const queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            1,
+            std::hardware_destructive_interference_size> const queue{};
 
         REQUIRE(queue.empty());
     }
 
     SECTION("Capacity is as requested")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> const queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            1,
+            std::hardware_destructive_interference_size> const queue{};
 
         REQUIRE(queue.capacity() == 1UZ);
     }
 
     SECTION("Single-slot queue resets cleanly and refills")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 1> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            1,
+            std::hardware_destructive_interference_size>
+            queue{};
 
         queue.emplace_back(11);
 
@@ -408,7 +415,11 @@ TEST_CASE(
 
     SECTION("Reset call on full queue")
     {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            8,
+            std::hardware_destructive_interference_size>
+            queue{};
         queue.emplace_back(1);
         queue.emplace_back(2);
         queue.emplace_back(3);
@@ -429,7 +440,11 @@ TEST_CASE(
 
         constexpr std::size_t const queue_capacity{8};
 
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            8,
+            std::hardware_destructive_interference_size>
+            queue{};
         queue.emplace_back(10);
         queue.emplace_back(20);
         queue.emplace_back(30);
@@ -468,7 +483,11 @@ TEST_CASE(
     SECTION("Destructor call on full queue")
     {
         {
-            forfun::concurrency::wait_free::spsc_bound_queue<int, 8> queue{};
+            forfun::concurrency::wait_free::spsc_bound_queue<
+                int,
+                8,
+                std::hardware_destructive_interference_size>
+                queue{};
             queue.emplace_back(1);
             queue.emplace_back(2);
             queue.emplace_back(3);
@@ -486,9 +505,11 @@ TEST_CASE(
     {
         destructor_call_counter_guard const guard;
         {
-            forfun::concurrency::wait_free::
-                spsc_bound_queue<dummy_with_tracked_destructor, 4>
-                    queue{};
+            forfun::concurrency::wait_free::spsc_bound_queue<
+                dummy_with_tracked_destructor,
+                4,
+                std::hardware_destructive_interference_size>
+                queue{};
 
             queue.emplace_back(584141);
             queue.emplace_back(604171);
@@ -520,9 +541,11 @@ TEST_CASE(
     {
         destructor_call_counter_guard const guard;
         {
-            forfun::concurrency::wait_free::
-                spsc_bound_queue<dummy_with_tracked_destructor, 4>
-                    queue{};
+            forfun::concurrency::wait_free::spsc_bound_queue<
+                dummy_with_tracked_destructor,
+                4,
+                std::hardware_destructive_interference_size>
+                queue{};
 
             queue.emplace_back(1062599);
             queue.emplace_back(1282529);
@@ -555,12 +578,19 @@ TEST_CASE(
         static constexpr auto const expected
             = {208739, 208759, 208787, 208799, 208807, 208837, 208843, 208877};
 
-        using SizeType = forfun::concurrency::wait_free::
-            spsc_bound_queue<int, queue_size>::size_type;
-        using ValueType = forfun::concurrency::wait_free::
-            spsc_bound_queue<int, queue_size>::value_type;
+        using SizeType = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>::size_type;
+        using ValueType = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>::value_type;
 
-        forfun::concurrency::wait_free::spsc_bound_queue<int, queue_size>
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>
             queue{};
 
         std::vector<ValueType> consumer_bag{};
@@ -618,10 +648,15 @@ TEST_CASE(
 
         using ValueType = dummy_aggregate;
 
-        using SizeType = forfun::concurrency::wait_free::
-            spsc_bound_queue<ValueType, queue_size>::size_type;
+        using SizeType = forfun::concurrency::wait_free::spsc_bound_queue<
+            ValueType,
+            queue_size,
+            std::hardware_destructive_interference_size>::size_type;
 
-        forfun::concurrency::wait_free::spsc_bound_queue<ValueType, queue_size>
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            ValueType,
+            queue_size,
+            std::hardware_destructive_interference_size>
             queue{};
 
         std::vector<ValueType> consumer_bag{};
@@ -692,12 +727,19 @@ TEST_CASE(
         static constexpr auto const expected
             = {208739, 208759, 208787, 208799, 208807, 208837, 208843, 208877};
 
-        using SizeType = forfun::concurrency::wait_free::
-            spsc_bound_queue<int, queue_size>::size_type;
-        using ValueType = forfun::concurrency::wait_free::
-            spsc_bound_queue<int, queue_size>::value_type;
+        using SizeType = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>::size_type;
+        using ValueType = forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>::value_type;
 
-        forfun::concurrency::wait_free::spsc_bound_queue<int, queue_size>
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            queue_size,
+            std::hardware_destructive_interference_size>
             queue{};
 
         std::vector<ValueType> consumer_bag{};
@@ -761,10 +803,15 @@ TEST_CASE(
 
         using ValueType = dummy_aggregate;
 
-        using SizeType = forfun::concurrency::wait_free::
-            spsc_bound_queue<ValueType, queue_size>::size_type;
+        using SizeType = forfun::concurrency::wait_free::spsc_bound_queue<
+            ValueType,
+            queue_size,
+            std::hardware_destructive_interference_size>::size_type;
 
-        forfun::concurrency::wait_free::spsc_bound_queue<ValueType, queue_size>
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            ValueType,
+            queue_size,
+            std::hardware_destructive_interference_size>
             queue{};
 
         std::vector<ValueType> consumer_bag{};
@@ -833,7 +880,11 @@ TEST_CASE(
 
         // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
         int volatile val /*[[indeterminate]]*/;
-        forfun::concurrency::wait_free::spsc_bound_queue<int, capacity> queue{};
+        forfun::concurrency::wait_free::spsc_bound_queue<
+            int,
+            capacity,
+            std::hardware_destructive_interference_size>
+            queue{};
 
         queue.emplace_back(502807);
         val = queue.to_span().back();
