@@ -9,11 +9,14 @@
 
 #include <array>
 #include <atomic>
+#include <bit>
 #include <cassert>
 #include <concepts>
 #include <cstddef>
+#include <limits>
 #include <memory>
 #include <span>
+#include <type_traits>
 #include <utility>
 
 namespace forfun::concurrency::wait_free {
@@ -51,7 +54,20 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 ///
 /// @note Internal storage and padding area might not be (zero-)initialized.
 template <typename Type, std::size_t Size, std::size_t CacheLineSeparation>
-    requires std::destructible<Type>
+    requires std::is_object_v<Type>
+    and std::same_as<Type, std::remove_cv_t<Type>>
+    and (not std::is_array_v<Type>)
+    and std::destructible<Type>
+    and (Size > 0UZ)
+    // NOLINTNEXTLINE(readability-redundant-parentheses)
+    and (std::cmp_less_equal(
+        Size, std::numeric_limits<std::size_t>::max() / sizeof(Type)
+    ))
+    // NOLINTNEXTLINE(readability-redundant-parentheses)
+    and (std::cmp_less_equal(Size, std::numeric_limits<std::ptrdiff_t>::max()))
+    // NOLINTNEXTLINE(readability-redundant-parentheses)
+    and (std::has_single_bit(CacheLineSeparation))
+    and (CacheLineSeparation >= alignof(std::atomic<std::size_t>))
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
 class spsc_bound_queue final {
 private:
@@ -116,8 +132,6 @@ public:
     {
         using std::atomic_load_explicit;
         using std::atomic_store_explicit;
-
-        static_assert(capacity_ != 0UZ);
 
         auto const write_cursor_copy{
             atomic_load_explicit(&write_cursor_, std::memory_order_relaxed)
