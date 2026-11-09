@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
+#include <new>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -29,12 +30,22 @@ TEST_CASE(
         .relative(true)
 
         .run(
-            NAMEOF_RAW(wait_free::spsc_bound_queue<int, capacity>{}).c_str(),
+            NAMEOF_RAW(
+                wait_free::spsc_bound_queue<
+                    int,
+                    capacity,
+                    std::hardware_destructive_interference_size>{}
+            )
+                .c_str(),
             [] noexcept -> void {
                 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
                 int volatile val /*[[indeterminate]]*/;
 
-                wait_free::spsc_bound_queue<int, capacity> queue{};
+                wait_free::spsc_bound_queue<
+                    int,
+                    capacity,
+                    std::hardware_destructive_interference_size>
+                    queue{};
 
                 queue.emplace_back(502807);
                 val = queue.to_span().back();

@@ -13,7 +13,6 @@
 #include <concepts>
 #include <cstddef>
 #include <memory>
-#include <new>
 #include <span>
 #include <utility>
 
@@ -51,7 +50,7 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 /// @note The implementation prioritizes performance over safety and security.
 ///
 /// @note Internal storage and padding area might not be (zero-)initialized.
-template <typename Type, std::size_t Size>
+template <typename Type, std::size_t Size, std::size_t CacheLineSeparation>
     requires std::destructible<Type>
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
 class spsc_bound_queue final {
@@ -184,36 +183,21 @@ private:
 
     static_assert(std::same_as<typename span_type::size_type, size_type>);
 
-#if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Winterference-size"
-#endif // defined(__GNUC__) && !defined(__clang__)
-
 #ifdef _MSC_VER
 #pragma warning(push)
 // Warning C4324: 'type': structure was padded due to alignment specifier.
 #pragma warning(disable : 4324)
 #endif // _MSC_VER
 
-    alignas(
-        std::hardware_destructive_interference_size
-    ) std::atomic<cursor_type> write_cursor_{0};
+    alignas(CacheLineSeparation) std::atomic<cursor_type> write_cursor_{0};
 
 #ifdef _MSC_VER
 #pragma warning(pop) // C4324
 #endif // _MSC_VER
 
-    static_assert(
-        std::hardware_destructive_interference_size >= sizeof(cursor_type)
-    );
+    static_assert(CacheLineSeparation >= sizeof(cursor_type));
 
-#if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic pop
-#endif // defined(__GNUC__) && !defined(__clang__)
-
-    std::array<
-        std::byte,
-        std::hardware_destructive_interference_size - sizeof(cursor_type)>
+    std::array<std::byte, CacheLineSeparation - sizeof(cursor_type)>
         end_of_object_padding_;
 
     constexpr auto reset_storage() noexcept -> void
