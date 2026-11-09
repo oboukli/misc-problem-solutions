@@ -215,9 +215,9 @@ forfun_target_config(
 forfun_target_config(
   forfun_lock_free
   HEADERS
-    "forfun/concurrency/spsc_bound_queue.hpp"
+    "forfun/concurrency/swmr_append_buffer.hpp"
   SOURCES
-    "forfun/concurrency/spsc_bound_queue.cpp"
+    "forfun/concurrency/swmr_append_buffer.cpp"
 )
 
 forfun_target_config(

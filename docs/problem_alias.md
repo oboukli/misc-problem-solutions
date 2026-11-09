@@ -35,7 +35,7 @@ benchmarks.
 | List Bidirectional Iterator                                                  |
 | Primality Test                                                               |
 | Tower of Hanoi                                                               |
-| Wait-free (lock-free) SPSC append-only bounded queue                         |
+| Wait-free (lock-free) SWMR append buffer                                     |
 
 ### LeetCode problems
 

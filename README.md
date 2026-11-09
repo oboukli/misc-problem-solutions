@@ -44,7 +44,7 @@ leveraged by this project:
 - EditorConfig
 - Markdown
 - Diagramming with Mermaid
-- Lock-free and wait-free algorithms
+- Lock-free and wait-free algorithms and data structure
 
 ## Index
 
@@ -121,7 +121,7 @@ leveraged by this project:
 | Valid Anagram                                                      | [`include/forfun/valid_anagram.hpp`](include/forfun/valid_anagram.hpp)                                                                         |
 | Valid Parentheses                                                  | [`src/forfun/valid_parentheses.cpp`](src/forfun/valid_parentheses.cpp)                                                                         |
 | Valid Sudoku                                                       | [`include/forfun/valid_sudoku.hpp`](include/forfun/valid_sudoku.hpp)                                                                           |
-| Wait-free (lock-free) SPSC append-only bounded queue               | [`include/forfun/concurrency/spsc_bound_queue.hpp`](include/forfun/concurrency/spsc_bound_queue.hpp)                                           |
+| Wait-free (lock-free) SWMR append buffer                           | [`include/forfun/concurrency/swmr_append_buffer.hpp`](include/forfun/concurrency/swmr_append_buffer.hpp)                                       |
 
 ## Disclaimer
 

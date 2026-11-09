@@ -130,7 +130,7 @@ forfun_target_config(
   SOURCES_DIR "benchmark"
   SOURCES
     "benchmark.cpp"
-    "concurrency/spsc_bound_queue_benchmark.cpp"
+    "concurrency/swmr_append_buffer_benchmark.cpp"
 )
 target_link_libraries(
   benchmark_driver_lock_free
