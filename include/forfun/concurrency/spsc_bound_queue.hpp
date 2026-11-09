@@ -9,7 +9,6 @@
 
 #include <array>
 #include <atomic>
-#include <bit>
 #include <cassert>
 #include <concepts>
 #include <cstddef>
@@ -28,16 +27,6 @@ template <typename Type>
 get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
     -> Type*
 {
-#if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wcast-align"
-#endif // defined(__GNUC__) && !defined(__clang__)
-
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
-#endif // __clang__
-
     // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
     assert(reinterpret_cast<std::uintptr_t>(buffer) % alignof(Type) == 0UZ);
 
@@ -45,14 +34,6 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 
     return reinterpret_cast<Type*>(buffer + (offset * sizeof(Type)));
     // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif // __clang__
-
-#if defined(__GNUC__) && !defined(__clang__)
-#pragma GCC diagnostic pop
-#endif // defined(__GNUC__) && !defined(__clang__)
 }
 
 } // namespace detail
@@ -70,18 +51,18 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 /// @note The implementation prioritizes performance over safety and security.
 ///
 /// @note Internal storage and padding area might not be (zero-)initialized.
-template <typename T, std::size_t Capacity>
-    requires std::destructible<T>
+template <typename Type, std::size_t Size>
+    requires std::destructible<Type>
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
 class spsc_bound_queue final {
 private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
-    using raw_queue_type = std::byte[Capacity * sizeof(T)];
+    using storage_type = std::byte[Size * sizeof(Type)];
 
 public:
     using size_type = std::size_t;
 
-    using value_type = T;
+    using value_type = Type;
 
     using reference = value_type&;
 
@@ -122,11 +103,7 @@ public:
 
     auto operator=(spsc_bound_queue&&) -> spsc_bound_queue& = delete;
 
-    /// @note Padding area might not be (zero-)initialized. Instance-to-instance
-    /// comparision is undefined behavior.
-    auto operator<=>(spsc_bound_queue const&) const = delete;
-
-    [[nodiscard]] auto empty_unsafe() const noexcept -> bool
+    [[nodiscard]] auto empty() const noexcept -> bool
     {
         using std::atomic_load_explicit;
 
@@ -176,40 +153,30 @@ public:
     {
         using std::atomic_load_explicit;
 
-        auto const cursor_snapshot{
+        auto const last{
             atomic_load_explicit(&write_cursor_, std::memory_order_acquire)
         };
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunsafe-buffer-usage-in-container"
-#endif // __clang__
-
         return span_type(
             detail::get_ptr_to_obj<value_type>(std::data(raw_queue_), {}),
-            static_cast<size_type>(cursor_snapshot)
+            static_cast<size_type>(last)
         );
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif // __clang__
     }
 
-    [[nodiscard]] static consteval auto capacity() noexcept -> size_type
+    [[nodiscard]] static constexpr auto capacity() noexcept -> size_type
     {
         return capacity_;
     }
 
 private:
-    static_assert(std::has_single_bit(Capacity));
-    static constexpr std::size_t const capacity_{Capacity};
+    static constexpr std::size_t const capacity_{Size};
 
     /// Raw cursor type, without atomic wrapper.
     using cursor_type = std::size_t;
 
     static_assert(std::atomic<cursor_type>::is_always_lock_free);
 
-    alignas(T) raw_queue_type raw_queue_;
+    alignas(Type) storage_type raw_queue_;
 
     static_assert(std::same_as<typename span_type::size_type, size_type>);
 

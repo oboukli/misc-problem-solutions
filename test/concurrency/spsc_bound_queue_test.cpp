@@ -160,7 +160,7 @@ TEMPLATE_TEST_CASE_SIG(
         forfun::concurrency::wait_free::spsc_bound_queue<Type, Size> const
             queue{};
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
     }
 
     SECTION("Capacity is as requested")
@@ -177,11 +177,11 @@ TEMPLATE_TEST_CASE_SIG(
 
         queue.emplace_back(677);
 
-        REQUIRE_FALSE(queue.empty_unsafe());
+        REQUIRE_FALSE(queue.empty());
 
         queue.emplace_back(683);
 
-        REQUIRE_FALSE(queue.empty_unsafe());
+        REQUIRE_FALSE(queue.empty());
     }
 
     SECTION("Emplace affects span size")
@@ -266,7 +266,7 @@ TEMPLATE_TEST_CASE_SIG(
             REQUIRE(ref == n);
         }
 
-        REQUIRE_FALSE(queue.empty_unsafe());
+        REQUIRE_FALSE(queue.empty());
 
         REQUIRE(queue.to_span().size() == queue_capacity);
 
@@ -301,7 +301,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         queue.reset_unsafe();
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
     }
 
     SECTION("Reset call on non-empty non-full queue")
@@ -313,7 +313,7 @@ TEMPLATE_TEST_CASE_SIG(
 
         queue.reset_unsafe();
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
     }
 
     SECTION("Destructor call on empty queue")
@@ -371,7 +371,7 @@ TEST_CASE(
     {
         forfun::concurrency::wait_free::spsc_bound_queue<int, 1> const queue{};
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
     }
 
     SECTION("Capacity is as requested")
@@ -393,7 +393,7 @@ TEST_CASE(
 
         queue.reset_unsafe();
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
 
         REQUIRE(queue.to_span().empty());
 
@@ -420,7 +420,7 @@ TEST_CASE(
 
         queue.reset_unsafe();
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
     }
 
     SECTION("Fill, reset, refill, and read queue")
@@ -441,7 +441,7 @@ TEST_CASE(
 
         queue.reset_unsafe();
 
-        REQUIRE(queue.empty_unsafe());
+        REQUIRE(queue.empty());
 
         queue.emplace_back(1);
         queue.emplace_back(2);
@@ -452,7 +452,7 @@ TEST_CASE(
         queue.emplace_back(7);
         queue.emplace_back(8);
 
-        REQUIRE_FALSE(queue.empty_unsafe());
+        REQUIRE_FALSE(queue.empty());
 
         REQUIRE(queue.to_span().size() == queue_capacity);
 
@@ -494,7 +494,7 @@ TEST_CASE(
             queue.emplace_back(604171);
             queue.emplace_back(971767);
 
-            REQUIRE_FALSE(queue.empty_unsafe());
+            REQUIRE_FALSE(queue.empty());
 
             REQUIRE(dummy_with_tracked_destructor::alive_instances() == 3UZ);
 
@@ -506,7 +506,7 @@ TEST_CASE(
 
             queue.reset_unsafe();
 
-            REQUIRE(queue.empty_unsafe());
+            REQUIRE(queue.empty());
 
             REQUIRE(dummy_with_tracked_destructor::alive_instances() == 0UZ);
         }
@@ -527,7 +527,7 @@ TEST_CASE(
             queue.emplace_back(1062599);
             queue.emplace_back(1282529);
 
-            REQUIRE_FALSE(queue.empty_unsafe());
+            REQUIRE_FALSE(queue.empty());
 
             REQUIRE(dummy_with_tracked_destructor::alive_instances() == 2UZ);
 
