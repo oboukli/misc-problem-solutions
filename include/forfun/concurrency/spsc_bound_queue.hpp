@@ -95,7 +95,10 @@ public:
 #endif // _MSC_VER
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
-    spsc_bound_queue() = default;
+    spsc_bound_queue() noexcept
+    {
+        // Avoid zero initialization.
+    }
 
 #ifdef _MSC_VER
 #pragma warning(pop) // C26495
