@@ -87,19 +87,11 @@ public:
 
     using span_type = std::span<value_type>;
 
-#ifdef _MSC_VER
-#pragma warning(push)
-// Warning C26495: Variable 'variable' is uninitialized. Always initialize a
-// member variable (type.6).
-#pragma warning(disable : 26495)
-#endif // _MSC_VER
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
-    spsc_bound_queue() = default;
-
-#ifdef _MSC_VER
-#pragma warning(pop) // C26495
-#endif // _MSC_VER
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,modernize-use-equals-default)
+    spsc_bound_queue() noexcept
+    {
+        // Avoid zero initialization.
+    }
 
     spsc_bound_queue(spsc_bound_queue const&) = delete;
 
