@@ -15,19 +15,6 @@
 
 #include <forfun/concurrency/spsc_bound_queue.hpp>
 
-namespace {
-
-[[nodiscard]] consteval auto is_constexpr_destructor() noexcept -> bool
-{
-    {
-        forfun::concurrency::wait_free::spsc_bound_queue<int, 8> const queue{};
-    }
-
-    return true;
-}
-
-} // namespace
-
 TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
 {
     SECTION("Object representations is not unique")
@@ -54,11 +41,6 @@ TEST_CASE("Wait-free SPSC append-only bounded queue", "[spsc_bound_queue]")
             std::movable<
                 forfun::concurrency::wait_free::spsc_bound_queue<int, 8>>
         );
-    }
-
-    SECTION("Destructor call on empty queue")
-    {
-        STATIC_REQUIRE(is_constexpr_destructor());
     }
 
     SECTION("Comparision")

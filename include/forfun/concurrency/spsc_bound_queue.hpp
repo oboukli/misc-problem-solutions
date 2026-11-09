@@ -13,8 +13,6 @@
 #include <cassert>
 #include <concepts>
 #include <cstddef>
-#include <execution>
-#include <iterator>
 #include <memory>
 #include <new>
 #include <span>
@@ -25,9 +23,10 @@ namespace forfun::concurrency::wait_free {
 namespace detail {
 
 /// @note Assumes @p buffer is correctly aligned.
-template <typename Pointer, typename Offset>
+template <typename Type>
 [[nodiscard]] constexpr auto
-get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
+get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
+    -> Type*
 {
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
@@ -40,14 +39,11 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
 #endif // __clang__
 
     // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
-    assert(
-        reinterpret_cast<std::uintptr_t>(
-            reinterpret_cast<Pointer>(buffer) + offset
-        ) % alignof(std::remove_pointer_t<Pointer>)
-        == 0UZ
-    );
+    assert(reinterpret_cast<std::uintptr_t>(buffer) % alignof(Type) == 0UZ);
 
-    return reinterpret_cast<Pointer>(buffer) + offset;
+    assert(((offset * sizeof(Type)) % alignof(Type)) == 0UZ);
+
+    return reinterpret_cast<Type*>(buffer + (offset * sizeof(Type)));
     // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
 
 #ifdef __clang__
@@ -57,38 +53,6 @@ get_ptr_to_obj(std::byte* const buffer, Offset const offset) noexcept -> Pointer
 #if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic pop
 #endif // defined(__GNUC__) && !defined(__clang__)
-}
-
-/// @note Assumes @p buffer is correctly aligned.
-template <typename Pointer>
-[[nodiscard]] constexpr auto get_ptr_to_obj(std::byte* const buffer) noexcept
-    -> Pointer
-{
-    return get_ptr_to_obj<Pointer>(buffer, std::ptrdiff_t{});
-}
-
-using std::destroy_n;
-
-template <typename Pointer, typename Size>
-auto constexpr destroy_n(std::byte* const buffer, Size n) noexcept(noexcept(
-#if defined(__cpp_lib_execution) && __cpp_lib_execution >= 201603L
-    destroy_n(
-        std::execution::unseq, std::declval<Pointer>(), std::declval<Size>()
-    )
-#else
-    destroy_n(std::declval<Pointer>(), std::declval<Size>())
-#endif // defined(__cpp_lib_execution) && __cpp_lib_execution >= 201603L
-)) -> std::byte*
-{
-    using std::data;
-
-    auto* const ptr{get_ptr_to_obj<Pointer>(buffer)};
-
-#if defined(__cpp_lib_execution) && __cpp_lib_execution >= 201603L
-    return destroy_n(std::execution::unseq, ptr, n);
-#else
-    return destroy_n(ptr, n);
-#endif // defined(__cpp_lib_execution) && __cpp_lib_execution >= 201603L
 }
 
 } // namespace detail
@@ -142,7 +106,12 @@ public:
 
     spsc_bound_queue(spsc_bound_queue&&) = delete;
 
-    constexpr ~spsc_bound_queue() noexcept(noexcept(reset_storage()))
+    ~spsc_bound_queue()
+        requires(std::is_trivially_destructible_v<value_type>)
+    = default;
+
+    ~spsc_bound_queue()
+        requires(not std::is_trivially_destructible_v<value_type>)
     {
         reset_storage();
     }
@@ -177,7 +146,7 @@ public:
         assert(std::cmp_less(write_cursor_cached_, capacity_));
 
         auto* const ptr_emplaced{std::construct_at(
-            detail::get_ptr_to_obj<pointer>(
+            detail::get_ptr_to_obj<value_type>(
                 data(raw_queue_), write_cursor_cached_
             ),
             std::forward<Args>(args)...
@@ -191,11 +160,17 @@ public:
         return *ptr_emplaced;
     }
 
-    auto reset_unsafe() noexcept(noexcept(reset_storage())) -> void
+    auto reset_unsafe() noexcept -> void
     {
+        using std::atomic_store_explicit;
+
         reset_storage();
 
-        reset_indices();
+        write_cursor_cached_ = {};
+
+        atomic_store_explicit(
+            &write_cursor_, cursor_type{}, std::memory_order_release
+        );
     }
 
     [[nodiscard]] auto to_span() noexcept -> span_type
@@ -213,7 +188,7 @@ public:
 #endif // __clang__
 
         return span_type(
-            detail::get_ptr_to_obj<pointer>(data(raw_queue_)),
+            detail::get_ptr_to_obj<value_type>(std::data(raw_queue_), {}),
             static_cast<size_type>(cursor_snapshot)
         );
 
@@ -232,7 +207,7 @@ private:
     static constexpr std::size_t const capacity_{Capacity};
 
     /// Raw cursor type, without atomic wrapper.
-    using cursor_type = std::ptrdiff_t;
+    using cursor_type = std::size_t;
 
     static_assert(std::atomic<cursor_type>::is_always_lock_free);
 
@@ -274,26 +249,25 @@ private:
     std::array<
         std::byte,
         std::hardware_destructive_interference_size - sizeof(cursor_type)>
-        end_of_object_padding_ /*[[indeterminate]]*/;
+        end_of_object_padding_;
 
-    auto reset_indices() noexcept -> void
+    constexpr auto reset_storage() noexcept -> void
     {
-        write_cursor_cached_ = {};
-
-        atomic_store_explicit(
-            &write_cursor_, cursor_type{}, std::memory_order_release
-        );
-    }
-
-    constexpr auto reset_storage() noexcept(noexcept(detail::destroy_n(
-        std::declval<typename raw_queue_type::pointer>(), capacity_
-    ))) -> void
-    {
-        using std::data;
-
         assert(std::cmp_less_equal(write_cursor_cached_, capacity_));
 
-        detail::destroy_n(data(raw_queue_), write_cursor_cached_);
+        if constexpr (not std::is_trivially_destructible_v<value_type>)
+        {
+            auto const size{static_cast<size_type>(write_cursor_cached_)};
+            auto* reversed_first{detail::get_ptr_to_obj<value_type>(
+                std::data(raw_queue_),
+                static_cast<size_type>(write_cursor_cached_)
+            )};
+            for (auto i{size}; i != size_type{}; --i)
+            {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+                std::destroy_at(reversed_first + (i - size_type{1}));
+            }
+        }
     }
 };
 
