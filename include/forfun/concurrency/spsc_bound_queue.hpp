@@ -115,22 +115,28 @@ public:
     template <typename... Args>
     auto emplace_back(Args&&... args) noexcept -> reference
     {
+        using std::atomic_load_explicit;
         using std::atomic_store_explicit;
 
         static_assert(capacity_ != 0UZ);
 
-        assert(std::cmp_less(write_cursor_cached_, capacity_));
+        auto const write_cursor_copy{
+            atomic_load_explicit(&write_cursor_, std::memory_order_relaxed)
+        };
+
+        assert(std::cmp_less(write_cursor_copy, capacity_));
 
         auto* const ptr_emplaced{std::construct_at(
             detail::get_ptr_to_obj<value_type>(
-                std::data(raw_queue_), write_cursor_cached_
+                std::data(raw_queue_), write_cursor_copy
             ),
             std::forward<Args>(args)...
         )};
 
-        ++write_cursor_cached_;
         atomic_store_explicit(
-            &write_cursor_, write_cursor_cached_, std::memory_order_release
+            &write_cursor_,
+            write_cursor_copy + cursor_type{1},
+            std::memory_order_release
         );
 
         return *ptr_emplaced;
@@ -141,8 +147,6 @@ public:
         using std::atomic_store_explicit;
 
         reset_storage();
-
-        write_cursor_cached_ = {};
 
         atomic_store_explicit(
             &write_cursor_, cursor_type{}, std::memory_order_release
@@ -199,8 +203,6 @@ private:
 #pragma warning(pop) // C4324
 #endif // _MSC_VER
 
-    cursor_type write_cursor_cached_{};
-
     static_assert(
         std::hardware_destructive_interference_size >= sizeof(cursor_type)
     );
@@ -216,14 +218,19 @@ private:
 
     constexpr auto reset_storage() noexcept -> void
     {
-        assert(std::cmp_less_equal(write_cursor_cached_, capacity_));
+        using std::atomic_load_explicit;
+
+        auto const write_cursor_copy{
+            atomic_load_explicit(&write_cursor_, std::memory_order_relaxed)
+        };
+
+        assert(std::cmp_less_equal(write_cursor_copy, capacity_));
 
         if constexpr (not std::is_trivially_destructible_v<value_type>)
         {
-            auto const size{static_cast<size_type>(write_cursor_cached_)};
+            auto const size{static_cast<size_type>(write_cursor_copy)};
             auto* reversed_first{detail::get_ptr_to_obj<value_type>(
-                std::data(raw_queue_),
-                static_cast<size_type>(write_cursor_cached_)
+                std::data(raw_queue_), static_cast<size_type>(write_cursor_copy)
             )};
             for (auto i{size}; i != size_type{}; --i)
             {
