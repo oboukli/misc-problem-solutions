@@ -22,9 +22,9 @@ namespace forfun::concurrency::wait_free {
 
 namespace detail {
 
-/// @note Assumes @p buffer is correctly aligned.
+/// @note Assumes @p buffer is aligned as Type.
 template <typename Type>
-[[nodiscard]] constexpr auto
+[[nodiscard]] auto
 get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
     -> Type*
 {
@@ -38,13 +38,13 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 #pragma clang diagnostic ignored "-Wunsafe-buffer-usage"
 #endif // __clang__
 
-    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     assert(reinterpret_cast<std::uintptr_t>(buffer) % alignof(Type) == 0UZ);
 
-    assert(((offset * sizeof(Type)) % alignof(Type)) == 0UZ);
-
-    return reinterpret_cast<Type*>(buffer + (offset * sizeof(Type)));
-    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    return static_cast<Type*>(
+        // NOLINTNEXTLINE(bugprone-casting-through-void,cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        static_cast<void*>(buffer + (offset * sizeof(Type)))
+    );
 
 #ifdef __clang__
 #pragma clang diagnostic pop
@@ -251,7 +251,7 @@ private:
         std::hardware_destructive_interference_size - sizeof(cursor_type)>
         end_of_object_padding_;
 
-    constexpr auto reset_storage() noexcept -> void
+    auto reset_storage() noexcept -> void
     {
         assert(std::cmp_less_equal(write_cursor_cached_, capacity_));
 
