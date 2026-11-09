@@ -4,8 +4,8 @@
 
 // SPDX-License-Identifier: MIT
 
-#ifndef FORFUN_CONCURRENCY_SPSC_APPEND_QUEUE_HPP_
-#define FORFUN_CONCURRENCY_SPSC_APPEND_QUEUE_HPP_
+#ifndef FORFUN_CONCURRENCY_SWMR_APPEND_BUFFER_HPP_
+#define FORFUN_CONCURRENCY_SWMR_APPEND_BUFFER_HPP_
 
 #include <array>
 #include <atomic>
@@ -40,19 +40,17 @@ get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
 
 } // namespace detail
 
-/// Single-producer single-consumer (SPSC) bound queue.
+/// Single-writer multiple non-claiming readers, bounded append-only buffer.
 ///
 /// Features:
 /// - Wait-free (lock-free) concurrency model
-/// - First in, first out (FIFO) order semantics
+/// - Fixed-capacity, and non-circular
 /// - Multi-pass reads via @c std::span
-/// - Bounded, fixed-capacity, and non-circular
 /// - Inline storage with no dynamic allocation
-/// - Append-only; elements are deconstructed when the queue is deconstructed.
+/// - Append-one by one; Reset all, manually or when buffer is destroyed.
 ///
-/// @note The implementation prioritizes performance over safety and security.
-///
-/// @note Internal storage and padding area might not be (zero-)initialized.
+/// @warning Experimental implementation. Has not been reviewed for safety or
+/// security.
 template <typename Type, std::size_t Size, std::size_t CacheLineSeparation>
     requires std::is_object_v<Type>
     and std::same_as<Type, std::remove_cv_t<Type>>
@@ -69,7 +67,7 @@ template <typename Type, std::size_t Size, std::size_t CacheLineSeparation>
     and (std::has_single_bit(CacheLineSeparation))
     and (CacheLineSeparation >= alignof(std::atomic<std::size_t>))
 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,clang-analyzer-optin.performance.Padding)
-class spsc_bound_queue final {
+class swmr_append_buffer final {
 private:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,modernize-avoid-c-arrays)
     using storage_type = std::byte[Size * sizeof(Type)];
@@ -84,28 +82,28 @@ public:
     using span_type = std::span<value_type>;
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,modernize-use-equals-default)
-    spsc_bound_queue() noexcept
+    swmr_append_buffer() noexcept
     {
         // Avoid zero initialization.
     }
 
-    spsc_bound_queue(spsc_bound_queue const&) = delete;
+    swmr_append_buffer(swmr_append_buffer const&) = delete;
 
-    spsc_bound_queue(spsc_bound_queue&&) = delete;
+    swmr_append_buffer(swmr_append_buffer&&) = delete;
 
-    ~spsc_bound_queue()
+    ~swmr_append_buffer()
         requires std::is_trivially_destructible_v<value_type>
     = default;
 
-    ~spsc_bound_queue()
+    ~swmr_append_buffer()
         requires(not std::is_trivially_destructible_v<value_type>)
     {
         reset_storage();
     }
 
-    auto operator=(spsc_bound_queue const&) -> spsc_bound_queue& = delete;
+    auto operator=(swmr_append_buffer const&) -> swmr_append_buffer& = delete;
 
-    auto operator=(spsc_bound_queue&&) -> spsc_bound_queue& = delete;
+    auto operator=(swmr_append_buffer&&) -> swmr_append_buffer& = delete;
 
     [[nodiscard]] auto empty() const noexcept -> bool
     {
@@ -130,7 +128,7 @@ public:
 
         auto* const ptr_emplaced{std::construct_at(
             detail::get_ptr_to_obj<value_type>(
-                std::data(raw_queue_), write_cursor_copy
+                std::data(storage_), write_cursor_copy
             ),
             std::forward<Args>(args)...
         )};
@@ -164,7 +162,7 @@ public:
         };
 
         return span_type(
-            detail::get_ptr_to_obj<value_type>(std::data(raw_queue_), {}),
+            detail::get_ptr_to_obj<value_type>(std::data(storage_), {}),
             static_cast<size_type>(last)
         );
     }
@@ -182,7 +180,7 @@ private:
 
     static_assert(std::atomic<cursor_type>::is_always_lock_free);
 
-    alignas(Type) storage_type raw_queue_;
+    alignas(Type) storage_type storage_;
 
     static_assert(std::same_as<typename span_type::size_type, size_type>);
 
@@ -217,7 +215,7 @@ private:
         {
             auto const size{static_cast<size_type>(write_cursor_copy)};
             auto* reversed_first{detail::get_ptr_to_obj<value_type>(
-                std::data(raw_queue_), static_cast<size_type>(write_cursor_copy)
+                std::data(storage_), static_cast<size_type>(write_cursor_copy)
             )};
             for (auto i{size}; i != size_type{}; --i)
             {
@@ -230,4 +228,4 @@ private:
 
 } // namespace forfun::concurrency::wait_free
 
-#endif // FORFUN_CONCURRENCY_SPSC_APPEND_QUEUE_HPP_
+#endif // FORFUN_CONCURRENCY_SWMR_APPEND_BUFFER_HPP_
