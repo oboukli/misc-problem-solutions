@@ -23,7 +23,7 @@
 
 namespace {
 
-struct dummy_aggregate {
+struct dummy_aggregate final {
     // NOLINTBEGIN(misc-non-private-member-variables-in-classes)
     int a;
 
