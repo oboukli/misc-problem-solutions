@@ -146,7 +146,8 @@ TEMPLATE_TEST_CASE_SIG(
     ((typename Type, std::size_t Size), Type, Size),
     (int, 4UZ),
     (int, 8UZ),
-    (int, 16UZ)
+    (int, 16UZ),
+    (int, 17UZ)
 )
 {
     using buffer_type = forfun::concurrency::wait_free::swmr_append_buffer<
@@ -500,7 +501,7 @@ TEST_CASE(
         SUCCEED();
     }
 
-    SECTION("Reset destroys bufferd non-trivial objects")
+    SECTION("Reset destroys buffered non-trivial objects")
     {
         destructor_call_counter_guard const guard;
         {
@@ -534,6 +535,30 @@ TEST_CASE(
         REQUIRE(dummy_with_tracked_destructor::destructor_calls() == 3UZ);
 
         REQUIRE(dummy_with_tracked_destructor::alive_instances() == 0UZ);
+    }
+
+    SECTION("Reset call on a buffer of an aggregate type")
+    {
+        forfun::concurrency::wait_free::swmr_append_buffer<
+            dummy_aggregate,
+            8,
+            std::hardware_destructive_interference_size>
+            buffer{};
+
+        buffer.emplace_back(15973, 15991, 16001, 16007);
+        buffer.emplace_back(16033, 16057, 16061, 16063);
+        buffer.emplace_back(16067, 16069, 16073, 16087);
+        buffer.emplace_back(16091, 16097, 16103, 16111);
+        buffer.emplace_back(16127, 16139, 16141, 16183);
+        buffer.emplace_back(16187, 16189, 16193, 16217);
+
+        REQUIRE(buffer.to_span().size() == 6UZ);
+
+        buffer.reset_unsafe();
+
+        REQUIRE(buffer.empty());
+
+        REQUIRE(buffer.to_span().empty());
     }
 
     SECTION("Destructor destroys buffered non-trivial objects")
