@@ -35,6 +35,8 @@ TEST_CASE("SWMR append buffer benchmarking", "[benchmark][swmr_append_buffer]")
             )
                 .c_str(),
             [] noexcept -> void {
+                int const volatile input_value{502807};
+
                 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
                 int volatile val /*[[indeterminate]]*/;
 
@@ -44,52 +46,52 @@ TEST_CASE("SWMR append buffer benchmarking", "[benchmark][swmr_append_buffer]")
                     std::hardware_destructive_interference_size>
                     buffer{};
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
-                buffer.emplace_back(502807);
+                buffer.emplace_back(input_value);
                 val = buffer.to_span().back();
 
                 ankerl::nanobench::doNotOptimizeAway(&val);
