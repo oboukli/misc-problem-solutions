@@ -77,7 +77,8 @@ public:
 
     using value_type = Type;
 
-    using reference = value_type&;
+    using const_reference
+        = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
     using span_type = std::span<value_type>;
 
@@ -115,7 +116,7 @@ public:
 
     /// @note Undefined behavior when pushing to a full container.
     template <typename... Args>
-    auto emplace_back(Args&&... args) noexcept -> reference
+    auto emplace_back(Args&&... args) noexcept -> const_reference
     {
         using std::atomic_load_explicit;
         using std::atomic_store_explicit;
@@ -126,7 +127,7 @@ public:
 
         assert(std::cmp_less(write_cursor_copy, capacity_));
 
-        auto* const ptr_emplaced{std::construct_at(
+        auto const* const ptr_emplaced{std::construct_at(
             detail::get_ptr_to_obj<value_type>(
                 std::data(storage_), write_cursor_copy
             ),
