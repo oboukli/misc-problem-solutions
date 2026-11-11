@@ -132,7 +132,7 @@ TEST_CASE("Wait-free SWMR append buffer", "[swmr_append_buffer]")
 
         STATIC_REQUIRE(std::same_as<buffer_type::value_type, int>);
 
-        STATIC_REQUIRE(std::same_as<buffer_type::reference, int&>);
+        STATIC_REQUIRE(std::same_as<buffer_type::const_reference, int const&>);
     }
 
     SECTION("To span")
@@ -151,7 +151,7 @@ TEST_CASE("Wait-free SWMR append buffer", "[swmr_append_buffer]")
         );
     }
 
-    SECTION("Return type of emplace_back is reference")
+    SECTION("Return type of emplace_back is const reference")
     {
         using buffer_type = forfun::concurrency::wait_free::swmr_append_buffer<
             int,
@@ -160,7 +160,7 @@ TEST_CASE("Wait-free SWMR append buffer", "[swmr_append_buffer]")
 
         STATIC_REQUIRE(
             std::same_as<
-                buffer_type::reference,
+                buffer_type::const_reference,
                 decltype(std::declval<buffer_type>().emplace_back(int{}))>
         );
     }

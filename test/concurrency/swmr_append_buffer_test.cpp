@@ -235,7 +235,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(buffer.to_span().front() == -2);
     }
 
-    SECTION("Emplace returns reference to emplaced element")
+    SECTION("Emplace returns const reference to emplaced element")
     {
         buffer_type buffer{};
 
@@ -246,10 +246,6 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(ref_to_emplaced == 225149);
 
         REQUIRE(buffer.to_span().front() == 225149);
-
-        ref_to_emplaced = 75773;
-
-        REQUIRE(buffer.to_span().front() == 75773);
     }
 
     SECTION("Emplace till full then read all")
