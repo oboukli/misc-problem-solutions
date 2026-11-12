@@ -21,25 +21,6 @@
 
 namespace forfun::concurrency::wait_free {
 
-namespace detail {
-
-/// @note Assumes @p buffer is aligned as Type.
-template <typename Type>
-[[nodiscard]] auto
-get_ptr_to_obj(std::byte* const buffer, std::size_t const offset) noexcept
-    -> Type*
-{
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-    assert(reinterpret_cast<std::uintptr_t>(buffer) % alignof(Type) == 0UZ);
-
-    return static_cast<Type*>(
-        // NOLINTNEXTLINE(bugprone-casting-through-void,cppcoreguidelines-pro-bounds-pointer-arithmetic)
-        static_cast<void*>(buffer + (offset * sizeof(Type)))
-    );
-}
-
-} // namespace detail
-
 /// Single-writer multiple non-claiming readers, bounded append-only buffer.
 ///
 /// Features:
@@ -128,9 +109,7 @@ public:
         assert(std::cmp_less(write_cursor_copy, capacity_));
 
         auto const* const ptr_emplaced{std::construct_at(
-            detail::get_ptr_to_obj<value_type>(
-                std::data(storage_), write_cursor_copy
-            ),
+            to_pointer(static_cast<std::size_t>(write_cursor_copy)),
             std::forward<Args>(args)...
         )};
 
@@ -162,10 +141,7 @@ public:
             atomic_load_explicit(&write_cursor_, std::memory_order_acquire)
         };
 
-        return span_type(
-            detail::get_ptr_to_obj<value_type>(std::data(storage_), {}),
-            static_cast<size_type>(last)
-        );
+        return span_type(to_pointer(0UZ), static_cast<size_type>(last));
     }
 
     [[nodiscard]] static constexpr auto capacity() noexcept -> size_type
@@ -202,6 +178,14 @@ private:
     std::array<std::byte, CacheLineSeparation - sizeof(cursor_type)>
         end_of_object_padding_;
 
+    [[nodiscard]] auto to_pointer(std::size_t const offset) noexcept -> Type*
+    {
+        return static_cast<Type*>(
+            // NOLINTNEXTLINE(bugprone-casting-through-void,cppcoreguidelines-pro-bounds-pointer-arithmetic)
+            static_cast<void*>(std::data(storage_) + (offset * sizeof(Type)))
+        );
+    }
+
     auto reset_storage() noexcept -> void
     {
         using std::atomic_load_explicit;
@@ -215,9 +199,9 @@ private:
         if constexpr (not std::is_trivially_destructible_v<value_type>)
         {
             auto const size{static_cast<size_type>(write_cursor_copy)};
-            auto* reversed_first{detail::get_ptr_to_obj<value_type>(
-                std::data(storage_), static_cast<size_type>(write_cursor_copy)
-            )};
+            auto* reversed_first{
+                to_pointer(static_cast<size_type>(write_cursor_copy))
+            };
             for (auto i{size}; i != size_type{}; --i)
             {
                 // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-pointer-arithmetic)
