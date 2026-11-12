@@ -155,18 +155,22 @@ TEMPLATE_TEST_CASE_SIG(
         Size,
         std::hardware_destructive_interference_size>;
 
-    SECTION("Initial span is empty")
+    SECTION("Default-initialized buffer is empty")
     {
-        buffer_type buffer{};
+        buffer_type buffer;
+
+        REQUIRE(buffer.empty());
 
         REQUIRE(buffer.to_span().empty());
     }
 
-    SECTION("Initially empty")
+    SECTION("Value-initialized buffer is empty")
     {
-        buffer_type const buffer{};
+        buffer_type buffer{};
 
         REQUIRE(buffer.empty());
+
+        REQUIRE(buffer.to_span().empty());
     }
 
     SECTION("Capacity is as requested")
@@ -210,7 +214,7 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(buffer.to_span().size() == 4UZ);
     }
 
-    SECTION("Emplace affects span back")
+    SECTION("Emplace affects span's back")
     {
         buffer_type buffer{};
 
@@ -349,42 +353,11 @@ TEST_CASE(
     "Wait-free SWMR append buffer (miscellaneous cases)", "[swmr_append_buffer]"
 )
 {
-    SECTION("Initial span is empty")
+    SECTION("One-element buffer resets and refills")
     {
         forfun::concurrency::wait_free::swmr_append_buffer<
             int,
-            1,
-            std::hardware_destructive_interference_size>
-            buffer{};
-
-        REQUIRE(buffer.to_span().empty());
-    }
-
-    SECTION("Initially empty")
-    {
-        forfun::concurrency::wait_free::swmr_append_buffer<
-            int,
-            1,
-            std::hardware_destructive_interference_size> const buffer{};
-
-        REQUIRE(buffer.empty());
-    }
-
-    SECTION("Capacity is as requested")
-    {
-        forfun::concurrency::wait_free::swmr_append_buffer<
-            int,
-            1,
-            std::hardware_destructive_interference_size> const buffer{};
-
-        REQUIRE(buffer.capacity() == 1UZ);
-    }
-
-    SECTION("Single-slot buffer resets cleanly and refills")
-    {
-        forfun::concurrency::wait_free::swmr_append_buffer<
-            int,
-            1,
+            1UZ,
             std::hardware_destructive_interference_size>
             buffer{};
 
@@ -413,7 +386,7 @@ TEST_CASE(
     {
         forfun::concurrency::wait_free::swmr_append_buffer<
             int,
-            8,
+            8UZ,
             std::hardware_destructive_interference_size>
             buffer{};
         buffer.emplace_back(1);
@@ -438,7 +411,7 @@ TEST_CASE(
 
         forfun::concurrency::wait_free::swmr_append_buffer<
             int,
-            8,
+            8UZ,
             std::hardware_destructive_interference_size>
             buffer{};
         buffer.emplace_back(10);
@@ -481,7 +454,7 @@ TEST_CASE(
         {
             forfun::concurrency::wait_free::swmr_append_buffer<
                 int,
-                8,
+                8UZ,
                 std::hardware_destructive_interference_size>
                 buffer{};
             buffer.emplace_back(1);
@@ -503,7 +476,7 @@ TEST_CASE(
         {
             forfun::concurrency::wait_free::swmr_append_buffer<
                 dummy_with_tracked_destructor,
-                4,
+                4UZ,
                 std::hardware_destructive_interference_size>
                 buffer{};
 
@@ -537,7 +510,7 @@ TEST_CASE(
     {
         forfun::concurrency::wait_free::swmr_append_buffer<
             dummy_aggregate,
-            8,
+            8UZ,
             std::hardware_destructive_interference_size>
             buffer{};
 
@@ -563,7 +536,7 @@ TEST_CASE(
         {
             forfun::concurrency::wait_free::swmr_append_buffer<
                 dummy_with_tracked_destructor,
-                4,
+                4UZ,
                 std::hardware_destructive_interference_size>
                 buffer{};
 
