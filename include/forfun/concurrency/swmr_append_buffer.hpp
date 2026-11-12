@@ -19,6 +19,8 @@
 #include <type_traits>
 #include <utility>
 
+#include <forfun/common/type_traits.hpp>
+
 namespace forfun::concurrency::wait_free {
 
 /// Single-writer multiple non-claiming readers, bounded append-only buffer.
@@ -61,7 +63,7 @@ public:
     using const_reference
         = std::add_lvalue_reference_t<std::add_const_t<value_type>>;
 
-    using span_type = std::span<value_type>;
+    using span_type = std::span<std::add_const_t<value_type>>;
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,modernize-use-equals-default)
     swmr_append_buffer() noexcept
@@ -133,7 +135,7 @@ public:
         );
     }
 
-    [[nodiscard]] auto to_span() noexcept -> span_type
+    [[nodiscard]] auto to_span() const noexcept -> span_type
     {
         using std::atomic_load_explicit;
 
@@ -151,6 +153,10 @@ public:
 
 private:
     static constexpr std::size_t const capacity_{Size};
+
+    using const_pointer = std::add_pointer_t<std::add_const_t<value_type>>;
+
+    using pointer = std::add_pointer_t<value_type>;
 
     /// Raw cursor type, without atomic wrapper.
     using cursor_type = std::size_t;
@@ -178,12 +184,20 @@ private:
     std::array<std::byte, CacheLineSeparation - sizeof(cursor_type)>
         end_of_object_padding_;
 
-    [[nodiscard]] auto to_pointer(std::size_t const offset) noexcept -> Type*
+    [[nodiscard]] auto
+    to_pointer(this auto& self, std::size_t const offset) noexcept -> forfun::
+        common::type_traits::if_const_t<decltype(self), const_pointer, pointer>
     {
-        return static_cast<Type*>(
+        using IntermediatePointer = forfun::common::type_traits::
+            if_const_t<decltype(self), void const*, void*>;
+
+        using Pointer = forfun::common::type_traits::
+            if_const_t<decltype(self), const_pointer, pointer>;
+
+        return static_cast<Pointer>(static_cast<IntermediatePointer>(
             // NOLINTNEXTLINE(bugprone-casting-through-void,cppcoreguidelines-pro-bounds-pointer-arithmetic)
-            static_cast<void*>(std::data(storage_) + (offset * sizeof(Type)))
-        );
+            std::data(self.storage_) + (offset * sizeof(value_type))
+        ));
     }
 
     auto reset_storage() noexcept -> void

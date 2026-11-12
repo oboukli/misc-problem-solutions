@@ -219,6 +219,11 @@ forfun_target_config(
   SOURCES
     "forfun/concurrency/swmr_append_buffer.cpp"
 )
+target_link_libraries(
+  forfun_lock_free
+  PRIVATE
+    forfun_common
+)
 
 forfun_target_config(
   forfun_math

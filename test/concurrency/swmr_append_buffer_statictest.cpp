@@ -142,7 +142,9 @@ TEST_CASE("Wait-free SWMR append buffer", "[swmr_append_buffer]")
             8UZ,
             std::hardware_destructive_interference_size>;
 
-        STATIC_REQUIRE(std::same_as<buffer_type::span_type, std::span<int>>);
+        STATIC_REQUIRE(
+            std::same_as<buffer_type::span_type, std::span<int const>>
+        );
 
         STATIC_REQUIRE(
             std::same_as<
