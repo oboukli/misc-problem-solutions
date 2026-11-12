@@ -157,7 +157,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Default-initialized buffer is empty")
     {
-        buffer_type buffer;
+        buffer_type const buffer;
 
         REQUIRE(buffer.empty());
 
@@ -166,7 +166,7 @@ TEMPLATE_TEST_CASE_SIG(
 
     SECTION("Value-initialized buffer is empty")
     {
-        buffer_type buffer{};
+        buffer_type const buffer{};
 
         REQUIRE(buffer.empty());
 
