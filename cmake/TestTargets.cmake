@@ -24,7 +24,7 @@ forfun_target_config(
     "common/concepts_statictest.cpp"
     "common/limits_statictest.cpp"
     "common/type_traits_statictest.cpp"
-    "concurrency/spsc_bound_queue_statictest.cpp"
+    "concurrency/swmr_append_buffer_statictest.cpp"
     "container/forward_list_cycle_statictest.cpp"
     "container/forward_list_statictest.cpp"
     "container/internal/list_const_iterator_statictest.cpp"
@@ -199,7 +199,7 @@ forfun_target_config(
   test_driver_lock_free
   SOURCES_DIR "test"
   SOURCES
-    "concurrency/spsc_bound_queue_test.cpp"
+    "concurrency/swmr_append_buffer_test.cpp"
 )
 target_link_libraries(
   test_driver_lock_free

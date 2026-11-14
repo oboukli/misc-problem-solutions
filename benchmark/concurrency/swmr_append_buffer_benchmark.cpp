@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 #include <cstddef>
+#include <new>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -12,12 +13,9 @@
 
 #include <nanobench.h>
 
-#include <forfun/concurrency/spsc_bound_queue.hpp>
+#include <forfun/concurrency/swmr_append_buffer.hpp>
 
-TEST_CASE(
-    "Wait-free SPSC append-only bounded queue benchmarking",
-    "[benchmark][spsc_bound_queue]"
-)
+TEST_CASE("SWMR append buffer benchmarking", "[benchmark][swmr_append_buffer]")
 {
     using namespace forfun::concurrency;
 
@@ -25,16 +23,26 @@ TEST_CASE(
 
     ankerl::nanobench::Bench()
 
-        .title("Wait-free SPSC append-only bounded queue")
+        .title("SWMR append buffer")
         .relative(true)
 
         .run(
-            NAMEOF_RAW(wait_free::spsc_bound_queue<int, capacity>{}).c_str(),
+            NAMEOF_RAW(
+                wait_free::swmr_append_buffer<
+                    int,
+                    capacity,
+                    std::hardware_destructive_interference_size>{}
+            )
+                .c_str(),
             [] noexcept -> void {
                 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
                 int volatile val /*[[indeterminate]]*/;
 
-                wait_free::spsc_bound_queue<int, capacity> queue{};
+                wait_free::swmr_append_buffer<
+                    int,
+                    capacity,
+                    std::hardware_destructive_interference_size>
+                    queue{};
 
                 queue.emplace_back(502807);
                 val = queue.to_span().back();
